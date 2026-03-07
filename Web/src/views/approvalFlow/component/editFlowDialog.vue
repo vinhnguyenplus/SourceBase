@@ -9,23 +9,23 @@
 			<div class="f-content">
 				<div class="f-container">
 					<div class="f-switch">
-						<el-switch v-model="state.value2" @change="change" class="mb-2" active-text="打开框选" inactive-text="关闭框选" />
+						<el-switch v-model="state.value2" @change="change" class="mb-2" active-text="Open marquee selection" inactive-text="Turn off selection box" />
 					</div>
 					<PanelControl v-if="lf" :lf="lf" @catData="getData"></PanelControl>
 					<div class="f-container-c" ref="container" id="container"></div>
 					<PanelNode v-if="lf" :lf="lf"></PanelNode>
-					<el-drawer title="属性" v-model="drawer" :direction="direction" size="500px" :before-close="handleClose">
+					<el-drawer title="Attribute" v-model="drawer" :direction="direction" size="500px" :before-close="handleClose">
 						<PropertyDialog v-if="drawer" :nodeData="state.nodeData" :lf="lf" @setPropertiesFinish="handleClose"></PropertyDialog>
 					</el-drawer>
-					<el-dialog title="数据" v-model="dataVisible" width="50%">
+					<el-dialog title="Data" v-model="dataVisible" width="50%">
 						<PanelDataDialog :graphData="state.graphData"></PanelDataDialog>
 					</el-dialog>
 				</div>
 			</div>
 			<template #footer>
 				<span class="dialog-footer">
-					<el-button @click="cancel">取 消</el-button>
-					<el-button type="primary" @click="submit">确 定</el-button>
+					<el-button @click="cancel">Cancel</el-button>
+					<el-button type="primary" @click="submit">Confirm</el-button>
 				</span>
 			</template>
 		</el-dialog>
@@ -77,7 +77,7 @@ const state = reactive({
 
 const openDialog = (row: ApprovalFlowOutput) => {
 	state.ruleSource = row as UpdateApprovalFlowInput;
-	// 初始化数据
+	// initialization data
 	if (state.ruleSource.flowJson) {
 		flowData.value = JSON.parse(state.ruleSource.flowJson);
 	} else {
@@ -88,7 +88,7 @@ const openDialog = (row: ApprovalFlowOutput) => {
 	}
 	state.isShowDialog = true;
 	nextTick(() => {
-		// 初始化画布
+		// Initialize canvas
 		initGraph();
 	});
 	console.log('open');
@@ -105,7 +105,7 @@ const cancel = () => {
 	console.log('cancel');
 };
 
-// 保存流程设计
+// Save process design
 const submit = async () => {
 	flowData.value = lf.value?.getGraphData();
 	state.ruleSource.flowJson = JSON.stringify(flowData.value);
@@ -115,72 +115,72 @@ const submit = async () => {
 };
 
 const initGraph = () => {
-	// 初始化画布
+	// Initialize canvas
 	const container: HTMLElement = document.querySelector('#container')!;
-	// 配置项
+	// Configuration items
 	const config = {
-		stopScrollGraph: true, // 禁止鼠标滚动移动画布
-		stopZoomGraph: true, // 禁止缩放
+		stopScrollGraph: true, // Disable mouse scrolling to move canvas
+		stopZoomGraph: true, // Disable zoom
 		metaKeyMultipleSelected: true,
-		// 背景网格大小
+		// Background grid size
 		grid: {
 			size: 10,
 			type: 'dot',
 		},
-		// 快捷键
+		// shortcut key
 		keyboard: {
 			enabled: true,
 		},
-		// 辅助线
+		// auxiliary line
 		snapline: true,
 	};
 	lf.value = new LogicFlow({
 		...config,
 		plugins: [
 			BpmnElement,
-			// 作栋节点自动插入边
+			// Zuodong nodes automatically insert edges
 			InsertNodeInPolyline,
-			// 右键菜单
+			// right click menu
 			Menu,
-			// 迷你图
+			// Sparklines
 			MiniMap,
-			// 框选
+			// Frame selection
 			SelectionSelect,
-			// 快照
+			// Snapshot
 			Snapshot,
 		],
 		container: container,
 		width: container.clientWidth,
 		height: container.clientHeight,
 	});
-	// 设置主题
+	// Set theme
 	lf.value.setTheme({
 		snapline: {
-			stroke: '#1E90FF', // 对齐线颜色
-			strokeWidth: 1, // 对齐线宽度
+			stroke: '#1E90FF', // Alignment line color
+			strokeWidth: 1, // alignment line width
 		},
 	});
-	// 注册自定义节点
+	// Register a custom node
 	RegisterNode.Register(lf.value);
-	// 注册自定义边
+	// Register a custom edge
 	RegisterEdge.Register(lf.value);
-	// 监听节点点击事件
+	// Listen to node click events
 	lf.value.on('node:click', ({ data }) => {
 		state.nodeData = data;
 		drawer.value = true;
 	});
-	// 监听边点击事件
+	// Listen for edge click events
 	lf.value.on('edge:click', ({ data }) => {
 		state.nodeData = data;
 		drawer.value = true;
 	});
-	// 渲染数据
+	// render data
 	lf.value.render(flowData.value);
-	// 画布居中
+	// Center canvas
 	lf.value.focusOn({ coordinate: { x: 300, y: 300 } });
 };
 
-// 框选
+// Frame selection
 const change = (val: boolean) => {
 	if (val) {
 		lf.value?.extension.selectionSelect.openSelectionSelect();
@@ -189,16 +189,16 @@ const change = (val: boolean) => {
 	}
 };
 
-// 获取数据
+// Get data
 const getData = () => {
 	var data = lf.value?.getGraphData();
 	state.graphData = data;
 	dataVisible.value = true;
 };
 
-// 关闭属性界面提醒
+// Close property interface reminder
 const handleClose = (done: () => void) => {
-	ElMessageBox.confirm('确认要关闭当前属性编辑?')
+	ElMessageBox.confirm('Are you sure you want to close current property editing?')
 		.then(() => {
 			done();
 		})

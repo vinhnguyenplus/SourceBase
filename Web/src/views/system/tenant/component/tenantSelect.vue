@@ -1,5 +1,5 @@
 <template v-if="userStore.userInfos.accountType == 999">
-    <el-select v-bind="$attrs" v-model="tenantModelValue" placeholder="请选择租户">
+    <el-select v-bind="$attrs" v-model="tenantModelValue" placeholder="Please select a tenant">
         <el-option v-for="(item, index) in state.tenantList"
             :value="item.value" 
             :label="item.host ? `${item.label} (${item.host})` : item.label" 
@@ -19,7 +19,7 @@ const emit = defineEmits(['update:modelValue']);
 
 const props = defineProps({
 	/**
-     * 绑定的值
+     * Boundvalue
      * @example
      * <tenant-select v-model="value" code="xxxx" />
    */

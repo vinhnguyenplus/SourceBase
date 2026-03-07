@@ -1,13 +1,13 @@
-// Admin.NET 项目的版权、商标、专利和其他相关权利均受相应法律法规的保护。使用本项目应遵守相关法律法规和许可证的要求。
+// The copyright, trademark, patent and other related rights of the Admin.NET project are protected by corresponding laws and regulations. Use of this project shall comply with relevant laws, regulations and license requirements.
 //
-// 本项目主要遵循 MIT 许可证和 Apache 许可证（版本 2.0）进行分发和使用。许可证位于源代码树根目录中的 LICENSE-MIT 和 LICENSE-APACHE 文件。
+// This project is distributed and used primarily under the MIT License and the Apache License (version 2.0). The license is located in the LICENSE-MIT and LICENSE-APACHE files in the root of the source tree.
 //
-// 不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！
+// This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project!
 
 namespace Admin.NET.Core.Service;
 
 /// <summary>
-/// 生成网页授权Url
+/// Generate web page authorization URL
 /// </summary>
 public class GenAuthUrlInput
 {
@@ -28,31 +28,31 @@ public class GenAuthUrlInput
 }
 
 /// <summary>
-/// 获取微信用户OpenId
+/// Get WeChat user OpenId
 /// </summary>
 public class WechatOAuth2Input
 {
     /// <summary>
     /// Code
     /// </summary>
-    [Required(ErrorMessage = "Code不能为空"), MinLength(10, ErrorMessage = "Code错误")]
+    [Required(ErrorMessage = "Code cannot be empty"), MinLength(10, ErrorMessage = "Codemistake")]
     public string Code { get; set; }
 }
 
 /// <summary>
-/// 微信用户登录
+/// WeChat user login
 /// </summary>
 public class WechatUserLogin
 {
     /// <summary>
     /// OpenId
     /// </summary>
-    [Required(ErrorMessage = "微信标识不能为空"), MinLength(10, ErrorMessage = "微信标识长错误")]
+    [Required(ErrorMessage = "WeChat ID cannot be empty"), MinLength(10, ErrorMessage = "WeChat logo length error")]
     public string OpenId { get; set; }
 }
 
 /// <summary>
-/// 获取配置签名
+/// Get configuration signature
 /// </summary>
 public class SignatureInput
 {
@@ -63,72 +63,72 @@ public class SignatureInput
 }
 
 /// <summary>
-/// 获取消息模板列表
+/// Get a list of message templates
 /// </summary>
 public class MessageTemplateSendInput
 {
     /// <summary>
-    /// 订阅模板Id
+    /// Subscription TemplateId
     /// </summary>
-    [Required(ErrorMessage = "订阅模板Id不能为空")]
+    [Required(ErrorMessage = "Subscription template ID cannot be empty")]
     public string TemplateId { get; set; }
 
     /// <summary>
-    /// 接收者的OpenId
+    /// Receiver's OpenId
     /// </summary>
-    [Required(ErrorMessage = "接收者的OpenId不能为空")]
+    [Required(ErrorMessage = "The recipient's OpenId cannot be empty")]
     public string ToUserOpenId { get; set; }
 
     /// <summary>
-    /// 模板数据，格式形如 { "key1": { "value": any }, "key2": { "value": any } }
+    /// Template data, in the format of { "key1": { "value": any }, "key2": { "value": any } }
     /// </summary>
-    [Required(ErrorMessage = "模板数据不能为空")]
+    [Required(ErrorMessage = "Template data cannot be empty")]
     public Dictionary<string, CgibinMessageSubscribeSendRequest.Types.DataItem> Data { get; set; }
 
     /// <summary>
-    /// 模板跳转链接
+    /// Template jump link
     /// </summary>
     public string Url { get; set; }
 
     /// <summary>
-    /// 所需跳转到小程序的具体页面路径，支持带参数,（示例index?foo=bar）
+    /// The specific page path required to jump to the mini program, supports parameters, (example index?foo=bar)
     /// </summary>
     public string MiniProgramPagePath { get; set; }
 }
 
 /// <summary>
-/// 删除消息模板
+/// Delete message template
 /// </summary>
 public class DeleteMessageTemplateInput
 {
     /// <summary>
-    /// 订阅模板Id
+    /// Subscription TemplateId
     /// </summary>
-    [Required(ErrorMessage = "订阅模板Id不能为空")]
+    [Required(ErrorMessage = "Subscription template ID cannot be empty")]
     public string TemplateId { get; set; }
 }
 
 public class UploadAvatarInput
 {
     /// <summary>
-    /// 小程序用户身份标识
+    /// Mini program user identity
     /// </summary>
-    [Required(ErrorMessage = "OpenId不能为空")]
+    [Required(ErrorMessage = "OpenId cannot be empty")]
     public string OpenId { get; set; }
 
     /// <summary>
-    /// 文件
+    /// document
     /// </summary>
     [Required]
     public IFormFile File { get; set; }
 
     /// <summary>
-    /// 文件类型
+    /// File type
     /// </summary>
     public string FileType { get; set; }
 
     /// <summary>
-    /// 文件路径
+    /// file path
     /// </summary>
     public string Path { get; set; }
 }
@@ -136,14 +136,14 @@ public class UploadAvatarInput
 public class SetNickNameInput
 {
     /// <summary>
-    /// 小程序用户身份标识
+    /// Mini program user identity
     /// </summary>
-    [Required(ErrorMessage = "OpenId不能为空")]
+    [Required(ErrorMessage = "OpenId cannot be empty")]
     public string OpenId { get; set; }
 
     /// <summary>
-    /// 昵称
+    /// Nick name
     /// </summary>
-    [Required(ErrorMessage = "昵称不能为空")]
+    [Required(ErrorMessage = "Nickname cannot be empty")]
     public string NickName { get; set; }
 }

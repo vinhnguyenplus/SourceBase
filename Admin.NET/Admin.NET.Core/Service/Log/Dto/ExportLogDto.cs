@@ -1,68 +1,68 @@
-﻿// Admin.NET 项目的版权、商标、专利和其他相关权利均受相应法律法规的保护。使用本项目应遵守相关法律法规和许可证的要求。
+﻿// The copyright, trademark, patent and other related rights of the Admin.NET project are protected by corresponding laws and regulations. Use of this project shall comply with relevant laws, regulations and license requirements.
 //
-// 本项目主要遵循 MIT 许可证和 Apache 许可证（版本 2.0）进行分发和使用。许可证位于源代码树根目录中的 LICENSE-MIT 和 LICENSE-APACHE 文件。
+// This project is distributed and used primarily under the MIT License and the Apache License (version 2.0). The license is located in the LICENSE-MIT and LICENSE-APACHE files in the root of the source tree.
 //
-// 不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！
+// This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project!
 
 namespace Admin.NET.Core;
 
 /// <summary>
-/// 导出日志数据
+/// Export log data
 /// </summary>
-[ExcelExporter(Name = "日志数据", TableStyle = OfficeOpenXml.Table.TableStyles.None, AutoFitAllColumn = true)]
+[ExcelExporter(Name = "Log data", TableStyle = OfficeOpenXml.Table.TableStyles.None, AutoFitAllColumn = true)]
 public class ExportLogDto
 {
     /// <summary>
-    /// 记录器类别名称
+    /// Logger class name
     /// </summary>
-    [ExporterHeader(DisplayName = "记录器类别名称", IsBold = true)]
+    [ExporterHeader(DisplayName = "Logger class name", IsBold = true)]
     public string LogName { get; set; }
 
     /// <summary>
-    /// 日志级别
+    /// Log level
     /// </summary>
-    [ExporterHeader(DisplayName = "日志级别", IsBold = true)]
+    [ExporterHeader(DisplayName = "Log level", IsBold = true)]
     public string LogLevel { get; set; }
 
     /// <summary>
-    /// 事件Id
+    /// EventId
     /// </summary>
-    [ExporterHeader(DisplayName = "事件Id", IsBold = true)]
+    [ExporterHeader(DisplayName = "Event ID", IsBold = true)]
     public string EventId { get; set; }
 
     /// <summary>
-    /// 日志消息
+    /// log message
     /// </summary>
-    [ExporterHeader(DisplayName = "日志消息", IsBold = true)]
+    [ExporterHeader(DisplayName = "Log message", IsBold = true)]
     public string Message { get; set; }
 
     /// <summary>
-    /// 异常对象
+    /// exception object
     /// </summary>
-    [ExporterHeader(DisplayName = "异常对象", IsBold = true)]
+    [ExporterHeader(DisplayName = "Exception object", IsBold = true)]
     public string Exception { get; set; }
 
     /// <summary>
-    /// 当前状态值
+    /// current status value
     /// </summary>
-    [ExporterHeader(DisplayName = "当前状态值", IsBold = true)]
+    [ExporterHeader(DisplayName = "Current state value", IsBold = true)]
     public string State { get; set; }
 
     /// <summary>
-    /// 日志记录时间
+    /// Logging time
     /// </summary>
-    [ExporterHeader(DisplayName = "日志记录时间", IsBold = true)]
+    [ExporterHeader(DisplayName = "Log Time", IsBold = true)]
     public DateTime LogDateTime { get; set; }
 
     /// <summary>
-    /// 线程Id
+    /// ThreadId
     /// </summary>
-    [ExporterHeader(DisplayName = "线程Id", IsBold = true)]
+    [ExporterHeader(DisplayName = "ThreadId", IsBold = true)]
     public int ThreadId { get; set; }
 
     /// <summary>
-    /// 请求跟踪Id
+    /// Request Tracking ID
     /// </summary>
-    [ExporterHeader(DisplayName = "请求跟踪Id", IsBold = true)]
+    [ExporterHeader(DisplayName = "Request Tracking ID", IsBold = true)]
     public string TraceId { get; set; }
 }

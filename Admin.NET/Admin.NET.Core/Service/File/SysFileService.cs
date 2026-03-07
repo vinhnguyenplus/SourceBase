@@ -1,8 +1,8 @@
-// Admin.NET 项目的版权、商标、专利和其他相关权利均受相应法律法规的保护。使用本项目应遵守相关法律法规和许可证的要求。
+// The copyright, trademark, patent and other related rights of the Admin.NET project are protected by corresponding laws and regulations. Use of this project shall comply with relevant laws, regulations and license requirements.
 //
-// 本项目主要遵循 MIT 许可证和 Apache 许可证（版本 2.0）进行分发和使用。许可证位于源代码树根目录中的 LICENSE-MIT 和 LICENSE-APACHE 文件。
+// This project is distributed and used primarily under the MIT License and the Apache License (version 2.0). The license is located in the LICENSE-MIT and LICENSE-APACHE files in the root of the source tree.
 //
-// 不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！
+// This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project!
 
 using Aliyun.OSS.Util;
 using Furion.AspNetCore;
@@ -11,9 +11,9 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 namespace Admin.NET.Core.Service;
 
 /// <summary>
-/// 系统文件服务 🧩
+/// System file service 🧩
 /// </summary>
-[ApiDescriptionSettings(Order = 410, Description = "系统文件")]
+[ApiDescriptionSettings(Order = 410, Description = "System files")]
 public class SysFileService : IDynamicApiController, ITransient
 {
     private readonly UserManager _userManager;
@@ -39,10 +39,10 @@ public class SysFileService : IDynamicApiController, ITransient
         _uploadOptions = uploadOptions.Value;
         _configuration = configuration;
 
-        // 简化提供者选择逻辑
+        // Simplify provider selection logic
         if (_OSSProviderOptions.Enabled || _configuration["MultiOSS:Enabled"].ToBoolean())
         {
-            // 统一使用MultiOSSFileProvider处理所有OSS情况
+            // Unified use of MultiOSSFileProvider to handle all OSS situations
             _customFileProvider = _namedServiceProvider.GetService<ITransient>(nameof(MultiOSSFileProvider));
         }
         else if (_configuration["SSHProvider:Enabled"].ToBoolean())
@@ -56,18 +56,18 @@ public class SysFileService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 获取文件分页列表 🔖
+    /// Get file paging list 🔖
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
-    [DisplayName("获取文件分页列表")]
+    [DisplayName("Get paginated list of files")]
     public async Task<SqlSugarPagedList<SysFile>> Page(PageFileInput input)
     {
-        // 获取所有公开附件
+        // Get all public attachments
         var publicList = _sysFileRep.AsQueryable().ClearFilter().Where(u => u.IsPublic == true);
-        // 获取私有附件
+        // Get private attachments
         var privateList = _sysFileRep.AsQueryable().Where(u => u.IsPublic == false);
-        // 合并公开和私有附件并分页
+        // Merge public and private attachments and paginate
         return await _sysFileRep.Context.UnionAll(publicList, privateList)
             .WhereIF(!string.IsNullOrWhiteSpace(input.FileName), u => u.FileName.Contains(input.FileName.Trim()))
             .WhereIF(!string.IsNullOrWhiteSpace(input.FilePath), u => u.FilePath.Contains(input.FilePath.Trim()))
@@ -78,11 +78,11 @@ public class SysFileService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 上传文件Base64 🔖
+    /// Upload file Base64 🔖
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
-    [DisplayName("上传文件Base64")]
+    [DisplayName("Upload file Base64")]
     public async Task<SysFile> UploadFileFromBase64(UploadFileFromBase64Input input)
     {
         var pattern = @"data:(?<type>.+?);base64,(?<data>[^""]+)";
@@ -108,11 +108,11 @@ public class SysFileService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 上传多文件 🔖
+    /// Upload multiple files 🔖
     /// </summary>
     /// <param name="files"></param>
     /// <returns></returns>
-    [DisplayName("上传多文件")]
+    [DisplayName("Upload Multiple Files")]
     public async Task<List<SysFile>> UploadFiles([Required] List<IFormFile> files)
     {
         var fileList = new List<SysFile>();
@@ -125,11 +125,11 @@ public class SysFileService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 根据文件Id或Url下载 🔖
+    /// Download based on file Id or Url 🔖
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
-    [DisplayName("根据文件Id或Url下载")]
+    [DisplayName("Download based on file Id or Url")]
     public async Task<IActionResult> DownloadFile(SysFile input)
     {
         var file = input.Id > 0 ? await GetFile(input.Id) : await _sysFileRep.CopyNew().GetFirstAsync(u => u.Url == input.Url);
@@ -138,11 +138,11 @@ public class SysFileService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 文件预览 🔖
+    /// File preview 🔖
     /// </summary>
     /// <param name="id"></param>
     /// <returns></returns>
-    [DisplayName("文件预览")]
+    [DisplayName("File preview")]
     public async Task<IActionResult> GetPreview([FromRoute] long id)
     {
         var file = await GetFile(id);
@@ -151,7 +151,7 @@ public class SysFileService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 获取文件流
+    /// Get file stream
     /// </summary>
     /// <param name="file"></param>
     /// <param name="fileName"></param>
@@ -162,7 +162,7 @@ public class SysFileService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 获取文件流
+    /// Get file stream
     /// </summary>
     [NonAction]
     public async Task<Stream> GetFileStream(SysFile file)
@@ -173,38 +173,38 @@ public class SysFileService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 下载指定文件Base64格式 🔖
+    /// Download the specified file in Base64 format 🔖
     /// </summary>
     /// <param name="url"></param>
     /// <returns></returns>
-    [DisplayName("下载指定文件Base64格式")]
+    [DisplayName("Download the specified file in Base64 format")]
     public async Task<string> DownloadFileBase64([FromBody] string url)
     {
-        var sysFile = await _sysFileRep.CopyNew().GetFirstAsync(u => u.Url == url) ?? throw Oops.Oh($"文件不存在");
+        var sysFile = await _sysFileRep.CopyNew().GetFirstAsync(u => u.Url == url) ?? throw Oops.Oh($"File does not exist");
         return await _customFileProvider.DownloadFileBase64Async(sysFile);
     }
 
     /// <summary>
-    /// 删除文件 🔖
+    /// Delete files 🔖
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
     [ApiDescriptionSettings(Name = "Delete"), HttpPost]
-    [DisplayName("删除文件")]
+    [DisplayName("Delete files")]
     public async Task DeleteFile(BaseIdInput input)
     {
-        var file = await _sysFileRep.GetByIdAsync(input.Id) ?? throw Oops.Oh($"文件不存在");
+        var file = await _sysFileRep.GetByIdAsync(input.Id) ?? throw Oops.Oh($"File does not exist");
         await _sysFileRep.DeleteAsync(file);
         await _customFileProvider.DeleteFileAsync(file);
     }
 
     /// <summary>
-    /// 更新文件 🔖
+    /// Update file 🔖
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
     [ApiDescriptionSettings(Name = "Update"), HttpPost]
-    [DisplayName("更新文件")]
+    [DisplayName("update file")]
     public async Task UpdateFile(SysFile input)
     {
         var isExist = await _sysFileRep.IsAnyAsync(u => u.Id == input.Id);
@@ -214,11 +214,11 @@ public class SysFileService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 获取文件 🔖
+    /// Get files 🔖
     /// </summary>
     /// <param name="id"></param>
     /// <returns></returns>
-    [DisplayName("获取文件")]
+    [DisplayName("Get file")]
     public async Task<SysFile> GetFile([FromQuery] long id)
     {
         var file = await _sysFileRep.CopyNew().GetByIdAsync(id);
@@ -226,24 +226,24 @@ public class SysFileService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 根据文件Id集合获取文件 🔖
+    /// Get files based on file ID collection 🔖
     /// </summary>
     /// <param name="ids"></param>
     /// <returns></returns>
-    [DisplayName("根据文件Id集合获取文件")]
+    [DisplayName("Get files based on the collection of file IDs")]
     public async Task<List<SysFile>> GetFileByIds([FromQuery][FlexibleArray<long>] List<long> ids)
     {
         return await _sysFileRep.AsQueryable().Where(u => ids.Contains(u.Id)).ToListAsync();
     }
 
     /// <summary>
-    /// 获取文件路径 🔖
+    /// Get file path 🔖
     /// </summary>
     /// <returns></returns>
-    [DisplayName("获取文件路径")]
+    [DisplayName("Get file path")]
     public async Task<List<TreeNode>> GetFolder()
     {
-        // 优化：直接在数据库层面获取不重复的文件路径
+        // Optimization: Obtain unique file paths directly at the database level
         var folders = await _sysFileRep.AsQueryable()
             .Select(u => u.FilePath)
             .Distinct()
@@ -255,20 +255,20 @@ public class SysFileService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 上传文件 🔖
+    /// Upload files 🔖
     /// </summary>
     /// <param name="input"></param>
-    /// <param name="targetPath">存储目标路径</param>
+    /// <param name="targetPath">Store target path</param>
     /// <returns></returns>
-    [DisplayName("上传文件")]
+    [DisplayName("Upload File")]
     public async Task<SysFile> UploadFile([FromForm] UploadFileInput input, [BindNever] string targetPath = "")
     {
         if (input.File == null || input.File.Length <= 0) throw Oops.Oh(ErrorCodeEnum.D8000);
 
         if (input.File.FileName.IndexOfAny(Path.GetInvalidFileNameChars()) >= 0) throw Oops.Oh(ErrorCodeEnum.D8005);
 
-        // 判断是否重复上传的文件
-        var sizeKb = input.File.Length / 1024; // 大小KB
+        // Determine whether uploaded files are repeated
+        var sizeKb = input.File.Length / 1024; // Size KB
         var fileMd5 = string.Empty;
         if (_uploadOptions.EnableMd5)
         {
@@ -276,51 +276,51 @@ public class SysFileService : IDynamicApiController, ITransient
             {
                 fileMd5 = OssUtils.ComputeContentMd5(fileStream, fileStream.Length);
             }
-            // Mysql8 中如果使用了 utf8mb4_general_ci 之外的编码会出错，尽量避免在条件里使用.ToString()
-            // 因为 Squsugar 并不是把变量转换为字符串来构造SQL语句，而是构造了CAST(123 AS CHAR)这样的语句，这样这个返回值是utf8mb4_general_ci，所以容易出错。
+            // If encoding other than utf8mb4_general_ci is used in Mysql8, an error will occur. Try to avoid using .ToString() in conditions.
+            // Because Squsugar does not convert variables into strings to construct SQL statements, but constructs statements such as CAST(123 AS CHAR), so the return value is utf8mb4_general_ci, so it is prone to errors.
             var sysFile = await _sysFileRep.GetFirstAsync(u => u.FileMd5 == fileMd5 && u.SizeKb == sizeKb);
             if (sysFile != null) return sysFile;
         }
 
-        // 验证文件类型
+        // Verify file type
         if (!_uploadOptions.ContentType.Contains(input.File.ContentType)) throw Oops.Oh($"{ErrorCodeEnum.D8001}:{input.File.ContentType}");
 
-        // 验证文件大小
-        if (sizeKb > _uploadOptions.MaxSize) throw Oops.Oh($"{ErrorCodeEnum.D8002}，允许最大：{_uploadOptions.MaxSize}KB");
+        // Verify file size
+        if (sizeKb > _uploadOptions.MaxSize) throw Oops.Oh($"{ErrorCodeEnum.D8002}, maximum allowed: {_uploadOptions.MaxSize}KB");
 
-        // 获取文件后缀
-        var suffix = Path.GetExtension(input.File.FileName).ToLower(); // 后缀
+        // Get file suffix
+        var suffix = Path.GetExtension(input.File.FileName).ToLower(); // suffix
         if (string.IsNullOrWhiteSpace(suffix))
             suffix = string.Concat(".", input.File.ContentType.AsSpan(input.File.ContentType.LastIndexOf('/') + 1));
         if (!string.IsNullOrWhiteSpace(suffix))
         {
             //var contentTypeProvider = FS.GetFileExtensionContentTypeProvider();
             //suffix = contentTypeProvider.Mappings.FirstOrDefault(u => u.Value == file.ContentType).Key;
-            // 修改 image/jpeg 类型返回的 .jpeg、jpe 后缀
+            // Modify the .jpeg, jpe suffix returned by image/jpeg type
             if (suffix == ".jpeg" || suffix == ".jpe")
                 suffix = ".jpg";
         }
         if (string.IsNullOrWhiteSpace(suffix)) throw Oops.Oh(ErrorCodeEnum.D8003);
 
-        // 防止客户端伪造文件类型
+        // Prevent clients from forging file types
         if (!string.IsNullOrWhiteSpace(input.AllowSuffix) && !input.AllowSuffix.Contains(suffix)) throw Oops.Oh(ErrorCodeEnum.D8003);
         //if (!VerifyFileExtensionName.IsSameType(file.OpenReadStream(), suffix)) throw Oops.Oh(ErrorCodeEnum.D8001);
 
-        // 文件存储位置
+        // File storage location
         var path = string.IsNullOrWhiteSpace(targetPath) ? _uploadOptions.Path : targetPath;
         path = path.ParseToDateTimeForRep();
 
         var newFile = input.Adapt<SysFile>();
         newFile.Id = YitIdHelper.NextId();
 
-        // 优先使用用户指定的存储桶名称，如果没有指定则使用默认配置
+        // Priority is given to the user-specified bucket name. If not specified, the default configuration is used.
         if (!string.IsNullOrEmpty(input.BucketName))
         {
             newFile.BucketName = input.BucketName;
         }
         else
         {
-            // MultiOSSFileProvider会自动使用默认配置
+            // MultiOSSFileProvider will automatically use the default configuration
             newFile.BucketName = _OSSProviderOptions.Enabled ? _OSSProviderOptions.Bucket : "Local";
         }
 
@@ -331,7 +331,7 @@ public class SysFileService : IDynamicApiController, ITransient
         newFile.FileMd5 = fileMd5;
         newFile.DataId = input.DataId;
 
-        var finalName = newFile.Id + suffix; // 文件最终名称
+        var finalName = newFile.Id + suffix; // file final name
 
         newFile = await _customFileProvider.UploadFileAsync(input.File, newFile, path, finalName);
         await _sysFileRep.AsInsertable(newFile).ExecuteCommandAsync();
@@ -339,11 +339,11 @@ public class SysFileService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 上传头像 🔖
+    /// Upload avatar 🔖
     /// </summary>
     /// <param name="file"></param>
     /// <returns></returns>
-    [DisplayName("上传头像")]
+    [DisplayName("Upload Avatar")]
     public async Task<SysFile> UploadAvatar([Required] IFormFile file)
     {
         var sysFile = await UploadFile(new UploadFileInput { File = file, AllowSuffix = _imageType }, "upload/avatar");
@@ -351,7 +351,7 @@ public class SysFileService : IDynamicApiController, ITransient
         var sysUserRep = _sysFileRep.ChangeRepository<SqlSugarRepository<SysUser>>();
         var user = await sysUserRep.GetByIdAsync(_userManager.UserId);
         await sysUserRep.UpdateAsync(u => new SysUser() { Avatar = sysFile.Url }, u => u.Id == user.Id);
-        // 删除已有头像文件
+        // Delete existing avatar files
         if (!string.IsNullOrWhiteSpace(user.Avatar))
         {
             var fileId = Path.GetFileNameWithoutExtension(user.Avatar);
@@ -363,7 +363,7 @@ public class SysFileService : IDynamicApiController, ITransient
                 }
                 catch
                 {
-                    // 忽略删除旧头像文件的错误，不影响新头像上传
+                    // Ignore the error of deleting old avatar files and do not affect the upload of new avatars
                 }
             }
         }
@@ -372,18 +372,18 @@ public class SysFileService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 上传电子签名 🔖
+    /// Upload electronic signature 🔖
     /// </summary>
     /// <param name="file"></param>
     /// <returns></returns>
-    [DisplayName("上传电子签名")]
+    [DisplayName("Upload electronic signature")]
     public async Task<SysFile> UploadSignature([Required] IFormFile file)
     {
         var sysFile = await UploadFile(new UploadFileInput { File = file, AllowSuffix = _imageType }, "upload/signature");
 
         var sysUserRep = _sysFileRep.ChangeRepository<SqlSugarRepository<SysUser>>();
         var user = await sysUserRep.GetByIdAsync(_userManager.UserId);
-        // 删除已有电子签名文件
+        // Delete existing electronic signature files
         if (!string.IsNullOrWhiteSpace(user.Signature) && user.Signature.EndsWith(".png"))
         {
             var fileId = Path.GetFileNameWithoutExtension(user.Signature);
@@ -395,7 +395,7 @@ public class SysFileService : IDynamicApiController, ITransient
                 }
                 catch
                 {
-                    // 忽略删除旧签名文件的错误，不影响新签名上传
+                    // Ignore the error of deleting old signature files and do not affect the upload of new signatures
                 }
             }
         }
@@ -403,10 +403,10 @@ public class SysFileService : IDynamicApiController, ITransient
         return sysFile;
     }
 
-    #region 统一实体与文件关联时，业务应用实体只需要定义一个SysFile集合导航属性，业务增加和更新、删除分别调用即可
+    #region uniteoneEntity and file associationtime，Business application entities only need to be definedonepieceSysFileCollection NavigationAttribute，BusinessincreaseandUpdate、DeletepointsJust don't call it
 
     /// <summary>
-    /// 更新文件的业务数据Id
+    /// Update the business data ID of the file
     /// </summary>
     /// <param name="dataId"></param>
     /// <param name="sysFiles"></param>
@@ -416,7 +416,7 @@ public class SysFileService : IDynamicApiController, ITransient
     {
         var newFileIds = sysFiles.Select(u => u.Id).ToList();
 
-        // 求文件Id差集并删除（无效文件）
+        // Find the file ID difference and delete it (invalid file)
         var tmpFiles = await _sysFileRep.GetListAsync(u => u.DataId == dataId);
         var tmpFileIds = tmpFiles.Select(u => u.Id).ToList();
         var deleteFileIds = tmpFileIds.Except(newFileIds);
@@ -427,19 +427,19 @@ public class SysFileService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 删除业务数据对应的文件
+    /// Delete files corresponding to business data
     /// </summary>
     /// <param name="dataId"></param>
     /// <returns></returns>
     [NonAction]
     public async Task DeleteFileByDataId(long dataId)
     {
-        // 删除冗余无效的物理文件
+        // Delete redundant and invalid physical files
         var tmpFiles = await _sysFileRep.GetListAsync(u => u.DataId == dataId);
         foreach (var file in tmpFiles)
             await _customFileProvider.DeleteFileAsync(file);
         await _sysFileRep.AsDeleteable().Where(u => u.DataId == dataId).ExecuteCommandAsync();
     }
 
-    #endregion 统一实体与文件关联时，业务应用实体只需要定义一个SysFile集合导航属性，业务增加和更新、删除分别调用即可
+    #endregion uniteoneEntity and file associationtime，Business application entities only need to be definedonepieceSysFileCollection NavigationAttribute，BusinessincreaseandUpdate、DeletepointsJust don't call it
 }

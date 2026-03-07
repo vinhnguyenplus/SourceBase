@@ -37,19 +37,19 @@ import { useThemeConfig } from '/@/stores/themeConfig';
 import other from '/@/utils/other';
 import mittBus from '/@/utils/mitt';
 
-// 引入组件
+// Introduce components
 const SubItem = defineAsyncComponent(() => import('/@/layout/navMenu/subItem.vue'));
 
-// 定义父组件传过来的值
+// Define the value passed by the parent component
 const props = defineProps({
-	// 菜单列表
+	// Menu list
 	menuList: {
 		type: Array<RouteRecordRaw>,
 		default: () => [],
 	},
 });
 
-// 定义变量内容
+// Define variable content
 const stores = useRoutesList();
 const storesThemeConfig = useThemeConfig();
 const { routesList } = storeToRefs(stores);
@@ -59,11 +59,11 @@ const state = reactive({
 	defaultActive: '' as string | undefined,
 });
 
-// 获取父级菜单数据
+// Get parent menu data
 const menuLists = computed(() => {
 	return <RouteItems>props.menuList;
 });
-// 路由过滤递归函数
+// Route filtering recursive function
 const filterRoutesFun = <T extends RouteItem>(arr: T[]): T[] => {
 	return arr
 		.filter((item: T) => !item.meta?.isHide)
@@ -73,7 +73,7 @@ const filterRoutesFun = <T extends RouteItem>(arr: T[]): T[] => {
 			return item;
 		});
 };
-// 传送当前子级数据到菜单中
+// Send current child data to the menu
 const setSendClassicChildren = (path: string) => {
 	const currentPathSplit = path.split('/');
 	let currentData: MittMenu = { children: [] };
@@ -87,7 +87,7 @@ const setSendClassicChildren = (path: string) => {
 	});
 	return currentData;
 };
-// 设置页面当前路由高亮
+// Set the current route highlighting on the page
 const setCurrentRouterHighlight = (currentRoute: RouteToFrom) => {
 	const { path, meta } = currentRoute;
 	if (themeConfig.value.layout === 'classic') {
@@ -98,19 +98,19 @@ const setCurrentRouterHighlight = (currentRoute: RouteToFrom) => {
 		else state.defaultActive = path;
 	}
 };
-// 打开外部链接
+// Open external link
 const onALinkClick = (val: RouteItem) => {
 	other.handleOpenLink(val);
 };
-// 页面加载前
+// Before page loads
 onBeforeMount(() => {
 	setCurrentRouterHighlight(route);
 });
-// 路由更新时
+// When routing is updated
 onBeforeRouteUpdate((to) => {
-	// 修复：https://gitee.com/lyt-top/vue-next-admin/issues/I3YX6G
+	// Fix: https://gitee.com/lyt-top/vue-next-admin/issues/I3YX6G
 	setCurrentRouterHighlight(to);
-	// 修复经典布局开启切割菜单时，点击tagsView后左侧导航菜单数据不变的问题
+	// Fixed the issue where the left navigation menu data does not change after clicking tagsView when the cutting menu is enabled in the classic layout.
 	let { layout, isClassicSplitMenu } = themeConfig.value;
 	if (layout === 'classic' && isClassicSplitMenu) {
 		mittBus.emit('setSendClassicChildren', setSendClassicChildren(to.path));

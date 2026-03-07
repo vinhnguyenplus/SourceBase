@@ -1,7 +1,7 @@
 <template>
 	<div v-loading="state.loading">
 		<div style="text-align: right">
-			<div style="margin-right: 10px"><el-switch v-model="state.horizontal"></el-switch> 横向/纵向</div>
+			<div style="margin-right: 10px"><el-switch v-model="state.horizontal"></el-switch> Landscape/Portrait</div>
 		</div>
 		<div style="height: 500px">
 			<vue3-tree-org
@@ -19,7 +19,7 @@
 				<template v-slot="{ node }">
 					<div class="tree-org-node__text node-label">
 						<div class="node-title">{{ node.label }}</div>
-						<div class="node-id">编码：{{ node.id }}</div>
+						<div class="node-id">Code: {{ node.id }}</div>
 					</div>
 				</template>
 				<template v-slot:expand="{ node }">
@@ -59,13 +59,13 @@ onMounted(async () => {
 	state.loading = true;
 	var res = await getAPI(SysUserApi).apiSysUserOrgInfoGet();
 	var d = res.data.result ?? [];
-	state.orgData = d[0] ?? []; // 默认第一个树分支
+	state.orgData = d[0] ?? []; // Default first tree branch
 	if (state.orgData.id == userInfos.value.orgId) state.orgData.style = currentNodeStyle;
 	else InitOrg(state.orgData.children, userInfos.value.orgId);
 	state.loading = false;
 });
 
-// 递归遍历
+// Recursive traversal
 const InitOrg = (orgData: any, id: any) => {
 	if (orgData && orgData.length > 0) {
 		orgData.forEach(function (u: any) {

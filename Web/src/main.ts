@@ -7,19 +7,19 @@ import { directive } from '/@/directive/index';
 import other from '/@/utils/other';
 import ElementPlus, { ElTooltip } from 'element-plus';
 import '/@/theme/index.scss';
-// 动画库
+// animation library
 import 'animate.css';
-// 栅格布局
+// grid layout
 import VueGridLayout from 'vue-grid-layout';
-// 电子签名
+// electronic signature
 import VueSignaturePad from 'vue-signature-pad';
-// 组织架构图
+// Organization chart
 import vue3TreeOrg from 'vue3-tree-org';
 import 'vue3-tree-org/lib/vue3-tree-org.css';
-// VForm3 表单设计
+// VForm3 form design
 import VForm3 from 'vform3-builds';
 import 'vform3-builds/dist/designer.style.css';
-// 关闭自动打印
+// Turn off automatic printing
 import { disAutoConnect } from 'vue-plugin-hiprint';
 import sysDict from "/@/components/sysDict/sysDict.vue";
 import multiLangInput from "/@/components/multiLangInput/index.vue";
@@ -30,12 +30,12 @@ const app = createApp(App);
 directive(app);
 other.elSvg(app);
 
-// 注册全局字典组件
+// Register global dictionary component
 app.component('GSysDict', sysDict);
-// 注册全局多语言组件
+// Register global multilingual components
 app.component('GMultiLangInput', multiLangInput);
 
 const TooltipProps = ElTooltip.props
-TooltipProps.showAfter = { type: Number, default: 800 }; // 设置全局tooltip延时显示时间为800毫秒
+TooltipProps.showAfter = { type: Number, default: 800 }; // Set the global tooltip delay display time to 800 milliseconds
 
 app.use(pinia).use(router).use(ElementPlus).use(VueGridLayout).use(VForm3).use(VueSignaturePad).use(vue3TreeOrg).mount('#app');

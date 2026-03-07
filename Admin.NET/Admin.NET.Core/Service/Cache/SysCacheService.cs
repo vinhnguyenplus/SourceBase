@@ -1,17 +1,17 @@
-// Admin.NET 项目的版权、商标、专利和其他相关权利均受相应法律法规的保护。使用本项目应遵守相关法律法规和许可证的要求。
+// The copyright, trademark, patent and other related rights of the Admin.NET project are protected by corresponding laws and regulations. Use of this project shall comply with relevant laws, regulations and license requirements.
 //
-// 本项目主要遵循 MIT 许可证和 Apache 许可证（版本 2.0）进行分发和使用。许可证位于源代码树根目录中的 LICENSE-MIT 和 LICENSE-APACHE 文件。
+// This project is distributed and used primarily under the MIT License and the Apache License (version 2.0). The license is located in the LICENSE-MIT and LICENSE-APACHE files in the root of the source tree.
 //
-// 不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！
+// This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project!
 
 using Newtonsoft.Json;
 
 namespace Admin.NET.Core.Service;
 
 /// <summary>
-/// 系统缓存服务 🧩
+/// System cache service 🧩
 /// </summary>
-[ApiDescriptionSettings(Order = 400, Description = "系统缓存")]
+[ApiDescriptionSettings(Order = 400, Description = "System cache")]
 public class SysCacheService : IDynamicApiController, ISingleton
 {
     private static ICacheProvider _cacheProvider;
@@ -24,14 +24,14 @@ public class SysCacheService : IDynamicApiController, ISingleton
     }
 
     /// <summary>
-    /// 申请分布式锁 🔖
+    /// Apply for distributed lock 🔖
     /// </summary>
-    /// <param name="key">要锁定的key</param>
-    /// <param name="msTimeout">申请锁等待的时间，单位毫秒</param>
-    /// <param name="msExpire">锁过期时间，超过该时间没有主动是放则自动是放，必须整数秒，单位毫秒</param>
-    /// <param name="throwOnFailure">失败时是否抛出异常,如不抛出异常，可通过判断返回null得知申请锁失败</param>
+    /// <param name="key">key to lock</param>
+    /// <param name="msTimeout">The waiting time to apply for a lock, in milliseconds</param>
+    /// <param name="msExpire">The lock expiration time. If there is no active release after this time, it will be released automatically. It must be an integer number of seconds, and the unit is milliseconds.</param>
+    /// <param name="throwOnFailure">Whether an exception is thrown when failure occurs. If no exception is thrown, you can know that the lock application failed by returning null.</param>
     /// <returns></returns>
-    [DisplayName("申请分布式锁")]
+    [DisplayName("ApplyPleasepointsDistributed lock")]
     public IDisposable? BeginCacheLock(string key, int msTimeout = 500, int msExpire = 10000, bool throwOnFailure = true)
     {
         try
@@ -45,10 +45,10 @@ public class SysCacheService : IDynamicApiController, ISingleton
     }
 
     /// <summary>
-    /// 获取缓存键名集合 🔖
+    /// Get cache key name set 🔖
     /// </summary>
     /// <returns></returns>
-    [DisplayName("获取缓存键名集合")]
+    [DisplayName("Get the collection of cache key names")]
     public List<string> GetKeyList()
     {
         return _cacheProvider.Cache == Cache.Default
@@ -57,7 +57,7 @@ public class SysCacheService : IDynamicApiController, ISingleton
     }
 
     /// <summary>
-    /// 增加缓存
+    /// Increase cache
     /// </summary>
     /// <param name="key"></param>
     /// <param name="value"></param>
@@ -69,7 +69,7 @@ public class SysCacheService : IDynamicApiController, ISingleton
     }
 
     /// <summary>
-    /// 增加缓存并设置过期时间
+    /// Increase cache and set expiration time
     /// </summary>
     /// <param name="key"></param>
     /// <param name="value"></param>
@@ -104,7 +104,7 @@ public class SysCacheService : IDynamicApiController, ISingleton
     private async Task<T> AdGetAsync<T>(string cacheName, Delegate del, Object[] obs, TimeSpan? expiry) where T : class
     {
         var key = Key(cacheName, obs);
-        // 使用分布式锁
+        // Use distributed locks
         using (_cacheProvider.Cache.AcquireLock($@"lock:AdGetAsync:{cacheName}", 1000))
         {
             var value = Get<T>(key);
@@ -147,7 +147,7 @@ public class SysCacheService : IDynamicApiController, ISingleton
 
     private static string Key(string cacheName, object[] obs)
     {
-        if (obs.OfType<TimeSpan>().Any()) throw new Exception("缓存参数类型不能是:TimeSpan类型");
+        if (obs.OfType<TimeSpan>().Any()) throw new Exception("The cache parameter type cannot be: TimeSpan type");
         StringBuilder sb = new(cacheName);
         if (obs is { Length: > 0 })
         {
@@ -163,7 +163,7 @@ public class SysCacheService : IDynamicApiController, ISingleton
     }
 
     /// <summary>
-    /// 获取缓存的剩余生存时间
+    /// Get the remaining lifetime of the cache
     /// </summary>
     /// <param name="key"></param>
     /// <returns></returns>
@@ -174,7 +174,7 @@ public class SysCacheService : IDynamicApiController, ISingleton
     }
 
     /// <summary>
-    /// 获取缓存
+    /// Get cache
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <param name="key"></param>
@@ -186,22 +186,22 @@ public class SysCacheService : IDynamicApiController, ISingleton
     }
 
     /// <summary>
-    /// 删除缓存 🔖
+    /// Delete cache 🔖
     /// </summary>
     /// <param name="key"></param>
     /// <returns></returns>
     [ApiDescriptionSettings(Name = "Delete"), HttpPost]
-    [DisplayName("删除缓存")]
+    [DisplayName("Clear cache")]
     public int Remove(string key)
     {
         return _cacheProvider.Cache.Remove($"{_cacheOptions.Prefix}{key}");
     }
 
     /// <summary>
-    /// 清空所有缓存 🔖
+    /// Clear all cache 🔖
     /// </summary>
     /// <returns></returns>
-    [DisplayName("清空所有缓存")]
+    [DisplayName("Clear all cache")]
     [ApiDescriptionSettings(Name = "Clear"), HttpPost]
     public void Clear()
     {
@@ -211,9 +211,9 @@ public class SysCacheService : IDynamicApiController, ISingleton
     }
 
     /// <summary>
-    /// 检查缓存是否存在
+    /// Check if cache exists
     /// </summary>
-    /// <param name="key">键</param>
+    /// <param name="key">key</param>
     /// <returns></returns>
     [NonAction]
     public bool ExistKey(string key)
@@ -222,12 +222,12 @@ public class SysCacheService : IDynamicApiController, ISingleton
     }
 
     /// <summary>
-    /// 根据键名前缀删除缓存 🔖
+    /// Delete cache based on key name prefix 🔖
     /// </summary>
-    /// <param name="prefixKey">键名前缀</param>
+    /// <param name="prefixKey">Key name prefix</param>
     /// <returns></returns>
     [ApiDescriptionSettings(Name = "DeleteByPreKey"), HttpPost]
-    [DisplayName("根据键名前缀删除缓存")]
+    [DisplayName("Delete cache based on key prefix")]
     public int RemoveByPrefixKey(string prefixKey)
     {
         var delKeys = _cacheProvider.Cache == Cache.Default
@@ -237,11 +237,11 @@ public class SysCacheService : IDynamicApiController, ISingleton
     }
 
     /// <summary>
-    /// 根据键名前缀获取键名集合 🔖
+    /// Get the key name set based on the key name prefix 🔖
     /// </summary>
-    /// <param name="prefixKey">键名前缀</param>
+    /// <param name="prefixKey">Key name prefix</param>
     /// <returns></returns>
-    [DisplayName("根据键名前缀获取键名集合")]
+    [DisplayName("Get the key name set based on the key name prefix")]
     public List<string> GetKeysByPrefixKey(string prefixKey)
     {
         return _cacheProvider.Cache == Cache.Default
@@ -250,11 +250,11 @@ public class SysCacheService : IDynamicApiController, ISingleton
     }
 
     /// <summary>
-    /// 获取缓存值 🔖
+    /// Get cached value 🔖
     /// </summary>
     /// <param name="key"></param>
     /// <returns></returns>
-    [DisplayName("获取缓存值")]
+    [DisplayName("Get cache value")]
     public object GetValue(string key)
     {
         if (string.IsNullOrEmpty(key)) return null;
@@ -299,12 +299,12 @@ public class SysCacheService : IDynamicApiController, ISingleton
                         return null;
 
                     default:
-                        // 未知类型或特殊类型
+                        // Unknown type or special type
                         return new Dictionary<string, object>
                         {
                             { "key", key },
                             { "type", keyType ?? "unknown" },
-                            { "message", "无法使用标准方式获取此类型数据" }
+                            { "message", "NoneUse the standard methodObtainthisTypeData" }
                         };
                 }
             }
@@ -323,12 +323,12 @@ public class SysCacheService : IDynamicApiController, ISingleton
     }
 
     /// <summary>
-    /// 获取或添加缓存（在数据不存在时执行委托请求数据）
+    /// Get or add cache (execute delegate to request data when the data does not exist)
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <param name="key"></param>
     /// <param name="callback"></param>
-    /// <param name="expire">过期时间，单位秒</param>
+    /// <param name="expire">Expiration time in seconds</param>
     /// <returns></returns>
     [NonAction]
     public T GetOrAdd<T>(string key, Func<string, T> callback, int expire = -1)
@@ -338,7 +338,7 @@ public class SysCacheService : IDynamicApiController, ISingleton
     }
 
     /// <summary>
-    /// Hash匹配
+    /// Hash matching
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <param name="key"></param>
@@ -350,7 +350,7 @@ public class SysCacheService : IDynamicApiController, ISingleton
     }
 
     /// <summary>
-    /// 批量添加HASH
+    /// Add HASH in batches
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <param name="key"></param>
@@ -368,7 +368,7 @@ public class SysCacheService : IDynamicApiController, ISingleton
     }
 
     /// <summary>
-    /// 添加一条HASH
+    /// Add a HASH
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <param name="key"></param>
@@ -382,7 +382,7 @@ public class SysCacheService : IDynamicApiController, ISingleton
     }
 
     /// <summary>
-    /// 添加或更新一条HASH
+    /// Add or update a HASH
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <param name="key"></param>
@@ -399,7 +399,7 @@ public class SysCacheService : IDynamicApiController, ISingleton
     }
 
     /// <summary>
-    /// 获取多条HASH
+    /// Get multiple HASH
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <param name="key"></param>
@@ -413,7 +413,7 @@ public class SysCacheService : IDynamicApiController, ISingleton
     }
 
     /// <summary>
-    /// 获取一条HASH
+    /// Get a HASH
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <param name="key"></param>
@@ -427,7 +427,7 @@ public class SysCacheService : IDynamicApiController, ISingleton
     }
 
     /// <summary>
-    /// 根据KEY获取所有HASH
+    /// Get all HASH based on KEY
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <param name="key"></param>
@@ -440,7 +440,7 @@ public class SysCacheService : IDynamicApiController, ISingleton
     }
 
     /// <summary>
-    /// 删除HASH
+    /// Delete HASH
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <param name="key"></param>
@@ -455,7 +455,7 @@ public class SysCacheService : IDynamicApiController, ISingleton
     }
 
     ///// <summary>
-    ///// 搜索HASH
+    /////Search for HASH
     ///// </summary>
     ///// <typeparam name="T"></typeparam>
     ///// <param name="key"></param>
@@ -469,7 +469,7 @@ public class SysCacheService : IDynamicApiController, ISingleton
     //}
 
     ///// <summary>
-    ///// 搜索HASH
+    /////Search for HASH
     ///// </summary>
     ///// <typeparam name="T"></typeparam>
     ///// <param name="key"></param>

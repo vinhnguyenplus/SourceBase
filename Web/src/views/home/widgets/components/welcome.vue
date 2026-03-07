@@ -1,36 +1,36 @@
 <template>
-	<el-card shadow="hover" header="欢迎">
+	<el-card shadow="hover" header="Welcome">
 		<template #header>
 			<el-icon style="display: inline; vertical-align: middle"> <ele-Promotion /> </el-icon>
-			<span> 欢迎 </span>
+			<span> Welcome </span>
 		</template>
 		<div class="welcome">
 			<div class="logo">
 				<!-- <img src="/@/assets/logo.png" style="height: 150px;"/> -->
-				<h2>欢迎使用 {{ themeConfig.globalTitle }}</h2>
+				<h2>Welcome to {{ themeConfig.globalTitle }}</h2>
 			</div>
 			<div class="tips">
 				<div class="tips-item">
 					<div class="tips-item-icon">
 						<el-icon><ele-Menu /></el-icon>
 					</div>
-					<div class="tips-item-message">这里是项目控制台，你可以点击右上方的“自定义”按钮来添加移除或者移动部件。</div>
+					<div class="tips-item-message">Here is the project console. You can click the "Customize" button in the upper right to add, remove or move components.</div>
 				</div>
 				<div class="tips-item">
 					<div class="tips-item-icon">
 						<el-icon><ele-Promotion /></el-icon>
 					</div>
-					<div class="tips-item-message">在提高前端算力、减少带宽请求和代码执行力上多次优化，并且持续着。</div>
+					<div class="tips-item-message">Optimizations have been made many times to improve front-end computing power, reduce bandwidth requests and code execution, and continue to do so.</div>
 				</div>
 				<div class="tips-item">
 					<div class="tips-item-icon">
 						<el-icon><ele-MilkTea /></el-icon>
 					</div>
-					<div class="tips-item-message">让开发更简单、更通用、更流行！</div>
+					<div class="tips-item-message">Make development simpler, more versatile, and more popular!</div>
 				</div>
 			</div>
 			<div class="actions">
-				<el-button type="primary" icon="ele-Guide" size="large" @click="godoc">文档教程</el-button>
+				<el-button type="primary" icon="ele-Guide" size="large" @click="godoc">Document Tutorial</el-button>
 			</div>
 		</div>
 	</el-card>
@@ -44,9 +44,9 @@ const storesThemeConfig = useThemeConfig();
 const { themeConfig } = storeToRefs(storesThemeConfig);
 
 export default {
-	title: '欢迎',
+	title: 'Welcome',
 	icon: 'ele-Promotion',
-	description: '项目特色以及文档链接',
+	description: 'Project Features and Documentation Links',
 };
 </script>
 

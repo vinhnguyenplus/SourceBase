@@ -1,8 +1,8 @@
-// Admin.NET 项目的版权、商标、专利和其他相关权利均受相应法律法规的保护。使用本项目应遵守相关法律法规和许可证的要求。
+// The copyright, trademark, patent and other related rights of the Admin.NET project are protected by corresponding laws and regulations. Use of this project shall comply with relevant laws, regulations and license requirements.
 //
-// 本项目主要遵循 MIT 许可证和 Apache 许可证（版本 2.0）进行分发和使用。许可证位于源代码树根目录中的 LICENSE-MIT 和 LICENSE-APACHE 文件。
+// This project is distributed and used primarily under the MIT License and the Apache License (version 2.0). The license is located in the LICENSE-MIT and LICENSE-APACHE files in the root of the source tree.
 //
-// 不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！
+// This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project!
 
 using NewLife.Caching.Queues;
 using Newtonsoft.Json;
@@ -11,23 +11,23 @@ using System.Threading.Channels;
 namespace Admin.NET.Core;
 
 /// <summary>
-/// Redis自定义事件源存储器
+/// Redis custom event source storage
 /// </summary>
 /// <remarks>
-/// 在集群部署时，一般每一个消息只由一个服务节点消费一次。
-/// 有些特殊情情要通知到服务器群中的每一个节点(比如需要强制加载某些配置、重点服务等)，
-/// 在这种情况下就要以“broadcast:”开头来定义EventId，
-/// 本系统会把“broadcast:”开头的事件视为“广播消息”保证集群中的每一个服务节点都能消费得到这个消息
+/// When deployed in a cluster, each message is generally consumed only once by one service node.
+/// There are some special situations that need to be notified to every node in the server group (such as the need to force the loading of certain configurations, key services, etc.).
+/// In this case, EventId must be defined starting with "broadcast:".
+/// This system will treat events starting with "broadcast:" as "broadcast messages" to ensure that every service node in the cluster can consume this message.
 /// </remarks>
 public sealed class RedisEventSourceStorer : IEventSourceStorer, IDisposable
 {
     /// <summary>
-    /// 消费者
+    /// consumer
     /// </summary>
     private readonly EventConsumer<ChannelEventSource> _eventConsumer;
 
     /// <summary>
-    /// 内存通道事件源存储器
+    /// Memory channel event source memory
     /// </summary>
     private readonly Channel<IEventSource> _channel;
 
@@ -38,39 +38,39 @@ public sealed class RedisEventSourceStorer : IEventSourceStorer, IDisposable
     private ILogger<RedisEventSourceStorer> _logger;
 
     /// <summary>
-    /// 构造函数
+    /// Constructor
     /// </summary>
-    /// <param name="cacheProvider">Redis 连接对象</param>
-    /// <param name="routeKey">路由键</param>
-    /// <param name="capacity">存储器最多能够处理多少消息，超过该容量进入等待写入</param>
+    /// <param name="cacheProvider">Redis connection object</param>
+    /// <param name="routeKey">routing key</param>
+    /// <param name="capacity">The maximum number of messages that the memory can process. If it exceeds this capacity, it will wait for writing.</param>
     public RedisEventSourceStorer(ICacheProvider cacheProvider, string routeKey, int capacity)
     {
         _logger = App.GetRequiredService<ILogger<RedisEventSourceStorer>>();
 
-        // 配置通道，设置超出默认容量后进入等待
+        // Configure the channel and wait after the setting exceeds the default capacity.
         var boundedChannelOptions = new BoundedChannelOptions(capacity)
         {
             FullMode = BoundedChannelFullMode.Wait
         };
 
-        // 创建有限容量通道
+        // Create a limited capacity channel
         _channel = Channel.CreateBounded<IEventSource>(boundedChannelOptions);
 
         //_redis = redis as FullRedis;
 
-        // 创建广播消息订阅者，即所有服务器节点都能收到消息（用来发布重启、Reload配置等消息）
+        // Create a broadcast message subscriber, that is, all server nodes can receive the message (used to publish restart, reload configuration, etc. messages)
         FullRedis redis = (FullRedis)cacheProvider.Cache;
         var clusterOpt = App.GetConfig<ClusterOptions>("Cluster", true);
         _queueBroadcast = redis.GetStream<string>(routeKey + ":broadcast");
-        _queueBroadcast.Group = clusterOpt.ServerId;//根据服务器标识分配到不同的分组里
-        _queueBroadcast.Expire = TimeSpan.FromSeconds(10);//消息10秒过期（）
+        _queueBroadcast.Group = clusterOpt.ServerId;// Assigned to different groups based on server ID
+        _queueBroadcast.Expire = TimeSpan.FromSeconds(10);// Message expires in 10 seconds()
         _queueBroadcast.ConsumeAsync(OnConsumeBroadcast);
 
-        // 创建队列消息订阅者，只要有一个服务节点消费了消息即可
+        // Create a queue message subscriber, as long as one service node consumes the message
         _queueSingle = redis.GetQueue<ChannelEventSource>(routeKey + ":single");
         _eventConsumer = new EventConsumer<ChannelEventSource>(_queueSingle);
 
-        // 订阅消息写入 Channel
+        // Subscription messages are written to Channel
         _eventConsumer.Received += async (send, cr) =>
         {
             // var oriColor = Console.ForegroundColor;
@@ -81,7 +81,7 @@ public sealed class RedisEventSourceStorer : IEventSourceStorer, IDisposable
             }
             catch (Exception e)
             {
-                _logger.LogError(e, "处理Received中的消息产生错误！");
+                _logger.LogError(e, "An error occurred while processing the message in Received!");
             }
         };
         _eventConsumer.Start();
@@ -95,33 +95,33 @@ public sealed class RedisEventSourceStorer : IEventSourceStorer, IDisposable
 
     private async Task ConsumeChannelEventSourceAsync(ChannelEventSource ces, CancellationToken cancel = default)
     {
-        // 打印测试事件
+        // Print test events
         if (ces.EventId != null && ces.EventId.IndexOf(":Test") > 0)
         {
             var oriColor = Console.ForegroundColor;
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine($"有消息要处理{ces.EventId},{ces.Payload}");
+            Console.WriteLine($"haveinformationTo handle{ces.EventId},{ces.Payload}");
             Console.ForegroundColor = oriColor;
         }
         await _channel.Writer.WriteAsync(ces, cancel);
     }
 
     /// <summary>
-    /// 将事件源写入存储器
+    /// Write event source to memory
     /// </summary>
-    /// <param name="eventSource">事件源对象</param>
-    /// <param name="cancellationToken">取消任务 Token</param>
+    /// <param name="eventSource">event source object</param>
+    /// <param name="cancellationToken">Cancel task token</param>
     /// <returns><see cref="ValueTask"/></returns>
     public async ValueTask WriteAsync(IEventSource eventSource, CancellationToken cancellationToken)
     {
-        // 空检查
+        // empty check
         if (eventSource == default)
             throw new ArgumentNullException(nameof(eventSource));
 
-        // 这里判断是否是 ChannelEventSource 或者 自定义的 EventSource
+        // Determine whether it is a ChannelEventSource or a custom EventSource.
         if (eventSource is ChannelEventSource source)
         {
-            // 异步发布
+            // Asynchronous publishing
             await Task.Factory.StartNew(() =>
             {
                 if (source.EventId != null && source.EventId.StartsWith("broadcast:"))
@@ -137,25 +137,25 @@ public sealed class RedisEventSourceStorer : IEventSourceStorer, IDisposable
         }
         else
         {
-            // 处理动态订阅问题
+            // Handling dynamic subscription issues
             await _channel.Writer.WriteAsync(eventSource, cancellationToken);
         }
     }
 
     /// <summary>
-    /// 从存储器中读取一条事件源
+    /// Read an event source from memory
     /// </summary>
-    /// <param name="cancellationToken">取消任务 Token</param>
-    /// <returns>事件源对象</returns>
+    /// <param name="cancellationToken">Cancel task token</param>
+    /// <returns>event source object</returns>
     public async ValueTask<IEventSource> ReadAsync(CancellationToken cancellationToken)
     {
-        // 读取一条事件源
+        // Read an event source
         var eventSource = await _channel.Reader.ReadAsync(cancellationToken);
         return eventSource;
     }
 
     /// <summary>
-    /// 释放非托管资源
+    /// Release unmanaged resources
     /// </summary>
     public async void Dispose()
     {

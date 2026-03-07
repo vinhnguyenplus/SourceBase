@@ -58,13 +58,13 @@ class UserNodeModel extends PolygonNodeModel {
             y: data.y + 50
         }
         super(data, graphModel)
-        // 右键菜单自由配置，也可以通过边的properties或者其他属性条件更换不同菜单
+        // The right-click menu can be configured freely, and different menus can also be changed through the side properties or other attribute conditions.
         this.menu = [
             {
                 className: 'lf-menu-delete',
                 text: 'delete',
                 callback(node) {
-                    // const comfirm = window.confirm('你确定要删除吗？')
+                    // const comfirm = window.confirm('Are you sure you want to delete it?')
                     lf.deleteNode(node.id)
                 }
             },
@@ -94,7 +94,7 @@ class UserNodeModel extends PolygonNodeModel {
             [0, lenght]
         ]
     }
-    // 自定义锚点样式
+    // Custom anchor style
     getAnchorStyle() {
         const style = super.getAnchorStyle();
         style.hover.r = 8;

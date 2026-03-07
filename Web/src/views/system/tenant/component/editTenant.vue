@@ -10,36 +10,36 @@
 			</template>
 			<el-form :model="state.ruleForm" ref="ruleFormRef" label-width="auto">
 				<el-tabs v-loading="state.loading" v-model="state.selectedTabName">
-					<el-tab-pane label="基本信息" style="height: 450px; overflow-y: auto; overflow-x: hidden">
+					<el-tab-pane label="Basic Information" style="height: 450px; overflow-y: auto; overflow-x: hidden">
 						<el-row :gutter="35">
 							<el-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12" class="mb20">
-								<el-form-item label="租户类型"
-									:rules="[{ required: true, message: '租户类型不能为空', trigger: 'blur' }]">
+								<el-form-item label="Tenant Type"
+									:rules="[{ required: true, message: 'Tenant type cannot be empty', trigger: 'blur' }]">
 									<g-sys-dict v-model="state.ruleForm.tenantType" code="TenantTypeEnum" render-as="radio"
 										:disabled="state.ruleForm.id != undefined" />
 								</el-form-item>
 							</el-col>
 							<el-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12" class="mb20">
-								<el-form-item label="租户名称" prop="name"
-									:rules="[{ required: true, message: '租户名称不能为空', trigger: 'blur' }]">
-									<el-input v-model="state.ruleForm.name" placeholder="租户名称" clearable />
+								<el-form-item label="Tenant name" prop="name"
+									:rules="[{ required: true, message: 'Tenant name cannot be empty', trigger: 'blur' }]">
+									<el-input v-model="state.ruleForm.name" placeholder="Tenant name" clearable />
 								</el-form-item>
 							</el-col>
 							<el-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12" class="mb20">
-								<el-form-item label="租管账号" prop="adminAccount"
-									:rules="[{ required: true, message: '租管账号不能为空', trigger: 'blur' }]">
-									<el-input v-model="state.ruleForm.adminAccount" placeholder="租管账号" clearable />
+								<el-form-item label="Rental account" prop="adminAccount"
+									:rules="[{ required: true, message: 'The tenancy account cannot be empty', trigger: 'blur' }]">
+									<el-input v-model="state.ruleForm.adminAccount" placeholder="Rental account" clearable />
 								</el-form-item>
 							</el-col>
 							<el-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12" class="mb20">
-								<el-form-item label="电话" prop="phone"
-									:rules="[{ required: true, message: '电话号码不能为空', trigger: 'blur' }]">
-									<el-input v-model="state.ruleForm.phone" placeholder="电话" clearable />
+								<el-form-item label="Telephone" prop="phone"
+									:rules="[{ required: true, message: 'Phone number cannot be empty', trigger: 'blur' }]">
+									<el-input v-model="state.ruleForm.phone" placeholder="Telephone" clearable />
 								</el-form-item>
 							</el-col>
 							<el-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12" class="mb20">
-								<el-form-item label="数据库类型">
-									<el-select v-model="state.ruleForm.dbType" placeholder="数据库类型" clearable class="w100"
+								<el-form-item label="Database type">
+									<el-select v-model="state.ruleForm.dbType" placeholder="Database type" clearable class="w100"
 										:disabled="state.ruleForm.tenantType == 0 && state.ruleForm.tenantType != undefined">
 										<el-option label="MySql" :value="0" />
 										<el-option label="SqlServer" :value="1" />
@@ -70,49 +70,49 @@
 								</el-form-item>
 							</el-col>
 							<el-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12" class="mb20">
-								<el-form-item label="主机host">
-									<el-input v-model="state.ruleForm.host" placeholder="例：gitee.com" clearable />
+								<el-form-item label="hosthost">
+									<el-input v-model="state.ruleForm.host" placeholder="Example: gitee.com" clearable />
 								</el-form-item>
 							</el-col>
 							<el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="mb20">
-								<el-form-item label="连接字符串">
-									<el-input v-model="state.ruleForm.connection" placeholder="连接字符串" clearable
+								<el-form-item label="Connection string">
+									<el-input v-model="state.ruleForm.connection" placeholder="Connection string" clearable
 										type="textarea"
 										:disabled="state.ruleForm.tenantType == 0 && state.ruleForm.tenantType != undefined" />
 								</el-form-item>
 							</el-col>
 							<el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="mb20">
-								<el-form-item label="从库连接串">
+								<el-form-item label="Connect from libraryskewer">
 									<el-input v-model="state.ruleForm.slaveConnections"
-										placeholder="格式：[{'HitRate':10, 'ConnectionString':'xxx'},{'HitRate':10, 'ConnectionString':'xxx'}]"
+										placeholder="Format: [{'HitRate':10, 'ConnectionString':'xxx'},{'HitRate':10, 'ConnectionString':'xxx'}]"
 										clearable type="textarea"
 										:disabled="state.ruleForm.tenantType == 0 && state.ruleForm.tenantType != undefined" />
 								</el-form-item>
 							</el-col>
 							<el-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12" class="mb20">
-								<el-form-item label="邮箱">
-									<el-input v-model="state.ruleForm.email" placeholder="邮箱" clearable />
+								<el-form-item label="Email">
+									<el-input v-model="state.ruleForm.email" placeholder="Email" clearable />
 								</el-form-item>
 							</el-col>
 							<el-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12" class="mb20">
-								<el-form-item label="排序">
-									<el-input-number v-model="state.ruleForm.orderNo" placeholder="排序" class="w100" />
+								<el-form-item label="Sort">
+									<el-input-number v-model="state.ruleForm.orderNo" placeholder="Sort" class="w100" />
 								</el-form-item>
 							</el-col>
 							<el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="mb20">
-								<el-form-item label="备注">
-									<el-input v-model="state.ruleForm.remark" placeholder="请输入备注内容" clearable
+								<el-form-item label="Remarks">
+									<el-input v-model="state.ruleForm.remark" placeholder="Please enter the remark content" clearable
 										type="textarea" />
 								</el-form-item>
 							</el-col>
 						</el-row>
 					</el-tab-pane>
-					<el-tab-pane label="站点信息" style="height: 450px; overflow: auto; overflow-x: hidden"
+					<el-tab-pane label="Site information" style="height: 450px; overflow: auto; overflow-x: hidden"
 						v-if="state.ruleForm.host?.trim()">
 						<el-row :gutter="35">
 							<el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="mb20">
 								<el-form-item label="Logo" prop="logo"
-									:rules="[{ required: true, message: '应用Logo不能为空', trigger: 'blur' }]">
+									:rules="[{ required: true, message: 'Application Logo cannot be empty', trigger: 'blur' }]">
 									<el-upload ref="uploadRef" class="avatar-uploader" :showFileList="false"
 										:autoUpload="false" accept=".jpg,.png,.svg" action :limit="1"
 										:onChange="handleUploadChange">
@@ -123,47 +123,47 @@
 								</el-form-item>
 							</el-col>
 							<el-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12" class="mb20">
-								<el-form-item label="标题" prop="title"
-									:rules="[{ required: true, message: '标题不能为空', trigger: 'blur' }]">
-									<el-input v-model="state.ruleForm.title" placeholder="应用标题" maxlength="32" clearable />
+								<el-form-item label="title" prop="title"
+									:rules="[{ required: true, message: 'Title cannot be empty', trigger: 'blur' }]">
+									<el-input v-model="state.ruleForm.title" placeholder="App Title" maxlength="32" clearable />
 								</el-form-item>
 							</el-col>
 							<el-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12" class="mb20">
-								<el-form-item label="副标题" prop="viceTitle"
-									:rules="[{ required: true, message: '副标题不能为空', trigger: 'blur' }]">
-									<el-input v-model="state.ruleForm.viceTitle" placeholder="应用副标题" maxlength="32"
+								<el-form-item label="Subtitle" prop="viceTitle"
+									:rules="[{ required: true, message: 'Subtitle cannot be empty', trigger: 'blur' }]">
+									<el-input v-model="state.ruleForm.viceTitle" placeholder="App Subtitle" maxlength="32"
 										clearable />
 								</el-form-item>
 							</el-col>
 							<el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="mb20">
-								<el-form-item label="副标题描述" prop="viceDesc"
-									:rules="[{ required: true, message: '副标题描述不能为空', trigger: 'blur' }]">
-									<el-input v-model="state.ruleForm.viceDesc" placeholder="应用副标题描述" maxlength="64"
+								<el-form-item label="Subtitle description" prop="viceDesc"
+									:rules="[{ required: true, message: 'Subtitle description cannot be empty', trigger: 'blur' }]">
+									<el-input v-model="state.ruleForm.viceDesc" placeholder="Application subtitle description" maxlength="64"
 										clearable />
 								</el-form-item>
 							</el-col>
 							<el-col :xs="24" :sm="12" :md="24" :lg="24" :xl="24" class="mb20">
-								<el-form-item label="版权信息" prop="copyright"
-									:rules="[{ required: true, message: '版权信息不能为空', trigger: 'blur' }]">
-									<el-input v-model="state.ruleForm.copyright" placeholder="版权信息" maxlength="64"
+								<el-form-item label="Copyright information" prop="copyright"
+									:rules="[{ required: true, message: 'Copyright information cannot be empty', trigger: 'blur' }]">
+									<el-input v-model="state.ruleForm.copyright" placeholder="Copyright information" maxlength="64"
 										clearable />
 								</el-form-item>
 							</el-col>
 							<el-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12" class="mb20">
-								<el-form-item label="备案号" prop="icp">
-									<el-input v-model="state.ruleForm.icp" placeholder="例：省ICP备12345678号" maxlength="32" clearable />
+								<el-form-item label="Record Number" prop="icp">
+									<el-input v-model="state.ruleForm.icp" placeholder="Example: Provincial ICP No. 12345678" maxlength="32" clearable />
 								</el-form-item>
 							</el-col>
 							<el-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12" class="mb20">
-								<el-form-item label="ICP地址" prop="icpUrl"
-									:rules="[{ required: state.ruleForm.icp, message: 'ICP地址不能为空', trigger: 'blur' }]">
-									<el-input v-model="state.ruleForm.icpUrl" placeholder="例：https://beian.miit.gov.cn" maxlength="32"
+								<el-form-item label="ICP address" prop="icpUrl"
+									:rules="[{ required: state.ruleForm.icp, message: 'ICP address cannot be empty', trigger: 'blur' }]">
+									<el-input v-model="state.ruleForm.icpUrl" placeholder="Example: https://beian.miit.gov.cn" maxlength="32"
 										clearable />
 								</el-form-item>
 							</el-col>
 							<el-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12" class="mb20">
-								<el-form-item label="水印" prop="watermark">
-									<el-input v-model="state.ruleForm.watermark" placeholder="如果此处留空，则水印功能将被禁用"
+								<el-form-item label="Watermark" prop="watermark">
+									<el-input v-model="state.ruleForm.watermark" placeholder="If left blank here, the watermark feature will be disabled"
 										maxlength="32" clearable />
 								</el-form-item>
 							</el-col>
@@ -173,8 +173,8 @@
 			</el-form>
 			<template #footer>
 				<span class="dialog-footer">
-					<el-button @click="cancel">取 消</el-button>
-					<el-button type="primary" @click="submit">确 定</el-button>
+					<el-button @click="cancel">Cancel</el-button>
+					<el-button type="primary" @click="submit">Confirm</el-button>
 				</span>
 			</template>
 		</el-dialog>
@@ -205,14 +205,14 @@ const state = reactive({
 	ruleForm: {} as UpdateTenantInput,
 });
 
-// 通过onChange方法获得文件列表
+// Get the file list through onChange method
 const handleUploadChange = (file: any) => {
 	uploadRef.value!.clearFiles();
 	state.file = file;
-	state.ruleForm.logo = URL.createObjectURL(state.file.raw); // 显示预览logo
+	state.ruleForm.logo = URL.createObjectURL(state.file.raw); // Show preview logo
 };
 
-// 打开弹窗
+// Open pop-up window
 const openDialog = async (row: any) => {
 	state.selectedTabName = '0';
 	ruleFormRef.value?.resetFields();
@@ -222,20 +222,20 @@ const openDialog = async (row: any) => {
 	state.regWayData = await getAPI(SysUserRegWayApi).apiSysUserRegWayListPost({ tenantId: row.id }).then((res) => res.data.result ?? []);
 };
 
-// 关闭弹窗
+// Close pop-up window
 const closeDialog = () => {
 	emits('handleQuery');
 	state.isShowDialog = false;
 };
 
-// 取消
+// Cancel
 const cancel = () => {
 	state.isShowDialog = false;
 };
 
-// 提交
+// submit
 const submit = async () => {
-	// 如果有选择图标，则转换为 base64
+	// If icon is selected, convert to base64
 	if (state.file) {
 		state.ruleForm.logoBase64 = (await fileToBase64(state.file.raw)) as string;
 		state.ruleForm.logoFileName = state.file.raw.name;
@@ -257,6 +257,6 @@ const submit = async () => {
 	});
 };
 
-// 导出对象
+// Export object
 defineExpose({ openDialog });
 </script>

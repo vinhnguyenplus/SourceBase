@@ -1,13 +1,13 @@
-﻿// Admin.NET 项目的版权、商标、专利和其他相关权利均受相应法律法规的保护。使用本项目应遵守相关法律法规和许可证的要求。
+﻿// The copyright, trademark, patent and other related rights of the Admin.NET project are protected by corresponding laws and regulations. Use of this project shall comply with relevant laws, regulations and license requirements.
 //
-// 本项目主要遵循 MIT 许可证和 Apache 许可证（版本 2.0）进行分发和使用。许可证位于源代码树根目录中的 LICENSE-MIT 和 LICENSE-APACHE 文件。
+// This project is distributed and used primarily under the MIT License and the Apache License (version 2.0). The license is located in the LICENSE-MIT and LICENSE-APACHE files in the root of the source tree.
 //
-// 不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！
+// This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project!
 
 namespace Admin.NET.Core.Service;
 
 /// <summary>
-/// 系统异常日志服务 🧩
+/// System exception log service 🧩
 /// </summary>
 [ApiDescriptionSettings(Order = 350)]
 public class SysLogExService : IDynamicApiController, ITransient
@@ -22,11 +22,11 @@ public class SysLogExService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 获取异常日志分页列表 🔖
+    /// Get the paging list of exception logs 🔖
     /// </summary>
     /// <returns></returns>
     [SuppressMonitor]
-    [DisplayName("获取异常日志分页列表")]
+    [DisplayName("Get the exception log paging list")]
     public async Task<SqlSugarPagedList<SysLogEx>> Page(PageExLogInput input)
     {
         return await _sysLogExRep.AsQueryable()
@@ -47,33 +47,33 @@ public class SysLogExService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 获取异常日志详情 🔖
+    /// Get exception log details 🔖
     /// </summary>
     /// <returns></returns>
     [SuppressMonitor]
-    [DisplayName("获取异常日志详情")]
+    [DisplayName("Get exception log details")]
     public async Task<SysLogEx> GetDetail(long id)
     {
         return await _sysLogExRep.GetFirstAsync(u => u.Id == id);
     }
 
     /// <summary>
-    /// 清空异常日志 🔖
+    /// Clear exception log 🔖
     /// </summary>
     /// <returns></returns>
     [ApiDescriptionSettings(Name = "Clear"), HttpPost]
-    [DisplayName("清空异常日志")]
+    [DisplayName("ClearException Log")]
     public void Clear()
     {
         _sysLogExRep.AsSugarClient().DbMaintenance.TruncateTable<SysLogEx>();
     }
 
     /// <summary>
-    /// 导出异常日志 🔖
+    /// Export exception log 🔖
     /// </summary>
     /// <returns></returns>
     [ApiDescriptionSettings(Name = "Export"), NonUnify]
-    [DisplayName("导出异常日志")]
+    [DisplayName("Export exception log")]
     public async Task<IActionResult> ExportLogEx(LogInput input)
     {
         var logExList = await _sysLogExRep.AsQueryable()
@@ -84,6 +84,6 @@ public class SysLogExService : IDynamicApiController, ITransient
 
         IExcelExporter excelExporter = new ExcelExporter();
         var res = await excelExporter.ExportAsByteArray(logExList);
-        return new FileStreamResult(new MemoryStream(res), "application/octet-stream") { FileDownloadName = DateTime.Now.ToString("yyyyMMddHHmm") + "异常日志.xlsx" };
+        return new FileStreamResult(new MemoryStream(res), "application/octet-stream") { FileDownloadName = DateTime.Now.ToString("yyyyMMddHHmm") + "Exception log.xlsx" };
     }
 }

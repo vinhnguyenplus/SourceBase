@@ -1,8 +1,8 @@
-// Admin.NET 项目的版权、商标、专利和其他相关权利均受相应法律法规的保护。使用本项目应遵守相关法律法规和许可证的要求。
+// The copyright, trademark, patent and other related rights of the Admin.NET project are protected by corresponding laws and regulations. Use of this project shall comply with relevant laws, regulations and license requirements.
 //
-// 本项目主要遵循 MIT 许可证和 Apache 许可证（版本 2.0）进行分发和使用。许可证位于源代码树根目录中的 LICENSE-MIT 和 LICENSE-APACHE 文件。
+// This project is distributed and used primarily under the MIT License and the Apache License (version 2.0). The license is located in the LICENSE-MIT and LICENSE-APACHE files in the root of the source tree.
 //
-// 不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！
+// This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project!
 
 using System.IO.Compression;
 using System.Net;
@@ -11,7 +11,7 @@ using System.Security.Cryptography;
 namespace Admin.NET.Core.Service;
 
 /// <summary>
-/// 系统更新管理服务 🧩
+/// System update management service 🧩
 /// </summary>
 [ApiDescriptionSettings(Order = 390)]
 public class SysUpdateService : IDynamicApiController, ITransient
@@ -26,10 +26,10 @@ public class SysUpdateService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 备份列表
+    /// Backup list
     /// </summary>
     /// <returns></returns>
-    [DisplayName("备份列表")]
+    [DisplayName("Backup list")]
     [ApiDescriptionSettings(Name = "List"), HttpPost]
     public Task<List<BackupOutput>> List()
     {
@@ -51,115 +51,115 @@ public class SysUpdateService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 还原
+    /// reduction
     /// </summary>
     /// <returns></returns>
-    [DisplayName("还原")]
+    [DisplayName("restore")]
     [ApiDescriptionSettings(Name = "Restore"), HttpPost]
     public async Task Restore(RestoreInput input)
     {
-        // 检查参数
+        // Check parameters
         CheckConfig();
         try
         {
             var file = (await List()).FirstOrDefault(u => u.FileName.EqualIgnoreCase(input.FileName));
             if (file == null)
             {
-                PrintfLog("文件不存在...");
+                PrintfLog("File does not exist...");
                 return;
             }
 
-            PrintfLog("正在还原...");
+            PrintfLog("Restoring...");
             using ZipArchive archive = new(File.OpenRead(file.FilePath), ZipArchiveMode.Read, leaveOpen: false);
             archive.ExtractToDirectory(_cdConfigOptions.BackendOutput, true);
-            PrintfLog("还原成功...");
+            PrintfLog("Restore successful...");
         }
         catch (Exception ex)
         {
-            PrintfLog("发生异常：" + ex.Message);
+            PrintfLog("An exception occurred:" + ex.Message);
             throw;
         }
     }
 
     /// <summary>
-    /// 从远端更新系统
+    /// Updating the system remotely
     /// </summary>
     /// <returns></returns>
-    [DisplayName("系统更新")]
+    [DisplayName("System update")]
     [ApiDescriptionSettings(Name = "Update"), HttpPost]
     public async Task Update()
     {
         var originColor = Console.ForegroundColor;
         Console.ForegroundColor = ConsoleColor.Yellow;
-        Console.WriteLine($"【{DateTime.Now}】从远端仓库部署项目");
+        Console.WriteLine($"[{DateTime.Now}] Deploy project from remote repository");
         try
         {
-            PrintfLog("----------------------------从远端仓库部署项目-开始----------------------------");
+            PrintfLog("----------------------------Deploy the project from the remote warehouse-start---------------------------");
 
-            // 检查参数
+            // Check parameters
             CheckConfig();
 
-            // 检查操作间隔
+            // Check operation interval
             if (_cdConfigOptions.UpdateInterval > 0)
             {
-                if (_sysCacheService.Get<bool>(CacheConst.KeySysUpdateInterval)) throw Oops.Oh("请勿频繁操作");
+                if (_sysCacheService.Get<bool>(CacheConst.KeySysUpdateInterval)) throw Oops.Oh("Do not operate frequently");
                 _sysCacheService.Set(CacheConst.KeySysUpdateInterval, true, TimeSpan.FromMinutes(_cdConfigOptions.UpdateInterval));
             }
 
-            PrintfLog($"客户端host：{App.HttpContext.Request.Host}");
-            PrintfLog($"客户端IP：{App.HttpContext.GetRemoteIpAddressToIPv4(true)}");
-            PrintfLog($"仓库地址：https://gitee.com/{_cdConfigOptions.Owner}/{_cdConfigOptions.Repo}.git");
-            PrintfLog($"仓库分支：{_cdConfigOptions.Branch}");
+            PrintfLog($"Client host: {App.HttpContext.Request.Host}");
+            PrintfLog($"Client IP: {App.HttpContext.GetRemoteIpAddressToIPv4(true)}");
+            PrintfLog($"Repository address: https://gitee.com/{_cdConfigOptions.Owner}/{_cdConfigOptions.Repo}.git");
+            PrintfLog($"Warehouse branch: {_cdConfigOptions.Branch}");
 
-            // 获取解压后的根目录
+            // Get the decompressed root directory
             var rootPath = Path.GetFullPath(Path.Combine(_cdConfigOptions.BackendOutput, ".."));
             var tempDir = Path.Combine(rootPath, $"{_cdConfigOptions.Repo}-{_cdConfigOptions.Branch}");
 
-            PrintfLog("清理旧文件...");
+            PrintfLog("Clean up old files...");
             FileHelper.TryDelete(tempDir);
 
-            PrintfLog("拉取远端代码...");
+            PrintfLog("Pulling remote code...");
             var stream = await GiteeHelper.DownloadRepoZip(_cdConfigOptions.Owner, _cdConfigOptions.Repo,
                 _cdConfigOptions.AccessToken, _cdConfigOptions.Branch);
 
-            PrintfLog("文件包解压...");
+            PrintfLog("Unzip the file package...");
             using ZipArchive archive = new(stream, ZipArchiveMode.Read, leaveOpen: false);
             archive.ExtractToDirectory(rootPath);
 
-            // 项目目录
-            var backendDir = "Admin.NET"; // 后端根目录
-            var entryProjectName = "Admin.NET.Web.Entry"; // 启动项目目录
+            // Project directory
+            var backendDir = "Admin.NET"; // Backend root directory
+            var entryProjectName = "Admin.NET.Web.Entry"; // Start project directory
             var tempOutput = Path.Combine(rootPath, $"{_cdConfigOptions.Repo}_temp");
 
-            PrintfLog("编译项目...");
-            PrintfLog($"发布版本：{_cdConfigOptions.Publish.Configuration}");
-            PrintfLog($"目标框架：{_cdConfigOptions.Publish.TargetFramework}");
-            PrintfLog($"运行环境：{_cdConfigOptions.Publish.RuntimeIdentifier}");
+            PrintfLog("Compile project...");
+            PrintfLog($"Release version: {_cdConfigOptions.Publish.Configuration}");
+            PrintfLog($"Target framework: {_cdConfigOptions.Publish.TargetFramework}");
+            PrintfLog($"Running environment: {_cdConfigOptions.Publish.RuntimeIdentifier}");
             var option = _cdConfigOptions.Publish;
             var adminNetDir = Path.Combine(tempDir, backendDir);
             var args = $"publish \"{entryProjectName}\" -c {option.Configuration} -f {option.TargetFramework} -r {option.RuntimeIdentifier} --output \"{tempOutput}\"";
             await RunCommandAsync("dotnet", args, adminNetDir);
 
-            PrintfLog("复制 wwwroot 目录...");
+            PrintfLog("Copy wwwroot Table of Contents...");
             var wwwrootDir = Path.Combine(adminNetDir, entryProjectName, "wwwroot");
             FileHelper.CopyDirectory(wwwrootDir, Path.Combine(tempOutput, "wwwroot"), true);
 
-            // 删除排除文件
+            // Delete excluded files
             foreach (var filePath in (_cdConfigOptions.ExcludeFiles ?? new()).SelectMany(file => Directory.GetFiles(tempOutput, file, SearchOption.TopDirectoryOnly)))
             {
-                PrintfLog($"排除文件：{filePath}");
+                PrintfLog($"Exclude files: {filePath}");
                 FileHelper.TryDelete(filePath);
             }
 
-            PrintfLog("备份原项目文件...");
+            PrintfLog("Backing up the original project files...");
             string backupPath = Path.Combine(rootPath, $"{_cdConfigOptions.Repo}_{DateTime.Now:yyyy_MM_dd}.zip");
             if (File.Exists(backupPath)) File.Delete(backupPath);
             ZipFile.CreateFromDirectory(_cdConfigOptions.BackendOutput, backupPath);
 
-            // 将临时文件移动到正式目录
+            // Move temporary files to official directory
             FileHelper.CopyDirectory(tempOutput, _cdConfigOptions.BackendOutput, true);
 
-            PrintfLog("清理文件...");
+            PrintfLog("Clean files...");
             FileHelper.TryDelete(tempOutput);
             FileHelper.TryDelete(tempDir);
 
@@ -167,7 +167,7 @@ public class SysUpdateService : IDynamicApiController, ITransient
             {
                 var fileList = await List();
                 if (fileList.Count > _cdConfigOptions.BackupCount)
-                    PrintfLog("清除多余的备份文件...");
+                    PrintfLog("Clearing unnecessary backup files...");
                 while (fileList.Count > _cdConfigOptions.BackupCount)
                 {
                     var last = fileList.Last();
@@ -176,35 +176,35 @@ public class SysUpdateService : IDynamicApiController, ITransient
                 }
             }
 
-            PrintfLog("重启项目后生效...");
+            PrintfLog("Takes effect after restarting the project...");
         }
         catch (Exception ex)
         {
-            PrintfLog("发生异常：" + ex.Message);
+            PrintfLog("An exception occurred:" + ex.Message);
             throw;
         }
         finally
         {
-            PrintfLog("----------------------------从远端仓库部署项目-结束----------------------------");
+            PrintfLog("----------------------------Deploy Project from Remote Repository - End----------------------------");
             Console.ForegroundColor = originColor;
         }
     }
 
     /// <summary>
-    /// 仓库WebHook接口
+    /// Warehouse WebHook interface
     /// </summary>
     /// <returns></returns>
     [AllowAnonymous]
-    [DisplayName("仓库WebHook接口")]
+    [DisplayName("Warehouse WebHook interface")]
     [ApiDescriptionSettings(Name = "WebHook"), HttpPost]
     public async Task WebHook(Dictionary<string, object> input)
     {
-        if (!_cdConfigOptions.Enabled) throw Oops.Oh("未启用持续部署功能");
-        PrintfLog("----------------------------收到WebHook请求-开始----------------------------");
+        if (!_cdConfigOptions.Enabled) throw Oops.Oh("Continuous deployment feature not enabled");
+        PrintfLog("---------------------------- WebHook request received - Start ----------------------------");
 
         try
         {
-            // 获取请求头信息
+            // Get request header information
             var even = App.HttpContext.Request.Headers.FirstOrDefault(u => u.Key == "X-Gitee-Event").Value
                 .FirstOrDefault();
             var ua = App.HttpContext.Request.Headers.FirstOrDefault(u => u.Key == "User-Agent").Value.FirstOrDefault();
@@ -216,7 +216,7 @@ public class SysUpdateService : IDynamicApiController, ITransient
             PrintfLog("Gitee-Token：" + token);
             PrintfLog("Gitee-Timestamp：" + timestamp);
 
-            PrintfLog("开始验签...");
+            PrintfLog("Starting signature verification...");
             var secret = GetWebHookKey();
             var stringToSign = $"{timestamp}\n{secret}";
             using var mac = new HMACSHA256(Encoding.UTF8.GetBytes(secret));
@@ -224,15 +224,15 @@ public class SysUpdateService : IDynamicApiController, ITransient
             var encodedSignData = Convert.ToBase64String(signData);
             var calculatedSignature = WebUtility.UrlEncode(encodedSignData);
 
-            if (calculatedSignature != token) throw Oops.Oh("非法签名");
-            PrintfLog("验签成功...");
+            if (calculatedSignature != token) throw Oops.Oh("IllegalSignature");
+            PrintfLog("Signature verification successful...");
 
             var hookName = input.GetValueOrDefault("hook_name") as string;
             PrintfLog("Hook-Name：" + hookName);
 
             switch (hookName)
             {
-                // 提交修改
+                // Submit changes
                 case "push_hooks":
                     {
                         var commitList = input.GetValueOrDefault("commits")?.Adapt<List<Dictionary<string, object>>>() ?? new();
@@ -248,7 +248,7 @@ public class SysUpdateService : IDynamicApiController, ITransient
 
                         break;
                     }
-                // 合并 Pull Request
+                // Merge Pull Request
                 case "merge_request_hooks":
                     {
                         var pull = input.GetValueOrDefault("pull_request")?.Adapt<Dictionary<string, object>>();
@@ -259,7 +259,7 @@ public class SysUpdateService : IDynamicApiController, ITransient
                         PrintfLog("Pull-Request-Body：" + pull?.GetValueOrDefault("body"));
                         break;
                     }
-                // 新的issue
+                // new issue
                 case "issue_hooks":
                     {
                         var issue = input.GetValueOrDefault("issue")?.Adapt<Dictionary<string, object>>();
@@ -272,7 +272,7 @@ public class SysUpdateService : IDynamicApiController, ITransient
                         PrintfLog("Issue-Body：" + issue?.GetValueOrDefault("body"));
                         return;
                     }
-                // 评论
+                // Comment
                 case "note_hooks":
                     {
                         var comment = input.GetValueOrDefault("comment")?.Adapt<Dictionary<string, object>>();
@@ -299,15 +299,15 @@ public class SysUpdateService : IDynamicApiController, ITransient
         }
         finally
         {
-            PrintfLog("----------------------------收到WebHook请求-结束----------------------------");
+            PrintfLog("---------------------------- WebHook request received - end ----------------------------");
         }
     }
 
     /// <summary>
-    /// 获取WebHook接口密钥
+    /// Get WebHook interface key
     /// </summary>
     /// <returns></returns>
-    [DisplayName("获取WebHook接口密钥")]
+    [DisplayName("Obtain WebHook API Key")]
     [ApiDescriptionSettings(Name = "WebHookKey"), HttpGet]
     public string GetWebHookKey()
     {
@@ -315,10 +315,10 @@ public class SysUpdateService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 获取日志列表
+    /// Get log list
     /// </summary>
     /// <returns></returns>
-    [DisplayName("获取日志列表")]
+    [DisplayName("Get log list")]
     [ApiDescriptionSettings(Name = "Logs"), HttpGet]
     public List<string> LogList()
     {
@@ -326,10 +326,10 @@ public class SysUpdateService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 清空日志
+    /// Clear log
     /// </summary>
     /// <returns></returns>
-    [DisplayName("清空日志")]
+    [DisplayName("Clear logs")]
     [ApiDescriptionSettings(Name = "Clear"), HttpGet]
     public void ClearLog()
     {
@@ -337,36 +337,36 @@ public class SysUpdateService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 检查参数
+    /// Check parameters
     /// </summary>
     /// <returns></returns>
     private void CheckConfig()
     {
-        PrintfLog("检查CD配置参数...");
+        PrintfLog("Checking CD configuration parameters...");
 
-        if (_cdConfigOptions == null) throw Oops.Oh("CDConfig配置不能为空");
+        if (_cdConfigOptions == null) throw Oops.Oh("CDConfig configuration cannot be empty");
 
-        if (string.IsNullOrWhiteSpace(_cdConfigOptions.Owner)) throw Oops.Oh("仓库用户名不能为空");
+        if (string.IsNullOrWhiteSpace(_cdConfigOptions.Owner)) throw Oops.Oh("The warehouse username cannot be empty");
 
-        if (string.IsNullOrWhiteSpace(_cdConfigOptions.Repo)) throw Oops.Oh("仓库名不能为空");
+        if (string.IsNullOrWhiteSpace(_cdConfigOptions.Repo)) throw Oops.Oh("Warehouse name cannot be empty");
 
-        // if (string.IsNullOrWhiteSpace(_cdConfigOptions.Branch)) throw Oops.Oh("分支名不能为空");
+        // if (string.IsNullOrWhiteSpace(_cdConfigOptions.Branch)) throw Oops.Oh("The branch name cannot be empty");
 
-        if (string.IsNullOrWhiteSpace(_cdConfigOptions.AccessToken)) throw Oops.Oh("授权信息不能为空");
+        if (string.IsNullOrWhiteSpace(_cdConfigOptions.AccessToken)) throw Oops.Oh("Authorization information cannot be empty");
 
-        if (string.IsNullOrWhiteSpace(_cdConfigOptions.BackendOutput)) throw Oops.Oh("部署目录不能为空");
+        if (string.IsNullOrWhiteSpace(_cdConfigOptions.BackendOutput)) throw Oops.Oh("The deployment directory cannot be empty");
 
-        if (_cdConfigOptions.Publish == null) throw Oops.Oh("编译配置不能为空");
+        if (_cdConfigOptions.Publish == null) throw Oops.Oh("Compilation configuration cannot be empty");
 
-        if (string.IsNullOrWhiteSpace(_cdConfigOptions.Publish.Configuration)) throw Oops.Oh("运行环境编译配置不能为空");
+        if (string.IsNullOrWhiteSpace(_cdConfigOptions.Publish.Configuration)) throw Oops.Oh("The runtime environment compile configuration cannot be empty");
 
-        if (string.IsNullOrWhiteSpace(_cdConfigOptions.Publish.TargetFramework)) throw Oops.Oh(".NET版本编译配置不能为空");
+        if (string.IsNullOrWhiteSpace(_cdConfigOptions.Publish.TargetFramework)) throw Oops.Oh(".NET version compilation configuration cannot be empty");
 
-        if (string.IsNullOrWhiteSpace(_cdConfigOptions.Publish.RuntimeIdentifier)) throw Oops.Oh("运行平台配置不能为空");
+        if (string.IsNullOrWhiteSpace(_cdConfigOptions.Publish.RuntimeIdentifier)) throw Oops.Oh("The runtime platform configuration cannot be empty");
     }
 
     /// <summary>
-    /// 打印日志
+    /// Print log
     /// </summary>
     /// <param name="message"></param>
     private void PrintfLog(string message)
@@ -383,11 +383,11 @@ public class SysUpdateService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 执行命令
+    /// execute command
     /// </summary>
-    /// <param name="command">命令</param>
-    /// <param name="arguments">参数</param>
-    /// <param name="workingDirectory">工作目录</param>
+    /// <param name="command">Order</param>
+    /// <param name="arguments">parameter</param>
+    /// <param name="workingDirectory">working directory</param>
     private async Task RunCommandAsync(string command, string arguments, string workingDirectory)
     {
         var processStartInfo = new ProcessStartInfo

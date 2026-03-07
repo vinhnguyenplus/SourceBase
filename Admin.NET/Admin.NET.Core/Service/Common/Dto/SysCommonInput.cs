@@ -1,69 +1,69 @@
-﻿// Admin.NET 项目的版权、商标、专利和其他相关权利均受相应法律法规的保护。使用本项目应遵守相关法律法规和许可证的要求。
+﻿// The copyright, trademark, patent and other related rights of the Admin.NET project are protected by corresponding laws and regulations. Use of this project shall comply with relevant laws, regulations and license requirements.
 //
-// 本项目主要遵循 MIT 许可证和 Apache 许可证（版本 2.0）进行分发和使用。许可证位于源代码树根目录中的 LICENSE-MIT 和 LICENSE-APACHE 文件。
+// This project is distributed and used primarily under the MIT License and the Apache License (version 2.0). The license is located in the LICENSE-MIT and LICENSE-APACHE files in the root of the source tree.
 //
-// 不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！
+// This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project!
 
 namespace Admin.NET.Core.Service;
 
 /// <summary>
-/// 接口压测输入参数
+/// Interface pressure test input parameters
 /// </summary>
 public class StressTestInput
 {
     /// <summary>
-    /// 接口请求地址
+    /// Interface request address
     /// </summary>
     /// <example>https://gitee.com/zuohuaijun/Admin.NET</example>
-    [Required(ErrorMessage = "接口请求地址不能为空")]
+    [Required(ErrorMessage = "The interface request address cannot be empty")]
     public string RequestUri { get; set; }
 
     /// <summary>
-    /// 请求方式
+    /// Request method
     /// </summary>
-    [Required(ErrorMessage = "请求方式不能为空")]
+    [Required(ErrorMessage = "Request method cannot be empty")]
     public string RequestMethod { get; set; } = nameof(HttpMethod.Get);
 
     /// <summary>
-    /// 每轮请求量
+    /// Requests per round
     /// </summary>
     /// <example>100</example>
-    [Required(ErrorMessage = "每轮请求量不能为空")]
-    [Range(1, 100000, ErrorMessage = "每轮请求量必须为1-100000")]
+    [Required(ErrorMessage = "The request volume per round cannot be empty")]
+    [Range(1, 100000, ErrorMessage = "The number of requests per round must be 1-100000")]
     public int? NumberOfRequests { get; set; }
 
     /// <summary>
-    /// 压测轮数
+    /// Number of pressure test rounds
     /// </summary>
     /// <example>5</example>
-    [Required(ErrorMessage = "压测轮数不能为空")]
-    [Range(1, 10000, ErrorMessage = "压测轮数必须为1-10000")]
+    [Required(ErrorMessage = "The number of pressure test rounds cannot be empty.")]
+    [Range(1, 10000, ErrorMessage = "The number of stress test rounds must be between 1 and 10,000")]
     public int? NumberOfRounds { get; set; }
 
     /// <summary>
-    /// 最大并行量（默认为当前主机逻辑处理器的数量）
+    /// Maximum amount of parallelism (defaults to the current number of host logical processors)
     /// </summary>
     /// <example>500</example>
-    [Range(0, 10000, ErrorMessage = "最大并行量必须为0-10000")]
+    [Range(0, 10000, ErrorMessage = "The maximum parallelism must be 0-10000")]
     public int? MaxDegreeOfParallelism { get; set; } = Environment.ProcessorCount;
 
     /// <summary>
-    /// 请求参数
+    /// Request parameters
     /// </summary>
     public List<KeyValuePair<string, string>> RequestParameters { get; set; } = new();
 
     /// <summary>
-    /// 请求头参数
+    /// Request header parameters
     /// </summary>
     public Dictionary<string, string> Headers { get; set; } = new();
 
     /// <summary>
-    /// 路径参数
+    /// path parameters
     /// </summary>
     public Dictionary<string, string> PathParameters { get; set; } = new();
 
     /// <summary>
-    /// Query参数
+    /// Query parameters
     /// </summary>
     public Dictionary<string, string> QueryParameters { get; set; } = new();
 }

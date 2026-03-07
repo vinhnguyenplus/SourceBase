@@ -4,51 +4,51 @@
 			<template #header>
 				<div style="color: #fff">
 					<el-icon size="16" style="margin-right: 3px; display: inline; vertical-align: middle"> <ele-Key /> </el-icon>
-					<span> 生成签名 </span>
+					<span> Generate signature </span>
 				</div>
 			</template>
 			<el-form :model="state.ruleForm" ref="ruleFormRef" label-width="auto">
 				<el-row :gutter="35">
 					<el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="mb20">
-						<el-form-item label="身份标识" prop="accessKey">
-							<el-input v-model="state.ruleForm.accessKey" placeholder="身份标识" readonly />
+						<el-form-item label="Identity mark" prop="accessKey">
+							<el-input v-model="state.ruleForm.accessKey" placeholder="Identity mark" readonly />
 						</el-form-item>
 					</el-col>
 					<el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="mb20">
-						<el-form-item label="密钥" prop="accessSecret">
-							<el-input v-model="state.ruleForm.accessSecret" placeholder="密钥" readonly> </el-input>
+						<el-form-item label="key" prop="accessSecret">
+							<el-input v-model="state.ruleForm.accessSecret" placeholder="key" readonly> </el-input>
 						</el-form-item>
 					</el-col>
 					<el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="mb20">
-						<el-form-item label="接口请求地址" prop="url">
-							<el-input v-model="state.ruleForm.url" placeholder="接口请求地址" class="input-with-select" clearable>
+						<el-form-item label="InterfaceRequest address" prop="url">
+							<el-input v-model="state.ruleForm.url" placeholder="InterfaceRequest address" class="input-with-select" clearable>
 								<template #prepend>
-                  <g-sys-dict v-model="state.ruleForm.method" code="HttpMethodEnum" render-as="select" placeholder="请求方法" style="width: 100px" />
+                  <g-sys-dict v-model="state.ruleForm.method" code="HttpMethodEnum" render-as="select" placeholder="Request Method" style="width: 100px" />
 								</template>
 							</el-input>
 						</el-form-item>
 					</el-col>
 					<el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="mb20">
-						<el-form-item label="时间戳" prop="timestamp">
-							<el-input v-model="state.ruleForm.timestamp" placeholder="输入或获取时间戳" clearable>
+						<el-form-item label="Timestamp" prop="timestamp">
+							<el-input v-model="state.ruleForm.timestamp" placeholder="Enter or get timestamp" clearable>
 								<template #append>
-									<el-button @click="getTimeStamp">获取</el-button>
+									<el-button @click="getTimeStamp">Obtain</el-button>
 								</template>
 							</el-input>
 						</el-form-item>
 					</el-col>
 					<el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="mb20">
-						<el-form-item label="随机数" prop="nonce">
-							<el-input v-model="state.ruleForm.nonce" placeholder="输入或获取随机数" clearable>
+						<el-form-item label="random number" prop="nonce">
+							<el-input v-model="state.ruleForm.nonce" placeholder="Enter or get a random number" clearable>
 								<template #append>
-									<el-button @click="getNonce">获取</el-button>
+									<el-button @click="getNonce">Obtain</el-button>
 								</template>
 							</el-input>
 						</el-form-item>
 					</el-col>
 					<el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="mb20">
-						<el-form-item label="签名" prop="sign">
-							<el-input v-model="state.sign" placeholder="填写信息后自动生成" readonly> </el-input>
+						<el-form-item label="Signature" prop="sign">
+							<el-input v-model="state.sign" placeholder="Automatically generated after filling in the information" readonly> </el-input>
 						</el-form-item>
 					</el-col>
 				</el-row>
@@ -68,7 +68,7 @@ const ruleFormRef = ref();
 const state = reactive({
 	isShowDialog: false,
 	ruleForm: {} as GenerateSignatureInput,
-	sign: '', // 生成的签名
+	sign: '', // generated signature
 });
 
 watch([() => state.ruleForm.method, () => state.ruleForm.url, () => state.ruleForm.timestamp, () => state.ruleForm.nonce], () => {
@@ -78,7 +78,7 @@ watch([() => state.ruleForm.method, () => state.ruleForm.url, () => state.ruleFo
 		!state.ruleForm.url ||
 		!state.ruleForm.timestamp ||
 		!state.ruleForm.nonce ||
-		/^\d+$/.test(state.ruleForm.timestamp as unknown as string) == false // 时间戳必须为数字
+		/^\d+$/.test(state.ruleForm.timestamp as unknown as string) == false // timestamp must be numeric
 	) {
 		state.sign = '';
 		return;
@@ -87,7 +87,7 @@ watch([() => state.ruleForm.method, () => state.ruleForm.url, () => state.ruleFo
 	generateSign();
 });
 
-// 打开弹窗
+// Open pop-up window
 const openDialog = (row: any) => {
 	state.ruleForm = {
 		accessKey: row?.accessKey,
@@ -99,19 +99,19 @@ const openDialog = (row: any) => {
 	ruleFormRef.value?.resetFields();
 };
 
-/** 生成密钥 */
+/** Generate key */
 const createSecret = async () => {
 	var res = await getAPI(SysOpenAccessApi).apiSysOpenAccessSecretPost();
 	state.ruleForm.accessSecret = res.data.result!;
 };
 
-/** 获取当前时间戳（精确到秒） */
+/** Get the current timestamp (accurate to seconds) */
 const getTimeStamp = () => {
 	const timestamp = Math.floor(Date.now() / 1000);
 	state.ruleForm.timestamp = timestamp;
 };
 
-/** 获取随机数 */
+/** Get random number */
 const getNonce = () => {
 	var nonce = '';
 	for (var i = 0; i < 6; i++) {
@@ -120,13 +120,13 @@ const getNonce = () => {
 	state.ruleForm.nonce = nonce;
 };
 
-/** 生成签名 */
+/** Generate signature */
 const generateSign = async () => {
 	var res = await getAPI(SysOpenAccessApi).apiSysOpenAccessGenerateSignaturePost(state.ruleForm);
 	state.sign = res.data.result!;
 };
 
-// 导出对象
+// Export object
 defineExpose({ openDialog });
 </script>
 

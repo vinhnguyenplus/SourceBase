@@ -1,15 +1,15 @@
-// Admin.NET 项目的版权、商标、专利和其他相关权利均受相应法律法规的保护。使用本项目应遵守相关法律法规和许可证的要求。
+// The copyright, trademark, patent and other related rights of the Admin.NET project are protected by corresponding laws and regulations. Use of this project shall comply with relevant laws, regulations and license requirements.
 //
-// 本项目主要遵循 MIT 许可证和 Apache 许可证（版本 2.0）进行分发和使用。许可证位于源代码树根目录中的 LICENSE-MIT 和 LICENSE-APACHE 文件。
+// This project is distributed and used primarily under the MIT License and the Apache License (version 2.0). The license is located in the LICENSE-MIT and LICENSE-APACHE files in the root of the source tree.
 //
-// 不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！
+// This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project!
 
 using Npgsql;
 
 namespace Admin.NET.Core.Service;
 
 /// <summary>
-/// 系统数据库管理服务 🧩
+/// System database management services 🧩
 /// </summary>
 [ApiDescriptionSettings(Order = 250)]
 public class SysDatabaseService : IDynamicApiController, ITransient
@@ -28,20 +28,20 @@ public class SysDatabaseService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 获取库列表 🔖
+    /// Get library list 🔖
     /// </summary>
     /// <returns></returns>
-    [DisplayName("获取库列表")]
+    [DisplayName("Get library list")]
     public List<VisualDb> GetList()
     {
         return App.GetOptions<DbConnectionOptions>().ConnectionConfigs.Select(u => new VisualDb { ConfigId = u.ConfigId.ToString(), DbNickName = u.DbNickName }).ToList();
     }
 
     /// <summary>
-    /// 获取可视化库表结构 🔖
+    /// Get the visual library table structure 🔖
     /// </summary>
     /// <returns></returns>
-    [DisplayName("获取可视化库表结构")]
+    [DisplayName("Obtain the table structure of the visualization library")]
     public VisualDbTable GetVisualDbTable()
     {
         var visualTableList = new List<VisualTable>();
@@ -49,7 +49,7 @@ public class SysDatabaseService : IDynamicApiController, ITransient
         var columnRelationList = new List<ColumnRelation>();
         var dbOptions = App.GetOptions<DbConnectionOptions>().ConnectionConfigs.First(u => u.ConfigId.ToString() == SqlSugarConst.MainConfigId);
 
-        // 遍历所有实体获取所有库表结构
+        // Traverse all entities to obtain all database table structures
         var random = new Random();
         var entityTypes = App.EffectiveTypes.Where(u => !u.IsInterface && !u.IsAbstract && u.IsClass && u.IsDefined(typeof(SugarTable), false)).ToList();
         foreach (var entityType in entityTypes)
@@ -77,7 +77,7 @@ public class SysDatabaseService : IDynamicApiController, ITransient
                 };
                 visualColumnList.Add(visualColumn);
 
-                // 根据导航配置获取表之间关联关系
+                // Obtain the association between tables based on navigation configuration
                 if (columnInfo.Navigat != null)
                 {
                     var name1 = columnInfo.Navigat.GetName();
@@ -100,12 +100,12 @@ public class SysDatabaseService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 获取字段列表 🔖
+    /// Get field list 🔖
     /// </summary>
-    /// <param name="tableName">表名</param>
+    /// <param name="tableName">table name</param>
     /// <param name="configId">ConfigId</param>
     /// <returns></returns>
-    [DisplayName("获取字段列表")]
+    [DisplayName("ObtainFieldList")]
     public List<DbColumnOutput> GetColumnList(string tableName, string configId = SqlSugarConst.MainConfigId)
     {
         var db = _db.AsTenant().GetConnectionScope(configId);
@@ -113,11 +113,11 @@ public class SysDatabaseService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 获取数据库数据类型列表 🔖
+    /// Get database data type list 🔖
     /// </summary>
     /// <param name="configId"></param>
     /// <returns></returns>
-    [DisplayName("获取数据库数据类型列表")]
+    [DisplayName("Get a list of database data types")]
     public List<string> GetDbTypeList(string configId = SqlSugarConst.MainConfigId)
     {
         var db = _db.AsTenant().GetConnectionScope(configId);
@@ -125,11 +125,11 @@ public class SysDatabaseService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 增加列 🔖
+    /// Add column 🔖
     /// </summary>
     /// <param name="input"></param>
     [ApiDescriptionSettings(Name = "AddColumn"), HttpPost]
-    [DisplayName("增加列")]
+    [DisplayName("Add column")]
     public void AddColumn(DbColumnInput input)
     {
         var column = new DbColumnInfo
@@ -145,7 +145,7 @@ public class SysDatabaseService : IDynamicApiController, ITransient
         };
         var db = _db.AsTenant().GetConnectionScope(input.ConfigId);
         db.DbMaintenance.AddColumn(input.TableName, column);
-        // 默认值直接添加报错
+        // The default value is added directly to report an error.
         if (!string.IsNullOrWhiteSpace(input.DefaultValue))
         {
             db.DbMaintenance.AddDefaultValue(input.TableName, column.DbColumnName, input.DefaultValue);
@@ -155,11 +155,11 @@ public class SysDatabaseService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 删除列 🔖
+    /// Delete column 🔖
     /// </summary>
     /// <param name="input"></param>
     [ApiDescriptionSettings(Name = "DeleteColumn"), HttpPost]
-    [DisplayName("删除列")]
+    [DisplayName("Delete column")]
     public void DeleteColumn(DeleteDbColumnInput input)
     {
         var db = _db.AsTenant().GetConnectionScope(input.ConfigId);
@@ -167,16 +167,16 @@ public class SysDatabaseService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 编辑列 🔖
+    /// Edit column 🔖
     /// </summary>
     /// <param name="input"></param>
     [ApiDescriptionSettings(Name = "UpdateColumn"), HttpPost]
-    [DisplayName("编辑列")]
+    [DisplayName("Edit Column")]
     public void UpdateColumn(UpdateDbColumnInput input)
     {
         var db = _db.AsTenant().GetConnectionScope(input.ConfigId);
 
-        // 前端未修改列名时，不进行重命名操作，避免报错
+        // When the front-end has not modified the column name, the renaming operation will not be performed to avoid error reporting.
         if (input.OldColumnName != input.ColumnName)
         {
             db.DbMaintenance.RenameColumn(input.TableName, input.OldColumnName, input.ColumnName);
@@ -195,11 +195,11 @@ public class SysDatabaseService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 移动列位置 🔖
+    /// Move column position 🔖
     /// </summary>
     /// <param name="input"></param>
     [ApiDescriptionSettings(Name = "MoveColumn"), HttpPost]
-    [DisplayName("移动列")]
+    [DisplayName("Move columns")]
     public void MoveColumn(MoveDbColumnInput input)
     {
         var db = _db.AsTenant().GetConnectionScope(input.ConfigId);
@@ -212,7 +212,7 @@ public class SysDatabaseService : IDynamicApiController, ITransient
             c.DbColumnName.Equals(input.ColumnName, StringComparison.OrdinalIgnoreCase));
 
         if (targetColumn == null)
-            throw new Exception($"列 {input.ColumnName} 在表 {input.TableName} 中不存在");
+            throw new Exception($"Column {input.ColumnName} does not exist in table {input.TableName}");
 
         switch (dbType)
         {
@@ -221,12 +221,12 @@ public class SysDatabaseService : IDynamicApiController, ITransient
                 break;
 
             default:
-                throw new NotSupportedException($"暂不支持 {dbType} 数据库的列移动操作");
+                throw new NotSupportedException($"The column movement operation of {dbType} database is not supported yet.");
         }
     }
 
     /// <summary>
-    /// 获取列定义
+    /// Get column definition
     /// </summary>
     /// <param name="db"></param>
     /// <param name="tableName"></param>
@@ -244,10 +244,10 @@ public class SysDatabaseService : IDynamicApiController, ITransient
             throw new Exception($"Column {columnName} not found");
 
         var definition = new StringBuilder();
-        definition.Append($"`{columnName}` ");  // 列名
-        definition.Append($"{columnDef.Type} "); // 数据类型
+        definition.Append($"`{columnName}` ");  // List
+        definition.Append($"{columnDef.Type} "); // data type
 
-        // 处理约束条件
+        // Handle constraints
         definition.Append(columnDef.Null == "YES" ? "NULL " : "NOT NULL ");
         if (columnDef.Default != null && !noDefault)
             definition.Append($"DEFAULT '{columnDef.Default}' ");
@@ -260,7 +260,7 @@ public class SysDatabaseService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// MySQL 列移动实现
+    /// MySQL column movement implementation
     /// </summary>
     /// <param name="db"></param>
     /// <param name="tableName"></param>
@@ -281,11 +281,11 @@ public class SysDatabaseService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 获取表列表 🔖
+    /// Get table list 🔖
     /// </summary>
     /// <param name="configId">ConfigId</param>
     /// <returns></returns>
-    [DisplayName("获取表列表")]
+    [DisplayName("Get table list")]
     public List<DbTableInfo> GetTableList(string configId = SqlSugarConst.MainConfigId)
     {
         var db = _db.AsTenant().GetConnectionScope(configId);
@@ -293,11 +293,11 @@ public class SysDatabaseService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 增加表 🔖
+    /// Add table 🔖
     /// </summary>
     /// <param name="input"></param>
     [ApiDescriptionSettings(Name = "AddTable"), HttpPost]
-    [DisplayName("增加表")]
+    [DisplayName("Add table")]
     public void AddTable(DbTableInput input)
     {
         if (input.DbColumnInfoList == null || !input.DbColumnInfoList.Any())
@@ -312,7 +312,7 @@ public class SysDatabaseService : IDynamicApiController, ITransient
         input.DbColumnInfoList.ForEach(u =>
         {
             var dbColumnName = config!.DbSettings.EnableUnderLine ? u.DbColumnName.Trim().ToUnderLine() : u.DbColumnName.Trim();
-            // 虚拟类都默认string类型，具体以列数据类型为准
+            // Virtual classes default to string type, which is subject to the column data type.
             typeBuilder.CreateProperty(dbColumnName, typeof(string), new SugarColumn()
             {
                 IsPrimaryKey = u.IsPrimarykey == 1,
@@ -329,11 +329,11 @@ public class SysDatabaseService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 删除表 🔖
+    /// Delete table 🔖
     /// </summary>
     /// <param name="input"></param>
     [ApiDescriptionSettings(Name = "DeleteTable"), HttpPost]
-    [DisplayName("删除表")]
+    [DisplayName("Delete table")]
     public void DeleteTable(DeleteDbTableInput input)
     {
         var db = _db.AsTenant().GetConnectionScope(input.ConfigId);
@@ -341,11 +341,11 @@ public class SysDatabaseService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 编辑表 🔖
+    /// Edit table 🔖
     /// </summary>
     /// <param name="input"></param>
     [ApiDescriptionSettings(Name = "UpdateTable"), HttpPost]
-    [DisplayName("编辑表")]
+    [DisplayName("Edit Table")]
     public void UpdateTable(UpdateDbTableInput input)
     {
         var db = _db.AsTenant().GetConnectionScope(input.ConfigId);
@@ -365,27 +365,27 @@ public class SysDatabaseService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 创建实体 🔖
+    /// Create entity 🔖
     /// </summary>
     /// <param name="input"></param>
     [ApiDescriptionSettings(Name = "CreateEntity"), HttpPost]
-    [DisplayName("创建实体")]
+    [DisplayName("Create entity")]
     public void CreateEntity(CreateEntityInput input)
     {
         var config = App.GetOptions<DbConnectionOptions>().ConnectionConfigs.FirstOrDefault(u => u.ConfigId.ToString() == input.ConfigId);
         input.Position = string.IsNullOrWhiteSpace(input.Position) ? "Admin.NET.Application" : input.Position;
         input.EntityName = string.IsNullOrWhiteSpace(input.EntityName) ? (config.DbSettings.EnableUnderLine ? CodeGenUtil.CamelColumnName(input.TableName, null) : input.TableName) : input.EntityName;
         string[] dbColumnNames = Array.Empty<string>();
-        // Entity.cs.vm中是允许创建没有基类的实体的，所以这里也要做出相同的判断
+        // Entity.cs.vm allows the creation of entities without base classes, so the same judgment must be made here.
         if (!string.IsNullOrWhiteSpace(input.BaseClassName))
         {
             Assembly assembly = Assembly.Load("Admin.NET.Core");
             Type type = assembly.GetType($"Admin.NET.Core.{input.BaseClassName}");
             if (type is null)
-                throw Oops.Oh("基类集合配置不存在此类型");
+                throw Oops.Oh("The base class collection configuration does not contain this type");
             dbColumnNames = CodeGenUtil.GetPropertyInfoArray(type)?.Select(p => p.Name).ToArray();
             if (dbColumnNames is null || dbColumnNames is { Length: 0 })
-                throw Oops.Oh("基类中不存在任何字段");
+                throw Oops.Oh("No fields exist in the base class");
         }
         var templatePath = GetEntityTemplatePath();
         var targetPath = GetEntityTargetPath(input);
@@ -396,10 +396,10 @@ public class SysDatabaseService : IDynamicApiController, ITransient
         {
             if (u.DbColumnName.ToUpper() == u.DbColumnName)
             {
-                //字段全是大写的， 这种情况下生成的代码会有问题（即对 DOB 这样的字段，生成的前端代码为 dOB， 而数据序列化到前端又成了 dob，导致bug），因此抛出异常，不允许。
-                throw new Exception($"错误：{u.DbColumnName} 字段全是大写字母，这样生成的代码会有bug！请更改为大写字母开头的驼峰式命名!");
+                //The fields are all uppercase. In this case, the generated code will have problems (that is, for fields such as DOB, the generated front-end code is dOB, and the data serialized to the front-end becomes dob, causing bugs), so an exception is thrown and is not allowed.
+                throw new Exception($"Error: The {u.DbColumnName} field is all uppercase letters, which will cause bugs in the generated code! Please change it to camel case starting with an uppercase letter!");
             }
-            u.PropertyName = config.DbSettings.EnableUnderLine ? CodeGenUtil.CamelColumnName(u.DbColumnName, dbColumnNames) : u.DbColumnName; // 转下划线后的列名需要再转回来
+            u.PropertyName = config.DbSettings.EnableUnderLine ? CodeGenUtil.CamelColumnName(u.DbColumnName, dbColumnNames) : u.DbColumnName; // The column name after the underscore needs to be converted back again
             u.DataType = CodeGenUtil.ConvertDataType(u, config.DbType);
         });
         if (_codeGenOptions.BaseEntityNames.Contains(input.BaseClassName, StringComparer.OrdinalIgnoreCase))
@@ -420,11 +420,11 @@ public class SysDatabaseService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 创建种子数据 🔖
+    /// Create seed data 🔖
     /// </summary>
     /// <param name="input"></param>
     [ApiDescriptionSettings(Name = "CreateSeedData"), HttpPost]
-    [DisplayName("创建种子数据")]
+    [DisplayName("Create seed data")]
     public async Task CreateSeedData(CreateSeedDataInput input)
     {
         var config = App.GetOptions<DbConnectionOptions>().ConnectionConfigs.FirstOrDefault(u => u.ConfigId.ToString() == input.ConfigId);
@@ -432,8 +432,8 @@ public class SysDatabaseService : IDynamicApiController, ITransient
 
         var templatePath = GetSeedDataTemplatePath();
         var db = _db.AsTenant().GetConnectionScope(input.ConfigId);
-        var tableInfo = db.DbMaintenance.GetTableInfoList(false).First(u => u.Name == input.TableName); // 表名
-        List<DbColumnInfo> dbColumnInfos = db.DbMaintenance.GetColumnInfosByTableName(input.TableName, false); // 所有字段
+        var tableInfo = db.DbMaintenance.GetTableInfoList(false).First(u => u.Name == input.TableName); // table name
+        List<DbColumnInfo> dbColumnInfos = db.DbMaintenance.GetColumnInfosByTableName(input.TableName, false); // All fields
         IEnumerable<EntityInfo> entityInfos = await GetEntityInfos();
         Type entityType = null;
         foreach (var item in entityInfos)
@@ -448,25 +448,25 @@ public class SysDatabaseService : IDynamicApiController, ITransient
         input.SeedDataName = entityType.Name + "SeedData";
         if (!string.IsNullOrWhiteSpace(input.Suffix)) input.SeedDataName += input.Suffix;
 
-        // 查询所有数据
+        // Query all data
         var query = db.QueryableByObject(entityType);
-        // 优先用创建时间排序
+        // Sort by creation time first
         DbColumnInfo orderField = dbColumnInfos.FirstOrDefault(u => u.DbColumnName.ToLower() == "create_time" || u.DbColumnName.ToLower() == "createtime");
         if (orderField != null) query = query.OrderBy(orderField.DbColumnName);
-        // 再使用第一个主键排序
+        // Then use the first primary key to sort
         query = query.OrderBy(dbColumnInfos.First(u => u.IsPrimarykey).DbColumnName);
         var records = ((IEnumerable)await query.ToListAsync()).ToDynamicList();
 
-        // 过滤已存在的数据
+        // Filter existing data
         if (input.FilterExistingData && records.Any())
         {
-            // 获取实体类型-所有种数据数据类型
+            // Get entity type - all data types
             var entityTypes = App.EffectiveTypes.Where(u => !u.IsInterface && !u.IsAbstract && u.IsClass && u.IsDefined(typeof(SugarTable), false) && u.FullName.EndsWith("." + input.EntityName))
                 .Where(u => !u.GetCustomAttributes<IgnoreTableAttribute>().Any())
                 .ToList();
-            if (entityTypes.Count == 1) // 只有一个实体匹配才能过滤
+            if (entityTypes.Count == 1) // Only one entity matching can be filtered
             {
-                // 获取实体的主键对应的属性名称
+                // Get the attribute name corresponding to the entity's primary key
                 var pkInfo = entityTypes[0].GetProperties().FirstOrDefault(u => u.GetCustomAttribute<SugarColumn>()?.IsPrimaryKey == true);
                 if (pkInfo != null)
                 {
@@ -476,9 +476,9 @@ public class SysDatabaseService : IDynamicApiController, ITransient
                             )
                         )
                         .ToList();
-                    // 可能会重名的种子数据不作为过滤项
+                    // Seed data that may have the same name will not be used as filter items
                     string doNotFilterFullName1 = $"{input.Position}.SeedData.{input.SeedDataName}";
-                    string doNotFilterFullName2 = $"{input.Position}.{input.SeedDataName}"; // Core中的命名空间没有SeedData
+                    string doNotFilterFullName2 = $"{input.Position}.{input.SeedDataName}"; // Namespace in Core does not have SeedData
 
                     PropertyInfo idPropertySeedData = records[0].GetType().GetProperty("Id");
 
@@ -487,7 +487,7 @@ public class SysDatabaseService : IDynamicApiController, ITransient
                         string fullName = seedDataTypes[i].FullName;
                         if ((fullName == doNotFilterFullName1) || (fullName == doNotFilterFullName2)) continue;
 
-                        // 删除重复数据
+                        // Remove duplicate data
                         var instance = Activator.CreateInstance(seedDataTypes[i]);
                         var hasDataMethod = seedDataTypes[i].GetMethod("HasData");
                         var seedData = ((IEnumerable)hasDataMethod?.Invoke(instance, null))?.Cast<object>();
@@ -511,7 +511,7 @@ public class SysDatabaseService : IDynamicApiController, ITransient
             }
         }
 
-        // 检查有没有 System.Text.Json.Serialization.JsonIgnore 的属性
+        // Check if there is a property of System.Text.Json.Serialization.JsonIgnore
         // var jsonIgnoreProperties = entityType.GetProperties().Where(p => (p.GetAttribute<System.Text.Json.Serialization.JsonIgnoreAttribute>() != null ||
         //     p.GetAttribute<JsonIgnoreAttribute>() != null) && p.GetAttribute<SugarColumn>() != null).ToList();
         // var jsonIgnoreInfo = new List<List<JsonIgnoredPropertyData>>();
@@ -540,7 +540,7 @@ public class SysDatabaseService : IDynamicApiController, ITransient
         //     }
         // }
 
-        // 获取所有字段信息
+        // Get all field information
         var propertyList = entityType.GetProperties().Where(x => false == (x.GetCustomAttribute<SugarColumn>()?.IsIgnore ?? false)).ToList();
         for (var i = 0; i < propertyList.Count; i++)
         {
@@ -549,7 +549,7 @@ public class SysDatabaseService : IDynamicApiController, ITransient
             for (var j = i; j > 0; j--) propertyList[j] = propertyList[j - 1];
             propertyList[0] = temp;
         }
-        // 拼接数据
+        // Splice data
         var recordList = records.Select(obj => string.Join(", ", propertyList.Select(prop =>
         {
             var propType = Nullable.GetUnderlyingType(prop.PropertyType) ?? prop.PropertyType;
@@ -600,7 +600,7 @@ public class SysDatabaseService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 获取库表信息
+    /// Get library table information
     /// </summary>
     /// <returns></returns>
     private async Task<IEnumerable<EntityInfo>> GetEntityInfos()
@@ -646,7 +646,7 @@ public class SysDatabaseService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 获取实体模板文件路径
+    /// Get entity template file path
     /// </summary>
     /// <returns></returns>
     private static string GetEntityTemplatePath()
@@ -656,7 +656,7 @@ public class SysDatabaseService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 获取种子数据模板文件路径
+    /// Get the seed data template file path
     /// </summary>
     /// <returns></returns>
     private static string GetSeedDataTemplatePath()
@@ -666,7 +666,7 @@ public class SysDatabaseService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 设置生成实体文件路径
+    /// Set the generated entity file path
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
@@ -689,7 +689,7 @@ public class SysDatabaseService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 设置生成种子数据文件路径
+    /// Set the path to generate seed data file
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
@@ -702,30 +702,30 @@ public class SysDatabaseService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 备份数据库（PostgreSQL）🔖
+    /// Backup database (PostgreSQL)🔖
     /// </summary>
     /// <returns></returns>
     [HttpPost, NonUnify]
-    [DisplayName("备份数据库（PostgreSQL）")]
+    [DisplayName("Backup database (PostgreSQL)")]
     public async Task<IActionResult> BackupDatabase()
     {
         if (_db.CurrentConnectionConfig.DbType != SqlSugar.DbType.PostgreSQL)
-            throw Oops.Oh("只支持 PostgreSQL 数据库 😁");
+            throw Oops.Oh("Only supports PostgreSQL database 😁");
 
         var npgsqlConn = new NpgsqlConnectionStringBuilder(_db.CurrentConnectionConfig.ConnectionString);
         if (npgsqlConn == null || string.IsNullOrWhiteSpace(npgsqlConn.Host) || string.IsNullOrWhiteSpace(npgsqlConn.Username) || string.IsNullOrWhiteSpace(npgsqlConn.Password) || string.IsNullOrWhiteSpace(npgsqlConn.Database))
-            throw Oops.Oh("PostgreSQL 数据库配置错误");
+            throw Oops.Oh("PostgreSQL database configuration error");
 
-        // 确保备份目录存在
+        // Make sure the backup directory exists
         var backupDirectory = Path.Combine(Directory.GetCurrentDirectory(), "backups");
         Directory.CreateDirectory(backupDirectory);
 
-        // 构建备份文件名
+        // Build backup file name
         string backupFileName = $"backup_{DateTime.Now:yyyyMMddHHmmss}.sql";
         string backupFilePath = Path.Combine(backupDirectory, backupFileName);
 
-        // 启动pg_dump进程进行备份
-        // 设置密码：export PGPASSWORD='xxxxxx'
+        // Start the pg_dump process for backup
+        // Set password: export PGPASSWORD='xxxxxx'
         var bash = $"-U {npgsqlConn.Username} -h {npgsqlConn.Host} -p {npgsqlConn.Port} -E UTF8 -F c -b -v -f {backupFilePath} {npgsqlConn.Database}";
         var startInfo = new ProcessStartInfo
         {
@@ -741,7 +741,7 @@ public class SysDatabaseService : IDynamicApiController, ITransient
             }
         };
 
-        //_logger.LogInformation("备份数据库：pg_dump " + bash);
+        //_logger.LogInformation("Backup database: pg_dump " + bash);
 
         //try
         //{
@@ -752,22 +752,22 @@ public class SysDatabaseService : IDynamicApiController, ITransient
             //var output = await backupProcess.StandardOutput.ReadToEndAsync();
             //var error = await backupProcess.StandardError.ReadToEndAsync();
 
-            // 检查备份是否成功
+            // Check if backup is successful
             if (backupProcess.ExitCode != 0)
             {
-                throw Oops.Oh($"备份失败：ExitCode({backupProcess.ExitCode})");
+                throw Oops.Oh($"BackupFailure：ExitCode({backupProcess.ExitCode})");
             }
         }
 
-        //    _logger.LogInformation($"备份成功：{backupFilePath}");
+        //    _logger.LogInformation($"Backup successful: {backupFilePath}");
         //}
         //catch (Exception ex)
         //{
-        //    _logger.LogError(ex, $"备份失败：");
+        //    _logger.LogError(ex, $"Backup failed:");
         //    throw;
         //}
 
-        // 若备份成功则提供下载链接
+        // If the backup is successful, a download link will be provided.
         return new FileStreamResult(new FileStream(backupFilePath, FileMode.Open), "application/octet-stream")
         {
             FileDownloadName = backupFileName

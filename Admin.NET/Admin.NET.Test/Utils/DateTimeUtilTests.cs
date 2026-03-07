@@ -1,8 +1,8 @@
-﻿// Admin.NET 项目的版权、商标、专利和其他相关权利均受相应法律法规的保护。使用本项目应遵守相关法律法规和许可证的要求。
+﻿// The copyright, trademark, patent and other related rights of the Admin.NET project are protected by corresponding laws and regulations. Use of this project shall comply with relevant laws, regulations and license requirements.
 //
-// 本项目主要遵循 MIT 许可证和 Apache 许可证（版本 2.0）进行分发和使用。许可证位于源代码树根目录中的 LICENSE-MIT 和 LICENSE-APACHE 文件。
+// This project is distributed and used primarily under the MIT License and the Apache License (version 2.0). The license is located in the LICENSE-MIT and LICENSE-APACHE files in the root of the source tree.
 //
-// 不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！
+// This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project!
 
 using Admin.NET.Core;
 using Xunit;
@@ -15,7 +15,7 @@ public class DateTimeUtilTests
     public void Init_WithTimeSpan_ReturnsCorrectDateTime()
     {
         // Arrange
-        var timeSpan = new TimeSpan(1, 0, 0, 0); // 1天
+        var timeSpan = new TimeSpan(1, 0, 0, 0); // 1 day
 
         // Act
         var dateTimeUtil = DateTimeUtil.Init(timeSpan);
@@ -47,8 +47,8 @@ public class DateTimeUtilTests
         var (start, end) = dateTimeUtil.GetTodayRange();
 
         // Assert
-        Assert.Equal(new DateTime(2023, 10, 15), start); // 当天开始时间
-        Assert.Equal(new DateTime(2023, 10, 15, 23, 59, 59), end); // 当天结束时间
+        Assert.Equal(new DateTime(2023, 10, 15), start); // Start time of the day
+        Assert.Equal(new DateTime(2023, 10, 15, 23, 59, 59), end); // end of day
     }
 
     [Fact]
@@ -61,8 +61,8 @@ public class DateTimeUtilTests
         var (start, end) = dateTimeUtil.GetMonthRange();
 
         // Assert
-        Assert.Equal(new DateTime(2023, 10, 1), start); // 本月第一天
-        Assert.Equal(new DateTime(2023, 10, 31, 23, 59, 59), end); // 本月最后一天
+        Assert.Equal(new DateTime(2023, 10, 1), start); // first day of month
+        Assert.Equal(new DateTime(2023, 10, 31, 23, 59, 59), end); // last day of month
     }
 
     [Fact]
@@ -75,7 +75,7 @@ public class DateTimeUtilTests
         var firstDay = dateTimeUtil.GetFirstDayOfMonth();
 
         // Assert
-        Assert.Equal(new DateTime(2023, 10, 1), firstDay); // 本月第一天
+        Assert.Equal(new DateTime(2023, 10, 1), firstDay); // first day of month
     }
 
     [Fact]
@@ -88,7 +88,7 @@ public class DateTimeUtilTests
         var lastDay = dateTimeUtil.GetLastDayOfMonth();
 
         // Assert
-        Assert.Equal(new DateTime(2023, 10, 31, 23, 59, 59), lastDay); // 本月最后一天
+        Assert.Equal(new DateTime(2023, 10, 31, 23, 59, 59), lastDay); // last day of month
     }
 
     [Fact]
@@ -101,8 +101,8 @@ public class DateTimeUtilTests
         var (start, end) = dateTimeUtil.GetYearRange();
 
         // Assert
-        Assert.Equal(new DateTime(2023, 1, 1), start); // 今年第一天
-        Assert.Equal(new DateTime(2023, 12, 31, 23, 59, 59), end); // 今年最后一天
+        Assert.Equal(new DateTime(2023, 1, 1), start); // first day of the year
+        Assert.Equal(new DateTime(2023, 12, 31, 23, 59, 59), end); // last day of this year
     }
 
     [Fact]
@@ -115,7 +115,7 @@ public class DateTimeUtilTests
         var firstDay = dateTimeUtil.GetFirstDayOfYear();
 
         // Assert
-        Assert.Equal(new DateTime(2023, 1, 1), firstDay); // 今年第一天
+        Assert.Equal(new DateTime(2023, 1, 1), firstDay); // first day of the year
     }
 
     [Fact]
@@ -128,7 +128,7 @@ public class DateTimeUtilTests
         var lastDay = dateTimeUtil.GetLastDayOfYear();
 
         // Assert
-        Assert.Equal(new DateTime(2023, 12, 31, 23, 59, 59), lastDay); // 今年最后一天
+        Assert.Equal(new DateTime(2023, 12, 31, 23, 59, 59), lastDay); // last day of this year
     }
 
     [Fact]
@@ -141,8 +141,8 @@ public class DateTimeUtilTests
         var (start, end) = dateTimeUtil.GetDayBeforeYesterdayRange();
 
         // Assert
-        Assert.Equal(new DateTime(2023, 10, 13), start); // 前天开始时间
-        Assert.Equal(new DateTime(2023, 10, 13, 23, 59, 59), end); // 前天结束时间
+        Assert.Equal(new DateTime(2023, 10, 13), start); // Start time the day before yesterday
+        Assert.Equal(new DateTime(2023, 10, 13, 23, 59, 59), end); // end time the day before yesterday
     }
 
     [Fact]
@@ -155,36 +155,36 @@ public class DateTimeUtilTests
         var (start, end) = dateTimeUtil.GetYesterdayRange();
 
         // Assert
-        Assert.Equal(new DateTime(2023, 10, 14), start); // 昨天开始时间
-        Assert.Equal(new DateTime(2023, 10, 14, 23, 59, 59), end); // 昨天结束时间
+        Assert.Equal(new DateTime(2023, 10, 14), start); // Yesterday's start time
+        Assert.Equal(new DateTime(2023, 10, 14, 23, 59, 59), end); // Yesterday's end time
     }
 
     [Fact]
     public void GetLastWeekRange_ReturnsCorrectRange()
     {
         // Arrange
-        var dateTimeUtil = DateTimeUtil.Init(new DateTime(2023, 10, 15)); // 2023-10-15 是周日
+        var dateTimeUtil = DateTimeUtil.Init(new DateTime(2023, 10, 15)); // 2023-10-15 is Sunday
 
         // Act
         var (start, end) = dateTimeUtil.GetLastWeekRange();
 
         // Assert
-        Assert.Equal(new DateTime(2023, 10, 8), start); // 上周第一天（周一）
-        Assert.Equal(new DateTime(2023, 10, 14, 23, 59, 59), end); // 上周最后一天（周日）
+        Assert.Equal(new DateTime(2023, 10, 8), start); // The first day of last week (Monday)
+        Assert.Equal(new DateTime(2023, 10, 14, 23, 59, 59), end); // Last day of last week (Sunday)
     }
 
     [Fact]
     public void GetThisWeekRange_ReturnsCorrectRange()
     {
         // Arrange
-        var dateTimeUtil = DateTimeUtil.Init(new DateTime(2023, 10, 15)); // 2023-10-15 是周日
+        var dateTimeUtil = DateTimeUtil.Init(new DateTime(2023, 10, 15)); // 2023-10-15 is Sunday
 
         // Act
         var (start, end) = dateTimeUtil.GetThisWeekRange();
 
         // Assert
-        Assert.Equal(new DateTime(2023, 10, 15), start); // 本周第一天（周一）
-        Assert.Equal(new DateTime(2023, 10, 21, 23, 59, 59), end); // 本周最后一天（周日）
+        Assert.Equal(new DateTime(2023, 10, 15), start); // First day of the week (Monday)
+        Assert.Equal(new DateTime(2023, 10, 21, 23, 59, 59), end); // Last day of the week (Sunday)
     }
 
     [Fact]
@@ -197,8 +197,8 @@ public class DateTimeUtilTests
         var (start, end) = dateTimeUtil.GetLastMonthRange();
 
         // Assert
-        Assert.Equal(new DateTime(2023, 9, 1), start); // 上月第一天
-        Assert.Equal(new DateTime(2023, 9, 30, 23, 59, 59), end); // 上月最后一天
+        Assert.Equal(new DateTime(2023, 9, 1), start); // first day of last month
+        Assert.Equal(new DateTime(2023, 9, 30, 23, 59, 59), end); // last day of last month
     }
 
     [Fact]
@@ -211,8 +211,8 @@ public class DateTimeUtilTests
         var (start, end) = dateTimeUtil.GetLast3DaysRange();
 
         // Assert
-        Assert.Equal(new DateTime(2023, 10, 13), start); // 3天前的开始时间
-        Assert.Equal(new DateTime(2023, 10, 15, 23, 59, 59), end); // 当前日期的结束时间
+        Assert.Equal(new DateTime(2023, 10, 13), start); // Start time 3 days ago
+        Assert.Equal(new DateTime(2023, 10, 15, 23, 59, 59), end); // end time of current date
     }
 
     [Fact]
@@ -225,8 +225,8 @@ public class DateTimeUtilTests
         var (start, end) = dateTimeUtil.GetLast7DaysRange();
 
         // Assert
-        Assert.Equal(new DateTime(2023, 10, 9), start); // 7天前的开始时间
-        Assert.Equal(new DateTime(2023, 10, 15, 23, 59, 59), end); // 当前日期的结束时间
+        Assert.Equal(new DateTime(2023, 10, 9), start); // Start time 7 days ago
+        Assert.Equal(new DateTime(2023, 10, 15, 23, 59, 59), end); // end time of current date
     }
 
     [Fact]
@@ -239,8 +239,8 @@ public class DateTimeUtilTests
         var (start, end) = dateTimeUtil.GetLast15DaysRange();
 
         // Assert
-        Assert.Equal(new DateTime(2023, 10, 1), start); // 15天前的开始时间
-        Assert.Equal(new DateTime(2023, 10, 15, 23, 59, 59), end); // 当前日期的结束时间
+        Assert.Equal(new DateTime(2023, 10, 1), start); // Start time 15 days ago
+        Assert.Equal(new DateTime(2023, 10, 15, 23, 59, 59), end); // end time of current date
     }
 
     [Fact]
@@ -253,8 +253,8 @@ public class DateTimeUtilTests
         var (start, end) = dateTimeUtil.GetLast3MonthsRange();
 
         // Assert
-        Assert.Equal(new DateTime(2023, 7, 15), start); // 3个月前的开始时间
-        Assert.Equal(new DateTime(2023, 10, 15, 23, 59, 59), end); // 当前日期的结束时间
+        Assert.Equal(new DateTime(2023, 7, 15), start); // Start time 3 months ago
+        Assert.Equal(new DateTime(2023, 10, 15, 23, 59, 59), end); // end time of current date
     }
 
     [Fact]
@@ -267,8 +267,8 @@ public class DateTimeUtilTests
         var (start, end) = dateTimeUtil.GetFirstHalfYearRange();
 
         // Assert
-        Assert.Equal(new DateTime(2023, 1, 1), start); // 上半年开始时间
-        Assert.Equal(new DateTime(2023, 6, 30, 23, 59, 59), end); // 上半年结束时间
+        Assert.Equal(new DateTime(2023, 1, 1), start); // Start time of first half
+        Assert.Equal(new DateTime(2023, 6, 30, 23, 59, 59), end); // End of the first half of the year
     }
 
     [Fact]
@@ -281,7 +281,7 @@ public class DateTimeUtilTests
         var (start, end) = dateTimeUtil.GetSecondHalfYearRange();
 
         // Assert
-        Assert.Equal(new DateTime(2023, 7, 1), start); // 下半年开始时间
-        Assert.Equal(new DateTime(2023, 12, 31, 23, 59, 59), end); // 下半年结束时间
+        Assert.Equal(new DateTime(2023, 7, 1), start); // Start time of the second half of the year
+        Assert.Equal(new DateTime(2023, 12, 31, 23, 59, 59), end); // The end of the second half of the year
     }
 }

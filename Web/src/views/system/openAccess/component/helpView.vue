@@ -4,54 +4,54 @@
 			<template #header>
 				<div style="color: #fff">
 					<el-icon size="16" style="margin-right: 3px; display: inline; vertical-align: middle"> <ele-QuestionFilled /> </el-icon>
-					<span> 说明 </span>
+					<span> illustrate </span>
 				</div>
 			</template>
 			<div class="text-content">
-				<h2>OpenAPI 使用</h2>
+				<h2>Using OpenAPI</h2>
 				<ul>
 					<li>
-						在需要使用 Signature 身份验证的 Api 中贴上
+						Paste in APIs that require Signature authentication
 						<p><el-tag>[Authorize(AuthenticationSchemes = SignatureAuthenticationDefaults.AuthenticationScheme)]</el-tag></p>
 					</li>
 					<li>
-						如果 Api 需要保留 Jwt 方式的身份验证，可贴上
+						If the API needs to retain Jwt authentication, you can paste
 						<p><el-tag>[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme + "," + SignatureAuthenticationDefaults.AuthenticationScheme)]</el-tag></p>
 					</li>
 					<li>
-						通过对请求的签名，可以达到以下目的：
+						By signing the request, the following objectives can be achieved:
 						<ul>
-							<li>免登录识别访问接口用户的身份</li>
-							<li>防止潜在的重放攻击</li>
+							<li>ExemptLoginRecognition Access InterfaceUseridentity</li>
+							<li>Prevent potential replay attacks</li>
 						</ul>
 					</li>
 				</ul>
 				<el-divider />
-				<h2>OpenAPI 签名流程</h2>
-				客户端在请求时，需要按照如下步骤生成签名 Signature，并添加公共参数：
-				<h3>公共请求参数</h3>
-				<p>在原始请求的基础上添加 Header 请求参数</p>
+				<h2>OpenAPI Signature Process</h2>
+				When the client makes a request, it needs to generate a signature and add public parameters according to the following steps:
+				<h3>Public Request Parameters</h3>
+				<p>Add Header request parameters based on the original request</p>
 				<ul>
-					<li><el-tag effect="plain">accessKey</el-tag>：身份标识</li>
-					<li><el-tag effect="plain">timestamp</el-tag>：时间戳，精确到秒</li>
-					<li><el-tag effect="plain">nonce</el-tag>：唯一随机数，建议为一个6位的随机数</li>
-					<li><el-tag effect="plain">sign</el-tag>：签名数据（见“计算签名”部分）</li>
+					<li><el-tag effect="plain">accessKey</el-tag>: Identity Identifier</li>
+					<li><el-tag effect="plain">timestamp</el-tag>: Timestamp, accurate to the second</li>
+					<li><el-tag effect="plain">nonce</el-tag>: A unique random number, it is recommended to be a 6-digit random number</li>
+					<li><el-tag effect="plain">sign</el-tag>:Signature data (see "Computing Signatures" section)</li>
 				</ul>
-				<h3>计算签名</h3>
+				<h3>Compute Signature</h3>
 				<ul>
 					<li>
-						按照如下顺序对请求中的参数进行排序，各个参数通过&进行拼接（中间不含空格）：
+						Sort the parameters in the request in the following order, and concatenate each parameter with & (without spaces in the middle):
 						<p><el-tag>method & url & accessKey & timestamp & nonce</el-tag></p>
 						<ul>
-							<li><el-tag effect="plain">method</el-tag> 需要大写，如：GET</li>
-							<li><el-tag effect="plain">url</el-tag> 去除协议、域名、参数，以 / 开头，如：/api/demo/helloWord</li>
+							<li><el-tag effect="plain">method</el-tag> Capital letters are required, such as: GET</li>
+							<li><el-tag effect="plain">url</el-tag> Remove the protocol, domain, and parameters, starting with /, for example: /api/demo/helloWord</li>
 						</ul>
 					</li>
-					<li>使用 HMAC-SHA256 协议创建基于哈希的消息身份验证代码 (HMAC)，以 <el-tag effect="plain">accessSecret</el-tag> 作为密钥，对上面拼接的参数进行计算签名，所得签名进行 Base-64 编码</li>
+					<li>Create a hash-based message authentication code (HMAC) using the HMAC-SHA256 protocol to <el-tag effect="plain">accessSecret</el-tag> As a key, calculate the signature on the parameters spliced above, and the resulting signature is Base-64 encoded.</li>
 				</ul>
 			</div>
 			<div class="el-alert el-alert--info is-light">
-				HMAC-SHA256 在线计算：
+				HMAC-SHA256 online calculation:
 				<el-link href="https://1024tools.com/hmac" target="_blank" type="primary">https://1024tools.com/hmac</el-link>
 			</div>
 		</el-dialog>
@@ -65,17 +65,17 @@ const state = reactive({
 	isShowDialog: false,
 });
 
-// 打开弹窗
+// Open pop-up window
 const openDialog = () => {
 	state.isShowDialog = true;
 };
 
-// // 关闭
+// // closure
 // const close = () => {
 // 	state.isShowDialog = false;
 // };
 
-// 导出对象
+// Export object
 defineExpose({ openDialog });
 </script>
 <style scoped lang="scss">

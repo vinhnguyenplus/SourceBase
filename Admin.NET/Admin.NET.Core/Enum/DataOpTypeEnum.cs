@@ -1,92 +1,92 @@
-﻿// Admin.NET 项目的版权、商标、专利和其他相关权利均受相应法律法规的保护。使用本项目应遵守相关法律法规和许可证的要求。
+﻿// The copyright, trademark, patent and other related rights of the Admin.NET project are protected by corresponding laws and regulations. Use of this project shall comply with relevant laws, regulations and license requirements.
 //
-// 本项目主要遵循 MIT 许可证和 Apache 许可证（版本 2.0）进行分发和使用。许可证位于源代码树根目录中的 LICENSE-MIT 和 LICENSE-APACHE 文件。
+// This project is distributed and used primarily under the MIT License and the Apache License (version 2.0). The license is located in the LICENSE-MIT and LICENSE-APACHE files in the root of the source tree.
 //
-// 不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！
+// This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project!
 
 namespace Admin.NET.Core;
 
 /// <summary>
-/// 数据操作类型枚举
+/// Data operation type enumeration
 /// </summary>
-[Description("数据操作类型枚举")]
+[Description("Data operation type enumeration")]
 public enum DataOpTypeEnum
 {
     /// <summary>
-    /// 其它
+    /// other
     /// </summary>
-    [Description("其它"), Theme("info")]
+    [Description("Other"), Theme("info")]
     Other,
 
     /// <summary>
-    /// 增加
+    /// Increase
     /// </summary>
-    [Description("增加")]
+    [Description("increase")]
     Add,
 
     /// <summary>
-    /// 删除
+    /// delete
     /// </summary>
-    [Description("删除")]
+    [Description("Delete")]
     Delete,
 
     /// <summary>
-    /// 编辑
+    /// edit
     /// </summary>
-    [Description("编辑")]
+    [Description("Edit")]
     Edit,
 
     /// <summary>
-    /// 更新
+    /// renew
     /// </summary>
-    [Description("更新")]
+    [Description("Update")]
     Update,
 
     /// <summary>
-    /// 查询
+    /// Query
     /// </summary>
-    [Description("查询")]
+    [Description("Query")]
     Query,
 
     /// <summary>
-    /// 详情
+    /// Details
     /// </summary>
-    [Description("详情")]
+    [Description("Details")]
     Detail,
 
     /// <summary>
-    /// 树
+    /// Tree
     /// </summary>
-    [Description("树")]
+    [Description("Tree")]
     Tree,
 
     /// <summary>
-    /// 导入
+    /// import
     /// </summary>
-    [Description("导入")]
+    [Description("import")]
     Import,
 
     /// <summary>
-    /// 导出
+    /// Export
     /// </summary>
-    [Description("导出")]
+    [Description("Export")]
     Export,
 
     /// <summary>
-    /// 授权
+    /// Authorize
     /// </summary>
-    [Description("授权")]
+    [Description("Authorization")]
     Grant,
 
     /// <summary>
-    /// 强退
+    /// Forced retreat
     /// </summary>
-    [Description("强退")]
+    [Description("Force quit")]
     Force,
 
     /// <summary>
-    /// 清空
+    /// Clear
     /// </summary>
-    [Description("清空")]
+    [Description("Clear")]
     Clean
 }

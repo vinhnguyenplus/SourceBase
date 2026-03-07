@@ -1,8 +1,8 @@
-// Admin.NET 项目的版权、商标、专利和其他相关权利均受相应法律法规的保护。使用本项目应遵守相关法律法规和许可证的要求。
+// The copyright, trademark, patent and other related rights of the Admin.NET project are protected by corresponding laws and regulations. Use of this project shall comply with relevant laws, regulations and license requirements.
 //
-// 本项目主要遵循 MIT 许可证和 Apache 许可证（版本 2.0）进行分发和使用。许可证位于源代码树根目录中的 LICENSE-MIT 和 LICENSE-APACHE 文件。
+// This project is distributed and used primarily under the MIT License and the Apache License (version 2.0). The license is located in the LICENSE-MIT and LICENSE-APACHE files in the root of the source tree.
 //
-// 不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！
+// This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project!
 
 using MapsterMapper;
 
@@ -11,7 +11,7 @@ namespace Admin.NET.Core;
 public static class RepositoryExtension
 {
     /// <summary>
-    /// 实体假删除 _rep.FakeDelete(entity)
+    /// Entity fake delete _rep.FakeDelete(entity)
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <param name="repository"></param>
@@ -23,7 +23,7 @@ public static class RepositoryExtension
     }
 
     /// <summary>
-    /// 实体假删除 db.FakeDelete(entity)
+    /// Fake delete of entity db.FakeDelete(entity)
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <param name="db"></param>
@@ -33,13 +33,13 @@ public static class RepositoryExtension
     {
         return db.Updateable(entity).AS().ReSetValue(x => { x.IsDelete = true; })
             .IgnoreColumns(ignoreAllNullColumns: true)
-            .EnableDiffLogEvent()   // 记录差异日志
-            .UpdateColumns(x => new { x.IsDelete, x.DeleteTime, x.UpdateTime, x.UpdateUserId })  // 允许更新的字段-AOP拦截自动设置UpdateTime、UpdateUserId
+            .EnableDiffLogEvent()   // Record difference log
+            .UpdateColumns(x => new { x.IsDelete, x.DeleteTime, x.UpdateTime, x.UpdateUserId })  // Fields allowed to be updated - AOP interception automatically sets UpdateTime, UpdateUserId
             .ExecuteCommand();
     }
 
     /// <summary>
-    /// 实体集合批量假删除 _rep.FakeDelete(entity)
+    /// Batch fake deletion of entity collection _rep.FakeDelete(entity)
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <param name="repository"></param>
@@ -51,7 +51,7 @@ public static class RepositoryExtension
     }
 
     /// <summary>
-    /// 实体集合批量假删除 db.FakeDelete(entity)
+    /// Batch fake deletion of entity collection db.FakeDelete(entity)
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <param name="db"></param>
@@ -61,13 +61,13 @@ public static class RepositoryExtension
     {
         return db.Updateable(entity).AS().ReSetValue(x => { x.IsDelete = true; })
             .IgnoreColumns(ignoreAllNullColumns: true)
-            .EnableDiffLogEvent()   // 记录差异日志
-            .UpdateColumns(x => new { x.IsDelete, x.DeleteTime, x.UpdateTime, x.UpdateUserId })  // 允许更新的字段-AOP拦截自动设置UpdateTime、UpdateUserId
+            .EnableDiffLogEvent()   // Record difference log
+            .UpdateColumns(x => new { x.IsDelete, x.DeleteTime, x.UpdateTime, x.UpdateUserId })  // Fields allowed to be updated - AOP interception automatically sets UpdateTime, UpdateUserId
             .ExecuteCommand();
     }
 
     /// <summary>
-    /// 实体假删除异步 _rep.FakeDeleteAsync(entity)
+    /// Entity fake deletion asynchronous _rep.FakeDeleteAsync(entity)
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <param name="repository"></param>
@@ -79,7 +79,7 @@ public static class RepositoryExtension
     }
 
     /// <summary>
-    /// 实体假删除 db.FakeDelete(entity)
+    /// Fake delete of entity db.FakeDelete(entity)
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <param name="db"></param>
@@ -89,13 +89,13 @@ public static class RepositoryExtension
     {
         return db.Updateable(entity).AS().ReSetValue(x => { x.IsDelete = true; })
             .IgnoreColumns(ignoreAllNullColumns: true)
-            .EnableDiffLogEvent()   // 记录差异日志
-            .UpdateColumns(x => new { x.IsDelete, x.DeleteTime, x.UpdateTime, x.UpdateUserId })  // 允许更新的字段-AOP拦截自动设置UpdateTime、UpdateUserId
+            .EnableDiffLogEvent()   // Record difference log
+            .UpdateColumns(x => new { x.IsDelete, x.DeleteTime, x.UpdateTime, x.UpdateUserId })  // Fields allowed to be updated - AOP interception automatically sets UpdateTime, UpdateUserId
             .ExecuteCommandAsync();
     }
 
     /// <summary>
-    /// 实体集合批量假删除异步 _rep.FakeDeleteAsync(entity)
+    /// Batch fake deletion of entity collection asynchronously _rep.FakeDeleteAsync(entity)
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <param name="repository"></param>
@@ -107,7 +107,7 @@ public static class RepositoryExtension
     }
 
     /// <summary>
-    /// 实体集合批量假删除 db.FakeDelete(entity)
+    /// Batch fake deletion of entity collection db.FakeDelete(entity)
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <param name="db"></param>
@@ -117,43 +117,43 @@ public static class RepositoryExtension
     {
         return db.Updateable(entity).AS().ReSetValue(x => { x.IsDelete = true; })
             .IgnoreColumns(ignoreAllNullColumns: true)
-            .EnableDiffLogEvent()   // 记录差异日志
-            .UpdateColumns(x => new { x.IsDelete, x.DeleteTime, x.UpdateTime, x.UpdateUserId })  // 允许更新的字段-AOP拦截自动设置UpdateTime、UpdateUserId
+            .EnableDiffLogEvent()   // Record difference log
+            .UpdateColumns(x => new { x.IsDelete, x.DeleteTime, x.UpdateTime, x.UpdateUserId })  // Fields allowed to be updated - AOP interception automatically sets UpdateTime, UpdateUserId
             .ExecuteCommandAsync();
     }
 
     /// <summary>
-    /// 排序方式(默认降序)
+    /// Sort by (default descending)
     /// </summary>
     /// <param name="queryable"></param>
     /// <param name="pageInput"> </param>
     /// <param name="prefix"> </param>
-    /// <param name="defaultSortField"> 默认排序字段 </param>
-    /// <param name="descSort"> 是否降序 </param>
+    /// <param name="defaultSortField"> Default sort field </param>
+    /// <param name="descSort"> Is descending order </param>
     /// <returns> </returns>
     public static ISugarQueryable<T> OrderBuilder<T>(this ISugarQueryable<T> queryable, BasePageInput pageInput, string prefix = "", string defaultSortField = "Id", bool descSort = true)
     {
         var iSqlBuilder = InstanceFactory.GetSqlBuilderWithContext(queryable.Context);
 
-        // 约定默认每张表都有Id排序
+        // It is agreed that each table is sorted by Id by default.
         var orderStr = string.IsNullOrWhiteSpace(defaultSortField) ? "" : $"{prefix}{iSqlBuilder.GetTranslationColumnName(defaultSortField)}" + (descSort ? " Desc" : " Asc");
 
         TypeAdapterConfig typeAdapterConfig = new();
         typeAdapterConfig.ForType<T, BasePageInput>().IgnoreNullValues(true);
-        Mapper mapper = new(typeAdapterConfig); // 务必将mapper设为单实例
+        Mapper mapper = new(typeAdapterConfig); // Be sure to set the mapper to a single instance
         var nowPagerInput = mapper.Map<BasePageInput>(pageInput);
-        // 排序是否可用-排序字段为非空才启用排序，排序顺序默认为倒序
+        // Whether sorting is available - sorting is enabled only when the sorting field is non-empty. The sorting order defaults to reverse order.
         if (!string.IsNullOrEmpty(nowPagerInput.Field))
         {
-            nowPagerInput.Field = Regex.Replace(nowPagerInput.Field, @"[\s;()\-'@=/%]", ""); //过滤掉一些关键字符防止构造特殊SQL语句注入
-            var orderByDbName = queryable.Context.EntityMaintenance.GetDbColumnName<T>(nowPagerInput.Field);//防止注入，类中只要不存在属性名就会报错
+            nowPagerInput.Field = Regex.Replace(nowPagerInput.Field, @"[\s;()\-'@=/%]", ""); // Filter out some key characters to prevent special SQL statement injection
+            var orderByDbName = queryable.Context.EntityMaintenance.GetDbColumnName<T>(nowPagerInput.Field);// To prevent injection, an error will be reported as long as the attribute name does not exist in the class.
             orderStr = $"{prefix}{iSqlBuilder.GetTranslationColumnName(orderByDbName)} {(string.IsNullOrEmpty(nowPagerInput.Order) || nowPagerInput.Order.Equals(nowPagerInput.DescStr, StringComparison.OrdinalIgnoreCase) ? "Desc" : "Asc")}";
         }
         return queryable.OrderByIF(!string.IsNullOrWhiteSpace(orderStr), orderStr);
     }
 
     /// <summary>
-    /// 更新实体并记录差异日志 _rep.UpdateWithDiffLog(entity)
+    /// Update the entity and log the difference _rep.UpdateWithDiffLog(entity)
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <param name="repository"></param>
@@ -166,7 +166,7 @@ public static class RepositoryExtension
     }
 
     /// <summary>
-    /// 更新实体并记录差异日志 _rep.UpdateWithDiffLog(entity)
+    /// Update the entity and log the difference _rep.UpdateWithDiffLog(entity)
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <param name="db"></param>
@@ -182,7 +182,7 @@ public static class RepositoryExtension
     }
 
     /// <summary>
-    /// 更新实体并记录差异日志 _rep.UpdateWithDiffLogAsync(entity)
+    /// Update entities and log differences _rep.UpdateWithDiffLogAsync(entity)
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <param name="repository"></param>
@@ -195,7 +195,7 @@ public static class RepositoryExtension
     }
 
     /// <summary>
-    /// 更新实体并记录差异日志 _rep.UpdateWithDiffLogAsync(entity)
+    /// Update entities and log differences _rep.UpdateWithDiffLogAsync(entity)
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <param name="db"></param>
@@ -211,7 +211,7 @@ public static class RepositoryExtension
     }
 
     /// <summary>
-    /// 新增实体并记录差异日志 _rep.InsertWithDiffLog(entity)
+    /// Add an entity and record the difference log _rep.InsertWithDiffLog(entity)
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <param name="repository"></param>
@@ -223,7 +223,7 @@ public static class RepositoryExtension
     }
 
     /// <summary>
-    /// 新增实体并记录差异日志 _rep.InsertWithDiffLog(entity)
+    /// Add an entity and record the difference log _rep.InsertWithDiffLog(entity)
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <param name="db"></param>
@@ -235,7 +235,7 @@ public static class RepositoryExtension
     }
 
     /// <summary>
-    /// 新增实体并记录差异日志 _rep.InsertWithDiffLogAsync(entity)
+    /// Add an entity and record the difference log _rep.InsertWithDiffLogAsync(entity)
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <param name="repository"></param>
@@ -247,7 +247,7 @@ public static class RepositoryExtension
     }
 
     /// <summary>
-    /// 新增实体并记录差异日志 _rep.InsertWithDiffLog(entity)
+    /// Add an entity and record the difference log _rep.InsertWithDiffLog(entity)
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <param name="db"></param>
@@ -259,7 +259,7 @@ public static class RepositoryExtension
     }
 
     /// <summary>
-    /// 多库查询
+    /// Multi-database query
     /// </summary>
     /// <param name="queryable"></param>
     /// <returns> </returns>
@@ -270,7 +270,7 @@ public static class RepositoryExtension
     }
 
     /// <summary>
-    /// 多库查询
+    /// Multi-database query
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <typeparam name="T2"></typeparam>
@@ -283,7 +283,7 @@ public static class RepositoryExtension
     }
 
     /// <summary>
-    /// 多库更新
+    /// Multiple database updates
     /// </summary>
     /// <param name="updateable"></param>
     /// <returns> </returns>
@@ -294,7 +294,7 @@ public static class RepositoryExtension
     }
 
     /// <summary>
-    /// 多库新增
+    /// New multi-library
     /// </summary>
     /// <param name="insertable"></param>
     /// <returns> </returns>
@@ -305,7 +305,7 @@ public static class RepositoryExtension
     }
 
     /// <summary>
-    /// 多库删除
+    /// Delete multiple databases
     /// </summary>
     /// <param name="deleteable"></param>
     /// <returns> </returns>
@@ -316,7 +316,7 @@ public static class RepositoryExtension
     }
 
     /// <summary>
-    /// 根据实体类型获取表信息
+    /// Get table information based on entity type
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <returns></returns>
@@ -330,30 +330,30 @@ public static class RepositoryExtension
     }
 
     /// <summary>
-    /// 禁用过滤器-适用于更新和删除操作（只对当前请求有效，禁止使用异步）
+    /// Disable filter - applies to update and delete operations (only valid for current request, disables the use of asynchronous)
     /// </summary>
     /// <param name="repository"></param>
-    /// <param name="action">禁止异步</param>
+    /// <param name="action">Disable async</param>
     /// <returns></returns>
     public static void RunWithoutFilter(this ISugarRepository repository, Action action)
     {
-        repository.Context.QueryFilter.ClearAndBackup(); // 清空并备份过滤器
+        repository.Context.QueryFilter.ClearAndBackup(); // Clear and back up filters
         action.Invoke();
-        repository.Context.QueryFilter.Restore(); // 还原过滤器
+        repository.Context.QueryFilter.Restore(); // Restore filter
 
-        // 用例
+        // use case
         //_rep.RunWithoutFilter(() =>
         //{
-        //    执行更新或者删除
-        //    禁止使用异步函数
+        //    Perform updates or deletes
+        //    Disable the use of asynchronous functions
         //});
     }
 
     /// <summary>
-    /// 忽略租户
+    /// Ignore tenant
     /// </summary>
     /// <param name="queryable"></param>
-    /// <param name="ignore">是否忽略 默认true</param>
+    /// <param name="ignore">Whether to ignore, default true</param>
     /// <returns> </returns>
     public static ISugarQueryable<T> IgnoreTenant<T>(this ISugarQueryable<T> queryable, bool ignore = true)
     {
@@ -361,7 +361,7 @@ public static class RepositoryExtension
     }
 
     /// <summary>
-    /// 只更新某些列
+    /// Only update certain columns
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <typeparam name="R"></typeparam>
@@ -374,7 +374,7 @@ public static class RepositoryExtension
 
         foreach (PropertyInfo info in typeof(R).GetProperties())
         {
-            // 判断是否是相同属性
+            // Determine whether they have the same attributes
             if (typeof(T).GetProperty(info.Name) != null)
                 updateable.UpdateBuilder.UpdateColumns.Add(info.Name);
         }
@@ -382,7 +382,7 @@ public static class RepositoryExtension
     }
 
     /// <summary>
-    /// 导航只更新（主表）某些列
+    /// Navigation updates only certain columns (main table)
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <typeparam name="R"></typeparam>
@@ -396,7 +396,7 @@ public static class RepositoryExtension
 
         foreach (PropertyInfo info in r.GetType().GetProperties())
         {
-            //判断是否是相同属性
+            //Determine whether they have the same attributes
             PropertyInfo pro = t.GetType().GetProperty(info.Name);
             var attr = pro.GetCustomAttribute<SugarColumn>();
             if (pro != null && attr != null && !attr.IsPrimaryKey)
@@ -407,7 +407,7 @@ public static class RepositoryExtension
     }
 
     /// <summary>
-    /// 批量列表in查询
+    /// Batch list in query
     /// </summary>
     /// <typeparam name="T1"></typeparam>
     /// <typeparam name="T2"></typeparam>
@@ -421,17 +421,17 @@ public static class RepositoryExtension
             IEnumerable<T2> queryList,
             CancellationToken stoppingToken) where T1 : class, new()
     {
-        // 创建临时表 (用真表兼容性好，表名随机)
+        // Create a temporary table (use a real table for good compatibility, and the table name is random)
         var tableName = "Temp" + SnowFlakeSingle.Instance.NextId();
         try
         {
             var type = queryable.Context.DynamicBuilder().CreateClass(tableName, new SugarTable())
-                .CreateProperty("ColumnName", typeof(string), new SugarColumn() { IsPrimaryKey = true }) // 主键不要自增
+                .CreateProperty("ColumnName", typeof(string), new SugarColumn() { IsPrimaryKey = true }) // Do not increment the primary key
                 .BuilderType();
-            // 创建表
+            // Create table
             queryable.Context.CodeFirst.InitTables(type);
             var insertData = queryList.Select(it => new SingleColumnEntity<T2>() { ColumnName = it }).ToList();
-            // 插入临时表
+            // Insert into temporary table
             queryable.Context.Fastest<SingleColumnEntity<T2>>()
                 .AS(tableName)
                 .BulkCopy(insertData);

@@ -1,14 +1,14 @@
 <template>
 	<div class="device-info-container">
-		<!-- 系统概览卡片 -->
+		<!-- System overview card -->
 		<el-row :gutter="16" style="margin-bottom: 16px">
 			<el-col :span="24">
 				<el-card class="overview-card" shadow="hover">
 					<template #header>
 						<div class="card-header">
 							<i class="el-icon-monitor"></i>
-							<span>系统概览</span>
-							<span class="status-text">运行正常</span>
+							<span>System overview</span>
+							<span class="status-text">Running normally</span>
 						</div>
 					</template>
 					<div class="overview-content">
@@ -17,9 +17,9 @@
 								<i class="el-icon-cpu"></i>
 							</div>
 							<div class="overview-text">
-								<div class="overview-title">处理器</div>
+								<div class="overview-title">Processor</div>
 								<div class="overview-value">{{ deviceInfo.cpuInfo.processorName }}</div>
-								<div class="overview-subtitle">{{ deviceInfo.cpuInfo.physicalCoreCount }}核 {{ deviceInfo.cpuInfo.logicalCoreCount }}线程</div>
+								<div class="overview-subtitle">{{ deviceInfo.cpuInfo.physicalCoreCount }} core {{ deviceInfo.cpuInfo.logicalCoreCount }} thread</div>
 							</div>
 						</div>
 						<div class="overview-item">
@@ -27,9 +27,9 @@
 								<i class="el-icon-film"></i>
 							</div>
 							<div class="overview-text">
-								<div class="overview-title">内存</div>
+								<div class="overview-title">Memory</div>
 								<div class="overview-value">{{ deviceInfo.ramInfo.totalSpace }}</div>
-								<div class="overview-subtitle">使用率 {{ deviceInfo.ramInfo.usagePercentage }}%</div>
+								<div class="overview-subtitle">Usage {{ deviceInfo.ramInfo.usagePercentage }}%</div>
 							</div>
 						</div>
 						<div class="overview-item">
@@ -37,9 +37,9 @@
 								<i class="el-icon-monitor"></i>
 							</div>
 							<div class="overview-text">
-								<div class="overview-title">操作系统</div>
+								<div class="overview-title">operating system</div>
 								<div class="overview-value">{{ deviceInfo.systemInfo.osDescription }}</div>
-								<div class="overview-subtitle">{{ deviceInfo.systemInfo.osArchitecture }} 架构</div>
+								<div class="overview-subtitle">{{ deviceInfo.systemInfo.osArchitecture }} architecture</div>
 							</div>
 						</div>
 						<div class="overview-item">
@@ -47,7 +47,7 @@
 								<i class="el-icon-guide"></i>
 							</div>
 							<div class="overview-text">
-								<div class="overview-title">运行框架</div>
+								<div class="overview-title">Run the framework</div>
 								<div class="overview-value">{{ deviceInfo.systemInfo.frameworkDescription }}</div>
 								<div class="overview-subtitle">{{ deviceInfo.systemInfo.machineName }}</div>
 							</div>
@@ -57,9 +57,9 @@
 								<i class="el-icon-time"></i>
 							</div>
 							<div class="overview-text">
-								<div class="overview-title">运行时间</div>
+								<div class="overview-title">running time</div>
 								<div class="overview-value">{{ deviceInfo.systemUptime }}</div>
-								<div class="overview-subtitle">系统稳定运行</div>
+								<div class="overview-subtitle">System runs stably</div>
 							</div>
 						</div>
 					</div>
@@ -67,14 +67,14 @@
 			</el-col>
 		</el-row>
 
-		<!-- CPU和内存性能 -->
+		<!-- CPU and memory performance -->
 		<el-row :gutter="16" style="margin-bottom: 16px">
 			<el-col :md="12" :sm="24">
 				<el-card class="performance-card cpu-card" shadow="hover">
 					<template #header>
 						<div class="card-header">
 							<i class="el-icon-cpu"></i>
-							<span>CPU 性能</span>
+							<span>CPU performance</span>
 						</div>
 					</template>
 					<div class="performance-content">
@@ -83,22 +83,22 @@
 								<template #default>
 									<div class="progress-content">
 										<div class="progress-value">{{ deviceInfo.cpuInfo.usagePercentage }}%</div>
-										<div class="progress-label">CPU使用率</div>
+										<div class="progress-label">CPU Usage</div>
 									</div>
 								</template>
 							</el-progress>
 						</div>
 						<div class="performance-details">
 							<div class="detail-item">
-								<span class="detail-label">处理器架构：</span>
+								<span class="detail-label">Processor Architecture:</span>
 								<span class="detail-value">{{ deviceInfo.cpuInfo.processorArchitecture }}</span>
 							</div>
 							<div class="detail-item">
-								<span class="detail-label">基础频率：</span>
+								<span class="detail-label">Fundamental frequency:</span>
 								<span class="detail-value">{{ deviceInfo.cpuInfo.baseClockSpeed }} GHz</span>
 							</div>
 							<div class="detail-item">
-								<span class="detail-label">缓存大小：</span>
+								<span class="detail-label">Cache size:</span>
 								<span class="detail-value">{{ deviceInfo.cpuInfo.cacheSize }}</span>
 							</div>
 						</div>
@@ -110,7 +110,7 @@
 					<template #header>
 						<div class="card-header">
 							<i class="el-icon-memory-card"></i>
-							<span>内存使用</span>
+							<span>memory usage</span>
 						</div>
 					</template>
 					<div class="performance-content">
@@ -119,22 +119,22 @@
 								<template #default>
 									<div class="progress-content">
 										<div class="progress-value">{{ deviceInfo.ramInfo.usagePercentage.toFixed(1) }}%</div>
-										<div class="progress-label">内存使用</div>
+										<div class="progress-label">memory usage</div>
 									</div>
 								</template>
 							</el-progress>
 						</div>
 						<div class="performance-details">
 							<div class="detail-item">
-								<span class="detail-label">总内存：</span>
+								<span class="detail-label">Total memory:</span>
 								<span class="detail-value">{{ deviceInfo.ramInfo.totalSpace }}</span>
 							</div>
 							<div class="detail-item">
-								<span class="detail-label">已使用：</span>
+								<span class="detail-label">Used:</span>
 								<span class="detail-value">{{ deviceInfo.ramInfo.usedSpace }}</span>
 							</div>
 							<div class="detail-item">
-								<span class="detail-label">可用：</span>
+								<span class="detail-label">Available:</span>
 								<span class="detail-value">{{ deviceInfo.ramInfo.freeSpace }}</span>
 							</div>
 						</div>
@@ -143,14 +143,14 @@
 			</el-col>
 		</el-row>
 
-		<!-- 磁盘信息 -->
+		<!-- disk information -->
 		<el-row :gutter="16" style="margin-bottom: 16px">
 			<el-col :span="24">
 				<el-card class="disk-card" shadow="hover">
 					<template #header>
 						<div class="card-header">
 							<i class="el-icon-files"></i>
-							<span>磁盘使用情况</span>
+							<span>Disk usage</span>
 						</div>
 					</template>
 					<el-row :gutter="16">
@@ -166,22 +166,22 @@
 											<template #default>
 												<div class="disk-progress-content">
 													<div class="disk-usage">{{ disk.usedPercentage }}%</div>
-													<div class="disk-label">已使用</div>
+													<div class="disk-label">Already used</div>
 												</div>
 											</template>
 										</el-progress>
 									</div>
 									<div class="disk-details">
 										<div class="disk-detail-item">
-											<span class="detail-label">总容量：</span>
+											<span class="detail-label">Total capacity:</span>
 											<span class="detail-value">{{ disk.totalSpace }}</span>
 										</div>
 										<div class="disk-detail-item">
-											<span class="detail-label">已使用：</span>
+											<span class="detail-label">Used:</span>
 											<span class="detail-value">{{ disk.usedSpace }}</span>
 										</div>
 										<div class="disk-detail-item">
-											<span class="detail-label">可用空间：</span>
+											<span class="detail-label">Available space:</span>
 											<span class="detail-value">{{ disk.freeSpace }}</span>
 										</div>
 									</div>
@@ -193,14 +193,14 @@
 			</el-col>
 		</el-row>
 
-		<!-- GPU信息 -->
+		<!-- GPU information -->
 		<el-row :gutter="16" style="margin-bottom: 16px">
 			<el-col :span="24">
 				<el-card class="gpu-card" shadow="hover">
 					<template #header>
 						<div class="card-header">
 							<i class="el-icon-view"></i>
-							<span>显卡信息</span>
+							<span>Graphics card information</span>
 						</div>
 					</template>
 					<el-row :gutter="16">
@@ -214,15 +214,15 @@
 								</div>
 								<div class="gpu-details">
 									<div class="gpu-detail-item">
-										<span class="detail-label">显存：</span>
+										<span class="detail-label">Video Memory:</span>
 										<span class="detail-value">{{ gpu.memorySize }}</span>
 									</div>
 									<div class="gpu-detail-item">
-										<span class="detail-label">驱动版本：</span>
+										<span class="detail-label">Driver version:</span>
 										<span class="detail-value">{{ gpu.driverVersion || 'N/A' }}</span>
 									</div>
 									<div class="gpu-detail-item">
-										<span class="detail-label">分辨率：</span>
+										<span class="detail-label">Resolution:</span>
 										<span class="detail-value">{{ gpu.videoModeDescription }}</span>
 									</div>
 								</div>
@@ -233,15 +233,15 @@
 			</el-col>
 		</el-row>
 
-		<!-- 网络信息 -->
+		<!-- Network information -->
 		<el-row :gutter="16" style="margin-bottom: 16px">
 			<el-col :span="24">
 				<el-card class="network-card" shadow="hover">
 					<template #header>
 						<div class="card-header">
 							<i class="el-icon-connection"></i>
-							<span>网络适配器</span>
-							<span class="status-text">{{ getActiveNetworks().length }} 个活跃</span>
+							<span>network adapter</span>
+							<span class="status-text">{{ getActiveNetworks().length }} active</span>
 						</div>
 					</template>
 					<div class="network-content">
@@ -265,19 +265,19 @@
 										<el-col :md="12" :sm="24">
 											<div class="network-info">
 												<div class="network-detail-item">
-													<span class="detail-label">描述：</span>
+													<span class="detail-label">Description:</span>
 													<span class="detail-value">{{ network.description }}</span>
 												</div>
 												<div class="network-detail-item">
-													<span class="detail-label">物理地址：</span>
+													<span class="detail-label">Physical Address:</span>
 													<span class="detail-value">{{ network.physicalAddress || 'N/A' }}</span>
 												</div>
 												<div class="network-detail-item">
-													<span class="detail-label">速度：</span>
+													<span class="detail-label">Speed:</span>
 													<span class="detail-value">{{ network.speed }}</span>
 												</div>
 												<div class="network-detail-item" v-if="network.iPv4Addresses && network.iPv4Addresses.length > 0">
-													<span class="detail-label">IPv4地址：</span>
+													<span class="detail-label">IPv4 Address:</span>
 													<div class="ip-addresses">
 														<el-tag v-for="ip in network.iPv4Addresses" :key="ip.address" size="small" class="ip-tag">
 															{{ ip.address }}
@@ -288,22 +288,22 @@
 										</el-col>
 										<el-col :md="12" :sm="24" v-if="network.statistics">
 											<div class="network-statistics">
-												<h4>网络统计</h4>
+												<h4>Network Statistics</h4>
 												<div class="stats-grid">
 													<div class="stat-item">
-														<div class="stat-label">接收字节</div>
+														<div class="stat-label">Received bytes</div>
 														<div class="stat-value">{{ formatBytes(network.statistics.bytesReceived) }}</div>
 													</div>
 													<div class="stat-item">
-														<div class="stat-label">发送字节</div>
+														<div class="stat-label">Send bytes</div>
 														<div class="stat-value">{{ formatBytes(network.statistics.bytesSent) }}</div>
 													</div>
 													<div class="stat-item">
-														<div class="stat-label">接收包数</div>
+														<div class="stat-label">Number of received packages</div>
 														<div class="stat-value">{{ network.statistics.packetsReceived.toLocaleString() }}</div>
 													</div>
 													<div class="stat-item">
-														<div class="stat-label">发送包数</div>
+														<div class="stat-label">Number of packages sent</div>
 														<div class="stat-value">{{ network.statistics.packetsSent.toLocaleString() }}</div>
 													</div>
 												</div>
@@ -318,31 +318,31 @@
 			</el-col>
 		</el-row>
 
-		<!-- 主板信息 -->
+		<!-- Motherboard information -->
 		<el-row :gutter="16" style="margin-bottom: 16px">
 			<el-col :span="24">
 				<el-card class="board-card" shadow="hover">
 					<template #header>
 						<div class="card-header">
 							<i class="el-icon-cpu"></i>
-							<span>主板信息</span>
+							<span>Motherboard Information</span>
 						</div>
 					</template>
 					<div class="board-content">
 						<div class="board-item">
-							<span class="detail-label">制造商：</span>
+							<span class="detail-label">Manufacturer:</span>
 							<span class="detail-value">{{ deviceInfo.boardInfo.manufacturer }}</span>
 						</div>
 						<div class="board-item">
-							<span class="detail-label">产品型号：</span>
+							<span class="detail-label">Product Model:</span>
 							<span class="detail-value">{{ deviceInfo.boardInfo.product }}</span>
 						</div>
 						<div class="board-item">
-							<span class="detail-label">版本：</span>
+							<span class="detail-label">Version:</span>
 							<span class="detail-value">{{ deviceInfo.boardInfo.version }}</span>
 						</div>
 						<div class="board-item">
-							<span class="detail-label">序列号：</span>
+							<span class="detail-label">No:</span>
 							<span class="detail-value">{{ deviceInfo.boardInfo.serialNumber }}</span>
 						</div>
 					</div>
@@ -350,47 +350,47 @@
 			</el-col>
 		</el-row>
 
-		<!-- 系统信息 -->
+		<!-- System information -->
 		<el-row :gutter="16">
 			<el-col :span="24">
 				<el-card class="system-card" shadow="hover">
 					<template #header>
 						<div class="card-header">
 							<i class="el-icon-setting"></i>
-							<span>系统信息</span>
+							<span>System information</span>
 						</div>
 					</template>
 					<div class="system-content">
 						<div class="system-item">
-							<span class="detail-label">操作系统：</span>
+							<span class="detail-label">Operating system:</span>
 							<span class="detail-value">{{ deviceInfo.systemInfo.osDescription }}</span>
 						</div>
 						<div class="system-item">
-							<span class="detail-label">系统版本：</span>
+							<span class="detail-label">System version:</span>
 							<span class="detail-value">{{ deviceInfo.systemInfo.osVersion }}</span>
 						</div>
 						<div class="system-item">
-							<span class="detail-label">系统架构：</span>
+							<span class="detail-label">System architecture:</span>
 							<span class="detail-value">{{ deviceInfo.systemInfo.osArchitecture }}</span>
 						</div>
 						<div class="system-item">
-							<span class="detail-label">运行框架：</span>
+							<span class="detail-label">Run the framework:</span>
 							<span class="detail-value">{{ deviceInfo.systemInfo.frameworkDescription }}</span>
 						</div>
 						<div class="system-item">
-							<span class="detail-label">机器名称：</span>
+							<span class="detail-label">Machine Name:</span>
 							<span class="detail-value">{{ deviceInfo.systemInfo.machineName }}</span>
 						</div>
 						<div class="system-item">
-							<span class="detail-label">当前用户：</span>
+							<span class="detail-label">Current User:</span>
 							<span class="detail-value">{{ deviceInfo.systemInfo.userName }}</span>
 						</div>
 						<div class="system-item">
-							<span class="detail-label">系统启动时间：</span>
+							<span class="detail-label">System startup time:</span>
 							<span class="detail-value">{{ deviceInfo.systemInfo.systemStartTime }}</span>
 						</div>
 						<div class="system-item">
-							<span class="detail-label">进程启动时间：</span>
+							<span class="detail-label">Process start time:</span>
 							<span class="detail-value">{{ deviceInfo.systemInfo.processStartTime }}</span>
 						</div>
 					</div>
@@ -398,15 +398,15 @@
 			</el-col>
 		</el-row>
 
-		<!-- NuGet包信息 -->
+		<!-- NuGet package information -->
 		<el-row :gutter="16">
 			<el-col :span="24">
 				<el-card class="nuget-card" shadow="hover">
 					<template #header>
 						<div class="card-header">
 							<i class="el-icon-collection"></i>
-							<span>NuGet 包信息</span>
-							<span class="status-text">{{ deviceInfo.nugetPackages.length }} 个包</span>
+							<span>NuGet package information</span>
+							<span class="status-text">{{ deviceInfo.nugetPackages.length }} packages</span>
 						</div>
 					</template>
 					<div class="nuget-content">
@@ -429,7 +429,7 @@
 import { ref, reactive, onMounted } from 'vue';
 import { getHardwareInfo, getRuntimeInfo, getNuGetPackagesInfo } from '/@/api/system/admin';
 
-// 网络接口类型定义
+// Network interface type definition
 interface NetworkInfo {
 	name: string;
 	description: string;
@@ -464,7 +464,7 @@ interface NetworkInfo {
 	};
 }
 
-// 设备信息数据
+// Device information data
 const deviceInfo = reactive<any>({
 	cpuInfo: {
 		processorName: '',
@@ -506,7 +506,7 @@ const deviceInfo = reactive<any>({
 
 const activeNetworkNames = ref('');
 
-// 格式化字节数为可读格式
+// Format the number of bytes into a readable format
 const formatBytes = (bytes: number) => {
 	if (bytes === 0) return '0 B';
 	const k = 1024;
@@ -515,17 +515,17 @@ const formatBytes = (bytes: number) => {
 	return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
 };
 
-// 获取硬件信息
+// Get hardware information
 const getHardwareInfoData = async () => {
 	try {
-		// 并行获取硬件信息、运行时信息和 NuGet 包信息
+		// Get hardware information, runtime information, and NuGet package information in parallel
 		const [hardwareRes, runtimeRes, nugetRes] = await Promise.all([getHardwareInfo(), getRuntimeInfo(), getNuGetPackagesInfo()]);
 
 		const hardwareData = hardwareRes.data.result;
 		const runtimeData = runtimeRes.data.result;
 		const nugetPackages = nugetRes.data.result;
 
-		// 处理CPU信息
+		// Processing CPU information
 		Object.assign(deviceInfo.cpuInfo, {
 			processorName: hardwareData.cpuInfo.processorName,
 			processorArchitecture: hardwareData.cpuInfo.processorArchitecture,
@@ -536,7 +536,7 @@ const getHardwareInfoData = async () => {
 			usagePercentage: hardwareData.cpuInfo.usagePercentage,
 		});
 
-		// 处理内存信息
+		// Process memory information
 		Object.assign(deviceInfo.ramInfo, {
 			totalSpace: formatBytes(hardwareData.ramInfo.totalBytes),
 			usedSpace: formatBytes(hardwareData.ramInfo.usedBytes),
@@ -544,7 +544,7 @@ const getHardwareInfoData = async () => {
 			usagePercentage: hardwareData.ramInfo.usagePercentage,
 		});
 
-		// 处理磁盘信息
+		// Process disk information
 		deviceInfo.diskInfos = hardwareData.diskInfos.map((disk: any) => ({
 			diskName: disk.diskName,
 			typeName: disk.typeName,
@@ -555,10 +555,10 @@ const getHardwareInfoData = async () => {
 			usedPercentage: ((disk.usedSpace / disk.totalSpace) * 100).toFixed(1),
 		}));
 
-		// 处理网络信息
+		// Process network information
 		deviceInfo.networkInfos = hardwareData.networkInfos;
 
-		// 处理GPU信息
+		// Processing GPU information
 		deviceInfo.gpuInfos = hardwareData.gpuInfos.map((gpu: any) => ({
 			name: gpu.name,
 			description: gpu.description,
@@ -571,7 +571,7 @@ const getHardwareInfoData = async () => {
 			status: gpu.status,
 		}));
 
-		// 处理主板信息
+		// Processing motherboard information
 		Object.assign(deviceInfo.boardInfo, {
 			manufacturer: hardwareData.boardInfo.manufacturer,
 			product: hardwareData.boardInfo.product,
@@ -579,10 +579,10 @@ const getHardwareInfoData = async () => {
 			serialNumber: hardwareData.boardInfo.serialNumber,
 		});
 
-		// 处理系统运行时间和其他系统信息
+		// Process system uptime and other system information
 		deviceInfo.systemUptime = runtimeData.runningTime || runtimeData.runtimeInfo.systemUptime;
 
-		// 添加系统信息到deviceInfo（可选）
+		// Add system information to deviceInfo (optional)
 		deviceInfo.systemInfo = {
 			osDescription: runtimeData.runtimeInfo.osDescription,
 			osVersion: runtimeData.runtimeInfo.osVersion,
@@ -594,19 +594,19 @@ const getHardwareInfoData = async () => {
 			processStartTime: runtimeData.runtimeInfo.processStartTime,
 		};
 
-		// 处理 NuGet 包信息
+		// Handle NuGet package information
 		deviceInfo.nugetPackages = nugetPackages.map((pkg: any) => ({
 			packageName: pkg.packageName,
 			packageVersion: pkg.packageVersion,
 		}));
 	} catch (error) {
-		console.error('获取硬件信息失败:', error);
-		// 设置默认值，避免页面崩溃
-		deviceInfo.systemUptime = '获取失败';
+		console.error('Failed to obtain hardware information:', error);
+		// Set default values ​​to avoid page crashes
+		deviceInfo.systemUptime = 'Failed to obtain';
 	}
 };
 
-// 获取活跃网络
+// Get active network
 const getActiveNetworks = () => {
 	return deviceInfo.networkInfos.filter(
 		(network: NetworkInfo) =>
@@ -614,7 +614,7 @@ const getActiveNetworks = () => {
 	);
 };
 
-// 获取网络状态图标
+// Get network status icon
 const getNetworkStatusIcon = (status: string) => {
 	switch (status) {
 		case 'Up':
@@ -626,7 +626,7 @@ const getNetworkStatusIcon = (status: string) => {
 	}
 };
 
-// 获取网络类型颜色
+// Get network type color
 const getNetworkTypeColor = (type: string) => {
 	switch (type) {
 		case 'Ethernet':
@@ -640,21 +640,21 @@ const getNetworkTypeColor = (type: string) => {
 	}
 };
 
-// 获取CPU使用率颜色
+// Get CPU usage color
 const getCpuColor = (percentage: number) => {
 	if (percentage < 50) return '#67c23a';
 	if (percentage < 80) return '#e6a23c';
 	return '#f56c6c';
 };
 
-// 获取内存使用率颜色
+// Get memory usage color
 const getRamColor = (percentage: number) => {
 	if (percentage < 60) return '#409eff';
 	if (percentage < 80) return '#e6a23c';
 	return '#f56c6c';
 };
 
-// 获取磁盘使用率颜色
+// Get disk usage color
 const getDiskColor = (availablePercentage: number) => {
 	const usedPercentage = 100 - availablePercentage;
 	if (usedPercentage < 70) return '#67c23a';
@@ -663,7 +663,7 @@ const getDiskColor = (availablePercentage: number) => {
 };
 
 onMounted(() => {
-	console.log('设备信息页面已加载');
+	console.log('The device information page has loaded');
 	getHardwareInfoData();
 });
 </script>
@@ -697,7 +697,7 @@ onMounted(() => {
 	flex-shrink: 0;
 }
 
-// 概览卡片
+// Overview card
 .overview-card {
 	background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 	color: white;
@@ -785,7 +785,7 @@ onMounted(() => {
 	}
 }
 
-// 性能卡片
+// performance card
 .performance-card {
 	&.cpu-card {
 		border-left: 4px solid #e6a23c;
@@ -848,7 +848,7 @@ onMounted(() => {
 	font-size: 14px;
 }
 
-// 磁盘卡片
+// disk card
 .disk-card {
 	border-left: 4px solid #67c23a;
 }
@@ -922,7 +922,7 @@ onMounted(() => {
 	}
 }
 
-// GPU卡片
+// GPU card
 .gpu-card {
 	border-left: 4px solid #f56c6c;
 }
@@ -964,7 +964,7 @@ onMounted(() => {
 	padding: 4px 0;
 }
 
-// 网络卡片
+// network card
 .network-card {
 	border-left: 4px solid #909399;
 }
@@ -1054,7 +1054,7 @@ onMounted(() => {
 	color: #303133;
 }
 
-// 主板卡片
+// motherboard card
 .board-card {
 	border-left: 4px solid #973399;
 }
@@ -1073,7 +1073,7 @@ onMounted(() => {
 	border-radius: 6px;
 }
 
-// 系统信息卡片
+// System information card
 .system-card {
 	border-left: 4px solid #409eff;
 }
@@ -1092,7 +1092,7 @@ onMounted(() => {
 	border-radius: 6px;
 }
 
-// 响应式设计
+// Responsive design
 @media (max-width: 768px) {
 	.overview-content {
 		flex-direction: column;
@@ -1121,7 +1121,7 @@ onMounted(() => {
 	}
 }
 
-// 动画效果
+// Animation effects
 .el-card {
 	transition:
 		transform 0.3s ease,
@@ -1148,7 +1148,7 @@ onMounted(() => {
 	padding-bottom: 16px;
 }
 
-// NuGet包信息卡片样式
+// NuGet package information card style
 .nuget-card {
 	border-left: 4px solid #409eff;
 	margin-top: 16px;

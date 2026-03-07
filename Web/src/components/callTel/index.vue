@@ -1,14 +1,14 @@
 ﻿<template>
 	<div class="page-container">
-		<!-- 姓名和号码部分 -->
+		<!-- name and number part -->
 		<div class="name-number" v-if="state.data">
 			<span class="name">{{ state.data.realName }}</span>
-			<span class="spacing"></span> <!-- 新增的间距元素 -->
+			<span class="spacing"></span> <!-- Add NewspacingYuanplain -->
 			<span class="number">{{ state.data.number }}</span>
 		</div>
-		<!-- 头像容器 -->
+		<!-- avatar container -->
 		<div class="avatars">
-			<!-- 绿色头像 -->
+			<!-- green avatar -->
 			<div class="avatar-wrap green-icon-wrap" @click="handleClick(true)" v-reclick="1000">
 				<el-avatar :size="100" class="icon green-icon">
 					<i class="iconfont icon-dianhua"></i>
@@ -28,7 +28,7 @@ const state = reactive({
 	data: {} as any
 });
 
-// 页面初始化
+// Page initialization
 const initializePage = () => {
 	state.data = JSON.parse(decodeURIComponent(route.query.code || '{}' as any));
 	state.token = route.query.token;
@@ -38,59 +38,59 @@ onMounted(() => {
 	initializePage();
 });
 
-// 点击事件
+// click event
 const handleClick = (success: boolean) => {
 	if (success) location.href = 'tel:' + state.data.number;
 };
 </script>
 
 <style lang="scss" scoped>
-/* 样式保持不变 */
+/* style remains the same */
 .page-container {
 	display: flex;
 	flex-direction: column;
-	justify-content: flex-start; /* 使用flex-start而不是center以控制垂直对齐 */
-	align-items: center; /* 水平居中 */
+	justify-content: flex-start; /* Useflex-startbut notYescenterto controlverticalAlign */
+	align-items: center; /* levelcenter */
 	height: 100vh;
-	padding-top: calc(100vh * (1 - 1/1.618)); /* 使用黄金分割比例计算顶部内边距 */
+	padding-top: calc(100vh * (1 - 1/1.618)); /* Use goldpointsCalculate top padding by split ratio */
 }
 
 .name-number {
 	text-align: center;
-	margin-bottom: 20px; /* 添加与头像之间的间距 */
+	margin-bottom: 20px; /* Add toandAvatarspacing between */
 	.name {
 		font-weight: bold;
-		font-size: 24px; /* 增大字体大小 */
+		font-size: 24px; /* Increase font size */
 	}
 
 	.spacing {
 		display: block;
-		height: 10px; /* 设置间距的高度 */
+		height: 10px; /* Set the height of the spacing */
 	}
 
 	.number {
-		font-size: 20px; /* 增大字体大小 */
-		color: #a09e9e; /* 更改号码颜色为指定的浅灰色 */
-		font-weight: 600; /* 加粗字体 */
+		font-size: 20px; /* Increase font size */
+		color: #a09e9e; /* Change the number color to the specified light gray */
+		font-weight: 600; /* Bold font */
 	}
 }
 
 .avatars {
 	display: flex;
-	justify-content: center; /* 使子元素（绿色头像）水平居中 */
-	gap: 40px; /* 增加头像之间的间距 */
+	justify-content: center; /* makechildYuanplain（GreenAvatar）levelcenter */
+	gap: 40px; /* increaseAvatarspacing between */
 	.avatar-wrap {
 		cursor: pointer;
 		transition: background-color 0.2s, transform 0.2s;
 	}
 
 	.avatar-wrap:hover .icon {
-		filter: brightness(90%); /* 鼠标悬停时稍微变暗 */
+		filter: brightness(90%); /* ratLabel hovertimeSlightly darken */
 	}
 
 	.avatar-wrap:active .icon {
-		filter: brightness(80%); /* 点击时更明显地变暗 */
-		transform: scale(0.94); /* 点击时轻微缩小 */
+		filter: brightness(80%); /* ClicktimeBecome darker more noticeably */
+		transform: scale(0.94); /* ClicktimeSlightReduce */
 	}
 
 	.icon {

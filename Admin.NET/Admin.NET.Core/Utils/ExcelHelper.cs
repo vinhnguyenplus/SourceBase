@@ -1,8 +1,8 @@
-﻿// Admin.NET 项目的版权、商标、专利和其他相关权利均受相应法律法规的保护。使用本项目应遵守相关法律法规和许可证的要求。
+﻿// The copyright, trademark, patent and other related rights of the Admin.NET project are protected by corresponding laws and regulations. Use of this project shall comply with relevant laws, regulations and license requirements.
 //
-// 本项目主要遵循 MIT 许可证和 Apache 许可证（版本 2.0）进行分发和使用。许可证位于源代码树根目录中的 LICENSE-MIT 和 LICENSE-APACHE 文件。
+// This project is distributed and used primarily under the MIT License and the Apache License (version 2.0). The license is located in the LICENSE-MIT and LICENSE-APACHE files in the root of the source tree.
 //
-// 不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！
+// This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project!
 
 using OfficeOpenXml;
 
@@ -11,7 +11,7 @@ namespace Admin.NET.Core;
 public class ExcelHelper
 {
     /// <summary>
-    /// 数据导入
+    /// Data import
     /// </summary>
     /// <param name="file"></param>
     /// <param name="action"></param>
@@ -20,18 +20,18 @@ public class ExcelHelper
     {
         try
         {
-            var result = CommonUtil.ImportExcelDataAsync<IN>(file).Result ?? throw Oops.Oh("有效数据为空");
+            var result = CommonUtil.ImportExcelDataAsync<IN>(file).Result ?? throw Oops.Oh("Valid data is empty");
             result.ForEach(u => u.Id = YitIdHelper.NextId());
 
             var tasks = new List<Task>();
             action.Invoke(result, (storageable, pageItems, rows) =>
             {
-                // 标记校验信息
+                // Mark verification information
                 tasks.Add(Task.Run(() =>
                 {
                     if (!storageable.TotalList.Any()) return;
 
-                    // 通过Id标记校验信息
+                    // Verify information by marking it with Id
                     var itemMap = pageItems.ToDictionary(u => u.Id, u => u);
                     foreach (var item in storageable.TotalList)
                     {
@@ -41,13 +41,13 @@ public class ExcelHelper
                 }));
             });
 
-            // 等待所有标记验证信息任务完成
+            // Wait for all tag verification information tasks to complete
             Task.WhenAll(tasks).GetAwaiter().GetResult();
 
-            // 仅导出错误记录
+            // Export error records only
             var errorList = result.Where(u => !string.IsNullOrWhiteSpace(u.Error)).ToList();
             if (!errorList.Any())
-                return new JsonResult(AdminResultProvider.Ok("导入成功"));
+                return new JsonResult(AdminResultProvider.Ok("Import successful"));
             return ExportData(errorList);
         }
         catch (Exception ex)
@@ -57,12 +57,12 @@ public class ExcelHelper
     }
 
     /// <summary>
-    /// 导出Xlsx数据
+    /// Export Xlsx data
     /// </summary>
     /// <param name="list"></param>
     /// <param name="fileName"></param>
     /// <returns></returns>
-    public static IActionResult ExportData(dynamic list, string fileName = "导入记录")
+    public static IActionResult ExportData(dynamic list, string fileName = "Import Records")
     {
         var exporter = new ExcelExporter();
         var fs = new MemoryStream(exporter.ExportAsByteArray(list).GetAwaiter().GetResult());
@@ -70,19 +70,19 @@ public class ExcelHelper
     }
 
     /// <summary>
-    /// 根据类型导出Xlsx模板
+    /// Export Xlsx template based on type
     /// </summary>
     /// <param name="list"></param>
     /// <param name="filename"></param>
     /// <param name="addListValidationFun"></param>
     /// <returns></returns>
-    public static IActionResult ExportTemplate<T>(IEnumerable<T> list, string filename = "导入模板", Func<ExcelWorksheet, PropertyInfo, IEnumerable<string>> addListValidationFun = null)
+    public static IActionResult ExportTemplate<T>(IEnumerable<T> list, string filename = "Import template", Func<ExcelWorksheet, PropertyInfo, IEnumerable<string>> addListValidationFun = null)
     {
         using var package = new ExcelPackage((ExportData(list, filename) as XlsxFileResult)!.Stream);
         var worksheet = package.Workbook.Worksheets[0];
 
-        // 创建一个隐藏的sheet，用于添加下拉列表
-        var dropdownSheet = package.Workbook.Worksheets.Add("下拉数据");
+        // Create a hidden sheet for adding drop-down lists
+        var dropdownSheet = package.Workbook.Worksheets.Add("Drop down data");
         dropdownSheet.Hidden = eWorkSheetHidden.Hidden;
 
         var sysDictTypeService = App.GetService<SysDictTypeService>();
@@ -95,28 +95,28 @@ public class ExcelHelper
             if (isNullableEnum) propType = Nullable.GetUnderlyingType(propType);
             if (headerAttr == null) continue;
 
-            // 获取列序号
+            // Get column number
             var columnIndex = 0;
             foreach (var item in worksheet.Cells[1, 1, 1, worksheet.Dimension.End.Column])
                 if (++columnIndex > 0 && item.Text.Equals(headerAttr.DisplayName)) break;
             if (columnIndex <= 0) continue;
 
-            // 优先从代理函数中获取下列列表，若为空且字段为枚举型，则填充枚举项为下列列表，若为字典字段，则填充字典值value列表为下列列表
+            // First obtain the following list from the agent function. If it is empty and the field is an enumeration type, the enumeration item is filled in the following list. If it is a dictionary field, the dictionary value value list is filled in the following list.
             var dataList = addListValidationFun?.Invoke(worksheet, prop)?.ToList();
             if (dataList == null)
             {
-                // 填充枚举项为下列列表
+                // Populate the enumeration items with the following list
                 if (propType.IsEnum())
                 {
                     dataList = propType.EnumToList()?.Select(it => it.Describe).ToList();
                 }
                 else
                 {
-                    // 获取字段上的字典特性
+                    // Get dictionary attributes on a field
                     var dict = prop.GetCustomAttribute<DictAttribute>();
                     if (dict != null)
                     {
-                        // 填充字典值value为下列列表
+                        // Populate the dictionary value with the following list
                         dataList = sysDictTypeService.GetDataList(new GetDataDictTypeInput { Code = dict.DictTypeCode })
                             .Result?.Select(x => x.Label).ToList();
                     }
@@ -125,7 +125,7 @@ public class ExcelHelper
 
             if (dataList != null)
             {
-                // 添加下拉列表
+                // Add dropdown list
                 AddListValidation(dropdownSheet, columnIndex, dataList);
                 dropdownSheet.Cells[1, columnIndex, dataList.Count, columnIndex].LoadFromCollection(dataList);
             }
@@ -140,8 +140,8 @@ public class ExcelHelper
             var validation = worksheet.DataValidations.AddListValidation(worksheet.Cells[2, columnIndex, ExcelPackage.MaxRows, columnIndex].Address);
             validation!.Formula.ExcelFormula = "=" + dropdownSheet.Cells[1, columnIndex, dataList.Count, columnIndex].FullAddressAbsolute;
             validation.ShowErrorMessage = true;
-            validation.ErrorTitle = "无效输入";
-            validation.Error = "请从列表中选择一个有效的选项";
+            validation.ErrorTitle = "Invalid input";
+            validation.Error = "Please choose a valid option from the list";
         }
     }
 }

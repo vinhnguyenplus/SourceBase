@@ -1,54 +1,54 @@
 ﻿import {useBaseApi} from '/@/api/base';
 
-// 翻译接口服务
+// Translation interface service
 export const useSysLangTextApi = () => {
 	const baseApi = useBaseApi("sysLangText");
 	return {
-		// 分页查询翻译
+		// Pagination query translation
 		page: baseApi.page,
-		// 查看翻译详细
+		// View translation details
 		detail: baseApi.detail,
-		// 新增翻译
+		// Add translation
 		add: baseApi.add,
-		// 更新翻译
+		// Update translation
 		update: baseApi.update,
-		// 删除翻译
+		// Delete translation
 		delete: baseApi.delete,
-		// 批量删除翻译
+		// Delete translations in batches
 		batchDelete: baseApi.batchDelete,
-		// 导出翻译数据
+		// Export translation data
 		exportData: baseApi.exportData,
-		// 导入翻译数据
+		// Import translation data
 		importData: baseApi.importData,
-		// 下载翻译数据导入模板
+		// Download translation data import template
 		downloadTemplate: baseApi.downloadTemplate,
 	}
 }
 
-// 翻译实体
+// translation entity
 export interface SysLangText {
-	// 主键Id
+	// Primary keyId
 	id: number;
-	// 所属实体名
+	// Name of the entity to which it belongs
 	entityName?: string;
-	// 所属实体ID
+	// Owning entity ID
 	entityId?: number;
-	// 字段名
+	// Field name
 	fieldName?: string;
-	// 语言代码
+	// language code
 	langCode?: string;
-	// 翻译内容
+	// Translate content
 	content?: string;
-	// 创建时间
+	// creation time
 	createTime: string;
-	// 更新时间
+	// Update time
 	updateTime: string;
-	// 创建者Id
+	// CreatorId
 	createUserId: number;
-	// 创建者姓名
+	// Creator name
 	createUserName: string;
-	// 修改者Id
+	// Modifier ID
 	updateUserId: number;
-	// 修改者姓名
+	// Modifier name
 	updateUserName: string;
 }

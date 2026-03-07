@@ -1,8 +1,8 @@
 <template>
-	<el-tooltip :visible="state.capsLockVisible" effect="light" content="大写锁定已打开" placement="top">
+	<el-tooltip :visible="state.capsLockVisible" effect="light" content="Caps Lock is on" placement="top">
 		<el-form ref="ruleFormRef" :model="state.ruleForm" size="large" :rules="state.rules" class="login-content-form">
 			<el-form-item class="login-animation2" prop="tenantId" clearable v-if="!props.tenantInfo.id && !themeConfig.hideTenantForLogin">
-				<el-select v-model="state.ruleForm.tenantId" placeholder="请选择租户" style="width: 100%" filterable>
+				<el-select v-model="state.ruleForm.tenantId" placeholder="Please select a tenant" style="width: 100%" filterable>
 					<template #prefix>
 						<i class="iconfont icon-shuxingtu el-input__icon"></i>
 					</template>
@@ -10,14 +10,14 @@
 				</el-select>
 			</el-form-item>
 			<el-form-item class="login-animation1" prop="phone" clearable>
-				<el-input text placeholder="请输入手机号" v-model="state.ruleForm.phone" clearable autocomplete="off">
+				<el-input text placeholder="Please enter your phone number" v-model="state.ruleForm.phone" clearable autocomplete="off">
 					<template #prefix>
 						<i class="iconfont icon-dianhua el-input__icon"></i>
 					</template>
 				</el-input>
 			</el-form-item>
 			<el-form-item class="login-animation1" prop="account" clearable>
-				<el-input ref="accountRef" text placeholder="请输入登录账号" v-model="state.ruleForm.account" clearable autocomplete="off" @keyup.enter.native="handleRegister">
+				<el-input ref="accountRef" text placeholder="Please enter your login account" v-model="state.ruleForm.account" clearable autocomplete="off" @keyup.enter.native="handleRegister">
 					<template #prefix>
 						<el-icon>
 							<ele-User />
@@ -26,7 +26,7 @@
 				</el-input>
 			</el-form-item>
 			<el-form-item class="login-animation1" prop="realName" clearable>
-				<el-input ref="accountRef" text placeholder="请输入您的姓名" v-model="state.ruleForm.realName" clearable autocomplete="off" @keyup.enter.native="handleRegister">
+				<el-input ref="accountRef" text placeholder="Please enter your name" v-model="state.ruleForm.realName" clearable autocomplete="off" @keyup.enter.native="handleRegister">
 					<template #prefix>
 						<el-icon>
 							<ele-User />
@@ -40,7 +40,7 @@
 						ref="codeRef"
 						text
 						maxlength="4"
-						placeholder="请输入验证码"
+						placeholder="Please enter the verification code"
 						v-model="state.ruleForm.code"
 						clearable
 						autocomplete="off"
@@ -62,10 +62,10 @@
 			</el-form-item>
 			<el-form-item class="login-animation4">
 				<el-button type="primary" class="login-content-submit" round v-waves @click="handleRegister" :loading="state.loading.register">
-					<span>注 册</span>
+					<span>Register</span>
 				</el-button>
 			</el-form-item>
-			<div class="font12 mt30 login-animation4 login-msg">* 温馨提示：建议使用谷歌、Microsoft Edge，版本 79.0.1072.62 及以上浏览器，360浏览器请使用极速模式</div>
+			<div class="font12 mt30 login-animation4 login-msg">* Warm reminder: It is recommended to use Google, Microsoft Edge, version 79.0.1072.62 and above browsers, please use the fast mode for 360 browsers</div>
 		</el-form>
 	</el-tooltip>
 	<div class="dialog-header">
@@ -74,8 +74,8 @@
 				ref="dragRef"
 				:imgsrc="state.rotateVerifyImg"
 				v-model:isPassing="state.isPassRotate"
-				text="请按住滑块拖动"
-				successText="验证通过"
+				text="Please hold down the slider and drag"
+				successText="Verification passed"
 				handlerIcon="fa fa-angle-double-right"
 				successIcon="fa fa-hand-peace-o"
 				@passcallback="passRotateVerify"
@@ -101,7 +101,7 @@ const props = defineProps({
 	},
 });
 
-// 旋转图片滑块组件
+// Rotate picture slider component
 // import verifyImg from '/@/assets/logo-mini.svg';
 const DragVerifyImgRotate = defineAsyncComponent(() => import('/@/components/dragVerify/dragVerifyImgRotate.vue'));
 
@@ -128,10 +128,10 @@ const state = reactive({
 		codeId: 0,
 	},
 	rules: {
-		account: [{ required: true, message: '请输入登录账号', trigger: 'blur' }],
-		realName: [{ required: true, message: '请输入您的姓名', trigger: 'blur' }],
-		phone: [{ required: true, message: '请输入手机号', trigger: 'blur' }],
-		code: [{ required: true, message: '请输入验证码', trigger: 'blur' }],
+		account: [{ required: true, message: 'Please enter your login account', trigger: 'blur' }],
+		realName: [{ required: true, message: 'Please enter your name', trigger: 'blur' }],
+		phone: [{ required: true, message: 'Please enter your phone number', trigger: 'blur' }],
+		code: [{ required: true, message: 'Please enter the verification code', trigger: 'blur' }],
 	},
 	loading: {
 		register: false,
@@ -142,27 +142,27 @@ const state = reactive({
 	secondVerEnabled: false,
 	isPassRotate: false,
 	capsLockVisible: false,
-	expirySeconds: 60, // 验证码过期时间
+	expirySeconds: 60, // Verification code expiration time
 });
 
-// 验证码过期计时器
+// Verification code expiration timer
 let timer: any = null;
 
-// 页面初始化
+// Page initialization
 onMounted(async () => {
-	// 默认尝试从地址栏获取wayid注册方案id
+	// By default, try to get the wayid registration scheme id from the address bar
 	if (route.query.wayid) state.ruleForm.wayId = route.query.wayid as any;
 	watch(
 		() => themeConfig.value.isLoaded,
 		(isLoaded) => {
 			if (isLoaded) {
-				// 获取登录配置
+				// Get login configuration
 				state.secondVerEnabled = themeConfig.value.secondVer ?? true;
 
-				// 获取验证码
+				// Get verification code
 				getCaptcha();
 
-				// 注册验证码过期计时器
+				// Registration verification code expiration timer
 				timer = setInterval(() => {
 					if (state.expirySeconds > 0) state.expirySeconds -= 1;
 				}, 1000);
@@ -171,25 +171,25 @@ onMounted(async () => {
 		{ immediate: true }
 	);
 
-	// 检测大小写按键/CapsLK
+	// Detect uppercase and lowercase keys/CapsLK
 	document.addEventListener('keyup', handleKeyPress);
 });
 
-// 页面卸载
+// Page unloading
 onUnmounted(() => {
-	// 销毁验证码过期计时器
+	// Destroy verification code expiration timer
 	clearInterval(timer);
 	timer = null;
 
 	document.removeEventListener('keyup', handleKeyPress);
 });
 
-// 检测大小写按键
+// Detect uppercase and lowercase keys
 const handleKeyPress = (e: KeyboardEvent) => {
 	state.capsLockVisible = e.getModifierState('CapsLock');
 };
 
-// 获取验证码
+// Get verification code
 const getCaptcha = async () => {
 	state.ruleForm.code = '';
 	const res = await getAPI(SysAuthApi).apiSysAuthCaptchaGet().then(res => res.data.result);
@@ -198,7 +198,7 @@ const getCaptcha = async () => {
   state.ruleForm.codeId = res?.id;
 };
 
-// 注册
+// register
 const onRegister = async () => {
 	ruleFormRef.value.validate(async (valid: boolean) => {
 		if (!valid) return false;
@@ -213,17 +213,17 @@ const onRegister = async () => {
 			const [err, res] = await feature(getAPI(SysAuthApi).apiSysAuthUserRegistrationPost({...state.ruleForm, password: password } as any));
 
 			if (res?.data?.code === 200) {
-				const registerText = '欢迎加入, 请使用默认密码登录！';
+				const registerText = 'Welcome to join, please use the default password to log in!';
 				ElMessage.success(registerText);
 				emits('goLogin');
 				return;
 			}
 
 			if (err) {
-				getCaptcha(); // 重新获取验证码
+				getCaptcha(); // Get verification code again
 			} else if (res.type != 'success') {
-				getCaptcha(); // 重新获取验证码
-				ElMessage.error('message.register.注册失败！');
+				getCaptcha(); // Get verification code again
+				ElMessage.error('message.register.Registration failed!');
 			}
 		} finally {
 			state.loading.register = false;
@@ -231,21 +231,21 @@ const onRegister = async () => {
 	});
 };
 
-// 打开旋转验证
+// Turn on rotation verification
 const openRotateVerify = () => {
 	state.rotateVerifyVisible = true;
 	state.isPassRotate = false;
 	dragRef.value?.reset();
 };
 
-// 通过旋转验证
+// Verified by rotation
 const passRotateVerify = () => {
 	state.rotateVerifyVisible = false;
 	state.isPassRotate = true;
 	//onSignIn();
 };
 
-// 注册处理
+// Registration processing
 const handleRegister = () => {
 	ruleFormRef.value.validate(async (valid: boolean) => {
 		if (!valid) return false;
@@ -327,7 +327,7 @@ const handleRegister = () => {
 	.login-content-code-expired {
 		@extend .login-content-code;
 		&::before {
-			content: '验证码已过期';
+			content: 'The verification code has expired';
 			position: absolute;
 			top: 0;
 			left: 0;

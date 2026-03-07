@@ -1,30 +1,30 @@
-﻿// Admin.NET 项目的版权、商标、专利和其他相关权利均受相应法律法规的保护。使用本项目应遵守相关法律法规和许可证的要求。
+﻿// The copyright, trademark, patent and other related rights of the Admin.NET project are protected by corresponding laws and regulations. Use of this project shall comply with relevant laws, regulations and license requirements.
 //
-// 本项目主要遵循 MIT 许可证和 Apache 许可证（版本 2.0）进行分发和使用。许可证位于源代码树根目录中的 LICENSE-MIT 和 LICENSE-APACHE 文件。
+// This project is distributed and used primarily under the MIT License and the Apache License (version 2.0). The license is located in the LICENSE-MIT and LICENSE-APACHE files in the root of the source tree.
 //
-// 不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！
+// This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project!
 
 namespace Admin.NET.Core.Service;
 
 public class LangFieldMap<TEntity>
 {
-    /// <summary>实体名，如 Product</summary>
+    /// <summary>Entity name, such as Product</summary>
     public string EntityName { get; set; }
 
-    /// <summary>字段名，如 Name/Description</summary>
+    /// <summary>Field name, such as Name/Description</summary>
     public string FieldName { get; set; }
 
-    /// <summary>如何取主键ID</summary>
+    /// <summary>How to get the primary key ID</summary>
     public Func<TEntity, long> IdSelector { get; set; }
 
-    /// <summary>如何写回翻译值</summary>
+    /// <summary>How to write back translation values</summary>
     public Action<TEntity, string> SetTranslatedValue { get; set; }
 }
 
 /// <summary>
-/// 翻译缓存服务 🧩
+/// Translation caching service 🧩
 /// </summary>
-[ApiDescriptionSettings(Order = 100, Description = "翻译缓存服务")]
+[ApiDescriptionSettings(Order = 100, Description = "Translation caching service")]
 public class SysLangTextCacheService : IDynamicApiController, ITransient
 {
     private readonly SysCacheService _sysCacheService;
@@ -45,18 +45,18 @@ public class SysLangTextCacheService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 【单条翻译获取】
-    /// 根据实体类型、字段、主键ID 和语言编码获取翻译内容。<br/>
-    /// 适用于：小表（如菜单、字典），可设置较长缓存时间。<br/>
+    /// [Get a single translation]
+    /// Get translated content based on entity type, field, primary key ID and language encoding. <br/>
+    /// Applicable to: small tables (such as menus, dictionaries), long cache time can be set. <br/>
     /// <br/>
-    /// 【示例】<br/>
+    /// 【Example】<br/>
     /// var content = await _sysLangTextCacheService.GetTranslation("Product", "Name", 123, "en-US");
     /// </summary>
-    /// <param name="entityName">实体名称，如 "Product"</param>
-    /// <param name="fieldName">字段名称，如 "Name"</param>
-    /// <param name="entityId">实体主键ID</param>
-    /// <param name="langCode">语言编码，如 "zh-CN"</param>
-    /// <returns>翻译后的内容（若无则返回 null 或空）</returns>
+    /// <param name="entityName">Entity name, such as "Product"</param>
+    /// <param name="fieldName">Field name, such as "Name"</param>
+    /// <param name="entityId">Entity primary key ID</param>
+    /// <param name="langCode">Language encoding, such as "zh-CN"</param>
+    /// <returns>Translated content (returns null or empty if none)</returns>
     [NonAction]
     public async Task<string> GetTranslation(string entityName, string fieldName, long entityId, string langCode)
     {
@@ -71,19 +71,19 @@ public class SysLangTextCacheService : IDynamicApiController, ITransient
 
         if (!string.IsNullOrEmpty(value))
         {
-            _sysCacheService.Set(key, value, expireSeconds); // 设置过期
+            _sysCacheService.Set(key, value, expireSeconds); // Set expiration
         }
 
         return value;
     }
 
     /// <summary>
-    /// 根据实体类型、字段、主键ID 和语言编码获取翻译实体
+    /// Get translation entities based on entity type, field, primary key ID and language encoding
     /// </summary>
-    /// <param name="entityName">实体名称</param>
-    /// <param name="fieldName">字段名称</param>
-    /// <param name="entityId">实体主键ID</param>
-    /// <param name="langCode">语言编码</param>
+    /// <param name="entityName">Entity name</param>
+    /// <param name="fieldName">Field name</param>
+    /// <param name="entityId">Entity primary key ID</param>
+    /// <param name="langCode">language encoding</param>
     /// <returns></returns>
     [NonAction]
     public async Task<SysLangText> GetTranslationEntity(string entityName, string fieldName, long entityId, string langCode)
@@ -98,32 +98,32 @@ public class SysLangTextCacheService : IDynamicApiController, ITransient
 
         if (!value.IsNullOrEmpty())
         {
-            _sysCacheService.Set(key, value, expireSeconds); // 设置过期
+            _sysCacheService.Set(key, value, expireSeconds); // Set expiration
         }
 
         return value;
     }
 
     /// <summary>
-    /// 【批量翻译获取】<br/>
-    /// 根据实体、字段和一批主键ID获取对应翻译内容，自动从缓存或数据库获取。<br/>
-    /// 适用于：SKU、多商品、批量字典等需要高效批量获取的场景。<br/>
+    /// 【Batch translation acquisition】<br/>
+    /// Obtain the corresponding translation content based on entities, fields and a batch of primary key IDs, and automatically obtain it from the cache or database. <br/>
+    /// Suitable for: SKU, multiple products, batch dictionaries and other scenarios that require efficient batch acquisition. <br/>
     ///
-    /// 【示例】<br/>
+    /// 【Example】<br/>
     /// var dict = await _sysLangTextCacheService.GetTranslations("SKU", "Name", skuIds, "en_US");
     /// </summary>
-    /// <param name="entityName">实体名称</param>
-    /// <param name="fieldName">字段名称</param>
-    /// <param name="entityIds">主键ID集合</param>
-    /// <param name="langCode">语言编码</param>
-    /// <returns>主键ID到翻译内容的字典</returns>
+    /// <param name="entityName">Entity name</param>
+    /// <param name="fieldName">Field name</param>
+    /// <param name="entityIds">Primary key ID collection</param>
+    /// <param name="langCode">language encoding</param>
+    /// <returns>Dictionary from primary key ID to translated content</returns>
     [NonAction]
     public async Task<Dictionary<long, string>> GetTranslations(string entityName, string fieldName, List<long> entityIds, string langCode)
     {
         var result = new Dictionary<long, string>();
-        var missingIds = new HashSet<long>(); // 用 HashSet 提高后面 Contains 的性能
+        var missingIds = new HashSet<long>(); // Use HashSet to improve the performance of subsequent Contains
 
-        foreach (var id in entityIds.Distinct()) // 先去重，防止重复缓存 Key
+        foreach (var id in entityIds.Distinct()) // Remove duplicates first to prevent repeated caching of Keys
         {
             var key = BuildKey(entityName, fieldName, id, langCode);
             var value = _sysCacheService.Get<string>(key);
@@ -148,12 +148,12 @@ public class SysLangTextCacheService : IDynamicApiController, ITransient
 
             foreach (var item in list)
             {
-                if (string.IsNullOrWhiteSpace(item.Content)) continue; // 跳过脏数据
+                if (string.IsNullOrWhiteSpace(item.Content)) continue; // Skip dirty data
 
                 var key = BuildKey(item.EntityName, item.FieldName, item.EntityId, item.LangCode);
                 _sysCacheService.Set(key, item.Content, expireSeconds);
 
-                // 用 TryAdd 防止异常
+                // Use TryAdd to prevent exceptions
                 result[item.EntityId] = item.Content;
             }
         }
@@ -162,20 +162,20 @@ public class SysLangTextCacheService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 【列表翻译】<br/>
-    /// 按配置把同一字段的翻译写回到实体列表中。内部会调用批量翻译接口。<br/>
+    /// 【List translation】<br/>
+    /// Write the translation of the same field back to the entity list as configured. The batch translation interface will be called internally. <br/>
     /// <br/>
-    /// 【示例】<br/>
+    /// 【Example】<br/>
     /// await _sysLangTextCacheService.TranslateList(products, "Product", "Name", p =&gt; p.Id, (p, val) =&gt; p.Name = val, "zh-CN");
     /// </summary>
-    /// <typeparam name="TEntity">实体类型</typeparam>
-    /// <param name="list">待翻译的实体列表</param>
-    /// <param name="entityName">实体名称</param>
-    /// <param name="fieldName">字段名称</param>
-    /// <param name="idSelector">用于取出主键ID的表达式</param>
-    /// <param name="setTranslatedValue">写回翻译值的委托</param>
-    /// <param name="langCode">语言编码</param>
-    /// <returns>翻译后的实体列表（引用传递）</returns>
+    /// <typeparam name="TEntity">Entity type</typeparam>
+    /// <param name="list">List of entities to be translated</param>
+    /// <param name="entityName">Entity name</param>
+    /// <param name="fieldName">Field name</param>
+    /// <param name="idSelector">Expression used to retrieve the primary key ID</param>
+    /// <param name="setTranslatedValue">A delegate that writes back translated values</param>
+    /// <param name="langCode">language encoding</param>
+    /// <returns>Translated entity list (passed by reference)</returns>
     [NonAction]
     public async Task<List<TEntity>> TranslateList<TEntity>(List<TEntity> list, string entityName, string fieldName, Func<TEntity, long> idSelector, Action<TEntity, string> setTranslatedValue, string langCode)
     {
@@ -195,14 +195,14 @@ public class SysLangTextCacheService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 【多字段批量翻译】
-    /// 对列表中的实体对象，按配置的字段映射进行多字段翻译处理。<br/>
-    /// 常用于：菜单多语言、商品多语言、SKU多语言等需要多字段翻译的场景。<br/><br/>
-    /// ✅ 特点：<br/>
-    /// 1️⃣ 可同时翻译同一实体的多个字段（如 Name、Description、Title 等）<br/>
-    /// 2️⃣ 内部先尝试从缓存读取，如缓存未命中则批量查询数据库，并自动写回缓存<br/>
-    /// 3️⃣ 引用传递，直接对原实体对象赋值，无需额外返回<br/><br/>
-    /// 【使用示例】：<br/>
+    /// 【Multi-field batch translation】
+    /// For the entity objects in the list, perform multi-field translation processing according to the configured field mapping. <br/>
+    /// Commonly used in scenarios that require multi-field translation, such as menus in multiple languages, products in multiple languages, SKUs in multiple languages, etc. <br/><br/>
+    /// ✅ Features:<br/>
+    /// 1️⃣ Can translate multiple fields of the same entity at the same time (such as Name, Description, Title, etc.)<br/>
+    /// 2️⃣ Internally try to read from the cache first. If the cache misses, query the database in batches and automatically write back to the cache<br/>
+    /// 3️⃣ Pass by reference, assign value directly to the original entity object without additional return<br/><br/>
+    /// [Usage example]:<br/>
     /// <code>
     /// var fields = new List&lt;LangFieldMap&lt;Product&gt;&gt;
     /// {
@@ -222,11 +222,11 @@ public class SysLangTextCacheService : IDynamicApiController, ITransient
     /// await _sysLangTextCacheService.TranslateMultiFields(products, fields, "zh-CN");
     /// </code>
     /// </summary>
-    /// <typeparam name="TEntity">要翻译的实体类型，如 Product/Menu/SKU 等</typeparam>
-    /// <param name="list">需要翻译的实体对象列表</param>
-    /// <param name="fields">需要翻译的字段映射集合，支持多个字段</param>
-    /// <param name="langCode">语言编码，如 "zh-CN"、"en-US"、"it-IT" 等</param>
-    /// <returns>翻译后的实体列表（引用传递，原对象已直接赋值）</returns>
+    /// <typeparam name="TEntity">Entity type to be translated, such as Product/Menu/SKU, etc.</typeparam>
+    /// <param name="list">List of entity objects that need to be translated</param>
+    /// <param name="fields">A collection of field mappings that need to be translated, supporting multiple fields</param>
+    /// <param name="langCode">Language encoding, such as "zh-CN", "en-US", "it-IT", etc.</param>
+    /// <returns>Translated entity list (passed by reference, the original object has been directly assigned)</returns>
     [NonAction]
     public async Task<List<TEntity>> TranslateMultiFields<TEntity>(
     List<TEntity> list,
@@ -236,7 +236,7 @@ public class SysLangTextCacheService : IDynamicApiController, ITransient
         var keyToField = new Dictionary<string, (TEntity Entity, LangFieldMap<TEntity> FieldMap)>();
         var missingKeys = new List<string>();
 
-        // 先尝试从缓存读取
+        // Try reading from cache first
         foreach (var item in list)
         {
             foreach (var field in fields)
@@ -246,12 +246,12 @@ public class SysLangTextCacheService : IDynamicApiController, ITransient
                 var cached = _sysCacheService.Get<string>(key);
                 if (!string.IsNullOrEmpty(cached))
                 {
-                    // 命中缓存，直接赋值
+                    // Hit the cache and assign directly
                     field.SetTranslatedValue(item, cached);
                 }
                 else
                 {
-                    // 缓存未命中，加入待查表
+                    // Cache miss, add to lookup table
                     keyToField[key] = (item, field);
                     missingKeys.Add(key);
                 }
@@ -260,7 +260,7 @@ public class SysLangTextCacheService : IDynamicApiController, ITransient
 
         if (missingKeys.Any())
         {
-            // 把缺失的 keys 拆解成组合实体
+            // Decompose missing keys into composite entities
             var missingTuples = missingKeys
                 .Select(key =>
                 {
@@ -274,14 +274,14 @@ public class SysLangTextCacheService : IDynamicApiController, ITransient
                 })
                 .ToList();
 
-            // 按 EntityName + FieldName 分组
+            // Group by EntityName + FieldName
             var grouped = missingTuples
                 .GroupBy(x => new { x.EntityName, x.FieldName })
                 .ToList();
 
             var result = new List<SysLangText>();
 
-            // 分批查询，每组单独查询
+            // Query in batches, each group is queried separately
             const int chunkSize = 500;
             foreach (var g in grouped)
             {
@@ -299,7 +299,7 @@ public class SysLangTextCacheService : IDynamicApiController, ITransient
                 }
             }
 
-            // 遍历查询结果，写回实体和缓存
+            // Traverse query results, write back entities and cache
             foreach (var item in result)
             {
                 var key = BuildKey(item.EntityName, item.FieldName, item.EntityId, item.LangCode);
@@ -315,7 +315,7 @@ public class SysLangTextCacheService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 删除缓存
+    /// Delete cache
     /// </summary>
     /// <param name="entityName"></param>
     /// <param name="fieldName"></param>
@@ -328,7 +328,7 @@ public class SysLangTextCacheService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 更新缓存
+    /// Update cache
     /// </summary>
     /// <param name="entityName"></param>
     /// <param name="fieldName"></param>

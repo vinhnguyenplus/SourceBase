@@ -1,18 +1,18 @@
 <template>
 	<div class="sys-jobCluster-container">
-		<el-drawer v-model="state.isVisible" title="作业集群" size="40%">
+		<el-drawer v-model="state.isVisible" title="Job cluster" size="40%">
 			<el-table :data="state.jobClusterList" style="width: 100%;" v-loading="state.loading" border>
-				<el-table-column type="index" label="序号" width="55" align="center" />
-				<el-table-column prop="clusterId" label="集群编号" header-align="center" show-overflow-tooltip />
-				<el-table-column prop="status" label="状态" align="center" show-overflow-tooltip>
+				<el-table-column type="index" label="No" width="55" align="center" />
+				<el-table-column prop="clusterId" label="cluster number" header-align="center" show-overflow-tooltip />
+				<el-table-column prop="status" label="state" align="center" show-overflow-tooltip>
 					<template #default="scope">
-						<el-tag v-if="scope.row.status == 0"> 宕机 </el-tag>
-						<el-tag v-if="scope.row.status == 1"> 工作中 </el-tag>
-						<el-tag v-if="scope.row.status == 2"> 等待被唤醒 </el-tag>
+						<el-tag v-if="scope.row.status == 0"> Crash </el-tag>
+						<el-tag v-if="scope.row.status == 1"> at work </el-tag>
+						<el-tag v-if="scope.row.status == 2"> waiting to be awakened </el-tag>
 					</template>
 				</el-table-column>
-				<el-table-column prop="description" label="描述" header-align="center" show-overflow-tooltip />
-				<el-table-column prop="updatedTime " label="更新时间" align="center" show-overflow-tooltip />
+				<el-table-column prop="description" label="Description" header-align="center" show-overflow-tooltip />
+				<el-table-column prop="updatedTime " label="Update Time" align="center" show-overflow-tooltip />
 			</el-table>
 		</el-drawer>
 	</div>
@@ -35,7 +35,7 @@ onMounted(async () => {
 	handleQuery();
 });
 
-// 查询操作
+// Query operation
 const handleQuery = async () => {
 	state.loading = true;
 	var res = await getAPI(SysJobApi).apiSysJobJobClusterListGet();
@@ -43,12 +43,12 @@ const handleQuery = async () => {
 	state.loading = false;
 };
 
-// 打开页面
+// open page
 const openDrawer = () => {
 	state.isVisible = true;
 };
 
-// 导出对象
+// Export object
 defineExpose({ openDrawer });
 </script>
 

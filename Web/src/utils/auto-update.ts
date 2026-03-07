@@ -1,14 +1,14 @@
 /**
- *通过监听当前页面的JS的SRC来判断当前网页是否有更新
- *使用方法   main.js   import checkUpdate from "/@/utils/auto-update";
+ *By listening to the current page'sJSofSRCTo determine the current webpageYesnohaveUpdate
+ *Instructions for use   main.js   import checkUpdate from "/@/utils/auto-update";
  */
 
-let lastSrcs: any[] | null; //上次js地址集合
-// const scriptReg = /(?<=<script.*src=["']).*?(?=["'])/gm; //IOS 不支持断言匹配
+let lastSrcs: any[] | null; // Last js address collection
+// const scriptReg = /(?<=<script.*src=["']).*?(?=["'])/gm; //IOS does not support assertion matching
 const scriptReg = /<script.*?src=['"](.*?)['"]/gm;
 
 /**
- * 获取最新的js集合
+ * ObtainlatestjsSet
  * @returns
  */
 async function extractNewScripts() {
@@ -18,7 +18,7 @@ async function extractNewScripts() {
 	return result;
 }
 /**
- * 判断是否有更新
+ * JudgmentYesnohaveUpdate
  * @returns
  */
 async function checkUpdate() {
@@ -43,7 +43,7 @@ async function checkUpdate() {
 }
 
 /**
- * 定时器定时检测是否更新，有更新则执行回调函数
+ * SettimeDetermined by the devicetimeDetectionYesnoUpdate，haveUpdateThen execute the callback function
  * @param callbackFn
  * @param interval
  */

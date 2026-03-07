@@ -1,15 +1,15 @@
-﻿// Admin.NET 项目的版权、商标、专利和其他相关权利均受相应法律法规的保护。使用本项目应遵守相关法律法规和许可证的要求。
+﻿// The copyright, trademark, patent and other related rights of the Admin.NET project are protected by corresponding laws and regulations. Use of this project shall comply with relevant laws, regulations and license requirements.
 //
-// 本项目主要遵循 MIT 许可证和 Apache 许可证（版本 2.0）进行分发和使用。许可证位于源代码树根目录中的 LICENSE-MIT 和 LICENSE-APACHE 文件。
+// This project is distributed and used primarily under the MIT License and the Apache License (version 2.0). The license is located in the LICENSE-MIT and LICENSE-APACHE files in the root of the source tree.
 //
-// 不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！
+// This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project!
 
 using System.Text.Json;
 
 namespace Admin.NET.Core;
 
 /// <summary>
-/// Sqlsugar 动态查询扩展方法
+/// Sqlsugar dynamic query extension method
 /// </summary>
 public static class SqlSugarExtension
 {
@@ -292,10 +292,10 @@ public static class SqlSugarExtension
         return Expression.Call(selectorExpr, method, constant);
     }
 
-    #region 视图操作
+    #region ViewOperation
 
     /// <summary>
-    /// 获取映射SQL语句, 用于创建视图
+    /// Get the mapping SQL statement used to create the view
     /// </summary>
     /// <param name="queryable"></param>
     /// <typeparam name="T"></typeparam>
@@ -304,35 +304,35 @@ public static class SqlSugarExtension
     {
         ArgumentNullException.ThrowIfNull(queryable);
 
-        // 获取实体映射信息
+        // Get entity mapping information
         var entityInfo = queryable.Context.EntityMaintenance.GetEntityInfo(typeof(T));
         if (entityInfo?.Columns == null || entityInfo.Columns.Count == 0) return queryable.ToSqlString();
 
-        // 构建需要替换的字段名映射（只处理实际有差异的字段）
+        // Build a mapping of field names that need to be replaced (only fields with actual differences are processed)
         var nameMap = entityInfo.Columns
             .Where(c => !string.Equals(c.PropertyName, c.DbColumnName, StringComparison.OrdinalIgnoreCase))
             .ToDictionary(k => k.PropertyName.ToLower(), v => v.DbColumnName, StringComparer.OrdinalIgnoreCase);
         if (nameMap.Count == 0) return queryable.ToSqlString();
 
-        // 预编译正则表达式提升性能
+        // Precompiled regular expressions improve performance
         var sql = queryable.ToSqlString();
         foreach (var kv in nameMap)
         {
-            sql = Regex.Replace(sql, $@"\b{kv.Key}\b", kv.Value ?? kv.Key, RegexOptions.IgnoreCase | RegexOptions.Compiled); // 单词边界匹配
+            sql = Regex.Replace(sql, $@"\b{kv.Key}\b", kv.Value ?? kv.Key, RegexOptions.IgnoreCase | RegexOptions.Compiled); // word boundary matching
         }
         return sql;
     }
 
-    #endregion 视图操作
+    #endregion ViewOperation
 
     /// <summary>
-    /// 列表转换为树形结构
+    /// Convert list to tree structure
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    /// <param name="source">列表数据</param>
-    /// <param name="childrenSelector">设置子节点列表。例如：item => item.Children</param>
-    /// <param name="parentIdSelector">设置元素的父级 Id。例如：item => item.ParentId</param>
-    /// <param name="rootParentId">根节点的父级 Id，默认为 0 </param>
+    /// <param name="source">List data</param>
+    /// <param name="childrenSelector">Set the list of child nodes. For example: item => item.Children</param>
+    /// <param name="parentIdSelector">Sets the element's parent ID. For example: item => item.ParentId</param>
+    /// <param name="rootParentId">The parent ID of the root node, default is 0 </param>
     /// <returns></returns>
     /// <exception cref="Exception"></exception>
     public static IEnumerable<T> ToTree<T>(
@@ -354,11 +354,11 @@ public static class SqlSugarExtension
             }).ToList();
         }
 
-        // 需要提供获取Id的方法，可以用反射或者自己传参数
+        // It is necessary to provide a method to obtain the ID. You can use reflection or pass parameters yourself.
         long GetId(T item)
         {
             var prop = typeof(T).GetProperty("Id");
-            if (prop == null) throw new Exception("没有找到Id属性");
+            if (prop == null) throw new Exception("Id attribute not found");
             return (long)prop.GetValue(item);
         }
 

@@ -4,7 +4,7 @@
 			<div class="card-header">
 				<div class="tree-h-flex">
 					<div class="tree-h-left">
-						<el-input :prefix-icon="Search" v-model="filterText" placeholder="行政区域名称" />
+						<el-input :prefix-icon="Search" v-model="filterText" placeholder="Administrative region name" />
 					</div>
 					<div class="tree-h-right">
 						<el-dropdown @command="handleCommand">
@@ -15,10 +15,10 @@
 							</el-button>
 							<template #dropdown>
 								<el-dropdown-menu>
-									<el-dropdown-item command="expandAll">全部展开</el-dropdown-item>
-									<el-dropdown-item command="collapseAll">全部折叠</el-dropdown-item>
-									<el-dropdown-item command="rootNode">根节点</el-dropdown-item>
-									<el-dropdown-item command="refresh">刷新</el-dropdown-item>
+									<el-dropdown-item command="expandAll">Expand all</el-dropdown-item>
+									<el-dropdown-item command="collapseAll">Collapse all</el-dropdown-item>
+									<el-dropdown-item command="rootNode">root node</el-dropdown-item>
+									<el-dropdown-item command="refresh">Refresh</el-dropdown-item>
 								</el-dropdown-menu>
 							</template>
 						</el-dropdown>
@@ -87,25 +87,25 @@ const loadNode = async (node: any, resolve: any) => {
 };
 
 /**
- * 获取选中节点的Keys
- * @returns 选中节点的Key数组
+ * ObtainSelectinof the nodeKeys
+ * @returns Selectinof the nodeKeynumbergroup
  */
 const getCheckedKeys = () => {
     return treeRef.value!.getCheckedKeys();
 };
 
 /**
- * 获取当前选中节点
- * @returns 当前选中节点
+ * ObtainCurrently selectedinNode
+ * @returns Currently selectedinNode
  */
 const getCurrentNode = () => {
     return treeRef.value!.getCurrentNode();
 };
 
 /**
- * 获取当前选中节点的路径数组
- * （从根节点到当前节点，按下标顺序排列）
- * @returns {Array<{ id: number, name: string }>} 路径数组
+ * ObtainCurrently selectedinNumber of paths of the nodegroup
+ * （fromroot nodeTo the current node，Arrange in index order）
+ * @returns {Array<{ id: number, name: string }>} Number of pathsgroup
  */
 const getCurrentPath = () => {
     const currentNode = getCurrentNode();
@@ -121,7 +121,7 @@ const getCurrentPath = () => {
     return path;
 };
 
-// 递归获取当前选中级联数据
+// Recursively obtain the currently selected cascade data
 const getCascaderData = (child: any) => {
     const parent = treeRef.value!.getNode(child.pid)?.data as SysRegion & { child?: SysRegion };
     if(!parent) return child;
@@ -155,13 +155,13 @@ const handleCommand = async (command: string | number | object) => {
 	}
 };
 
-// 与父组件的交互逻辑
+// Interaction logic with parent component
 const emits = defineEmits(['node-click']);
 const nodeClick = (node: any) => {
 	emits('node-click', { id: node.id, name: node.name });
 };
 
-// 导出对象
+// Export object
 defineExpose({ initTreeData, getCheckedKeys, getCurrentNode, getCurrentPath });
 </script>
 

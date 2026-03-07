@@ -1,8 +1,8 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Admin.NET 通用权限开发平台
- * 让 .NET 开发更简单、更通用、更流行。整合最新技术，模块插件式开发，前后端分离，开箱即用。<br/><u><b><font color='FF0000'> 👮不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！</font></b></u>
+ * Admin.NET General Permission Development Platform
+ * let .NET Develop more simply、More general、More popular。wholeIn line with the latest technology，Modular Plugin-Based Development，Frontend and backendpointsLeave，Ready to use out of the box。<br/><u><b><font color='FF0000'> 👮This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project! </font></b></u>
  *
  * OpenAPI spec version: 1.0.0
  * 
@@ -22,7 +22,7 @@ import { MessageTypeEnum } from './message-type-enum';
 export interface MessageInput {
 
     /**
-     * 接收者用户Id
+     * ReceiverUserId
      *
      * @type {number}
      * @memberof MessageInput
@@ -30,7 +30,7 @@ export interface MessageInput {
     receiveUserId?: number;
 
     /**
-     * 接收者名称
+     * Receivername
      *
      * @type {string}
      * @memberof MessageInput
@@ -38,7 +38,7 @@ export interface MessageInput {
     receiveUserName?: string | null;
 
     /**
-     * 用户ID列表
+     * User IDList
      *
      * @type {Array<number>}
      * @memberof MessageInput
@@ -46,7 +46,7 @@ export interface MessageInput {
     userIds?: Array<number> | null;
 
     /**
-     * 消息标题
+     * informationtitle
      *
      * @type {string}
      * @memberof MessageInput
@@ -60,7 +60,7 @@ export interface MessageInput {
     messageType?: MessageTypeEnum;
 
     /**
-     * 消息内容
+     * informationcontent
      *
      * @type {string}
      * @memberof MessageInput
@@ -68,7 +68,7 @@ export interface MessageInput {
     message?: string | null;
 
     /**
-     * 发送者Id
+     * SenderId
      *
      * @type {string}
      * @memberof MessageInput
@@ -76,7 +76,7 @@ export interface MessageInput {
     sendUserId?: string | null;
 
     /**
-     * 发送者名称
+     * Sendername
      *
      * @type {string}
      * @memberof MessageInput
@@ -84,7 +84,7 @@ export interface MessageInput {
     sendUserName?: string | null;
 
     /**
-     * 发送时间
+     * Sendtimespace
      *
      * @type {Date}
      * @memberof MessageInput

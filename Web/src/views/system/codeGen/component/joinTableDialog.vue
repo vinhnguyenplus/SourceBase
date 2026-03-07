@@ -10,35 +10,35 @@
 			<el-form :model="state.ruleForm" ref="ruleFormRef" label-width="auto">
 				<el-row :gutter="35">
 					<el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="mb20">
-						<el-form-item label="库定位器" prop="fkConfigId" :rules="[{ required: true, message: '库不能为空', trigger: 'blur' }]">
-							<el-select v-model="state.ruleForm.fkConfigId" placeholder="库名" filterable clearable @change="DbChanged()" class="w100">
+						<el-form-item label="library locator" prop="fkConfigId" :rules="[{ required: true, message: 'The library cannot be empty', trigger: 'blur' }]">
+							<el-select v-model="state.ruleForm.fkConfigId" placeholder="Library name" filterable clearable @change="DbChanged()" class="w100">
 								<el-option v-for="item in state.dbData" :key="item.configId" :label="item.dbNickName" :value="item.configId" />
 							</el-select>
 						</el-form-item>
 					</el-col>
 					<el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="mb20">
-						<el-form-item label="数据库表" prop="fkTableName" :rules="[{ required: true, message: '数据表不能为空', trigger: 'blur' }]">
+						<el-form-item label="database table" prop="fkTableName" :rules="[{ required: true, message: 'The data table cannot be empty', trigger: 'blur' }]">
 							<el-select v-model="state.ruleForm.fkTableName" class="w100" filterable clearable @change="TableChanged()">
 								<el-option v-for="item in state.tableData" :key="item.entityName" :label="item.tableName + ' [' + item.tableComment + ']'" :value="item.tableName" />
 							</el-select>
 						</el-form-item>
 					</el-col>
 					<el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="mb20">
-						<el-form-item label="显示字段" prop="fkDisplayColumnList" :rules="[{ required: true, message: '显示字段不能为空', trigger: 'blur' }]">
+						<el-form-item label="DisplayField" prop="fkDisplayColumnList" :rules="[{ required: true, message: 'Display field cannot be empty', trigger: 'blur' }]">
 							<el-select v-model="state.ruleForm.fkDisplayColumnList" multiple filterable clearable class="w100">
 								<el-option v-for="item in state.columnData" :key="item.propertyName" :label="item.propertyName + ' [' + item.columnComment + ']'" :value="item.propertyName" />
 							</el-select>
 						</el-form-item>
 					</el-col>
 					<el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="mb20">
-						<el-form-item label="值&ensp;字&ensp;段" prop="fkLinkColumnName" :rules="[{ required: true, message: '值字段不能为空', trigger: 'blur' }]">
+						<el-form-item label="Value Field" prop="fkLinkColumnName" :rules="[{ required: true, message: 'The value field cannot be empty', trigger: 'blur' }]">
 							<el-select v-model="state.ruleForm.fkLinkColumnName" filterable clearable class="w100">
 								<el-option v-for="item in state.columnData" :key="item.propertyName" :label="item.propertyName + ' [' + item.columnComment + ']'" :value="item.propertyName" />
 							</el-select>
 						</el-form-item>
 					</el-col>
 					<el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="mb20" v-if="state.ruleForm.effectType == 'ApiTreeSelector'">
-						<el-form-item label="父级字段" prop="pidColumn" :rules="[{ required: true, message: '父级字段不能为空', trigger: 'blur' }]">
+						<el-form-item label="Parent field" prop="pidColumn" :rules="[{ required: true, message: 'Parent field cannot be empty', trigger: 'blur' }]">
 							<el-select v-model="state.ruleForm.pidColumn" filterable clearable class="w100">
 								<el-option v-for="item in state.columnData" :key="item.propertyName" :label="item.propertyName + ' [' + item.columnComment + ']'" :value="item.propertyName" />
 							</el-select>
@@ -48,8 +48,8 @@
 			</el-form>
 			<template #footer>
 				<span class="dialog-footer">
-					<el-button @click="cancel">取 消</el-button>
-					<el-button type="primary" @click="submit">确 定</el-button>
+					<el-button @click="cancel">Cancel</el-button>
+					<el-button type="primary" @click="submit">Confirm</el-button>
 				</span>
 			</template>
 		</el-dialog>
@@ -104,7 +104,7 @@ const getColumnInfoList = async () => {
       .then(res => res.data.result ?? []);
 };
 
-// 打开弹窗
+// Open pop-up window
 const openDialog = async (row: any, title: string) => {
   await getDbList();
   state.dialogTitle = title;
@@ -119,7 +119,7 @@ const openDialog = async (row: any, title: string) => {
 	}
 };
 
-// 关闭弹窗
+// Close pop-up window
 const closeDialog = () => {
   state.ruleForm.fkColumnNetType = state.columnData.find(x => x.columnName == state.ruleForm.fkLinkColumnName)?.netType;
   state.ruleForm.fkEntityName = state.tableData.find(x => x.tableName == state.ruleForm.fkTableName)?.entityName;
@@ -128,7 +128,7 @@ const closeDialog = () => {
 	cancel();
 };
 
-// 取消
+// Cancel
 const cancel = () => {
 	state.isShowDialog = false;
 	state.dbData.value = [];
@@ -136,7 +136,7 @@ const cancel = () => {
 	state.columnData.value = [];
 };
 
-// 提交
+// submit
 const submit = () => {
 	ruleFormRef.value.validate(async (valid: boolean) => {
 		if (!valid) return;
@@ -144,6 +144,6 @@ const submit = () => {
 	});
 };
 
-// 导出对象
+// Export object
 defineExpose({ openDialog });
 </script>

@@ -19,9 +19,9 @@ using Yitter.IdGenerator;
 namespace Admin.NET.Core;
 
 /// <summary>
-/// 动态作业任务
+/// Dynamic job tasks
 /// </summary>
-[JobDetail("你的作业编号")]
+[JobDetail("Your homework number")]
 public class DynamicJob : IJob
 {
     private readonly IServiceProvider _serviceProvider;
@@ -35,14 +35,14 @@ public class DynamicJob : IJob
     {
         using var serviceScope = _serviceProvider.CreateScope();
         
-        // 获取用户仓储
+        // Get user repository
         // var rep = serviceScope.ServiceProvider.GetService<SqlSugarRepository<SysUser>>();
 
-        // 请求网址
+        // Request URL
         // var result = await "http://www.baidu.com".GetAsStringAsync();
         // Console.WriteLine(result);
 
-        // 日志
-        // Log.Information("日志消息");
+        // log
+        // Log.Information("Log message");
     }
 }`;

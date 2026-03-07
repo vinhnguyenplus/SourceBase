@@ -15,44 +15,44 @@ import { ElMessage } from 'element-plus';
 import { getAPI } from '/@/utils/axios-utils';
 import { SysFileApi } from '/@/api-services/api';
 
-// 定义父组件传过来的值
+// Define the value passed by the parent component
 const props = defineProps({
-	// 是否禁用
+	// Whether to disable
 	disable: {
 		type: Boolean,
 		default: () => false,
 	},
-	// 内容框默认 placeholder
+	// Content box default placeholder
 	placeholder: {
 		type: String,
-		default: () => '请输入内容...',
+		default: () => 'Please entercontent...',
 	},
 	// https://www.wangeditor.com/v5/getting-started.html#mode-%E6%A8%A1%E5%BC%8F
-	// 模式，可选 <default|simple>，默认 default
+	// Mode, optional <default|simple>, default default
 	mode: {
 		type: String,
 		default: () => 'default',
 	},
-	// 高度
+	// high
 	height: {
 		type: String,
 		default: () => '310px',
 	},
-	// 双向绑定，用于获取 editor.getHtml()
+	// Two-way binding, used to obtain editor.getHtml()
 	getHtml: String,
-	// 双向绑定，用于获取 editor.getText()
+	// Two-way binding, used to obtain editor.getText()
 	getText: String,
 });
 
-// 定义子组件向父组件传值/事件
+// Define child components to pass values/events to parent components
 const emit = defineEmits(['update:getHtml', 'update:getText']);
 
-// 定义变量内容
+// Define variable content
 const editorRef = shallowRef();
 const state = reactive({
 	editorConfig: {
 		placeholder: props.placeholder,
-		// 菜单配置
+		// Menu configuration
 		MENU_CONF: {
 			uploadImage: {
 				fieldName: 'file',
@@ -61,7 +61,7 @@ const state = reactive({
 						if (data.type == 'success' && data.result) {
 							editorRef.value.insertNode({ type: 'image', src: data.result.url, alt: data.result.fileName, href: data.result.url, children: [{ text: '' }] })
 						} else {
-							ElMessage.error('上传失败！')
+							ElMessage.error('Upload failed!')
 						}
 					})
 				},
@@ -69,7 +69,7 @@ const state = reactive({
 			insertImage: {
 				checkImage(src: string, alt: string, href: string): boolean | string | undefined {
 					if (src.indexOf('http') !== 0) {
-						return '图片网址必须以 http/https 开头';
+						return 'Image URL must start with http/https';
 					}
 					return true;
 				},
@@ -79,22 +79,22 @@ const state = reactive({
 	editorVal: props.getHtml,
 });
 
-// 编辑器回调函数
+// Editor callback function
 const handleCreated = (editor: IDomEditor) => {
 	editorRef.value = editor;
 };
-// 编辑器内容改变时
+// When the editor content changes
 const handleChange = (editor: IDomEditor) => {
 	emit('update:getHtml', editor.getHtml());
 	emit('update:getText', editor.getText());
 };
-// 页面销毁时
+// When the page is destroyed
 onBeforeUnmount(() => {
 	const editor = editorRef.value;
 	if (editor == null) return;
 	editor.destroy();
 });
-// 监听是否禁用改变
+// Listen for disable changes
 // https://gitee.com/lyt-top/vue-next-admin/issues/I4LM7I
 watch(
 	() => props.disable,
@@ -107,7 +107,7 @@ watch(
 		deep: true,
 	}
 );
-// 监听双向绑定值改变，用于回显
+// Monitor changes in two-way binding values ​​for echoing
 watch(
 	() => props.getHtml,
 	(val) => {
@@ -118,7 +118,7 @@ watch(
 	}
 );
 
-// 暴露 editorRef
+// expose editorRef
 defineExpose({
 	ref: editorRef,
 });
@@ -133,19 +133,19 @@ defineExpose({
 		}
 	}
 	.w-e-text-container {
-		// 文本框里面的层级调低
+		// Lower the level inside the text box
 		//z-index: 3 !important;
 	}
 	.w-e-toolbar {
-		// 给工具栏换行
+		// Wrap toolbar
 		flex-wrap: wrap;
 		z-index: 4 !important;
 	}
 	.w-e-menu {
-		// 最重要的一句代码
+		// The most important code
 		z-index: auto !important;
 		.w-e-droplist {
-			// 触发工具栏后的显示框调高
+			// Increase the display frame after triggering the toolbar
 			z-index: 2 !important;
 		}
 	}

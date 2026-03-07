@@ -2,19 +2,19 @@
 	<div class="sys-difflog-container">
 		<el-card shadow="hover" :body-style="{ padding: 5 }">
 			<el-form :model="state.queryParams" ref="queryForm" :inline="true">
-				<el-form-item label="租户" v-if="userStore.userInfos.accountType == 999">
+				<el-form-item label="tenant" v-if="userStore.userInfos.accountType == 999">
 					<TenantSelect v-model="state.queryParams.tenantId" clearable />
 				</el-form-item>
-				<el-form-item label="开始时间">
-					<el-date-picker v-model="state.queryParams.startTime" type="datetime" placeholder="开始时间" value-format="YYYY-MM-DD HH:mm:ss" :shortcuts="shortcuts" />
+				<el-form-item label="start time">
+					<el-date-picker v-model="state.queryParams.startTime" type="datetime" placeholder="start time" value-format="YYYY-MM-DD HH:mm:ss" :shortcuts="shortcuts" />
 				</el-form-item>
-				<el-form-item label="结束时间">
-					<el-date-picker v-model="state.queryParams.endTime" type="datetime" placeholder="结束时间" value-format="YYYY-MM-DD HH:mm:ss" :shortcuts="shortcuts" />
+				<el-form-item label="end time">
+					<el-date-picker v-model="state.queryParams.endTime" type="datetime" placeholder="end time" value-format="YYYY-MM-DD HH:mm:ss" :shortcuts="shortcuts" />
 				</el-form-item>
 				<el-form-item>
 					<el-button-group>
-						<el-button type="primary" icon="ele-Search" @click="handleQuery" v-auth="'sysDifflog:page'"> 查询 </el-button>
-						<el-button icon="ele-Refresh" @click="resetQuery"> 重置 </el-button>
+						<el-button type="primary" icon="ele-Search" @click="handleQuery" v-auth="'sysDifflog:page'"> Query </el-button>
+						<el-button icon="ele-Refresh" @click="resetQuery"> reset </el-button>
 					</el-button-group>
 				</el-form-item>
 			</el-form>
@@ -24,48 +24,48 @@
 			<el-table :data="state.logData" style="width: 100%" v-loading="state.loading" border>
         <el-table-column type="expand">
           <template #default="scope">
-            <el-card header="差异数据" style="width: 100%; margin: 5px">
+            <el-card header="differential data" style="width: 100%; margin: 5px">
               <el-table :data="item.columns" v-for="item in scope.row.diffData" :key="item.tableName" :span-method="(data: any) => diffTableSpanMethod(data, item)" border style="width: 100%">
-                <el-table-column label="表名" width="200">
+                <el-table-column label="Table Name" width="200">
                   <template #default>
                     {{item.tableName}}
                     <br/>
                     {{item.tableDescription}}
                   </template>
                 </el-table-column>
-                <el-table-column prop="columnName" label="字段描述" width="300" :formatter="(row: any) => `${row.columnName} - ${row.columnDescription}`" />
-                <el-table-column prop="beforeValue" label="修改前" show-overflow-tooltip>
+                <el-table-column prop="columnName" label="FieldDescription" width="300" :formatter="(row: any) => `${row.columnName} - ${row.columnDescription}`" />
+                <el-table-column prop="beforeValue" label="Before modification" show-overflow-tooltip>
                   <template #default="columnScope">
                     <pre v-html="markDiff(columnScope.row.beforeValue, columnScope.row.afterValue, true)" />
                   </template>
                 </el-table-column>
-                <el-table-column prop="afterValue" label="修改后" show-overflow-tooltip>
+                <el-table-column prop="afterValue" label="After modification" show-overflow-tooltip>
                   <template #default="columnScope">
                     <pre v-html="markDiff(columnScope.row.beforeValue, columnScope.row.afterValue, false)" />
                   </template>
                 </el-table-column>
               </el-table>
               <el-table :data="[ { sql: scope.row.sql } ]" border style="width: 100%">
-                <el-table-column prop="sql" label="SQL语句">
+                <el-table-column prop="sql" label="SQL statement">
                   <template #default>
                     <pre class="sql" v-html="formatSql(scope.row.sql)"></pre>
                   </template>
                 </el-table-column>
               </el-table>
               <el-table :data="scope.row.parameters" border style="width: 100%">
-                <el-table-column prop="parameterName" label="参数名" width="200" />
-                <el-table-column prop="typeName" label="类型" width="100" />
-                <el-table-column prop="value" label="值" />
+                <el-table-column prop="parameterName" label="Parameter Name" width="200" />
+                <el-table-column prop="typeName" label="Type" width="100" />
+                <el-table-column prop="value" label="value" />
               </el-table>
             </el-card>
           </template>
         </el-table-column>
-				<el-table-column type="index" label="序号" width="55" align="center" />
-				<el-table-column prop="diffType" label="差异操作" header-align="center" show-overflow-tooltip />
-				<el-table-column prop="elapsed" label="耗时(ms)" header-align="center" show-overflow-tooltip />
-				<el-table-column prop="message" label="日志消息" header-align="center" show-overflow-tooltip />
-				<el-table-column prop="businessData" label="业务对象" header-align="center" show-overflow-tooltip />
-				<el-table-column prop="createTime" label="操作时间" align="center" show-overflow-tooltip />
+				<el-table-column type="index" label="No" width="55" align="center" />
+				<el-table-column prop="diffType" label="difference operation" header-align="center" show-overflow-tooltip />
+				<el-table-column prop="elapsed" label="Time taken(ms)" header-align="center" show-overflow-tooltip />
+				<el-table-column prop="message" label="Log message" header-align="center" show-overflow-tooltip />
+				<el-table-column prop="businessData" label="business object" header-align="center" show-overflow-tooltip />
+				<el-table-column prop="createTime" label="Operating time" align="center" show-overflow-tooltip />
 			</el-table>
 			<el-pagination
 				v-model:currentPage="state.tableParams.page"
@@ -114,7 +114,7 @@ onMounted(async () => {
 	handleQuery();
 });
 
-// 查询操作
+// Query operation
 const handleQuery = async () => {
 	if (state.queryParams.startTime == null) state.queryParams.startTime = undefined;
 	if (state.queryParams.endTime == null) state.queryParams.endTime = undefined;
@@ -131,26 +131,26 @@ const handleQuery = async () => {
 	state.loading = false;
 };
 
-// 重置操作
+// reset operation
 const resetQuery = () => {
 	state.queryParams.startTime = undefined;
 	state.queryParams.endTime = undefined;
 	handleQuery();
 };
 
-// 改变页面容量
+// Change page capacity
 const handleSizeChange = (val: number) => {
 	state.tableParams.pageSize = val;
 	handleQuery();
 };
 
-// 改变页码序号
+// Change page number
 const handleCurrentChange = (val: number) => {
 	state.tableParams.page = val;
 	handleQuery();
 };
 
-// 合并差异表格表名列
+// Merge difference table table names
 const diffTableSpanMethod = ({columnIndex, rowIndex}: any, itme: any) => {
   if (columnIndex === 0) {
     if (rowIndex === 0) {
@@ -168,27 +168,27 @@ const diffTableSpanMethod = ({columnIndex, rowIndex}: any, itme: any) => {
 }
 
 const formatSql = (sql: string) => {
-  // 移除多余的空格
+  // Remove extra spaces
   let formatted = sql.replace(/\s+/g, ' ').trim();
 
-  // 替换反引号包裹的字段
+  // Replace fields wrapped in backticks
   formatted = formatted.replace(/`([^`]+)`/g, '<span class="sql-backtick">`$1`</span>');
 
-  // 替换@参数
+  // Replace @parameter
   formatted = formatted.replace(/(@\w+)/g, '<span class="sql-param">$1</span>');
 
-  // 替换SQL关键字
+  // Replace SQL keywords
   formatted = formatted.replace(/\b(INSERT|DELETE|UPDATE|SELECT|FROM|SET|JOIN|ON|AND|OR|IN|NOT|IS|NULL|WHERE|TRUE|FALSE|LIKE|ORDER BY|GROUP BY|HAVING|LIMIT|AS|WITH|CASE|WHEN|THEN|ELSE|END)\b/g, '<span class="sql-keyword">$1</span>');
 
-  // 智能换行
-  // 在SET和VALUES后面添加换行
+  // Smart line wrapping
+  // Add newline after SET and VALUES
   formatted = formatted.replace(/(SET|VALUES)(?=\s)/g, '$1\n    ');
-  // 在逗号后面添加换行，除非是最后一个逗号
+  // Add a newline after a comma, unless it's the last comma
   formatted = formatted.replace(/,(?![^]*?,\s*$)(?=[^\s])/g, ',\n    ');
-  // 在WHERE前添加换行，如果WHERE前面不是逗号
+  // Add a newline before WHERE, if WHERE is not preceded by a comma
   formatted = formatted.replace(/([\s\S]+)(WHERE)/g, '$1\n$2');
 
-  // 移除由于换行添加的多余空格
+  // Remove extra spaces added due to line breaks
   formatted = formatted.replace(/\n\s*\n/g, '\n');
 
   return formatted;
@@ -249,11 +249,11 @@ function markDiff(oldData: any, newData: any, returnOld: boolean): string {
 
 const shortcuts = [
 	{
-		text: '今天',
+		text: 'Today',
 		value: new Date(),
 	},
 	{
-		text: '昨天',
+		text: 'yesterday',
 		value: () => {
 			const date = new Date();
 			date.setTime(date.getTime() - 3600 * 1000 * 24);
@@ -261,7 +261,7 @@ const shortcuts = [
 		},
 	},
 	{
-		text: '上周',
+		text: 'last week',
 		value: () => {
 			const date = new Date();
 			date.setTime(date.getTime() - 3600 * 1000 * 24 * 7);

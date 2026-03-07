@@ -21,7 +21,7 @@
 				</div>
 				<div class="layout-lock-screen-date-top">
 					<SvgIcon name="ele-Top" />
-					<div class="layout-lock-screen-date-top-text">上滑解锁</div>
+					<div class="layout-lock-screen-date-top-text">Swipe up to unlock</div>
 				</div>
 			</div>
 			<transition name="el-zoom-in-center">
@@ -33,10 +33,10 @@
 						<div class="layout-lock-screen-login-box-name">{{ userInfos.account }}</div>
 						<div v-if="state.showMessage" class="layout-lock-screen-login-box-message">
 							<span>{{ state.message }}</span>
-							<el-button style="max-width: 80px; margin-top: 20px" size="default" @click="hideMessage"> 确认 </el-button>
+							<el-button style="max-width: 80px; margin-top: 20px" size="default" @click="hideMessage"> Confirm </el-button>
 						</div>
 						<div v-else class="layout-lock-screen-login-box-value">
-							<el-input placeholder="请输入密码" type="password" ref="layoutLockScreenInputRef" size="default" v-model="state.lockScreenPassword" @keyup.enter.native.stop="onLockScreenSubmit()">
+							<el-input placeholder="Please enter password" type="password" ref="layoutLockScreenInputRef" size="default" v-model="state.lockScreenPassword" @keyup.enter.native.stop="onLockScreenSubmit()">
 								<template #append>
 									<el-button @click="onLockScreenSubmit">
 										<el-icon class="el-input__icon">
@@ -69,7 +69,7 @@ import { sm2 } from 'sm-crypto-v2';
 import { feature, getAPI } from '/@/utils/axios-utils';
 import { SysAuthApi } from '/@/api-services';
 
-// 定义变量内容
+// Define variable content
 const layoutLockScreenDateRef = ref<HtmlType>();
 const layoutLockScreenInputRef = ref();
 const storesThemeConfig = useThemeConfig();
@@ -96,27 +96,27 @@ const state = reactive({
 	showMessage: false,
 });
 
-// 鼠标按下 pc
+// mouse press pc
 const onDownPc = (down: MouseEvent) => {
 	state.isFlags = true;
 	state.downClientY = down.clientY;
 };
-// 鼠标按下 app
+// Mouse press app
 const onDownApp = (down: TouchEvent) => {
 	state.isFlags = true;
 	state.downClientY = down.touches[0].clientY;
 };
-// 鼠标移动 pc
+// mouse movement pc
 const onMovePc = (move: MouseEvent) => {
 	state.moveDifference = move.clientY - state.downClientY;
 	onMove();
 };
-// 鼠标移动 app
+// mouse movement app
 const onMoveApp = (move: TouchEvent) => {
 	state.moveDifference = move.touches[0].clientY - state.downClientY;
 	onMove();
 };
-// 鼠标移动事件
+// mouse move event
 const onMove = () => {
 	if (state.isFlags) {
 		const el = <HTMLElement>state.querySelectorEl;
@@ -136,7 +136,7 @@ const onMove = () => {
 		}
 	}
 };
-// 鼠标松开
+// Release mouse
 const onEnd = () => {
 	state.isFlags = false;
 	state.transparency = 1;
@@ -144,30 +144,30 @@ const onEnd = () => {
 		(<HTMLElement>state.querySelectorEl).setAttribute('style', `top:0px;opacity:1;transition:all 0.3s ease;`);
 	}
 };
-// 获取要拖拽的初始元素
+// Get the initial element to be dragged
 const initGetElement = () => {
 	nextTick(() => {
 		state.querySelectorEl = layoutLockScreenDateRef.value;
 	});
 };
-// 时间初始化
+// Time initialization
 const initTime = () => {
 	state.time.hm = formatDate(new Date(), 'HH:MM');
 	state.time.s = formatDate(new Date(), 'SS');
-	state.time.mdq = formatDate(new Date(), 'mm月dd日，WWW');
+	state.time.mdq = formatDate(new Date(), 'mm/dd, WWW');
 };
-// 时间初始化定时器
+// Time initialization timer
 const initSetTime = () => {
 	initTime();
 	state.setIntervalTime = window.setInterval(() => {
 		initTime();
 	}, 1000);
 };
-// 锁屏时间定时器
+// Lock screen timer
 const initLockScreen = () => {
 	if (themeConfig.value.isLockScreen) {
 		state.isShowLockScreenIntervalTime = window.setInterval(() => {
-			// 锁屏时间为null重置为300秒，防止白屏
+			// The lock screen time is null and reset to 300 seconds to prevent a white screen.
 			if (themeConfig.value.lockScreenTime == null) {
 				themeConfig.value.lockScreenTime = 300;
 				setLocalThemeConfig();
@@ -184,23 +184,23 @@ const initLockScreen = () => {
 		clearInterval(state.isShowLockScreenIntervalTime);
 	}
 };
-// 存储布局配置
+// Store layout configuration
 const setLocalThemeConfig = () => {
 	themeConfig.value.isDrawer = false;
 	Local.set('themeConfig', themeConfig.value);
 };
-// 密码输入点击事件
+// Password input click event
 const onLockScreenSubmit = async () => {
 	if (state.lockScreenPassword) {
 		try {
-			// 用户信息不存在时直接解锁（清理缓存后）
+			// Unlock directly when user information does not exist (after clearing cache)
 			if (userInfos.value.account === void 0) {
 				themeConfig.value.isLockScreen = false;
 				themeConfig.value.lockScreenTime = 300;
 				setLocalThemeConfig();
 				return;
 			}
-			// SM2加密密码
+			// SM2 encryption password
 			const publicKey = window.__env__.VITE_SM_PUBLIC_KEY;
 			const password = sm2.doEncrypt(state.lockScreenPassword, publicKey, 1);
 			const [err, res] = await feature(getAPI(SysAuthApi).apiSysAuthUnLockScreenPost(password));
@@ -216,43 +216,43 @@ const onLockScreenSubmit = async () => {
 				setLocalThemeConfig();
 			}
 		} catch (ex: any) {
-			state.message = `出错了:${ex}`;
+			state.message = `Something went wrong:${ex}`;
 			state.showMessage = true;
 		}
 	}
 };
-// 隐藏消息
+// Hide message
 const hideMessage = () => {
 	state.showMessage = false;
 	nextTick(() => {
 		layoutLockScreenInputRef.value.focus();
 	});
 };
-// 页面加载时
+// When the page loads
 onMounted(() => {
 	initGetElement();
 	initSetTime();
 	initLockScreen();
 
-	// 侦听ENTER按钮事件
+	// Listening for ENTER button events
 	document.onkeydown = (e) => {
 		if (e.key === 'Enter') {
-			// 当显示锁屏页时，按ENTER切到密码输入
+			// When the lock screen page is displayed, press ENTER to switch to password input
 			if (state.isShowLoockLogin == false) {
 				const moveInterval = setInterval(() => {
 					state.isFlags = true;
 					state.moveDifference = state.moveDifference - 10;
 					onMove();
-					// 超过410像素则结束
+					// It ends when it exceeds 410 pixels
 					if (state.moveDifference < -410) clearInterval(moveInterval);
 				}, 5);
 			}
-			// 当显示消息时，按ENTER切到密码输入
+			// When the message is displayed, press ENTER to switch to password entry
 			if (state.showMessage == true) hideMessage();
 		}
 	};
 });
-// 页面卸载时
+// When the page is unloaded
 onUnmounted(() => {
 	window.clearInterval(state.setIntervalTime);
 	window.clearInterval(state.isShowLockScreenIntervalTime);

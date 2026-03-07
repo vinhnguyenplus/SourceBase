@@ -1,18 +1,18 @@
-﻿// Admin.NET 项目的版权、商标、专利和其他相关权利均受相应法律法规的保护。使用本项目应遵守相关法律法规和许可证的要求。
+﻿// The copyright, trademark, patent and other related rights of the Admin.NET project are protected by corresponding laws and regulations. Use of this project shall comply with relevant laws, regulations and license requirements.
 //
-// 本项目主要遵循 MIT 许可证和 Apache 许可证（版本 2.0）进行分发和使用。许可证位于源代码树根目录中的 LICENSE-MIT 和 LICENSE-APACHE 文件。
+// This project is distributed and used primarily under the MIT License and the Apache License (version 2.0). The license is located in the LICENSE-MIT and LICENSE-APACHE files in the root of the source tree.
 //
-// 不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！
+// This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project!
 
 namespace Admin.NET.Plugin.WorkWeixin.Proxy;
 
 /// <summary>
-/// 标签远程调用服务
+/// Label remote call service
 /// </summary>
 public interface ITagHttp : IHttpDeclarative
 {
     /// <summary>
-    /// 创建标签
+    /// Create tags
     /// https://developer.work.weixin.qq.com/document/path/90210
     /// </summary>
     /// <param name="accessToken"></param>
@@ -22,7 +22,7 @@ public interface ITagHttp : IHttpDeclarative
     Task<BaseWorkIdOutput> Create([Query("access_token")] string accessToken, [Body] TagHttpInput body);
 
     /// <summary>
-    /// 更新标签名字
+    /// Update tag name
     /// https://developer.work.weixin.qq.com/document/path/90211
     /// </summary>
     /// <param name="accessToken"></param>
@@ -32,7 +32,7 @@ public interface ITagHttp : IHttpDeclarative
     Task<TagIdHttpOutput> Update([Query("access_token")] string accessToken, [Body] TagHttpInput body);
 
     /// <summary>
-    /// 删除标签
+    /// Delete tag
     /// https://developer.work.weixin.qq.com/document/path/90212
     /// </summary>
     /// <param name="accessToken"></param>
@@ -42,7 +42,7 @@ public interface ITagHttp : IHttpDeclarative
     Task<BaseWorkOutput> Delete([Query("access_token")] string accessToken, [Query("tagid")] long tagId);
 
     /// <summary>
-    /// 获取标签详情
+    /// Get label details
     /// https://developer.work.weixin.qq.com/document/path/90213
     /// </summary>
     /// <param name="accessToken"></param>
@@ -52,7 +52,7 @@ public interface ITagHttp : IHttpDeclarative
     Task<DepartmentOutput> Get([Query("access_token")] string accessToken, [Query("tagid")] long tagId);
 
     /// <summary>
-    /// 增加标签成员
+    /// Add tag members
     /// https://developer.work.weixin.qq.com/document/path/90214
     /// </summary>
     /// <param name="accessToken"></param>
@@ -62,7 +62,7 @@ public interface ITagHttp : IHttpDeclarative
     Task<DepartmentOutput> AddTagUsers([Query("access_token")] string accessToken, [Body] TagUsersTagInput body);
 
     /// <summary>
-    /// 删除标签成员
+    /// Delete tag members
     /// https://developer.work.weixin.qq.com/document/path/90215
     /// </summary>
     /// <param name="accessToken"></param>
@@ -72,7 +72,7 @@ public interface ITagHttp : IHttpDeclarative
     Task<DepartmentOutput> DelTagUsers([Query("access_token")] string accessToken, [Body] TagUsersTagInput body);
 
     /// <summary>
-    /// 获取标签列表
+    /// Get tag list
     /// https://developer.work.weixin.qq.com/document/path/90216
     /// </summary>
     /// <param name="accessToken"></param>

@@ -1,8 +1,8 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Admin.NET 通用权限开发平台
- * 让 .NET 开发更简单、更通用、更流行。整合最新技术，模块插件式开发，前后端分离，开箱即用。<br/><u><b><font color='FF0000'> 👮不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！</font></b></u>
+ * Admin.NET General Permission Development Platform
+ * let .NET Develop more simply、More general、More popular。wholeIn line with the latest technology，Modular Plugin-Based Development，Frontend and backendpointsLeave，Ready to use out of the box。<br/><u><b><font color='FF0000'> 👮This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project! </font></b></u>
  *
  * OpenAPI spec version: 1.0.0
  * 
@@ -35,7 +35,7 @@ export const SysMenuApiAxiosParamCreator = function (configuration?: Configurati
     return {
         /**
          * 
-         * @summary 增加菜单 🔖
+         * @summary Add menu 🔖
          * @param {AddMenuInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -83,7 +83,7 @@ export const SysMenuApiAxiosParamCreator = function (configuration?: Configurati
         },
         /**
          * 
-         * @summary 删除菜单 🔖
+         * @summary Delete Menu 🔖
          * @param {DeleteMenuInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -131,10 +131,10 @@ export const SysMenuApiAxiosParamCreator = function (configuration?: Configurati
         },
         /**
          * 
-         * @summary 获取菜单列表 🔖
-         * @param {string} [title] 标题
-         * @param {MenuTypeEnum} [type] 菜单类型（1目录 2菜单 3按钮）
-         * @param {number} [tenantId] 租户Id
+         * @summary ObtainmenuList 🔖
+         * @param {string} [title] title
+         * @param {MenuTypeEnum} [type] menuType（1Table of Contents 2menu 3button）
+         * @param {number} [tenantId] Tenant ID
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -189,7 +189,7 @@ export const SysMenuApiAxiosParamCreator = function (configuration?: Configurati
         },
         /**
          * 
-         * @summary 获取登录菜单树 🔖
+         * @summary Get login menu tree 🔖
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -232,7 +232,7 @@ export const SysMenuApiAxiosParamCreator = function (configuration?: Configurati
         },
         /**
          * 
-         * @summary 获取用户拥有按钮权限集合（缓存） 🔖
+         * @summary ObtainUserto havebuttonPermission set（cache） 🔖
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -275,7 +275,7 @@ export const SysMenuApiAxiosParamCreator = function (configuration?: Configurati
         },
         /**
          * 
-         * @summary 设置菜单状态 🔖
+         * @summary Set menu status 🔖
          * @param {MenuStatusInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -323,7 +323,7 @@ export const SysMenuApiAxiosParamCreator = function (configuration?: Configurati
         },
         /**
          * 
-         * @summary 更新菜单 🔖
+         * @summary Updatemenu 🔖
          * @param {UpdateMenuInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -380,7 +380,7 @@ export const SysMenuApiFp = function(configuration?: Configuration) {
     return {
         /**
          * 
-         * @summary 增加菜单 🔖
+         * @summary Add menu 🔖
          * @param {AddMenuInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -394,7 +394,7 @@ export const SysMenuApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary 删除菜单 🔖
+         * @summary Delete Menu 🔖
          * @param {DeleteMenuInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -408,10 +408,10 @@ export const SysMenuApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary 获取菜单列表 🔖
-         * @param {string} [title] 标题
-         * @param {MenuTypeEnum} [type] 菜单类型（1目录 2菜单 3按钮）
-         * @param {number} [tenantId] 租户Id
+         * @summary ObtainmenuList 🔖
+         * @param {string} [title] title
+         * @param {MenuTypeEnum} [type] menuType（1Table of Contents 2menu 3button）
+         * @param {number} [tenantId] Tenant ID
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -424,7 +424,7 @@ export const SysMenuApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary 获取登录菜单树 🔖
+         * @summary Get login menu tree 🔖
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -437,7 +437,7 @@ export const SysMenuApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary 获取用户拥有按钮权限集合（缓存） 🔖
+         * @summary ObtainUserto havebuttonPermission set（cache） 🔖
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -450,7 +450,7 @@ export const SysMenuApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary 设置菜单状态 🔖
+         * @summary Set menu status 🔖
          * @param {MenuStatusInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -464,7 +464,7 @@ export const SysMenuApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary 更新菜单 🔖
+         * @summary Updatemenu 🔖
          * @param {UpdateMenuInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -487,7 +487,7 @@ export const SysMenuApiFactory = function (configuration?: Configuration, basePa
     return {
         /**
          * 
-         * @summary 增加菜单 🔖
+         * @summary Add menu 🔖
          * @param {AddMenuInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -497,7 +497,7 @@ export const SysMenuApiFactory = function (configuration?: Configuration, basePa
         },
         /**
          * 
-         * @summary 删除菜单 🔖
+         * @summary Delete Menu 🔖
          * @param {DeleteMenuInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -507,10 +507,10 @@ export const SysMenuApiFactory = function (configuration?: Configuration, basePa
         },
         /**
          * 
-         * @summary 获取菜单列表 🔖
-         * @param {string} [title] 标题
-         * @param {MenuTypeEnum} [type] 菜单类型（1目录 2菜单 3按钮）
-         * @param {number} [tenantId] 租户Id
+         * @summary ObtainmenuList 🔖
+         * @param {string} [title] title
+         * @param {MenuTypeEnum} [type] menuType（1Table of Contents 2menu 3button）
+         * @param {number} [tenantId] Tenant ID
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -519,7 +519,7 @@ export const SysMenuApiFactory = function (configuration?: Configuration, basePa
         },
         /**
          * 
-         * @summary 获取登录菜单树 🔖
+         * @summary Get login menu tree 🔖
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -528,7 +528,7 @@ export const SysMenuApiFactory = function (configuration?: Configuration, basePa
         },
         /**
          * 
-         * @summary 获取用户拥有按钮权限集合（缓存） 🔖
+         * @summary ObtainUserto havebuttonPermission set（cache） 🔖
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -537,7 +537,7 @@ export const SysMenuApiFactory = function (configuration?: Configuration, basePa
         },
         /**
          * 
-         * @summary 设置菜单状态 🔖
+         * @summary Set menu status 🔖
          * @param {MenuStatusInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -547,7 +547,7 @@ export const SysMenuApiFactory = function (configuration?: Configuration, basePa
         },
         /**
          * 
-         * @summary 更新菜单 🔖
+         * @summary Updatemenu 🔖
          * @param {UpdateMenuInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -567,7 +567,7 @@ export const SysMenuApiFactory = function (configuration?: Configuration, basePa
 export class SysMenuApi extends BaseAPI {
     /**
      * 
-     * @summary 增加菜单 🔖
+     * @summary Add menu 🔖
      * @param {AddMenuInput} [body] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -578,7 +578,7 @@ export class SysMenuApi extends BaseAPI {
     }
     /**
      * 
-     * @summary 删除菜单 🔖
+     * @summary Delete Menu 🔖
      * @param {DeleteMenuInput} [body] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -589,10 +589,10 @@ export class SysMenuApi extends BaseAPI {
     }
     /**
      * 
-     * @summary 获取菜单列表 🔖
-     * @param {string} [title] 标题
-     * @param {MenuTypeEnum} [type] 菜单类型（1目录 2菜单 3按钮）
-     * @param {number} [tenantId] 租户Id
+     * @summary ObtainmenuList 🔖
+     * @param {string} [title] title
+     * @param {MenuTypeEnum} [type] menuType（1Table of Contents 2menu 3button）
+     * @param {number} [tenantId] Tenant ID
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SysMenuApi
@@ -602,7 +602,7 @@ export class SysMenuApi extends BaseAPI {
     }
     /**
      * 
-     * @summary 获取登录菜单树 🔖
+     * @summary Get login menu tree 🔖
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SysMenuApi
@@ -612,7 +612,7 @@ export class SysMenuApi extends BaseAPI {
     }
     /**
      * 
-     * @summary 获取用户拥有按钮权限集合（缓存） 🔖
+     * @summary ObtainUserto havebuttonPermission set（cache） 🔖
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SysMenuApi
@@ -622,7 +622,7 @@ export class SysMenuApi extends BaseAPI {
     }
     /**
      * 
-     * @summary 设置菜单状态 🔖
+     * @summary Set menu status 🔖
      * @param {MenuStatusInput} [body] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -633,7 +633,7 @@ export class SysMenuApi extends BaseAPI {
     }
     /**
      * 
-     * @summary 更新菜单 🔖
+     * @summary Updatemenu 🔖
      * @param {UpdateMenuInput} [body] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}

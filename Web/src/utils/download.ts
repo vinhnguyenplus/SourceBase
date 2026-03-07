@@ -103,16 +103,16 @@ export function getFileName(headers: RawAxiosResponseHeaders | AxiosResponseHead
 	var fileNameUnicode = headers['content-disposition'].split('filename*=')[1];
 	if (fileName?.includes("%")) fileName = decodeURIComponent(fileName);
 	if (fileNameUnicode) {
-		//当存在 filename* 时，取filename* 并进行解码（为了解决中文乱码问题）
+		//When filename* exists, take filename* and decode it (in order to solve the problem of Chinese garbled characters)
 		fileName = decodeURIComponent(fileNameUnicode.split("''")[1]);
 	}
 	return fileName;
 }
 
 /**
- * 文件流下载
+ * File streamDownload
  * @param res
- * @param fileName 文件名
+ * @param fileName File name
  */
 export function downloadStreamFile(res: any, fileName: string | undefined = undefined) {
 	const contentType = res.headers['content-type'];

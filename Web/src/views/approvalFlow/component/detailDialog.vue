@@ -30,7 +30,7 @@
 			</el-timeline>
 			<!-- <template #footer>
 				<span class="dialog-footer">
-					<el-button @click="cancel">取 消</el-button>
+					<el-button @click="cancel">Cancel</el-button>
 				</span>
 			</template> -->
 		</el-dialog>

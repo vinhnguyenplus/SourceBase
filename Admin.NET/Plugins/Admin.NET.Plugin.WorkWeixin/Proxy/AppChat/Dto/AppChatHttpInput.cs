@@ -1,87 +1,87 @@
-﻿// Admin.NET 项目的版权、商标、专利和其他相关权利均受相应法律法规的保护。使用本项目应遵守相关法律法规和许可证的要求。
+﻿// The copyright, trademark, patent and other related rights of the Admin.NET project are protected by corresponding laws and regulations. Use of this project shall comply with relevant laws, regulations and license requirements.
 //
-// 本项目主要遵循 MIT 许可证和 Apache 许可证（版本 2.0）进行分发和使用。许可证位于源代码树根目录中的 LICENSE-MIT 和 LICENSE-APACHE 文件。
+// This project is distributed and used primarily under the MIT License and the Apache License (version 2.0). The license is located in the LICENSE-MIT and LICENSE-APACHE files in the root of the source tree.
 //
-// 不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！
+// This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project!
 
 namespace Admin.NET.Plugin.WorkWeixin.Proxy;
 
 /// <summary>
-/// 创建群聊会话输入参数
+/// Create group chat session input parameters
 /// </summary>
 public class CreatAppChatInput
 {
     /// <summary>
-    /// 群名称
+    /// Group name
     /// </summary>
     [JsonProperty("name")]
     [JsonPropertyName("name")]
-    [Required(ErrorMessage = "群名称不能为空"), MaxLength(50, ErrorMessage = "群名称最多不能超过50个字符")]
+    [Required(ErrorMessage = "Group name cannot be empty"), MaxLength(50, ErrorMessage = "The group name cannot exceed 50 characters")]
     public string Name { get; set; }
 
     /// <summary>
-    /// 群主Id
+    /// Group owner ID
     /// </summary>
     [JsonProperty("owner")]
     [JsonPropertyName("owner")]
-    [Required(ErrorMessage = "群主Id不能为空")]
+    [Required(ErrorMessage = "group ownerId cannot be empty")]
     public string Owner { get; set; }
 
     /// <summary>
-    /// 群成员Id列表
+    /// Group member ID list
     /// </summary>
     [JsonProperty("userlist")]
     [JsonPropertyName("userlist")]
-    [Core.NotEmpty(ErrorMessage = "群成员列表不能为空")]
+    [Core.NotEmpty(ErrorMessage = "The group member list cannot be empty")]
     public List<string> UserList { get; set; }
 
     /// <summary>
-    /// 群Id
+    /// GroupId
     /// </summary>
     [JsonProperty("chatid")]
     [JsonPropertyName("chatid")]
-    [Required(ErrorMessage = "群Id不能为空"), MaxLength(32, ErrorMessage = "群Id最多不能超过32个字符")]
+    [Required(ErrorMessage = "Group ID cannot be empty"), MaxLength(32, ErrorMessage = "The group ID cannot exceed 32 characters at most")]
     public string ChatId { get; set; }
 }
 
 /// <summary>
-/// 修改群聊会话输入参数
+/// Modify group chat session input parameters
 /// </summary>
 public class UpdateAppChatInput
 {
     /// <summary>
-    /// 群Id
+    /// GroupId
     /// </summary>
     [JsonProperty("chatid")]
     [JsonPropertyName("chatid")]
-    [Required(ErrorMessage = "群Id不能为空"), MaxLength(32, ErrorMessage = "群Id最多不能超过32个字符")]
+    [Required(ErrorMessage = "Group ID cannot be empty"), MaxLength(32, ErrorMessage = "The group ID cannot exceed 32 characters at most")]
     public string ChatId { get; set; }
 
     /// <summary>
-    /// 群名称
+    /// Group name
     /// </summary>
     [JsonProperty("name")]
     [JsonPropertyName("name")]
-    [Required(ErrorMessage = "群名称不能为空"), MaxLength(50, ErrorMessage = "群名称最多不能超过50个字符")]
+    [Required(ErrorMessage = "Group name cannot be empty"), MaxLength(50, ErrorMessage = "The group name cannot exceed 50 characters")]
     public string Name { get; set; }
 
     /// <summary>
-    /// 群主Id
+    /// Group owner ID
     /// </summary>
     [JsonProperty("owner")]
     [JsonPropertyName("owner")]
-    [Required(ErrorMessage = "群主Id不能为空")]
+    [Required(ErrorMessage = "group ownerId cannot be empty")]
     public string Owner { get; set; }
 
     /// <summary>
-    /// 添加成员的id列表
+    /// Add member id list
     /// </summary>
     [JsonProperty("add_user_list")]
     [JsonPropertyName("add_user_list")]
     public List<string> AddUserList { get; set; }
 
     /// <summary>
-    /// 踢出成员的id列表
+    /// List of ids of kicked members
     /// </summary>
     [JsonProperty("del_user_list")]
     [JsonPropertyName("del_user_list")]
@@ -89,41 +89,41 @@ public class UpdateAppChatInput
 }
 
 /// <summary>
-/// 应用消息推送输入基类参数
+/// Apply message push input base class parameters
 /// </summary>
 public class SendBaseAppChatInput
 {
     /// <summary>
-    /// 群Id
+    /// GroupId
     /// </summary>
     [JsonProperty("chatid")]
     [JsonPropertyName("chatid")]
-    [Required(ErrorMessage = "群Id不能为空"), MaxLength(32, ErrorMessage = "群Id最多不能超过32个字符")]
+    [Required(ErrorMessage = "Group ID cannot be empty"), MaxLength(32, ErrorMessage = "The group ID cannot exceed 32 characters at most")]
     public string ChatId { get; set; }
 
     /// <summary>
-    /// 消息类型
+    /// Message type
     /// </summary>
-    /// <example>text：文本消息</example>
-    /// <example>image：图片消息</example>
-    /// <example>voice：图片消息</example>
-    /// <example>video：视频消息</example>
-    /// <example>file：文件消息</example>
-    /// <example>textcard：文本卡片</example>
-    /// <example>news：图文消息</example>
-    /// <example>mpnews：图文消息（存储在企业微信）</example>
-    /// <example>markdown：markdown消息</example>
+    /// <example>text: text message</example>
+    /// <example>image: picture message</example>
+    /// <example>voice: picture message</example>
+    /// <example>video: video message</example>
+    /// <example>file: file message</example>
+    /// <example>textcard: text card</example>
+    /// <example>news: graphic news</example>
+    /// <example>mpnews: graphic news (stored in corporate WeChat)</example>
+    /// <example>markdown: markdown message</example>
     [JsonProperty("msgtype")]
     [JsonPropertyName("msgtype")]
-    [Required(ErrorMessage = "消息类型不能为空")]
+    [Required(ErrorMessage = "Message type cannot be empty")]
     protected string MsgType { get; set; }
 
     /// <summary>
-    /// 是否是保密消息
+    /// Is it confidential information?
     /// </summary>
     [JsonProperty("safe")]
     [JsonPropertyName("safe")]
-    [Required(ErrorMessage = "消息类型不能为空")]
+    [Required(ErrorMessage = "Message type cannot be empty")]
     public int Safe { get; set; }
 
     public SendBaseAppChatInput(string chatId, string msgType, bool safe = false)
@@ -135,19 +135,19 @@ public class SendBaseAppChatInput
 }
 
 /// <summary>
-/// 推送文本消息输入参数
+/// Push text message input parameters
 /// </summary>
 public class SendTextAppChatInput : SendBaseAppChatInput
 {
     /// <summary>
-    /// 消息内容
+    /// Message content
     /// </summary>
     [JsonProperty("text")]
     [JsonPropertyName("text")]
     public object Text { get; set; }
 
     /// <summary>
-    /// 文本消息
+    /// text message
     /// </summary>
     /// <param name="chatId"></param>
     /// <param name="content"></param>
@@ -159,19 +159,19 @@ public class SendTextAppChatInput : SendBaseAppChatInput
 }
 
 /// <summary>
-/// 推送图片消息输入参数
+/// Push picture message input parameters
 /// </summary>
 public class SendImageAppChatInput : SendBaseAppChatInput
 {
     /// <summary>
-    /// 消息内容
+    /// Message content
     /// </summary>
     [JsonProperty("image")]
     [JsonPropertyName("image")]
     public object Image { get; set; }
 
     /// <summary>
-    /// 图片消息
+    /// Picture message
     /// </summary>
     /// <param name="chatId"></param>
     /// <param name="mediaId"></param>
@@ -183,19 +183,19 @@ public class SendImageAppChatInput : SendBaseAppChatInput
 }
 
 /// <summary>
-/// 推送语音消息输入参数
+/// Push voice message input parameters
 /// </summary>
 public class SendVoiceAppChatInput : SendBaseAppChatInput
 {
     /// <summary>
-    /// 消息内容
+    /// Message content
     /// </summary>
     [JsonProperty("voice")]
     [JsonPropertyName("voice")]
     public object Voice { get; set; }
 
     /// <summary>
-    /// 语音消息
+    /// voice message
     /// </summary>
     /// <param name="chatId"></param>
     /// <param name="mediaId"></param>
@@ -207,19 +207,19 @@ public class SendVoiceAppChatInput : SendBaseAppChatInput
 }
 
 /// <summary>
-/// 推送视频消息输入参数
+/// Push video message input parameters
 /// </summary>
 public class SendVideoAppChatInput : SendBaseAppChatInput
 {
     /// <summary>
-    /// 消息内容
+    /// Message content
     /// </summary>
     [JsonProperty("video")]
     [JsonPropertyName("video")]
     public object Video { get; set; }
 
     /// <summary>
-    /// 视频消息
+    /// video message
     /// </summary>
     /// <param name="chatId"></param>
     /// <param name="title"></param>
@@ -238,19 +238,19 @@ public class SendVideoAppChatInput : SendBaseAppChatInput
 }
 
 /// <summary>
-/// 推送视频消息输入参数
+/// Push video message input parameters
 /// </summary>
 public class SendFileAppChatInput : SendBaseAppChatInput
 {
     /// <summary>
-    /// 消息内容
+    /// Message content
     /// </summary>
     [JsonProperty("file")]
     [JsonPropertyName("file")]
     public object File { get; set; }
 
     /// <summary>
-    /// 文件消息
+    /// file message
     /// </summary>
     /// <param name="chatId"></param>
     /// <param name="mediaId"></param>
@@ -262,25 +262,25 @@ public class SendFileAppChatInput : SendBaseAppChatInput
 }
 
 /// <summary>
-/// 推送文本卡片消息输入参数
+/// Push text card message input parameters
 /// </summary>
 public class SendTextCardAppChatInput : SendBaseAppChatInput
 {
     /// <summary>
-    /// 消息内容
+    /// Message content
     /// </summary>
     [JsonProperty("textcard")]
     [JsonPropertyName("textcard")]
     public object TextCard { get; set; }
 
     /// <summary>
-    /// 文本卡片消息
+    /// text card message
     /// </summary>
     /// <param name="chatId"></param>
-    /// <param name="title">标题</param>
-    /// <param name="description">描述</param>
-    /// <param name="url">点击后跳转的链接</param>
-    /// <param name="btnTxt">按钮文字</param>
+    /// <param name="title">title</param>
+    /// <param name="description">describe</param>
+    /// <param name="url">Links that jump after clicking</param>
+    /// <param name="btnTxt">button text</param>
     /// <param name="safe"></param>
     public SendTextCardAppChatInput(string chatId, string title, string description, string url, string btnTxt, bool safe = false) : base(chatId, "textcard", safe)
     {
@@ -295,33 +295,33 @@ public class SendTextCardAppChatInput : SendBaseAppChatInput
 }
 
 /// <summary>
-/// 图文消息项
+/// Graphic message items
 /// </summary>
 public class SendNewsItem
 {
     /// <summary>
-    /// 标题
+    /// title
     /// </summary>
     [JsonProperty("title")]
     [JsonPropertyName("title")]
     public string Title { get; set; }
 
     /// <summary>
-    /// 描述
+    /// describe
     /// </summary>
     [JsonProperty("description")]
     [JsonPropertyName("description")]
     public string Description { get; set; }
 
     /// <summary>
-    /// 描述
+    /// describe
     /// </summary>
     [JsonProperty("url")]
     [JsonPropertyName("url")]
     public string Url { get; set; }
 
     /// <summary>
-    /// 图文消息的图片链接（推荐大图1068 * 455，小图150 * 150）
+    /// Picture link of graphic message (recommended large picture 1068 * 455, small picture 150 * 150)
     /// </summary>
     [JsonProperty("picurl")]
     [JsonPropertyName("picurl")]
@@ -329,22 +329,22 @@ public class SendNewsItem
 }
 
 /// <summary>
-/// 推送图文消息输入参数
+/// Push graphic message input parameters
 /// </summary>
 public class SendNewsAppChatInput : SendBaseAppChatInput
 {
     /// <summary>
-    /// 消息内容
+    /// Message content
     /// </summary>
     [JsonProperty("news")]
     [JsonPropertyName("news")]
     public object News { get; set; }
 
     /// <summary>
-    /// 图文消息
+    /// Graphic message
     /// </summary>
     /// <param name="chatId"></param>
-    /// <param name="newsList">图文消息列表</param>
+    /// <param name="newsList">Graphic message list</param>
     /// <param name="safe"></param>
     public SendNewsAppChatInput(string chatId, List<SendNewsItem> newsList, bool safe = false) : base(chatId, "news", safe)
     {
@@ -353,47 +353,47 @@ public class SendNewsAppChatInput : SendBaseAppChatInput
 }
 
 /// <summary>
-/// 图文消息项
+/// Graphic message items
 /// </summary>
 public class SendMpNewsItem
 {
     /// <summary>
-    /// 标题
+    /// title
     /// </summary>
     [JsonProperty("title")]
     [JsonPropertyName("title")]
     public string Title { get; set; }
 
     /// <summary>
-    /// 缩略图media_id
+    /// Thumbnail media_id
     /// </summary>
     [JsonProperty("thumb_media_id")]
     [JsonPropertyName("thumb_media_id")]
     public string ThumbMediaId { get; set; }
 
     /// <summary>
-    /// 作者
+    /// author
     /// </summary>
     [JsonProperty("author")]
     [JsonPropertyName("author")]
     public string Author { get; set; }
 
     /// <summary>
-    /// 点击“阅读原文”之后的页面链接
+    /// Click the page link after "Read the original text"
     /// </summary>
     [JsonProperty("content_source_url")]
     [JsonPropertyName("content_source_url")]
     public string ContentSourceUrl { get; set; }
 
     /// <summary>
-    /// 图文消息的内容
+    /// Contents of graphic messages
     /// </summary>
     [JsonProperty("content")]
     [JsonPropertyName("content")]
     public string Content { get; set; }
 
     /// <summary>
-    /// 图文消息的描述
+    /// Description of graphic message
     /// </summary>
     [JsonProperty("digest")]
     [JsonPropertyName("digest")]
@@ -401,22 +401,22 @@ public class SendMpNewsItem
 }
 
 /// <summary>
-/// 推送图文消息(存储在企业微信)输入参数
+/// Push graphic messages (stored in corporate WeChat) input parameters
 /// </summary>
 public class SendMpNewsAppChatInput : SendBaseAppChatInput
 {
     /// <summary>
-    /// 消息内容
+    /// Message content
     /// </summary>
     [JsonProperty("mpnews")]
     [JsonPropertyName("mpnews")]
     public object MpNews { get; set; }
 
     /// <summary>
-    /// 图文消息
+    /// Graphic message
     /// </summary>
     /// <param name="chatId"></param>
-    /// <param name="mpNewsList">图文消息列表</param>
+    /// <param name="mpNewsList">Graphic message list</param>
     /// <param name="safe"></param>
     public SendMpNewsAppChatInput(string chatId, List<SendMpNewsItem> mpNewsList, bool safe = false) : base(chatId, "mpnews", safe)
     {

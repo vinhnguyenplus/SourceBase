@@ -10,21 +10,21 @@
 			<el-form :model="state.ruleForm" ref="ruleFormRef" label-width="auto">
 				<el-row :gutter="35">
 					<el-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12" class="mb20">
-						<el-form-item label="库定位器" prop="configId" :rules="[{ required: true, message: '库定位器不能为空', trigger: 'blur' }]">
-							<el-select v-model="state.ruleForm.configId" placeholder="库名" filterable @change="dbChanged()" class="w100">
+						<el-form-item label="library locator" prop="configId" :rules="[{ required: true, message: 'Library locator cannot be empty', trigger: 'blur' }]">
+							<el-select v-model="state.ruleForm.configId" placeholder="Library name" filterable @change="dbChanged()" class="w100">
 								<el-option v-for="item in state.dbData" :key="item.configId" :label="item.dbNickName" :value="item.configId" />
 							</el-select>
 						</el-form-item>
 					</el-col>
 					<el-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12" class="mb20">
-						<el-form-item label="表定位器" prop="tableName" :rules="[{ required: true, message: '表定位器不能为空', trigger: 'blur' }]">
+						<el-form-item label="table locator" prop="tableName" :rules="[{ required: true, message: 'Table locator cannot be empty', trigger: 'blur' }]">
 							<el-select v-model="state.ruleForm.tableName" value-key="value" filterable clearable class="w100">
 								<el-option v-for="item in state.tableData" :key="item.name" :label="item.name + ' [ ' + item.description + ' ]'" :value="item.name" />
 							</el-select>
 						</el-form-item>
 					</el-col>
 					<el-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12" class="mb20">
-						<el-form-item label="操作" prop="typeName" :rules="[{ required: true, message: '操作不能为空', trigger: 'blur' }]">
+						<el-form-item label="Operation" prop="typeName" :rules="[{ required: true, message: 'Operation cannot be empty', trigger: 'blur' }]">
 							<el-select v-model="state.ruleForm.typeName" value-key="value" filterable clearable class="w100">
 								<el-option v-for="item in state.typeData" :key="item.name" :label="item.name + ' ( ' + item.value + ' )' + ' [ ' + item.description + ' ]'" :value="item.value" />
 							</el-select>
@@ -34,8 +34,8 @@
 			</el-form>
 			<template #footer>
 				<span class="dialog-footer">
-					<el-button @click="cancel">取 消</el-button>
-					<el-button type="primary" @click="submit">确 定</el-button>
+					<el-button @click="cancel">Cancel</el-button>
+					<el-button type="primary" @click="submit">Confirm</el-button>
 				</span>
 			</template>
 		</el-dialog>
@@ -73,27 +73,27 @@ const state = reactive({
 		{
 			name: 'Add',
 			value: 'add',
-			description: '新增',
+			description: 'Add New',
 		},
 		{
 			name: 'Update',
 			value: 'update',
-			description: '更新',
+			description: 'Update',
 		},
 		{
 			name: 'Delete',
 			value: 'delete',
-			description: '删除',
+			description: 'Delete',
 		},
 		{
 			name: 'Select',
 			value: 'select',
-			description: '查询',
+			description: 'Query',
 		},
 		{
 			name: 'Export',
 			value: 'export',
-			description: '导出',
+			description: 'Export',
 		},
 	],
 });
@@ -128,7 +128,7 @@ const submit = async () => {
 	closeDialog();
 };
 
-// db改变
+// dbchange
 const dbChanged = async () => {
 	if (state.ruleForm.configId === '') return;
 

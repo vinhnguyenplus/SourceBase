@@ -2,15 +2,15 @@
 import { hiprint } from 'vue-plugin-hiprint';
 import logoImg from '/@/assets/logo.png';
 
-// 自定义设计元素1
+// Custom design elements 1
 export const aProvider = function () {
 	var addElementTypes = function (context: any) {
 		context.removePrintElementTypes('aProviderModule');
 		context.addPrintElementTypes('aProviderModule', [
-			new hiprint.PrintElementTypeGroup('【公共组件】', [
+			new hiprint.PrintElementTypeGroup('【Public components】', [
 				{
 					tid: 'aProviderModule.barcode',
-					title: '条形码',
+					title: 'barcode',
 					data: '18012345678',
 					type: 'text',
 					options: {
@@ -27,7 +27,7 @@ export const aProvider = function () {
 				},
 				{
 					tid: 'aProviderModule.qrcode',
-					title: '二维码',
+					title: 'QR code',
 					data: 'Z18012345678',
 					type: 'text',
 					options: {
@@ -45,82 +45,82 @@ export const aProvider = function () {
 				},
 				{
 					tid: 'aProviderModule.table',
-					title: '表格',
+					title: 'table',
 					type: 'table',
 					options: {
 						field: 'table',
 						tableHeaderRepeat: 'first',
 						tableFooterRepeat: 'last',
 						fields: [
-							{ text: '名称', field: 'NAME' },
-							{ text: '数量', field: 'SL' },
-							{ text: '规格', field: 'GG' },
-							{ text: '条码', field: 'TM' },
-							{ text: '单价', field: 'DJ' },
-							{ text: '金额', field: 'JE' },
+							{ text: 'name', field: 'NAME' },
+							{ text: 'quantity', field: 'SL' },
+							{ text: 'Specification', field: 'GG' },
+							{ text: 'barcode', field: 'TM' },
+							{ text: 'Unit price', field: 'DJ' },
+							{ text: 'Amount', field: 'JE' },
 						],
 					},
 					editable: true,
-					columnDisplayEditable: true, //列显示是否能编辑
-					columnDisplayIndexEditable: true, //列顺序显示是否能编辑
-					columnTitleEditable: true, //列标题是否能编辑
-					columnResizable: true, //列宽是否能调整
-					columnAlignEditable: true, //列对齐是否调整
-					isEnableEditField: true, //编辑字段
-					isEnableContextMenu: true, //开启右键菜单 默认true
-					isEnableInsertRow: true, //插入行
-					isEnableDeleteRow: true, //删除行
-					isEnableInsertColumn: true, //插入列
-					isEnableDeleteColumn: true, //删除列
-					isEnableMergeCell: true, //合并单元格
+					columnDisplayEditable: true, // Column shows whether it can be edited
+					columnDisplayIndexEditable: true, // Column order shows whether it can be edited
+					columnTitleEditable: true, // Whether column titles can be edited
+					columnResizable: true, // Can the column width be adjusted?
+					columnAlignEditable: true, // Whether column alignment is adjusted
+					isEnableEditField: true, // Edit field
+					isEnableContextMenu: true, // Enable right-click menu. Default is true.
+					isEnableInsertRow: true, // Insert row
+					isEnableDeleteRow: true, // Delete row
+					isEnableInsertColumn: true, // insert column
+					isEnableDeleteColumn: true, // Delete column
+					isEnableMergeCell: true, // Merge cells
 					columns: [
 						[
-							{ title: '名称', align: 'center', field: 'NAME', width: 150 },
-							{ title: '数量', align: 'center', field: 'SL', width: 80 },
-							{ title: '规格', align: 'center', field: 'GG', width: 80, checked: false },
-							{ title: '条码', align: 'center', field: 'TM', width: 100, checked: false },
-							{ title: '单价', align: 'center', field: 'DJ', width: 100 },
-							{ title: '金额', align: 'center', field: 'JE', width: 100, checked: false },
+							{ title: 'name', align: 'center', field: 'NAME', width: 150 },
+							{ title: 'quantity', align: 'center', field: 'SL', width: 80 },
+							{ title: 'Specification', align: 'center', field: 'GG', width: 80, checked: false },
+							{ title: 'barcode', align: 'center', field: 'TM', width: 100, checked: false },
+							{ title: 'Unit price', align: 'center', field: 'DJ', width: 100 },
+							{ title: 'Amount', align: 'center', field: 'JE', width: 100, checked: false },
 						],
 					],
 					// footerFormatter: function (options: unknown, rows: unknown, data: any, currentPageGridRowsData: unknown) {
 					//   if (data && data['totalCap']) {
-					//     return `<td style="padding:0 10px" colspan="100">${'应收金额大写: ' + data['totalCap']}</td>`
+					//     return `<td style="padding:0 10px" colspan="100">${'Amount receivable in capital letters: ' + data['totalCap']}</td>`
 					//   }
-					//   return '<td style="padding:0 10px" colspan="100">应收金额大写: </td>'
+					//   return '<td style="padding:0 10px" colspan="100">Amount receivable in capital letters: </td>'
 					// },
 				},
 				{
 					tid: 'aProviderModule.customText',
-					title: '文本',
-					customText: '自定义文本',
+					title: 'text',
+					customText: 'Custom text',
 					custom: true,
 					type: 'text',
 					options: {
 						width: 200,
-						testData: '长文本分页/不分页测试',
+						testData: 'Long text pagination/non-pagination test',
 					},
 				},
 				{
 					tid: 'aProviderModule.longText',
-					title: '长文本',
+					title: 'Long text',
 					type: 'longText',
 					options: {
 						field: 'test.longText',
 						width: 200,
-						testData: '长文本分页/不分页测试',
+						testData: 'Long text pagination/non-pagination test',
 					},
 				},
 				{ tid: 'aProviderModule.logo', title: 'Logo', data: logoImg, type: 'image', options: { field: 'imageUrl' } },
-				{ tid: 'aProviderModule.hline', title: '横线', type: 'hline' },
-				{ tid: 'aProviderModule.vline', title: '竖线', type: 'vline' },
-				{ tid: 'aProviderModule.rect', title: '矩形', type: 'rect' },
-				{ tid: 'aProviderModule.oval', title: '椭圆', type: 'oval' },
+				{ tid: 'aProviderModule.hline', title: 'horizontal line', type: 'hline' },
+				{ tid: 'aProviderModule.vline', title: 'Vertical line', type: 'vline' },
+				{ tid: 'aProviderModule.rect', title: 'Rectangle', type: 'rect' },
+				{ tid: 'aProviderModule.oval', title: 'Ellipse', type: 'oval' },
 			]),
-			new hiprint.PrintElementTypeGroup('【视图字段】', [
+			new hiprint.PrintElementTypeGroup('[View Fields]', [
 				{
 					tid: 'aProviderModule.creater',
-					title: '制表人',
+					title: 'Tabulator',
 					data: 'Admin.NET',
 					type: 'text',
 					options: {
@@ -135,7 +135,7 @@ export const aProvider = function () {
 				},
 				{
 					tid: 'aProviderModule.printDate',
-					title: '打印时间',
+					title: 'Print Time',
 					data: '2023-07-20 09:00',
 					type: 'text',
 					options: {
@@ -150,7 +150,7 @@ export const aProvider = function () {
 				},
 				{
 					tid: 'aProviderModule.signer',
-					title: '库管签字',
+					title: "Warehouse manager's signature",
 					data: 'Admin.NET',
 					type: 'text',
 					options: {
@@ -165,7 +165,7 @@ export const aProvider = function () {
 				},
 				{
 					tid: 'aProviderModule.director',
-					title: '经理签字',
+					title: "Manager's signature",
 					data: 'Admin.NET',
 					type: 'text',
 					options: {
@@ -186,19 +186,19 @@ export const aProvider = function () {
 	};
 };
 
-// 自定义设计元素2
+// Custom design elements 2
 export const bProvider = function () {
 	var addElementTypes = function (context: any) {
 		context.removePrintElementTypes('bProviderModule');
 		context.addPrintElementTypes('bProviderModule', [
-			new hiprint.PrintElementTypeGroup('【常规】', [
+			new hiprint.PrintElementTypeGroup('【General】', [
 				{
 					tid: 'bProviderModule.header',
-					title: '单据表头',
-					data: '单据表头',
+					title: 'Document Header',
+					data: 'Document Header',
 					type: 'text',
 					options: {
-						testData: '单据表头',
+						testData: 'Document Header',
 						height: 17,
 						fontSize: 16.5,
 						fontWeight: '700',
@@ -208,11 +208,11 @@ export const bProvider = function () {
 				},
 				{
 					tid: 'bProviderModule.type',
-					title: '单据类型',
-					data: '单据类型',
+					title: 'Document type',
+					data: 'Document type',
 					type: 'text',
 					options: {
-						testData: '单据类型',
+						testData: 'Document type',
 						height: 16,
 						fontSize: 15,
 						fontWeight: '700',
@@ -222,7 +222,7 @@ export const bProvider = function () {
 				},
 				{
 					tid: 'bProviderModule.order',
-					title: '订单编号',
+					title: 'Order Number',
 					data: 'Z18012345678',
 					type: 'text',
 					options: {
@@ -237,7 +237,7 @@ export const bProvider = function () {
 				},
 				{
 					tid: 'bProviderModule.date',
-					title: '业务日期',
+					title: 'business date',
 					data: '2023-07-20',
 					type: 'text',
 					options: {
@@ -252,7 +252,7 @@ export const bProvider = function () {
 				},
 				{
 					tid: 'bProviderModule.barcode',
-					title: '条形码',
+					title: 'barcode',
 					data: '18012345678',
 					type: 'text',
 					options: {
@@ -268,7 +268,7 @@ export const bProvider = function () {
 				},
 				{
 					tid: 'bProviderModule.qrcode',
-					title: '二维码',
+					title: 'QR code',
 					data: 'Z18012345678',
 					type: 'text',
 					options: {
@@ -285,11 +285,11 @@ export const bProvider = function () {
 				},
 				{
 					tid: 'bProviderModule.platform',
-					title: '平台名称',
-					data: '平台名称',
+					title: 'Platform name',
+					data: 'Platform name',
 					type: 'text',
 					options: {
-						testData: '平台名称',
+						testData: 'Platform name',
 						height: 17,
 						fontSize: 16.5,
 						fontWeight: '700',
@@ -299,15 +299,15 @@ export const bProvider = function () {
 				},
 				{ tid: 'bProviderModule.image', title: 'Logo', data: logoImg, type: 'image' },
 			]),
-			new hiprint.PrintElementTypeGroup('【客户】', [
+			new hiprint.PrintElementTypeGroup('[Customer]', [
 				{
 					tid: 'bProviderModule.khname',
-					title: '客户名称',
-					data: '高级客户',
+					title: 'Customer name',
+					data: 'Premium customers',
 					type: 'text',
 					options: {
 						field: 'name',
-						testData: '高级客户',
+						testData: 'Premium customers',
 						height: 16,
 						fontSize: 6.75,
 						fontWeight: '700',
@@ -317,7 +317,7 @@ export const bProvider = function () {
 				},
 				{
 					tid: 'bProviderModule.tel',
-					title: '客户电话',
+					title: 'Customer phone number',
 					data: '18012345678',
 					type: 'text',
 					options: {
@@ -331,95 +331,95 @@ export const bProvider = function () {
 					},
 				},
 			]),
-			new hiprint.PrintElementTypeGroup('【表格/其他】', [
+			new hiprint.PrintElementTypeGroup('[Table/Other]', [
 				{
 					tid: 'bProviderModule.table',
-					title: '订单数据',
+					title: 'Order Data',
 					type: 'table',
 					options: {
 						field: 'table',
 						fields: [
-							{ text: '名称', field: 'NAME' },
-							{ text: '数量', field: 'SL' },
-							{ text: '规格', field: 'GG' },
-							{ text: '条码', field: 'TM' },
-							{ text: '单价', field: 'DJ' },
-							{ text: '金额', field: 'JE' },
-							{ text: '备注', field: 'DETAIL' },
+							{ text: 'name', field: 'NAME' },
+							{ text: 'quantity', field: 'SL' },
+							{ text: 'Specification', field: 'GG' },
+							{ text: 'barcode', field: 'TM' },
+							{ text: 'Unit price', field: 'DJ' },
+							{ text: 'Amount', field: 'JE' },
+							{ text: 'Remarks', field: 'DETAIL' },
 						],
 					},
 					editable: true,
-					columnDisplayEditable: true, //列显示是否能编辑
-					columnDisplayIndexEditable: true, //列顺序显示是否能编辑
-					columnTitleEditable: true, //列标题是否能编辑
-					columnResizable: true, //列宽是否能调整
-					columnAlignEditable: true, //列对齐是否调整
-					isEnableEditField: true, //编辑字段
-					isEnableContextMenu: true, //开启右键菜单 默认true
-					isEnableInsertRow: true, //插入行
-					isEnableDeleteRow: true, //删除行
-					isEnableInsertColumn: true, //插入列
-					isEnableDeleteColumn: true, //删除列
-					isEnableMergeCell: true, //合并单元格
+					columnDisplayEditable: true, // Column shows whether it can be edited
+					columnDisplayIndexEditable: true, // Column order shows whether it can be edited
+					columnTitleEditable: true, // Whether column titles can be edited
+					columnResizable: true, // Can the column width be adjusted?
+					columnAlignEditable: true, // Whether column alignment is adjusted
+					isEnableEditField: true, // Edit field
+					isEnableContextMenu: true, // Enable right-click menu. Default is true.
+					isEnableInsertRow: true, // Insert row
+					isEnableDeleteRow: true, // Delete row
+					isEnableInsertColumn: true, // insert column
+					isEnableDeleteColumn: true, // Delete column
+					isEnableMergeCell: true, // Merge cells
 					columns: [
 						[
-							{ title: '名称', align: 'center', field: 'NAME', width: 100 },
-							{ title: '数量', align: 'center', field: 'SL', width: 100 },
-							{ title: '条码', align: 'center', field: 'TM', width: 100 },
-							{ title: '规格', align: 'center', field: 'GG', width: 100 },
-							{ title: '单价', align: 'center', field: 'DJ', width: 100 },
-							{ title: '金额', align: 'center', field: 'JE', width: 100 },
-							{ title: '备注', align: 'center', field: 'DETAIL', width: 100 },
+							{ title: 'name', align: 'center', field: 'NAME', width: 100 },
+							{ title: 'quantity', align: 'center', field: 'SL', width: 100 },
+							{ title: 'barcode', align: 'center', field: 'TM', width: 100 },
+							{ title: 'Specification', align: 'center', field: 'GG', width: 100 },
+							{ title: 'Unit price', align: 'center', field: 'DJ', width: 100 },
+							{ title: 'Amount', align: 'center', field: 'JE', width: 100 },
+							{ title: 'Remarks', align: 'center', field: 'DETAIL', width: 100 },
 						],
 					],
 					// footerFormatter: function (options: unknown, rows: unknown, data: any, currentPageGridRowsData: unknown) {
 					//   if (data && data['totalCap']) {
-					//     return `<td style="padding:0 10px" colspan="100">${'应收金额大写: ' + data['totalCap']}</td>`
+					//     return `<td style="padding:0 10px" colspan="100">${'Amount receivable in capital letters: ' + data['totalCap']}</td>`
 					//   }
-					//   return '<td style="padding:0 10px" colspan="100">应收金额大写: </td>'
+					//   return '<td style="padding:0 10px" colspan="100">Amount receivable in capital letters: </td>'
 					// },
 				},
-				{ tid: 'bProviderModule.customText', title: '文本', customText: '自定义文本', custom: true, type: 'text' },
+				{ tid: 'bProviderModule.customText', title: 'text', customText: 'Custom text', custom: true, type: 'text' },
 				{
 					tid: 'bProviderModule.longText',
-					title: '长文本',
+					title: 'Long text',
 					type: 'longText',
 					options: {
 						field: 'test.longText',
 						width: 200,
-						testData: '长文本分页/不分页测试',
+						testData: 'Long text pagination/non-pagination test',
 					},
 				},
 			]),
-			new hiprint.PrintElementTypeGroup('【辅助】', [
+			new hiprint.PrintElementTypeGroup('[Support]', [
 				{
 					tid: 'bProviderModule.hline',
-					title: '横线',
+					title: 'horizontal line',
 					type: 'hline',
 				},
 				{
 					tid: 'bProviderModule.vline',
-					title: '竖线',
+					title: 'Vertical line',
 					type: 'vline',
 				},
 				{
 					tid: 'bProviderModule.rect',
-					title: '矩形',
+					title: 'Rectangle',
 					type: 'rect',
 				},
 				{
 					tid: 'bProviderModule.oval',
-					title: '椭圆',
+					title: 'Ellipse',
 					type: 'oval',
 				},
 				{
 					tid: 'bProviderModule.barcode',
-					title: '条形码',
+					title: 'barcode',
 					type: 'barcode',
 				},
 				{
 					tid: 'bProviderModule.qrcode',
-					title: '二维码',
+					title: 'QR code',
 					type: 'qrcode',
 				},
 			]),
@@ -430,16 +430,16 @@ export const bProvider = function () {
 	};
 };
 
-// type: 1供货商 2经销商
+// type: 1 supplier 2 dealer
 export default [
 	{
-		name: 'A设计',
+		name: 'A design',
 		value: 'aProviderModule',
 		type: 1,
 		f: aProvider(),
 	},
 	{
-		name: 'B设计',
+		name: 'B Design',
 		value: 'bProviderModule',
 		type: 2,
 		f: bProvider(),

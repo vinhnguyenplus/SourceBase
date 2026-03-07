@@ -1,8 +1,8 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Admin.NET 通用权限开发平台
- * 让 .NET 开发更简单、更通用、更流行。整合最新技术，模块插件式开发，前后端分离，开箱即用。<br/><u><b><font color='FF0000'> 👮不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！</font></b></u>
+ * Admin.NET General Permission Development Platform
+ * let .NET Develop more simply、More general、More popular。wholeIn line with the latest technology，Modular Plugin-Based Development，Frontend and backendpointsLeave，Ready to use out of the box。<br/><u><b><font color='FF0000'> 👮This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project! </font></b></u>
  *
  * OpenAPI spec version: 1.0.0
  * 
@@ -25,7 +25,7 @@ import { YesNoEnum } from './yes-no-enum';
 export interface UpdateTenantInput {
 
     /**
-     * 雪花Id
+     * SnowflakeId
      *
      * @type {number}
      * @memberof UpdateTenantInput
@@ -33,7 +33,7 @@ export interface UpdateTenantInput {
     id?: number;
 
     /**
-     * 创建时间
+     * Creation Time
      *
      * @type {Date}
      * @memberof UpdateTenantInput
@@ -41,7 +41,7 @@ export interface UpdateTenantInput {
     createTime?: Date;
 
     /**
-     * 更新时间
+     * Update Time
      *
      * @type {Date}
      * @memberof UpdateTenantInput
@@ -49,7 +49,7 @@ export interface UpdateTenantInput {
     updateTime?: Date | null;
 
     /**
-     * 创建者Id
+     * CreatorId
      *
      * @type {number}
      * @memberof UpdateTenantInput
@@ -57,7 +57,7 @@ export interface UpdateTenantInput {
     createUserId?: number | null;
 
     /**
-     * 创建者姓名
+     * Creator name
      *
      * @type {string}
      * @memberof UpdateTenantInput
@@ -65,7 +65,7 @@ export interface UpdateTenantInput {
     createUserName?: string | null;
 
     /**
-     * 修改者Id
+     * Modifier ID
      *
      * @type {number}
      * @memberof UpdateTenantInput
@@ -73,7 +73,7 @@ export interface UpdateTenantInput {
     updateUserId?: number | null;
 
     /**
-     * 修改者姓名
+     * Modifier name
      *
      * @type {string}
      * @memberof UpdateTenantInput
@@ -81,7 +81,7 @@ export interface UpdateTenantInput {
     updateUserName?: string | null;
 
     /**
-     * 租管用户Id
+     * Rent-controlled User ID
      *
      * @type {number}
      * @memberof UpdateTenantInput
@@ -89,7 +89,7 @@ export interface UpdateTenantInput {
     userId?: number;
 
     /**
-     * 机构Id
+     * Organization ID
      *
      * @type {number}
      * @memberof UpdateTenantInput
@@ -97,7 +97,7 @@ export interface UpdateTenantInput {
     orgId?: number;
 
     /**
-     * 域名
+     * domain name
      *
      * @type {string}
      * @memberof UpdateTenantInput
@@ -117,7 +117,7 @@ export interface UpdateTenantInput {
     dbType?: DbType;
 
     /**
-     * 数据库连接
+     * Database connection
      *
      * @type {string}
      * @memberof UpdateTenantInput
@@ -125,7 +125,7 @@ export interface UpdateTenantInput {
     connection?: string | null;
 
     /**
-     * 数据库标识
+     * Database ID
      *
      * @type {string}
      * @memberof UpdateTenantInput
@@ -133,7 +133,7 @@ export interface UpdateTenantInput {
     configId?: string | null;
 
     /**
-     * 从库连接/读写分离
+     * Slave connection / read-write separation
      *
      * @type {string}
      * @memberof UpdateTenantInput
@@ -147,7 +147,7 @@ export interface UpdateTenantInput {
     enableReg?: YesNoEnum;
 
     /**
-     * 默认注册方案Id
+     * Default registration schemeId
      *
      * @type {number}
      * @memberof UpdateTenantInput
@@ -155,7 +155,7 @@ export interface UpdateTenantInput {
     regWayId?: number | null;
 
     /**
-     * 图标
+     * icon
      *
      * @type {string}
      * @memberof UpdateTenantInput
@@ -163,7 +163,7 @@ export interface UpdateTenantInput {
     logo?: string | null;
 
     /**
-     * 水印
+     * Watermark
      *
      * @type {string}
      * @memberof UpdateTenantInput
@@ -171,7 +171,7 @@ export interface UpdateTenantInput {
     watermark?: string | null;
 
     /**
-     * 排序
+     * Sort
      *
      * @type {number}
      * @memberof UpdateTenantInput
@@ -179,7 +179,7 @@ export interface UpdateTenantInput {
     orderNo?: number;
 
     /**
-     * 备注
+     * Remarks
      *
      * @type {string}
      * @memberof UpdateTenantInput
@@ -193,7 +193,7 @@ export interface UpdateTenantInput {
     status?: StatusEnum;
 
     /**
-     * 电子邮箱
+     * electricitychildEmail
      *
      * @type {string}
      * @memberof UpdateTenantInput
@@ -201,7 +201,7 @@ export interface UpdateTenantInput {
     email?: string | null;
 
     /**
-     * 电话
+     * Telephone
      *
      * @type {string}
      * @memberof UpdateTenantInput
@@ -209,7 +209,7 @@ export interface UpdateTenantInput {
     phone?: string | null;
 
     /**
-     * 租户名称
+     * Tenant name
      *
      * @type {string}
      * @memberof UpdateTenantInput
@@ -217,7 +217,7 @@ export interface UpdateTenantInput {
     name: string;
 
     /**
-     * 租管账号
+     * Rental account
      *
      * @type {string}
      * @memberof UpdateTenantInput
@@ -225,7 +225,7 @@ export interface UpdateTenantInput {
     adminAccount: string;
 
     /**
-     * 系统主标题
+     * System Main Title
      *
      * @type {string}
      * @memberof UpdateTenantInput
@@ -233,7 +233,7 @@ export interface UpdateTenantInput {
     title?: string | null;
 
     /**
-     * 系统副标题
+     * System Subtitle
      *
      * @type {string}
      * @memberof UpdateTenantInput
@@ -241,7 +241,7 @@ export interface UpdateTenantInput {
     viceTitle?: string | null;
 
     /**
-     * 系统描述
+     * System description
      *
      * @type {string}
      * @memberof UpdateTenantInput
@@ -249,7 +249,7 @@ export interface UpdateTenantInput {
     viceDesc?: string | null;
 
     /**
-     * 版权说明
+     * Copyright statement
      *
      * @type {string}
      * @memberof UpdateTenantInput
@@ -257,7 +257,7 @@ export interface UpdateTenantInput {
     copyright?: string | null;
 
     /**
-     * ICP备案号
+     * ICP Filing Number
      *
      * @type {string}
      * @memberof UpdateTenantInput
@@ -265,7 +265,7 @@ export interface UpdateTenantInput {
     icp?: string | null;
 
     /**
-     * ICP地址
+     * ICP address
      *
      * @type {string}
      * @memberof UpdateTenantInput
@@ -273,7 +273,7 @@ export interface UpdateTenantInput {
     icpUrl?: string | null;
 
     /**
-     * Logo图片Base64码
+     * LogoPictureBase64code
      *
      * @type {string}
      * @memberof UpdateTenantInput
@@ -281,7 +281,7 @@ export interface UpdateTenantInput {
     logoBase64?: string | null;
 
     /**
-     * Logo文件名
+     * LogoFile name
      *
      * @type {string}
      * @memberof UpdateTenantInput

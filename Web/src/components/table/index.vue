@@ -7,29 +7,29 @@
 			<div v-loading="state.exportLoading" class="table-footer-tool">
                 <el-dropdown v-if="!config.hideExport" split-button trigger="click" @click="onExportTable">
                     <!-- <el-button icon="ele-Download"  /> -->
-                     导出
+                     Export
                     <template #dropdown>
                         <el-dropdown-menu>
-                            <el-dropdown-item @click="onExportTable">导出本页数据</el-dropdown-item>
-                            <el-dropdown-item @click="onExportTableAll">导出全部数据</el-dropdown-item>
+                            <el-dropdown-item @click="onExportTable">Export data on this page</el-dropdown-item>
+                            <el-dropdown-item @click="onExportTableAll">Export all data</el-dropdown-item>
                         </el-dropdown-menu>
                     </template>
                 </el-dropdown>
 
                 <el-button-group>
-                    <el-button icon="ele-Refresh" v-if="!config.hideRefresh" title="刷新" @click="() => onRefreshTable()" />
+                    <el-button icon="ele-Refresh" v-if="!config.hideRefresh" title="Refresh" @click="() => onRefreshTable()" />
                     <el-button icon="ele-Switch" v-if="state.haveFixed" :title="state.switchFixedContent" :color="state.fixedIconColor" @click="switchFixed" />
-                    <el-button icon="ele-Printer" v-if="!config.hidePrint" title="打印" @click="onPrintTable"  />
+                    <el-button icon="ele-Printer" v-if="!config.hidePrint" title="Print" @click="onPrintTable"  />
                     <el-popover v-if="!config.hideSet" placement="bottom-end" trigger="click" transition="el-zoom-in-top" popper-class="table-tool-popper" :width="200" :persistent="false" @show="onSetTable">
                         <template #reference>
                             <el-button icon="ele-Setting"  />
                         </template>
                         <template #default>
                             <div class="tool-box">
-                                <el-checkbox v-model="state.checkListAll" :indeterminate="state.checkListIndeterminate" class="ml10 mr1" label="列显示" @change="onCheckAllChange" />
-                                <el-checkbox v-model="getConfig.isSerialNo" class="ml12 mr1" label="序号" />
-                                <el-checkbox v-if="getConfig.showSelection" v-model="getConfig.isSelection" class="ml12 mr1" label="多选" />
-                                <el-tooltip content="拖动进行排序" placement="top-start">
+                                <el-checkbox v-model="state.checkListAll" :indeterminate="state.checkListIndeterminate" class="ml10 mr1" label="Column Display" @change="onCheckAllChange" />
+                                <el-checkbox v-model="getConfig.isSerialNo" class="ml12 mr1" label="No" />
+                                <el-checkbox v-if="getConfig.showSelection" v-model="getConfig.isSelection" class="ml12 mr1" label="Multiple Choice" />
+                                <el-tooltip content="Drag to sort" placement="top-start">
                                     <SvgIcon style="position: absolute; right: 15px; line-height: 32px;" name="fa fa-question-circle-o" :size="17" class="ml11 cursor-pointer" color="#909399" />
                                 </el-tooltip>
                             </div>
@@ -61,12 +61,12 @@
             @sort-change="sortChange"
 		>
 			<el-table-column type="selection" :reserve-selection="true" :width="30" v-if="config.isSelection && config.showSelection" />
-			<el-table-column type="index" :fixed="state.currentFixed && state.serialNoFixed" label="序号" align="center" :width="60" v-if="config.isSerialNo" />
+			<el-table-column type="index" :fixed="state.currentFixed && state.serialNoFixed" label="No" align="center" :width="60" v-if="config.isSerialNo" />
 			<el-table-column v-for="(item, index) in setHeader" :key="index" v-bind="item">
 				<template #header v-if="!item.children && $slots[item.prop]">
 					<slot :name="`${item.prop}header`" />
 				</template>
-				<!-- 自定义列插槽，插槽名为columns属性的prop -->
+				<!-- Custom column slot, the slot name is the prop of the columns attribute -->
 				<template #default="scope" v-if="!item.children && $slots[item.prop]">
 					<formatter v-if="item.formatter" :fn="item.formatter(scope.row, scope.column, scope.cellValue, scope.index)"> </formatter>
 					<slot v-else :name="item.prop" v-bind="scope"></slot>
@@ -88,7 +88,7 @@
 					</template>
 				</template>
 				<el-table-column v-for="(childrenItem, childrenIndex) in item.children" :key="childrenIndex" v-bind="childrenItem">
-					<!-- 自定义列插槽，插槽名为columns属性的prop -->
+					<!-- Custom column slot, the slot name is the prop of the columns attribute -->
 					<template #default="scope" v-if="$slots[childrenItem.prop]">
 						<formatter v-if="childrenItem.formatter" :fn="childrenItem.formatter(scope.row, scope.column, scope.cellValue, scope.index)"> </formatter>
 						<slot v-else :name="childrenItem.prop" v-bind="scope"></slot>
@@ -112,7 +112,7 @@
 				</el-table-column>
 			</el-table-column>
 			<!-- <template #empty>
-				<el-empty description="暂无数据" />
+				<el-empty description="No data available" />
 			</template> -->
 		</el-table>
 		<div v-if="!config.hidePagination && state.showPagination" class="table-footer mt2">
@@ -142,50 +142,50 @@ import printJs from 'print-js';
 //import { EmptyObjectType } from "/@/types/global";
 import formatter from '/@/components/table/formatter.vue';
 import { useThemeConfig } from '/@/stores/themeConfig';
-import { exportExcel } from '/@/utils/exportExcel';  //TODO: 此包会引起浏览器控制台报 Module "stream" has been externalized for browser compatibility. Cannot access "stream.Readable" in client code. 警告，建议替换
+import { exportExcel } from '/@/utils/exportExcel';  // TODO: This package will cause the browser console to report Module "stream" has been externalized for browser compatibility. Cannot access "stream.Readable" in client code. warning, it is recommended to replace it.
 
-// 定义父组件传过来的值
+// Define the value passed by the parent component
 const props = defineProps({
-	// 获取数据的方法，由父组件传递
+	// Method to obtain data, passed by the parent component
 	getData: {
 		type: Function,
 		required: true,
 	},
-	// 列属性，和elementUI的Table-column 属性相同，附加属性：isCheck-是否默认勾选展示，hideCheck-是否隐藏该列的可勾选和拖拽
+	// The column attribute is the same as the Table-column attribute of elementUI. Additional attributes: isCheck - whether to check and display by default, hideCheck - whether to hide the checkable and draggable properties of the column.
 	columns: {
 		type: Array<any>,
 		default: () => [],
 	},
-	// 配置项：isBorder-是否显示表格边框，isSerialNo-是否显示表格序号，showSelection-是否显示表格可多选，isSelection-是否默认选中表格多选，pageSize-每页条数，hideExport-是否隐藏导出按钮，exportFileName-导出表格的文件名，空值默认用应用名称作为文件名
+	// Configuration items: isBorder - whether to display the table border, isSerialNo - whether to display the table No, showSelection - whether to display the table with multiple selections, isSelection - whether the table multi-selection is selected by default, pageSize - the number of items per page, hideExport - whether to hide the export button, exportFileName - the file name of the exported table, and the empty value defaults to the application name as the file name.
 	config: {
 		type: Object,
 		default: () => ({}),
 	},
-	// 筛选参数
+	// Filter parameters
 	param: {
 		type: Object,
 		default: () => ({}),
 	},
-	// 默认排序方式，{prop:"排序字段",order:"ascending or descending"}
+	// Default sorting method, {prop:"sort field",order:"ascending or descending"}
 	defaultSort: {
 		type: Object,
 		default: () => ({}),
 	},
-	// 导出报表自定义数据转换方法，不传按字段值导出
+	// Export report custom data conversion method, do not export by field value
 	exportChangeData: {
 		type: Function,
 	},
-	// 打印标题
+	// Print title
 	printName: {
 		type: String,
 		default: () => '',
 	},
 });
 
-// 定义子组件向父组件传值/事件，pageChange-翻页事件，selectionChange-表格多选事件，可以在父组件处理批量删除/修改等功能，sortHeader-拖拽列顺序事件
+// Define the child component to pass values/events to the parent component, pageChange - page turning event, selectionChange - table multi-selection event, which can handle functions such as batch deletion/modification in the parent component, sortHeader - drag and drop column order event
 const emit = defineEmits(['pageChange', 'selectionChange', 'sortHeader']);
 
-// 定义变量内容
+// Define variable content
 const toolSetRef = ref();
 const tableRef = ref();
 const storesThemeConfig = useThemeConfig();
@@ -210,7 +210,7 @@ const state = reactive({
 	haveFixed: false,
 	currentFixed: false,
 	serialNoFixed: false,
-	switchFixedContent: '取消固定列',
+	switchFixedContent: 'Unfreeze columns',
 	fixedIconColor: themeConfig.value.primary,
 });
 
@@ -227,71 +227,71 @@ const getProperty = (obj: any, property: any) => {
 	return value;
 };
 
-// 设置边框显示/隐藏
+// Set border display/hide
 const setBorder = computed(() => {
 	return props.config.isBorder ? true : false;
 });
-// 设置斑马纹显示/隐藏
+// Set zebra pattern show/hide
 const setStripe = computed(() => {
 	return props.config.isStripe ? true : false;
 });
-// 获取父组件 配置项（必传）
+// Get parent component configuration items (required)
 const getConfig = computed(() => {
 	return props.config;
 });
-// 设置 tool header 数据
+// Set tool header data
 const setHeader = computed(() => {
 	return state.columns.filter((v) => v.isCheck);
 });
-// tool 列显示全选改变时
+// When tool column display select all changes
 const onCheckAllChange = <T,>(val: T) => {
 	if (val) state.columns.forEach((v) => (v.isCheck = true));
 	else state.columns.forEach((v) => (v.isCheck = false));
 	state.checkListIndeterminate = false;
 };
-// tool 列显示当前项改变时
+// The tool column displays when the current item changes
 const onCheckChange = () => {
 	const headers = state.columns.filter((v) => v.isCheck).length;
 	state.checkListAll = headers === state.columns.length;
 	state.checkListIndeterminate = headers > 0 && headers < state.columns.length;
 };
-// 表格多选改变时
+// When the table multi-select changes
 const onSelectionChange = (val: EmptyObjectType[]) => {
 	state.selectlist = val;
 	emit('selectionChange', state.selectlist);
 };
-// 分页改变
+// Pagination changes
 const onHandleSizeChange = (val: number) => {
 	state.page.pageSize = val;
 	onRefreshTable();
 	emit('pageChange', state.page);
 };
-// 改变当前页
+// Change current page
 const onHandleCurrentChange = (val: number) => {
 	state.page.page = val;
 	onRefreshTable();
 	emit('pageChange', state.page);
 };
-// 列排序
+// Column sort
 const sortChange = (column: any) => {
 	state.page.field = column.prop;
 	state.page.order = column.order;
 	onRefreshTable();
 };
-// 重置列表
+// reset list
 const pageReset = () => {
 	tableRef.value.clearSelection();
 	state.page.page = 1;
 	onRefreshTable();
 };
-// 导出当前页
+// Export current page
 const onExportTable = () => {
-	if (setHeader.value.length <= 0) return ElMessage.error('没有勾选要导出的列');
+	if (setHeader.value.length <= 0) return ElMessage.error('No columns selected for export');
 	exportData(state.data);
 };
-// 全部导出
+// Export all
 const onExportTableAll = async () => {
-	if (setHeader.value.length <= 0) return ElMessage.error('没有勾选要导出的列');
+	if (setHeader.value.length <= 0) return ElMessage.error('No columns selected for export');
 	state.exportLoading = true;
 	const param = Object.assign({}, props.param, { page: 1, pageSize: 9999999 });
 	const res = await props.getData(param);
@@ -299,9 +299,9 @@ const onExportTableAll = async () => {
 	const data = res.result?.items ?? [];
 	exportData(data);
 };
-// 导出方法
+// Export method
 const exportData = (data: Array<EmptyObjectType>) => {
-	if (data.length <= 0) return ElMessage.error('没有数据可以导出');
+	if (data.length <= 0) return ElMessage.error('No data available for export');
 	state.exportLoading = true;
 	let exportData = JSON.parse(JSON.stringify(data));
 	if (props.exportChangeData) {
@@ -313,11 +313,11 @@ const exportData = (data: Array<EmptyObjectType>) => {
 			setHeader.value.filter((item) => {
 				return item.type != 'action';
 			}),
-			'导出数据'
+			'Export Data'
 	);
 	state.exportLoading = false;
 };
-// 打印
+// Print
 const onPrintTable = () => {
     let printDiv = document.createElement('div');
     let printTitle = document.createElement('div');
@@ -325,7 +325,7 @@ const onPrintTable = () => {
     let printTableHeader = document.createElement('thead');
     let printTableBody = document.createElement('tbody');
 
-    // 构建表头
+    // Build header
     setHeader.value.forEach((col: EmptyObjectType) => {
         if (col.prop === 'action' || !col.isCheck) {
             return;
@@ -338,7 +338,7 @@ const onPrintTable = () => {
             printTableHeader.appendChild(th);
     });
 
-    // 构建表体
+    // Build table body
     state.data.forEach((row: EmptyObjectType) => {
         let tr = document.createElement('tr');
         tr.classList.add('print-table-tr');
@@ -371,7 +371,7 @@ const onPrintTable = () => {
     printTable.appendChild(printTableBody);
     printTable.classList.add('print-table');
 
-    // 构建打印标题
+    // Build print header
     if(props.config.printName) {
         printTitle.classList.add('print-table-title');
         printTitle.innerText = props.config.printName;
@@ -393,7 +393,7 @@ const onPrintTable = () => {
     printDiv.remove()
 };
 
-// 拖拽设置
+// Drag and drop settings
 const onSetTable = () => {
 	nextTick(() => {
 		const sortable = Sortable.create(toolSetRef.value, {
@@ -401,7 +401,7 @@ const onSetTable = () => {
 			dataIdAttr: 'data-key',
 			animation: 150,
             onStart: () => {
-                // 为了区分固定列和非固定列，拖动时给非固定列加背景色
+                // In order to distinguish fixed columns from non-fixed columns, add a background color to non-fixed columns when dragging
                 toolSetRef.value.children.forEach((element: HTMLElement) => {
                     if(element.dataset.fixed === 'false') {
                         element.classList.add('tool-sortable-item-draggable');
@@ -409,9 +409,9 @@ const onSetTable = () => {
                 });
             },
             onMove: (evt) => {
-                // 禁止固定列拖动
-                const srcItem = evt.dragged.dataset.fixed; // 拖动项
-                const targetItem = evt.related.dataset.fixed; // 目标位置(禁止拖动到固定列位置)
+                // Disable fixed column dragging
+                const srcItem = evt.dragged.dataset.fixed; // Drag item
+                const targetItem = evt.related.dataset.fixed; // Target position (disable dragging to fixed column position)
                 if(srcItem === 'true' || targetItem === 'true') {
                     return false;
                 }
@@ -426,7 +426,7 @@ const onSetTable = () => {
 				//emit('sortHeader', headerList);
                 state.columns = headerList;
 
-                // 清除拖动时加的背景色
+                // Clear the background color added when dragging
                 toolSetRef.value.children.forEach((element: HTMLElement) => {
                     element.classList.remove('tool-sortable-item-draggable');
                 });
@@ -461,7 +461,7 @@ const getTableData = () => {
 
 const setTableData = (data: Array<EmptyObjectType>, add: boolean = false) => {
 	if (add) {
-		// 追加, 去重
+		// Append, remove duplicates
 		var repeat = false;
 		for (let newItem of data) {
 			repeat = false;
@@ -486,7 +486,7 @@ const clearFixed = () => {
 
 const switchFixed = () => {
 	state.currentFixed = !state.currentFixed;
-	state.switchFixedContent = state.currentFixed ? '取消固定列' : '启用固定列';
+	state.switchFixedContent = state.currentFixed ? 'Unfreeze columns' : 'enablefixedcolumn';
 	if (state.currentFixed) {
 		state.fixedIconColor = themeConfig.value.primary;
 		state.columns = JSON.parse(JSON.stringify(state.oldColumns));
@@ -523,7 +523,7 @@ onMounted(() => {
 
 const handleList = onRefreshTable;
 
-// 暴露变量
+// exposure variables
 defineExpose({
 	pageReset,
 	handleList,

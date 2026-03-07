@@ -1,13 +1,13 @@
-// Admin.NET 项目的版权、商标、专利和其他相关权利均受相应法律法规的保护。使用本项目应遵守相关法律法规和许可证的要求。
+// The copyright, trademark, patent and other related rights of the Admin.NET project are protected by corresponding laws and regulations. Use of this project shall comply with relevant laws, regulations and license requirements.
 //
-// 本项目主要遵循 MIT 许可证和 Apache 许可证（版本 2.0）进行分发和使用。许可证位于源代码树根目录中的 LICENSE-MIT 和 LICENSE-APACHE 文件。
+// This project is distributed and used primarily under the MIT License and the Apache License (version 2.0). The license is located in the LICENSE-MIT and LICENSE-APACHE files in the root of the source tree.
 //
-// 不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！
+// This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project!
 
 namespace Admin.NET.Core.Service;
 
 /// <summary>
-/// 系统菜单服务 🧩
+/// System menu service 🧩
 /// </summary>
 [ApiDescriptionSettings(Order = 450)]
 public class SysMenuService : IDynamicApiController, ITransient
@@ -45,17 +45,17 @@ public class SysMenuService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 获取登录菜单树 🔖
+    /// Get login menu tree 🔖
     /// </summary>
     /// <returns></returns>
-    [DisplayName("获取登录菜单树")]
+    [DisplayName("Get login menu tree")]
     public async Task<List<MenuOutput>> GetLoginMenuTree()
     {
         var sysDefaultLang = App.GetOptions<LocalizationSettingsOptions>().DefaultCulture;
         var langCode = _userManager.LangCode;
         var (query, _) = GetSugarQueryableAndTenantId(_userManager.TenantId);
 
-        // 查询菜单主表（过滤非按钮和禁用）
+        // Query menu main table (filter non-buttons and disabled)
         var menuQuery = query.Where(u => u.Type != MenuTypeEnum.Btn && u.Status == StatusEnum.Enable);
 
         if (!(_userManager.SuperAdmin || _userManager.SysAdmin))
@@ -64,15 +64,15 @@ public class SysMenuService : IDynamicApiController, ITransient
             menuQuery = menuQuery.Where(u => menuIdList.Contains(u.Id));
         }
 
-        // 查询主表（不再 LEFT JOIN）
+        // Query the main table (no more LEFT JOIN)
         var menuList = await menuQuery
             .OrderBy(u => new { u.OrderNo, u.Id })
             .ToListAsync();
 
-        // 仅当用户语言和系统默认语言不同时，才进行翻译，避免不必要的性能开销
+        // Translation is only performed when the user language is different from the system default language to avoid unnecessary performance overhead.
         if (langCode != sysDefaultLang)
         {
-            // 调用缓存翻译：翻译 Title 字段
+            // Call cached translation: translate the Title field
             var fields = new List<LangFieldMap<SysMenu>>
             {
                 new LangFieldMap<SysMenu>
@@ -86,27 +86,27 @@ public class SysMenuService : IDynamicApiController, ITransient
             await _sysLangTextCacheService.TranslateMultiFields(menuList, fields, langCode);
         }
 
-        // 构造树
+        // Construction tree
         var menuTree = menuList.ToTree(
             it => it.Children, it => it.Pid, 0
         );
 
-        // 转换为输出 DTO
+        // Convert to output DTO
         return menuTree.Adapt<List<MenuOutput>>();
     }
 
     /// <summary>
-    /// 获取菜单列表 🔖
+    /// Get menu list 🔖
     /// </summary>
     /// <returns></returns>
-    [DisplayName("获取菜单列表")]
+    [DisplayName("ObtainmenuList")]
     public async Task<List<SysMenu>> GetList([FromQuery] MenuInput input)
     {
         var langCode = _userManager.LangCode;
         var menuIdList = _userManager.SuperAdmin || _userManager.SysAdmin ? new List<long>() : await GetMenuIdList();
         var (query, _) = GetSugarQueryableAndTenantId(input.TenantId);
 
-        // 有条件直接查询菜单列表（带 Title、Type 过滤）
+        // Conditionally query the menu list directly (with Title and Type filtering)
         if (!string.IsNullOrWhiteSpace(input.Title) || input.Type is > 0)
         {
             var menuList = await query
@@ -116,7 +116,7 @@ public class SysMenuService : IDynamicApiController, ITransient
                 .OrderBy(u => new { u.OrderNo, u.Id })
                 .ToListAsync();
 
-            // 走缓存批量翻译
+            // Use cached batch translation
             var fields = new List<LangFieldMap<SysMenu>>
             {
                 new LangFieldMap<SysMenu>
@@ -132,7 +132,7 @@ public class SysMenuService : IDynamicApiController, ITransient
             return menuList.Distinct().ToList();
         }
 
-        // 无筛选条件则走全量树形结构（带权限）
+        // If there are no filter conditions, the entire tree structure will be used (with permissions)
         if (!(_userManager.SuperAdmin || _userManager.SysAdmin))
         {
             query = query.Where(u => menuIdList.Contains(u.Id));
@@ -142,7 +142,7 @@ public class SysMenuService : IDynamicApiController, ITransient
             .OrderBy(u => new { u.OrderNo, u.Id })
             .ToListAsync();
 
-        // 走缓存批量翻译
+        // Use cached batch translation
         var treeFields = new List<LangFieldMap<SysMenu>>
         {
             new LangFieldMap<SysMenu>
@@ -155,18 +155,18 @@ public class SysMenuService : IDynamicApiController, ITransient
         };
         await _sysLangTextCacheService.TranslateMultiFields(menuFullList, treeFields, langCode);
 
-        // 组装树
+        // Assembly tree
         var menuTree = menuFullList.ToTree(it => it.Children, it => it.Pid, 0);
         return menuTree.ToList();
     }
 
     /// <summary>
-    /// 增加菜单 🔖
+    /// Add menu 🔖
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
     [ApiDescriptionSettings(Name = "Add"), HttpPost]
-    [DisplayName("增加菜单")]
+    [DisplayName("Add menu")]
     public async Task<long> AddMenu(AddMenuInput input)
     {
         var (query, tenantId) = GetSugarQueryableAndTenantId(input.TenantId);
@@ -180,27 +180,27 @@ public class SysMenuService : IDynamicApiController, ITransient
 
         if (input.Pid != 0 && await query.AnyAsync(u => u.Id == input.Pid && u.Type == MenuTypeEnum.Btn)) throw Oops.Oh(ErrorCodeEnum.D4010);
 
-        // 校验菜单参数
+        // Verify menu parameters
         var sysMenu = input.Adapt<SysMenu>();
         CheckMenuParam(sysMenu);
 
-        // 保存租户菜单权限
+        // Save tenant menu permissions
         await _sysMenuRep.InsertAsync(sysMenu);
         await _sysTenantMenuRep.InsertAsync(new SysTenantMenu { TenantId = tenantId, MenuId = sysMenu.Id });
 
-        // 清除缓存
+        // clear cache
         DeleteMenuCache();
 
         return sysMenu.Id;
     }
 
     /// <summary>
-    /// 更新菜单 🔖
+    /// Update menu 🔖
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
     [ApiDescriptionSettings(Name = "Update"), HttpPost]
-    [DisplayName("更新菜单")]
+    [DisplayName("Updatemenu")]
     public async Task UpdateMenu(UpdateMenuInput input)
     {
         if (!_userManager.SuperAdmin && new SysMenuSeedData().HasData().Any(u => u.Id == input.Id)) throw Oops.Oh(ErrorCodeEnum.D4012);
@@ -217,16 +217,16 @@ public class SysMenuService : IDynamicApiController, ITransient
 
         if (input.Pid != 0 && await query.AnyAsync(u => u.Id == input.Pid && u.Type == MenuTypeEnum.Btn)) throw Oops.Oh(ErrorCodeEnum.D4010);
 
-        // 校验菜单参数
+        // Verify menu parameters
         var sysMenu = input.Adapt<SysMenu>();
         CheckMenuParam(sysMenu);
 
         await _sysMenuRep.AsTenant().UseTranAsync(async () =>
         {
-            // 更新菜单
+            // Update menu
             await _sysMenuRep.AsUpdateable(sysMenu).ExecuteCommandAsync();
 
-            // 同步更新翻译表
+            // Synchronously update the translation table
             var menuTranslation = await _sysLangTextCacheService.GetTranslationEntity("SysMenu", "Title", sysMenu.Id, _userManager.LangCode);
             if (!menuTranslation.IsNullOrEmpty())
             {
@@ -242,21 +242,21 @@ public class SysMenuService : IDynamicApiController, ITransient
             }
         }, err =>
         {
-            Oops.Oh("更新数据时发生错误", err.Message);
+            Oops.Oh("UpdateDatatimehappenmistake", err.Message);
         });
 
-        // 清除缓存
+        // clear cache
         DeleteMenuCache();
     }
 
     /// <summary>
-    /// 删除菜单 🔖
+    /// Delete menu 🔖
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
     [UnitOfWork]
     [ApiDescriptionSettings(Name = "Delete"), HttpPost]
-    [DisplayName("删除菜单")]
+    [DisplayName("Delete Menu")]
     public async Task DeleteMenu(DeleteMenuInput input)
     {
         if (!_userManager.SuperAdmin && new SysMenuSeedData().HasData().Any(u => u.Id == input.Id)) throw Oops.Oh(ErrorCodeEnum.D4013);
@@ -266,26 +266,26 @@ public class SysMenuService : IDynamicApiController, ITransient
 
         await _sysMenuRep.DeleteAsync(u => menuIdList.Contains(u.Id));
 
-        // 级联删除租户菜单数据
+        // Cascade delete tenant menu data
         await _sysTenantMenuRep.AsDeleteable().Where(u => menuIdList.Contains(u.MenuId)).ExecuteCommandAsync();
 
-        // 级联删除角色菜单数据
+        // Cascade delete character menu data
         await _sysRoleMenuService.DeleteRoleMenuByMenuIdList(menuIdList);
 
-        // 级联删除用户收藏菜单
+        // Cascade delete user favorite menu
         await _sysUserMenuService.DeleteMenuList(menuIdList);
 
-        // 清除缓存
+        // clear cache
         DeleteMenuCache();
     }
 
     /// <summary>
-    /// 设置菜单状态 🔖
+    /// Set menu status 🔖
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
     [UnitOfWork]
-    [DisplayName("设置菜单状态")]
+    [DisplayName("Set menu status")]
     public virtual async Task<int> SetStatus(MenuStatusInput input)
     {
         if (_userManager.UserId == input.Id)
@@ -298,7 +298,7 @@ public class SysMenuService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 增加和编辑时检查菜单数据
+    /// Check menu data when adding and editing
     /// </summary>
     /// <param name="menu"></param>
     private static void CheckMenuParam(SysMenu menu)
@@ -327,10 +327,10 @@ public class SysMenuService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 获取用户拥有按钮权限集合（缓存） 🔖
+    /// Get the set of button permissions that the user has (cache) 🔖
     /// </summary>
     /// <returns></returns>
-    [DisplayName("获取按钮权限集合")]
+    [DisplayName("Obtain the set of button permissions")]
     public async Task<List<string>> GetOwnBtnPermList()
     {
         var userId = _userManager.UserId;
@@ -356,7 +356,7 @@ public class SysMenuService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 获取系统所有按钮权限集合（缓存）
+    /// Get the permission set of all buttons in the system (cache)
     /// </summary>
     /// <returns></returns>
     [NonAction]
@@ -374,7 +374,7 @@ public class SysMenuService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 根据租户id获取构建菜单联表查询实例
+    /// Get the build menu joint table query instance based on the tenant ID
     /// </summary>
     /// <param name="tenantId"></param>
     /// <returns></returns>
@@ -383,7 +383,7 @@ public class SysMenuService : IDynamicApiController, ITransient
     {
         if (!_userManager.SuperAdmin) tenantId = _userManager.TenantId;
 
-        // 超管用户菜单范围：种子菜单 + 租户id菜单
+        // Super-managed user menu range: seed menu + tenant id menu
         ISugarQueryable<SysMenu, SysTenantMenu> query;
         if (_userManager.SuperAdmin)
         {
@@ -393,10 +393,10 @@ public class SysMenuService : IDynamicApiController, ITransient
             }
             else
             {
-                // 指定租户的菜单
+                // Tenant-specific menu
                 var menuIds = _sysTenantMenuRep.AsQueryable().Where(u => u.TenantId == tenantId).ToList(u => u.MenuId) ?? new();
 
-                // 种子菜单
+                // Seed menu
                 //menuIds.AddRange(new SysMenuSeedData().HasData().Select(u => u.Id).ToList());
 
                 menuIds = menuIds.Distinct().ToList();
@@ -412,7 +412,7 @@ public class SysMenuService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 清除菜单和按钮缓存
+    /// Clear menu and button cache
     /// </summary>
     [NonAction]
     public void DeleteMenuCache()
@@ -422,7 +422,7 @@ public class SysMenuService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 获取当前用户菜单Id集合
+    /// Get the current user menu ID collection
     /// </summary>
     /// <returns></returns>
     [NonAction]
@@ -433,28 +433,28 @@ public class SysMenuService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 排除前端存在全选的父级菜单
+    /// Exclude the existence of a select-all parent menu on the front end
     /// </summary>
     /// <returns></returns>
     [NonAction]
     public async Task<List<long>> ExcludeParentMenuOfFullySelected(List<long> menuIds)
     {
-        // 获取当前用户菜单
+        // Get the current user menu
         var (query, _) = GetSugarQueryableAndTenantId(0);
         var menuList = await query.ToListAsync();
 
-        // 排除列表，防止前端全选问题
+        // Exclude the list to prevent front-end select-all problems
         var exceptList = new List<long>();
         foreach (var id in menuIds)
         {
-            // 排除按钮菜单
+            // exclude button menu
             if (menuList.Any(u => u.Id == id && u.Type == MenuTypeEnum.Btn)) continue;
 
-            // 如果没有子集或有全部子集权限
+            // If there is no subset or all subset permissions
             var children = menuList.ToChildList(u => u.Id, u => u.Pid, id, false).ToList();
             if (children.Count == 0 || children.All(u => menuIds.Contains(u.Id))) continue;
 
-            // 排除没有全部子集权限的菜单
+            // Exclude menus without full subset permissions
             exceptList.Add(id);
         }
         return menuIds.Except(exceptList).ToList();

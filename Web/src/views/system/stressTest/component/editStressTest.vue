@@ -4,14 +4,14 @@
 			<template #header>
 				<div style="color: #fff">
 					<el-icon size="16" style="margin-right: 3px; display: inline; vertical-align: middle"> <ele-DataLine /> </el-icon>
-					<span> 接口压测参数 </span>
+					<span> Interface Stress Test Parameters </span>
 				</div>
 			</template>
 			<el-form :model="state.ruleForm" ref="ruleFormRef" label-width="auto" v-loading="state.loading">
 				<el-row :gutter="35">
 					<el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="mb20">
-						<el-form-item label="请求方式" :rules="[{ required: true, message: '请求方式不能为空', trigger: 'blur' }]">
-							<el-select v-model="state.ruleForm.requestMethod" placeholder="请求方式">
+						<el-form-item label="Request Method" :rules="[{ required: true, message: 'Request method cannot be empty', trigger: 'blur' } ]">
+							<el-select v-model="state.ruleForm.requestMethod" placeholder="Request Method">
 								<el-option :value="'GET'">GET</el-option>
 								<el-option :value="'PUT'">PUT</el-option>
 								<el-option :value="'POST'">POST</el-option>
@@ -20,23 +20,23 @@
 						</el-form-item>
 					</el-col>
 					<el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="mb20">
-						<el-form-item label="请求地址" :rules="[{ required: true, message: '请求地址不能为空', trigger: 'blur' }]">
-							<el-input v-model="state.ruleForm.requestUri" placeholder="请求地址" clearable />
+						<el-form-item label="Request address" :rules="[{ required: true, message: 'Request address cannot be empty', trigger: 'blur' }]">
+							<el-input v-model="state.ruleForm.requestUri" placeholder="Request address" clearable />
 						</el-form-item>
 					</el-col>
 					<el-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12" class="mb20">
-						<el-form-item label="轮数" :rules="[{ required: true, message: '轮数不能为空', trigger: 'blur' }]">
-							<el-input-number v-model="state.ruleForm.numberOfRounds" placeholder="轮数" />
+						<el-form-item label="Number of rounds" :rules="[{ required: true, message: 'Number of rounds cannot be empty', trigger: 'blur' }]">
+							<el-input-number v-model="state.ruleForm.numberOfRounds" placeholder="Number of rounds" />
 						</el-form-item>
 					</el-col>
 					<el-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12" class="mb20">
-						<el-form-item label="每轮请求数" :rules="[{ required: true, message: '每轮请求数不能为空', trigger: 'blur' }]">
-							<el-input-number v-model="state.ruleForm.numberOfRequests" :step="100" placeholder="每轮请求数" />
+						<el-form-item label="Number of requests per round" :rules="[{ required: true, message: 'The number of requests per round cannot be empty', trigger: 'blur' }]">
+							<el-input-number v-model="state.ruleForm.numberOfRequests" :step="100" placeholder="Number of requests per round" />
 						</el-form-item>
 					</el-col>
 					<el-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12" class="mb20">
-						<el-form-item label="最大并发量">
-							<el-input-number v-model="state.ruleForm.maxDegreeOfParallelism" :step="5" placeholder="最大并发量" />
+						<el-form-item label="Maximum concurrency">
+							<el-input-number v-model="state.ruleForm.maxDegreeOfParallelism" :step="5" placeholder="Maximum concurrency" />
 						</el-form-item>
 					</el-col>
 					<el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="mb20">
@@ -47,10 +47,10 @@
                                         <div class="flex-auto">
                                             <el-row :gutter="15" class="w100">
                                                 <el-col :xs="24" :sm="7" :md="7" :lg="7" :xl="7" class="mt5 mb5">
-                                                    <el-input v-model="item[0]" placeholder="参数名" clearable />
+                                                    <el-input v-model="item[0]" placeholder="Parameter Name" clearable />
                                                 </el-col>
                                                 <el-col :xs="24" :sm="17" :md="17" :lg="17" :xl="17" class="mt5 mb5">
-                                                    <el-input v-model="item[1]" placeholder="参数值" clearable />
+                                                    <el-input v-model="item[1]" placeholder="Parameter value" clearable />
                                                 </el-col>
                                             </el-row>
                                         </div>
@@ -66,10 +66,10 @@
                                         <div class="flex-auto">
                                             <el-row :gutter="15" class="w100">
                                                 <el-col :xs="24" :sm="7" :md="7" :lg="7" :xl="7" class="mt5 mb5">
-                                                    <el-input v-model="item[0]" placeholder="参数名" clearable />
+                                                    <el-input v-model="item[0]" placeholder="Parameter Name" clearable />
                                                 </el-col>
                                                 <el-col :xs="24" :sm="17" :md="17" :lg="17" :xl="17" class="mt5 mb5">
-                                                    <el-input v-model="item[1]" placeholder="参数值" clearable />
+                                                    <el-input v-model="item[1]" placeholder="Parameter value" clearable />
                                                 </el-col>
                                             </el-row>
                                         </div>
@@ -85,10 +85,10 @@
                                         <div class="flex-auto">
                                             <el-row :gutter="15" class="w100">
                                                 <el-col :xs="24" :sm="7" :md="7" :lg="7" :xl="7" class="mt5 mb5">
-                                                    <el-input v-model="item[0]" placeholder="参数名" clearable />
+                                                    <el-input v-model="item[0]" placeholder="Parameter Name" clearable />
                                                 </el-col>
                                                 <el-col :xs="24" :sm="17" :md="17" :lg="17" :xl="17" class="mt5 mb5">
-                                                    <el-input v-model="item[1]" placeholder="参数值" clearable/>
+                                                    <el-input v-model="item[1]" placeholder="Parameter value" clearable/>
                                                 </el-col>
                                             </el-row>
                                         </div>
@@ -104,10 +104,10 @@
                                         <div class="flex-auto">
                                             <el-row :gutter="15" class="w100">
                                                 <el-col :xs="24" :sm="7" :md="7" :lg="7" :xl="7" class="mt5 mb5">
-                                                    <el-input v-model="item[0]" placeholder="参数名" clearable/>
+                                                    <el-input v-model="item[0]" placeholder="Parameter Name" clearable/>
                                                 </el-col>
                                                 <el-col :xs="24" :sm="17" :md="17" :lg="17" :xl="17" class="mt5 mb5">
-                                                    <el-input v-model="item[1]" placeholder="参数值" clearable/>
+                                                    <el-input v-model="item[1]" placeholder="Parameter value" clearable/>
                                                 </el-col>
                                             </el-row>
                                         </div>
@@ -123,8 +123,8 @@
 			</el-form>
 			<template #footer>
 				<span class="dialog-footer" v-loading="state.loading">
-					<el-button @click="() => state.isShowDialog = false">取 消</el-button>
-					<el-button type="primary" @click="submit" v-reclick="1000">确 定</el-button>
+					<el-button @click="() => state.isShowDialog = false">Cancel</el-button>
+					<el-button type="primary" @click="submit" v-reclick="1000">Confirm</el-button>
 				</span>
 			</template>
 		</el-dialog>
@@ -155,7 +155,7 @@ const state = reactive({
 	},
 });
 
-// 格式化参数
+// Format parameters
 const formatParameter = (params: any[] | {}) => {
 	if (Array.isArray(params)) {
 		return Object.fromEntries(params.filter(e => e.length === 2));
@@ -165,9 +165,9 @@ const formatParameter = (params: any[] | {}) => {
 	return {};
 };
 
-// 打开弹窗
+// Open pop-up window
 const openDialog = (row: any) => {
-	const newRow = { ...state.ruleForm, ...row }; // 合并默认值和新值
+	const newRow = { ...state.ruleForm, ...row }; // Merge default and new values
 	state.ruleForm = {
 		...newRow,
 		requestMethod: row.requestMethod?.toUpperCase() ?? 'GET',
@@ -176,14 +176,14 @@ const openDialog = (row: any) => {
 	ruleFormRef.value?.resetFields();
 };
 
-// 提交
+// submit
 const submit = () => {
 	ruleFormRef.value.validate(async (valid: boolean) => {
 		if (!valid) return;
 		try {
 			state.loading = true;
 
-			// 创建一个新的对象来保存格式化后的数据
+			// Create a new object to hold the formatted data
 			const formattedRuleForm = {
 				...state.ruleForm,
 				headers: formatParameter(state.ruleForm.headers),
@@ -192,7 +192,7 @@ const submit = () => {
 				requestParameters: formatParameter(state.ruleForm.requestParameters),
 			};
 
-			// 确保所有可能是空对象的参数被正确设置为 undefined
+			// Ensure that all parameters that may be empty objects are correctly set to undefined
 			['headers', 'pathParameters', 'queryParameters', 'requestParameters'].forEach(paramKey => {
 				if (Object.keys(formattedRuleForm[paramKey] || {}).length === 0) {
 					formattedRuleForm[paramKey] = undefined;
@@ -207,7 +207,7 @@ const submit = () => {
 	});
 };
 
-// 添加参数
+// Add parameters
 const addParams = () => {
 	const paramType = ['headers', 'requestParameters', 'pathParameters', 'queryParameters'][+state.activeName - 1];
 	if (Array.isArray(state.ruleForm[paramType])) {
@@ -217,6 +217,6 @@ const addParams = () => {
 	}
 };
 
-// 导出对象
+// Export object
 defineExpose({ openDialog });
 </script>

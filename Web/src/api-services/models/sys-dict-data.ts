@@ -1,8 +1,8 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Admin.NET 通用权限开发平台
- * 让 .NET 开发更简单、更通用、更流行。整合最新技术，模块插件式开发，前后端分离，开箱即用。<br/><u><b><font color='FF0000'> 👮不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！</font></b></u>
+ * Admin.NET General Permission Development Platform
+ * let .NET Develop more simply、More general、More popular。wholeIn line with the latest technology，Modular Plugin-Based Development，Frontend and backendpointsLeave，Ready to use out of the box。<br/><u><b><font color='FF0000'> 👮This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project! </font></b></u>
  *
  * OpenAPI spec version: 1.0.0
  * 
@@ -14,7 +14,7 @@
 
 import { StatusEnum } from './status-enum';
  /**
- * 系统字典值表
+ * System Dictionary Value Table
  *
  * @export
  * @interface SysDictData
@@ -22,7 +22,7 @@ import { StatusEnum } from './status-enum';
 export interface SysDictData {
 
     /**
-     * 雪花Id
+     * SnowflakeId
      *
      * @type {number}
      * @memberof SysDictData
@@ -30,7 +30,7 @@ export interface SysDictData {
     id?: number;
 
     /**
-     * 创建时间
+     * Creation Time
      *
      * @type {Date}
      * @memberof SysDictData
@@ -38,7 +38,7 @@ export interface SysDictData {
     createTime?: Date;
 
     /**
-     * 更新时间
+     * Update Time
      *
      * @type {Date}
      * @memberof SysDictData
@@ -46,7 +46,7 @@ export interface SysDictData {
     updateTime?: Date | null;
 
     /**
-     * 创建者Id
+     * CreatorId
      *
      * @type {number}
      * @memberof SysDictData
@@ -54,7 +54,7 @@ export interface SysDictData {
     createUserId?: number | null;
 
     /**
-     * 创建者姓名
+     * Creator name
      *
      * @type {string}
      * @memberof SysDictData
@@ -62,7 +62,7 @@ export interface SysDictData {
     createUserName?: string | null;
 
     /**
-     * 修改者Id
+     * Modifier ID
      *
      * @type {number}
      * @memberof SysDictData
@@ -70,7 +70,7 @@ export interface SysDictData {
     updateUserId?: number | null;
 
     /**
-     * 修改者姓名
+     * Modifier name
      *
      * @type {string}
      * @memberof SysDictData
@@ -78,7 +78,7 @@ export interface SysDictData {
     updateUserName?: string | null;
 
     /**
-     * 字典类型Id
+     * Dictionary Type Id
      *
      * @type {number}
      * @memberof SysDictData
@@ -86,7 +86,7 @@ export interface SysDictData {
     dictTypeId?: number;
 
     /**
-     * 显示文本
+     * Display Text
      *
      * @type {string}
      * @memberof SysDictData
@@ -94,7 +94,7 @@ export interface SysDictData {
     label: string;
 
     /**
-     * 值
+     * value
      *
      * @type {string}
      * @memberof SysDictData
@@ -102,7 +102,7 @@ export interface SysDictData {
     value: string;
 
     /**
-     * 编码
+     * Encoding
      *
      * @type {string}
      * @memberof SysDictData
@@ -110,7 +110,7 @@ export interface SysDictData {
     code?: string | null;
 
     /**
-     * 名称
+     * name
      *
      * @type {string}
      * @memberof SysDictData
@@ -118,7 +118,7 @@ export interface SysDictData {
     name?: string | null;
 
     /**
-     * 显示样式-标签颜色
+     * Display style-label color
      *
      * @type {string}
      * @memberof SysDictData
@@ -126,7 +126,7 @@ export interface SysDictData {
     tagType?: string | null;
 
     /**
-     * 显示样式-Style(控制显示样式)
+     * Display style-Style(ControlDisplayStyle)
      *
      * @type {string}
      * @memberof SysDictData
@@ -134,7 +134,7 @@ export interface SysDictData {
     styleSetting?: string | null;
 
     /**
-     * 显示样式-Class(控制显示样式)
+     * DisplayStyle-Class(ControlDisplayStyle)
      *
      * @type {string}
      * @memberof SysDictData
@@ -142,7 +142,7 @@ export interface SysDictData {
     classSetting?: string | null;
 
     /**
-     * 排序
+     * Sort
      *
      * @type {number}
      * @memberof SysDictData
@@ -150,7 +150,7 @@ export interface SysDictData {
     orderNo?: number;
 
     /**
-     * 备注
+     * Remarks
      *
      * @type {string}
      * @memberof SysDictData
@@ -158,7 +158,7 @@ export interface SysDictData {
     remark?: string | null;
 
     /**
-     * 拓展数据(保存业务功能的配置项)
+     * Expansion data (save configuration items for business functions)
      *
      * @type {string}
      * @memberof SysDictData

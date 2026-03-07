@@ -7,8 +7,8 @@ import { getAPI } from '/@/utils/axios-utils';
 import { SysAuthApi, SysConstApi, SysDictTypeApi } from '/@/api-services/api';
 
 /**
- * 用户信息
- * @methods setUserInfos 设置用户信息
+ * UserInformation
+ * @methods setUserInfos SettingsUserInformation
  */
 export const useUserInfo = defineStore('userInfo', {
 	state: (): UserInfosState => ({
@@ -17,7 +17,7 @@ export const useUserInfo = defineStore('userInfo', {
 		dictList: {} as any,
 	}),
 	getters: {
-		// // 获取系统常量列表
+		// // Get the system constant list
 		// async getSysConstList(): Promise<any[]> {
 		// 	var res = await getAPI(SysConstApi).apiSysConstListGet();
 		// 	this.constList = res.data.result ?? [];
@@ -25,18 +25,18 @@ export const useUserInfo = defineStore('userInfo', {
 		// },
 	},
 	actions: {
-		// 存储用户信息到浏览器缓存
+		// Store user information in browser cache
 		async setUserInfos() {
 			this.userInfos = Session.get('userInfo') ?? <UserInfos>await this.getApiUserInfo();
 		},
 
-		// 存储常量信息到浏览器缓存
+		// Store constant information in browser cache
 		async setConstList() {
 			this.constList = Session.get('constList') ?? <any[]>await this.getSysConstList();
 			if (!Session.get('constList')) Session.set('constList', this.constList);
 		},
 
-		// 存储字典信息到浏览器缓存
+		// Store dictionary information in browser cache
 		async setDictList() {
 			var dictList = await getAPI(SysDictTypeApi).apiSysDictTypeAllDictListGet().then(res => res.data.result ?? {});
 			var dictListTemp = JSON.parse(JSON.stringify(dictList));
@@ -45,7 +45,7 @@ export const useUserInfo = defineStore('userInfo', {
 				// dictList[key].forEach((da: any, index: any) => {
 				// 	setDictLangMessageAsync(dictListTemp[key][index]);
 				// });
-				// 如果 key 以 "Enum" 结尾，则转换 value 为数字
+				// If key ends with "Enum", convert value to number
 				if (key.endsWith("Enum")) {
 					dictListTemp[key].forEach((e: any) => e.value = Number(e.value));
 				}
@@ -53,7 +53,7 @@ export const useUserInfo = defineStore('userInfo', {
 			this.dictList = dictListTemp;
 		},
 
-		// 获取当前用户信息
+		// Get current user information
 		getApiUserInfo() {
 			return new Promise((resolve) => {
 				getAPI(SysAuthApi)
@@ -83,11 +83,11 @@ export const useUserInfo = defineStore('userInfo', {
 							time: new Date().getTime(),
 						};
 
-						// vue-next-admin 提交Id：225bce7 提交消息：admin-23.03.26:发布v2.4.32版本
-						// 增加了下面代码，引起当前会话的用户信息不会刷新，如：重新提交的头像不更新，需要新开一个页面才能正确显示
+						// vue-next-admin Submit Id: 225bce7 Submit message: admin-23.03.26: Release v2.4.32 version
+						// The following code has been added, causing the user information of the current session to not be refreshed. For example: the resubmitted avatar is not updated, and a new page needs to be opened to display it correctly.
 						// Session.set('userInfo', userInfos);
 
-						// 用户水印
+						// User watermark
 						const storesThemeConfig = useThemeConfig();
 						storesThemeConfig.themeConfig.watermarkText = d.watermarkText ?? '';
 						if (storesThemeConfig.themeConfig.isWatermark) Watermark.set(storesThemeConfig.themeConfig.watermarkText);
@@ -101,7 +101,7 @@ export const useUserInfo = defineStore('userInfo', {
 			});
 		},
 
-		// 获取常量集合
+		// Get a collection of constants
 		getSysConstList() {
 			return new Promise((resolve) => {
 				getAPI(SysConstApi)
@@ -112,25 +112,25 @@ export const useUserInfo = defineStore('userInfo', {
 			});
 		},
 
-		// 根据常量类名获取常量数据
+		// Get constant data based on constant class name
 		getConstDataByTypeCode(typeCode: string) {
 			return this.constList.find((item: any) => item.code === typeCode)?.data?.result || [];
 		},
 
-		// 根据常量类名和编码获取常量值
+		// Get constant value based on constant class name and encoding
 		getConstItemNameByType(typeCode: string, itemCode: string) {
 			const data = this.getConstDataByTypeCode(typeCode);
 			return data.find((item: any) => item.code === itemCode)?.name;
 		},
 
-		// 根据字典类型获取字典数据
+		// Get dictionary data based on dictionary type
 		getDictDataByCode(dictTypeCode: string) {
 			return this.dictList[dictTypeCode] || [];
 		}
 	},
 });
 
-// 处理字典国际化, 默认显示字典中的label值
+// Process dictionary internationalization and display the label value in the dictionary by default
 // const setDictLangMessageAsync = async (dict: any) => {
 // 	dict.langMessage = `message.dictType.${dict.typeCode}_${dict.value}`;
 // 	const text = dict.langMessage;

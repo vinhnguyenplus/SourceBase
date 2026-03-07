@@ -7,7 +7,7 @@
 				</div>
 				<div class="tree-h-flex">
 					<div class="tree-h-left">
-						<el-input :prefix-icon="Search" v-model="filterText" placeholder="机构名称" />
+						<el-input :prefix-icon="Search" v-model="filterText" placeholder="Organization name" />
 					</div>
 					<div class="tree-h-right">
 						<el-dropdown @command="handleCommand">
@@ -18,10 +18,10 @@
 							</el-button>
 							<template #dropdown>
 								<el-dropdown-menu>
-									<el-dropdown-item command="expandAll">全部展开</el-dropdown-item>
-									<el-dropdown-item command="collapseAll">全部折叠</el-dropdown-item>
-									<el-dropdown-item command="rootNode">根节点</el-dropdown-item>
-									<el-dropdown-item command="refresh">刷新</el-dropdown-item>
+									<el-dropdown-item command="expandAll">Expand all</el-dropdown-item>
+									<el-dropdown-item command="collapseAll">Collapse all</el-dropdown-item>
+									<el-dropdown-item command="rootNode">root node</el-dropdown-item>
+									<el-dropdown-item command="refresh">Refresh</el-dropdown-item>
 								</el-dropdown-menu>
 							</template>
 						</el-dropdown>
@@ -92,7 +92,7 @@ const initTreeData = async () => {
 	state.loading = false;
 };
 
-// 设置默认选择
+// Set default selection
 const setCheckedKeys = (data: any) => {
 	const isArray = Array.isArray(data);
 	treeRef.value!.setCheckedKeys([]);
@@ -104,7 +104,7 @@ const setCheckedKeys = (data: any) => {
 	state.isShowCheckbox = isArray;
 };
 
-// 获取已经选择
+// Get selected
 const getCheckedKeys = () => {
 	return treeRef.value!.getCheckedKeys();
 };
@@ -130,13 +130,13 @@ const handleCommand = async (command: string | number | object) => {
 	}
 };
 
-// 与父组件的交互逻辑
+// Interaction logic with parent component
 const emits = defineEmits(['node-click']);
 const nodeClick = (node: any) => {
 	emits('node-click', node);
 };
 
-// 导出对象
+// Export object
 defineExpose({ initTreeData, setCheckedKeys, getCheckedKeys });
 </script>
 

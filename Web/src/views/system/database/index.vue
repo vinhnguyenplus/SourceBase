@@ -2,13 +2,13 @@
 	<div class="sys-database-container">
 		<el-card shadow="hover" :body-style="{ padding: 5 }">
 			<el-form :model="state.queryParams" ref="queryForm" :inline="true" v-loading="state.loading">
-				<el-form-item label="库名">
-					<el-select v-model="state.configId" placeholder="库名" filterable @change="handleQueryTable">
+				<el-form-item label="Library name">
+					<el-select v-model="state.configId" placeholder="Library name" filterable @change="handleQueryTable">
 						<el-option v-for="item in state.dbData" :key="item.configId" :label="item.dbNickName" :value="item.configId" />
 					</el-select>
 				</el-form-item>
-				<el-form-item label="表名">
-					<el-select v-model="state.tableName" placeholder="表名" filterable clearable @change="handleQueryColumn">
+				<el-form-item label="Table Name">
+					<el-select v-model="state.tableName" placeholder="Table Name" filterable clearable @change="handleQueryColumn">
                         <template #label="{ label, value }">
                             <div class="flex flex-items-center">
                                 <span>{{ value }}</span>
@@ -25,17 +25,17 @@
 				</el-form-item>
 				<el-form-item>
 					<el-button-group>
-						<el-button icon="ele-Plus" type="primary" @click="openAddTable"> 增加表 </el-button>
-						<el-button icon="ele-Edit" @click="openEditTable"> 编辑表 </el-button>
-						<el-button icon="ele-Delete" type="danger" @click="delTable" disabled> 删除表 </el-button>
-						<el-button icon="ele-View" @click="visualTable"> 可视化 </el-button>
+						<el-button icon="ele-Plus" type="primary" @click="openAddTable"> Add table </el-button>
+						<el-button icon="ele-Edit" @click="openEditTable"> Edit Table </el-button>
+						<el-button icon="ele-Delete" type="danger" @click="delTable" disabled> Delete table </el-button>
+						<el-button icon="ele-View" @click="visualTable"> Visualization </el-button>
 					</el-button-group>
 					<el-button-group style="padding-left: 10px">
-						<el-button icon="ele-Plus" @click="openAddColumn"> 增加列 </el-button>
-						<el-button icon="ele-Plus" @click="openGenDialog"> 生成实体 </el-button>
-						<el-popover placement="bottom" title="温馨提示" :width="200" trigger="hover" content="如果是刚刚生成的实体，请重启服务后再生成种子">
+						<el-button icon="ele-Plus" @click="openAddColumn"> Add column </el-button>
+						<el-button icon="ele-Plus" @click="openGenDialog"> Generate entity </el-button>
+						<el-popover placement="bottom" title="Warm reminder" :width="200" trigger="hover" content="If it is a newly generated entity, please restart the service before generating the seed again.">
 							<template #reference>
-								<el-button icon="ele-Plus" @click="openGenSeedDataDialog"> 生成种子 </el-button>
+								<el-button icon="ele-Plus" @click="openGenSeedDataDialog"> Generate Seed </el-button>
 							</template>
 						</el-popover>
 					</el-button-group>
@@ -45,37 +45,37 @@
 
 		<el-card class="full-table" shadow="hover" style="margin-top: 5px">
 			<el-table :data="state.columnData" style="width: 100%" v-loading="state.loading1" border>
-				<el-table-column type="index" label="序号" width="55" align="center" />
-				<el-table-column prop="dbColumnName" label="字段名" show-overflow-tooltip />
-				<el-table-column prop="dataType" label="数据类型" align="center" show-overflow-tooltip />
-				<el-table-column prop="isPrimarykey" label="主键" width="70" align="center" show-overflow-tooltip>
+				<el-table-column type="index" label="No" width="55" align="center" />
+				<el-table-column prop="dbColumnName" label="Field Name" show-overflow-tooltip />
+				<el-table-column prop="dataType" label="data type" align="center" show-overflow-tooltip />
+				<el-table-column prop="isPrimarykey" label="Primary Key" width="70" align="center" show-overflow-tooltip>
 					<template #default="scope">
-						<el-tag type="success" v-if="scope.row.isPrimarykey === true">是</el-tag>
-						<el-tag type="info" v-else>否</el-tag>
+						<el-tag type="success" v-if="scope.row.isPrimarykey === true">Yes</el-tag>
+						<el-tag type="info" v-else>no</el-tag>
 					</template>
 				</el-table-column>
-				<el-table-column prop="isIdentity" label="自增" width="70" align="center" show-overflow-tooltip>
+				<el-table-column prop="isIdentity" label="Auto-increment" width="70" align="center" show-overflow-tooltip>
 					<template #default="scope">
-						<el-tag type="success" v-if="scope.row.isIdentity === true">是</el-tag>
-						<el-tag type="info" v-else>否</el-tag>
+						<el-tag type="success" v-if="scope.row.isIdentity === true">Yes</el-tag>
+						<el-tag type="info" v-else>no</el-tag>
 					</template>
 				</el-table-column>
-				<el-table-column prop="isNullable" label="可空" width="70" align="center" show-overflow-tooltip>
+				<el-table-column prop="isNullable" label="Nullable" width="70" align="center" show-overflow-tooltip>
 					<template #default="scope">
-						<el-tag v-if="scope.row.isNullable === true">是</el-tag>
-						<el-tag type="info" v-else>否</el-tag>
+						<el-tag v-if="scope.row.isNullable === true">Yes</el-tag>
+						<el-tag type="info" v-else>no</el-tag>
 					</template>
 				</el-table-column>
-				<el-table-column prop="length" label="长度" width="70" align="center" show-overflow-tooltip />
-				<el-table-column prop="decimalDigits" label="精度" width="70" align="center" show-overflow-tooltip />
-				<el-table-column prop="defaultValue" label="默认值" align="center" show-overflow-tooltip />
-				<el-table-column prop="columnDescription" label="描述" header-align="center" show-overflow-tooltip />
-				<el-table-column label="操作" width="195" fixed="right" align="center" show-overflow-tooltip>
+				<el-table-column prop="length" label="length" width="70" align="center" show-overflow-tooltip />
+				<el-table-column prop="decimalDigits" label="Accuracy" width="70" align="center" show-overflow-tooltip />
+				<el-table-column prop="defaultValue" label="Default value" align="center" show-overflow-tooltip />
+				<el-table-column prop="columnDescription" label="Description" header-align="center" show-overflow-tooltip />
+				<el-table-column label="Operation" width="195" fixed="right" align="center" show-overflow-tooltip>
 					<template #default="scope">
-						<el-button icon="ele-Top" size="small" text type="primary" @click="moveColumn(scope.row, 'up')" :disabled="scope.$index === 0" title="上移"></el-button>
-						<el-button icon="ele-Bottom" size="small" text type="primary" @click="moveColumn(scope.row, 'down')" :disabled="scope.$index === state.columnData.length - 1" title="下移"></el-button>
-						<el-button icon="ele-Edit" size="small" text type="primary" @click="openEditColumn(scope.row)">编辑</el-button>
-						<el-button icon="ele-Delete" size="small" text type="danger" @click="delColumn(scope.row)">删除</el-button>
+						<el-button icon="ele-Top" size="small" text type="primary" @click="moveColumn(scope.row, 'up')" :disabled="scope.$index === 0" title="move up"></el-button>
+						<el-button icon="ele-Bottom" size="small" text type="primary" @click="moveColumn(scope.row, 'down')" :disabled="scope.$index === state.columnData.length - 1" title="Move down"></el-button>
+						<el-button icon="ele-Edit" size="small" text type="primary" @click="openEditColumn(scope.row)">Edit</el-button>
+						<el-button icon="ele-Delete" size="small" text type="danger" @click="delColumn(scope.row)">Delete</el-button>
 					</template>
 				</el-table-column>
 			</el-table>
@@ -124,7 +124,7 @@ const state = reactive({
 		name: undefined,
 		code: undefined,
 	},
-	appNamespaces: [] as Array<String>, // 存储位置
+	appNamespaces: [] as Array<String>, // storage location
 });
 
 onMounted(async () => {
@@ -137,14 +137,14 @@ onMounted(async () => {
 	state.appNamespaces = appNamesRes.data.result as Array<string>;
 });
 
-// 增加表
+// Add table
 const addTableSubmitted = (e: any) => {
 	handleQueryTable();
 	state.tableName = e;
 	handleQueryColumn();
 };
 
-// 表查询操作
+// Table query operations
 const handleQueryTable = async () => {
 	state.tableName = '';
 	state.columnData = [];
@@ -154,7 +154,7 @@ const handleQueryTable = async () => {
 	let tableData = res.data.result ?? [];
 	state.tableData = [];
 	tableData.forEach((element: any) => {
-		//排除zero_开头的表
+		//Exclude tables starting with zero_
 		if (!element.name.startsWith('zero_')) {
 			state.tableData.push(element);
 		}
@@ -162,7 +162,7 @@ const handleQueryTable = async () => {
 	state.loading = false;
 };
 
-// 列查询操作
+// Column query operations
 const handleQueryColumn = async () => {
 	state.columnData = [];
 	if (state.tableName == '' || typeof state.tableName == 'undefined') return;
@@ -173,12 +173,12 @@ const handleQueryColumn = async () => {
 	state.loading1 = false;
 };
 
-// 打开表编辑页面
+// Open the table editing page
 const openEditTable = () => {
 	if (state.configId == '' || state.tableName == '') {
 		ElMessage({
 			type: 'error',
-			message: `请选择库名和表名!`,
+			message: `Please select a database name and table name!`,
 		});
 		return;
 	}
@@ -192,12 +192,12 @@ const openEditTable = () => {
 	editTableRef.value?.openDialog(table);
 };
 
-// 打开实体生成页面
+// Open the entity generation page
 const openGenDialog = () => {
 	if (state.configId == '' || state.tableName == '') {
 		ElMessage({
 			type: 'error',
-			message: `请选择库名和表名!`,
+			message: `Please select a database name and table name!`,
 		});
 		return;
 	}
@@ -210,12 +210,12 @@ const openGenDialog = () => {
 	genEntityRef.value?.openDialog(table);
 };
 
-// 生成种子数据页面
+// Generate seed data page
 const openGenSeedDataDialog = () => {
 	if (state.configId == '' || state.tableName == '') {
 		ElMessage({
 			type: 'error',
-			message: `请选择库名和表名!`,
+			message: `Please select a database name and table name!`,
 		});
 		return;
 	}
@@ -227,12 +227,12 @@ const openGenSeedDataDialog = () => {
 	genSeedDataRef.value?.openDialog(table);
 };
 
-// 打开表增加页面
+// Open the table add page
 const openAddTable = () => {
 	if (state.configId == '') {
 		ElMessage({
 			type: 'error',
-			message: `请选择库名!`,
+			message: `Please select the library name!`,
 		});
 		return;
 	}
@@ -245,7 +245,7 @@ const openAddTable = () => {
 	addTableRef.value?.openDialog(table);
 };
 
-// 打开列编辑页面
+// Open the column editing page
 const openEditColumn = (row: any) => {
 	var column: any = {
 		configId: state.configId,
@@ -258,12 +258,12 @@ const openEditColumn = (row: any) => {
 	editColumnRef.value?.openDialog(column);
 };
 
-// 打开列增加页面
+// Open the column addition page
 const openAddColumn = () => {
 	if (state.configId == '' || state.tableName == '') {
 		ElMessage({
 			type: 'error',
-			message: `请选择库名和表名!`,
+			message: `Please select a database name and table name!`,
 		});
 		return;
 	}
@@ -285,18 +285,18 @@ const openAddColumn = () => {
 	addColumnRef.value?.openDialog(addRow);
 };
 
-// 删除表
+// Delete table
 const delTable = () => {
 	if (state.tableName == '') {
 		ElMessage({
 			type: 'error',
-			message: `请选择表名!`,
+			message: `Please select a table name!`,
 		});
 		return;
 	}
-	ElMessageBox.confirm(`确定删除表：【${state.tableName}】?`, '提示', {
-		confirmButtonText: '确定',
-		cancelButtonText: '取消',
+	ElMessageBox.confirm(`Are you sure you want to delete the table: 【${state.tableName}】?`, 'Prompt', {
+		confirmButtonText: 'Confirm',
+		cancelButtonText: 'Cancel',
 		type: 'warning',
 	})
 		.then(async () => {
@@ -306,16 +306,16 @@ const delTable = () => {
 			};
 			await getAPI(SysDatabaseApi).apiSysDatabaseDeleteTablePost(deleteDbTableInput);
 			handleQueryTable();
-			ElMessage.success('表删除成功');
+			ElMessage.success('Table deleted successfully');
 		})
 		.catch(() => {});
 };
 
-// 删除列
+// Delete column
 const delColumn = (row: any) => {
-	ElMessageBox.confirm(`确定删除列：【${row.dbColumnName}】?`, '提示', {
-		confirmButtonText: '确定',
-		cancelButtonText: '取消',
+	ElMessageBox.confirm(`Are you sure to delete the column: [${row.dbColumnName}]?`, 'Prompt', {
+		confirmButtonText: 'Confirm',
+		cancelButtonText: 'Cancel',
 		type: 'warning',
 	})
 		.then(async () => {
@@ -326,7 +326,7 @@ const delColumn = (row: any) => {
 			};
 			await getAPI(SysDatabaseApi).apiSysDatabaseDeleteColumnPost(eleteDbColumnInput);
 			handleQueryColumn();
-			ElMessage.success('列删除成功');
+			ElMessage.success('Column deleted successfully');
 		})
 		.catch(() => {});
 };
@@ -335,25 +335,25 @@ const moveColumn = (row: any, direction: 'up' | 'down') => {
 	const { columnData, tableName, configId } = state;
 	const currentIndex = columnData.findIndex((item) => item.dbColumnName === row.dbColumnName);
 
-	// 边界检查与反馈
+	// Boundary checking and feedback
 	if (direction === 'up' && currentIndex === 0) {
-		ElMessage.warning('已处于首位，无法上移');
+		ElMessage.warning('Already at the top, cannot move up');
 		return;
 	}
 	if (direction === 'down' && currentIndex === columnData.length - 1) {
-		ElMessage.warning('已处于末位，无法下移');
+		ElMessage.warning('Already at the bottom，NoneLawMove down');
 		return;
 	}
 
-	// 计算目标位置
+	// Calculate target position
 	const targetIndex = direction === 'up' ? currentIndex - 1 : currentIndex + 1;
 	const targetColumn = columnData[targetIndex];
 	const columnName = direction === 'up' ? targetColumn.dbColumnName : row.dbColumnName;
 	const afterColumnName = direction === 'up' ? row.dbColumnName : targetColumn.dbColumnName;
 
-	ElMessageBox.confirm(`确定将列【${row.dbColumnName}】${direction === 'up' ? '上移' : '下移'}?`, '操作确认', {
-		confirmButtonText: '确定',
-		cancelButtonText: '取消',
+	ElMessageBox.confirm(`Are you sure to move the column [${row.dbColumnName}]${direction === 'up' ? 'Move up' : 'Move down'}?`, 'Operation confirmation', {
+		confirmButtonText: 'Confirm',
+		cancelButtonText: 'Cancel',
 		type: 'warning',
 	}).then(async () => {
 			try {
@@ -364,24 +364,24 @@ const moveColumn = (row: any, direction: 'up' | 'down') => {
 					afterColumnName,
 				};
 
-				// 调用API
+				// Call API
 				await getAPI(SysDatabaseApi).apiSysDatabaseMoveColumnPost(moveParams);
 
 				handleQueryColumn();
-				ElMessage.success('列位置已更新');
+				ElMessage.success('Column positions have been updated');
 			} catch (error: any) {
-				ElMessage.error(`操作失败: ${error.message || '未知错误'}`);
+				ElMessage.error(`Operation failed: ${error.message || 'Unknown error'}`);
 			}
 		})
 		.catch(() => {});
 };
 
-// 可视化表
+// Visualization table
 const visualTable = () => {
 	if (state.configId == '') {
 		ElMessage({
 			type: 'error',
-			message: `请选择库名!`,
+			message: `Please select the library name!`,
 		});
 		return;
 	}

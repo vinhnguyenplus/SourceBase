@@ -3,19 +3,19 @@
 		<el-dialog v-model="state.isUpgrade" width="300px" destroy-on-close :show-close="false" :close-on-click-modal="false" :close-on-press-escape="false">
 			<div class="upgrade-title">
 				<div class="upgrade-title-warp">
-					<span class="upgrade-title-warp-txt">新版本升级</span>
+					<span class="upgrade-title-warp-txt">New version upgrade</span>
 					<span class="upgrade-title-warp-version">v{{ state.version }}</span>
 				</div>
 			</div>
 			<div class="upgrade-content">
-				{{ getThemeConfig.globalTitle }} 新版本来啦，马上更新尝鲜吧！不用担心，更新很快的哦！
+				{{ getThemeConfig.globalTitle }} The new version is here, update it now and try it out! Don’t worry, updates will be coming soon!
 				<div class="mt5">
 					<el-link type="primary" class="font12" href="https://xxx/CHANGELOG.md" target="_black"> CHANGELOG.md </el-link>
 				</div>
-				<!-- <div class="upgrade-content-desc mt5">提示：更新会还原默认配置</div> -->
+				<!-- <div class="upgrade-content-desc mt5">Tip: The update will restore the default configuration</div> -->
 			</div>
 			<div class="upgrade-btn">
-				<el-button round size="default" type="info" text @click="onCancel">残忍拒绝</el-button>
+				<el-button round size="default" type="info" text @click="onCancel">Cruelly reject</el-button>
 				<el-button type="primary" round size="default" @click="onUpgrade" :loading="state.isLoading">{{ state.btnTxt }}</el-button>
 			</div>
 		</el-dialog>
@@ -27,7 +27,7 @@ import { reactive, computed, onMounted } from 'vue';
 import { storeToRefs } from 'pinia';
 import { useThemeConfig } from '/@/stores/themeConfig';
 
-// 定义变量内容
+// Define variable content
 const storesThemeConfig = useThemeConfig();
 const { themeConfig } = storeToRefs(storesThemeConfig);
 const state = reactive({
@@ -38,28 +38,28 @@ const state = reactive({
 	btnTxt: '',
 });
 
-// 获取布局配置信息
+// Get layout configuration information
 const getThemeConfig = computed(() => {
 	return themeConfig.value;
 });
 
-// 页面加载时
+// When the page loads
 onMounted(() => {
 	delayShow();
 	setTimeout(() => {
-		state.btnTxt = '马上更新';
+		state.btnTxt = 'Update now';
 	}, 200);
 });
 
-// 残忍拒绝
+// cruel rejection
 const onCancel = () => {
 	state.isUpgrade = false;
 };
 
-// 马上更新
+// Update now
 const onUpgrade = () => {
 	state.isLoading = true;
-	state.btnTxt = '更新中';
+	state.btnTxt = 'Updating';
 	setTimeout(() => {
 		// Local.clear();
 		window.location.reload();
@@ -67,7 +67,7 @@ const onUpgrade = () => {
 	}, 2000);
 };
 
-// 延迟显示，防止刷新时界面显示太快
+// Delay display to prevent the interface from displaying too quickly when refreshing
 const delayShow = () => {
 	setTimeout(() => {
 		state.isUpgrade = true;

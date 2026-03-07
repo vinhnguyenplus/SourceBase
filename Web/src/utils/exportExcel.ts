@@ -1,19 +1,19 @@
 import XLSXS from 'xlsx-js-style';
 /**
 * @description:
-* @param {Object} json 服务端发过来的数据
-* @param {String} name 导出Excel文件名字
+* @param {Object} json Sent from the serverData
+* @param {String} name ExportExcelFile name
 
-* @param {String} titleArr 导出Excel表头
+* @param {String} titleArr ExportExcelTable Header
 
-* @param {String} sheetName 导出sheetName名字
+* @param {String} sheetName ExportsheetNameName
 * @return:
 **/
 export function exportExcel(jsonarr: Array<EmptyObjectType>, name: string, header: Array<EmptyObjectType>, sheetName: string) {
 	var data = new Array();
-	var wpxArr = new Array(); //列宽度
+	var wpxArr = new Array(); // column width
 	const borderStyle = {
-		// 边框样式
+		// border style
 		top: {
 			style: 'thin',
 			color: {
@@ -42,17 +42,17 @@ export function exportExcel(jsonarr: Array<EmptyObjectType>, name: string, heade
 	let headerDepth = getMaxDepth(header);
 	let headerColumns = getTotalColumns(header);
 
-	// 创建表头二维数组
+	// Create a header two-dimensional array
 	let headerArr = new Array(headerDepth);
 	for (let i = 0; i < headerArr.length; i++) {
 		headerArr[i] = new Array(headerColumns);
 	}
-	// 计算列索引
+	// Compute column index
 	let colIndex = 0;
 	for (let i = 0; i < header.length; i++) {
 		let col = header[i];
 
-		// 获取列对应的长度
+		// Get the corresponding length of the column
 		let colNum = getTotalColumns([col]);
 		let colDepth = getMaxDepth([col]);
 		for (let y = 0; y < colNum; y++) {
@@ -65,7 +65,7 @@ export function exportExcel(jsonarr: Array<EmptyObjectType>, name: string, heade
 		colIndex++;
 	}
 
-	// 填充表头列为空的列，为空的列要和本列上一行保持一致，通过一致的单元格，来合并单元格
+	// Fill the header column with an empty column. The empty column must be consistent with the previous row of this column. Merge cells through consistent cells.
 	for (let i = 0; i < headerArr.length; i++) {
 		let row = headerArr[i];
 		for (let j = 0; j < row.length; j++) {
@@ -75,7 +75,7 @@ export function exportExcel(jsonarr: Array<EmptyObjectType>, name: string, heade
 		}
 	}
 
-	// 递归header
+	// Recursive header
 	function headerRec(rowindex: number, colindex: number, childrenindex: number, col: any, arr: any) {
 		if (rowindex > 0) {
 			if (col.children) {
@@ -108,15 +108,15 @@ export function exportExcel(jsonarr: Array<EmptyObjectType>, name: string, heade
 				},
 			});
 		}
-		data.push(headrow); // 写入标题
+		data.push(headrow); // write title
 	}
 
-	// 计算合并单元格信息
+	// Calculate merged cell information
 	var mergedCells = [];
 	var mergedflg = false;
 	var mergedcell = { s: { r: 0, c: 0 }, e: { r: 0, c: 0 } };
 
-	// 列合并
+	// Column merge
 	for (let i = 0; i < headerColumns; i++) {
 		let rowcol = headerArr[0][i];
 		for (let j = 0; j < headerDepth; j++) {
@@ -157,7 +157,7 @@ export function exportExcel(jsonarr: Array<EmptyObjectType>, name: string, heade
 		}
 	}
 
-	// 行合并
+	// row merge
 	mergedflg = false;
 	for (let i = 0; i < headerDepth; i++) {
 		let rowcol = headerArr[i][0];
@@ -207,14 +207,14 @@ export function exportExcel(jsonarr: Array<EmptyObjectType>, name: string, heade
 				if (json[item.prop] != null) {
 					if (item.formatter) {
 						var itemf = item.formatter(json);
-						val = formatterRec(itemf); // 递归获取formatter信息
+						val = formatterRec(itemf); // Recursively obtain formatter information
 					} else {
 						val = json[item.prop];
 					}
 				} else if (getProperty(json, item.prop)) {
 					if (item.formatter) {
 						var itemf = item.formatter(json);
-						val = formatterRec(itemf); // 递归获取formatter信息
+						val = formatterRec(itemf); // Recursively obtain formatter information
 					} else {
 						val = getProperty(json, item.prop);
 					}
@@ -234,13 +234,13 @@ export function exportExcel(jsonarr: Array<EmptyObjectType>, name: string, heade
 	const ws = XLSXS.utils.aoa_to_sheet(data);
 	const wb = XLSXS.utils.book_new();
 	ws['!cols'] = wpxArr;
-	ws['!merges'] = mergedCells; // 设置合并单元格信息
+	ws['!merges'] = mergedCells; // Set merged cell information
 	XLSXS.utils.book_append_sheet(wb, ws, sheetName);
 	/* generate file and send to client */
 	XLSXS.writeFile(wb, name + '.xlsx');
 }
 
-// 递归formatter
+// recursive formatter
 function formatterRec(itemf: any) {
 	let r = '';
 	if (itemf.children) {
@@ -257,7 +257,7 @@ function formatterRec(itemf: any) {
 	return r;
 }
 
-// 获取深度
+// get depth
 function getMaxDepth(data: any) {
 	let maxDepth = 1;
 	function traverse(obj: any, depth: any) {
@@ -274,7 +274,7 @@ function getMaxDepth(data: any) {
 	return maxDepth;
 }
 
-// 获取总列数
+// Get the total number of columns
 function getTotalColumns(data: any) {
 	let totalColumns = 0;
 	function traverse(obj: any) {
@@ -289,7 +289,7 @@ function getTotalColumns(data: any) {
 	return totalColumns;
 }
 
-// 获取子对象
+// Get child object
 const getProperty = (obj: any, property: any) => {
 	const keys = property.split('.');
 	let value = obj;

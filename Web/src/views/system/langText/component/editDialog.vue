@@ -5,7 +5,7 @@ import type { FormRules } from "element-plus";
 import { formatDate } from '/@/utils/formatTime';
 import { useSysLangTextApi } from '/@/api/system/sysLangText';
 
-//父级传递来的函数，用于回调
+//Function passed from parent for callback
 const emit = defineEmits(["reloadTable"]);
 const sysLangTextApi = useSysLangTextApi();
 const ruleFormRef = ref();
@@ -19,20 +19,20 @@ const state = reactive({
 	dropdownData: {} as any,
 });
 
-// 自行添加其他规则
+// Add other rules yourself
 const rules = ref<FormRules>({
-  entityName: [{required: true, message: '请选择所属实体名！', trigger: 'blur',},],
-  entityId: [{required: true, message: '请选择所属实体ID！', trigger: 'blur',},],
-  fieldName: [{required: true, message: '请选择字段名！', trigger: 'blur',},],
-  langCode: [{required: true, message: '请选择语言代码！', trigger: 'blur',},],
-  content: [{required: true, message: '请选择翻译内容！', trigger: 'blur',},],
+  entityName: [{required: true, message: 'Please select the name of the affiliated entity!', trigger: 'blur',},],
+  entityId: [{required: true, message: 'Please select the entity ID to which you belong!', trigger: 'blur',},],
+  fieldName: [{required: true, message: 'Please select a field name!', trigger: 'blur',},],
+  langCode: [{required: true, message: 'Please select the language code!', trigger: 'blur',},],
+  content: [{required: true, message: 'Please select translation content!', trigger: 'blur',},],
 });
 
-// 页面加载时
+// When the page loads
 onMounted(async () => {
 });
 
-// 打开弹窗
+// Open pop-up window
 const openDialog = async (row: any, title: string) => {
 	state.title = title;
 	row = row ?? {  };
@@ -40,13 +40,13 @@ const openDialog = async (row: any, title: string) => {
 	state.showDialog = true;
 };
 
-// 关闭弹窗
+// Close pop-up window
 const closeDialog = () => {
 	emit("reloadTable");
 	state.showDialog = false;
 };
 
-// 提交
+// submit
 const submit = async () => {
 	ruleFormRef.value.validate(async (isValid: boolean, fields?: any) => {
 		if (isValid) {
@@ -55,14 +55,14 @@ const submit = async () => {
 			closeDialog();
 		} else {
 			ElMessage({
-				message: `表单有${Object.keys(fields).length}处验证失败，请修改后再提交`,
+				message: `The form failed to verify at ${Object.keys(fields).length}, please modify it before submitting.`,
 				type: "error",
 			});
 		}
 	});
 };
 
-//将属性或者函数暴露给父组件
+//Expose properties or functions to parent components
 defineExpose({ openDialog });
 </script>
 <template>
@@ -79,36 +79,36 @@ defineExpose({ openDialog });
 						<el-input v-model="state.ruleForm.id" />
 					</el-form-item>
 					<el-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12" class="mb20" >
-						<el-form-item label="所属实体名" prop="entityName">
-							<el-input v-model="state.ruleForm.entityName" placeholder="请输入所属实体名" maxlength="255" show-word-limit clearable />
+						<el-form-item label="Name of the affiliated entity" prop="entityName">
+							<el-input v-model="state.ruleForm.entityName" placeholder="Please enter the name of the entity you belong to" maxlength="255" show-word-limit clearable />
 						</el-form-item>
 					</el-col>
 					<el-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12" class="mb20" >
-						<el-form-item label="所属实体ID" prop="entityId">
-							<el-input v-model="state.ruleForm.entityId" placeholder="请输入所属实体ID" show-word-limit clearable />
+						<el-form-item label="Associated Entity ID" prop="entityId">
+							<el-input v-model="state.ruleForm.entityId" placeholder="Please enter the affiliated entity ID" show-word-limit clearable />
 						</el-form-item>
 					</el-col>
 					<el-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12" class="mb20" >
-						<el-form-item label="字段名" prop="fieldName">
-							<el-input v-model="state.ruleForm.fieldName" placeholder="请输入字段名" maxlength="255" show-word-limit clearable />
+						<el-form-item label="Field Name" prop="fieldName">
+							<el-input v-model="state.ruleForm.fieldName" placeholder="Please enter a field name" maxlength="255" show-word-limit clearable />
 						</el-form-item>
 					</el-col>
 					<el-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12" class="mb20" >
-						<el-form-item label="语言代码" prop="langCode">
-							<el-input v-model="state.ruleForm.langCode" placeholder="请输入语言代码" maxlength="255" show-word-limit clearable />
+						<el-form-item label="Language code" prop="langCode">
+							<el-input v-model="state.ruleForm.langCode" placeholder="Please enter language code" maxlength="255" show-word-limit clearable />
 						</el-form-item>
 					</el-col>
 					<el-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12" class="mb20" >
-						<el-form-item label="翻译内容" prop="content">
-							<el-input v-model="state.ruleForm.content" placeholder="请输入翻译内容" maxlength="255" show-word-limit clearable />
+						<el-form-item label="Translate content" prop="content">
+							<el-input v-model="state.ruleForm.content" placeholder="Please enter the content to be translated" maxlength="255" show-word-limit clearable />
 						</el-form-item>
 					</el-col>
 				</el-row>
 			</el-form>
 			<template #footer>
 				<span class="dialog-footer">
-					<el-button @click="() => state.showDialog = false">取 消</el-button>
-					<el-button @click="submit" type="primary" v-reclick="1000">确 定</el-button>
+					<el-button @click="() => state.showDialog = false">Cancel</el-button>
+					<el-button @click="submit" type="primary" v-reclick="1000">Confirm</el-button>
 				</span>
 			</template>
 		</el-dialog>

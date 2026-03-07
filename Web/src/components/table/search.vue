@@ -9,7 +9,7 @@
                                 label-width="auto"
                                 :label="val.label"
                                 :prop="val.prop"
-                                :rules="[{ required: val.required, message: `${val.label}不能为空`, trigger: val.type === 'input' ? 'blur' : 'change' }]"
+                                :rules="[{ required: val.required, message: `${val.label} cannot be empty`, trigger: val.type === 'input' ? 'blur' : 'change' }]"
                             >
                                 <el-input
                                     v-model="state.innerModelValue[val.prop]"
@@ -44,9 +44,9 @@
                                     v-bind="val.comProps"
                                     type="daterange"
                                     value-format="YYYY/MM/DD"
-                                    range-separator="至"
-                                    start-placeholder="开始日期"
-                                    end-placeholder="结束日期"
+                                    range-separator="to"
+                                    start-placeholder="Start Date"
+                                    end-placeholder="End Date"
                                     :clearable="!val.required"
                                     :shortcuts="shortcuts"
                                     :default-time="defaultTime"
@@ -84,7 +84,7 @@
             <el-form :inline="true">
                 <el-form-item>
                     <el-button text @click="state.isToggle = !state.isToggle"
-                    >更多查询
+                    >More queries
                         <el-icon class="el-icon--right">
                             <ele-ArrowUpBold v-if="state.isToggle" />
                             <ele-ArrowDownBold v-else />
@@ -98,10 +98,10 @@
         <div class="table-search-btn">
             <el-form :inline="true">
                 <el-form-item>
-                    <!-- 使用el-button-group会导致具有type属性的按钮的右边框无法显示 -->
+                    <!-- Using el-button-group will cause the right border of the button with type attribute to not be displayed -->
                     <!-- <el-button-group> -->
-                    <el-button plain type="primary" icon="ele-Search" @click="onSearch(tableSearchRef)"> 查询 </el-button>
-                    <el-button icon="ele-Refresh" @click="onReset(tableSearchRef)" style="margin-left: 12px"> 重置 </el-button>
+                    <el-button plain type="primary" icon="ele-Search" @click="onSearch(tableSearchRef)"> Query </el-button>
+                    <el-button icon="ele-Refresh" @click="onReset(tableSearchRef)" style="margin-left: 12px"> reset </el-button>
                     <!-- </el-button-group> -->
                 </el-form-item>
             </el-form>
@@ -115,10 +115,10 @@ import type { FormInstance } from 'element-plus';
 import { dayjs } from 'element-plus';
 import {useUserInfo} from "/@/stores/userInfo";
 
-// 定义父组件传过来的值
+// Define the value passed by the parent component
 const props = defineProps({
-	// 搜索表单,type-控件类型（input,select,cascader,date）,options-type为selct时需传值，cascaderData,cascaderProps-type为cascader时需传值，属性同elementUI,cascaderProps不传则使用state默认。
-	// 可带入comProps属性，和使用的控件属性对应
+	// Search form, type-control type (input, select, cascader, date), values ​​need to be passed when options-type is selct, cascaderData, cascaderProps-type need to be passed when type is cascader, the properties are the same as elementUI, if cascaderProps is not passed, use state by default.
+	// The comProps attribute can be brought in, corresponding to the control attributes used.
 	search: {
 		type: Array<TableSearchType>,
 		default: () => [],
@@ -127,26 +127,26 @@ const props = defineProps({
 		type: Object,
 		default: () => ({}),
 	},
-    // 默认显示几个查询条件，超过则隐藏，点击更多展开
+    // Several query conditions are displayed by default. If more than one are exceeded, they will be hidden. Click more to expand.
     defaultShowCount: {
         type: Number,
         default: 5,
     },
 });
 
-// 定义子组件向父组件传值/事件
+// Define child components to pass values/events to parent components
 const emit = defineEmits(['search', 'reset', 'update:modelValue']);
 
-// 定义变量内容
+// Define variable content
 const tableSearchRef = ref<FormInstance>();
 const state = reactive({
 	isToggle: false,
 	cascaderProps: { checkStrictly: true, emitPath: false, value: 'id', label: 'name', expandTrigger: 'hover' },
-	/** 内部 modelValue */
+	/** internal modelValue */
 	innerModelValue: {} as EmptyObjectType,
 });
 
-/** 监听 props.modelValue 变化 */
+/** Monitor props.modelValue changes */
 watch(
 	() => props.modelValue,
 	(val) => {
@@ -155,7 +155,7 @@ watch(
 	{ immediate: true }
 );
 
-/** 监听 state.innerModelValue 变化 */
+/** Monitor state.innerModelValue changes */
 watch(
 	() => state.innerModelValue,
 	(val) => {
@@ -164,7 +164,7 @@ watch(
 	{ deep: true }
 );
 
-// 查询
+// Query
 const onSearch = (formEl: FormInstance | undefined) => {
 	if (!formEl) return;
 	formEl.validate((isValid: boolean): void => {
@@ -174,7 +174,7 @@ const onSearch = (formEl: FormInstance | undefined) => {
 	});
 };
 
-// 重置
+// reset
 const onReset = (formEl: FormInstance | undefined) => {
 	if (!formEl) return;
 	formEl.resetFields();
@@ -188,12 +188,12 @@ const getSelectOptions = (val: TableSearchType) => {
 	return [];
 };
 
-/** 时间范围默认时间 */
+/** Time range default time */
 const defaultTime = ref<[Date, Date]>([new Date(2000, 1, 1, 0, 0, 0), new Date(2000, 2, 1, 23, 59, 59)]);
-/** 时间范围快捷选择 */
+/** Quick selection of time range */
 const shortcuts = [
 	{
-		text: '7天内',
+		text: 'Within 7 days',
 		value: () => {
 			const end = dayjs().endOf('day').toDate();
 			const start = dayjs().startOf('day').add(-7, 'day').toDate();
@@ -201,7 +201,7 @@ const shortcuts = [
 		},
 	},
 	{
-		text: '1个月内',
+		text: 'Within 1 month',
 		value: () => {
 			const end = dayjs().endOf('day').toDate();
 			const start = dayjs().startOf('day').add(-1, 'month').toDate();
@@ -209,7 +209,7 @@ const shortcuts = [
 		},
 	},
 	{
-		text: '3个月内',
+		text: 'within 3 months',
 		value: () => {
 			const end = dayjs().endOf('day').toDate();
 			const start = dayjs().startOf('day').add(-3, 'month').toDate();
@@ -239,7 +239,7 @@ const shortcuts = [
 .table-search-btn {
     flex-shrink: 0;
 
-    // 右侧查询重置按钮随展开垂直居中
+    // The query reset button on the right is vertically centered as it expands
     // .el-form--inline {
     //     height: 100%;
 	// 	.el-form-item--small.el-form-item,.el-form-item:last-of-type {

@@ -1,8 +1,8 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Admin.NET 通用权限开发平台
- * 让 .NET 开发更简单、更通用、更流行。整合最新技术，模块插件式开发，前后端分离，开箱即用。<br/><u><b><font color='FF0000'> 👮不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！</font></b></u>
+ * Admin.NET General Permission Development Platform
+ * let .NET Develop more simply、More general、More popular。wholeIn line with the latest technology，Modular Plugin-Based Development，Frontend and backendpointsLeave，Ready to use out of the box。<br/><u><b><font color='FF0000'> 👮This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project! </font></b></u>
  *
  * OpenAPI spec version: 1.0.0
  * 
@@ -15,7 +15,7 @@
 import { StatusEnum } from './status-enum';
 import { SysOrg } from './sys-org';
  /**
- * 系统机构表
+ * System Organization Table
  *
  * @export
  * @interface SysOrg
@@ -23,7 +23,7 @@ import { SysOrg } from './sys-org';
 export interface SysOrg {
 
     /**
-     * 雪花Id
+     * SnowflakeId
      *
      * @type {number}
      * @memberof SysOrg
@@ -31,7 +31,7 @@ export interface SysOrg {
     id?: number;
 
     /**
-     * 创建时间
+     * Creation Time
      *
      * @type {Date}
      * @memberof SysOrg
@@ -39,7 +39,7 @@ export interface SysOrg {
     createTime?: Date;
 
     /**
-     * 更新时间
+     * Update Time
      *
      * @type {Date}
      * @memberof SysOrg
@@ -47,7 +47,7 @@ export interface SysOrg {
     updateTime?: Date | null;
 
     /**
-     * 创建者Id
+     * CreatorId
      *
      * @type {number}
      * @memberof SysOrg
@@ -55,7 +55,7 @@ export interface SysOrg {
     createUserId?: number | null;
 
     /**
-     * 创建者姓名
+     * Creator name
      *
      * @type {string}
      * @memberof SysOrg
@@ -63,7 +63,7 @@ export interface SysOrg {
     createUserName?: string | null;
 
     /**
-     * 修改者Id
+     * Modifier ID
      *
      * @type {number}
      * @memberof SysOrg
@@ -71,7 +71,7 @@ export interface SysOrg {
     updateUserId?: number | null;
 
     /**
-     * 修改者姓名
+     * Modifier name
      *
      * @type {string}
      * @memberof SysOrg
@@ -79,7 +79,7 @@ export interface SysOrg {
     updateUserName?: string | null;
 
     /**
-     * 租户Id
+     * Tenant ID
      *
      * @type {number}
      * @memberof SysOrg
@@ -87,7 +87,7 @@ export interface SysOrg {
     tenantId?: number | null;
 
     /**
-     * 父Id
+     * Parent ID
      *
      * @type {number}
      * @memberof SysOrg
@@ -95,7 +95,7 @@ export interface SysOrg {
     pid?: number;
 
     /**
-     * 名称
+     * name
      *
      * @type {string}
      * @memberof SysOrg
@@ -103,7 +103,7 @@ export interface SysOrg {
     name: string;
 
     /**
-     * 编码
+     * Encoding
      *
      * @type {string}
      * @memberof SysOrg
@@ -111,7 +111,7 @@ export interface SysOrg {
     code?: string | null;
 
     /**
-     * 级别
+     * level
      *
      * @type {number}
      * @memberof SysOrg
@@ -119,7 +119,7 @@ export interface SysOrg {
     level?: number | null;
 
     /**
-     * 机构类型-数据字典
+     * Institution type-Datadictionary
      *
      * @type {string}
      * @memberof SysOrg
@@ -127,7 +127,7 @@ export interface SysOrg {
     type?: string | null;
 
     /**
-     * 负责人Id
+     * Person in charge ID
      *
      * @type {number}
      * @memberof SysOrg
@@ -135,7 +135,7 @@ export interface SysOrg {
     directorId?: number | null;
 
     /**
-     * 排序
+     * Sort
      *
      * @type {number}
      * @memberof SysOrg
@@ -149,7 +149,7 @@ export interface SysOrg {
     status?: StatusEnum;
 
     /**
-     * 备注
+     * Remarks
      *
      * @type {string}
      * @memberof SysOrg
@@ -157,7 +157,7 @@ export interface SysOrg {
     remark?: string | null;
 
     /**
-     * 机构子项
+     * mechanismchilditem
      *
      * @type {Array<SysOrg>}
      * @memberof SysOrg
@@ -165,7 +165,7 @@ export interface SysOrg {
     children?: Array<SysOrg> | null;
 
     /**
-     * 是否禁止选中
+     * YesnoSelection prohibitedin
      *
      * @type {boolean}
      * @memberof SysOrg

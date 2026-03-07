@@ -4,7 +4,7 @@ import path from 'path';
 
 const filesToDelete = ['pnpm-lock.yaml', 'package-lock.json'];
 
-// 删除文件
+// Delete file
 filesToDelete.forEach((file) => {
 	const filePath = path.join(process.cwd(), file);
 	if (fs.existsSync(filePath)) {

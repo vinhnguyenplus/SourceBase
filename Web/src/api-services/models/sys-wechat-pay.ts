@@ -1,8 +1,8 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Admin.NET 通用权限开发平台
- * 让 .NET 开发更简单、更通用、更流行。整合最新技术，模块插件式开发，前后端分离，开箱即用。<br/><u><b><font color='FF0000'> 👮不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！</font></b></u>
+ * Admin.NET General Permission Development Platform
+ * let .NET Develop more simply、More general、More popular。wholeIn line with the latest technology，Modular Plugin-Based Development，Frontend and backendpointsLeave，Ready to use out of the box。<br/><u><b><font color='FF0000'> 👮This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project! </font></b></u>
  *
  * OpenAPI spec version: 1.0.0
  * 
@@ -13,7 +13,7 @@
  */
 
  /**
- * 系统微信支付表
+ * System WeChat Pay Table
  *
  * @export
  * @interface SysWechatPay
@@ -21,7 +21,7 @@
 export interface SysWechatPay {
 
     /**
-     * 雪花Id
+     * SnowflakeId
      *
      * @type {number}
      * @memberof SysWechatPay
@@ -29,7 +29,7 @@ export interface SysWechatPay {
     id?: number;
 
     /**
-     * 创建时间
+     * Creation Time
      *
      * @type {Date}
      * @memberof SysWechatPay
@@ -37,7 +37,7 @@ export interface SysWechatPay {
     createTime?: Date;
 
     /**
-     * 更新时间
+     * Update Time
      *
      * @type {Date}
      * @memberof SysWechatPay
@@ -45,7 +45,7 @@ export interface SysWechatPay {
     updateTime?: Date | null;
 
     /**
-     * 创建者Id
+     * CreatorId
      *
      * @type {number}
      * @memberof SysWechatPay
@@ -53,7 +53,7 @@ export interface SysWechatPay {
     createUserId?: number | null;
 
     /**
-     * 创建者姓名
+     * Creator name
      *
      * @type {string}
      * @memberof SysWechatPay
@@ -61,7 +61,7 @@ export interface SysWechatPay {
     createUserName?: string | null;
 
     /**
-     * 修改者Id
+     * Modifier ID
      *
      * @type {number}
      * @memberof SysWechatPay
@@ -69,7 +69,7 @@ export interface SysWechatPay {
     updateUserId?: number | null;
 
     /**
-     * 修改者姓名
+     * Modifier name
      *
      * @type {string}
      * @memberof SysWechatPay
@@ -77,7 +77,7 @@ export interface SysWechatPay {
     updateUserName?: string | null;
 
     /**
-     * 微信商户号
+     * WeChat merchant account
      *
      * @type {string}
      * @memberof SysWechatPay
@@ -85,7 +85,7 @@ export interface SysWechatPay {
     merchantId: string;
 
     /**
-     * 服务商AppId
+     * Service provider AppId
      *
      * @type {string}
      * @memberof SysWechatPay
@@ -93,7 +93,7 @@ export interface SysWechatPay {
     appId: string;
 
     /**
-     * 商户订单号
+     * Merchant Order Number
      *
      * @type {string}
      * @memberof SysWechatPay
@@ -101,7 +101,7 @@ export interface SysWechatPay {
     outTradeNumber: string;
 
     /**
-     * 支付订单号
+     * Payment Order Number
      *
      * @type {string}
      * @memberof SysWechatPay
@@ -109,7 +109,7 @@ export interface SysWechatPay {
     transactionId: string;
 
     /**
-     * 交易类型
+     * transaction type
      *
      * @type {string}
      * @memberof SysWechatPay
@@ -117,7 +117,7 @@ export interface SysWechatPay {
     tradeType?: string | null;
 
     /**
-     * 交易状态
+     * Transaction Status
      *
      * @type {string}
      * @memberof SysWechatPay
@@ -125,7 +125,7 @@ export interface SysWechatPay {
     tradeState?: string | null;
 
     /**
-     * 交易状态描述
+     * Transaction status description
      *
      * @type {string}
      * @memberof SysWechatPay
@@ -133,7 +133,7 @@ export interface SysWechatPay {
     tradeStateDescription?: string | null;
 
     /**
-     * 付款银行类型
+     * Payment bank type
      *
      * @type {string}
      * @memberof SysWechatPay
@@ -141,7 +141,7 @@ export interface SysWechatPay {
     bankType?: string | null;
 
     /**
-     * 订单总金额
+     * Total Order Amount
      *
      * @type {number}
      * @memberof SysWechatPay
@@ -149,7 +149,7 @@ export interface SysWechatPay {
     total?: number;
 
     /**
-     * 用户支付金额
+     * User Payment Amount
      *
      * @type {number}
      * @memberof SysWechatPay
@@ -157,7 +157,7 @@ export interface SysWechatPay {
     payerTotal?: number | null;
 
     /**
-     * 支付完成时间
+     * Payment Completion Time
      *
      * @type {Date}
      * @memberof SysWechatPay
@@ -165,7 +165,7 @@ export interface SysWechatPay {
     successTime?: Date | null;
 
     /**
-     * 交易结束时间
+     * Transaction End Time
      *
      * @type {Date}
      * @memberof SysWechatPay
@@ -173,7 +173,7 @@ export interface SysWechatPay {
     expireTime?: Date | null;
 
     /**
-     * 商品描述
+     * Product description
      *
      * @type {string}
      * @memberof SysWechatPay
@@ -181,7 +181,7 @@ export interface SysWechatPay {
     description?: string | null;
 
     /**
-     * 场景信息
+     * scene information
      *
      * @type {string}
      * @memberof SysWechatPay
@@ -189,7 +189,7 @@ export interface SysWechatPay {
     scene?: string | null;
 
     /**
-     * 附加数据
+     * AdditionalData
      *
      * @type {string}
      * @memberof SysWechatPay
@@ -197,7 +197,7 @@ export interface SysWechatPay {
     attachment?: string | null;
 
     /**
-     * 优惠标记
+     * Discount Tag
      *
      * @type {string}
      * @memberof SysWechatPay
@@ -205,7 +205,7 @@ export interface SysWechatPay {
     goodsTag?: string | null;
 
     /**
-     * 结算信息
+     * Billing information
      *
      * @type {string}
      * @memberof SysWechatPay
@@ -213,7 +213,7 @@ export interface SysWechatPay {
     settlement?: string | null;
 
     /**
-     * 回调通知地址
+     * Callback notification address
      *
      * @type {string}
      * @memberof SysWechatPay
@@ -221,7 +221,7 @@ export interface SysWechatPay {
     notifyUrl?: string | null;
 
     /**
-     * 备注
+     * Remarks
      *
      * @type {string}
      * @memberof SysWechatPay
@@ -229,7 +229,7 @@ export interface SysWechatPay {
     remark?: string | null;
 
     /**
-     * 微信OpenId标识
+     * WeChat OpenId Identifier
      *
      * @type {string}
      * @memberof SysWechatPay
@@ -237,7 +237,7 @@ export interface SysWechatPay {
     openId?: string | null;
 
     /**
-     * 业务标签，用来区分做什么业务
+     * Business Tag，used to dividepointsWhat business do you do?
      *
      * @type {string}
      * @memberof SysWechatPay
@@ -245,7 +245,7 @@ export interface SysWechatPay {
     tags?: string | null;
 
     /**
-     * 对应业务的主键
+     * The primary key corresponding to the business
      *
      * @type {number}
      * @memberof SysWechatPay
@@ -253,7 +253,7 @@ export interface SysWechatPay {
     businessId?: number;
 
     /**
-     * 付款二维码内容
+     * Payment QR code content
      *
      * @type {string}
      * @memberof SysWechatPay
@@ -261,7 +261,7 @@ export interface SysWechatPay {
     qrcodeContent?: string | null;
 
     /**
-     * 子商户号
+     * Sub-merchant number
      *
      * @type {string}
      * @memberof SysWechatPay
@@ -269,7 +269,7 @@ export interface SysWechatPay {
     subMerchantId?: string | null;
 
     /**
-     * 子商户AppId
+     * childMerchant AppId
      *
      * @type {string}
      * @memberof SysWechatPay
@@ -277,7 +277,7 @@ export interface SysWechatPay {
     subAppId?: string | null;
 
     /**
-     * 子商户唯一标识
+     * childMerchant OnlyoneLogo
      *
      * @type {string}
      * @memberof SysWechatPay

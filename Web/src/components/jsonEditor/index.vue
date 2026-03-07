@@ -1,9 +1,9 @@
 <!--
-// JsonEditor组件，用于编辑类json格式数据，防止配置式数据的错误格式输入
-// 使用示例：
+// JsonEditor component, used to edit json-like format data to prevent incorrect format input of configuration data
+// Usage example:
 <template>
 	<el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="mb20">
-		<el-form-item label="内容" prop="content">
+		<el-form-item label="content" prop="content">
 			<JsonEditor ref="jsonEditorRef" v-model:jsonObj="ruleForm.content"></JsonEditor>
 		</el-form-item>
 	</el-col>
@@ -14,7 +14,7 @@ import JsonEditor from '/@/components/jsonEditor/index.vue';
 -->
 
 <template>
-	<!-- 根据 isJsonValid 控制 JsonEditorVue 的显示 -->
+	<!-- Control the display of JsonEditorVue based on isJsonValid -->
 	<JsonEditorVue ref="jsonEditorVueRef" v-show="isJsonValid" v-model="internalJsonObj" mode="text" style="width: 100%" />
 </template>
 
@@ -25,15 +25,15 @@ import JsonEditorVue from 'json-editor-vue';
 const props = defineProps({
 	jsonObj: {
 		type: null,
-		default: null, // 允许为 null
-		required: false, // 不是必需的
+		default: null, // allowed to be null
+		required: false, // Not required
 	},
 });
 const jsonEditorVueRef = useTemplateRef('jsonEditorVueRef');
 const internalJsonObj = ref(props.jsonObj);
 const emit = defineEmits(['update:jsonObj']);
 
-// 计算属性，判断 jsonObj 是否为有效的 JSON 字符串，这里为简易判断，防止输入框失去焦点时，组件频繁隐藏和显示
+// Calculate attributes to determine whether jsonObj is a valid JSON string. Here is a simple judgment to prevent components from being frequently hidden and displayed when the input box loses focus.
 const isJsonValid = computed(() => {
 	try {
 		if (internalJsonObj.value && (internalJsonObj.value.startsWith('{') || internalJsonObj.value.startsWith('[')) && (internalJsonObj.value.endsWith('}') || internalJsonObj.value.endsWith(']'))) {
@@ -45,12 +45,12 @@ const isJsonValid = computed(() => {
 	return false;
 });
 
-// 监听内部 JSON 对象变化并触发外部更新
+// Monitor internal JSON object changes and trigger external updates
 watch(internalJsonObj, () => {
 	emit('update:jsonObj', internalJsonObj.value);
 });
 
-// 监听外部字符串变化并更新内部JSON对象
+// Listen to external string changes and update the internal JSON object
 watch(
 	() => props.jsonObj,
 	(newVal) => {

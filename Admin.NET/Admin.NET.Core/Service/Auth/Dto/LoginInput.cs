@@ -1,42 +1,42 @@
-// Admin.NET 项目的版权、商标、专利和其他相关权利均受相应法律法规的保护。使用本项目应遵守相关法律法规和许可证的要求。
+// The copyright, trademark, patent and other related rights of the Admin.NET project are protected by corresponding laws and regulations. Use of this project shall comply with relevant laws, regulations and license requirements.
 //
-// 本项目主要遵循 MIT 许可证和 Apache 许可证（版本 2.0）进行分发和使用。许可证位于源代码树根目录中的 LICENSE-MIT 和 LICENSE-APACHE 文件。
+// This project is distributed and used primarily under the MIT License and the Apache License (version 2.0). The license is located in the LICENSE-MIT and LICENSE-APACHE files in the root of the source tree.
 //
-// 不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！
+// This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project!
 
 namespace Admin.NET.Core.Service;
 
 /// <summary>
-/// 用户登录参数
+/// User login parameters
 /// </summary>
 public class LoginInput
 {
     /// <summary>
-    /// 账号
+    /// account
     /// </summary>
     /// <example>admin</example>
-    [Required(ErrorMessage = "账号不能为空"), MinLength(2, ErrorMessage = "账号不能少于2个字符")]
+    [Required(ErrorMessage = "Account cannot be empty"), MinLength(2, ErrorMessage = "The account cannot be less than 2 characters")]
     public string Account { get; set; }
 
     /// <summary>
-    /// 密码
+    /// password
     /// </summary>
     /// <example>123456</example>
-    [Required(ErrorMessage = "密码不能为空"), MinLength(3, ErrorMessage = "密码不能少于3个字符")]
+    [Required(ErrorMessage = "Password cannot be empty"), MinLength(3, ErrorMessage = "The password cannot be less than 3 characters")]
     public string Password { get; set; }
 
     /// <summary>
-    /// 租户
+    /// tenant
     /// </summary>
     public long? TenantId { get; set; }
 
     /// <summary>
-    /// 验证码Id
+    /// Verification codeId
     /// </summary>
     public long CodeId { get; set; }
 
     /// <summary>
-    /// 验证码
+    /// Verification code
     /// </summary>
     public string Code { get; set; }
 }
@@ -44,77 +44,77 @@ public class LoginInput
 public class LoginPhoneInput
 {
     /// <summary>
-    /// 手机号码
+    /// phone number
     /// </summary>
     /// <example>admin</example>
-    [Required(ErrorMessage = "手机号码不能为空")]
-    [DataValidation(ValidationTypes.PhoneNumber, ErrorMessage = "手机号码不正确")]
+    [Required(ErrorMessage = "The mobile phone number cannot be empty")]
+    [DataValidation(ValidationTypes.PhoneNumber, ErrorMessage = "The phone number is incorrect")]
     public string Phone { get; set; }
 
     /// <summary>
-    /// 验证码
+    /// Verification code
     /// </summary>
     /// <example>123456</example>
-    [Required(ErrorMessage = "验证码不能为空"), MinLength(4, ErrorMessage = "验证码不能少于4个字符")]
+    [Required(ErrorMessage = "The verification code cannot be empty"), MinLength(4, ErrorMessage = "The verification code must be at least 4 characters")]
     public string Code { get; set; }
 
     /// <summary>
-    /// 租户
+    /// tenant
     /// </summary>
-    [Required(ErrorMessage = "租户不能为空")]
+    [Required(ErrorMessage = "Tenant cannot be empty")]
     public long? TenantId { get; set; }
 }
 
 /// <summary>
-/// 用户注册输入参数
+/// User registration input parameters
 /// </summary>
 public class UserRegistrationInput
 {
     /// <summary>
-    /// 真实姓名
+    /// real name
     /// </summary>
-    [Required(ErrorMessage = "真实姓名不能为空"), MinLength(2, ErrorMessage = "真实姓名不能少于2个字符")]
+    [Required(ErrorMessage = "Real name cannot be empty"), MinLength(2, ErrorMessage = "The real name must be at least 2 characters long")]
     public string RealName { get; set; }
 
     /// <summary>
-    /// 账号
+    /// account
     /// </summary>
-    [Required(ErrorMessage = "账号不能为空"), MinLength(6, ErrorMessage = "账号不能少于6个字符")]
+    [Required(ErrorMessage = "Account cannot be empty"), MinLength(6, ErrorMessage = "Account number cannot be less than 6 characters")]
     public string Account { get; set; }
 
     /// <summary>
-    /// 手机号码
+    /// phone number
     /// </summary>
     /// <example>admin</example>
-    [Required(ErrorMessage = "手机号码不能为空")]
-    [DataValidation(ValidationTypes.PhoneNumber, ErrorMessage = "手机号码不正确")]
+    [Required(ErrorMessage = "The mobile phone number cannot be empty")]
+    [DataValidation(ValidationTypes.PhoneNumber, ErrorMessage = "The phone number is incorrect")]
     public string Phone { get; set; }
 
     /// <summary>
-    /// 验证码
+    /// Verification code
     /// </summary>
     /// <example>123456</example>
-    [Required(ErrorMessage = "验证码不能为空")]
+    [Required(ErrorMessage = "The verification code cannot be empty")]
     public string Code { get; set; }
 
     /// <summary>
-    /// 验证码Id
+    /// Verification codeId
     /// </summary>
     public long CodeId { get; set; }
 
     /// <summary>
-    /// 租户
+    /// tenant
     /// </summary>
-    [Required(ErrorMessage = "租户不能为空")]
+    [Required(ErrorMessage = "Tenant cannot be empty")]
     public long TenantId { get; set; }
 
     /// <summary>
-    /// 密码
+    /// password
     /// </summary>
     public string Password { get; set; }
 
     /// <summary>
-    /// 注册方案
+    /// Registration plan
     /// </summary>
     public long WayId { get; set; }
 }

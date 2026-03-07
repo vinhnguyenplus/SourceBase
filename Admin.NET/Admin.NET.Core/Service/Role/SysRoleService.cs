@@ -1,13 +1,13 @@
-﻿// Admin.NET 项目的版权、商标、专利和其他相关权利均受相应法律法规的保护。使用本项目应遵守相关法律法规和许可证的要求。
+﻿// The copyright, trademark, patent and other related rights of the Admin.NET project are protected by corresponding laws and regulations. Use of this project shall comply with relevant laws, regulations and license requirements.
 //
-// 本项目主要遵循 MIT 许可证和 Apache 许可证（版本 2.0）进行分发和使用。许可证位于源代码树根目录中的 LICENSE-MIT 和 LICENSE-APACHE 文件。
+// This project is distributed and used primarily under the MIT License and the Apache License (version 2.0). The license is located in the LICENSE-MIT and LICENSE-APACHE files in the root of the source tree.
 //
-// 不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！
+// This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project!
 
 namespace Admin.NET.Core.Service;
 
 /// <summary>
-/// 系统角色服务 🧩
+/// System role service 🧩
 /// </summary>
 [ApiDescriptionSettings(Order = 480)]
 public class SysRoleService : IDynamicApiController, ITransient
@@ -41,19 +41,19 @@ public class SysRoleService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 获取角色分页列表 🔖
+    /// Get paginated list of roles 🔖
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
-    [DisplayName("获取角色分页列表")]
+    [DisplayName("Get a paginated list of roles")]
     public async Task<SqlSugarPagedList<SysRole>> Page(PageRoleInput input)
     {
-        // 当前用户已拥有的角色集合
+        // A collection of roles owned by the current user
         var roleIdList = _userManager.SuperAdmin ? new List<long>() : await _sysUserRoleService.GetUserRoleIdList(_userManager.UserId);
         return await _sysRoleRep.AsQueryable()
             .WhereIF(_userManager.SuperAdmin && input.TenantId > 0, u => u.TenantId == input.TenantId)
-            .WhereIF(!_userManager.SuperAdmin, u => u.TenantId == _userManager.TenantId) // 若非超管，则只能操作本租户的角色
-            .WhereIF(!_userManager.SuperAdmin && !_userManager.SysAdmin, u => u.CreateUserId == _userManager.UserId || roleIdList.Contains(u.Id)) // 若非超管且非系统管理员，则只能操作自己创建的角色|自己拥有的角色
+            .WhereIF(!_userManager.SuperAdmin, u => u.TenantId == _userManager.TenantId) // If it is not super-managed, you can only operate the role of this tenant.
+            .WhereIF(!_userManager.SuperAdmin && !_userManager.SysAdmin, u => u.CreateUserId == _userManager.UserId || roleIdList.Contains(u.Id)) // If you are not a super administrator and are not a system administrator, you can only operate the roles you created | the roles you own.
             .WhereIF(!string.IsNullOrWhiteSpace(input.Name), u => u.Name.Contains(input.Name))
             .WhereIF(!string.IsNullOrWhiteSpace(input.Code), u => u.Code.Contains(input.Code))
             .OrderBy(u => new { u.OrderNo, u.Id })
@@ -61,29 +61,29 @@ public class SysRoleService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 获取角色列表 🔖
+    /// Get character list 🔖
     /// </summary>
     /// <returns></returns>
-    [DisplayName("获取角色列表")]
+    [DisplayName("Get role list")]
     public async Task<List<RoleOutput>> GetList()
     {
-        // 当前用户已拥有的角色集合
+        // A collection of roles owned by the current user
         var roleIdList = _userManager.SuperAdmin ? new List<long>() : await _sysUserRoleService.GetUserRoleIdList(_userManager.UserId);
 
         return await _sysRoleRep.AsQueryable()
-            .WhereIF(!_userManager.SuperAdmin, u => u.TenantId == _userManager.TenantId) // 若非超管，则只能操作本租户的角色
-            .WhereIF(!_userManager.SuperAdmin && !_userManager.SysAdmin, u => u.CreateUserId == _userManager.UserId || roleIdList.Contains(u.Id)) // 若非超管且非系统管理员，则只显示自己创建和已拥有的角色
-            .Where(u => u.Status != StatusEnum.Disable) // 非禁用的
+            .WhereIF(!_userManager.SuperAdmin, u => u.TenantId == _userManager.TenantId) // If it is not super-managed, you can only operate the role of this tenant.
+            .WhereIF(!_userManager.SuperAdmin && !_userManager.SysAdmin, u => u.CreateUserId == _userManager.UserId || roleIdList.Contains(u.Id)) // If you are not a super administrator and are not a system administrator, only the roles you created and already own will be displayed.
+            .Where(u => u.Status != StatusEnum.Disable) // Not prohibited
             .OrderBy(u => new { u.OrderNo, u.Id }).Select<RoleOutput>().ToListAsync();
     }
 
     /// <summary>
-    /// 增加角色 🔖
+    /// Add roles 🔖
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
     [ApiDescriptionSettings(Name = "Add"), HttpPost]
-    [DisplayName("增加角色")]
+    [DisplayName("Add character")]
     public async Task AddRole(AddRoleInput input)
     {
         if (await _sysRoleRep.IsAnyAsync(u => u.Name == input.Name && u.Code == input.Code))
@@ -95,7 +95,7 @@ public class SysRoleService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 更新角色菜单权限
+    /// Update role menu permissions
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
@@ -110,12 +110,12 @@ public class SysRoleService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 更新角色 🔖
+    /// Update character 🔖
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
     [ApiDescriptionSettings(Name = "Update"), HttpPost]
-    [DisplayName("更新角色")]
+    [DisplayName("Update Character")]
     public async Task UpdateRole(UpdateRoleInput input)
     {
         if (await _sysRoleRep.IsAnyAsync(u => u.Name == input.Name && u.Code == input.Code && u.Id != input.Id))
@@ -128,43 +128,43 @@ public class SysRoleService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 删除角色 🔖
+    /// Delete role 🔖
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
     [UnitOfWork]
     [ApiDescriptionSettings(Name = "Delete"), HttpPost]
-    [DisplayName("删除角色")]
+    [DisplayName("Delete role")]
     public async Task DeleteRole(DeleteRoleInput input)
     {
-        // 若角色有用户则禁止删除
+        // If the role has users, deletion is prohibited
         var userIds = await _sysUserRoleService.GetUserIdList(input.Id);
         if (userIds != null && userIds.Count > 0) throw Oops.Oh(ErrorCodeEnum.D1025);
 
-        // 若有绑定注册方案则禁止删除
+        // If there is a binding registration plan, deletion is prohibited.
         var hasUserRegWay = await _sysRoleRep.Context.Queryable<SysUserRegWay>().AnyAsync(u => u.RoleId == input.Id);
         if (hasUserRegWay) throw Oops.Oh(ErrorCodeEnum.D1033);
 
         var sysRole = await _sysRoleRep.GetFirstAsync(u => u.Id == input.Id) ?? throw Oops.Oh(ErrorCodeEnum.D1002);
         await _sysRoleRep.DeleteAsync(sysRole);
 
-        // 级联删除角色机构数据
+        // Cascade deletion of role organization data
         await _sysRoleOrgService.DeleteRoleOrgByRoleId(sysRole.Id);
 
-        // 级联删除用户角色数据
+        // Cascade delete user role data
         await _sysUserRoleService.DeleteUserRoleByRoleId(sysRole.Id);
 
-        // 级联删除角色菜单数据
+        // Cascade delete character menu data
         await _sysRoleMenuService.DeleteRoleMenuByRoleId(sysRole.Id);
     }
 
     /// <summary>
-    /// 授权角色菜单 🔖
+    /// Authorized role menu 🔖
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
     [UnitOfWork]
-    [DisplayName("授权角色菜单")]
+    [DisplayName("Authorized Role Menu")]
     public async Task GrantMenu(RoleMenuInput input)
     {
         if (input.MenuIdList == null || input.MenuIdList.Count < 1) return;
@@ -175,15 +175,15 @@ public class SysRoleService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 授权角色数据范围 🔖
+    /// Authorized role data range 🔖
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
     [UnitOfWork]
-    [DisplayName("授权角色数据范围")]
+    [DisplayName("Authorized Role Data Scope")]
     public async Task GrantDataScope(RoleOrgInput input)
     {
-        // 删除与该角色相关的用户机构缓存
+        // Delete the user organization cache associated with this role
         var userIdList = await _sysUserRoleService.GetUserIdList(input.Id);
         foreach (var userId in userIdList)
         {
@@ -196,9 +196,9 @@ public class SysRoleService : IDynamicApiController, ITransient
         {
             switch (dataScope)
             {
-                // 非超级管理员没有全部数据范围权限
+                // Non-super administrators do not have full data range permissions
                 case (int)DataScopeEnum.All: throw Oops.Oh(ErrorCodeEnum.D1016);
-                // 若数据范围自定义，则判断授权数据范围是否有权限
+                // If the data range is customized, determine whether the authorized data range has permissions.
                 case (int)DataScopeEnum.Define:
                     {
                         var grantOrgIdList = input.OrgIdList;
@@ -221,11 +221,11 @@ public class SysRoleService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 根据角色Id获取菜单Id集合 🔖
+    /// Get the menu ID collection based on the role ID 🔖
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
-    [DisplayName("根据角色Id获取菜单Id集合")]
+    [DisplayName("Get menu ID collection based on role ID")]
     public async Task<List<long>> GetOwnMenuList([FromQuery] RoleInput input)
     {
         var menuIds = await _sysRoleMenuService.GetRoleMenuIdList(new List<long> { input.Id });
@@ -233,22 +233,22 @@ public class SysRoleService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 根据角色Id获取机构Id集合 🔖
+    /// Get the organization ID collection based on the role ID 🔖
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
-    [DisplayName("根据角色Id获取机构Id集合")]
+    [DisplayName("Get the organization ID collection based on the role ID")]
     public async Task<List<long>> GetOwnOrgList([FromQuery] RoleInput input)
     {
         return await _sysRoleOrgService.GetRoleOrgIdList(new List<long> { input.Id });
     }
 
     /// <summary>
-    /// 设置角色状态 🔖
+    /// Set character status 🔖
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
-    [DisplayName("设置角色状态")]
+    [DisplayName("Set character status")]
     public async Task<int> SetStatus(RoleInput input)
     {
         if (!Enum.IsDefined(typeof(StatusEnum), input.Status)) throw Oops.Oh(ErrorCodeEnum.D3005);
@@ -260,7 +260,7 @@ public class SysRoleService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 删除与该角色相关的用户接口缓存
+    /// Delete the user interface cache associated with this role
     /// </summary>
     /// <param name="roleId"></param>
     /// <returns></returns>

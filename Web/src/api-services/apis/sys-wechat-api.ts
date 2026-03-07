@@ -1,8 +1,8 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Admin.NET 通用权限开发平台
- * 让 .NET 开发更简单、更通用、更流行。整合最新技术，模块插件式开发，前后端分离，开箱即用。<br/><u><b><font color='FF0000'> 👮不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！</font></b></u>
+ * Admin.NET General Permission Development Platform
+ * let .NET Develop more simply、More general、More popular。wholeIn line with the latest technology，Modular Plugin-Based Development，Frontend and backendpointsLeave，Ready to use out of the box。<br/><u><b><font color='FF0000'> 👮This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project! </font></b></u>
  *
  * OpenAPI spec version: 1.0.0
  * 
@@ -32,7 +32,7 @@ export const SysWechatApiAxiosParamCreator = function (configuration?: Configura
     return {
         /**
          * 
-         * @summary 删除模板 🔖
+         * @summary Delete template 🔖
          * @param {DeleteMessageTemplateInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -80,7 +80,7 @@ export const SysWechatApiAxiosParamCreator = function (configuration?: Configura
         },
         /**
          * 
-         * @summary 生成网页授权Url 🔖
+         * @summary Generate web page authorization URL 🔖
          * @param {GenAuthUrlInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -128,7 +128,7 @@ export const SysWechatApiAxiosParamCreator = function (configuration?: Configura
         },
         /**
          * 
-         * @summary 获取配置签名参数(wx.config) 🔖
+         * @summary Get configuration signature parameters (wx.config) 🔖
          * @param {SignatureInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -176,7 +176,7 @@ export const SysWechatApiAxiosParamCreator = function (configuration?: Configura
         },
         /**
          * 
-         * @summary 获取模板列表 🔖
+         * @summary Get template list 🔖
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -219,7 +219,7 @@ export const SysWechatApiAxiosParamCreator = function (configuration?: Configura
         },
         /**
          * 
-         * @summary 微信用户登录OpenId 🔖
+         * @summary WeChat user login OpenId 🔖
          * @param {WechatUserLogin} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -267,7 +267,7 @@ export const SysWechatApiAxiosParamCreator = function (configuration?: Configura
         },
         /**
          * 
-         * @summary 发送模板消息 🔖
+         * @summary Send template message 🔖
          * @param {MessageTemplateSendInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -315,7 +315,7 @@ export const SysWechatApiAxiosParamCreator = function (configuration?: Configura
         },
         /**
          * 
-         * @summary 获取微信用户OpenId 🔖
+         * @summary Obtain WeChat user's OpenId 🔖
          * @param {string} code Code
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -376,7 +376,7 @@ export const SysWechatApiFp = function(configuration?: Configuration) {
     return {
         /**
          * 
-         * @summary 删除模板 🔖
+         * @summary Delete template 🔖
          * @param {DeleteMessageTemplateInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -390,7 +390,7 @@ export const SysWechatApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary 生成网页授权Url 🔖
+         * @summary Generate web page authorization URL 🔖
          * @param {GenAuthUrlInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -404,7 +404,7 @@ export const SysWechatApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary 获取配置签名参数(wx.config) 🔖
+         * @summary Get configuration signature parameters (wx.config) 🔖
          * @param {SignatureInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -418,7 +418,7 @@ export const SysWechatApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary 获取模板列表 🔖
+         * @summary Get template list 🔖
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -431,7 +431,7 @@ export const SysWechatApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary 微信用户登录OpenId 🔖
+         * @summary WeChat user login OpenId 🔖
          * @param {WechatUserLogin} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -445,7 +445,7 @@ export const SysWechatApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary 发送模板消息 🔖
+         * @summary Send template message 🔖
          * @param {MessageTemplateSendInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -459,7 +459,7 @@ export const SysWechatApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary 获取微信用户OpenId 🔖
+         * @summary Obtain WeChat user's OpenId 🔖
          * @param {string} code Code
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -482,7 +482,7 @@ export const SysWechatApiFactory = function (configuration?: Configuration, base
     return {
         /**
          * 
-         * @summary 删除模板 🔖
+         * @summary Delete template 🔖
          * @param {DeleteMessageTemplateInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -492,7 +492,7 @@ export const SysWechatApiFactory = function (configuration?: Configuration, base
         },
         /**
          * 
-         * @summary 生成网页授权Url 🔖
+         * @summary Generate web page authorization URL 🔖
          * @param {GenAuthUrlInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -502,7 +502,7 @@ export const SysWechatApiFactory = function (configuration?: Configuration, base
         },
         /**
          * 
-         * @summary 获取配置签名参数(wx.config) 🔖
+         * @summary Get configuration signature parameters (wx.config) 🔖
          * @param {SignatureInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -512,7 +512,7 @@ export const SysWechatApiFactory = function (configuration?: Configuration, base
         },
         /**
          * 
-         * @summary 获取模板列表 🔖
+         * @summary Get template list 🔖
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -521,7 +521,7 @@ export const SysWechatApiFactory = function (configuration?: Configuration, base
         },
         /**
          * 
-         * @summary 微信用户登录OpenId 🔖
+         * @summary WeChat user login OpenId 🔖
          * @param {WechatUserLogin} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -531,7 +531,7 @@ export const SysWechatApiFactory = function (configuration?: Configuration, base
         },
         /**
          * 
-         * @summary 发送模板消息 🔖
+         * @summary Send template message 🔖
          * @param {MessageTemplateSendInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -541,7 +541,7 @@ export const SysWechatApiFactory = function (configuration?: Configuration, base
         },
         /**
          * 
-         * @summary 获取微信用户OpenId 🔖
+         * @summary Obtain WeChat user's OpenId 🔖
          * @param {string} code Code
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -561,7 +561,7 @@ export const SysWechatApiFactory = function (configuration?: Configuration, base
 export class SysWechatApi extends BaseAPI {
     /**
      * 
-     * @summary 删除模板 🔖
+     * @summary Delete template 🔖
      * @param {DeleteMessageTemplateInput} [body] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -572,7 +572,7 @@ export class SysWechatApi extends BaseAPI {
     }
     /**
      * 
-     * @summary 生成网页授权Url 🔖
+     * @summary Generate web page authorization URL 🔖
      * @param {GenAuthUrlInput} [body] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -583,7 +583,7 @@ export class SysWechatApi extends BaseAPI {
     }
     /**
      * 
-     * @summary 获取配置签名参数(wx.config) 🔖
+     * @summary Get configuration signature parameters (wx.config) 🔖
      * @param {SignatureInput} [body] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -594,7 +594,7 @@ export class SysWechatApi extends BaseAPI {
     }
     /**
      * 
-     * @summary 获取模板列表 🔖
+     * @summary Get template list 🔖
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SysWechatApi
@@ -604,7 +604,7 @@ export class SysWechatApi extends BaseAPI {
     }
     /**
      * 
-     * @summary 微信用户登录OpenId 🔖
+     * @summary WeChat user login OpenId 🔖
      * @param {WechatUserLogin} [body] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -615,7 +615,7 @@ export class SysWechatApi extends BaseAPI {
     }
     /**
      * 
-     * @summary 发送模板消息 🔖
+     * @summary Send template message 🔖
      * @param {MessageTemplateSendInput} [body] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -626,7 +626,7 @@ export class SysWechatApi extends BaseAPI {
     }
     /**
      * 
-     * @summary 获取微信用户OpenId 🔖
+     * @summary Obtain WeChat user's OpenId 🔖
      * @param {string} code Code
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}

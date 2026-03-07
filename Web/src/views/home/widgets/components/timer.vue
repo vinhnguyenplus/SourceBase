@@ -1,8 +1,8 @@
 <template>
-	<el-card shadow="hover" header="当前时钟" class="item-background">
+	<el-card shadow="hover" header="Currentclock" class="item-background">
 		<template #header>
 			<el-icon style="display: inline; vertical-align: middle"> <ele-Clock /> </el-icon>
-			<span> 当前时钟 </span>
+			<span> Currentclock </span>
 		</template>
 		<div class="time">
 			<h2>{{ time }}</h2>
@@ -13,9 +13,9 @@
 
 <script lang="ts">
 export default {
-	title: '时钟',
+	title: 'clock',
 	icon: 'ele-Timer',
-	description: '时钟原子组件演示',
+	description: 'Clock Atomic Component Demonstration',
 };
 </script>
 
@@ -39,7 +39,7 @@ onUnmounted(() => {
 
 const showTime = () => {
 	time.value = formatDate(new Date(), 'HH:MM:SS');
-	day.value = formatDate(new Date(), 'YYYY年mm月dd日');
+	day.value = formatDate(new Date(), 'YYYY year mm month dd day');
 };
 </script>
 

@@ -12,7 +12,7 @@ const vFormDesignRef = ref(null);
 
 <style lang="scss" scoped>
 body {
-	margin: 0; // 去除页面垂直滚动条
+	margin: 0; // Remove vertical scroll bar from page
 }
 
 .form-designer {

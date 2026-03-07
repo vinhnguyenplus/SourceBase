@@ -4,12 +4,12 @@ using Swashbuckle.AspNetCore.SwaggerGen;
 namespace Admin.NET.Core;
 
 /// <summary>
-/// 租户头部参数过滤器
+/// Tenant header parameter filter
 /// </summary>
 public class TenantHeaderOperationFilter : IOperationFilter
 {
     /// <summary>
-    /// 应用租户头部参数过滤器
+    /// Apply tenant header parameters filter
     /// </summary>
     public void Apply(OpenApiOperation operation, OperationFilterContext context)
     {
@@ -22,7 +22,7 @@ public class TenantHeaderOperationFilter : IOperationFilter
             Schema = new OpenApiSchema { Type = JsonSchemaType.String },
             Required = false,
             AllowEmptyValue = true,
-            Description = "租户ID（留空表示默认租户）"
+            Description = "Tenant ID (leave blank for default tenant)"
         });
     }
 }

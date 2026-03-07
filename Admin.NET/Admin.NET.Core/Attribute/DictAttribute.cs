@@ -1,88 +1,88 @@
-// Admin.NET 项目的版权、商标、专利和其他相关权利均受相应法律法规的保护。使用本项目应遵守相关法律法规和许可证的要求。
+// The copyright, trademark, patent and other related rights of the Admin.NET project are protected by corresponding laws and regulations. Use of this project shall comply with relevant laws, regulations and license requirements.
 //
-// 本项目主要遵循 MIT 许可证和 Apache 许可证（版本 2.0）进行分发和使用。许可证位于源代码树根目录中的 LICENSE-MIT 和 LICENSE-APACHE 文件。
+// This project is distributed and used primarily under the MIT License and the Apache License (version 2.0). The license is located in the LICENSE-MIT and LICENSE-APACHE files in the root of the source tree.
 //
-// 不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！
+// This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project!
 
 namespace Admin.NET.Core;
 
 /// <summary>
-/// 字典值合规性校验特性
+/// Dictionary value compliance checking feature
 /// </summary>
 [SuppressSniffer]
 [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field, AllowMultiple = true, Inherited = true)]
 public class DictAttribute : ValidationAttribute, ITransient
 {
     /// <summary>
-    /// 字典编码
+    /// dictionary encoding
     /// </summary>
     public string DictTypeCode { get; }
 
     /// <summary>
-    /// 是否允许空字符串
+    /// Whether to allow empty strings
     /// </summary>
     public bool AllowEmptyStrings { get; set; } = false;
 
     /// <summary>
-    /// 允许空值，有值才验证，默认 false
+    /// Allow empty values, only verify if there is a value, default false
     /// </summary>
     public bool AllowNullValue { get; set; } = false;
 
     /// <summary>
-    /// 字典值合规性校验特性
+    /// Dictionary value compliance checking feature
     /// </summary>
     /// <param name="dictTypeCode"></param>
     /// <param name="errorMessage"></param>
-    public DictAttribute(string dictTypeCode = "", string errorMessage = "字典值不合法！")
+    public DictAttribute(string dictTypeCode = "", string errorMessage = "The dictionary value is invalid!")
     {
         DictTypeCode = dictTypeCode;
         ErrorMessage = errorMessage;
     }
 
     /// <summary>
-    /// 字典值合规性校验
+    /// Dictionary value compliance check
     /// </summary>
     /// <param name="value"></param>
     /// <param name="validationContext"></param>
     /// <returns></returns>
     protected override ValidationResult IsValid(object? value, ValidationContext validationContext)
     {
-        // 判断是否允许空值
+        // Determine whether null values ​​are allowed
         if (AllowNullValue && value == null) return ValidationResult.Success;
 
-        // 获取属性的类型
+        // Get the type of attribute
         var property = validationContext.ObjectType.GetProperty(validationContext.MemberName!);
-        if (property == null) return new ValidationResult($"未知属性: {validationContext.MemberName}");
+        if (property == null) return new ValidationResult($"Unknown property: {validationContext.MemberName}");
 
         string importHeaderName = GetImporterHeaderName(property, validationContext.MemberName);
 
         var propertyType = Nullable.GetUnderlyingType(property.PropertyType) ?? property.PropertyType;
 
-        // 先尝试从 ValidationContext 的依赖注入容器中拿服务，拿不到或类型不匹配时，再从全局的 App 容器中获取
+        // First try to get the service from the dependency injection container of ValidationContext. If it cannot be obtained or the type does not match, then get it from the global App container.
         if (validationContext.GetService(typeof(SysDictDataService)) is not SysDictDataService sysDictDataService)
             sysDictDataService = App.GetRequiredService<SysDictDataService>();
 
-        // 获取字典值列表
+        // Get a list of dictionary values
         var dictDataList = sysDictDataService.GetDataList(DictTypeCode).GetAwaiter().GetResult();
 
-        // 使用 HashSet 来提高查找效率
+        // Use HashSet to improve search efficiency
         var dictHash = new HashSet<string>(dictDataList.Select(u => u.Value));
 
-        // 判断是否为集合类型
+        // Determine whether it is a collection type
         if (propertyType.IsGenericType && propertyType.GetGenericTypeDefinition() == typeof(List<>))
         {
-            // 如果是空集合并且允许空值，则直接返回成功
+            // If it is an empty collection and null values ​​are allowed, success will be returned directly.
             if (value == null && AllowNullValue) return ValidationResult.Success;
 
-            // 处理集合为空的情况
+            // Handle the case when the collection is empty
             var collection = value as IEnumerable;
             if (collection == null) return ValidationResult.Success;
 
-            // 获取集合的元素类型
+            // Get the element type of the collection
             var elementType = propertyType.GetGenericArguments()[0];
             var underlyingElementType = Nullable.GetUnderlyingType(elementType) ?? elementType;
 
-            // 如果元素类型是枚举，则逐个验证
+            // If the element type is an enumeration, verify one by one
             if (underlyingElementType.IsEnum)
             {
                 foreach (var item in collection)
@@ -90,7 +90,7 @@ public class DictAttribute : ValidationAttribute, ITransient
                     if (item == null && AllowNullValue) continue;
 
                     if (!Enum.IsDefined(underlyingElementType, item!))
-                        return new ValidationResult($"提示：{ErrorMessage}|枚举值【{item}】不是有效的【{underlyingElementType.Name}】枚举类型值！", [importHeaderName]);
+                        return new ValidationResult($"Hint: {ErrorMessage} | The enum value [{item}] is not a valid [{underlyingElementType.Name}] enum type value!", [importHeaderName]);
                 }
                 return ValidationResult.Success;
             }
@@ -101,7 +101,7 @@ public class DictAttribute : ValidationAttribute, ITransient
 
                 var itemString = item?.ToString();
                 if (!dictHash.Contains(itemString))
-                    return new ValidationResult($"提示：{ErrorMessage}|字典【{DictTypeCode}】不包含【{itemString}】！", [importHeaderName]);
+                    return new ValidationResult($"Prompt: {ErrorMessage} | The dictionary [{DictTypeCode}] does not contain [{itemString}]!", [importHeaderName]);
             }
 
             return ValidationResult.Success;
@@ -109,25 +109,25 @@ public class DictAttribute : ValidationAttribute, ITransient
 
         var valueAsString = value?.ToString();
 
-        // 是否忽略空字符串
+        // Whether to ignore empty strings
         if (AllowEmptyStrings && string.IsNullOrEmpty(valueAsString)) return ValidationResult.Success;
 
-        // 枚举类型验证
+        // Enumeration type validation
         if (propertyType.IsEnum)
         {
-            if (!Enum.IsDefined(propertyType, value!)) return new ValidationResult($"提示：{ErrorMessage}|枚举值【{value}】不是有效的【{propertyType.Name}】枚举类型值！", [importHeaderName]);
+            if (!Enum.IsDefined(propertyType, value!)) return new ValidationResult($"Prompt: {ErrorMessage}|The enum value [{value}] is not a valid [{propertyType.Name}] enum type value!", [importHeaderName]);
             return ValidationResult.Success;
         }
 
         if (!dictHash.Contains(valueAsString))
-            return new ValidationResult($"提示：{ErrorMessage}|字典【{DictTypeCode}】不包含【{valueAsString}】！", [importHeaderName]);
+            return new ValidationResult($"Hint: {ErrorMessage}|Dictionary [{DictTypeCode}] does not contain [{valueAsString}]!", [importHeaderName]);
 
         return ValidationResult.Success;
     }
 
     /// <summary>
-    /// 获取本字段上 [ImporterHeader(Name = "xxx")] 里的Name，如果没有则使用defaultName.
-    /// 用于在从excel导入数据时，能让调用者知道是哪个字段验证失败，而不是抛异常
+    /// Get the Name in [ImporterHeader(Name = "xxx")] on this field, if not, use defaultName.
+    /// Used when importing data from excel, it allows the caller to know which field failed validation instead of throwing an exception.
     /// </summary>
     private static string GetImporterHeaderName(PropertyInfo property, string defaultName)
     {

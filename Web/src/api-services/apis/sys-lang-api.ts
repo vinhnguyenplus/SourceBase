@@ -1,8 +1,8 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Admin.NET 通用权限开发平台
- * 让 .NET 开发更简单、更通用、更流行。整合最新技术，模块插件式开发，前后端分离，开箱即用。<br/><u><b><font color='FF0000'> 👮不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！</font></b></u>
+ * Admin.NET General Permission Development Platform
+ * let .NET Develop more simply、More general、More popular。wholeIn line with the latest technology，Modular Plugin-Based Development，Frontend and backendpointsLeave，Ready to use out of the box。<br/><u><b><font color='FF0000'> 👮This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project! </font></b></u>
  *
  * OpenAPI spec version: 1.0.0
  * 
@@ -33,7 +33,7 @@ export const SysLangApiAxiosParamCreator = function (configuration?: Configurati
     return {
         /**
          * 
-         * @summary 增加语言 ➕
+         * @summary increaseLanguage ➕
          * @param {AddSysLangInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -81,7 +81,7 @@ export const SysLangApiAxiosParamCreator = function (configuration?: Configurati
         },
         /**
          * 
-         * @summary 删除语言 ❌
+         * @summary Delete language ❌
          * @param {DeleteSysLangInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -129,8 +129,8 @@ export const SysLangApiAxiosParamCreator = function (configuration?: Configurati
         },
         /**
          * 
-         * @summary 获取语言详情 ℹ️
-         * @param {number} id 主键Id
+         * @summary Get language details ℹ️
+         * @param {number} id Primary keyId
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -181,7 +181,7 @@ export const SysLangApiAxiosParamCreator = function (configuration?: Configurati
         },
         /**
          * 
-         * @summary 获取下拉列表数据 🔖
+         * @summary Get drop-down list data 🔖
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -224,7 +224,7 @@ export const SysLangApiAxiosParamCreator = function (configuration?: Configurati
         },
         /**
          * 
-         * @summary 分页查询语言 🔖
+         * @summary Paginated query language 🔖
          * @param {PageSysLangInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -272,7 +272,7 @@ export const SysLangApiAxiosParamCreator = function (configuration?: Configurati
         },
         /**
          * 
-         * @summary 更新语言 ✏️
+         * @summary Update language ✏️
          * @param {UpdateSysLangInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -329,7 +329,7 @@ export const SysLangApiFp = function(configuration?: Configuration) {
     return {
         /**
          * 
-         * @summary 增加语言 ➕
+         * @summary increaseLanguage ➕
          * @param {AddSysLangInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -343,7 +343,7 @@ export const SysLangApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary 删除语言 ❌
+         * @summary Delete language ❌
          * @param {DeleteSysLangInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -357,8 +357,8 @@ export const SysLangApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary 获取语言详情 ℹ️
-         * @param {number} id 主键Id
+         * @summary Get language details ℹ️
+         * @param {number} id Primary keyId
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -371,7 +371,7 @@ export const SysLangApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary 获取下拉列表数据 🔖
+         * @summary Get drop-down list data 🔖
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -384,7 +384,7 @@ export const SysLangApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary 分页查询语言 🔖
+         * @summary Paginated query language 🔖
          * @param {PageSysLangInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -398,7 +398,7 @@ export const SysLangApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary 更新语言 ✏️
+         * @summary Update language ✏️
          * @param {UpdateSysLangInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -421,7 +421,7 @@ export const SysLangApiFactory = function (configuration?: Configuration, basePa
     return {
         /**
          * 
-         * @summary 增加语言 ➕
+         * @summary increaseLanguage ➕
          * @param {AddSysLangInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -431,7 +431,7 @@ export const SysLangApiFactory = function (configuration?: Configuration, basePa
         },
         /**
          * 
-         * @summary 删除语言 ❌
+         * @summary Delete language ❌
          * @param {DeleteSysLangInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -441,8 +441,8 @@ export const SysLangApiFactory = function (configuration?: Configuration, basePa
         },
         /**
          * 
-         * @summary 获取语言详情 ℹ️
-         * @param {number} id 主键Id
+         * @summary Get language details ℹ️
+         * @param {number} id Primary keyId
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -451,7 +451,7 @@ export const SysLangApiFactory = function (configuration?: Configuration, basePa
         },
         /**
          * 
-         * @summary 获取下拉列表数据 🔖
+         * @summary Get drop-down list data 🔖
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -460,7 +460,7 @@ export const SysLangApiFactory = function (configuration?: Configuration, basePa
         },
         /**
          * 
-         * @summary 分页查询语言 🔖
+         * @summary Paginated query language 🔖
          * @param {PageSysLangInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -470,7 +470,7 @@ export const SysLangApiFactory = function (configuration?: Configuration, basePa
         },
         /**
          * 
-         * @summary 更新语言 ✏️
+         * @summary Update language ✏️
          * @param {UpdateSysLangInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -490,7 +490,7 @@ export const SysLangApiFactory = function (configuration?: Configuration, basePa
 export class SysLangApi extends BaseAPI {
     /**
      * 
-     * @summary 增加语言 ➕
+     * @summary increaseLanguage ➕
      * @param {AddSysLangInput} [body] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -501,7 +501,7 @@ export class SysLangApi extends BaseAPI {
     }
     /**
      * 
-     * @summary 删除语言 ❌
+     * @summary Delete language ❌
      * @param {DeleteSysLangInput} [body] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -512,8 +512,8 @@ export class SysLangApi extends BaseAPI {
     }
     /**
      * 
-     * @summary 获取语言详情 ℹ️
-     * @param {number} id 主键Id
+     * @summary Get language details ℹ️
+     * @param {number} id Primary keyId
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SysLangApi
@@ -523,7 +523,7 @@ export class SysLangApi extends BaseAPI {
     }
     /**
      * 
-     * @summary 获取下拉列表数据 🔖
+     * @summary Get drop-down list data 🔖
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SysLangApi
@@ -533,7 +533,7 @@ export class SysLangApi extends BaseAPI {
     }
     /**
      * 
-     * @summary 分页查询语言 🔖
+     * @summary Paginated query language 🔖
      * @param {PageSysLangInput} [body] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -544,7 +544,7 @@ export class SysLangApi extends BaseAPI {
     }
     /**
      * 
-     * @summary 更新语言 ✏️
+     * @summary Update language ✏️
      * @param {UpdateSysLangInput} [body] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}

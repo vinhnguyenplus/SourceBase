@@ -93,11 +93,11 @@ export default {
 		},
 		successTip: {
 			type: String,
-			default: "验证通过"
+			default: "Verification passed"
 		},
 		failTip: {
 			type: String,
-			default: "验证失败"
+			default: "Authentication failed"
 		},
 		diffDegree: {
 			type: Number,
@@ -168,7 +168,7 @@ export default {
 			};
 		},
 		factor: function () {
-			//避免指定旋转角度时一直拖动到最右侧才验证通过
+			//Avoid dragging all the way to the far right when specifying a rotation angle to verify it.
 			if (this.minDegree == this.maxDegree) {
 				return Math.floor(1 + Math.random() * 6) / 10 + 1;
 			}
@@ -189,14 +189,14 @@ export default {
 	},
 	methods: {
 		checkimgLoaded: function () {
-			//生成旋转角度
+			//Generate rotation angle
 			var minDegree = this.minDegree;
 			var maxDegree = this.maxDegree;
 			var ranRotate = Math.floor(
 				minDegree + Math.random() * (maxDegree - minDegree)
-			); //生成随机角度
+			); // Generate random angles
 			this.ranRotate = ranRotate;
-			//console.log("旋转" + ranRotate);
+			//console.log("rotation" + ranRotate);
 			this.imgStyle = {
 				transform: `rotateZ(${ranRotate}deg)`
 			};

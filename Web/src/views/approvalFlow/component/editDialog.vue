@@ -9,43 +9,43 @@
 			</template>
 			<el-form :model="state.ruleForm" ref="ruleFormRef" label-width="auto" :rules="rules">
 				<el-tabs>
-					<el-tab-pane label="基本信息">
+					<el-tab-pane label="Basic Information">
 						<el-row :gutter="35">
 							<el-form-item v-show="false">
 								<el-input v-model="state.ruleForm.id" />
 							</el-form-item>
 							<el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="mb20">
-								<el-form-item label="编号" prop="code">
-									<el-input v-model="state.ruleForm.code" placeholder="请输入编号" maxlength="32" show-word-limit clearable />
+								<el-form-item label="Number" prop="code">
+									<el-input v-model="state.ruleForm.code" placeholder="Please enter number" maxlength="32" show-word-limit clearable />
 								</el-form-item>
 							</el-col>
 							<el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="mb20">
-								<el-form-item label="名称" prop="name" :rules="[{ required: true, message: '名称不能为空', trigger: 'blur' }]">
-									<el-input v-model="state.ruleForm.name" placeholder="请输入名称" maxlength="32" show-word-limit clearable />
+								<el-form-item label="name" prop="name" :rules="[{ required: true, message: 'Name cannot be empty', trigger: 'blur' }]">
+									<el-input v-model="state.ruleForm.name" placeholder="Please enter a name" maxlength="32" show-word-limit clearable />
 								</el-form-item>
 							</el-col>
 							<el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="mb20">
-								<el-form-item label="状态" prop="status" :rules="[{ required: true, message: '状态不能为空', trigger: 'blur' }]">
+								<el-form-item label="state" prop="status" :rules="[{ required: true, message: 'Status cannot be empty', trigger: 'blur' }]">
 									<g-sys-dict code="LabStatusEnum" v-model="state.ruleForm.status" render-as="select" />
 								</el-form-item>
 							</el-col>
 							<el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="mb20">
-								<el-form-item label="备注" prop="remark">
-									<el-input v-model="state.ruleForm.remark" placeholder="请输入备注" type="textarea" maxlength="255" show-word-limit clearable />
+								<el-form-item label="Remarks" prop="remark">
+									<el-input v-model="state.ruleForm.remark" placeholder="Please enter a note" type="textarea" maxlength="255" show-word-limit clearable />
 								</el-form-item>
 							</el-col>
 						</el-row>
 					</el-tab-pane>
-					<el-tab-pane label="扩展信息">
+					<el-tab-pane label="Extended information">
 						<el-row :gutter="35">
 							<el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="mb20">
-								<el-form-item label="表单" prop="formJson">
-									<el-input v-model="state.ruleForm.formJson" placeholder="请输入表单" type="textarea" maxlength="4096" show-word-limit clearable />
+								<el-form-item label="form" prop="formJson">
+									<el-input v-model="state.ruleForm.formJson" placeholder="Please enter the form" type="textarea" maxlength="4096" show-word-limit clearable />
 								</el-form-item>
 							</el-col>
 							<el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="mb20">
-								<el-form-item label="流程" prop="flowJson">
-									<el-input v-model="state.ruleForm.flowJson" placeholder="请输入流程" type="textarea" maxlength="4096" show-word-limit clearable />
+								<el-form-item label="Process" prop="flowJson">
+									<el-input v-model="state.ruleForm.flowJson" placeholder="Please enter the process" type="textarea" maxlength="4096" show-word-limit clearable />
 								</el-form-item>
 							</el-col>
 						</el-row>
@@ -54,8 +54,8 @@
 			</el-form>
 			<template #footer>
 				<span class="dialog-footer">
-					<el-button @click="cancel">取 消</el-button>
-					<el-button type="primary" @click="submit">确 定</el-button>
+					<el-button @click="cancel">Cancel</el-button>
+					<el-button type="primary" @click="submit">Confirm</el-button>
 				</span>
 			</template>
 		</el-dialog>
@@ -69,7 +69,7 @@ import type { FormRules } from 'element-plus';
 import { getAPI } from '/@/utils/axios-utils';
 import { ApprovalFlowApi } from '/@/api-plugins/approvalFlow/api';
 
-// 父级传递来的参数
+// Parameters passed from parent
 var props = defineProps({
 	title: {
 		type: String,
@@ -80,10 +80,10 @@ var props = defineProps({
 		default: () => [],
 	},
 });
-// 父级传递来的函数，用于回调
+// Function passed from parent for callback
 const emit = defineEmits(['reloadTable']);
 
-// 定义变量内容
+// Define variable content
 const ruleFormRef = ref();
 const state = reactive({
 	loading: false,
@@ -91,36 +91,36 @@ const state = reactive({
 	ruleForm: {} as any,
 });
 
-// 自行添加其他规则
+// Add other rules yourself
 const rules = ref<FormRules>({
 	name: [
 		{
 			pattern: /^(?!^[0-9].*$).*/,
-			message: '不能以数字开头',
+			message: 'cannot start with a number',
 			trigger: 'blur',
 		},
 	],
 });
 
-// 打开弹窗
+// Open pop-up window
 const openDialog = async (row: any) => {
 	let rowData = JSON.parse(JSON.stringify(row));
 	state.ruleForm = rowData.id ? (await getAPI(ApprovalFlowApi).apiApprovalFlowDetailGet(rowData.id)).data.result : rowData;
 	state.isShowDialog = true;
 };
 
-// 关闭弹窗
+// Close pop-up window
 const closeDialog = () => {
 	emit('reloadTable');
 	state.isShowDialog = false;
 };
 
-// 取消
+// Cancel
 const cancel = () => {
 	state.isShowDialog = false;
 };
 
-// 提交
+// submit
 const submit = async () => {
 	ruleFormRef.value.validate(async (isValid: boolean, fields?: any) => {
 		if (isValid) {
@@ -132,14 +132,14 @@ const submit = async () => {
 			closeDialog();
 		} else {
 			ElMessage({
-				message: `表单有${Object.keys(fields).length}处验证失败，请修改后再提交`,
+				message: `The form failed to verify at ${Object.keys(fields).length}, please modify it before submitting.`,
 				type: 'error',
 			});
 		}
 	});
 };
 
-// 将属性或者函数暴露给父组件
+// Expose properties or functions to parent components
 defineExpose({ openDialog });
 </script>
 

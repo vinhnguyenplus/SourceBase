@@ -1,8 +1,8 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * 钉钉开放平台
- * 集成钉钉开放平台<br/><u><b><font color='FF0000'> 👮不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！</font></b></u>
+ * DingTalkOpen Platform
+ * IntegrationDingTalkOpen Platform<br/><u><b><font color='FF0000'> 👮This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project! </font></b></u>
  *
  * OpenAPI spec version: 1.0.0
  * 
@@ -21,7 +21,7 @@
 export interface SearchSupport {
 
     /**
-     * 类型的icon，供搜索展示使用。
+     * Typeoficon，For use in search display。
      *
      * @type {string}
      * @memberof SearchSupport
@@ -29,7 +29,7 @@ export interface SearchSupport {
     searchIcon?: string | null;
 
     /**
-     * 卡片类型名。
+     * cardTypeName。
      *
      * @type {string}
      * @memberof SearchSupport
@@ -37,7 +37,7 @@ export interface SearchSupport {
     searchTypeName?: string | null;
 
     /**
-     * 供消息展示与搜索的字段。
+     * supplyinformationDisplay and SearchField。
      *
      * @type {string}
      * @memberof SearchSupport

@@ -1,27 +1,27 @@
-// Admin.NET 项目的版权、商标、专利和其他相关权利均受相应法律法规的保护。使用本项目应遵守相关法律法规和许可证的要求。
+// The copyright, trademark, patent and other related rights of the Admin.NET project are protected by corresponding laws and regulations. Use of this project shall comply with relevant laws, regulations and license requirements.
 //
-// 本项目主要遵循 MIT 许可证和 Apache 许可证（版本 2.0）进行分发和使用。许可证位于源代码树根目录中的 LICENSE-MIT 和 LICENSE-APACHE 文件。
+// This project is distributed and used primarily under the MIT License and the Apache License (version 2.0). The license is located in the LICENSE-MIT and LICENSE-APACHE files in the root of the source tree.
 //
-// 不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！
+// This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project!
 
 namespace Admin.NET.Core;
 
 /// <summary>
-/// 系统字典值表
+/// System dictionary value table
 /// </summary>
-[SugarTable(null, "系统字典值表")]
+[SugarTable(null, "System Dictionary Value Table")]
 [SysTable]
 [SugarIndex("index_{table}_TV", nameof(DictTypeId), OrderByType.Asc, nameof(Value), OrderByType.Asc, IsUnique = true)]
 public partial class SysDictData : EntityBase
 {
     /// <summary>
-    /// 字典类型Id
+    /// Dictionary typeId
     /// </summary>
-    [SugarColumn(ColumnDescription = "字典类型Id")]
+    [SugarColumn(ColumnDescription = "Dictionary Type Id")]
     public long DictTypeId { get; set; }
 
     /// <summary>
-    /// 字典类型
+    /// dictionary type
     /// </summary>
     [Newtonsoft.Json.JsonIgnore]
     [System.Text.Json.Serialization.JsonIgnore]
@@ -29,77 +29,77 @@ public partial class SysDictData : EntityBase
     public SysDictType DictType { get; set; }
 
     /// <summary>
-    /// 显示文本
+    /// display text
     /// </summary>
-    [SugarColumn(ColumnDescription = "显示文本", Length = 256)]
+    [SugarColumn(ColumnDescription = "Display Text", Length = 256)]
     [Required, MaxLength(256)]
     public virtual string Label { get; set; }
 
     /// <summary>
-    /// 值
+    /// value
     /// </summary>
-    [SugarColumn(ColumnDescription = "值", Length = 256)]
+    [SugarColumn(ColumnDescription = "value", Length = 256)]
     [Required, MaxLength(256)]
     public virtual string Value { get; set; }
 
     /// <summary>
-    /// 编码
+    /// coding
     /// </summary>
     /// <remarks>
     /// </remarks>
-    [SugarColumn(ColumnDescription = "编码", Length = 256)]
+    [SugarColumn(ColumnDescription = "Encoding", Length = 256)]
     public virtual string? Code { get; set; }
 
     /// <summary>
-    /// 名称
+    /// name
     /// </summary>
-    [SugarColumn(ColumnDescription = "名称", Length = 256)]
+    [SugarColumn(ColumnDescription = "name", Length = 256)]
     [MaxLength(256)]
     public virtual string? Name { get; set; }
 
     /// <summary>
-    /// 显示样式-标签颜色
+    /// Display style-label color
     /// </summary>
-    [SugarColumn(ColumnDescription = "显示样式-标签颜色", Length = 16)]
+    [SugarColumn(ColumnDescription = "Display style-label color", Length = 16)]
     [MaxLength(16)]
     public string? TagType { get; set; }
 
     /// <summary>
-    /// 显示样式-Style(控制显示样式)
+    /// Display style-Style (control display style)
     /// </summary>
-    [SugarColumn(ColumnDescription = "显示样式-Style", Length = 512)]
+    [SugarColumn(ColumnDescription = "Display style-Style", Length = 512)]
     [MaxLength(512)]
     public string? StyleSetting { get; set; }
 
     /// <summary>
-    /// 显示样式-Class(控制显示样式)
+    /// Display style-Class (control display style)
     /// </summary>
-    [SugarColumn(ColumnDescription = "显示样式-Class", Length = 512)]
+    [SugarColumn(ColumnDescription = "DisplayStyle-Class", Length = 512)]
     [MaxLength(512)]
     public string? ClassSetting { get; set; }
 
     /// <summary>
-    /// 排序
+    /// sort
     /// </summary>
-    [SugarColumn(ColumnDescription = "排序", DefaultValue = "100")]
+    [SugarColumn(ColumnDescription = "Sort", DefaultValue = "100")]
     public int OrderNo { get; set; } = 100;
 
     /// <summary>
-    /// 备注
+    /// Remark
     /// </summary>
-    [SugarColumn(ColumnDescription = "备注", Length = 2048)]
+    [SugarColumn(ColumnDescription = "Remarks", Length = 2048)]
     [MaxLength(2048)]
     public string? Remark { get; set; }
 
     /// <summary>
-    /// 拓展数据(保存业务功能的配置项)
+    /// Expansion data (save configuration items for business functions)
     /// </summary>
-    [SugarColumn(ColumnDescription = "拓展数据(保存业务功能的配置项)", ColumnDataType = StaticConfig.CodeFirst_BigString)]
+    [SugarColumn(ColumnDescription = "Expansion data (save configuration items for business functions)", ColumnDataType = StaticConfig.CodeFirst_BigString)]
     public string? ExtData { get; set; }
 
     /// <summary>
-    /// 状态
+    /// state
     /// </summary>
-    [SugarColumn(ColumnDescription = "状态", DefaultValue = "1")]
+    [SugarColumn(ColumnDescription = "state", DefaultValue = "1")]
     public StatusEnum Status { get; set; } = StatusEnum.Enable;
 }

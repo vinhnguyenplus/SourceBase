@@ -7,27 +7,27 @@
 			<el-splitter-panel :min="200" style="overflow: auto; display: flex; flex-direction: column;">
                 <el-card shadow="hover" :body-style="{ padding: 5 }">
 					<el-form :model="state.queryParams" ref="queryForm" :inline="true">
-						<el-form-item label="账号">
-							<el-input v-model="state.queryParams.account" placeholder="账号" clearable />
+						<el-form-item label="Account number">
+							<el-input v-model="state.queryParams.account" placeholder="Account number" clearable />
 						</el-form-item>
-						<el-form-item label="姓名">
-							<el-input v-model="state.queryParams.realName" placeholder="姓名" clearable />
+						<el-form-item label="Name">
+							<el-input v-model="state.queryParams.realName" placeholder="Name" clearable />
 						</el-form-item>
-						<el-form-item label="职位名称">
-							<el-input v-model="state.queryParams.posName" placeholder="职位名称" clearable />
+						<el-form-item label="Job title">
+							<el-input v-model="state.queryParams.posName" placeholder="Job title" clearable />
 						</el-form-item>
-						<el-form-item label="手机号码">
-							<el-input v-model="state.queryParams.phone" placeholder="手机号码" clearable />
+						<el-form-item label="Mobile phone number">
+							<el-input v-model="state.queryParams.phone" placeholder="Mobile phone number" clearable />
 						</el-form-item>
 						<el-form-item>
 							<el-button-group>
 								<el-button type="primary" icon="ele-Search" @click="handleQuery"
-									v-auth="'sysUser:page'"> 查询 </el-button>
-								<el-button icon="ele-Refresh" @click="resetQuery"> 重置 </el-button>
+									v-auth="'sysUser:page'"> Query </el-button>
+								<el-button icon="ele-Refresh" @click="resetQuery"> reset </el-button>
 							</el-button-group>
 						</el-form-item>
 						<el-form-item>
-							<el-button type="primary" icon="ele-Plus" @click="openAddUser" v-auth="'sysUser:add'"> 新增
+							<el-button type="primary" icon="ele-Plus" @click="openAddUser" v-auth="'sysUser:add'"> Add New
 							</el-button>
 						</el-form-item>
 					</el-form>
@@ -35,59 +35,59 @@
 
 				<el-card class="full-table" shadow="hover" style="margin-top: 5px">
 					<el-table :data="state.userData" style="width: 100%" v-loading="state.loading" border>
-						<el-table-column type="index" label="序号" width="55" align="center" fixed />
-						<el-table-column label="头像" width="80" align="center" show-overflow-tooltip>
+						<el-table-column type="index" label="No" width="55" align="center" fixed />
+						<el-table-column label="Avatar" width="80" align="center" show-overflow-tooltip>
 							<template #default="scope">
 								<el-avatar :src="scope.row.avatar" size="small">{{ scope.row.nickName?.slice(0, 1) ??
 									scope.row.realName?.slice(0, 1) }} </el-avatar>
 							</template>
 						</el-table-column>
-						<el-table-column prop="account" label="账号" width="120" align="center" show-overflow-tooltip />
-						<!-- <el-table-column prop="nickName" label="昵称" width="120" align="center" show-overflow-tooltip /> -->
-						<el-table-column prop="realName" label="姓名" width="120" align="center" show-overflow-tooltip />
-						<el-table-column prop="phone" label="手机号码" width="120" align="center" show-overflow-tooltip />
-						<!-- <el-table-column label="出生日期" width="100" align="center" show-overflow-tooltip>
+						<el-table-column prop="account" label="Account number" width="120" align="center" show-overflow-tooltip />
+						<!-- <el-table-column prop="nickName" label="nickname" width="120" align="center" show-overflow-tooltip /> -->
+						<el-table-column prop="realName" label="Name" width="120" align="center" show-overflow-tooltip />
+						<el-table-column prop="phone" label="Mobile phone number" width="120" align="center" show-overflow-tooltip />
+						<!-- <el-table-column label="date of birth" width="100" align="center" show-overflow-tooltip>
 							<template #default="scope">
 								{{ formatDate(new Date(scope.row.birthday), 'YYYY-mm-dd') }}
 							</template>
 						</el-table-column>
-						<el-table-column label="性别" width="70" align="center" show-overflow-tooltip>
+						<el-table-column label="gender" width="70" align="center" show-overflow-tooltip>
 							<template #default="scope">
-								<el-tag v-if="scope.row.sex === 1" type="success">男</el-tag>
-								<el-tag v-else-if="scope.row.sex === 2" type="danger">女</el-tag>
-								<el-tag v-else-if="scope.row.sex === 0" type="info">未知</el-tag>
-								<el-tag v-else-if="scope.row.sex === 9" type="info">未说明</el-tag>
+								<el-tag v-if="scope.row.sex === 1" type="success">male</el-tag>
+								<el-tag v-else-if="scope.row.sex === 2" type="danger">Female</el-tag>
+								<el-tag v-else-if="scope.row.sex === 0" type="info">unknown</el-tag>
+								<el-tag v-else-if="scope.row.sex === 9" type="info">Unspecified</el-tag>
 							</template>
 						</el-table-column> -->
-						<el-table-column label="账号类型" width="110" align="center" show-overflow-tooltip>
+						<el-table-column label="Account Type" width="110" align="center" show-overflow-tooltip>
 							<template #default="scope">
 								<g-sys-dict v-model="scope.row.accountType" code="AccountTypeEnum" />
 							</template>
 						</el-table-column>
-						<el-table-column prop="roleName" label="角色集合" min-width="150" align="center"
+						<el-table-column prop="roleName" label="role collection" min-width="150" align="center"
 							show-overflow-tooltip />
-						<el-table-column prop="orgName" label="所属机构" min-width="120" align="center"
+						<el-table-column prop="orgName" label="Affiliated institution" min-width="120" align="center"
 							show-overflow-tooltip />
-						<el-table-column prop="posName" label="职位名称" min-width="120" align="center"
+						<el-table-column prop="posName" label="Job title" min-width="120" align="center"
 							show-overflow-tooltip />
-						<el-table-column label="状态" width="70" align="center" show-overflow-tooltip>
+						<el-table-column label="state" width="70" align="center" show-overflow-tooltip>
 							<template #default="scope">
 								<TagSwitch v-model="scope.row.status" :active-value="1" :inactive-value="2" code="StatusEnum" @change="changeStatus(scope.row)" v-auth="'sysUser:setStatus'" />
 							</template>
 						</el-table-column>
-						<el-table-column prop="orderNo" label="排序" width="70" align="center" show-overflow-tooltip />
-						<el-table-column label="修改记录" width="100" align="center" show-overflow-tooltip>
+						<el-table-column prop="orderNo" label="Sort" width="70" align="center" show-overflow-tooltip />
+						<el-table-column label="Modify records" width="100" align="center" show-overflow-tooltip>
 							<template #default="scope">
 								<ModifyRecord :data="scope.row" />
 							</template>
 						</el-table-column>
-						<el-table-column label="操作" width="120" align="center" fixed="right" show-overflow-tooltip>
+						<el-table-column label="Operation" width="120" align="center" fixed="right" show-overflow-tooltip>
 							<template #default="scope">
-								<el-tooltip content="编辑" placement="top">
+								<el-tooltip content="Edit" placement="top">
 									<el-button icon="ele-Edit" text type="primary" v-auth="'sysUser:update'"
 										@click="openEditUser(scope.row)"> </el-button>
 								</el-tooltip>
-								<el-tooltip content="删除" placement="top">
+								<el-tooltip content="Delete" placement="top">
 									<el-button icon="ele-Delete" text type="danger" v-auth="'sysUser:delete'"
 										@click="delUser(scope.row)"> </el-button>
 								</el-tooltip>
@@ -99,17 +99,17 @@
                                             <span v-auth="'sysUser:add'">
                                                 <el-dropdown-item icon="ele-CopyDocument" text type="primary"
                                                     @click="openCopyMenu(scope.row)"
-                                                >复制</el-dropdown-item>
+                                                >Copy</el-dropdown-item>
                                             </span>
 											<span v-auth="'sysUser:resetPwd'">
                                                 <el-dropdown-item icon="ele-RefreshLeft" text type="danger"
 												    @click="resetUserPwd(scope.row)"
-                                                 >重置密码</el-dropdown-item>
+                                                 >reset password</el-dropdown-item>
                                             </span>
 											<span v-auth="'sysUser:unlockLogin'">
                                                 <el-dropdown-item icon="ele-Unlock" text type="primary"
 												    @click="unlockLogin(scope.row)"
-                                                >解除锁定</el-dropdown-item>
+                                                >Unlock</el-dropdown-item>
                                             </span>
 											
 										</el-dropdown-menu>
@@ -177,7 +177,7 @@ onMounted(async () => {
 	await handleQuery();
 });
 
-// 查询机构数据
+// Query institutional data
 const loadOrgData = async () => {
 	state.loading = true;
 	let res = await getAPI(SysOrgApi).apiSysOrgTreeGet(0);
@@ -185,7 +185,7 @@ const loadOrgData = async () => {
 	state.loading = false;
 };
 
-// 查询操作
+// Query operation
 const handleQuery = async () => {
 	state.loading = true;
 	let params = Object.assign(state.queryParams, state.tableParams);
@@ -195,7 +195,7 @@ const handleQuery = async () => {
 	state.loading = false;
 };
 
-// 重置操作
+// reset operation
 const resetQuery = async () => {
 	state.queryParams.orgId = -1;
 	state.queryParams.account = undefined;
@@ -205,101 +205,101 @@ const resetQuery = async () => {
 	await handleQuery();
 };
 
-// 打开新增页面
+// Open new page
 const openAddUser = () => {
-	state.editUserTitle = '添加账号';
+	state.editUserTitle = 'Add account';
 	editUserRef.value?.openDialog({ id: undefined, birthday: '2000-01-01', sex: 1, tenantId: state.tenantId, orderNo: 100, cardType: 0, cultureLevel: 5 });
 };
 
-// 打开编辑页面
+// Open the edit page
 const openEditUser = (row: any) => {
-	state.editUserTitle = '编辑账号';
+	state.editUserTitle = 'Edit Account';
 	editUserRef.value?.openDialog(row);
 };
 
-// 打开复制页面
+// Open copy page
 const openCopyMenu = (row: any) => {
-	state.editUserTitle = '复制账号';
+	state.editUserTitle = 'CopyAccount number';
 	var copyRow = JSON.parse(JSON.stringify(row)) as UpdateUserInput;
 	copyRow.id = 0;
 	copyRow.account = '';
 	editUserRef.value?.openDialog(copyRow);
 };
 
-// 删除
+// delete
 const delUser = (row: any) => {
-	ElMessageBox.confirm(`确定删除账号：【${row.account}】?`, '提示', {
-		confirmButtonText: '确定',
-		cancelButtonText: '取消',
+	ElMessageBox.confirm(`ConfirmDeleteAccount number：【${row.account}】?`, 'Prompt', {
+		confirmButtonText: 'Confirm',
+		cancelButtonText: 'Cancel',
 		type: 'warning',
 	})
 		.then(async () => {
 			await getAPI(SysUserApi).apiSysUserDeletePost({ id: row.id });
 			await handleQuery();
-			ElMessage.success('删除成功');
+			ElMessage.success('Deleted successfully');
 		})
 		.catch(() => { });
 };
 
-// 改变页面容量
+// Change page capacity
 const handleSizeChange = (val: number) => {
 	state.tableParams.pageSize = val;
 	handleQuery();
 };
 
-// 改变页码序号
+// Change page number
 const handleCurrentChange = async (val: number) => {
 	state.tableParams.page = val;
 	await handleQuery();
 };
 
-// 修改状态
+// Modify status
 const changeStatus = async (row: any) => {
 	await getAPI(SysUserApi)
 		.apiSysUserSetStatusPost({ id: row.id, status: row.status })
 		.then(() => {
-			ElMessage.success('账号状态设置成功');
+			ElMessage.success('Account status set successfully');
 		})
 		.catch(() => {
 			row.status = row.status == 1 ? 2 : 1;
 		});
 };
 
-// 重置密码
+// reset password
 const resetUserPwd = async (row: any) => {
-	ElMessageBox.confirm(`确定重置密码：【${row.account}】?`, '提示', {
-		confirmButtonText: '确定',
-		cancelButtonText: '取消',
+	ElMessageBox.confirm(`Confirm to reset password: [${row.account}]?`, 'Prompt', {
+		confirmButtonText: 'Confirm',
+		cancelButtonText: 'Cancel',
 		type: 'warning',
 	})
 		.then(async () => {
 			await getAPI(SysUserApi)
 				.apiSysUserResetPwdPost({ id: row.id })
 				.then((res) => {
-					ElMessage.success(`密码重置成功为：${res.data.result}`);
+					ElMessage.success(`Password reset successfully: ${res.data.result}`);
 				});
 		})
 		.catch(() => { });
 };
 
-// 解除登录锁定
+// Unlock login
 const unlockLogin = async (row: any) => {
-	ElMessageBox.confirm(`确定解除登录锁定：【${row.account}】?`, '提示', {
-		confirmButtonText: '确定',
-		cancelButtonText: '取消',
+	ElMessageBox.confirm(`Are you sure you want to unlock the login for: 【${row.account}】?`, 'Prompt', {
+		confirmButtonText: 'Confirm',
+		cancelButtonText: 'Cancel',
 		type: 'warning',
 	})
 		.then(async () => {
 			await getAPI(SysUserApi)
 				.apiSysUserUnlockLoginPost({ id: row.id })
 				.then(() => {
-					ElMessage.success('解除登录锁定成功');
+					ElMessage.success('Login lock unlocked successfully');
 				});
 		})
 		.catch(() => { });
 };
 
-// 树组件点击
+// Tree component click
 const nodeClick = async (node: any) => {
 	state.queryParams.orgId = node.id;
 	state.queryParams.account = undefined;

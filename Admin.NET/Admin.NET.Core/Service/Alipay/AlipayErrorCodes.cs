@@ -1,138 +1,138 @@
-﻿// Admin.NET 项目的版权、商标、专利和其他相关权利均受相应法律法规的保护。使用本项目应遵守相关法律法规和许可证的要求。
+﻿// The copyright, trademark, patent and other related rights of the Admin.NET project are protected by corresponding laws and regulations. Use of this project shall comply with relevant laws, regulations and license requirements.
 //
-// 本项目主要遵循 MIT 许可证和 Apache 许可证（版本 2.0）进行分发和使用。许可证位于源代码树根目录中的 LICENSE-MIT 和 LICENSE-APACHE 文件。
+// This project is distributed and used primarily under the MIT License and the Apache License (version 2.0). The license is located in the LICENSE-MIT and LICENSE-APACHE files in the root of the source tree.
 //
-// 不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！
+// This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project!
 
 namespace Admin.NET.Core.Service;
 
 /// <summary>
-/// 支付宝支付错误码
+/// Alipay payment error code
 /// </summary>
 public class AlipayErrorCode
 {
     /// <summary>
-    /// 错误代码
+    /// error code
     /// </summary>
     public string Code { get; private set; }
 
     /// <summary>
-    /// 错误消息
+    /// error message
     /// </summary>
     public string Message { get; private set; }
 
     /// <summary>
-    /// 解决方案
+    /// solution
     /// </summary>
     public string Solution { get; private set; }
 
     /// <summary>
-    /// 错误码集
+    /// error code set
     /// </summary>
     private static readonly List<AlipayErrorCode> StatusCodes =
     [
-        new AlipayErrorCode { Code="SYSTEM_ERROR", Message="系统繁忙", Solution="可能是由于网络或者系统故障，请与技术人员联系以解决该问题。" },
-        new AlipayErrorCode { Code="INVALID_PARAMETER", Message="参数有误或没有参数", Solution="请检查并确认查询请求参数合法性。" },
-        new AlipayErrorCode { Code="AUTHORISE_NOT_MATCH", Message="授权失败，无法获取用户信息", Solution="检查账户与支付方关系主表关系，确认是否正确配置。" },
-        new AlipayErrorCode { Code="BALANCE_IS_NOT_ENOUGH", Message="余额不足，建议尽快充值。后续登录电银通或支付宝，自主设置余额预警提醒功能。", Solution="余额不足，建议尽快充值。商户后续登录电银通或支付宝，自主设置余额预警提醒功能或登录Alipay-资金管理->产品一览->右上角功能按钮进行设置。" },
-        new AlipayErrorCode { Code="BIZ_UNIQUE_EXCEPTION", Message="商户订单号冲突。", Solution="商户订单号冲突。" },
-        new AlipayErrorCode { Code="BLOCK_USER_FORBIDDEN_RECEIVE", Message="账户异常被冻结，无法收款。", Solution="账户异常被冻结，无法收款。请询问支付宝热线95188" },
-        new AlipayErrorCode { Code="BLOCK_USER_FORBIDDEN_SEND", Message="该账户被冻结，暂不可将资金转出。", Solution="该账户被冻结，暂不可将资金转出。" },
-        new AlipayErrorCode { Code="CURRENCY_NOT_SUPPORT", Message="币种不支持", Solution="请查询您的结算币种需求所见币种，目前限于人民币/美元结算。" },
-        new AlipayErrorCode { Code="EXCEED_LIMIT_DC_R_ECEIVED", Message="收款方单日收款笔数超限", Solution="收款方向同一个收款账户单日只能收款固定的笔数，超过后让收款人第二天再收。" },
-        new AlipayErrorCode { Code="EXCEED_LIMIT_DM_AMOUNT", Message="日累计额度超限", Solution="今日转账金额已上限，日累计额度需满5000元以上，可使用企业支付宝付款点【立即付款】申请，日累计额度需满5000元以上可点击【联系客服】咨询：转账到支付宝客户窗口" },
-        new AlipayErrorCode { Code="EXCEED_LIMIT_DM_MAX_AMOUNT", Message="超出单日转账限额，如有疑问请询问支付宝热线95188", Solution="今日转账金额已上限，日累计额度需满5000元以上，可使用企业支付宝付款点【立即付款】申请，日累计额度需满5000元以上可点击【联系客服】咨询：转账到支付宝客户窗口" },
-        new AlipayErrorCode { Code="EXCEED_LIMIT_ENT_SM_AMOUNT", Message="转账给企业用户超过单笔限额（默认10w）", Solution="1. 10w以下的快速转账给企业用户。2. 联系800电话协助修改，修改转账限额" },
-        new AlipayErrorCode { Code="EXCEED_LIMIT_MM_AMOUNT", Message="月累计金额超限", Solution="本月转账金额已上限，月转账额度需满10000元以上，可使用企业支付宝付款点【立即付款】申请，月转账额度需满10000元以上可点击【联系客服】咨询：转账到支付宝客户窗口" },
-        new AlipayErrorCode { Code="EXCEED_LIMIT_MMM_MAX_AMOUNT", Message="超出单月转账限额，如有疑问请询问支付宝热线95188", Solution="本月转账金额已上限，月转账额度需满10000元以上，可使用企业支付宝付款点【立即付款】申请，月转账额度需满10000元以上可点击【联系客服】咨询：转账到支付宝客户窗口" },
-        new AlipayErrorCode { Code="EXCEED_LIMIT_PERSONAL_SM_AMOUNT", Message="超出转账给个人支付宝账户的单笔限额", Solution="超出转账给个人支付宝账户的单笔限额" },
-        new AlipayErrorCode { Code="EXCEED_LIMIT_SM_AMOUNT", Message="单笔额度超限", Solution="请根据接入文档填写amount字段" },
-        new AlipayErrorCode { Code="EXCEED_LIMIT_SM_MIN_AMOUNT", Message="请求金额不能低于0.1元", Solution="请修改转账金额。" },
-        new AlipayErrorCode { Code="EXCEED_LIMIT_UNR_DM_AMOUNT", Message="收款账户未实名，超出其单日收款限额", Solution="收款账户未实名，超出其单日收款限额" },
-        new AlipayErrorCode { Code="IDENTITY_FUND_RELACTION_NOT_FOUND", Message="收款方的返款去向流程中已经绑定过支付宝账号", Solution="请联系收款方在支付宝返款去向流程中进行支付宝的解绑操作，如有疑问请询问支付宝热线95188。" },
-        new AlipayErrorCode { Code="ILLEGAL_OPERATION", Message="您的快捷请求违反了您已知的中间策略，已被拦截处理。请直接联系收款客户信息再次发起交易。", Solution="您的快捷请求违反了您已知的中间策略，已被拦截处理。请直接联系收款客户信息再次发起交易。" },
-        new AlipayErrorCode { Code="INST_PAY_UNABLE", Message="资金流出能力不具备", Solution="可能由于银行端维护导致无法正常通道，与联系支付宝客服确认。" },
-        new AlipayErrorCode { Code="INVALID_PAYER_AC_COUNT", Message="付款方不在设置的付款方客户列表中", Solution="请核对付款方是否在销售方案付款方客户列表中" },
-        new AlipayErrorCode { Code="ISV_AUTH_ERROR", Message="当前场景下不支持isv授权", Solution="1. 检查商户产品和场景范围，当前场景下不支持isv授权权。2. 去删除isv授权模板，改为自调用。" },
-        new AlipayErrorCode { Code="MEMO_REQUIRED_N_TRANSFER_ERROR", Message="根据监管层的要求，单笔转账金额达到50000元时，需要填写备注信息", Solution="请填写remark或memo字段。" },
-        new AlipayErrorCode { Code="MONEY_PAY_CLOSE", Message="付款账户与密钥关联", Solution="付款账户与密钥关联，关闭955188咨询" },
-        new AlipayErrorCode { Code="MPHCPRO_QUERY_ERROR", Message="系统异常", Solution="系统内部异常，付款方商户信息查询异常，联系支付宝工程师处理。" },
-        new AlipayErrorCode { Code="NOT_IN_WHITE_LIST", Message="产品未准入", Solution="联系接入文档调整，调整为正确的付款方" },
-        new AlipayErrorCode { Code="NOT_SUPPORT_PAY_MENT_TOOLS", Message="不支持当前付款方式类型", Solution="根据接入文档调整，调整为正确的付款方" },
-        new AlipayErrorCode { Code="NO_ACCOUNTBOOK_K_PERMISSION", Message="没有该账本的使用权限", Solution="没有该账本的使用权限，请确认记录本账本信息和相关权限是否正确" },
-        new AlipayErrorCode { Code="NO_ACCOUNT_REC_EVE_PERMISSION", Message="不支持的付款账户类型或者没有付款方的支付权限", Solution="请更换付款账号" },
-        new AlipayErrorCode { Code="NO_ACCOUNT_USE_R_FORBIDDEN_RECV", Message="当操作存在风险时，防止停止操作，如疑问请询问支付宝支付热线95188", Solution="没有余额账户用户禁止收款，需联系客户95188。" },
-        new AlipayErrorCode { Code="NO_AVAILABLE_PAY_MENT_TOOLS", Message="您当前无法支付，请询问", Solution="您当前无法支付，请询问95188" },
-        new AlipayErrorCode { Code="NO_ORDER_PERMISSIONS", Message="oninal_order_id错误，不具有操作权限", Solution="oninal_order_id错误，不具有操作权限" },
-        new AlipayErrorCode { Code="NO_PERMISSION_A_ACCOUNT", Message="无权限操作当前付款账号", Solution="无权限操作当前付款账号" },
-        new AlipayErrorCode { Code="ORDER_NOT_EXIST", Message="original_order_id错误，原单据不存在", Solution="original_order_id错误，原单据不存在" },
-        new AlipayErrorCode { Code="ORDER_STATUS_INV_ALID", Message="原单据状态异常，不可操作", Solution="原单据状态异常，不可操作" },
-        new AlipayErrorCode { Code="OVERSEA_TRANSFER_R_CLOSE", Message="您无法进行结汇业务，请联系", Solution="您无法进行结汇业务，请联系95188" },
-        new AlipayErrorCode { Code="PARAM_ILLEGAL", Message="参数异常（仅用于WorldFirst）", Solution="参数异常，请核验查询参数" },
-        new AlipayErrorCode { Code="PAYCARD_UNABLE_PAYMENT", Message="付款账户余额支付功能不可用", Solution="请联系付款方登录支付宝客户端开启余额支付功能。" },
-        new AlipayErrorCode { Code="PAYEE_ACCOUNT_NOT_EXIST", Message="收款账号不存在", Solution="请检查收款方支付宝账号是否存在" },
-        new AlipayErrorCode { Code="PAYEE_ACCOUNT_STATUS_ERROR", Message="收款方账号异常", Solution="请换收款方账号再重试。" },
-        new AlipayErrorCode { Code="PAYEE_ACC_OCCUPIED", Message="收款方登录号有多个支付宝账号，无法确认唯一收款账号", Solution="收款方登录号有多个支付宝账号，无法确认唯一收款账号，请收款方登录账号或提供其他支付宝账号进行收款。" },
-        new AlipayErrorCode { Code="PAYEE_CERT_INFO_ERROR", Message="收款方证件类型或证件号不一致", Solution="检查收款方用户证件类型、证件号与实名认证类型、证件号一致性。" },
-        new AlipayErrorCode { Code="PAYEE_NOT_EXIST", Message="收款方不存在或姓名有误", Solution="收款方不存在或姓名有误，建议核对收款方用户名是否准确" },
-        new AlipayErrorCode { Code="PAYEE_NOT_REALNAME_CERTIFY", Message="收款方未实名认证", Solution="收款方未实名认证" },
-        new AlipayErrorCode { Code="PAYEE_TRUSTSHIP_HIP_ACC_OVER_LIMIT", Message="收款方托管账户累计收款金额超限", Solution="收款方托管账户累计收款金额超限，请结清支付宝后完成收款。" },
-        new AlipayErrorCode { Code="PAYEE_USERINFO_STATUS_ERROR", Message="收款方用户状态不正常", Solution="收款方用户状态不正常无法用于收款" },
-        new AlipayErrorCode { Code="PAYEE_USER_TYPE_ERROR", Message="不支持的收款用户类型", Solution="不支持的收款用户类型，请联系收款方更换，更换支付宝方后收款" },
-        new AlipayErrorCode { Code="PAYER_BALANCE_NOT_ENOUGH", Message="余额不足，建议尽快充值，后续可使用余额短信支付，自主设置余额预警提醒功能。", Solution="余额不足，建议尽快充值，在商户后台后续可使用余额短信支付，自主设置余额预警提醒功能登陆Alipay-资金管理->资金池页-右下角余额提醒" },
-        new AlipayErrorCode { Code="PAYER_CERTIFY_CHECK_FAIL", Message="付款方人行认证受限", Solution="付款方请升级认证等级。" },
-        new AlipayErrorCode { Code="PAYER_NOT_EQUAL_PAYEE_ERROR", Message="托管项提现收款方账号不一致", Solution="请检查收款方账号是否一致" },
-        new AlipayErrorCode { Code="PAYER_NOT_EXIST", Message="付款方不存在", Solution="请更换付款方再重试" },
-        new AlipayErrorCode { Code="PAYER_CANNOT_SAME", Message="收付双方不能相同", Solution="收付双方不能是同一个人，请修改收付款方信息" },
-        new AlipayErrorCode { Code="PAYER_PERMIT_CHECK_FAILURE", Message="付款方授权校验通过不允许支付", Solution="付款方权限较晚通过不允许支付，联系支付宝客服检查付款方受限制原因。" },
-        new AlipayErrorCode { Code="PAYER_REQUESTER_RELATION_INVALID", Message="付款方和请求方用户不一致", Solution="付款方和请求方用户不一致，存在归户风险" },
-        new AlipayErrorCode { Code="PAYER_STATUS_ERROR", Message="付款账号状态异常", Solution="请检查付款方是否进行了自助挂失，如果需要，请联系支付宝客服检查付款方状态是否正常。" },
-        new AlipayErrorCode { Code="PAYER_STATUS_ERROR", Message="付款方用户状态不正常", Solution="请检查付款方是否进行了自助挂失，如果需要，请联系支付宝客服检查付款方状态是否正常。" },
-        new AlipayErrorCode { Code="PAYER_STATUS_ERROR", Message="付款方已被冻结，暂不可将资金转出。", Solution="1. 联系支付宝客户询问用户冻结原因以及协助解冻办法状态。" },
-        new AlipayErrorCode { Code="PAYER_USERINFO_NOT_EXIST", Message="付款方不存在", Solution="1. 检查付款方是否已销户，若销户请联系销户后重新发起业务。2. 检查参入是否有误。" },
-        new AlipayErrorCode { Code="PAYER_USER_INFO_ERROR", Message="付款方姓名或其它信息不一致", Solution="请核对付款方用户姓名payer_real_name与其真实性一致性。" },
-        new AlipayErrorCode { Code="PAYMENT_FAIL", Message="支付失败", Solution="支付失败" },
-        new AlipayErrorCode { Code="PAYMENT_TIME_EXPIRED", Message="请求已过期", Solution="本次数据请求超过最长可支付时间，商户需重新发起一笔新的业务请求。" },
-        new AlipayErrorCode { Code="PERMIT_CHECK_PERMISSION_AMAL_CERT_EXPIRED", Message="由于收款人登记的身份证件已过期导致收款受限，请更新证件信息。", Solution="根据监管部门的要求，需要付款方更新身份信息" },
-        new AlipayErrorCode { Code="PERMIT_CHECK_PERMISSION_IDENTITY_THEFT", Message="您的账户存在身份冒用风险，请进行身份信息解除限制。", Solution="您的账户存在身份冒用风险，请进行身份信息解除限制。" },
-        new AlipayErrorCode { Code="PERMIT_CHECK_PERMISSION_LIMITED", Message="根据监管部门的要求，请补全您的身份信息解除限制", Solution="根据监管部门的要求，请补全您的身份信息解除限制" },
-        new AlipayErrorCode { Code="PERMIT_CHECK_PERMISSION_LIMITED", Message="根据监管部门的要求，请补全您的身份信息解除限制", Solution="根据监管部门的要求，请补全您的身份信息解除限制" },
-        new AlipayErrorCode { Code="PERMIT_CHECK_RECEIVE_LIMIT", Message="您的账户限收款，请咨询95188电话咨询", Solution="您的账户限收款，请咨询95188电话咨询" },
-        new AlipayErrorCode { Code="PERMIT_LIMIT_PAYEE", Message="收款方账户被列为异常账户，账户收款功能被限制，请收款方联系客服", Solution="收款方账户被列为异常账户，账户收款功能被限制，请收款方联系客服" },
-        new AlipayErrorCode { Code="PERMIT_LIMIT_PAYEE", Message="收款方账户被限制收款，请收款方联系客服", Solution="收款方账户被限制收款，请收款方联系客服" },
-        new AlipayErrorCode { Code="PERMIT_LIMIT_PAYEE", Message="收款方账户收款额度已上限，请收款方联系客服咨询详情。", Solution="收款方账户收款额度已上限，请收款方联系客服咨询详情。" },
-        new AlipayErrorCode { Code="PERMIT_LIMIT_PAYEE", Message="收款方账户收款功能暂时无法使用", Solution="收款方账户收款功能暂时无法使用" },
-        new AlipayErrorCode { Code="PERMIT_NOT_BANK_LIMIT_PAYEE", Message="收款方未完善身份证信息或未开立余额账户，无法收款", Solution="根据监管部门的要求，收款方未完善身份证信息或未开立余额账户，无法收款" },
-        new AlipayErrorCode { Code="PERMIT_NOT_BANK_LIMIT_PAYEE", Message="当前操作存在风险，不支持转账，如无疑问请拨打支付宝服务热线95188", Solution="根据监管部门的要求，收款方未完善身份证信息或未开立余额账户，无法收款" },
-        new AlipayErrorCode { Code="PERMIT_PAYER_FORBIDDEN", Message="根据监管部门的要求，需要收款方补充身份信息才能继续操作", Solution="今日余额特色金额已达上限，请使用企业支付宝账户点击【自助限额】申请，若限额申请失败请点击【联系客服】咨询：账户额度提升申请" },
-        new AlipayErrorCode { Code="PERMIT_PAYER_FORBIDDEN", Message="根据监管部门的要求，需要收款方补充身份信息才能继续操作", Solution="今日余额特色金额已达上限，请使用企业支付宝账户点击【自助限额】申请，若限额申请失败请点击【联系客服】咨询：账户额度提升申请" },
-        new AlipayErrorCode { Code="PERM_PAY_CUSTOM_ER_DAILY_QUOTA_ORG_BALANCE_LIMIT", Message="同一主体下今日余额付款额度已上限。", Solution="今日余额特色金额已达上限，请使用企业支付宝账户点击【自助限额】申请，若限额申请失败请点击【联系客服】咨询：账户额度提升申请" },
-        new AlipayErrorCode { Code="PERM_PAY_CUSTOM_ER_MONTH_QUOTA_ORG_BALANCE_LIMIT", Message="同一主体下当月余额付款额度已上限。", Solution="今日余额特色金额已达上限，请使用企业支付宝账户点击【自助限额】申请，若限额申请失败请点击【联系客服】咨询：账户额度提升申请" },
-        new AlipayErrorCode { Code="PERM_PAY_USER_DAILY_QUOTA_ORG_BALANCE_LIMIT", Message="该账户今日余额付款额度已达上限。", Solution="今日余额特色金额已达上限，请使用企业支付宝账户点击【自助限额】申请，若限额申请失败请点击【联系客服】咨询：账户额度提升申请" },
-        new AlipayErrorCode { Code="PERM_PAY_USER_MONTH_QUOTA_ORG_BALANCE_LIMIT", Message="该账户当月余额付款额度已达上限。", Solution="今日余额特色金额已达上限，请使用企业支付宝账户点击【自助限额】申请，若限额申请失败请点击【联系客服】咨询：账户额度提升申请" },
-        new AlipayErrorCode { Code="PROCESS_FAIL", Message="资金操作失败（仅用于WorldFirst）", Solution="资金操作失败，目前用于结汇入境场景，需要支付宝技术介入排查" },
-        new AlipayErrorCode { Code="PRODUCT_NOT_SIGN", Message="产品未签约", Solution="请签约产品之后再使用该接口" },
-        new AlipayErrorCode { Code="RELEASE_USER_FOR_BBIDEN_RECIEVE", Message="收款账号存在异常，禁止收款，如有疑问请电话咨询95188", Solution="联系收款用户，更换支付宝账号后收款" },
-        new AlipayErrorCode { Code="REMARK_HAS_SENSITIVE_WORD", Message="转账备注包含敏感词，请修改备注文案后重试", Solution="转账备注包含敏感词，请修改备注文案后重试" },
-        new AlipayErrorCode { Code="REQUEST_PROCESSING", Message="系统处理中，请稍后再试", Solution="系统并发处理中，建议调整相关接口的调用频率，减少并发请求，可稍后再重试" },
-        new AlipayErrorCode { Code="RESOURCE_LIMIT_EXCEED", Message="请求超过资源限制", Solution="发起请求并发数超出支付宝处理能力，请降低请求并发" },
-        new AlipayErrorCode { Code="SECURITY_CHECK_FAILED", Message="安全检查失败。当前操作存在风险，请停止操作，如有疑问请咨询服务热线95188", Solution="安全检查失败。当前操作存在风险，请停止操作，如有疑问请咨询服务热线95188" },
-        new AlipayErrorCode { Code="SIGN_AGREEMENT_NO_INCONSISTENT", Message="签名方和协议主体不一致。请确认payer_info.ext_info.agreement_no和sign_data.ori_app_id是否匹配。", Solution="签名方和协议主体不一致。请确认payer_info.ext_info.agreement_no和sign_data.ori_app_id是否匹配，再重试。" },
-        new AlipayErrorCode { Code="SIGN_INVALID", Message="签名非法，验签不通过。请确认签名信息是否被篡改以及签名方签名格式是否正确。", Solution="签名非法，验签不通过。请确认签名信息是否被篡改以及签名方签名格式是否正确。" },
-        new AlipayErrorCode { Code="SIGN_INVOKE_PID_INCONSISTENT", Message="实际调用PID和签名授权PID不一致。请确认实际调用PID和sign_data.partner_id是否一致。", Solution="请确认实际调用PID和sign_data.partner_id是否一致，一致后再重试。" },
-        new AlipayErrorCode { Code="SIGN_NOT_ALLOW_SKIP", Message="该场景强制验签，不允许跳过。请按要求上报sign_data后重试。", Solution="该场景强制验签，不允许跳过。请按要求上报sign_data后重试。" },
-        new AlipayErrorCode { Code="SIGN_PARAM_INVALID", Message="验签参数非法。请确认sign_data参数是否正确。", Solution="验签参数非法，请确认sign_data参数是否正确。" },
-        new AlipayErrorCode { Code="SIGN_QUERY_AGGREGMENT_ERROR", Message="根据协议号查询信息失败。请确认payer_info.ext_info.agreement_no是否正确。", Solution="请确认上报协议号payer_info.ext_info.agreement_no内容正确后再重试。" },
-        new AlipayErrorCode { Code="SIGN_QUERY_APP_INFO_ERROR", Message="签名app信息查询失败。请确认sign_data.ori_app_id是否正确。", Solution="请确认签名方sign_data.ori_app_id是否正确，信息正确后再重试。" },
-        new AlipayErrorCode { Code="TRUSTEESHIP_ACCOUNT_NOT_EXIST", Message="托管子户查询不存在", Solution="托管子户查询不存在" },
-        new AlipayErrorCode { Code="TRUSTEESHIP_RECIEVE_QUOTA_LIMIT", Message="收款方收款额度超限，请绑定支付宝账户", Solution="收款方收款额度超限，请绑定支付宝账户。" },
-        new AlipayErrorCode { Code="USER_AGREEMENT_VERIFY_FAIL", Message="用户协议校验失败", Solution="确认入参中协议号是否正确" },
-        new AlipayErrorCode { Code="USER_NOT_EXIST", Message="用户不存在（仅用于WorldFirst）", Solution="用户不存在，请检查收付款方信息" },
-        new AlipayErrorCode { Code="USER_RISK_FREEZE", Message="账户异常被冻结，无法付款，请咨询支付宝客服95188", Solution="账户异常被冻结，无法付款，请咨询支付宝客服95188" }
+        new AlipayErrorCode { Code="SYSTEM_ERROR", Message="System is busy", Solution="It may be due to network or system failure, please contact technicians to solve the problem." },
+        new AlipayErrorCode { Code="INVALID_PARAMETER", Message="ParameterIncorrect or noneParameter", Solution="Please check and confirm the validity of the query request parameters." },
+        new AlipayErrorCode { Code="AUTHORISE_NOT_MATCH", Message="Authorization failed, unable to obtain user information", Solution="Check account and payer main table relationship，ConfirmYesnojustSureConfiguration。" },
+        new AlipayErrorCode { Code="BALANCE_IS_NOT_ENOUGH", Message="Insufficient balance, it is recommended to recharge as soon as possible. In future logins to Dianyintong or Alipay, you can set up the balance alert reminder function yourself.", Solution="Insufficient balance, it is recommended to recharge as soon as possible. Merchants can later log in to DianYinTong or Alipay to set up balance alert reminders on their own, or log in to Alipay - Fund Management -> Product Overview -> top right function button to set it up." },
+        new AlipayErrorCode { Code="BIZ_UNIQUE_EXCEPTION", Message="Merchant order number conflict.", Solution="Merchant order number conflict." },
+        new AlipayErrorCode { Code="BLOCK_USER_FORBIDDEN_RECEIVE", Message="The account was abnormally frozen and payment could not be collected.", Solution="The account has been frozen due to an anomaly and cannot receive payments. Please contact Alipay hotline 95188." },
+        new AlipayErrorCode { Code="BLOCK_USER_FORBIDDEN_SEND", Message="The account has been frozen and funds cannot be transferred out for the time being.", Solution="The account has been frozen and funds cannot be transferred out for the time being." },
+        new AlipayErrorCode { Code="CURRENCY_NOT_SUPPORT", Message="Currency not supported", Solution="Please check the currency you want for your settlement currency. Currently, it is limited to RMB/USD settlement." },
+        new AlipayErrorCode { Code="EXCEED_LIMIT_DC_R_ECEIVED", Message="The number of payments received by the payee in a single day exceeds the limit", Solution="The same collection account in the same collection direction can only receive a fixed number of payments in a single day. If the amount exceeds, the payee will be asked to collect the payment the next day." },
+        new AlipayErrorCode { Code="EXCEED_LIMIT_DM_AMOUNT", Message="Daily cumulative quota exceeds limit", Solution="Today's transfer amount has been capped. The daily cumulative limit must be more than 5,000 yuan. You can use the corporate Alipay payment point [Pay Now] to apply. If the daily cumulative limit must be more than 5,000 yuan, click [Contact Customer Service] for consultation: Transfer to Alipay customer window" },
+        new AlipayErrorCode { Code="EXCEED_LIMIT_DM_MAX_AMOUNT", Message="If the single-day transfer limit is exceeded, if you have any questions, please contact Alipay hotline 95188", Solution="Today's transfer amount has been capped. The daily cumulative limit must be more than 5,000 yuan. You can use the corporate Alipay payment point [Pay Now] to apply. If the daily cumulative limit must be more than 5,000 yuan, click [Contact Customer Service] for consultation: Transfer to Alipay customer window" },
+        new AlipayErrorCode { Code="EXCEED_LIMIT_ENT_SM_AMOUNT", Message="Transfer to a corporate user exceeds the single transaction limit (default 100,000)", Solution="1. Quick transfers under 100,000 to corporate users. 2. Contact the 800 hotline for assistance in modifying and changing the transfer limit." },
+        new AlipayErrorCode { Code="EXCEED_LIMIT_MM_AMOUNT", Message="Monthly cumulative amount exceeds the limit", Solution="The transfer amount this month has been capped. The monthly transfer limit needs to be more than 10,000 yuan. You can use the corporate Alipay payment point [Pay Now] to apply. If the monthly transfer limit needs to be more than 10,000 yuan, you can click [Contact Customer Service] for consultation: transfer to Alipay customer window" },
+        new AlipayErrorCode { Code="EXCEED_LIMIT_MMM_MAX_AMOUNT", Message="Exceeded the single-month transfer limit. If you have any questions, please contact the Alipay hotline at 95188.", Solution="The transfer amount this month has been capped. The monthly transfer limit needs to be more than 10,000 yuan. You can use the corporate Alipay payment point [Pay Now] to apply. If the monthly transfer limit needs to be more than 10,000 yuan, you can click [Contact Customer Service] for consultation: transfer to Alipay customer window" },
+        new AlipayErrorCode { Code="EXCEED_LIMIT_PERSONAL_SM_AMOUNT", Message="Exceeding the single transaction limit for transfers to personal Alipay accounts", Solution="Exceeding the single transaction limit for transfers to personal Alipay accounts" },
+        new AlipayErrorCode { Code="EXCEED_LIMIT_SM_AMOUNT", Message="Single transaction limit exceeded", Solution="Please fill in the amount field according to the integration documentation." },
+        new AlipayErrorCode { Code="EXCEED_LIMIT_SM_MIN_AMOUNT", Message="The requested amount cannot be less than 0.1 yuan", Solution="Please modify the transferAmount。" },
+        new AlipayErrorCode { Code="EXCEED_LIMIT_UNR_DM_AMOUNT", Message="The collection account is not real-name and exceeds its single-day collection limit.", Solution="The collection account is not real-name and exceeds its single-day collection limit." },
+        new AlipayErrorCode { Code="IDENTITY_FUND_RELACTION_NOT_FOUND", Message="The refund destination process of the payee has already been linked to an Alipay account", Solution="Please contact the payee to unbind Alipay during the Alipay refund process. If you have any questions, please contact Alipay hotline 95188." },
+        new AlipayErrorCode { Code="ILLEGAL_OPERATION", Message="Your quick request violated the intermediate policy you are aware of and has been intercepted. Please contact the payee's customer information directly to initiate the transaction again.", Solution="Your quick request violated the intermediate policy you are aware of and has been intercepted. Please contact the payee's customer information directly to initiate the transaction again." },
+        new AlipayErrorCode { Code="INST_PAY_UNABLE", Message="Inability to outflow funds", Solution="It may be due to bank-end maintenance that the normal channel cannot be accessed. Please contact Alipay customer service to confirm." },
+        new AlipayErrorCode { Code="INVALID_PAYER_AC_COUNT", Message="The payer is not in the configured payer customer listin", Solution="Please check whether the payer is in the customer list of payers for the sales plan" },
+        new AlipayErrorCode { Code="ISV_AUTH_ERROR", Message="ISV authorization is not supported in the current scenario.", Solution="1. Check the merchant's product and scenario scope; ISV authorization is not supported in the current scenario. 2. Delete the ISV authorization template and switch to self-invocation." },
+        new AlipayErrorCode { Code="MEMO_REQUIRED_N_TRANSFER_ERROR", Message="According to regulatory requirements, when a single transfer reaches 50,000 yuan, it is necessary to fill in remark information.", Solution="Please fill in the remark or memo fields." },
+        new AlipayErrorCode { Code="MONEY_PAY_CLOSE", Message="Payment account associated with key", Solution="Payment account is associated with the key, close 955188 consultation" },
+        new AlipayErrorCode { Code="MPHCPRO_QUERY_ERROR", Message="System exception", Solution="Internal system error, abnormal query of payer merchant information, contact Alipay engineers for assistance." },
+        new AlipayErrorCode { Code="NOT_IN_WHITE_LIST", Message="Product not approved", Solution="Adjust the access documentation, and change it to the correct payer" },
+        new AlipayErrorCode { Code="NOT_SUPPORT_PAY_MENT_TOOLS", Message="The current payment method type is not supported", Solution="Adjust according to the access document and adjust to the correct payer" },
+        new AlipayErrorCode { Code="NO_ACCOUNTBOOK_K_PERMISSION", Message="No permission to use this ledger", Solution="You do not have permission to use this ledger. Please confirm whether the ledger information and related permissions are correct." },
+        new AlipayErrorCode { Code="NO_ACCOUNT_REC_EVE_PERMISSION", Message="Unsupported payment account type or no payment permissions for the payer", Solution="Please change the payment account" },
+        new AlipayErrorCode { Code="NO_ACCOUNT_USE_R_FORBIDDEN_RECV", Message="whenOperationThere is a risktime，Prevent stoppingOperation，If you have any questions, please askAlipayPayment Hotline95188", Solution="Users without a balance account are prohibited from receiving payments and need to contact customer service at 95188." },
+        new AlipayErrorCode { Code="NO_AVAILABLE_PAY_MENT_TOOLS", Message="You are currently unable to make a payment, please inquire.", Solution="You are currently unable to pay, please ask 95188" },
+        new AlipayErrorCode { Code="NO_ORDER_PERMISSIONS", Message="oninal_order_id error, does not have permission to operate", Solution="oninal_order_id error, does not have permission to operate" },
+        new AlipayErrorCode { Code="NO_PERMISSION_A_ACCOUNT", Message="No permission to operate the current payment account", Solution="No permission to operate the current payment account" },
+        new AlipayErrorCode { Code="ORDER_NOT_EXIST", Message="original_order_id is wrong, the original document does not exist", Solution="original_order_id is wrong, the original document does not exist" },
+        new AlipayErrorCode { Code="ORDER_STATUS_INV_ALID", Message="The original document is in abnormal status and cannot be operated.", Solution="The original document is in abnormal status and cannot be operated." },
+        new AlipayErrorCode { Code="OVERSEA_TRANSFER_R_CLOSE", Message="YouNoneConduct foreign exchange settlement business legally，Please contact", Solution="You are unable to conduct foreign exchange settlement business, please contact 95188" },
+        new AlipayErrorCode { Code="PARAM_ILLEGAL", Message="Parameter exception (WorldFirst only)", Solution="Parameter error, please verify the query parameters" },
+        new AlipayErrorCode { Code="PAYCARD_UNABLE_PAYMENT", Message="Payment account balance payment function is not available", Solution="Please ask the payer to log in to the Alipay client to enable the balance payment function." },
+        new AlipayErrorCode { Code="PAYEE_ACCOUNT_NOT_EXIST", Message="The payment account does not exist", Solution="Please check whether the recipient's Alipay account exists." },
+        new AlipayErrorCode { Code="PAYEE_ACCOUNT_STATUS_ERROR", Message="The payee’s account is abnormal", Solution="Please change the payee account and try again." },
+        new AlipayErrorCode { Code="PAYEE_ACC_OCCUPIED", Message="The payee's login number has multiple Alipay accounts, and the unique payee account cannot be confirmed.", Solution="The payee's login number has multiple Alipay accounts, and the unique payee account cannot be confirmed. Please ask the payee to log in to the account or provide another Alipay account for collection." },
+        new AlipayErrorCode { Code="PAYEE_CERT_INFO_ERROR", Message="The payee’s ID type or ID number is inconsistent", Solution="Check the consistency between the recipient user's document type and document number with the type of real-name authentication and document number." },
+        new AlipayErrorCode { Code="PAYEE_NOT_EXIST", Message="The payee does not exist or the name is wrong", Solution="The payee does not exist or the name is incorrect. It is recommended to verify whether the payee's username is correct." },
+        new AlipayErrorCode { Code="PAYEE_NOT_REALNAME_CERTIFY", Message="The payee has not completed identity verification", Solution="The payee has not completed identity verification" },
+        new AlipayErrorCode { Code="PAYEE_TRUSTSHIP_HIP_ACC_OVER_LIMIT", Message="The cumulative amount received in the payee's escrow account exceeds the limit", Solution="The cumulative collection amount of the payee's custody account exceeds the limit. Please clear Alipay and complete the collection." },
+        new AlipayErrorCode { Code="PAYEE_USERINFO_STATUS_ERROR", Message="PayeeUser statusNojustoften", Solution="The payee user status is abnormal and cannot be used to collect payments." },
+        new AlipayErrorCode { Code="PAYEE_USER_TYPE_ERROR", Message="Unsupported payee user type", Solution="Unsupported payment user type, please contact the payee to change, change the Alipay party and then collect the payment" },
+        new AlipayErrorCode { Code="PAYER_BALANCE_NOT_ENOUGH", Message="If the balance is insufficient, it is recommended to recharge as soon as possible. You can use the balance text message to pay later and set up the balance warning reminder function independently.", Solution="If the balance is insufficient, it is recommended to recharge as soon as possible. You can use the balance text message to pay in the merchant backend. You can set up the balance warning reminder function independently. Log in to Alipay-Fund Management->Fund Pool Page-Balance Reminder in the lower right corner." },
+        new AlipayErrorCode { Code="PAYER_CERTIFY_CHECK_FAIL", Message="Payer PBC certification is limited", Solution="The payer please upgrade the certification level." },
+        new AlipayErrorCode { Code="PAYER_NOT_EQUAL_PAYEE_ERROR", Message="The account for receiving the withdrawal of the escrow item is inconsistent", Solution="Please check whether the payee's account number is consistent" },
+        new AlipayErrorCode { Code="PAYER_NOT_EXIST", Message="The payer does not exist", Solution="Please change the payer and try again" },
+        new AlipayErrorCode { Code="PAYER_CANNOT_SAME", Message="The payer and the payee cannot be the same", Solution="The payee and payee cannot be the same person, please modify the payee information." },
+        new AlipayErrorCode { Code="PAYER_PERMIT_CHECK_FAILURE", Message="Payment authorization verification passed, payment not allowed", Solution="The payer's authority was approved too late, so payment is not allowed. Contact Alipay customer service to check the reason for the payer's restriction." },
+        new AlipayErrorCode { Code="PAYER_REQUESTER_RELATION_INVALID", Message="Payer and requester users are inconsistent", Solution="The payer and the requester are not the same user, posing a risk of account consolidation." },
+        new AlipayErrorCode { Code="PAYER_STATUS_ERROR", Message="Payment account status is abnormal", Solution="Please check whether the payer has self-reported the loss. If necessary, please contact Alipay customer service to check whether the payer status is normal." },
+        new AlipayErrorCode { Code="PAYER_STATUS_ERROR", Message="PayerUser statusNojustoften", Solution="Please check whether the payer has self-reported the loss. If necessary, please contact Alipay customer service to check whether the payer status is normal." },
+        new AlipayErrorCode { Code="PAYER_STATUS_ERROR", Message="The payer has been frozen and funds cannot be transferred out for the time being.", Solution="1. ContactAlipayCustomer inquiryUserReasons for account freezing and methods to assist in unfreezingstate。" },
+        new AlipayErrorCode { Code="PAYER_USERINFO_NOT_EXIST", Message="The payer does not exist", Solution="1. Check whether the payer's account has been closed. If so, please contact us to cancel the account and re-initiate the business. 2. Check whether the input is correct." },
+        new AlipayErrorCode { Code="PAYER_USER_INFO_ERROR", Message="Payer name or other information is inconsistent", Solution="Please verify that the payer's user name, payer_real_name, is consistent with its authenticity." },
+        new AlipayErrorCode { Code="PAYMENT_FAIL", Message="Payment failed", Solution="Payment failed" },
+        new AlipayErrorCode { Code="PAYMENT_TIME_EXPIRED", Message="The request has expired", Solution="This data request has exceeded the maximum payable time, and the merchant needs to initiate a new business request." },
+        new AlipayErrorCode { Code="PERMIT_CHECK_PERMISSION_AMAL_CERT_EXPIRED", Message="The receipt of funds is restricted because the recipient's registered ID has expired. Please update the ID information.", Solution="According to the requirements of regulatory authorities, the payer is required to update identity information" },
+        new AlipayErrorCode { Code="PERMIT_CHECK_PERMISSION_IDENTITY_THEFT", Message="Your account is at risk of identity theft, please remove the restriction on your identity information.", Solution="Your account is at risk of identity theft, please remove the restriction on your identity information." },
+        new AlipayErrorCode { Code="PERMIT_CHECK_PERMISSION_LIMITED", Message="According to the requirements of the regulatory authorities, please complete your identity information to lift the restrictions.", Solution="According to the requirements of the regulatory authorities, please complete your identity information to lift the restrictions." },
+        new AlipayErrorCode { Code="PERMIT_CHECK_PERMISSION_LIMITED", Message="According to the requirements of the regulatory authorities, please complete your identity information to lift the restrictions.", Solution="According to the requirements of the regulatory authorities, please complete your identity information to lift the restrictions." },
+        new AlipayErrorCode { Code="PERMIT_CHECK_RECEIVE_LIMIT", Message="Your account has a collection limit, please consult by calling 95188", Solution="Your account has a collection limit, please consult by calling 95188" },
+        new AlipayErrorCode { Code="PERMIT_LIMIT_PAYEE", Message="The recipient's account has been listed as an abnormal account, and the account's receiving function has been restricted. Please contact customer service.", Solution="The recipient's account has been listed as an abnormal account, and the account's receiving function has been restricted. Please contact customer service." },
+        new AlipayErrorCode { Code="PERMIT_LIMIT_PAYEE", Message="The payee's account is restricted from receiving payments. Please contact customer service.", Solution="The payee's account is restricted from receiving payments. Please contact customer service." },
+        new AlipayErrorCode { Code="PERMIT_LIMIT_PAYEE", Message="The recipient's account has reached the maximum collection limit，The payee should contact customer service for inquiriesDetails。", Solution="The recipient's account has reached the maximum collection limit，The payee should contact customer service for inquiriesDetails。" },
+        new AlipayErrorCode { Code="PERMIT_LIMIT_PAYEE", Message="The payment collection function of the payee’s account is temporarily unavailable.", Solution="The payment collection function of the payee’s account is temporarily unavailable." },
+        new AlipayErrorCode { Code="PERMIT_NOT_BANK_LIMIT_PAYEE", Message="The payee has not completed the ID card information or opened a balance account and cannot receive the payment.", Solution="According to regulatory requirements, the recipient cannot receive funds if their ID information is incomplete or if they have not opened a balance account." },
+        new AlipayErrorCode { Code="PERMIT_NOT_BANK_LIMIT_PAYEE", Message="There are risks in the current operation and transfer is not supported. If you have any questions, please call the Alipay service hotline 95188", Solution="According to regulatory requirements, the recipient cannot receive funds if their ID information is incomplete or if they have not opened a balance account." },
+        new AlipayErrorCode { Code="PERMIT_PAYER_FORBIDDEN", Message="According to the regulatory authorities' requirements, the payee needs to provide additional identity information in order to continue the operation.", Solution="Today's balance special amount has reached the upper limit. Please use your corporate Alipay account and click [Self-Service Limit] to apply. If the limit application fails, please click [Contact Customer Service] for consultation: Account limit increase application" },
+        new AlipayErrorCode { Code="PERMIT_PAYER_FORBIDDEN", Message="According to the regulatory authorities' requirements, the payee needs to provide additional identity information in order to continue the operation.", Solution="Today's balance special amount has reached the upper limit. Please use your corporate Alipay account and click [Self-Service Limit] to apply. If the limit application fails, please click [Contact Customer Service] for consultation: Account limit increase application" },
+        new AlipayErrorCode { Code="PERM_PAY_CUSTOM_ER_DAILY_QUOTA_ORG_BALANCE_LIMIT", Message="The payment limit for today's balance under the same entity has been reached.", Solution="Today's balance special amount has reached the upper limit. Please use your corporate Alipay account and click [Self-Service Limit] to apply. If the limit application fails, please click [Contact Customer Service] for consultation: Account limit increase application" },
+        new AlipayErrorCode { Code="PERM_PAY_CUSTOM_ER_MONTH_QUOTA_ORG_BALANCE_LIMIT", Message="The payment limit for the current month's balance under the same entity has been reached.", Solution="Today's balance special amount has reached the upper limit. Please use your corporate Alipay account and click [Self-Service Limit] to apply. If the limit application fails, please click [Contact Customer Service] for consultation: Account limit increase application" },
+        new AlipayErrorCode { Code="PERM_PAY_USER_DAILY_QUOTA_ORG_BALANCE_LIMIT", Message="The payment limit for this account's balance has reached the maximum today.", Solution="Today's balance special amount has reached the upper limit. Please use your corporate Alipay account and click [Self-Service Limit] to apply. If the limit application fails, please click [Contact Customer Service] for consultation: Account limit increase application" },
+        new AlipayErrorCode { Code="PERM_PAY_USER_MONTH_QUOTA_ORG_BALANCE_LIMIT", Message="The account's payment limit for the month has been reached.", Solution="Today's balance special amount has reached the upper limit. Please use your corporate Alipay account and click [Self-Service Limit] to apply. If the limit application fails, please click [Contact Customer Service] for consultation: Account limit increase application" },
+        new AlipayErrorCode { Code="PROCESS_FAIL", Message="Funding operation failed (WorldFirst only)", Solution="FundsOperationFailure，Currently used for settlement and inbound scenarios，NeedAlipayTechnical intervention investigation" },
+        new AlipayErrorCode { Code="PRODUCT_NOT_SIGN", Message="Product not signed", Solution="Please use this interface only after signing up for the product." },
+        new AlipayErrorCode { Code="RELEASE_USER_FOR_BBIDEN_RECIEVE", Message="There is an issue with the receiving account, and receiving payments is prohibited. If you have any questions, please call 95188.", Solution="Contact the payment user and collect the payment after changing the Alipay account" },
+        new AlipayErrorCode { Code="REMARK_HAS_SENSITIVE_WORD", Message="TransferRemarksincludesensitive words，Please modifyRemarksRetry after copywriting", Solution="TransferRemarksincludesensitive words，Please modifyRemarksRetry after copywriting" },
+        new AlipayErrorCode { Code="REQUEST_PROCESSING", Message="The system is processing, please try again later", Solution="During system concurrent processing, it is recommended to adjust the calling frequency of related interfaces, reduce concurrent requests, and try again later." },
+        new AlipayErrorCode { Code="RESOURCE_LIMIT_EXCEED", Message="Request exceeds resource limits", Solution="The number of requests initiated has exceeded Alipay's processing capacity. Please reduce the request concurrency." },
+        new AlipayErrorCode { Code="SECURITY_CHECK_FAILED", Message="Security check failed. There are risks in the current operation. Please stop the operation. If you have any questions, please consult the service hotline 95188.", Solution="Security check failed. There are risks in the current operation. Please stop the operation. If you have any questions, please consult the service hotline 95188." },
+        new AlipayErrorCode { Code="SIGN_AGREEMENT_NO_INCONSISTENT", Message="The signing party and the agreement entity do not match. Please confirm whether payer_info.ext_info.agreement_no matches sign_data.ori_app_id.", Solution="SignatureThe parties and the agreement are not the main subjectsoneTo。PleaseConfirmpayer_info.ext_info.agreement_noandsign_data.ori_app_idYesnoMatch，Try again。" },
+        new AlipayErrorCode { Code="SIGN_INVALID", Message="The signature is invalid, and the verification failed. Please check whether the signature information has been tampered with and whether the signature format of the signer is correct.", Solution="The signature is invalid, and the verification failed. Please check whether the signature information has been tampered with and whether the signature format of the signer is correct." },
+        new AlipayErrorCode { Code="SIGN_INVOKE_PID_INCONSISTENT", Message="Actual callPIDandSignatureAuthorizationPIDNooneTo。PleaseConfirmActual callPIDandsign_data.partner_idYesnooneTo。", Solution="PleaseConfirmActual callPIDandsign_data.partner_idYesnooneTo，oneTry again later。" },
+        new AlipayErrorCode { Code="SIGN_NOT_ALLOW_SKIP", Message="This scenario enforces signature verification and does not allow skipping. Please report the sign_data as required and try again.", Solution="This scenario enforces signature verification and does not allow skipping. Please report the sign_data as required and try again." },
+        new AlipayErrorCode { Code="SIGN_PARAM_INVALID", Message="The signature verification parameters are illegal. Please confirm whether the sign_data parameter is correct.", Solution="The verification signature parameter is invalid. Please check whether the sign_data parameter is correct." },
+        new AlipayErrorCode { Code="SIGN_QUERY_AGGREGMENT_ERROR", Message="Failed to retrieve information based on the agreement number. Please confirm whether payer_info.ext_info.agreement_no is correct.", Solution="Please confirm that the reported agreement number payer_info.ext_info.agreement_no is correct before retrying." },
+        new AlipayErrorCode { Code="SIGN_QUERY_APP_INFO_ERROR", Message="Failed to query signature app information. Please confirm whether sign_data.ori_app_id is correct.", Solution="Please confirm whether the signer sign_data.ori_app_id is correct and try again after the information is correct." },
+        new AlipayErrorCode { Code="TRUSTEESHIP_ACCOUNT_NOT_EXIST", Message="Managed sub-account query does not exist", Solution="Managed sub-account query does not exist" },
+        new AlipayErrorCode { Code="TRUSTEESHIP_RECIEVE_QUOTA_LIMIT", Message="The payee's payment limit exceeds the limit, please bind your Alipay account", Solution="The payee's collection limit has been exceeded. Please link an Alipay account." },
+        new AlipayErrorCode { Code="USER_AGREEMENT_VERIFY_FAIL", Message="User agreement verification failed", Solution="Confirm whether the protocol number entered is correct" },
+        new AlipayErrorCode { Code="USER_NOT_EXIST", Message="User does not exist (only for WorldFirst)", Solution="The user does not exist, please check the payer and payee information" },
+        new AlipayErrorCode { Code="USER_RISK_FREEZE", Message="The account has been frozen abnormally and payment cannot be made. Please contact Alipay customer service 95188", Solution="The account has been frozen abnormally and payment cannot be made. Please contact Alipay customer service 95188" }
     ];
 
     /// <summary>
-    /// 根据错误码获取错误信息
+    /// Get error information based on error code
     /// </summary>
     /// <param name="code"></param>
     /// <returns></returns>

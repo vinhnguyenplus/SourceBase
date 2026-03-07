@@ -3,64 +3,64 @@ import { ElMessage } from 'element-plus';
 import { Local, } from '/@/utils/storage';
 import {clearAccessAfterReload} from "/@/utils/axios-utils";
 
-// 定义请求中止控制器映射表
+// Define request abort controller mapping table
 const abortControllerMap: Map<string, AbortController> = new Map();
 
-// 配置新建一个 axios 实例
+// Configure a new axios instance
 export const service = axios.create({
 	baseURL: window.__env__.VITE_API_URL as any,
 	timeout: 50000,
-	//headers: { 'Content-Type': 'application/json' }, 这个会导致生成代码的上传文件 file为空
+	//headers: { 'Content-Type': 'application/json' }, this will cause the file uploaded to generate the code to be empty.
 });
 
-// token 键定义
+// token key definition
 export const accessTokenKey = 'access-token';
 export const refreshAccessTokenKey = `x-${accessTokenKey}`;
 
-// 获取 token
+// Get token
 export const getToken = () => {
 	return Local.get(accessTokenKey);
 };
 
-// axios 默认实例
+// axios default instance
 export const axiosInstance: AxiosInstance = axios;
 
-// 添加请求拦截器
+// Add request interceptor
 service.interceptors.request.use(
 	(config) => {
-		// // 在发送请求之前做些什么 token
+		// //What to do before sending the request token
 		// if (Session.get('token')) {
 		// 	(<any>config.headers).common['Authorization'] = `${Session.get('token')}`;
 		// }
 
-		// 记录中止控制信息
+		// Record abort control information
 		const controller = new AbortController();
 		config.signal = controller.signal;
 		const url = config.url || '';
 		abortControllerMap.set(url, controller);
 
-		// 获取本地的 token
+		// Get local token
 		const accessToken = Local.get(accessTokenKey);
 		if (accessToken) {
-			// 将 token 添加到请求报文头中
+			// Add token to request header
 			config.headers!['Authorization'] = `Bearer ${accessToken}`;
 
-			// 判断 accessToken 是否过期
+			// Determine whether the accessToken has expired
 			const jwt: any = decryptJWT(accessToken);
 			const exp = getJWTDate(jwt.exp as number);
 
-			// token 已经过期
+			// token has expired
 			if (new Date() >= exp) {
-				// 获取刷新 token
+				// Get refresh token
 				const refreshAccessToken = Local.get(refreshAccessTokenKey);
 
-				// 携带刷新 token
+				// Carrying refresh token
 				if (refreshAccessToken) {
 					config.headers!['X-Authorization'] = `Bearer ${refreshAccessToken}`;
 				}
 			}
 			// debugger
-			// get请求映射params参数
+			// get request mapping params parameters
 			if (config.method?.toLowerCase() === 'get' && config.data) {
 				let url = config.url + '?' + tansParams(config.data);
 				url = url.slice(0, -1);
@@ -71,60 +71,60 @@ service.interceptors.request.use(
 		return config;
 	},
 	(error) => {
-		// 对请求错误做些什么
+		// What to do about request errors
 		return Promise.reject(error);
 	}
 );
 
-// 添加响应拦截器
+// Add response interceptor
 service.interceptors.response.use(
 	(res) => {
 
-		// 请求结束后清除中止控制项
+		// Clear abort controls after request ends
 		const url = res.config.url || '';
 		abortControllerMap.delete(url);
 
-		// 获取状态码和返回数据
+		// Get status code and return data
 		var status = res.status;
 		var serve = res.data;
 
-		// 处理 401
+		// Handling 401
 		if (status === 401) {
 			clearAccessAfterReload();
 		}
 
-		// 处理未进行规范化处理的
+		// Processing that has not been standardized
 		if (status >= 400) {
 			throw new Error(res.statusText || 'Request Error.');
 		}
 
-		// 处理规范化结果错误
+		// Handling normalization result errors
 		if (serve && serve.hasOwnProperty('errors') && serve.errors) {
 			throw new Error(JSON.stringify(serve.errors || 'Request Error.'));
 		}
 
-		// 读取响应报文头 token 信息
+		// Read response message header token information
 		var accessToken = res.headers[accessTokenKey];
 		var refreshAccessToken = res.headers[refreshAccessTokenKey];
 
-		// 判断是否是无效 token
+		// Determine whether it is an invalid token
 		if (accessToken === 'invalid_token') {
 			clearAccessAfterReload();
 		}
-		// 判断是否存在刷新 token，如果存在则存储在本地, 并重新加载页面
+		// Determine whether there is a refresh token, if it exists, store it locally, and reload the page
 		else if (refreshAccessToken && accessToken) {
 			Local.set(accessTokenKey, accessToken);
 			Local.set(refreshAccessTokenKey, refreshAccessToken);
 		}
 
-		// 响应拦截及自定义处理
+		// Response interception and custom processing
 		if (serve.code === 401) {
 			clearAccessAfterReload();
 		} else if (serve.code === undefined) {
 			return Promise.resolve(res);
 		} else if (serve.code !== 200) {
 			var message;
-			// 判断 serve.message 是否为对象
+			// Determine whether serve.message is an object
 			if (serve.message && typeof serve.message == 'object') {
 				message = JSON.stringify(serve.message);
 			} else {
@@ -141,28 +141,28 @@ service.interceptors.response.use(
 		return res;
 	},
 	(error) => {
-		// 处理响应错误
+		// Handling response errors
 		if (error.response) {
 			if (error.response.status === 401) {
 				clearAccessAfterReload();
 			}
 		}
 
-		// 对响应错误做点什么
+		// Do something about the response error
 		if (error.message.indexOf('timeout') != -1) {
-			ElMessage.error('网络超时');
+			ElMessage.error('Network timeout');
 		} else if (error.message == 'Network Error') {
-			ElMessage.error('网络连接错误');
+			ElMessage.error('Network connection error');
 		} else {
 			if (error.response.data) ElMessage.error(error.response.statusText);
-			else ElMessage.error('接口路径找不到');
+			else ElMessage.error('Interface path not found');
 		}
 
 		return Promise.reject(error);
 	}
 );
 
-// 取消指定请求
+// Cancel assignment request
 export const cancelRequest = (url: string | string[]) => {
 	const urlList = Array.isArray(url) ? url : [url];
 	for (const _url of urlList) {
@@ -171,7 +171,7 @@ export const cancelRequest = (url: string | string[]) => {
 	}
 }
 
-// 取消全部请求
+// Cancel all requests
 export const cancelAllRequest = () => {
 	for (const [_, controller] of abortControllerMap) {
 		controller.abort();
@@ -180,8 +180,8 @@ export const cancelAllRequest = () => {
 }
 
 /**
- *  参数处理
- * @param {*} params  参数
+ *  ParameterHandle
+ * @param {*} params  Parameter
  */
 export function tansParams(params: any) {
 	let result = '';
@@ -206,8 +206,8 @@ export function tansParams(params: any) {
 }
 
 /**
- * 解密 JWT token 的信息
- * @param token jwt token 字符串
+ * Decrypt JWT token information
+ * @param token jwt token String
  * @returns <any>object
  */
 export function decryptJWT(token: string): any {
@@ -217,20 +217,20 @@ export function decryptJWT(token: string): any {
 }
 
 /**
- * 将 JWT 时间戳转换成 Date
- * @description 主要针对 `exp`，`iat`，`nbf`
- * @param timestamp 时间戳
- * @returns Date 对象
+ * will JWT Timestampconvert to Date
+ * @description Mainly aimed at `exp`，`iat`，`nbf`
+ * @param timestamp Timestamp
+ * @returns Date Object
  */
 export function getJWTDate(timestamp: number): Date {
 	return new Date(timestamp * 1000);
 }
 
 /**
- * Ajax请求，如果成功返回result字段，如果不成功提示错误信息
- * @description Ajax请求
- * @config AxiosRequestConfig 请求参数
- * @returns 返回对象
+ * AjaxRequest，IfsuccessReturnresultField，If notsuccessPromptmistakeInformation
+ * @description AjaxRequest
+ * @config AxiosRequestConfig Request parameters
+ * @returns Return Object
  */
 export function request2(config: AxiosRequestConfig<any>): any {
 	return new Promise((resolve, reject) => {
@@ -252,7 +252,7 @@ export function request2(config: AxiosRequestConfig<any>): any {
 }
 
 /**
- * 使用新的令牌登录
+ * Use a new tokenLogin
  * @param accessInfo
  */
 export function reLoadLoginAccessToken(accessInfo: any) {
@@ -263,5 +263,5 @@ export function reLoadLoginAccessToken(accessInfo: any) {
 	}
 }
 
-// 导出 axios 实例
+// Export axios instance
 export default service;

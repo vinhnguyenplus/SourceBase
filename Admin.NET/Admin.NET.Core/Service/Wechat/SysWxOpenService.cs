@@ -1,13 +1,13 @@
-﻿// Admin.NET 项目的版权、商标、专利和其他相关权利均受相应法律法规的保护。使用本项目应遵守相关法律法规和许可证的要求。
+﻿// The copyright, trademark, patent and other related rights of the Admin.NET project are protected by corresponding laws and regulations. Use of this project shall comply with relevant laws, regulations and license requirements.
 //
-// 本项目主要遵循 MIT 许可证和 Apache 许可证（版本 2.0）进行分发和使用。许可证位于源代码树根目录中的 LICENSE-MIT 和 LICENSE-APACHE 文件。
+// This project is distributed and used primarily under the MIT License and the Apache License (version 2.0). The license is located in the LICENSE-MIT and LICENSE-APACHE files in the root of the source tree.
 //
-// 不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！
+// This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project!
 
 namespace Admin.NET.Core.Service;
 
 /// <summary>
-/// 微信小程序服务 🧩
+/// WeChat Mini Program Service 🧩
 /// </summary>
 [ApiDescriptionSettings(Order = 240)]
 public class SysWxOpenService : IDynamicApiController, ITransient
@@ -31,11 +31,11 @@ public class SysWxOpenService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 获取微信用户OpenId 🔖
+    /// Get WeChat user OpenId 🔖
     /// </summary>
     /// <param name="input"></param>
     [AllowAnonymous]
-    [DisplayName("获取微信用户OpenId")]
+    [DisplayName("Obtain WeChat user's OpenId")]
     public async Task<WxOpenIdOutput> GetWxOpenId([FromQuery] JsCode2SessionInput input)
     {
         var reqJsCode2Session = new SnsJsCode2SessionRequest()
@@ -43,7 +43,7 @@ public class SysWxOpenService : IDynamicApiController, ITransient
             JsCode = input.JsCode,
         };
         var resCode2Session = await _wechatApiClient.ExecuteSnsJsCode2SessionAsync(reqJsCode2Session);
-        if (resCode2Session.ErrorCode != (int)WechatReturnCodeEnum.请求成功)
+        if (resCode2Session.ErrorCode != (int)WechatReturnCodeEnum.Requestsuccess)
             throw Oops.Oh(resCode2Session.ErrorMessage + " " + resCode2Session.ErrorCode);
 
         var wxUser = await _sysWechatUserRep.GetFirstAsync(p => p.OpenId == resCode2Session.OpenId);
@@ -54,7 +54,7 @@ public class SysWxOpenService : IDynamicApiController, ITransient
                 OpenId = resCode2Session.OpenId,
                 UnionId = resCode2Session.UnionId,
                 SessionKey = resCode2Session.SessionKey,
-                PlatformType = PlatformTypeEnum.微信小程序
+                PlatformType = PlatformTypeEnum.WeChat Mini Program
             };
             wxUser = await _sysWechatUserRep.AsInsertable(wxUser).ExecuteReturnEntityAsync();
         }
@@ -70,11 +70,11 @@ public class SysWxOpenService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 获取微信用户电话号码 🔖
+    /// Get WeChat user phone number 🔖
     /// </summary>
     /// <param name="input"></param>
     [AllowAnonymous]
-    [DisplayName("获取微信用户电话号码")]
+    [DisplayName("ObtainWeChatUserTelephoneNumber")]
     public async Task<WxPhoneOutput> GetWxPhone([FromQuery] WxPhoneInput input)
     {
         var accessToken = await GetCgibinToken();
@@ -84,7 +84,7 @@ public class SysWxOpenService : IDynamicApiController, ITransient
             AccessToken = accessToken,
         };
         var resUserPhoneNumber = await _wechatApiClient.ExecuteWxaBusinessGetUserPhoneNumberAsync(reqUserPhoneNumber);
-        if (resUserPhoneNumber.ErrorCode != (int)WechatReturnCodeEnum.请求成功)
+        if (resUserPhoneNumber.ErrorCode != (int)WechatReturnCodeEnum.Requestsuccess)
             throw Oops.Oh(resUserPhoneNumber.ErrorMessage + " " + resUserPhoneNumber.ErrorCode);
 
         var wxUser = await _sysWechatUserRep.GetFirstAsync(p => p.OpenId == input.OpenId);
@@ -94,7 +94,7 @@ public class SysWxOpenService : IDynamicApiController, ITransient
             {
                 OpenId = input.OpenId,
                 Mobile = resUserPhoneNumber.PhoneInfo?.PhoneNumber,
-                PlatformType = PlatformTypeEnum.微信小程序
+                PlatformType = PlatformTypeEnum.WeChat Mini Program
             };
             wxUser = await _sysWechatUserRep.AsInsertable(wxUser).ExecuteReturnEntityAsync();
         }
@@ -111,17 +111,17 @@ public class SysWxOpenService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 微信小程序登录OpenId 🔖
+    /// WeChat applet login OpenId 🔖
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
     [AllowAnonymous]
-    [DisplayName("微信小程序登录OpenId")]
+    [DisplayName("WeChat applet login OpenId")]
     public async Task<dynamic> WxOpenIdLogin(WxOpenIdLoginInput input)
     {
         var wxUser = await _sysWechatUserRep.GetFirstAsync(u => u.OpenId == input.OpenId);
         if (wxUser == null)
-            throw Oops.Oh("微信小程序登录失败");
+            throw Oops.Oh("WeChat Mini Program login failed");
 
         var tokenExpire = await _sysConfigService.GetTokenExpire();
         return new
@@ -137,17 +137,17 @@ public class SysWxOpenService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 上传小程序头像
+    /// Upload mini program avatar
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
     [AllowAnonymous]
-    [DisplayName("上传小程序头像")]
+    [DisplayName("Upload mini program avatar")]
     public async Task<SysFile> UploadAvatar([FromForm] UploadAvatarInput input)
     {
         var wxUser = await _sysWechatUserRep.GetFirstAsync(u => u.OpenId == input.OpenId);
         if (wxUser == null)
-            throw Oops.Oh("未找到用户上传失败");
+            throw Oops.Oh("User upload failed not found");
 
         var res = await _sysFileService.UploadFile(new UploadFileInput { File = input.File, FileType = input.FileType }, "upload/wechatAvatar");
         wxUser.Avatar = res.Url;
@@ -157,7 +157,7 @@ public class SysWxOpenService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 设置小程序用户昵称
+    /// Set mini program user nickname
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
@@ -167,14 +167,14 @@ public class SysWxOpenService : IDynamicApiController, ITransient
     {
         var wxUser = await _sysWechatUserRep.GetFirstAsync(u => u.OpenId == input.OpenId);
         if (wxUser == null)
-            throw Oops.Oh("未找到用户信息设置失败");
+            throw Oops.Oh("User information not found, setting failed");
         wxUser.NickName = input.NickName;
         await _sysWechatUserRep.AsUpdateable(wxUser).IgnoreColumns(true).ExecuteCommandAsync();
         return;
     }
 
     /// <summary>
-    /// 获取小程序用户信息
+    /// Get mini program user information
     /// </summary>
     /// <param name="openid"></param>
     /// <returns></returns>
@@ -183,14 +183,14 @@ public class SysWxOpenService : IDynamicApiController, ITransient
     {
         var wxUser = await _sysWechatUserRep.GetFirstAsync(u => u.OpenId == openid);
         if (wxUser == null)
-            throw Oops.Oh("未找到用户信息获取失败");
+            throw Oops.Oh("Failed to obtain user information; user not found");
         return new { nickName = wxUser.NickName, avator = wxUser.Avatar };
     }
 
     /// <summary>
-    /// 获取订阅消息模板列表 🔖
+    /// Get subscription message template list 🔖
     /// </summary>
-    [DisplayName("获取订阅消息模板列表")]
+    [DisplayName("Get the list of subscription message templates")]
     public async Task<dynamic> GetMessageTemplateList()
     {
         var accessToken = await GetCgibinToken();
@@ -199,18 +199,18 @@ public class SysWxOpenService : IDynamicApiController, ITransient
             AccessToken = accessToken
         };
         var resTemplate = await _wechatApiClient.ExecuteWxaApiNewTemplateGetTemplateAsync(reqTemplate);
-        if (resTemplate.ErrorCode != (int)WechatReturnCodeEnum.请求成功)
+        if (resTemplate.ErrorCode != (int)WechatReturnCodeEnum.Requestsuccess)
             throw Oops.Oh(resTemplate.ErrorMessage + " " + resTemplate.ErrorCode);
 
         return resTemplate.TemplateList;
     }
 
     /// <summary>
-    /// 发送订阅消息 🔖
+    /// Send subscription message 🔖
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
-    [DisplayName("发送订阅消息")]
+    [DisplayName("Send subscription message")]
     public async Task<dynamic> SendSubscribeMessage(SendSubscribeMessageInput input)
     {
         var accessToken = await GetCgibinToken();
@@ -229,12 +229,12 @@ public class SysWxOpenService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 增加订阅消息模板 🔖
+    /// Add subscription message template 🔖
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
     [ApiDescriptionSettings(Name = "AddSubscribeMessageTemplate"), HttpPost]
-    [DisplayName("增加订阅消息模板")]
+    [DisplayName("Add subscription message template")]
     public async Task<dynamic> AddSubscribeMessageTemplate(AddSubscribeMessageTemplateInput input)
     {
         var accessToken = await GetCgibinToken();
@@ -250,18 +250,18 @@ public class SysWxOpenService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 生成带参数小程序二维码(总共生成的码数量限制为 100,000)
+    /// Generate QR codes for mini programs with parameters (the total number of codes generated is limited to 100,000)
     /// </summary>
-    /// <param name="input"> 扫码进入的小程序页面路径，最大长度 128 个字符，不能为空； eg: pages / index ? id = AY000001 </param>
+    /// <param name="input"> The mini program page path entered by scanning the QR code has a maximum length of 128 characters and cannot be empty; eg: pages / index ? id = AY000001 </param>
     /// <returns></returns>
-    [DisplayName("生成小程序二维码")]
+    [DisplayName("Generate mini program QR code")]
     [ApiDescriptionSettings(Name = "GenerateQRImage")]
     public async Task<GenerateQRImageOutput> GenerateQRImageAsync(GenerateQRImageInput input)
     {
         GenerateQRImageOutput generateQRImageOutInput = new GenerateQRImageOutput();
         if (input.PagePath.IsNullOrEmpty())
         {
-            generateQRImageOutInput.Message = $"生成失败 页面路径不能为空";
+            generateQRImageOutInput.Message = $"Generation failed. Page path cannot be empty.";
             return generateQRImageOutInput;
         }
 
@@ -284,21 +284,21 @@ public class SysWxOpenService : IDynamicApiController, ITransient
             var QRImagePath = App.GetConfig<string>("Wechat:QRImagePath");
             var relativeImgPath = string.Empty;
 
-            // 判断路径是绝对路径还是相对路径
+            // Determine whether the path is an absolute path or a relative path
             var isPathRooted = Path.IsPathRooted(QRImagePath);
             if (!isPathRooted)
             {
-                // 相对路径
+                // relative path
                 relativeImgPath = string.IsNullOrEmpty(QRImagePath) ? Path.Combine("upload", "QRImage") : QRImagePath;
                 QRImagePath = Path.Combine(App.WebHostEnvironment.WebRootPath, relativeImgPath);
             }
 
-            //判断文件存放路径是否存在
+            //Determine whether the file storage path exists
             if (!Directory.Exists(QRImagePath))
             {
                 Directory.CreateDirectory(QRImagePath);
             }
-            // 将二维码图片数据保存为文件
+            // Save QR code image data as a file
             var fileName = $"{input.ImageName.ToUpper()}.png";
             var filePath = Path.Combine(QRImagePath, fileName);
             if (File.Exists(filePath))
@@ -310,35 +310,35 @@ public class SysWxOpenService : IDynamicApiController, ITransient
             generateQRImageOutInput.Success = true;
             generateQRImageOutInput.ImgPath = filePath;
             generateQRImageOutInput.RelativeImgPath = Path.Combine(relativeImgPath, fileName);
-            generateQRImageOutInput.Message = "生成成功";
+            generateQRImageOutInput.Message = "Generated successfully";
         }
         else
         {
-            // 处理错误情况
-            generateQRImageOutInput.Message = $"生成失败 错误代码：{response.ErrorCode}  错误描述：{response.ErrorMessage}";
+            // Handle error conditions
+            generateQRImageOutInput.Message = $"Generation failed Error code: {response.ErrorCode} Error description: {response.ErrorMessage}";
         }
         return generateQRImageOutInput;
     }
 
     /// <summary>
-    /// 生成二维码(获取不受限制的小程序码)
+    /// Generate QR code (get unlimited mini program code)
     /// </summary>
-    /// <param name="input">入参</param>
+    /// <param name="input">Add ginseng</param>
     /// <returns></returns>
-    [DisplayName("生成小程序二维码")]
+    [DisplayName("Generate mini program QR code")]
     [ApiDescriptionSettings(Name = "GenerateQRImageUnlimit")]
     public async Task<GenerateQRImageOutput> GenerateQRImageUnlimitAsync(GenerateQRImageUnLimitInput input)
     {
         GenerateQRImageOutput generateQRImageOutInput = new GenerateQRImageOutput();
         if (input.PagePath.IsNullOrEmpty())
         {
-            generateQRImageOutInput.Message = $"生成失败，页面路径不能为空";
+            generateQRImageOutInput.Message = $"Generation failed, the page path cannot be empty";
             return generateQRImageOutInput;
         }
 
         if (input.Scene.Length > 32)
         {
-            generateQRImageOutInput.Message = $"生成失败，携带的参数长度超过限制";
+            generateQRImageOutInput.Message = $"Generation failed, the length of the provided parameters exceeds the limit";
             return generateQRImageOutInput;
         }
 
@@ -361,21 +361,21 @@ public class SysWxOpenService : IDynamicApiController, ITransient
             var QRImagePath = App.GetConfig<string>("Wechat:QRImagePath");
             var relativeImgPath = string.Empty;
 
-            // 判断路径是绝对路径还是相对路径
+            // Determine whether the path is an absolute path or a relative path
             var isPathRooted = Path.IsPathRooted(QRImagePath);
             if (!isPathRooted)
             {
-                // 相对路径
+                // relative path
                 relativeImgPath = string.IsNullOrEmpty(QRImagePath) ? Path.Combine("upload", "QRImageUnLimit") : QRImagePath;
                 QRImagePath = Path.Combine(App.WebHostEnvironment.WebRootPath, relativeImgPath);
             }
 
-            //判断文件存放路径是否存在
+            //Determine whether the file storage path exists
             if (!Directory.Exists(QRImagePath))
             {
                 Directory.CreateDirectory(QRImagePath);
             }
-            // 将二维码图片数据保存为文件
+            // Save QR code image data as a file
             var fileName = $"{input.ImageName.ToUpper()}.png";
             var filePath = Path.Combine(QRImagePath, fileName);
             if (File.Exists(filePath))
@@ -387,18 +387,18 @@ public class SysWxOpenService : IDynamicApiController, ITransient
             generateQRImageOutInput.Success = true;
             generateQRImageOutInput.ImgPath = filePath;
             generateQRImageOutInput.RelativeImgPath = Path.Combine(relativeImgPath, fileName);
-            generateQRImageOutInput.Message = "生成成功";
+            generateQRImageOutInput.Message = "Generated successfully";
         }
         else
         {
-            // 处理错误情况
-            generateQRImageOutInput.Message = $"生成失败 错误代码：{response.ErrorCode}  错误描述：{response.ErrorMessage}";
+            // Handle error conditions
+            generateQRImageOutInput.Message = $"Generation failed Error code: {response.ErrorCode} Error description: {response.ErrorMessage}";
         }
         return generateQRImageOutInput;
     }
 
     /// <summary>
-    /// 获取Access_token
+    /// Get Access_token
     /// </summary>
     private async Task<string> GetCgibinToken()
     {

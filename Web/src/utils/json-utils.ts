@@ -1,6 +1,6 @@
 /**
- * 尝试将字符串转对象
- * @param value 要转的字符串
+ * Try to convert a string to an object
+ * @param value The string to be converted
  * @returns {Object|String}
  */
 export const StringToObj = (value: any): any => {

@@ -5,10 +5,10 @@
 				<div class="left">
 					<div class="left-item">
 						<div class="left-item-animation left-item-num">401</div>
-						<div class="left-item-animation left-item-title">您未被授权，没有操作权限~</div>
-						<div class="left-item-animation left-item-msg">联系方式：加QQ群探讨 665452019</div>
+						<div class="left-item-animation left-item-title">You are not authorized and do not have permission to operate~</div>
+						<div class="left-item-animation left-item-msg">Contact information: Join QQ group for discussion 665452019</div>
 						<div class="left-item-animation left-item-btn">
-							<el-button type="primary" size="default" round @click="onSetAuth">重新授权</el-button>
+							<el-button type="primary" size="default" round @click="onSetAuth">Reauthorize</el-button>
 						</div>
 					</div>
 				</div>
@@ -26,9 +26,9 @@ import unauthorizedImage from '/@/assets/401.png';
 
 const onSetAuth = () => {
 	// https://gitee.com/lyt-top/vue-next-admin/issues/I5C3JS
-	// 清除缓存/token等
+	// Clear cache/token, etc.
 	Session.clear();
-	// 使用 reload 时，不需要调用 resetRoute() 重置路由
+	// When using reload, there is no need to call resetRoute() to reset the route
 	window.location.reload();
 };
 </script>

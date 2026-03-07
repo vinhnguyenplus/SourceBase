@@ -1,8 +1,8 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Admin.NET 通用权限开发平台
- * 让 .NET 开发更简单、更通用、更流行。整合最新技术，模块插件式开发，前后端分离，开箱即用。<br/><u><b><font color='FF0000'> 👮不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！</font></b></u>
+ * Admin.NET General Permission Development Platform
+ * let .NET Develop more simply、More general、More popular。wholeIn line with the latest technology，Modular Plugin-Based Development，Frontend and backendpointsLeave，Ready to use out of the box。<br/><u><b><font color='FF0000'> 👮This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project! </font></b></u>
  *
  * OpenAPI spec version: 1.0.0
  * 
@@ -23,7 +23,7 @@ import { StatusEnum } from './status-enum';
 export interface UpdatePrintInput {
 
     /**
-     * 雪花Id
+     * SnowflakeId
      *
      * @type {number}
      * @memberof UpdatePrintInput
@@ -31,7 +31,7 @@ export interface UpdatePrintInput {
     id?: number;
 
     /**
-     * 创建时间
+     * Creation Time
      *
      * @type {Date}
      * @memberof UpdatePrintInput
@@ -39,7 +39,7 @@ export interface UpdatePrintInput {
     createTime?: Date;
 
     /**
-     * 更新时间
+     * Update Time
      *
      * @type {Date}
      * @memberof UpdatePrintInput
@@ -47,7 +47,7 @@ export interface UpdatePrintInput {
     updateTime?: Date | null;
 
     /**
-     * 创建者Id
+     * CreatorId
      *
      * @type {number}
      * @memberof UpdatePrintInput
@@ -55,7 +55,7 @@ export interface UpdatePrintInput {
     createUserId?: number | null;
 
     /**
-     * 创建者姓名
+     * Creator name
      *
      * @type {string}
      * @memberof UpdatePrintInput
@@ -63,7 +63,7 @@ export interface UpdatePrintInput {
     createUserName?: string | null;
 
     /**
-     * 修改者Id
+     * Modifier ID
      *
      * @type {number}
      * @memberof UpdatePrintInput
@@ -71,7 +71,7 @@ export interface UpdatePrintInput {
     updateUserId?: number | null;
 
     /**
-     * 修改者姓名
+     * Modifier name
      *
      * @type {string}
      * @memberof UpdatePrintInput
@@ -79,7 +79,7 @@ export interface UpdatePrintInput {
     updateUserName?: string | null;
 
     /**
-     * 租户Id
+     * Tenant ID
      *
      * @type {number}
      * @memberof UpdatePrintInput
@@ -87,7 +87,7 @@ export interface UpdatePrintInput {
     tenantId?: number | null;
 
     /**
-     * 打印模板
+     * Print template
      *
      * @type {string}
      * @memberof UpdatePrintInput
@@ -101,7 +101,7 @@ export interface UpdatePrintInput {
     printType: PrintTypeEnum;
 
     /**
-     * 客户端服务地址
+     * Client service address
      *
      * @type {string}
      * @memberof UpdatePrintInput
@@ -109,7 +109,7 @@ export interface UpdatePrintInput {
     clientServiceAddress?: string | null;
 
     /**
-     * 打印参数
+     * Print parameters
      *
      * @type {string}
      * @memberof UpdatePrintInput
@@ -117,7 +117,7 @@ export interface UpdatePrintInput {
     printParam?: string | null;
 
     /**
-     * 排序
+     * Sort
      *
      * @type {number}
      * @memberof UpdatePrintInput
@@ -131,7 +131,7 @@ export interface UpdatePrintInput {
     status?: StatusEnum;
 
     /**
-     * 备注
+     * Remarks
      *
      * @type {string}
      * @memberof UpdatePrintInput
@@ -139,7 +139,7 @@ export interface UpdatePrintInput {
     remark?: string | null;
 
     /**
-     * 打印预览测试数据
+     * Print Preview Test Data
      *
      * @type {string}
      * @memberof UpdatePrintInput
@@ -147,7 +147,7 @@ export interface UpdatePrintInput {
     printDataDemo?: string | null;
 
     /**
-     * 名称
+     * name
      *
      * @type {string}
      * @memberof UpdatePrintInput

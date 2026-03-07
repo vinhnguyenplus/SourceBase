@@ -1,31 +1,31 @@
 import { markRaw } from 'vue';
-// 定义组件类型
+// Define component type
 type Component = any;
 
 const resultComps: Record<string, Component> = {};
 
-// 要排除的组件名称数组
+// Array of component names to exclude
 const excludeComponents = ['scheduleEdit'];
 
-// 使用 import.meta.glob 动态导入当前目录中的所有 .vue 文件，急切导入
+// Use import.meta.glob to dynamically import all .vue files in the current directory, eager import
 const requireComponent = import.meta.glob('./*.vue', { eager: true });
 // console.log(requireComponent);
 
 Object.keys(requireComponent).forEach((fileName: string) => {
-	// 处理文件名，去掉开头的 './' 和结尾的文件扩展名
+	// Process the file name, remove the leading './' and the trailing file extension
 	const componentName = fileName.replace(/^\.\/(.*)\.\w+$/, '$1');
 
-	// 如果组件名称在排除数组中，跳过导入
+	// Skip import if component name is in exclude array
 	if (excludeComponents.includes(componentName)) {
 		return;
 	}
 
-	// 确保模块导出存在并且是默认导出
+	// Make sure the module export exists and is the default export
 	const componentModule = requireComponent[fileName] as { default: Component };
 
-	// 将组件添加到 resultComps 中，使用处理后的文件名作为键
+	// Add component to resultComps, using processed filename as key
 	resultComps[componentName] = componentModule.default;
 });
 
-// 标记 resultComps 为原始对象，避免其被设为响应式
+// Mark resultComps as a primitive object to avoid making it reactive
 export default markRaw(resultComps);

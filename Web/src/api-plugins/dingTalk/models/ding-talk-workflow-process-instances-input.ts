@@ -1,8 +1,8 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * 钉钉开放平台
- * 集成钉钉开放平台<br/><u><b><font color='FF0000'> 👮不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！</font></b></u>
+ * DingTalkOpen Platform
+ * IntegrationDingTalkOpen Platform<br/><u><b><font color='FF0000'> 👮This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project! </font></b></u>
  *
  * OpenAPI spec version: 1.0.0
  * 
@@ -24,7 +24,7 @@ import { TargetSelectActioner } from './target-select-actioner';
 export interface DingTalkWorkflowProcessInstancesInput {
 
     /**
-     * 发起人用户ID
+     * FounderUser ID
      *
      * @type {string}
      * @memberof DingTalkWorkflowProcessInstancesInput
@@ -32,7 +32,7 @@ export interface DingTalkWorkflowProcessInstancesInput {
     originatorUserId?: string | null;
 
     /**
-     * 审批模板的流程编码
+     * ApprovalTemplateofProcessEncoding
      *
      * @type {string}
      * @memberof DingTalkWorkflowProcessInstancesInput
@@ -40,7 +40,7 @@ export interface DingTalkWorkflowProcessInstancesInput {
     processCode?: string | null;
 
     /**
-     * 部门ID
+     * DepartmentID
      *
      * @type {number}
      * @memberof DingTalkWorkflowProcessInstancesInput
@@ -48,7 +48,7 @@ export interface DingTalkWorkflowProcessInstancesInput {
     deptId?: number;
 
     /**
-     * 微应用AgentId
+     * Micro-applicationAgentId
      *
      * @type {number}
      * @memberof DingTalkWorkflowProcessInstancesInput
@@ -56,7 +56,7 @@ export interface DingTalkWorkflowProcessInstancesInput {
     microappAgentId?: number;
 
     /**
-     * 审批人列表（支持多节点）
+     * List of approvers（Supports multiple nodes）
      *
      * @type {Array<Approver>}
      * @memberof DingTalkWorkflowProcessInstancesInput
@@ -64,7 +64,7 @@ export interface DingTalkWorkflowProcessInstancesInput {
     approvers?: Array<Approver> | null;
 
     /**
-     * 抄送人列表
+     * CC List
      *
      * @type {Array<string>}
      * @memberof DingTalkWorkflowProcessInstancesInput
@@ -72,7 +72,7 @@ export interface DingTalkWorkflowProcessInstancesInput {
     ccList?: Array<string> | null;
 
     /**
-     * 抄送位置：START（开始），MIDDLE（中间），END（结束）
+     * CC Location：START（Start），MIDDLE（inspace），END（end）
      *
      * @type {string}
      * @memberof DingTalkWorkflowProcessInstancesInput
@@ -80,7 +80,7 @@ export interface DingTalkWorkflowProcessInstancesInput {
     ccPosition?: string | null;
 
     /**
-     * 目标动态选择办理人（用于会签或或签等场景）
+     * Dynamically select the handler for the target（For scenarios such as joint signing or multiple approvals）
      *
      * @type {Array<TargetSelectActioner>}
      * @memberof DingTalkWorkflowProcessInstancesInput
@@ -88,7 +88,7 @@ export interface DingTalkWorkflowProcessInstancesInput {
     targetSelectActioners?: Array<TargetSelectActioner> | null;
 
     /**
-     * 表单组件值列表
+     * formgrouppiecevalueList
      *
      * @type {Array<FormComponentValue>}
      * @memberof DingTalkWorkflowProcessInstancesInput
@@ -96,7 +96,7 @@ export interface DingTalkWorkflowProcessInstancesInput {
     formComponentValues?: Array<FormComponentValue> | null;
 
     /**
-     * 请求ID，用于幂等控制
+     * RequestID，Used for idempotency control
      *
      * @type {string}
      * @memberof DingTalkWorkflowProcessInstancesInput

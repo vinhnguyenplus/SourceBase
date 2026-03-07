@@ -48,7 +48,7 @@ class EndNodeModel extends CircleNodeModel {
         super.initNodeData(data)
         this.r = 20
     }
-    // 自定义锚点样式
+    // Custom anchor style
     getAnchorStyle() {
         const style = super.getAnchorStyle()
         style.hover.r = 8
@@ -56,7 +56,7 @@ class EndNodeModel extends CircleNodeModel {
         style.hover.stroke = 'rgb(24, 125, 255)'
         return style
     }
-    // 自定义节点outline
+    // Custom node outline
     getOutlineStyle() {
         const style = super.getOutlineStyle()
         style.stroke = '#88f'
@@ -65,7 +65,7 @@ class EndNodeModel extends CircleNodeModel {
     getConnectedSourceRules() {
         const rules = super.getConnectedSourceRules()
         const notAsTarget = {
-            message: '终止节点不能作为连线的起点',
+            message: 'The terminal node cannot be used as the starting point of a connection.',
             validate: () => false
         }
         rules.push(notAsTarget)

@@ -1,8 +1,8 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Admin.NET 通用权限开发平台
- * 让 .NET 开发更简单、更通用、更流行。整合最新技术，模块插件式开发，前后端分离，开箱即用。<br/><u><b><font color='FF0000'> 👮不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！</font></b></u>
+ * Admin.NET General Permission Development Platform
+ * let .NET Develop more simply、More general、More popular。wholeIn line with the latest technology，Modular Plugin-Based Development，Frontend and backendpointsLeave，Ready to use out of the box。<br/><u><b><font color='FF0000'> 👮This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project! </font></b></u>
  *
  * OpenAPI spec version: 1.0.0
  * 
@@ -16,7 +16,7 @@ import { Filter } from './filter';
 import { Search } from './search';
 import { TableUniqueConfigItem } from './table-unique-config-item';
  /**
- * 代码生成参数类
+ * code generationParameterClass
  *
  * @export
  * @interface CodeGenInput
@@ -30,7 +30,7 @@ export interface CodeGenInput {
     search?: Search;
 
     /**
-     * 模糊查询关键字
+     * BlurryQueryKeywords
      *
      * @type {string}
      * @memberof CodeGenInput
@@ -44,7 +44,7 @@ export interface CodeGenInput {
     filter?: Filter;
 
     /**
-     * 当前页码
+     * Current page number
      *
      * @type {number}
      * @memberof CodeGenInput
@@ -52,7 +52,7 @@ export interface CodeGenInput {
     page?: number;
 
     /**
-     * 页码容量
+     * Page capacity
      *
      * @type {number}
      * @memberof CodeGenInput
@@ -60,7 +60,7 @@ export interface CodeGenInput {
     pageSize?: number;
 
     /**
-     * 排序字段
+     * SortField
      *
      * @type {string}
      * @memberof CodeGenInput
@@ -68,7 +68,7 @@ export interface CodeGenInput {
     field?: string | null;
 
     /**
-     * 排序方向
+     * SortDirection
      *
      * @type {string}
      * @memberof CodeGenInput
@@ -76,7 +76,7 @@ export interface CodeGenInput {
     order?: string | null;
 
     /**
-     * 降序排序
+     * Descending orderSort
      *
      * @type {string}
      * @memberof CodeGenInput
@@ -84,7 +84,7 @@ export interface CodeGenInput {
     descStr?: string | null;
 
     /**
-     * 作者姓名
+     * Author's Name
      *
      * @type {string}
      * @memberof CodeGenInput
@@ -92,7 +92,7 @@ export interface CodeGenInput {
     authorName?: string | null;
 
     /**
-     * 类名
+     * Class name
      *
      * @type {string}
      * @memberof CodeGenInput
@@ -100,7 +100,7 @@ export interface CodeGenInput {
     className?: string | null;
 
     /**
-     * 是否移除表前缀
+     * Whether to remove the table prefix
      *
      * @type {string}
      * @memberof CodeGenInput
@@ -108,7 +108,7 @@ export interface CodeGenInput {
     tablePrefix?: string | null;
 
     /**
-     * 库定位器名
+     * Library Locator Name
      *
      * @type {string}
      * @memberof CodeGenInput
@@ -116,7 +116,7 @@ export interface CodeGenInput {
     configId?: string | null;
 
     /**
-     * 数据库名(保留字段)
+     * DataLibrary name(ReserveField)
      *
      * @type {string}
      * @memberof CodeGenInput
@@ -124,7 +124,7 @@ export interface CodeGenInput {
     dbName?: string | null;
 
     /**
-     * 数据库类型
+     * Database type
      *
      * @type {string}
      * @memberof CodeGenInput
@@ -132,7 +132,7 @@ export interface CodeGenInput {
     dbType?: string | null;
 
     /**
-     * 数据库链接
+     * Database link
      *
      * @type {string}
      * @memberof CodeGenInput
@@ -140,7 +140,7 @@ export interface CodeGenInput {
     connectionString?: string | null;
 
     /**
-     * 生成方式
+     * Generation method
      *
      * @type {string}
      * @memberof CodeGenInput
@@ -148,7 +148,7 @@ export interface CodeGenInput {
     generateType?: string | null;
 
     /**
-     * 数据库表名
+     * Database table name
      *
      * @type {string}
      * @memberof CodeGenInput
@@ -156,7 +156,7 @@ export interface CodeGenInput {
     tableName?: string | null;
 
     /**
-     * 命名空间
+     * namespace
      *
      * @type {string}
      * @memberof CodeGenInput
@@ -164,7 +164,7 @@ export interface CodeGenInput {
     nameSpace?: string | null;
 
     /**
-     * 业务名（业务代码包名称）
+     * Business Name（Business code packagename）
      *
      * @type {string}
      * @memberof CodeGenInput
@@ -172,7 +172,7 @@ export interface CodeGenInput {
     busName?: string | null;
 
     /**
-     * 功能名（数据库表名称）
+     * Function Name（Database table namecall）
      *
      * @type {string}
      * @memberof CodeGenInput
@@ -180,7 +180,7 @@ export interface CodeGenInput {
     tableComment?: string | null;
 
     /**
-     * 表唯一字段列表
+     * table onlyoneFieldList
      *
      * @type {Array<TableUniqueConfigItem>}
      * @memberof CodeGenInput
@@ -188,7 +188,7 @@ export interface CodeGenInput {
     tableUniqueList?: Array<TableUniqueConfigItem> | null;
 
     /**
-     * 菜单应用分类（应用编码）
+     * menuApplicationpointsClass（ApplicationEncoding）
      *
      * @type {string}
      * @memberof CodeGenInput
@@ -196,7 +196,7 @@ export interface CodeGenInput {
     menuApplication?: string | null;
 
     /**
-     * 是否生成菜单
+     * Generate menu?
      *
      * @type {boolean}
      * @memberof CodeGenInput
@@ -204,7 +204,7 @@ export interface CodeGenInput {
     generateMenu?: boolean;
 
     /**
-     * 菜单父级
+     * menuParent
      *
      * @type {number}
      * @memberof CodeGenInput
@@ -212,7 +212,7 @@ export interface CodeGenInput {
     menuPid?: number | null;
 
     /**
-     * 菜单图标
+     * Menu icon
      *
      * @type {string}
      * @memberof CodeGenInput
@@ -220,7 +220,7 @@ export interface CodeGenInput {
     menuIcon?: string | null;
 
     /**
-     * 页面目录
+     * Page directory
      *
      * @type {string}
      * @memberof CodeGenInput
@@ -228,7 +228,7 @@ export interface CodeGenInput {
     pagePath?: string | null;
 
     /**
-     * 支持打印类型
+     * Supported print types
      *
      * @type {string}
      * @memberof CodeGenInput
@@ -236,7 +236,7 @@ export interface CodeGenInput {
     printType?: string | null;
 
     /**
-     * 打印模版名称
+     * Print Template Name
      *
      * @type {string}
      * @memberof CodeGenInput

@@ -1,8 +1,8 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Admin.NET 通用权限开发平台
- * 让 .NET 开发更简单、更通用、更流行。整合最新技术，模块插件式开发，前后端分离，开箱即用。<br/><u><b><font color='FF0000'> 👮不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！</font></b></u>
+ * Admin.NET General Permission Development Platform
+ * let .NET Develop more simply、More general、More popular。wholeIn line with the latest technology，Modular Plugin-Based Development，Frontend and backendpointsLeave，Ready to use out of the box。<br/><u><b><font color='FF0000'> 👮This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project! </font></b></u>
  *
  * OpenAPI spec version: 1.0.0
  * 
@@ -17,7 +17,7 @@ import { MenuTypeEnum } from './menu-type-enum';
 import { StatusEnum } from './status-enum';
 import { SysMenuMeta } from './sys-menu-meta';
  /**
- * 系统菜单返回结果
+ * systemmenuReturn result
  *
  * @export
  * @interface MenuOutput
@@ -33,7 +33,7 @@ export interface MenuOutput {
     id?: number;
 
     /**
-     * 父Id
+     * Parent ID
      *
      * @type {number}
      * @memberof MenuOutput
@@ -47,7 +47,7 @@ export interface MenuOutput {
     type?: MenuTypeEnum;
 
     /**
-     * 名称
+     * name
      *
      * @type {string}
      * @memberof MenuOutput
@@ -55,7 +55,7 @@ export interface MenuOutput {
     name?: string | null;
 
     /**
-     * 路由地址
+     * Routing Address
      *
      * @type {string}
      * @memberof MenuOutput
@@ -63,7 +63,7 @@ export interface MenuOutput {
     path?: string | null;
 
     /**
-     * 组件路径
+     * component path
      *
      * @type {string}
      * @memberof MenuOutput
@@ -71,7 +71,7 @@ export interface MenuOutput {
     component?: string | null;
 
     /**
-     * 权限标识
+     * Permission Identifier
      *
      * @type {string}
      * @memberof MenuOutput
@@ -79,7 +79,7 @@ export interface MenuOutput {
     permission?: string | null;
 
     /**
-     * 重定向
+     * Redirect
      *
      * @type {string}
      * @memberof MenuOutput
@@ -87,7 +87,7 @@ export interface MenuOutput {
     redirect?: string | null;
 
     /**
-     * 排序
+     * Sort
      *
      * @type {number}
      * @memberof MenuOutput
@@ -101,7 +101,7 @@ export interface MenuOutput {
     status?: StatusEnum;
 
     /**
-     * 备注
+     * Remarks
      *
      * @type {string}
      * @memberof MenuOutput
@@ -109,7 +109,7 @@ export interface MenuOutput {
     remark?: string | null;
 
     /**
-     * 创建时间
+     * Creation Time
      *
      * @type {Date}
      * @memberof MenuOutput
@@ -117,7 +117,7 @@ export interface MenuOutput {
     createTime?: Date;
 
     /**
-     * 更新时间
+     * Update Time
      *
      * @type {Date}
      * @memberof MenuOutput
@@ -125,7 +125,7 @@ export interface MenuOutput {
     updateTime?: Date;
 
     /**
-     * 创建者姓名
+     * Creator name
      *
      * @type {string}
      * @memberof MenuOutput
@@ -133,7 +133,7 @@ export interface MenuOutput {
     createUserName?: string | null;
 
     /**
-     * 修改者姓名
+     * Modifier name
      *
      * @type {string}
      * @memberof MenuOutput
@@ -147,7 +147,7 @@ export interface MenuOutput {
     meta?: SysMenuMeta;
 
     /**
-     * 菜单子项
+     * menuchilditem
      *
      * @type {Array<MenuOutput>}
      * @memberof MenuOutput

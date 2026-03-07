@@ -41,7 +41,7 @@ export function urlToBase64(url: string, mineType?: string): Promise<string> {
 }
 
 /**
- * File转Base64
+ * FileTurnBase64
  * @param file
  */
 export function fileToBase64(file: Blob) {
@@ -54,10 +54,10 @@ export function fileToBase64(file: Blob) {
 }
 
 /**
- * Base64转File
+ * Base64TurnFile
  * @param dataURL   {String}  base64
- * @param fileName	{String}  文件名
- * @param mimeType	{String}  [可选]文件类型，默认为base64中的类型
+ * @param fileName	{String}  File name
+ * @param mimeType	{String}  [Optional]File type，Defaultforbase64inofType
  * @returns {File}
  */
 export function base64ToFile(dataURL: string, fileName: string, mimeType = null) {
@@ -73,10 +73,10 @@ export function base64ToFile(dataURL: string, fileName: string, mimeType = null)
 }
 
 /**
- * Blob转File
+ * BlobTurnFile
  * @param blob     {Blob}   blob
- * @param fileName {String} 文件名
- * @param mimeType {String} 文件类型
+ * @param fileName {String} File name
+ * @param mimeType {String} File type
  * @return {File}
  */
 export function blobToFile(blob: Blob, fileName: string, mimeType?: string) {

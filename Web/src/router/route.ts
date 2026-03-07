@@ -1,22 +1,22 @@
 import { RouteRecordRaw } from 'vue-router';
 
 /**
- * 建议：路由 path 路径与文件夹名称相同，找文件可浏览器地址找，方便定位文件位置
+ * Suggestion：Router path Paths and FoldersnameSame，Can look for the fileBrowseraddresslook for，Convenient for locating the file
  *
- * 路由meta对象参数说明
+ * RoutermetaObjectParameterillustrate
  * meta: {
- *      title:          菜单栏及 tagsView 栏、菜单搜索名称（国际化）
- *      isLink：        是否超链接菜单，开启外链条件，`1、isLink: 链接地址不为空 2、isIframe:false`
- *      isHide：        是否隐藏此路由
- *      isKeepAlive：   是否缓存组件状态
- *      isAffix：       是否固定在 tagsView 栏上
- *      isIframe：      是否内嵌窗口，开启条件，`1、isIframe:true 2、isLink：链接地址不为空`
- *      roles：         当前路由权限标识，取角色管理。控制路由显示、隐藏。超级管理员：admin 普通角色：common
- *      icon：          菜单、tagsView 图标，阿里：加 `iconfont xxx`，fontawesome：加 `fa xxx`
+ *      title:          menuRailings and tagsView rail、Menu searchname（Internationalization）
+ *      isLink：        YesnoHyperlinkmenu，Conditions for enabling external links，`1. isLink: The link address is not empty 2. isIframe: false`
+ *      isHide：        Whether to hideThis route
+ *      isKeepAlive：   Whether to cachegrouppiecestate
+ *      isAffix：       Is it fixed?at/in/on tagsView On the railing
+ *      isIframe：      YesnoEmbeddedWindow，Activation Conditions，`1. isIframe: true 2. isLink: the link address is not empty`
+ *      roles：         Current RoutePermission Identifier，takerole management。Control routingDisplay、hide。super administrator：admin OrdinaryRole：common
+ *      icon：          menu、tagsView icon，Ali：Add `iconfont xxx`，fontawesome：Add `fa xxx`
  * }
  */
 
-// 扩展 RouteMeta 接口
+// Extend RouteMeta interface
 declare module 'vue-router' {
 	interface RouteMeta {
 		title?: string;
@@ -32,11 +32,11 @@ declare module 'vue-router' {
 }
 
 /**
- * 定义动态路由
- * 前端添加路由，请在顶级节点的 `children 数组` 里添加
- * @description 未开启 isRequestRoutes 为 true 时使用（前端控制路由），开启时第一个顶级 children 的路由将被替换成接口请求回来的路由数据
- * @description 各字段请查看 `/@/views/system/menu/component/addMenu.vue 下的 ruleForm`
- * @returns 返回路由菜单数据
+ * Define dynamic routing
+ * FrontendAdd toRouter，Please inTopof the node `children array` insideAdd to
+ * @description Not yetTurn on isRequestRoutes for true timeUse（Frontend routing control），Turn ontimeNumberonepieceTop children The route will be replaced with the route returned by the interface requestData
+ * @description eachFieldPleaseView `ruleForm under /@/views/system/menu/component/addMenu.vue`
+ * @returns Return routemenuData
  */
 export const dynamicRoutes: Array<RouteRecordRaw> = [
 	{
@@ -54,7 +54,7 @@ export const dynamicRoutes: Array<RouteRecordRaw> = [
 		name: 'jobDashboard',
 		component: () => import('/@/views/system/job/dashboard.vue'),
 		meta: {
-			title: '任务看板',
+			title: 'task board',
 			isLink: window.__env__.VITE_API_URL + '/schedule',
 			isHide: true,
 			isKeepAlive: true,
@@ -68,7 +68,7 @@ export const dynamicRoutes: Array<RouteRecordRaw> = [
 		name: 'databaseVisual',
 		component: () => import('/@/views/system/database/component/visualTable.vue'),
 		meta: {
-			title: '库表可视化',
+			title: 'Database table visualization',
 			isHide: true,
 			isKeepAlive: true,
 			isAffix: false,
@@ -79,8 +79,8 @@ export const dynamicRoutes: Array<RouteRecordRaw> = [
 ];
 
 /**
- * 定义404、401界面
- * @link 参考：https://next.router.vuejs.org/zh/guide/essentials/history-mode.html#netlify
+ * Definition404、401interface
+ * @link Reference：https://next.router.vuejs.org/zh/guide/essentials/history-mode.html#netlify
  */
 export const notFoundAndNoPower = [
 	{
@@ -88,7 +88,7 @@ export const notFoundAndNoPower = [
 		name: 'notFound',
 		component: () => import('/@/views/error/404.vue'),
 		meta: {
-			title: '找不到此页面',
+			title: 'This page cannot be found',
 			isHide: true,
 		},
 	},
@@ -97,17 +97,17 @@ export const notFoundAndNoPower = [
 		name: 'noPower',
 		component: () => import('/@/views/error/401.vue'),
 		meta: {
-			title: '没有权限',
+			title: 'No permission',
 			isHide: true,
 		},
 	},
 ];
 
 /**
- * 定义静态路由（默认路由）
- * 此路由不要动，前端添加路由的话，请在 `dynamicRoutes 数组` 中添加
- * @description 前端控制直接改 dynamicRoutes 中的路由，后端控制不需要修改，请求接口路由数据时，会覆盖 dynamicRoutes 第一个顶级 children 的内容（全屏，不包含 layout 中的路由出口）
- * @returns 返回路由菜单数据
+ * Define static route（DefaultRouter）
+ * Do not touch this router，FrontendAdd toAs for the router，Please in `dynamicRoutes array` inAdd to
+ * @description Directly modify through front-end control dynamicRoutes inthe route，Backend controlunnecessaryModify，Request interface routeDatatime，will overwrite dynamicRoutes NumberonepieceTop children ofcontent（Full screen，Noinclude layout inthe routing exit）
+ * @returns Return routemenuData
  */
 export const staticRoutes: Array<RouteRecordRaw> = [
 	{
@@ -115,7 +115,7 @@ export const staticRoutes: Array<RouteRecordRaw> = [
 		name: 'login',
 		component: () => import('/@/views/login/index.vue'),
 		meta: {
-			title: '登录',
+			title: 'Login',
 			isPublic: true,
 		},
 	},{
@@ -123,13 +123,13 @@ export const staticRoutes: Array<RouteRecordRaw> = [
 		name: '$callTel',
 		component: () => import('/@/components/callTel/index.vue'),
 		meta: {
-			title: '拨号',
+			title: 'Dial',
 			isPublic: true,
 		},
 	},
 	/**
-	 * 提示：写在这里的为全屏界面，不建议写在这里
-	 * 请写在 `dynamicRoutes` 路由数组中
+	 * Prompt：What is written here is for full-screen mode，It is not recommended to write here
+	 * Please write on `dynamicRoutes` Number of routesgroupin
 	 */
 	// {
 	// 	path: '/visualizingDemo1',

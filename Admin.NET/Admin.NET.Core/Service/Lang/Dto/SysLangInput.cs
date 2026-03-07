@@ -1,413 +1,413 @@
-﻿// Admin.NET 项目的版权、商标、专利和其他相关权利均受相应法律法规的保护。使用本项目应遵守相关法律法规和许可证的要求。
+﻿// The copyright, trademark, patent and other related rights of the Admin.NET project are protected by corresponding laws and regulations. Use of this project shall comply with relevant laws, regulations and license requirements.
 //
-// 本项目主要遵循 MIT 许可证和 Apache 许可证（版本 2.0）进行分发和使用。许可证位于源代码树根目录中的 LICENSE-MIT 和 LICENSE-APACHE 文件。
+// This project is distributed and used primarily under the MIT License and the Apache License (version 2.0). The license is located in the LICENSE-MIT and LICENSE-APACHE files in the root of the source tree.
 //
-// 不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！
+// This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project!
 
 namespace Admin.NET.Core;
 
 /// <summary>
-/// 语言基础输入参数
+/// Language basic input parameters
 /// </summary>
 public class SysLangBaseInput
 {
     /// <summary>
-    /// 主键Id
+    /// Primary keyId
     /// </summary>
     public virtual long? Id { get; set; }
 
     /// <summary>
-    /// 语言名称
+    /// Language name
     /// </summary>
-    [Required(ErrorMessage = "语言名称不能为空")]
+    [Required(ErrorMessage = "Language name cannot be empty")]
     public virtual string Name { get; set; }
 
     /// <summary>
-    /// 语言代码
+    /// language code
     /// </summary>
-    [Required(ErrorMessage = "语言代码不能为空")]
+    [Required(ErrorMessage = "Language code cannot be empty")]
     public virtual string Code { get; set; }
 
     /// <summary>
-    /// ISO 语言代码
+    /// ISO language code
     /// </summary>
-    [Required(ErrorMessage = "ISO 语言代码不能为空")]
+    [Required(ErrorMessage = "ISO Language code cannot be empty")]
     public virtual string IsoCode { get; set; }
 
     /// <summary>
-    /// URL 语言代码
+    /// URL language code
     /// </summary>
-    [Required(ErrorMessage = "URL 语言代码不能为空")]
+    [Required(ErrorMessage = "The URL language code cannot be empty")]
     public virtual string UrlCode { get; set; }
 
     /// <summary>
-    /// 书写方向
+    /// writing direction
     /// </summary>
-    [Required(ErrorMessage = "书写方向不能为空")]
+    [Required(ErrorMessage = "Writing direction cannot be empty")]
     public virtual DirectionEnum Direction { get; set; }
 
     /// <summary>
-    /// 日期格式
+    /// date format
     /// </summary>
-    [Required(ErrorMessage = "日期格式不能为空")]
+    [Required(ErrorMessage = "Date format cannot be empty")]
     public virtual string DateFormat { get; set; }
 
     /// <summary>
-    /// 时间格式
+    /// time format
     /// </summary>
-    [Required(ErrorMessage = "时间格式不能为空")]
+    [Required(ErrorMessage = "time formatcannot benull")]
     public virtual string TimeFormat { get; set; }
 
     /// <summary>
-    /// 每周起始日
+    /// start day of week
     /// </summary>
-    [Required(ErrorMessage = "每周起始日不能为空")]
+    [Required(ErrorMessage = "Weekly start day cannot be empty")]
     public virtual WeekEnum? WeekStart { get; set; }
 
     /// <summary>
-    /// 分组符号
+    /// Grouping symbols
     /// </summary>
-    [Required(ErrorMessage = "分组符号不能为空")]
+    [Required(ErrorMessage = "Group symbol cannot be empty")]
     public virtual string Grouping { get; set; }
 
     /// <summary>
-    /// 小数点符号
+    /// decimal point symbol
     /// </summary>
-    [Required(ErrorMessage = "小数点符号不能为空")]
+    [Required(ErrorMessage = "The decimal point symbol cannot be empty")]
     public virtual string DecimalPoint { get; set; }
 
     /// <summary>
-    /// 千分位分隔符
+    /// Thousand separator
     /// </summary>
     public virtual string? ThousandsSep { get; set; }
 
     /// <summary>
-    /// 是否启用
+    /// Whether to enable
     /// </summary>
-    [Required(ErrorMessage = "是否启用不能为空")]
+    [Required(ErrorMessage = "Whether to enable cannot be empty")]
     public virtual bool? Active { get; set; }
 }
 
 /// <summary>
-/// 多语言分页查询输入参数
+/// Multi-language paging query input parameters
 /// </summary>
 public class PageSysLangInput : BasePageInput
 {
     /// <summary>
-    /// 语言名称
+    /// Language name
     /// </summary>
     public string Name { get; set; }
 
     /// <summary>
-    /// 语言代码
+    /// language code
     /// </summary>
     public string Code { get; set; }
 
     /// <summary>
-    /// ISO 语言代码
+    /// ISO language code
     /// </summary>
     public string IsoCode { get; set; }
 
     /// <summary>
-    /// URL 语言代码
+    /// URL language code
     /// </summary>
     public string UrlCode { get; set; }
 
     /// <summary>
-    /// 是否启用
+    /// Whether to enable
     /// </summary>
     public bool? Active { get; set; }
 
     /// <summary>
-    /// 选中主键列表
+    /// Select primary key list
     /// </summary>
     public List<long> SelectKeyList { get; set; }
 }
 
 /// <summary>
-/// 多语言增加输入参数
+/// Add input parameters for multiple languages
 /// </summary>
 public class AddSysLangInput
 {
     /// <summary>
-    /// 语言名称
+    /// Language name
     /// </summary>
-    [Required(ErrorMessage = "语言名称不能为空")]
-    [MaxLength(255, ErrorMessage = "语言名称字符长度不能超过255")]
+    [Required(ErrorMessage = "Language name cannot be empty")]
+    [MaxLength(255, ErrorMessage = "The language name character length cannot exceed 255")]
     public string Name { get; set; }
 
     /// <summary>
-    /// 语言代码
+    /// language code
     /// </summary>
-    [Required(ErrorMessage = "语言代码不能为空")]
-    [MaxLength(255, ErrorMessage = "语言代码字符长度不能超过255")]
+    [Required(ErrorMessage = "Language code cannot be empty")]
+    [MaxLength(255, ErrorMessage = "The language code character length cannot exceed 255")]
     public string Code { get; set; }
 
     /// <summary>
-    /// ISO 语言代码
+    /// ISO language code
     /// </summary>
-    [Required(ErrorMessage = "ISO 语言代码不能为空")]
-    [MaxLength(255, ErrorMessage = "ISO 语言代码字符长度不能超过255")]
+    [Required(ErrorMessage = "ISO Language code cannot be empty")]
+    [MaxLength(255, ErrorMessage = "ISO language code character length cannot exceed 255")]
     public string IsoCode { get; set; }
 
     /// <summary>
-    /// URL 语言代码
+    /// URL language code
     /// </summary>
-    [Required(ErrorMessage = "URL 语言代码不能为空")]
-    [MaxLength(255, ErrorMessage = "URL 语言代码字符长度不能超过255")]
+    [Required(ErrorMessage = "The URL language code cannot be empty")]
+    [MaxLength(255, ErrorMessage = "URL language code character length cannot exceed 255")]
     public string UrlCode { get; set; }
 
     /// <summary>
-    /// 书写方向
+    /// writing direction
     /// </summary>
-    [Required(ErrorMessage = "书写方向不能为空")]
+    [Required(ErrorMessage = "Writing direction cannot be empty")]
     public DirectionEnum Direction { get; set; }
 
     /// <summary>
-    /// 日期格式
+    /// date format
     /// </summary>
-    [Required(ErrorMessage = "日期格式不能为空")]
-    [MaxLength(255, ErrorMessage = "日期格式字符长度不能超过255")]
+    [Required(ErrorMessage = "Date format cannot be empty")]
+    [MaxLength(255, ErrorMessage = "The length of the date format characters cannot exceed 255")]
     public string DateFormat { get; set; }
 
     /// <summary>
-    /// 时间格式
+    /// time format
     /// </summary>
-    [Required(ErrorMessage = "时间格式不能为空")]
-    [MaxLength(255, ErrorMessage = "时间格式字符长度不能超过255")]
+    [Required(ErrorMessage = "time formatcannot benull")]
+    [MaxLength(255, ErrorMessage = "The length of time format characters cannot exceed 255")]
     public string TimeFormat { get; set; }
 
     /// <summary>
-    /// 每周起始日
+    /// start day of week
     /// </summary>
-    [Required(ErrorMessage = "每周起始日不能为空")]
+    [Required(ErrorMessage = "Weekly start day cannot be empty")]
     public WeekEnum? WeekStart { get; set; }
 
     /// <summary>
-    /// 分组符号
+    /// Grouping symbols
     /// </summary>
-    [Required(ErrorMessage = "分组符号不能为空")]
-    [MaxLength(255, ErrorMessage = "分组符号字符长度不能超过255")]
+    [Required(ErrorMessage = "Group symbol cannot be empty")]
+    [MaxLength(255, ErrorMessage = "The grouping symbol character length cannot exceed 255")]
     public string Grouping { get; set; }
 
     /// <summary>
-    /// 小数点符号
+    /// decimal point symbol
     /// </summary>
-    [Required(ErrorMessage = "小数点符号不能为空")]
-    [MaxLength(255, ErrorMessage = "小数点符号字符长度不能超过255")]
+    [Required(ErrorMessage = "The decimal point symbol cannot be empty")]
+    [MaxLength(255, ErrorMessage = "The length of the decimal point character cannot exceed 255")]
     public string DecimalPoint { get; set; }
 
     /// <summary>
-    /// 千分位分隔符
+    /// Thousand separator
     /// </summary>
-    [MaxLength(255, ErrorMessage = "千分位分隔符字符长度不能超过255")]
+    [MaxLength(255, ErrorMessage = "thousands separatorCharacterlengthcannot exceed255")]
     public string? ThousandsSep { get; set; }
 
     /// <summary>
-    /// 是否启用
+    /// Whether to enable
     /// </summary>
-    [Required(ErrorMessage = "是否启用不能为空")]
+    [Required(ErrorMessage = "Whether to enable cannot be empty")]
     public bool? Active { get; set; }
 }
 
 /// <summary>
-/// 多语言删除输入参数
+/// Delete input parameters in multiple languages
 /// </summary>
 public class DeleteSysLangInput
 {
     /// <summary>
-    /// 主键Id
+    /// Primary keyId
     /// </summary>
-    [Required(ErrorMessage = "主键Id不能为空")]
+    [Required(ErrorMessage = "Primary key Id cannot be empty")]
     public long? Id { get; set; }
 }
 
 /// <summary>
-/// 多语言更新输入参数
+/// Multi-language update input parameters
 /// </summary>
 public class UpdateSysLangInput
 {
     /// <summary>
-    /// 主键Id
+    /// Primary keyId
     /// </summary>
-    [Required(ErrorMessage = "主键Id不能为空")]
+    [Required(ErrorMessage = "Primary key Id cannot be empty")]
     public long? Id { get; set; }
 
     /// <summary>
-    /// 语言名称
+    /// Language name
     /// </summary>
-    [Required(ErrorMessage = "语言名称不能为空")]
-    [MaxLength(255, ErrorMessage = "语言名称字符长度不能超过255")]
+    [Required(ErrorMessage = "Language name cannot be empty")]
+    [MaxLength(255, ErrorMessage = "The language name character length cannot exceed 255")]
     public string Name { get; set; }
 
     /// <summary>
-    /// 语言代码
+    /// language code
     /// </summary>
-    [Required(ErrorMessage = "语言代码不能为空")]
-    [MaxLength(255, ErrorMessage = "语言代码字符长度不能超过255")]
+    [Required(ErrorMessage = "Language code cannot be empty")]
+    [MaxLength(255, ErrorMessage = "The language code character length cannot exceed 255")]
     public string Code { get; set; }
 
     /// <summary>
-    /// ISO 语言代码
+    /// ISO language code
     /// </summary>
-    [Required(ErrorMessage = "ISO 语言代码不能为空")]
-    [MaxLength(255, ErrorMessage = "ISO 语言代码字符长度不能超过255")]
+    [Required(ErrorMessage = "ISO Language code cannot be empty")]
+    [MaxLength(255, ErrorMessage = "ISO language code character length cannot exceed 255")]
     public string IsoCode { get; set; }
 
     /// <summary>
-    /// URL 语言代码
+    /// URL language code
     /// </summary>
-    [Required(ErrorMessage = "URL 语言代码不能为空")]
-    [MaxLength(255, ErrorMessage = "URL 语言代码字符长度不能超过255")]
+    [Required(ErrorMessage = "The URL language code cannot be empty")]
+    [MaxLength(255, ErrorMessage = "URL language code character length cannot exceed 255")]
     public string UrlCode { get; set; }
 
     /// <summary>
-    /// 书写方向
+    /// writing direction
     /// </summary>
-    [Required(ErrorMessage = "书写方向不能为空")]
+    [Required(ErrorMessage = "Writing direction cannot be empty")]
     public DirectionEnum Direction { get; set; }
 
     /// <summary>
-    /// 日期格式
+    /// date format
     /// </summary>
-    [Required(ErrorMessage = "日期格式不能为空")]
-    [MaxLength(255, ErrorMessage = "日期格式字符长度不能超过255")]
+    [Required(ErrorMessage = "Date format cannot be empty")]
+    [MaxLength(255, ErrorMessage = "The length of the date format characters cannot exceed 255")]
     public string DateFormat { get; set; }
 
     /// <summary>
-    /// 时间格式
+    /// time format
     /// </summary>
-    [Required(ErrorMessage = "时间格式不能为空")]
-    [MaxLength(255, ErrorMessage = "时间格式字符长度不能超过255")]
+    [Required(ErrorMessage = "time formatcannot benull")]
+    [MaxLength(255, ErrorMessage = "The length of time format characters cannot exceed 255")]
     public string TimeFormat { get; set; }
 
     /// <summary>
-    /// 每周起始日
+    /// start day of week
     /// </summary>
-    [Required(ErrorMessage = "每周起始日不能为空")]
+    [Required(ErrorMessage = "Weekly start day cannot be empty")]
     public WeekEnum? WeekStart { get; set; }
 
     /// <summary>
-    /// 分组符号
+    /// Grouping symbols
     /// </summary>
-    [Required(ErrorMessage = "分组符号不能为空")]
-    [MaxLength(255, ErrorMessage = "分组符号字符长度不能超过255")]
+    [Required(ErrorMessage = "Group symbol cannot be empty")]
+    [MaxLength(255, ErrorMessage = "The grouping symbol character length cannot exceed 255")]
     public string Grouping { get; set; }
 
     /// <summary>
-    /// 小数点符号
+    /// decimal point symbol
     /// </summary>
-    [Required(ErrorMessage = "小数点符号不能为空")]
-    [MaxLength(255, ErrorMessage = "小数点符号字符长度不能超过255")]
+    [Required(ErrorMessage = "The decimal point symbol cannot be empty")]
+    [MaxLength(255, ErrorMessage = "The length of the decimal point character cannot exceed 255")]
     public string DecimalPoint { get; set; }
 
     /// <summary>
-    /// 千分位分隔符
+    /// Thousand separator
     /// </summary>
-    [MaxLength(255, ErrorMessage = "千分位分隔符字符长度不能超过255")]
+    [MaxLength(255, ErrorMessage = "thousands separatorCharacterlengthcannot exceed255")]
     public string? ThousandsSep { get; set; }
 
     /// <summary>
-    /// 是否启用
+    /// Whether to enable
     /// </summary>
-    [Required(ErrorMessage = "是否启用不能为空")]
+    [Required(ErrorMessage = "Whether to enable cannot be empty")]
     public bool? Active { get; set; }
 }
 
 /// <summary>
-/// 多语言主键查询输入参数
+/// Multilingual primary key query input parameters
 /// </summary>
 public class QueryByIdSysLangInput : DeleteSysLangInput
 {
 }
 
 /// <summary>
-/// 多语言数据导入实体
+/// Multilingual data import entities
 /// </summary>
 [ExcelImporter(SheetIndex = 1, IsOnlyErrorRows = true)]
 public class ImportSysLangInput : BaseImportInput
 {
     /// <summary>
-    /// 语言名称
+    /// Language name
     /// </summary>
-    [ImporterHeader(Name = "*语言名称")]
-    [ExporterHeader("*语言名称", Format = "", Width = 25, IsBold = true)]
+    [ImporterHeader(Name = "*Language name")]
+    [ExporterHeader("*Language name", Format = "", Width = 25, IsBold = true)]
     public string Name { get; set; }
 
     /// <summary>
-    /// 语言代码
+    /// language code
     /// </summary>
-    [ImporterHeader(Name = "*语言代码")]
-    [ExporterHeader("*语言代码", Format = "", Width = 25, IsBold = true)]
+    [ImporterHeader(Name = "*Language Code")]
+    [ExporterHeader("*Language Code", Format = "", Width = 25, IsBold = true)]
     public string Code { get; set; }
 
     /// <summary>
-    /// ISO 语言代码
+    /// ISO language code
     /// </summary>
-    [ImporterHeader(Name = "*ISO 语言代码")]
-    [ExporterHeader("*ISO 语言代码", Format = "", Width = 25, IsBold = true)]
+    [ImporterHeader(Name = "*ISO language code")]
+    [ExporterHeader("*ISO language code", Format = "", Width = 25, IsBold = true)]
     public string IsoCode { get; set; }
 
     /// <summary>
-    /// URL 语言代码
+    /// URL language code
     /// </summary>
-    [ImporterHeader(Name = "*URL 语言代码")]
-    [ExporterHeader("*URL 语言代码", Format = "", Width = 25, IsBold = true)]
+    [ImporterHeader(Name = "*URL language code")]
+    [ExporterHeader("*URL language code", Format = "", Width = 25, IsBold = true)]
     public string UrlCode { get; set; }
 
     /// <summary>
-    /// 书写方向
+    /// writing direction
     /// </summary>
-    [ImporterHeader(Name = "*书写方向")]
-    [ExporterHeader("*书写方向", Format = "", Width = 25, IsBold = true)]
+    [ImporterHeader(Name = "*Writing direction")]
+    [ExporterHeader("*Writing direction", Format = "", Width = 25, IsBold = true)]
     public DirectionEnum Direction { get; set; }
 
     /// <summary>
-    /// 日期格式
+    /// date format
     /// </summary>
-    [ImporterHeader(Name = "*日期格式")]
-    [ExporterHeader("*日期格式", Format = "", Width = 25, IsBold = true)]
+    [ImporterHeader(Name = "*Date Format")]
+    [ExporterHeader("*Date Format", Format = "", Width = 25, IsBold = true)]
     public string DateFormat { get; set; }
 
     /// <summary>
-    /// 时间格式
+    /// time format
     /// </summary>
-    [ImporterHeader(Name = "*时间格式")]
-    [ExporterHeader("*时间格式", Format = "", Width = 25, IsBold = true)]
+    [ImporterHeader(Name = "*Time Format")]
+    [ExporterHeader("*Time Format", Format = "", Width = 25, IsBold = true)]
     public string TimeFormat { get; set; }
 
     /// <summary>
-    /// 每周起始日
+    /// start day of week
     /// </summary>
-    [ImporterHeader(Name = "*每周起始日")]
-    [ExporterHeader("*每周起始日", Format = "", Width = 25, IsBold = true)]
+    [ImporterHeader(Name = "*Start day of each week")]
+    [ExporterHeader("*Start day of each week", Format = "", Width = 25, IsBold = true)]
     public WeekEnum? WeekStart { get; set; }
 
     /// <summary>
-    /// 分组符号
+    /// Grouping symbols
     /// </summary>
-    [ImporterHeader(Name = "*分组符号")]
-    [ExporterHeader("*分组符号", Format = "", Width = 25, IsBold = true)]
+    [ImporterHeader(Name = "*Group symbol")]
+    [ExporterHeader("*Group symbol", Format = "", Width = 25, IsBold = true)]
     public string Grouping { get; set; }
 
     /// <summary>
-    /// 小数点符号
+    /// decimal point symbol
     /// </summary>
-    [ImporterHeader(Name = "*小数点符号")]
-    [ExporterHeader("*小数点符号", Format = "", Width = 25, IsBold = true)]
+    [ImporterHeader(Name = "*Decimal point symbol")]
+    [ExporterHeader("*Decimal point symbol", Format = "", Width = 25, IsBold = true)]
     public string DecimalPoint { get; set; }
 
     /// <summary>
-    /// 千分位分隔符
+    /// Thousand separator
     /// </summary>
-    [ImporterHeader(Name = "千分位分隔符")]
-    [ExporterHeader("千分位分隔符", Format = "", Width = 25, IsBold = true)]
+    [ImporterHeader(Name = "thousands separator")]
+    [ExporterHeader("thousands separator", Format = "", Width = 25, IsBold = true)]
     public string? ThousandsSep { get; set; }
 
     /// <summary>
-    /// 是否启用
+    /// Whether to enable
     /// </summary>
-    [ImporterHeader(Name = "*是否启用")]
-    [ExporterHeader("*是否启用", Format = "", Width = 25, IsBold = true)]
+    [ImporterHeader(Name = "*Whether to enable")]
+    [ExporterHeader("*Whether to enable", Format = "", Width = 25, IsBold = true)]
     public bool? Active { get; set; }
 }

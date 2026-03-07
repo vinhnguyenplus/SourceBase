@@ -1,8 +1,8 @@
-﻿// Admin.NET 项目的版权、商标、专利和其他相关权利均受相应法律法规的保护。使用本项目应遵守相关法律法规和许可证的要求。
+﻿// The copyright, trademark, patent and other related rights of the Admin.NET project are protected by corresponding laws and regulations. Use of this project shall comply with relevant laws, regulations and license requirements.
 //
-// 本项目主要遵循 MIT 许可证和 Apache 许可证（版本 2.0）进行分发和使用。许可证位于源代码树根目录中的 LICENSE-MIT 和 LICENSE-APACHE 文件。
+// This project is distributed and used primarily under the MIT License and the Apache License (version 2.0). The license is located in the LICENSE-MIT and LICENSE-APACHE files in the root of the source tree.
 //
-// 不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！
+// This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project!
 
 using Admin.NET.Core;
 using Admin.NET.Core.ElasticSearch;
@@ -43,62 +43,62 @@ public class Startup : AppStartup
 {
     public void ConfigureServices(IServiceCollection services)
     {
-        // 配置选项
+        // Configuration options
         services.AddProjectOptions();
 
-        // 缓存注册
+        // Cache registration
         services.AddCache();
         // SqlSugar
         services.AddSqlSugar();
         // JWT
         services.AddJwt<JwtHandler>(enableGlobalAuthorize: true, jwtBearerConfigure: options =>
         {
-            // 实现 JWT 身份验证过程控制
+            // Implement JWT authentication process control
             options.Events = new JwtBearerEvents
             {
                 OnMessageReceived = context =>
                 {
                     var httpContext = context.HttpContext;
-                    // 若请求 Url 包含 token 参数，则设置 Token 值
+                    // If the request URL contains the token parameter, set the Token value
                     if (httpContext.Request.Query.ContainsKey("token"))
                         context.Token = httpContext.Request.Query["token"];
                     return Task.CompletedTask;
                 }
             };
-        }).AddSignatureAuthentication(options =>  // 添加 Signature 身份验证
+        }).AddSignatureAuthentication(options =>  // Add Signature authentication
         {
             options.Events = SysOpenAccessService.GetSignatureAuthenticationEventImpl();
         });
 
-        // 允许跨域
+        // Allow cross domain
         services.AddCorsAccessor();
-        // 远程请求
+        // remote request
         services.AddHttpRemote();
-        // 任务队列
+        // task queue
         services.AddTaskQueue();
-        // 任务调度
+        // Task scheduling
         services.AddSchedule(options =>
         {
-            options.AddPersistence<DbJobPersistence>(); // 添加作业持久化器
-            options.AddMonitor<JobMonitor>(); // 添加作业执行监视器
+            options.AddPersistence<DbJobPersistence>(); // Add job persister
+            options.AddMonitor<JobMonitor>(); // Add job execution monitor
         });
-        // 脱敏检测
+        // Desensitization test
         services.AddSensitiveDetection();
 
-        // Json序列化设置
+        // Json serialization settings
         static void SetNewtonsoftJsonSetting(JsonSerializerSettings setting)
         {
             setting.DateFormatHandling = DateFormatHandling.IsoDateFormat;
             setting.DateTimeZoneHandling = DateTimeZoneHandling.Local;
-            //setting.Converters.AddDateTimeTypeConverters(localized: false); // 时间本地化
-            setting.DateFormatString = "yyyy-MM-dd HH:mm:ss"; // 时间格式化
-            setting.ReferenceLoopHandling = ReferenceLoopHandling.Ignore; // 忽略循环引用
-            // setting.ContractResolver = new CamelCasePropertyNamesContractResolver(); // 解决动态对象属性名大写
-            // setting.NullValueHandling = NullValueHandling.Ignore; // 忽略空值
-            setting.Converters.AddLongTypeConverters(); // long转string（防止js精度溢出） 超过17位开启
-            // setting.MetadataPropertyHandling = MetadataPropertyHandling.Ignore; // 解决DateTimeOffset异常
-            // setting.DateParseHandling = DateParseHandling.None; // 解决DateTimeOffset异常
-            // setting.Converters.Add(new IsoDateTimeConverter { DateTimeStyles = DateTimeStyles.AssumeUniversal }); // 解决DateTimeOffset异常
+            //setting.Converters.AddDateTimeTypeConverters(localized: false); // Time localization
+            setting.DateFormatString = "yyyy-MM-dd HH:mm:ss"; // time formatting
+            setting.ReferenceLoopHandling = ReferenceLoopHandling.Ignore; // Ignore circular references
+            // setting.ContractResolver = new CamelCasePropertyNamesContractResolver(); // Resolve capitalization of dynamic object property names
+            // setting.NullValueHandling = NullValueHandling.Ignore; // Ignore null values
+            setting.Converters.AddLongTypeConverters(); // Convert long to string (prevent js precision overflow) when more than 17 bits are turned on
+            // setting.MetadataPropertyHandling = MetadataPropertyHandling.Ignore; // Solve DateTimeOffset exception
+            // setting.DateParseHandling = DateParseHandling.None; // Solve DateTimeOffset exception
+            // setting.Converters.Add(new IsoDateTimeConverter { DateTimeStyles = DateTimeStyles.AssumeUniversal }); // Solve DateTimeOffset exception
         }
         ;
 
@@ -110,19 +110,19 @@ public class Startup : AppStartup
             .AddInjectWithUnifyResult<AdminResultProvider>()
             .AddJsonOptions(options =>
             {
-                options.JsonSerializerOptions.Encoder = JavaScriptEncoder.Create(UnicodeRanges.All); // 禁止Unicode转码
-                options.JsonSerializerOptions.Converters.AddDateTimeTypeConverters("yyyy-MM-dd HH:mm:ss"); // 时间格式化
+                options.JsonSerializerOptions.Encoder = JavaScriptEncoder.Create(UnicodeRanges.All); // Disable Unicode transcoding
+                options.JsonSerializerOptions.Converters.AddDateTimeTypeConverters("yyyy-MM-dd HH:mm:ss"); // time formatting
             });
 
-        // 三方授权登录OAuth
+        // Three-party authorized login OAuth
         services.AddOAuth();
 
         // ElasticSearch
         services.AddElasticSearchClients();
 
-        // 配置Nginx转发获取客户端真实IP
-        // 注1：如果负载均衡不是在本机通过 Loopback 地址转发请求的，一定要加上options.KnownNetworks.Clear()和options.KnownProxies.Clear()
-        // 注2：如果设置环境变量 ASPNETCORE_FORWARDEDHEADERS_ENABLED 为 True，则不需要下面的配置代码
+        // Configure Nginx forwarding to obtain the client’s real IP
+        // Note 1: If the load balancing does not forward requests through the Loopback address locally, be sure to add options.KnownNetworks.Clear() and options.KnownProxies.Clear()
+        // Note 2: If the environment variable ASPNETCORE_FORWARDEDHEADERS_ENABLED is set to True, the following configuration code is not required
         services.Configure<ForwardedHeadersOptions>(options =>
         {
             options.ForwardedHeaders = ForwardedHeaders.All;
@@ -130,46 +130,46 @@ public class Startup : AppStartup
             options.KnownProxies.Clear();
         });
 
-        // 限流服务
+        // Current limiting service
         services.AddInMemoryRateLimiting();
         services.AddSingleton<IRateLimitConfiguration, RateLimitConfiguration>();
 
-        // 事件总线
+        // event bus
         services.AddEventBus(options =>
         {
             options.UseUtcTimestamp = false;
-            // 不启用事件日志
+            // Disable event logging
             options.LogEnabled = false;
-            // 事件执行器（失败重试）
+            // Event executor (retry on failure)
             options.AddExecutor<RetryEventHandlerExecutor>();
-            // 事件执行器（重试后依然处理未处理异常的处理器）
+            // Event executor (handler that still handles unhandled exceptions after retries)
             options.UnobservedTaskExceptionHandler = (obj, args) =>
             {
                 if (args.Exception?.Message != null)
-                    Log.Error($"EeventBus 有未处理异常 ：{args.Exception?.Message} ", args.Exception);
+                    Log.Error($"EeventBus has unhandled exception: {args.Exception?.Message} ", args.Exception);
             };
-            // 事件执行器-监视器（每一次处理都会进入）
+            // Event executor-monitor (entered every time processing)
             options.AddMonitor<EventHandlerMonitor>();
 
-            #region Redis消息队列
+            #region RedisinformationQueue
 
-            // 替换事件源存储器为Redis
+            // Replace event source storage with Redis
             var cacheOptions = App.GetConfig<CacheOptions>("Cache", true);
             if (cacheOptions.CacheType == CacheTypeEnum.Redis.ToString())
             {
                 options.ReplaceStorer(serviceProvider =>
                 {
                     var cacheProvider = serviceProvider.GetRequiredService<NewLife.Caching.ICacheProvider>();
-                    // 创建默认内存通道事件源对象，可自定义队列路由key，如：adminnet_eventsource_queue
+                    // Create a default memory channel event source object and customize the queue routing key, such as: adminnet_eventsource_queue
                     return new RedisEventSourceStorer(cacheProvider, "adminnet_eventsource_queue", 3000);
                 });
             }
 
-            #endregion Redis消息队列
+            #endregion RedisinformationQueue
 
-            #region RabbitMQ消息队列
+            #region RabbitMQinformationQueue
 
-            //// 创建默认内存通道事件源对象，可自定义队列路由key，如：adminnet
+            //// Create a default memory channel event source object, you can customize the queue routing key, such as: adminnet
             //var eventBusOpt = App.GetConfig<EventBusOptions>("EventBus", true);
             //var rbmqEventSourceStorer = new RabbitMQEventSourceStore(new ConnectionFactory
             //{
@@ -179,75 +179,75 @@ public class Startup : AppStartup
             //    Port = eventBusOpt.RabbitMQ.Port
             //}, "adminnet", 3000);
 
-            //// 替换默认事件总线存储器
+            ////Replace default event bus memory
             //options.ReplaceStorer(serviceProvider =>
             //{
             //    return rbmqEventSourceStorer;
             //});
 
-            #endregion RabbitMQ消息队列
+            #endregion RabbitMQinformationQueue
         });
 
-        // 图像处理
+        // image processing
         services.AddImageSharp();
 
-        // OSS对象存储
+        // OSS object storage
         var ossOpt = App.GetConfig<OSSProviderOptions>("OSSProvider", true);
         services.AddOSSService(Enum.GetName(ossOpt.Provider), "OSSProvider");
 
-        // 文件存储服务
+        // File storage service
         services.AddTransient<SysFileProviderService>();
-        services.AddSingleton<IOSSServiceManager, OSSServiceManager>(); // 改为单例以保持缓存
+        services.AddSingleton<IOSSServiceManager, OSSServiceManager>(); // Change to singleton to keep cache
         services.AddTransient<MultiOSSFileProvider>();
 
-        // 模板引擎
+        // template engine
         services.AddViewEngine();
 
-        // 即时通讯
+        // instant messaging
         services.AddSignalR(options =>
         {
             options.EnableDetailedErrors = true;
-            options.KeepAliveInterval = TimeSpan.FromSeconds(15); // 服务器端向客户端ping的间隔
-            options.ClientTimeoutInterval = TimeSpan.FromSeconds(30); // 客户端向服务器端ping的间隔
-            options.MaximumReceiveMessageSize = 1024 * 1014 * 10; // 数据包大小10M，默认最大为32K
+            options.KeepAliveInterval = TimeSpan.FromSeconds(15); // The interval between pings from the server to the client
+            options.ClientTimeoutInterval = TimeSpan.FromSeconds(30); // The interval between client and server pings
+            options.MaximumReceiveMessageSize = 1024 * 1014 * 10; // Data packet size is 10M, the default maximum is 32K
         }).AddNewtonsoftJsonProtocol(options => SetNewtonsoftJsonSetting(options.PayloadSerializerSettings));
 
-        // 系统日志
+        // System log
         services.AddLoggingSetup();
 
-        // 验证码
+        // Verification code
         services.AddCaptcha();
 
-        // 控制台logo
+        // Console logo
         services.AddConsoleLogo();
 
-        //// Swagger 时间格式化
+        //// Swagger time formatting
         //services.AddSwaggerGen(c =>
         //{
         //    c.MapType<DateTime>(() => new Microsoft.OpenApi.Models.OpenApiSchema
         //    {
         //        Type = "string",
         //        Format = "date-time",
-        //        Example = new Microsoft.OpenApi.Any.OpenApiString(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")) // 示例值
+        //        Example = new Microsoft.OpenApi.Any.OpenApiString(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")) // Example value
         //    });
 
-        //    // 确保生成的文档包含 OpenAPI 版本字段
+        //    // Make sure the generated document contains the OpenAPI version field
         //    c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
         //    {
         //        Version = "v1",
         //        Title = "Admin.NET API",
-        //        Description = "Admin.NET 通用权限开发平台"
+        //        Description = "Admin.NET universal permissions development platform"
         //    });
         //    c.OperationFilter<TenantHeaderOperationFilter>();
         //});
 
-        // 将IP地址数据库文件完全加载到内存，提升查询速度（以空间换时间，内存将会增加60-70M）
+        // Completely load the IP address database file into the memory to improve query speed (exchanging space for time, the memory will increase by 60-70M)
         IpToolSettings.LoadInternationalDbToMemory = true;
-        // 设置默认查询器China和International
+        // Set the default query query China and International
         //IpToolSettings.DefalutSearcherType = IpSearcherType.China;
         IpToolSettings.DefalutSearcherType = IpSearcherType.International;
 
-        // 配置gzip与br的压缩等级为最优
+        // Configure the compression level of gzip and br to be optimal
         //services.Configure<BrotliCompressionProviderOptions>(options =>
         //{
         //    options.Level = CompressionLevel.Optimal;
@@ -256,7 +256,7 @@ public class Startup : AppStartup
         //{
         //    options.Level = CompressionLevel.Optimal;
         //});
-        // 注册压缩响应
+        // Register compressed response
         services.AddResponseCompression((options) =>
         {
             options.EnableForHttps = true;
@@ -271,13 +271,13 @@ public class Startup : AppStartup
              ]);
         });
 
-        // 注册虚拟文件系统服务
+        // Register the virtual file system service
         services.AddVirtualFileServer();
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     {
-        // 响应压缩
+        // response compression
         app.UseResponseCompression();
 
         app.UseForwardedHeaders();
@@ -298,60 +298,60 @@ public class Startup : AppStartup
             await next();
         });
 
-        // 图像处理
+        // image processing
         app.UseImageSharp();
 
-        // 特定文件类型（文件后缀）处理
+        // Specific file type (file suffix) processing
         var contentTypeProvider = FS.GetFileExtensionContentTypeProvider();
-        // contentTypeProvider.Mappings[".文件后缀"] = "MIME 类型";
+        // contentTypeProvider.Mappings[".file suffix"] = "MIME type";
         app.UseStaticFiles(new StaticFileOptions
         {
             ContentTypeProvider = contentTypeProvider
         });
-        // 二级目录文件路径解析
+        // Secondary directory file path analysis
         if (!string.IsNullOrEmpty(App.Settings.VirtualPath))
             app.UseStaticFiles(new StaticFileOptions
             {
                 RequestPath = App.Settings.VirtualPath,
                 FileProvider = App.WebHostEnvironment.WebRootFileProvider
             });
-        //// 启用HTTPS
+        ////enable HTTPS
         //app.UseHttpsRedirection();
 
-        // 启用OAuth
+        // Enable OAuth
         app.UseOAuth();
 
-        // 添加状态码拦截中间件
+        // Add status code interception middleware
         app.UseUnifyResultStatusCodes();
 
-        // 启用多语言，必须在 UseRouting 之前
+        // Enable multi-language, must be used before UseRouting
         app.UseAppLocalization();
 
-        // 路由注册
+        // Route registration
         app.UseRouting();
 
-        // 启用跨域，必须在 UseRouting 和 UseAuthentication 之间注册
+        // To enable cross-origin, must be registered between UseRouting and UseAuthentication
         app.UseCorsAccessor();
 
-        // 启用鉴权授权
+        // Enable authentication and authorization
         app.UseAuthentication();
         app.UseAuthorization();
 
-        // 限流组件（在跨域之后）
+        // Current limiting component (after cross-domain)
         app.UseIpRateLimiting();
         app.UseClientRateLimiting();
         app.UsePolicyRateLimit();
 
-        // 任务调度看板
+        // Task scheduling dashboard
         app.UseScheduleUI(options =>
         {
-            options.RequestPath = "/schedule"; // 必须以 / 开头且不以 / 结尾
-            options.DisableOnProduction = false; // 是否在生产环境中关闭
-            options.DisplayEmptyTriggerJobs = true; // 是否显示空作业触发器的作业
-            options.DisplayHead = false; // 是否显示页头
-            options.DefaultExpandAllJobs = false; // 是否默认展开所有作业
-            options.EnableDirectoryBrowsing = false; // 是否启用目录浏览
-            options.Title = "定时任务看板"; // 自定义看板标题
+            options.RequestPath = "/schedule"; // Must start with / and not end with /
+            options.DisableOnProduction = false; // Whether to turn off in production environment
+            options.DisplayEmptyTriggerJobs = true; // Whether to display jobs for empty job triggers
+            options.DisplayHead = false; // Whether to display the page header
+            options.DefaultExpandAllJobs = false; // Whether to expand all jobs by default
+            options.EnableDirectoryBrowsing = false; // Whether to enable directory browsing
+            options.Title = "Settimetask board"; // Custom board title
 
             options.LoginConfig.OnLoging = async (username, password, httpContext) =>
             {
@@ -360,14 +360,14 @@ public class Startup : AppStartup
             };
             options.LoginConfig.DefaultUsername = "";
             options.LoginConfig.DefaultPassword = "";
-            options.LoginConfig.SessionKey = "schedule_session_key"; // 登录客户端存储的 Session 键
+            options.LoginConfig.SessionKey = "schedule_session_key"; // Log in to the Session key stored on the client side
         });
 
         app.UseInject(string.Empty, options =>
         {
             foreach (var groupInfo in SpecificationDocumentBuilder.GetOpenApiGroups())
             {
-                groupInfo.Description += "<br/><u><b><font color='FF0000'> 👮不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！</font></b></u>";
+                groupInfo.Description += "<br/><u><b><font color='FF0000'> 👮This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project! </font></b></u>";
             }
             options.ConfigureSwagger(m =>
             {
@@ -381,21 +381,21 @@ public class Startup : AppStartup
 
         app.UseEndpoints(endpoints =>
         {
-            // 配置 Scalar 第三方 UI 集成（路由前缀一致代表独立，不同则代表共存）
+            // Configure Scalar third-party UI integration (consistent routing prefixes represent independence, different routing prefixes represent coexistence)
             if (App.GetConfig<bool>("AppSettings:InjectSpecificationDocument", true))
             {
                 endpoints.MapScalarApiReference("sapi", options =>
                 {
                     options.WithTitle("Admin.NET");
 
-                    // 配置 OpenAPI 文档
+                    // Configure OpenAPI documentation
                     foreach (var groupInfo in SpecificationDocumentBuilder.GetOpenApiGroups())
                     {
                         options.AddDocument(groupInfo.Group, groupInfo.Title, groupInfo.RouteTemplate);
                     }
                 });
             }
-            // 注册集线器
+            // Register hub
             endpoints.MapHubs();
 
             endpoints.MapControllerRoute(

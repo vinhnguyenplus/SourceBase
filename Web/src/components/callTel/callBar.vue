@@ -2,7 +2,7 @@
 import { nextTick, onMounted, ref } from "vue";
 import QRCode from 'qrcodejs2-fixes';
 
-// 组件属性
+// Component properties
 const props = defineProps({
 	realName: String,
 	number: String,
@@ -11,10 +11,10 @@ const props = defineProps({
   needToken: Boolean,
 });
 
-// 定义变量内容
+// Define variable content
 const qrcodeRef = ref<HTMLElement | null>(null);
 
-// 初始化生成二维码
+// Initialize to generate QR code
 const initQrcode = () => {
 	nextTick(() => {
 		const token = props.needToken ? Local.get(accessTokenKey) : '';
@@ -36,12 +36,12 @@ const initQrcode = () => {
 	});
 };
 
-// 拨打电话
+// Make a call
 const callTel = () => {
 	location.href = 'tel:' + props.number;
 }
 
-// 页面加载时
+// When the page loads
 onMounted(() => {
 	initQrcode();
 });
@@ -55,11 +55,11 @@ onMounted(() => {
 		<el-descriptions direction="vertical" :column="1" border>
 			<el-descriptions-item align="center">
 				<template #label>
-					<el-button @click="callTel">直接拨打</el-button>
+					<el-button @click="callTel">Dial directly</el-button>
 				</template>
 			</el-descriptions-item>
 			<el-descriptions-item width="140" align="center">
-				手机扫一扫
+				Scan with your mobile phone
 				<template #label>
 					<div ref="qrcodeRef" />
 				</template>

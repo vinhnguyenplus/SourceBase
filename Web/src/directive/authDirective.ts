@@ -3,20 +3,20 @@ import { useUserInfo } from '/@/stores/userInfo';
 import { judgementSameArr } from '/@/utils/arrayOperation';
 
 /**
- * 用户权限指令
- * @directive 单个权限验证（v-auth="xxx"）
- * @directive 多个权限验证，满足一个则显示（v-auths="[xxx,xxx]"）
- * @directive 多个权限验证，全部满足则显示（v-auth-all="[xxx,xxx]"）
+ * UserPermission command
+ * @directive Single permission verification（v-auth="xxx"）
+ * @directive Multiple permission verifications，satisfyoneitemDisplay（v-auths="[xxx,xxx]"）
+ * @directive Multiple permission verifications，If all are satisfiedDisplay（v-auth-all="[xxx,xxx]"）
  */
 export function authDirective(app: App) {
-	// 单个权限验证（v-auth="xxx"）
+	// Single permission verification (v-auth="xxx")
 	app.directive('auth', {
 		mounted(el, binding) {
 			const stores = useUserInfo();
 			if (!stores.userInfos.authBtnList.some((v: string) => v === binding.value)) el.parentNode.removeChild(el);
 		},
 	});
-	// 多个权限验证，满足一个则显示（v-auths="[xxx,xxx]"）
+	// Multiple permission verifications, if one is satisfied, it will be displayed (v-auths="[xxx,xxx]")
 	app.directive('auths', {
 		mounted(el, binding) {
 			let flag = false;
@@ -29,7 +29,7 @@ export function authDirective(app: App) {
 			if (!flag) el.parentNode.removeChild(el);
 		},
 	});
-	// 多个权限验证，全部满足则显示（v-auth-all="[xxx,xxx]"）
+	// Multiple permission verification, if all are satisfied, it will be displayed (v-auth-all="[xxx,xxx]")
 	app.directive('auth-all', {
 		mounted(el, binding) {
 			const stores = useUserInfo();

@@ -1,259 +1,259 @@
-﻿// Admin.NET 项目的版权、商标、专利和其他相关权利均受相应法律法规的保护。使用本项目应遵守相关法律法规和许可证的要求。
+﻿// The copyright, trademark, patent and other related rights of the Admin.NET project are protected by corresponding laws and regulations. Use of this project shall comply with relevant laws, regulations and license requirements.
 //
-// 本项目主要遵循 MIT 许可证和 Apache 许可证（版本 2.0）进行分发和使用。许可证位于源代码树根目录中的 LICENSE-MIT 和 LICENSE-APACHE 文件。
+// This project is distributed and used primarily under the MIT License and the Apache License (version 2.0). The license is located in the LICENSE-MIT and LICENSE-APACHE files in the root of the source tree.
 //
-// 不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！
+// This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project!
 
 namespace Admin.NET.Core;
 
 /// <summary>
-/// 翻译表基础输入参数
+/// Translation table basic input parameters
 /// </summary>
 public class SysLangTextBaseInput
 {
     /// <summary>
-    /// 主键Id
+    /// Primary keyId
     /// </summary>
     public virtual long? Id { get; set; }
 
     /// <summary>
-    /// 所属实体名
+    /// Name of the entity to which it belongs
     /// </summary>
-    [Required(ErrorMessage = "所属实体名不能为空")]
+    [Required(ErrorMessage = "The name of the entity to which it belongs cannot be empty.")]
     public virtual string EntityName { get; set; }
 
     /// <summary>
-    /// 所属实体ID
+    /// Owning entity ID
     /// </summary>
-    [Required(ErrorMessage = "所属实体ID不能为空")]
+    [Required(ErrorMessage = "The entity ID cannot be empty")]
     public virtual long? EntityId { get; set; }
 
     /// <summary>
-    /// 字段名
+    /// Field name
     /// </summary>
-    [Required(ErrorMessage = "字段名不能为空")]
+    [Required(ErrorMessage = "Field name cannot be empty")]
     public virtual string FieldName { get; set; }
 
     /// <summary>
-    /// 语言代码
+    /// language code
     /// </summary>
-    [Required(ErrorMessage = "语言代码不能为空")]
+    [Required(ErrorMessage = "Language code cannot be empty")]
     public virtual string LangCode { get; set; }
 
     /// <summary>
-    /// 翻译内容
+    /// Translate content
     /// </summary>
-    [Required(ErrorMessage = "翻译内容不能为空")]
+    [Required(ErrorMessage = "Translation content cannot be empty")]
     public virtual string Content { get; set; }
 }
 
 /// <summary>
-/// 翻译表分页查询输入参数
+/// Translation table paging query input parameters
 /// </summary>
 public class PageSysLangTextInput : BasePageInput
 {
     /// <summary>
-    /// 所属实体名
+    /// Name of the entity to which it belongs
     /// </summary>
     public string EntityName { get; set; }
 
     /// <summary>
-    /// 所属实体ID
+    /// Owning entity ID
     /// </summary>
     public long? EntityId { get; set; }
 
     /// <summary>
-    /// 字段名
+    /// Field name
     /// </summary>
     public string FieldName { get; set; }
 
     /// <summary>
-    /// 语言代码
+    /// language code
     /// </summary>
     public string LangCode { get; set; }
 
     /// <summary>
-    /// 翻译内容
+    /// Translate content
     /// </summary>
     public string Content { get; set; }
 
     /// <summary>
-    /// 选中主键列表
+    /// Select primary key list
     /// </summary>
     public List<long> SelectKeyList { get; set; }
 }
 
 /// <summary>
-/// 翻译表增加输入参数
+/// Add input parameters to translation table
 /// </summary>
 public class AddSysLangTextInput
 {
     /// <summary>
-    /// 所属实体名
+    /// Name of the entity to which it belongs
     /// </summary>
-    [Required(ErrorMessage = "所属实体名不能为空")]
-    [MaxLength(255, ErrorMessage = "所属实体名字符长度不能超过255")]
+    [Required(ErrorMessage = "The name of the entity to which it belongs cannot be empty.")]
+    [MaxLength(255, ErrorMessage = "The character length of the entity name cannot exceed 255")]
     public string EntityName { get; set; }
 
     /// <summary>
-    /// 所属实体ID
+    /// Owning entity ID
     /// </summary>
-    [Required(ErrorMessage = "所属实体ID不能为空")]
+    [Required(ErrorMessage = "The entity ID cannot be empty")]
     public long? EntityId { get; set; }
 
     /// <summary>
-    /// 字段名
+    /// Field name
     /// </summary>
-    [Required(ErrorMessage = "字段名不能为空")]
-    [MaxLength(255, ErrorMessage = "字段名字符长度不能超过255")]
+    [Required(ErrorMessage = "Field name cannot be empty")]
+    [MaxLength(255, ErrorMessage = "The length of the field name cannot exceed 255 characters")]
     public string FieldName { get; set; }
 
     /// <summary>
-    /// 语言代码
+    /// language code
     /// </summary>
-    [Required(ErrorMessage = "语言代码不能为空")]
-    [MaxLength(255, ErrorMessage = "语言代码字符长度不能超过255")]
+    [Required(ErrorMessage = "Language code cannot be empty")]
+    [MaxLength(255, ErrorMessage = "The language code character length cannot exceed 255")]
     public string LangCode { get; set; }
 
     /// <summary>
-    /// 翻译内容
+    /// Translate content
     /// </summary>
-    [Required(ErrorMessage = "翻译内容不能为空")]
+    [Required(ErrorMessage = "Translation content cannot be empty")]
     public string Content { get; set; }
 }
 
 /// <summary>
-/// 翻译表输入参数
+/// Translation table input parameters
 /// </summary>
 public class ListSysLangTextInput
 {
     /// <summary>
-    /// 所属实体名
+    /// Name of the entity to which it belongs
     /// </summary>
-    [Required(ErrorMessage = "所属实体名不能为空")]
+    [Required(ErrorMessage = "The name of the entity to which it belongs cannot be empty.")]
     public string EntityName { get; set; }
 
     /// <summary>
-    /// 所属实体ID
+    /// Owning entity ID
     /// </summary>
-    [Required(ErrorMessage = "所属实体ID不能为空")]
+    [Required(ErrorMessage = "The entity ID cannot be empty")]
     public long? EntityId { get; set; }
 
     /// <summary>
-    /// 字段名
+    /// Field name
     /// </summary>
-    [Required(ErrorMessage = "字段名不能为空")]
+    [Required(ErrorMessage = "Field name cannot be empty")]
     public string FieldName { get; set; }
 
     /// <summary>
-    /// 语言代码
+    /// language code
     /// </summary>
     public string LangCode { get; set; }
 }
 
 /// <summary>
-/// 翻译表删除输入参数
+/// Translation table delete input parameter
 /// </summary>
 public class DeleteSysLangTextInput
 {
     /// <summary>
-    /// 主键Id
+    /// Primary keyId
     /// </summary>
-    [Required(ErrorMessage = "主键Id不能为空")]
+    [Required(ErrorMessage = "Primary key Id cannot be empty")]
     public long? Id { get; set; }
 }
 
 /// <summary>
-/// 翻译表更新输入参数
+/// Translation table update input parameters
 /// </summary>
 public class UpdateSysLangTextInput
 {
     /// <summary>
-    /// 主键Id
+    /// Primary keyId
     /// </summary>
-    [Required(ErrorMessage = "主键Id不能为空")]
+    [Required(ErrorMessage = "Primary key Id cannot be empty")]
     public long? Id { get; set; }
 
     /// <summary>
-    /// 所属实体名
+    /// Name of the entity to which it belongs
     /// </summary>
-    [Required(ErrorMessage = "所属实体名不能为空")]
-    [MaxLength(255, ErrorMessage = "所属实体名字符长度不能超过255")]
+    [Required(ErrorMessage = "The name of the entity to which it belongs cannot be empty.")]
+    [MaxLength(255, ErrorMessage = "The character length of the entity name cannot exceed 255")]
     public string EntityName { get; set; }
 
     /// <summary>
-    /// 所属实体ID
+    /// Owning entity ID
     /// </summary>
-    [Required(ErrorMessage = "所属实体ID不能为空")]
+    [Required(ErrorMessage = "The entity ID cannot be empty")]
     public long? EntityId { get; set; }
 
     /// <summary>
-    /// 字段名
+    /// Field name
     /// </summary>
-    [Required(ErrorMessage = "字段名不能为空")]
-    [MaxLength(255, ErrorMessage = "字段名字符长度不能超过255")]
+    [Required(ErrorMessage = "Field name cannot be empty")]
+    [MaxLength(255, ErrorMessage = "The length of the field name cannot exceed 255 characters")]
     public string FieldName { get; set; }
 
     /// <summary>
-    /// 语言代码
+    /// language code
     /// </summary>
-    [Required(ErrorMessage = "语言代码不能为空")]
-    [MaxLength(255, ErrorMessage = "语言代码字符长度不能超过255")]
+    [Required(ErrorMessage = "Language code cannot be empty")]
+    [MaxLength(255, ErrorMessage = "The language code character length cannot exceed 255")]
     public string LangCode { get; set; }
 
     /// <summary>
-    /// 翻译内容
+    /// Translate content
     /// </summary>
-    [Required(ErrorMessage = "翻译内容不能为空")]
+    [Required(ErrorMessage = "Translation content cannot be empty")]
     public string Content { get; set; }
 }
 
 /// <summary>
-/// 翻译表主键查询输入参数
+/// Translation table primary key query input parameters
 /// </summary>
 public class QueryByIdSysLangTextInput : DeleteSysLangTextInput
 {
 }
 
 /// <summary>
-/// 翻译表数据导入实体
+/// Translate table data into entities
 /// </summary>
 [ExcelImporter(SheetIndex = 1, IsOnlyErrorRows = true)]
 public class ImportSysLangTextInput : BaseImportInput
 {
     /// <summary>
-    /// 所属实体名
+    /// Name of the entity to which it belongs
     /// </summary>
-    [ImporterHeader(Name = "*所属实体名")]
-    [ExporterHeader("*所属实体名", Format = "", Width = 25, IsBold = true)]
+    [ImporterHeader(Name = "*Affiliated Entity Name")]
+    [ExporterHeader("*Affiliated Entity Name", Format = "", Width = 25, IsBold = true)]
     public string EntityName { get; set; }
 
     /// <summary>
-    /// 所属实体ID
+    /// Owning entity ID
     /// </summary>
-    [ImporterHeader(Name = "*所属实体ID")]
-    [ExporterHeader("*所属实体ID", Format = "", Width = 25, IsBold = true)]
+    [ImporterHeader(Name = "*Official entity ID")]
+    [ExporterHeader("*Official entity ID", Format = "", Width = 25, IsBold = true)]
     public long? EntityId { get; set; }
 
     /// <summary>
-    /// 字段名
+    /// Field name
     /// </summary>
-    [ImporterHeader(Name = "*字段名")]
-    [ExporterHeader("*字段名", Format = "", Width = 25, IsBold = true)]
+    [ImporterHeader(Name = "*Field Name")]
+    [ExporterHeader("*Field Name", Format = "", Width = 25, IsBold = true)]
     public string FieldName { get; set; }
 
     /// <summary>
-    /// 语言代码
+    /// language code
     /// </summary>
-    [ImporterHeader(Name = "*语言代码")]
-    [ExporterHeader("*语言代码", Format = "", Width = 25, IsBold = true)]
+    [ImporterHeader(Name = "*Language Code")]
+    [ExporterHeader("*Language Code", Format = "", Width = 25, IsBold = true)]
     public string LangCode { get; set; }
 
     /// <summary>
-    /// 翻译内容
+    /// Translate content
     /// </summary>
-    [ImporterHeader(Name = "*翻译内容")]
-    [ExporterHeader("*翻译内容", Format = "", Width = 25, IsBold = true)]
+    [ImporterHeader(Name = "*Translation content")]
+    [ExporterHeader("*Translation content", Format = "", Width = 25, IsBold = true)]
     public string Content { get; set; }
 }
 
@@ -263,12 +263,12 @@ public class ImportSysLangTextInput : BaseImportInput
 public class AiTranslateTextInput
 {
     /// <summary>
-    /// 原文
+    /// original
     /// </summary>
     public string OriginalText { get; set; }
 
     /// <summary>
-    /// 目标语言
+    /// target language
     /// </summary>
     public string TargetLang { get; set; }
 }

@@ -1,82 +1,82 @@
-﻿// Admin.NET 项目的版权、商标、专利和其他相关权利均受相应法律法规的保护。使用本项目应遵守相关法律法规和许可证的要求。
+﻿// The copyright, trademark, patent and other related rights of the Admin.NET project are protected by corresponding laws and regulations. Use of this project shall comply with relevant laws, regulations and license requirements.
 //
-// 本项目主要遵循 MIT 许可证和 Apache 许可证（版本 2.0）进行分发和使用。许可证位于源代码树根目录中的 LICENSE-MIT 和 LICENSE-APACHE 文件。
+// This project is distributed and used primarily under the MIT License and the Apache License (version 2.0). The license is located in the LICENSE-MIT and LICENSE-APACHE files in the root of the source tree.
 //
-// 不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！
+// This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project!
 
 namespace Admin.NET.Core;
 
 /// <summary>
-/// 系统通知公告表
+/// System notification announcement form
 /// </summary>
-[SugarTable(null, "系统通知公告表")]
+[SugarTable(null, "System notification announcement form")]
 [SysTable]
 [SugarIndex("index_{table}_T", nameof(Type), OrderByType.Asc)]
 public partial class SysNotice : EntityBase
 {
     /// <summary>
-    /// 标题
+    /// title
     /// </summary>
-    [SugarColumn(ColumnDescription = "标题", Length = 32)]
+    [SugarColumn(ColumnDescription = "title", Length = 32)]
     [Required, MaxLength(32)]
     [SensitiveDetection('*')]
     public virtual string Title { get; set; }
 
     /// <summary>
-    /// 内容
+    /// content
     /// </summary>
-    [SugarColumn(ColumnDescription = "内容", ColumnDataType = StaticConfig.CodeFirst_BigString)]
+    [SugarColumn(ColumnDescription = "content", ColumnDataType = StaticConfig.CodeFirst_BigString)]
     [Required]
     [SensitiveDetection('*')]
     public virtual string Content { get; set; }
 
     /// <summary>
-    /// 类型（1通知 2公告）
+    /// Type (1 notification 2 announcement)
     /// </summary>
-    [SugarColumn(ColumnDescription = "类型（1通知 2公告）")]
+    [SugarColumn(ColumnDescription = "Type (1 notification 2 announcement)")]
     public NoticeTypeEnum Type { get; set; }
 
     /// <summary>
-    /// 发布人Id
+    /// PublisherId
     /// </summary>
-    [SugarColumn(ColumnDescription = "发布人Id")]
+    [SugarColumn(ColumnDescription = "PublisherId")]
     public long PublicUserId { get; set; }
 
     /// <summary>
-    /// 发布人姓名
+    /// Publisher name
     /// </summary>
-    [SugarColumn(ColumnDescription = "发布人姓名", Length = 32)]
+    [SugarColumn(ColumnDescription = "Publisher name", Length = 32)]
     [MaxLength(32)]
     public string? PublicUserName { get; set; }
 
     /// <summary>
-    /// 发布机构Id
+    /// Publisher ID
     /// </summary>
-    [SugarColumn(ColumnDescription = "发布机构Id")]
+    [SugarColumn(ColumnDescription = "Issuing Organization Id")]
     public long PublicOrgId { get; set; }
 
     /// <summary>
-    /// 发布机构名称
+    /// Issuing organization name
     /// </summary>
-    [SugarColumn(ColumnDescription = "发布机构名称", Length = 64)]
+    [SugarColumn(ColumnDescription = "Issuing organization name", Length = 64)]
     [MaxLength(64)]
     public string? PublicOrgName { get; set; }
 
     /// <summary>
-    /// 发布时间
+    /// Release time
     /// </summary>
-    [SugarColumn(ColumnDescription = "发布时间")]
+    [SugarColumn(ColumnDescription = "Release Time")]
     public DateTime? PublicTime { get; set; }
 
     /// <summary>
-    /// 撤回时间
+    /// Withdrawal time
     /// </summary>
-    [SugarColumn(ColumnDescription = "撤回时间")]
+    [SugarColumn(ColumnDescription = "Withdrawal Time")]
     public DateTime? CancelTime { get; set; }
 
     /// <summary>
-    /// 状态（0草稿 1发布 2撤回 3删除）
+    /// Status (0 draft 1 published 2 withdrawn 3 deleted)
     /// </summary>
-    [SugarColumn(ColumnDescription = "状态（0草稿 1发布 2撤回 3删除）")]
+    [SugarColumn(ColumnDescription = "state（0draft 1release 2Withdraw 3Delete）")]
     public NoticeStatusEnum Status { get; set; }
 }

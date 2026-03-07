@@ -1,8 +1,8 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Admin.NET 通用权限开发平台
- * 让 .NET 开发更简单、更通用、更流行。整合最新技术，模块插件式开发，前后端分离，开箱即用。<br/><u><b><font color='FF0000'> 👮不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！</font></b></u>
+ * Admin.NET General Permission Development Platform
+ * let .NET Develop more simply、More general、More popular。wholeIn line with the latest technology，Modular Plugin-Based Development，Frontend and backendpointsLeave，Ready to use out of the box。<br/><u><b><font color='FF0000'> 👮This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project! </font></b></u>
  *
  * OpenAPI spec version: 1.0.0
  * 
@@ -20,7 +20,7 @@ import { StatusEnum } from './status-enum';
 import { SysOrg } from './sys-org';
 import { SysUserExtOrg } from './sys-user-ext-org';
  /**
- * 更新用户输入参数
+ * Update userInputParameter
  *
  * @export
  * @interface UpdateUserInput
@@ -28,7 +28,7 @@ import { SysUserExtOrg } from './sys-user-ext-org';
 export interface UpdateUserInput {
 
     /**
-     * 雪花Id
+     * SnowflakeId
      *
      * @type {number}
      * @memberof UpdateUserInput
@@ -36,7 +36,7 @@ export interface UpdateUserInput {
     id?: number;
 
     /**
-     * 创建时间
+     * Creation Time
      *
      * @type {Date}
      * @memberof UpdateUserInput
@@ -44,7 +44,7 @@ export interface UpdateUserInput {
     createTime?: Date;
 
     /**
-     * 更新时间
+     * Update Time
      *
      * @type {Date}
      * @memberof UpdateUserInput
@@ -52,7 +52,7 @@ export interface UpdateUserInput {
     updateTime?: Date | null;
 
     /**
-     * 创建者Id
+     * CreatorId
      *
      * @type {number}
      * @memberof UpdateUserInput
@@ -60,7 +60,7 @@ export interface UpdateUserInput {
     createUserId?: number | null;
 
     /**
-     * 创建者姓名
+     * Creator name
      *
      * @type {string}
      * @memberof UpdateUserInput
@@ -68,7 +68,7 @@ export interface UpdateUserInput {
     createUserName?: string | null;
 
     /**
-     * 修改者Id
+     * Modifier ID
      *
      * @type {number}
      * @memberof UpdateUserInput
@@ -76,7 +76,7 @@ export interface UpdateUserInput {
     updateUserId?: number | null;
 
     /**
-     * 修改者姓名
+     * Modifier name
      *
      * @type {string}
      * @memberof UpdateUserInput
@@ -84,7 +84,7 @@ export interface UpdateUserInput {
     updateUserName?: string | null;
 
     /**
-     * 机构Id
+     * Organization ID
      *
      * @type {number}
      * @memberof UpdateUserInput
@@ -92,7 +92,7 @@ export interface UpdateUserInput {
     orgId?: number;
 
     /**
-     * 租户Id
+     * Tenant ID
      *
      * @type {number}
      * @memberof UpdateUserInput
@@ -100,7 +100,7 @@ export interface UpdateUserInput {
     tenantId?: number | null;
 
     /**
-     * 昵称
+     * Nickname
      *
      * @type {string}
      * @memberof UpdateUserInput
@@ -108,7 +108,7 @@ export interface UpdateUserInput {
     nickName?: string | null;
 
     /**
-     * 头像
+     * Avatar
      *
      * @type {string}
      * @memberof UpdateUserInput
@@ -122,7 +122,7 @@ export interface UpdateUserInput {
     sex?: GenderEnum;
 
     /**
-     * 年龄
+     * age
      *
      * @type {number}
      * @memberof UpdateUserInput
@@ -130,7 +130,7 @@ export interface UpdateUserInput {
     age?: number;
 
     /**
-     * 出生日期
+     * date of birth
      *
      * @type {Date}
      * @memberof UpdateUserInput
@@ -138,7 +138,7 @@ export interface UpdateUserInput {
     birthday?: Date | null;
 
     /**
-     * 民族
+     * ethnic group
      *
      * @type {string}
      * @memberof UpdateUserInput
@@ -146,7 +146,7 @@ export interface UpdateUserInput {
     nation?: string | null;
 
     /**
-     * 手机号码
+     * Mobile phone number
      *
      * @type {string}
      * @memberof UpdateUserInput
@@ -160,7 +160,7 @@ export interface UpdateUserInput {
     cardType?: CardTypeEnum;
 
     /**
-     * 身份证号
+     * ID number
      *
      * @type {string}
      * @memberof UpdateUserInput
@@ -168,7 +168,7 @@ export interface UpdateUserInput {
     idCardNum?: string | null;
 
     /**
-     * 邮箱
+     * Email
      *
      * @type {string}
      * @memberof UpdateUserInput
@@ -176,7 +176,7 @@ export interface UpdateUserInput {
     email?: string | null;
 
     /**
-     * 地址
+     * address
      *
      * @type {string}
      * @memberof UpdateUserInput
@@ -190,7 +190,7 @@ export interface UpdateUserInput {
     cultureLevel?: CultureLevelEnum;
 
     /**
-     * 政治面貌
+     * political outlook
      *
      * @type {string}
      * @memberof UpdateUserInput
@@ -198,7 +198,7 @@ export interface UpdateUserInput {
     politicalOutlook?: string | null;
 
     /**
-     * 毕业院校
+     * Graduation school
      *
      * @type {string}
      * @memberof UpdateUserInput
@@ -206,7 +206,7 @@ export interface UpdateUserInput {
     college?: string | null;
 
     /**
-     * 办公电话
+     * Office phone
      *
      * @type {string}
      * @memberof UpdateUserInput
@@ -214,7 +214,7 @@ export interface UpdateUserInput {
     officePhone?: string | null;
 
     /**
-     * 紧急联系人
+     * Emergency Contact
      *
      * @type {string}
      * @memberof UpdateUserInput
@@ -222,7 +222,7 @@ export interface UpdateUserInput {
     emergencyContact?: string | null;
 
     /**
-     * 紧急联系人电话
+     * Emergency contact number
      *
      * @type {string}
      * @memberof UpdateUserInput
@@ -230,7 +230,7 @@ export interface UpdateUserInput {
     emergencyPhone?: string | null;
 
     /**
-     * 紧急联系人地址
+     * UrgentContact address
      *
      * @type {string}
      * @memberof UpdateUserInput
@@ -238,7 +238,7 @@ export interface UpdateUserInput {
     emergencyAddress?: string | null;
 
     /**
-     * 个人简介
+     * Personal Profile
      *
      * @type {string}
      * @memberof UpdateUserInput
@@ -246,7 +246,7 @@ export interface UpdateUserInput {
     introduction?: string | null;
 
     /**
-     * 排序
+     * Sort
      *
      * @type {number}
      * @memberof UpdateUserInput
@@ -260,7 +260,7 @@ export interface UpdateUserInput {
     status?: StatusEnum;
 
     /**
-     * 备注
+     * Remarks
      *
      * @type {string}
      * @memberof UpdateUserInput
@@ -280,7 +280,7 @@ export interface UpdateUserInput {
     sysOrg?: SysOrg;
 
     /**
-     * 直属主管Id
+     * Direct Supervisor ID
      *
      * @type {number}
      * @memberof UpdateUserInput
@@ -288,7 +288,7 @@ export interface UpdateUserInput {
     managerUserId?: number | null;
 
     /**
-     * 职位Id
+     * Job ID
      *
      * @type {number}
      * @memberof UpdateUserInput
@@ -296,7 +296,7 @@ export interface UpdateUserInput {
     posId?: number;
 
     /**
-     * 工号
+     * Job number
      *
      * @type {string}
      * @memberof UpdateUserInput
@@ -304,7 +304,7 @@ export interface UpdateUserInput {
     jobNum?: string | null;
 
     /**
-     * 职级
+     * Rank
      *
      * @type {string}
      * @memberof UpdateUserInput
@@ -312,7 +312,7 @@ export interface UpdateUserInput {
     posLevel?: string | null;
 
     /**
-     * 职称
+     * Professional title
      *
      * @type {string}
      * @memberof UpdateUserInput
@@ -320,7 +320,7 @@ export interface UpdateUserInput {
     posTitle?: string | null;
 
     /**
-     * 擅长领域
+     * Areas of expertise
      *
      * @type {string}
      * @memberof UpdateUserInput
@@ -328,7 +328,7 @@ export interface UpdateUserInput {
     expertise?: string | null;
 
     /**
-     * 办公区域
+     * Office area
      *
      * @type {string}
      * @memberof UpdateUserInput
@@ -336,7 +336,7 @@ export interface UpdateUserInput {
     officeZone?: string | null;
 
     /**
-     * 办公室
+     * Office
      *
      * @type {string}
      * @memberof UpdateUserInput
@@ -344,7 +344,7 @@ export interface UpdateUserInput {
     office?: string | null;
 
     /**
-     * 入职日期
+     * Date of Joining
      *
      * @type {Date}
      * @memberof UpdateUserInput
@@ -352,7 +352,7 @@ export interface UpdateUserInput {
     joinDate?: Date | null;
 
     /**
-     * 最新登录Ip
+     * Latest login IP
      *
      * @type {string}
      * @memberof UpdateUserInput
@@ -360,7 +360,7 @@ export interface UpdateUserInput {
     lastLoginIp?: string | null;
 
     /**
-     * 最新登录地点
+     * Latest login location
      *
      * @type {string}
      * @memberof UpdateUserInput
@@ -368,7 +368,7 @@ export interface UpdateUserInput {
     lastLoginAddress?: string | null;
 
     /**
-     * 最新登录时间
+     * Latest login time
      *
      * @type {Date}
      * @memberof UpdateUserInput
@@ -376,7 +376,7 @@ export interface UpdateUserInput {
     lastLoginTime?: Date | null;
 
     /**
-     * 最新登录设备
+     * Latest login devices
      *
      * @type {string}
      * @memberof UpdateUserInput
@@ -384,7 +384,7 @@ export interface UpdateUserInput {
     lastLoginDevice?: string | null;
 
     /**
-     * 电子签名
+     * Electronic signature
      *
      * @type {string}
      * @memberof UpdateUserInput
@@ -392,7 +392,7 @@ export interface UpdateUserInput {
     signature?: string | null;
 
     /**
-     * 语言代码（如 zh-CN）
+     * Language code（such as zh-CN）
      *
      * @type {string}
      * @memberof UpdateUserInput
@@ -400,7 +400,7 @@ export interface UpdateUserInput {
     langCode?: string | null;
 
     /**
-     * 个性化首页地址
+     * Personalized homepage address
      *
      * @type {string}
      * @memberof UpdateUserInput
@@ -408,7 +408,7 @@ export interface UpdateUserInput {
     homepage?: string | null;
 
     /**
-     * 账号
+     * Account number
      *
      * @type {string}
      * @memberof UpdateUserInput
@@ -416,7 +416,7 @@ export interface UpdateUserInput {
     account: string;
 
     /**
-     * 真实姓名
+     * Real Name
      *
      * @type {string}
      * @memberof UpdateUserInput
@@ -424,7 +424,7 @@ export interface UpdateUserInput {
     realName: string;
 
     /**
-     * 域用户
+     * DomainUser
      *
      * @type {string}
      * @memberof UpdateUserInput
@@ -432,7 +432,7 @@ export interface UpdateUserInput {
     domainAccount?: string | null;
 
     /**
-     * 角色集合
+     * role collection
      *
      * @type {Array<number>}
      * @memberof UpdateUserInput
@@ -440,7 +440,7 @@ export interface UpdateUserInput {
     roleIdList?: Array<number> | null;
 
     /**
-     * 扩展机构集合
+     * ExpandmechanismSet
      *
      * @type {Array<SysUserExtOrg>}
      * @memberof UpdateUserInput

@@ -1,8 +1,8 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * 钉钉开放平台
- * 集成钉钉开放平台<br/><u><b><font color='FF0000'> 👮不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！</font></b></u>
+ * DingTalkOpen Platform
+ * IntegrationDingTalkOpen Platform<br/><u><b><font color='FF0000'> 👮This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project! </font></b></u>
  *
  * OpenAPI spec version: 1.0.0
  * 
@@ -37,7 +37,7 @@ export const DingTalkApiAxiosParamCreator = function (configuration?: Configurat
     return {
         /**
          * 
-         * @summary 创建并投放钉钉消息卡片 🔖
+         * @summary Create and launchDingTalkinformationcard 🔖
          * @param {string} token 
          * @param {DingTalkCreateAndDeliverInput} [body] 
          * @param {*} [options] Override http request option.
@@ -91,7 +91,7 @@ export const DingTalkApiAxiosParamCreator = function (configuration?: Configurat
         },
         /**
          * 
-         * @summary 获取在职员工列表 🔖
+         * @summary Get a list of current employees 🔖
          * @param {GetDingTalkCurrentEmployeesListInput} body 
          * @param {string} accessToken 
          * @param {*} [options] Override http request option.
@@ -149,7 +149,7 @@ export const DingTalkApiAxiosParamCreator = function (configuration?: Configurat
         },
         /**
          * 
-         * @summary 获取员工花名册字段信息 🔖
+         * @summary Obtain employee roster field information 🔖
          * @param {GetDingTalkCurrentEmployeesRosterListInput} body 
          * @param {string} accessToken 
          * @param {*} [options] Override http request option.
@@ -207,7 +207,7 @@ export const DingTalkApiAxiosParamCreator = function (configuration?: Configurat
         },
         /**
          * 
-         * @summary 发送钉钉互动卡片 🔖
+         * @summary SendDingTalkInteractioncard 🔖
          * @param {string} token 
          * @param {DingTalkSendInteractiveCardsInput} [body] 
          * @param {*} [options] Override http request option.
@@ -261,7 +261,7 @@ export const DingTalkApiAxiosParamCreator = function (configuration?: Configurat
         },
         /**
          * 
-         * @summary 获取企业内部应用的access_token
+         * @summary Obtain the access_token of the internal application of the enterprise
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -304,7 +304,7 @@ export const DingTalkApiAxiosParamCreator = function (configuration?: Configurat
         },
         /**
          * 
-         * @summary 查询审批实例
+         * @summary QueryApproval instance
          * @param {string} token 
          * @param {string} input 
          * @param {*} [options] Override http request option.
@@ -359,7 +359,7 @@ export const DingTalkApiAxiosParamCreator = function (configuration?: Configurat
         },
         /**
          * 
-         * @summary 用于发起OA审批实例
+         * @summary Used to initiate OA approval instances
          * @param {string} token 
          * @param {DingTalkWorkflowProcessInstancesInput} [body] 
          * @param {*} [options] Override http request option.
@@ -422,7 +422,7 @@ export const DingTalkApiFp = function(configuration?: Configuration) {
     return {
         /**
          * 
-         * @summary 创建并投放钉钉消息卡片 🔖
+         * @summary Create and launchDingTalkinformationcard 🔖
          * @param {string} token 
          * @param {DingTalkCreateAndDeliverInput} [body] 
          * @param {*} [options] Override http request option.
@@ -437,7 +437,7 @@ export const DingTalkApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary 获取在职员工列表 🔖
+         * @summary Get a list of current employees 🔖
          * @param {GetDingTalkCurrentEmployeesListInput} body 
          * @param {string} accessToken 
          * @param {*} [options] Override http request option.
@@ -452,7 +452,7 @@ export const DingTalkApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary 获取员工花名册字段信息 🔖
+         * @summary Obtain employee roster field information 🔖
          * @param {GetDingTalkCurrentEmployeesRosterListInput} body 
          * @param {string} accessToken 
          * @param {*} [options] Override http request option.
@@ -467,7 +467,7 @@ export const DingTalkApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary 发送钉钉互动卡片 🔖
+         * @summary SendDingTalkInteractioncard 🔖
          * @param {string} token 
          * @param {DingTalkSendInteractiveCardsInput} [body] 
          * @param {*} [options] Override http request option.
@@ -482,7 +482,7 @@ export const DingTalkApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary 获取企业内部应用的access_token
+         * @summary Obtain the access_token of the internal application of the enterprise
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -495,7 +495,7 @@ export const DingTalkApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary 查询审批实例
+         * @summary QueryApproval instance
          * @param {string} token 
          * @param {string} input 
          * @param {*} [options] Override http request option.
@@ -510,7 +510,7 @@ export const DingTalkApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary 用于发起OA审批实例
+         * @summary Used to initiate OA approval instances
          * @param {string} token 
          * @param {DingTalkWorkflowProcessInstancesInput} [body] 
          * @param {*} [options] Override http request option.
@@ -534,7 +534,7 @@ export const DingTalkApiFactory = function (configuration?: Configuration, baseP
     return {
         /**
          * 
-         * @summary 创建并投放钉钉消息卡片 🔖
+         * @summary Create and launchDingTalkinformationcard 🔖
          * @param {string} token 
          * @param {DingTalkCreateAndDeliverInput} [body] 
          * @param {*} [options] Override http request option.
@@ -545,7 +545,7 @@ export const DingTalkApiFactory = function (configuration?: Configuration, baseP
         },
         /**
          * 
-         * @summary 获取在职员工列表 🔖
+         * @summary Get a list of current employees 🔖
          * @param {GetDingTalkCurrentEmployeesListInput} body 
          * @param {string} accessToken 
          * @param {*} [options] Override http request option.
@@ -556,7 +556,7 @@ export const DingTalkApiFactory = function (configuration?: Configuration, baseP
         },
         /**
          * 
-         * @summary 获取员工花名册字段信息 🔖
+         * @summary Obtain employee roster field information 🔖
          * @param {GetDingTalkCurrentEmployeesRosterListInput} body 
          * @param {string} accessToken 
          * @param {*} [options] Override http request option.
@@ -567,7 +567,7 @@ export const DingTalkApiFactory = function (configuration?: Configuration, baseP
         },
         /**
          * 
-         * @summary 发送钉钉互动卡片 🔖
+         * @summary SendDingTalkInteractioncard 🔖
          * @param {string} token 
          * @param {DingTalkSendInteractiveCardsInput} [body] 
          * @param {*} [options] Override http request option.
@@ -578,7 +578,7 @@ export const DingTalkApiFactory = function (configuration?: Configuration, baseP
         },
         /**
          * 
-         * @summary 获取企业内部应用的access_token
+         * @summary Obtain the access_token of the internal application of the enterprise
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -587,7 +587,7 @@ export const DingTalkApiFactory = function (configuration?: Configuration, baseP
         },
         /**
          * 
-         * @summary 查询审批实例
+         * @summary QueryApproval instance
          * @param {string} token 
          * @param {string} input 
          * @param {*} [options] Override http request option.
@@ -598,7 +598,7 @@ export const DingTalkApiFactory = function (configuration?: Configuration, baseP
         },
         /**
          * 
-         * @summary 用于发起OA审批实例
+         * @summary Used to initiate OA approval instances
          * @param {string} token 
          * @param {DingTalkWorkflowProcessInstancesInput} [body] 
          * @param {*} [options] Override http request option.
@@ -619,7 +619,7 @@ export const DingTalkApiFactory = function (configuration?: Configuration, baseP
 export class DingTalkApi extends BaseAPI {
     /**
      * 
-     * @summary 创建并投放钉钉消息卡片 🔖
+     * @summary Create and launchDingTalkinformationcard 🔖
      * @param {string} token 
      * @param {DingTalkCreateAndDeliverInput} [body] 
      * @param {*} [options] Override http request option.
@@ -631,7 +631,7 @@ export class DingTalkApi extends BaseAPI {
     }
     /**
      * 
-     * @summary 获取在职员工列表 🔖
+     * @summary Get a list of current employees 🔖
      * @param {GetDingTalkCurrentEmployeesListInput} body 
      * @param {string} accessToken 
      * @param {*} [options] Override http request option.
@@ -643,7 +643,7 @@ export class DingTalkApi extends BaseAPI {
     }
     /**
      * 
-     * @summary 获取员工花名册字段信息 🔖
+     * @summary Obtain employee roster field information 🔖
      * @param {GetDingTalkCurrentEmployeesRosterListInput} body 
      * @param {string} accessToken 
      * @param {*} [options] Override http request option.
@@ -655,7 +655,7 @@ export class DingTalkApi extends BaseAPI {
     }
     /**
      * 
-     * @summary 发送钉钉互动卡片 🔖
+     * @summary SendDingTalkInteractioncard 🔖
      * @param {string} token 
      * @param {DingTalkSendInteractiveCardsInput} [body] 
      * @param {*} [options] Override http request option.
@@ -667,7 +667,7 @@ export class DingTalkApi extends BaseAPI {
     }
     /**
      * 
-     * @summary 获取企业内部应用的access_token
+     * @summary Obtain the access_token of the internal application of the enterprise
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DingTalkApi
@@ -677,7 +677,7 @@ export class DingTalkApi extends BaseAPI {
     }
     /**
      * 
-     * @summary 查询审批实例
+     * @summary QueryApproval instance
      * @param {string} token 
      * @param {string} input 
      * @param {*} [options] Override http request option.
@@ -689,7 +689,7 @@ export class DingTalkApi extends BaseAPI {
     }
     /**
      * 
-     * @summary 用于发起OA审批实例
+     * @summary Used to initiate OA approval instances
      * @param {string} token 
      * @param {DingTalkWorkflowProcessInstancesInput} [body] 
      * @param {*} [options] Override http request option.

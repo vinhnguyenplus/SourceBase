@@ -1,8 +1,8 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Admin.NET 通用权限开发平台
- * 让 .NET 开发更简单、更通用、更流行。整合最新技术，模块插件式开发，前后端分离，开箱即用。<br/><u><b><font color='FF0000'> 👮不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！</font></b></u>
+ * Admin.NET General Permission Development Platform
+ * let .NET Develop more simply、More general、More popular。wholeIn line with the latest technology，Modular Plugin-Based Development，Frontend and backendpointsLeave，Ready to use out of the box。<br/><u><b><font color='FF0000'> 👮This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project! </font></b></u>
  *
  * OpenAPI spec version: 1.0.0
  * 
@@ -22,7 +22,7 @@ import { TriggerStatus } from './trigger-status';
 export interface AddJobTriggerInput {
 
     /**
-     * 雪花Id
+     * SnowflakeId
      *
      * @type {number}
      * @memberof AddJobTriggerInput
@@ -30,7 +30,7 @@ export interface AddJobTriggerInput {
     id?: number;
 
     /**
-     * 触发器类型FullName
+     * Trigger typeFullName
      *
      * @type {string}
      * @memberof AddJobTriggerInput
@@ -38,7 +38,7 @@ export interface AddJobTriggerInput {
     triggerType?: string | null;
 
     /**
-     * 程序集Name
+     * AssemblyName
      *
      * @type {string}
      * @memberof AddJobTriggerInput
@@ -46,7 +46,7 @@ export interface AddJobTriggerInput {
     assemblyName?: string | null;
 
     /**
-     * 参数
+     * Parameter
      *
      * @type {string}
      * @memberof AddJobTriggerInput
@@ -54,7 +54,7 @@ export interface AddJobTriggerInput {
     args?: string | null;
 
     /**
-     * 描述信息
+     * Description information
      *
      * @type {string}
      * @memberof AddJobTriggerInput
@@ -68,7 +68,7 @@ export interface AddJobTriggerInput {
     status?: TriggerStatus;
 
     /**
-     * 起始时间
+     * start time
      *
      * @type {Date}
      * @memberof AddJobTriggerInput
@@ -76,7 +76,7 @@ export interface AddJobTriggerInput {
     startTime?: Date | null;
 
     /**
-     * 结束时间
+     * end time
      *
      * @type {Date}
      * @memberof AddJobTriggerInput
@@ -84,7 +84,7 @@ export interface AddJobTriggerInput {
     endTime?: Date | null;
 
     /**
-     * 最近运行时间
+     * Recent run time
      *
      * @type {Date}
      * @memberof AddJobTriggerInput
@@ -92,7 +92,7 @@ export interface AddJobTriggerInput {
     lastRunTime?: Date | null;
 
     /**
-     * 下一次运行时间
+     * Next Run Time
      *
      * @type {Date}
      * @memberof AddJobTriggerInput
@@ -100,7 +100,7 @@ export interface AddJobTriggerInput {
     nextRunTime?: Date | null;
 
     /**
-     * 触发次数
+     * Number of triggers
      *
      * @type {number}
      * @memberof AddJobTriggerInput
@@ -108,7 +108,7 @@ export interface AddJobTriggerInput {
     numberOfRuns?: number;
 
     /**
-     * 最大触发次数（0:不限制，n:N次）
+     * Maximum trigger count（0:No restrictions，n:Ntime）
      *
      * @type {number}
      * @memberof AddJobTriggerInput
@@ -116,7 +116,7 @@ export interface AddJobTriggerInput {
     maxNumberOfRuns?: number;
 
     /**
-     * 出错次数
+     * Number of errors
      *
      * @type {number}
      * @memberof AddJobTriggerInput
@@ -124,7 +124,7 @@ export interface AddJobTriggerInput {
     numberOfErrors?: number;
 
     /**
-     * 最大出错次数（0:不限制，n:N次）
+     * Maximum number of errors（0:No restrictions，n:Ntime）
      *
      * @type {number}
      * @memberof AddJobTriggerInput
@@ -132,7 +132,7 @@ export interface AddJobTriggerInput {
     maxNumberOfErrors?: number;
 
     /**
-     * 重试次数
+     * Number of retries
      *
      * @type {number}
      * @memberof AddJobTriggerInput
@@ -140,7 +140,7 @@ export interface AddJobTriggerInput {
     numRetries?: number;
 
     /**
-     * 重试间隔时间（ms）
+     * Retryintervaltimespace（ms）
      *
      * @type {number}
      * @memberof AddJobTriggerInput
@@ -148,7 +148,7 @@ export interface AddJobTriggerInput {
     retryTimeout?: number;
 
     /**
-     * 是否立即启动
+     * Whether to start immediately
      *
      * @type {boolean}
      * @memberof AddJobTriggerInput
@@ -156,7 +156,7 @@ export interface AddJobTriggerInput {
     startNow?: boolean;
 
     /**
-     * 是否启动时执行一次
+     * Whether to execute once at startup
      *
      * @type {boolean}
      * @memberof AddJobTriggerInput
@@ -164,7 +164,7 @@ export interface AddJobTriggerInput {
     runOnStart?: boolean;
 
     /**
-     * 是否在启动时重置最大触发次数等于一次的作业
+     * YesnoStartingtimeresetMaximum trigger countequalsonenext homework
      *
      * @type {boolean}
      * @memberof AddJobTriggerInput
@@ -172,7 +172,7 @@ export interface AddJobTriggerInput {
     resetOnlyOnce?: boolean;
 
     /**
-     * 更新时间
+     * Update Time
      *
      * @type {Date}
      * @memberof AddJobTriggerInput
@@ -180,7 +180,7 @@ export interface AddJobTriggerInput {
     updatedTime?: Date | null;
 
     /**
-     * 作业Id
+     * JobId
      *
      * @type {string}
      * @memberof AddJobTriggerInput
@@ -188,7 +188,7 @@ export interface AddJobTriggerInput {
     jobId: string;
 
     /**
-     * 触发器Id
+     * Trigger ID
      *
      * @type {string}
      * @memberof AddJobTriggerInput

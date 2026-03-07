@@ -1,8 +1,8 @@
-// Admin.NET 项目的版权、商标、专利和其他相关权利均受相应法律法规的保护。使用本项目应遵守相关法律法规和许可证的要求。
+// The copyright, trademark, patent and other related rights of the Admin.NET project are protected by corresponding laws and regulations. Use of this project shall comply with relevant laws, regulations and license requirements.
 //
-// 本项目主要遵循 MIT 许可证和 Apache 许可证（版本 2.0）进行分发和使用。许可证位于源代码树根目录中的 LICENSE-MIT 和 LICENSE-APACHE 文件。
+// This project is distributed and used primarily under the MIT License and the Apache License (version 2.0). The license is located in the LICENSE-MIT and LICENSE-APACHE files in the root of the source tree.
 //
-// 不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！
+// This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project!
 
 using Furion.Logging.Extensions;
 using Newtonsoft.Json;
@@ -10,7 +10,7 @@ using Newtonsoft.Json;
 namespace Admin.NET.Core.Service;
 
 /// <summary>
-/// 微信支付服务 🧩
+/// WeChat payment service 🧩
 /// </summary>
 [ApiDescriptionSettings(Order = 210)]
 public class SysWechatPayService : IDynamicApiController, ITransient
@@ -37,7 +37,7 @@ public class SysWechatPayService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 初始化微信支付客户端
+    /// Initialize WeChat payment client
     /// </summary>
     /// <returns></returns>
     private WechatTenpayClient CreateTenpayClient()
@@ -56,7 +56,7 @@ public class SysWechatPayService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 分页查询支付列表 🔖
+    /// Query payment list by page 🔖
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
@@ -72,12 +72,12 @@ public class SysWechatPayService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 查询退款信息列表
+    /// Query refund information list
     /// </summary>
     /// <param name="id"></param>
     /// <returns></returns>
     [HttpPost]
-    [DisplayName("根据支付id获取退款信息列表")]
+    [DisplayName("Get refund information list based on payment ID")]
     public async Task<List<SysWechatRefund>> ListRefund([FromBody] string id)
     {
         var query = _sysWechatRefundRep.AsQueryable()
@@ -86,11 +86,11 @@ public class SysWechatPayService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 生成JSAPI调起支付所需参数 🔖
+    /// Generate parameters required for JSAPI to call payment 🔖
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
-    [DisplayName("生成JSAPI调起支付所需参数")]
+    [DisplayName("Generate JSAPI parameters required to initiate payment")]
     public WechatPayParaOutput GenerateParametersForJsapiPay(WechatPayParaInput input)
     {
         var data = _wechatTenpayClient.GenerateParametersForJsapiPayRequest(_wechatPayOptions.AppId, input.PrepayId);
@@ -106,14 +106,14 @@ public class SysWechatPayService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 微信支付下单(商户直连) 🔖
+    /// Order via WeChat payment (direct connection to merchant) 🔖
     /// </summary>
-    [DisplayName("微信支付下单(商户直连)")]
+    [DisplayName("Order with WeChat payment (direct connection to merchant)")]
     public async Task<WechatPayTransactionOutput> CreatePayTransaction([FromBody] WechatPayTransactionInput input)
     {
         var request = new CreatePayTransactionJsapiRequest()
         {
-            OutTradeNumber = DateTimeOffset.Now.ToString("yyyyMMddHHmmssfff") + (new Random()).Next(100, 1000), // 订单号
+            OutTradeNumber = DateTimeOffset.Now.ToString("yyyyMMddHHmmssfff") + (new Random()).Next(100, 1000), // Order number
             AppId = _wechatPayOptions.AppId,
             Description = input.Description,
             Attachment = input.Attachment,
@@ -128,7 +128,7 @@ public class SysWechatPayService : IDynamicApiController, ITransient
             throw Oops.Oh(response.ErrorMessage);
 
         var singInfo = this.GenerateParametersForJsapiPay(new WechatPayParaInput() { PrepayId = response.PrepayId });
-        // 保存订单信息
+        // Save order information
         var wechatPay = new SysWechatPay()
         {
             AppId = _wechatPayOptions.AppId,
@@ -154,14 +154,14 @@ public class SysWechatPayService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 微信支付下单(商户直连)Native
+    /// WeChat Pay Order (Direct Merchant Connection) Native
     /// </summary>
-    [DisplayName("微信支付下单(商户直连)Native")]
+    [DisplayName("WeChat Pay Order (Merchant Direct Connection) Native")]
     public async Task<dynamic> CreatePayTransactionNative([FromBody] WechatPayTransactionInput input)
     {
         var request = new CreatePayTransactionNativeRequest()
         {
-            OutTradeNumber = DateTimeOffset.Now.ToString("yyyyMMddHHmmssfff") + (new Random()).Next(100, 1000), // 订单号
+            OutTradeNumber = DateTimeOffset.Now.ToString("yyyyMMddHHmmssfff") + (new Random()).Next(100, 1000), // Order number
             AppId = _wechatPayOptions.AppId,
             Description = input.Description,
             Attachment = input.Attachment,
@@ -178,7 +178,7 @@ public class SysWechatPayService : IDynamicApiController, ITransient
             JsonConvert.SerializeObject(response).LogInformation();
             throw Oops.Oh(response.ErrorMessage);
         }
-        // 保存订单信息
+        // Save order information
         var wechatPay = new SysWechatPay()
         {
             AppId = _wechatPayOptions.AppId,
@@ -203,14 +203,14 @@ public class SysWechatPayService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 微信支付下单(服务商模式) 🔖
+    /// Order with WeChat payment (service provider model) 🔖
     /// </summary>
-    [DisplayName("微信支付下单(服务商模式)")]
+    [DisplayName("WeChat Pay Order (Service Provider Mode)")]
     public async Task<dynamic> CreatePayPartnerTransaction([FromBody] WechatPayTransactionInput input)
     {
         var request = new CreatePayPartnerTransactionJsapiRequest()
         {
-            OutTradeNumber = DateTimeOffset.Now.ToString("yyyyMMddHHmmssfff") + (new Random()).Next(100, 1000), // 订单号
+            OutTradeNumber = DateTimeOffset.Now.ToString("yyyyMMddHHmmssfff") + (new Random()).Next(100, 1000), // Order number
             AppId = _wechatPayOptions.AppId,
             MerchantId = _wechatPayOptions.MerchantId,
             SubAppId = _wechatPayOptions.AppId,
@@ -227,7 +227,7 @@ public class SysWechatPayService : IDynamicApiController, ITransient
         if (!response.IsSuccessful())
             throw Oops.Oh(response.ErrorMessage);
         var singInfo = this.GenerateParametersForJsapiPay(new WechatPayParaInput() { PrepayId = response.PrepayId });
-        // 保存订单信息
+        // Save order information
         var wechatPay = new SysWechatPay()
         {
             AppId = _wechatPayOptions.AppId,
@@ -253,42 +253,42 @@ public class SysWechatPayService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 获取支付订单详情(本地库) 🔖
+    /// Get payment order details (local database) 🔖
     /// </summary>
     /// <param name="tradeId"></param>
     /// <returns></returns>
-    [DisplayName("获取支付订单详情(本地库)")]
+    [DisplayName("Get payment order details (local database)")]
     public async Task<SysWechatPay> GetPayInfo(string tradeId)
     {
         return await _sysWechatPayRep.GetFirstAsync(u => u.OutTradeNumber == tradeId);
     }
 
     /// <summary>
-    /// 获取支付订单详情(微信接口) 🔖
+    /// Get payment order details (WeChat interface) 🔖
     /// </summary>
     /// <param name="tradeId"></param>
     /// <returns></returns>
-    [DisplayName("获取支付订单详情(微信接口)")]
+    [DisplayName("ObtainPay OrderDetails(WeChatInterface)")]
     public async Task<SysWechatPay> GetPayInfoFromWechat(string tradeId)
     {
         var request = new GetPayTransactionByOutTradeNumberRequest();
         request.OutTradeNumber = tradeId;
         var response = await _wechatTenpayClient.ExecuteGetPayTransactionByOutTradeNumberAsync(request);
-        // 修改订单支付状态
+        // Modify order payment status
         var wechatPay = await _sysWechatPayRep.GetFirstAsync(u => u.OutTradeNumber == response.OutTradeNumber
             && u.MerchantId == response.MerchantId);
-        // 如果状态不一致就更新数据库中的记录
+        // If the status is inconsistent, update the record in the database
         if (wechatPay != null && wechatPay.TradeState != response.TradeState)
         {
             wechatPay.OpenId = response.Payer.OpenId;
-            wechatPay.TransactionId = response.TransactionId; // 支付订单号
-            wechatPay.TradeType = response.TradeType; // 交易类型
-            wechatPay.TradeState = response.TradeState; // 交易状态
-            wechatPay.TradeStateDescription = response.TradeStateDescription; // 交易状态描述
-            wechatPay.BankType = response.BankType; // 付款银行类型
-            wechatPay.Total = response.Amount.Total; // 订单总金额
-            wechatPay.PayerTotal = response.Amount.PayerTotal; // 用户支付金额
-            wechatPay.SuccessTime = response.SuccessTime.Value.DateTime; // 支付完成时间
+            wechatPay.TransactionId = response.TransactionId; // Payment order number
+            wechatPay.TradeType = response.TradeType; // transaction type
+            wechatPay.TradeState = response.TradeState; // transaction status
+            wechatPay.TradeStateDescription = response.TradeStateDescription; // Transaction status description
+            wechatPay.BankType = response.BankType; // Payment bank type
+            wechatPay.Total = response.Amount.Total; // Total order amount
+            wechatPay.PayerTotal = response.Amount.PayerTotal; // User payment amount
+            wechatPay.SuccessTime = response.SuccessTime.Value.DateTime; // Payment completion time
             await _sysWechatPayRep.AsUpdateable(wechatPay).IgnoreColumns(true).ExecuteCommandAsync();
         }
         wechatPay = new SysWechatPay()
@@ -299,24 +299,24 @@ public class SysWechatPayService : IDynamicApiController, ITransient
             SubMerchantId = _wechatPayOptions.MerchantId,
             OutTradeNumber = request.OutTradeNumber,
             Attachment = response.Attachment,
-            Total = response.Amount.Total, // 订单总金额
+            Total = response.Amount.Total, // Total order amount
             TransactionId = response.TransactionId,
-            TradeType = response.TradeType, // 交易类型
-            TradeState = response.TradeState, // 交易状态
-            TradeStateDescription = response.TradeStateDescription, // 交易状态描述
-            BankType = response.BankType, // 付款银行类型
-            PayerTotal = response.Amount.PayerTotal, // 用户支付金额
-            SuccessTime = response.SuccessTime.Value.DateTime // 支付完成时间
+            TradeType = response.TradeType, // transaction type
+            TradeState = response.TradeState, // transaction status
+            TradeStateDescription = response.TradeStateDescription, // Transaction status description
+            BankType = response.BankType, // Payment bank type
+            PayerTotal = response.Amount.PayerTotal, // User payment amount
+            SuccessTime = response.SuccessTime.Value.DateTime // Payment completion time
         };
         return wechatPay;
     }
 
     /// <summary>
-    /// 退款申请
+    /// Refund request
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
-    [DisplayName("退款申请")]
+    [DisplayName("Refund request")]
     [HttpPost]
     public async Task<dynamic> CreateRefundDomestic([FromBody] WechatPayRefundDomesticInput input)
     {
@@ -331,16 +331,16 @@ public class SysWechatPayService : IDynamicApiController, ITransient
             },
 
             OutTradeNumber = input.TradeId,
-            OutRefundNumber = "R" + DateTimeOffset.Now.ToString("yyyyMMddHHmmssfff") + (new Random()).Next(100, 1000), // 订单号
-            NotifyUrl = _payCallBackOptions.WechatRefundUrl, // 应采用WechatRefundUrl参数，如与WechatPayUrl入口相同，也应分开设置参数
+            OutRefundNumber = "R" + DateTimeOffset.Now.ToString("yyyyMMddHHmmssfff") + (new Random()).Next(100, 1000), // Order number
+            NotifyUrl = _payCallBackOptions.WechatRefundUrl, // The WechatRefundUrl parameter should be used. If it is the same as the WechatPayUrl entrance, the parameters should also be set separately.
             Reason = input.Reason,
         };
         var response = await _wechatTenpayClient.ExecuteCreateRefundDomesticRefundAsync(request);
         if (string.IsNullOrEmpty(response.ErrorCode))
         {
-            // 成功了，这里应该保存退款订单信息
+            // Successfully, the refund order information should be saved here.
             var wechatPay = await _sysWechatPayRep.GetFirstAsync(u => u.OutTradeNumber == response.OutTradeNumber);
-            // 保存订单信息
+            // Save order information
             if (wechatPay != null)
             {
                 var wechatRefund = new SysWechatRefund()
@@ -364,26 +364,26 @@ public class SysWechatPayService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 获取退款订单详情(微信接口)
+    /// Get refund order details (WeChat interface)
     /// </summary>
     /// <param name="refundId"></param>
     /// <returns></returns>
-    [DisplayName("获取退款订单详情(微信接口)")]
+    [DisplayName("Get refund order details (WeChat API)")]
     public async Task<SysWechatRefund> GetRefundInfoFromWechat(string refundId)
     {
         var request = new GetRefundDomesticRefundByOutRefundNumberRequest();
         request.OutRefundNumber = refundId;
         var response = await _wechatTenpayClient.ExecuteGetRefundDomesticRefundByOutRefundNumberAsync(request);
-        // 修改订单支付状态
+        // Modify order payment status
         var wechatRefund = await _sysWechatRefundRep.GetFirstAsync(u => u.OutRefundNumber == refundId);
-        // 如果状态不一致就更新数据库中的记录
+        // If the status is inconsistent, update the record in the database
         if (wechatRefund != null && wechatRefund.TradeState != response.Status)
         {
-            wechatRefund.TransactionId = response.TransactionId; // 支付订单号
-            wechatRefund.TradeState = response.Status; // 交易状态
-            wechatRefund.SuccessTime = response.SuccessTime.Value.DateTime; // 支付完成时间
+            wechatRefund.TransactionId = response.TransactionId; // Payment order number
+            wechatRefund.TradeState = response.Status; // transaction status
+            wechatRefund.SuccessTime = response.SuccessTime.Value.DateTime; // Payment completion time
             await _sysWechatRefundRep.AsUpdateable(wechatRefund).IgnoreColumns(true).ExecuteCommandAsync();
-            // 有退款，刷新一下订单状态
+            // If there is a refund, please refresh the order status.
             var wechatPay = await _sysWechatPayRep.GetFirstAsync(u => u.Id == wechatRefund.WechatPayId);
             if (wechatPay != null)
                 await GetPayInfoFromWechat(wechatPay.OutTradeNumber);
@@ -395,18 +395,18 @@ public class SysWechatPayService : IDynamicApiController, ITransient
             OutRefundNumber = request.OutRefundNumber,
             Channel = response.Channel,
             UserReceivedAccount = response.UserReceivedAccount,
-            TradeState = response.Status, // 交易状态
-            SuccessTime = response.SuccessTime.Value.DateTime, // 支付完成时间
+            TradeState = response.Status, // transaction status
+            SuccessTime = response.SuccessTime.Value.DateTime, // Payment completion time
         };
         return wechatRefund;
     }
 
     /// <summary>
-    /// 微信支付成功回调(商户直连)
+    /// WeChat payment successful callback (direct merchant connection)
     /// </summary>
     /// <returns></returns>
     [AllowAnonymous]
-    [DisplayName("微信支付成功回调(商户直连)")]
+    [DisplayName("WeChat Pay Successful Callback (Merchant Direct Connection)")]
     public async Task<WechatPayOutput> PayCallBack()
     {
         using var ms = new MemoryStream();
@@ -421,21 +421,21 @@ public class SysWechatPayService : IDynamicApiController, ITransient
             {
                 var callbackPayResource = _wechatTenpayClient.DecryptEventResource<TransactionResource>(callbackModel);
 
-                // 修改订单支付状态
+                // Modify order payment status
                 var wechatPay = await _sysWechatPayRep.GetFirstAsync(u => u.OutTradeNumber == callbackPayResource.OutTradeNumber
                     && u.MerchantId == callbackPayResource.MerchantId);
                 if (wechatPay == null) return null;
-                wechatPay.OpenId = callbackPayResource.Payer.OpenId; // 支付者标识
-                //wechatPay.MerchantId = callbackResource.MerchantId; // 微信商户号
-                //wechatPay.OutTradeNumber = callbackResource.OutTradeNumber; // 商户订单号
-                wechatPay.TransactionId = callbackPayResource.TransactionId; // 支付订单号
-                wechatPay.TradeType = callbackPayResource.TradeType; // 交易类型
-                wechatPay.TradeState = callbackPayResource.TradeState; // 交易状态
-                wechatPay.TradeStateDescription = callbackPayResource.TradeStateDescription; // 交易状态描述
-                wechatPay.BankType = callbackPayResource.BankType; // 付款银行类型
-                wechatPay.Total = callbackPayResource.Amount.Total; // 订单总金额
-                wechatPay.PayerTotal = callbackPayResource.Amount.PayerTotal; // 用户支付金额
-                wechatPay.SuccessTime = callbackPayResource.SuccessTime.DateTime; // 支付完成时间
+                wechatPay.OpenId = callbackPayResource.Payer.OpenId; // Payer ID
+                //wechatPay.MerchantId = callbackResource.MerchantId; // WeChat merchant number
+                //wechatPay.OutTradeNumber = callbackResource.OutTradeNumber; // Merchant order number
+                wechatPay.TransactionId = callbackPayResource.TransactionId; // Payment order number
+                wechatPay.TradeType = callbackPayResource.TradeType; // transaction type
+                wechatPay.TradeState = callbackPayResource.TradeState; // transaction status
+                wechatPay.TradeStateDescription = callbackPayResource.TradeStateDescription; // Transaction status description
+                wechatPay.BankType = callbackPayResource.BankType; // Payment bank type
+                wechatPay.Total = callbackPayResource.Amount.Total; // Total order amount
+                wechatPay.PayerTotal = callbackPayResource.Amount.PayerTotal; // User payment amount
+                wechatPay.SuccessTime = callbackPayResource.SuccessTime.DateTime; // Payment completion time
 
                 await _sysWechatPayRep.AsUpdateable(wechatPay).IgnoreColumns(true).ExecuteCommandAsync();
 
@@ -448,28 +448,28 @@ public class SysWechatPayService : IDynamicApiController, ITransient
             }
             catch (Exception ex)
             {
-                "微信支付回调时出错：".LogError(ex);
+                "WeChat PayCallbacktimeError:".LogError(ex);
             }
         }
         else if ("REFUND.SUCCESS".Equals(callbackModel.EventType))
         {
-            //参考：https://pay.weixin.qq.com/docs/merchant/apis/jsapi-payment/refund-result-notice.html
+            //Reference: https://pay.weixin.qq.com/docs/merchant/apis/jsapi-payment/refund-result-notice.html
             try
             {
                 var callbackRefundResource = _wechatTenpayClient.DecryptEventResource<RefundResource>(callbackModel);
-                // 修改订单支付状态
+                // Modify order payment status
                 var wechatRefund = await _sysWechatRefundRep.GetFirstAsync(u => u.OutRefundNumber == callbackRefundResource.OutRefundNumber);
                 if (wechatRefund == null) return null;
-                wechatRefund.TradeState = callbackRefundResource.RefundStatus; // 交易状态
-                wechatRefund.SuccessTime = callbackRefundResource.SuccessTime.Value.DateTime; // 支付完成时间
+                wechatRefund.TradeState = callbackRefundResource.RefundStatus; // transaction status
+                wechatRefund.SuccessTime = callbackRefundResource.SuccessTime.Value.DateTime; // Payment completion time
 
                 await _sysWechatRefundRep.AsUpdateable(wechatRefund).IgnoreColumns(true).ExecuteCommandAsync();
-                // 有退款，刷新一下订单状态
+                // If there is a refund, please refresh the order status.
                 await GetPayInfoFromWechat(callbackRefundResource.OutTradeNumber);
             }
             catch (Exception ex)
             {
-                "微信退款回调时出错：".LogError(ex);
+                "Error during WeChat refund callback:".LogError(ex);
             }
         }
         else
@@ -481,11 +481,11 @@ public class SysWechatPayService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 微信支付成功回调(服务商模式) 🔖
+    /// WeChat payment successful callback (service provider mode) 🔖
     /// </summary>
     /// <returns></returns>
     [AllowAnonymous]
-    [DisplayName("微信支付成功回调(服务商模式)")]
+    [DisplayName("WeChat Pay Successful Callback (Service Provider Mode)")]
     public async Task PayPartnerCallBack()
     {
         using var ms = new MemoryStream();
@@ -498,21 +498,21 @@ public class SysWechatPayService : IDynamicApiController, ITransient
         {
             var callbackResource = _wechatTenpayClient.DecryptEventResource<PartnerTransactionResource>(callbackModel);
 
-            // 修改订单支付状态
+            // Modify order payment status
             var wechatPay = await _sysWechatPayRep.GetFirstAsync(u => u.OutTradeNumber == callbackResource.OutTradeNumber
                 && u.MerchantId == callbackResource.MerchantId);
             if (wechatPay == null) return;
-            //wechatPay.OpenId = callbackResource.Payer.OpenId; // 支付者标识
-            //wechatPay.MerchantId = callbackResource.MerchantId; // 微信商户号
-            //wechatPay.OutTradeNumber = callbackResource.OutTradeNumber; // 商户订单号
-            wechatPay.TransactionId = callbackResource.TransactionId; // 支付订单号
-            wechatPay.TradeType = callbackResource.TradeType; // 交易类型
-            wechatPay.TradeState = callbackResource.TradeState; // 交易状态
-            wechatPay.TradeStateDescription = callbackResource.TradeStateDescription; // 交易状态描述
-            wechatPay.BankType = callbackResource.BankType; // 付款银行类型
-            wechatPay.Total = callbackResource.Amount.Total; // 订单总金额
-            wechatPay.PayerTotal = callbackResource.Amount.PayerTotal; // 用户支付金额
-            wechatPay.SuccessTime = callbackResource.SuccessTime.DateTime; // 支付完成时间
+            //wechatPay.OpenId = callbackResource.Payer.OpenId; // Payer ID
+            //wechatPay.MerchantId = callbackResource.MerchantId; // WeChat merchant number
+            //wechatPay.OutTradeNumber = callbackResource.OutTradeNumber; // Merchant order number
+            wechatPay.TransactionId = callbackResource.TransactionId; // Payment order number
+            wechatPay.TradeType = callbackResource.TradeType; // transaction type
+            wechatPay.TradeState = callbackResource.TradeState; // transaction status
+            wechatPay.TradeStateDescription = callbackResource.TradeStateDescription; // Transaction status description
+            wechatPay.BankType = callbackResource.BankType; // Payment bank type
+            wechatPay.Total = callbackResource.Amount.Total; // Total order amount
+            wechatPay.PayerTotal = callbackResource.Amount.PayerTotal; // User payment amount
+            wechatPay.SuccessTime = callbackResource.SuccessTime.DateTime; // Payment completion time
 
             await _sysWechatPayRep.AsUpdateable(wechatPay).IgnoreColumns(true).ExecuteCommandAsync();
         }

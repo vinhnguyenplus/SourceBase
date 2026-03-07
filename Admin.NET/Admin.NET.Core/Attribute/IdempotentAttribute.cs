@@ -1,8 +1,8 @@
-﻿// Admin.NET 项目的版权、商标、专利和其他相关权利均受相应法律法规的保护。使用本项目应遵守相关法律法规和许可证的要求。
+﻿// The copyright, trademark, patent and other related rights of the Admin.NET project are protected by corresponding laws and regulations. Use of this project shall comply with relevant laws, regulations and license requirements.
 //
-// 本项目主要遵循 MIT 许可证和 Apache 许可证（版本 2.0）进行分发和使用。许可证位于源代码树根目录中的 LICENSE-MIT 和 LICENSE-APACHE 文件。
+// This project is distributed and used primarily under the MIT License and the Apache License (version 2.0). The license is located in the LICENSE-MIT and LICENSE-APACHE files in the root of the source tree.
 //
-// 不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！
+// This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project!
 
 using Newtonsoft.Json;
 using System.Security.Claims;
@@ -10,34 +10,34 @@ using System.Security.Claims;
 namespace Admin.NET.Core;
 
 /// <summary>
-/// 防止重复请求过滤器特性(此特性使用了分布式锁，需确保系统支持分布式锁)
+/// Prevent duplicate request filter feature (this feature uses distributed locks, you need to ensure that the system supports distributed locks)
 /// </summary>
 [SuppressSniffer]
 [AttributeUsage(AttributeTargets.All, AllowMultiple = true, Inherited = true)]
 public class IdempotentAttribute : Attribute, IAsyncActionFilter
 {
     /// <summary>
-    /// 请求间隔时间/秒
+    /// Request interval time/second
     /// </summary>
     public int IntervalTime { get; set; } = 5;
 
     /// <summary>
-    /// 错误提示内容
+    /// Error message content
     /// </summary>
-    public string Message { get; set; } = "你操作频率过快，请稍后重试！";
+    public string Message { get; set; } = "You are operating too frequently, please try again later!";
 
     /// <summary>
-    /// 缓存前缀: Key+请求路由+用户Id+请求参数
+    /// Cache prefix: Key+request route+userId+request parameter
     /// </summary>
     public string CacheKey { get; set; } = CacheConst.KeyIdempotent;
 
     /// <summary>
-    /// 是否直接抛出异常：Ture是，False返回上次请求结果
+    /// Whether to throw an exception directly: True, False returns the result of the last request
     /// </summary>
     public bool ThrowBah { get; set; }
 
     /// <summary>
-    /// 锁前缀
+    /// lock prefix
     /// </summary>
     public string LockPrefix { get; set; } = "lock_";
 
@@ -62,7 +62,7 @@ public class IdempotentAttribute : Attribute, IAsyncActionFilter
         var sysCacheService = httpContext.RequestServices.GetService<SysCacheService>();
         try
         {
-            // 分布式锁
+            // Distributed lock
             using var distributedLock = sysCacheService.BeginCacheLock($"{LockPrefix}{cacheKey}") ?? throw Oops.Oh(Message);
 
             var cacheValue = sysCacheService.Get<ResponseData>(cacheKey);
@@ -75,7 +75,7 @@ public class IdempotentAttribute : Attribute, IAsyncActionFilter
             else
             {
                 var resultContext = await next();
-                // 缓存请求结果,null值不缓存
+                // Cache request results, null values ​​are not cached
                 if (resultContext.Result is ObjectResult { Value: { } } objectResult)
                 {
                     var typeName = objectResult.Value.GetType().Name;
@@ -95,17 +95,17 @@ public class IdempotentAttribute : Attribute, IAsyncActionFilter
     }
 
     /// <summary>
-    /// 请求结果数据
+    /// Request result data
     /// </summary>
     private class ResponseData
     {
         /// <summary>
-        /// 结果类型
+        /// result type
         /// </summary>
         public string Type { get; set; }
 
         /// <summary>
-        /// 请求结果
+        /// Request results
         /// </summary>
         public dynamic Value { get; set; }
     }

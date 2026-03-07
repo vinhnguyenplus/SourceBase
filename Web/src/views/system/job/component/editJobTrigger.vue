@@ -10,26 +10,26 @@
 			<el-form :model="state.ruleForm" ref="ruleFormRef" label-width="auto">
 				<el-row :gutter="35">
 					<el-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12" class="mb20">
-						<el-form-item label="触发器编号" prop="triggerId" :rules="[{ required: true, message: '触发器编号不能为空', trigger: 'blur' }]">
-							<el-input v-model="state.ruleForm.triggerId" placeholder="触发器编号" clearable />
+						<el-form-item label="Trigger number" prop="triggerId" :rules="[{ required: true, message: 'Trigger number cannot be empty', trigger: 'blur' }]">
+							<el-input v-model="state.ruleForm.triggerId" placeholder="Trigger number" clearable />
 						</el-form-item>
 					</el-col>
 					<el-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12" class="mb20">
-						<el-form-item label="触发器类型">
+						<el-form-item label="Trigger type">
 							<el-select v-model="state.ruleForm.triggerType" style="width: 100%">
-								<el-option value="Furion.Schedule.PeriodTrigger" label="间隔"></el-option>
-								<el-option value="Furion.Schedule.CronTrigger" label="Cron表达式"></el-option>
+								<el-option value="Furion.Schedule.PeriodTrigger" label="interval"></el-option>
+								<el-option value="Furion.Schedule.CronTrigger" label="Cron expression"></el-option>
 							</el-select>
 						</el-form-item>
 					</el-col>
 					<el-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12" class="mb20" v-if="state.ruleForm.triggerType == 'Furion.Schedule.PeriodTrigger'">
-						<el-form-item label="间隔时间(ms)">
-							<el-input-number v-model="periodValue" placeholder="间隔" :min="1000" :step="1000" class="w100" />
+						<el-form-item label="Interval time (ms)">
+							<el-input-number v-model="periodValue" placeholder="interval" :min="1000" :step="1000" class="w100" />
 						</el-form-item>
 					</el-col>
 					<el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="mb20" v-else>
-						<el-form-item label="Cron表达式">
-							<el-input v-model="cronValue" placeholder="Cron表达式">
+						<el-form-item label="Cron expression">
+							<el-input v-model="cronValue" placeholder="Cron expression">
 								<template #append>
 									<el-space :size="10" spacer="|">
 										<el-dropdown style="color: inherit" trigger="click" @command="macroDropDownCommand">
@@ -45,55 +45,55 @@
 												</el-dropdown-menu>
 											</template>
 										</el-dropdown>
-										<el-button style="margin: 0px -20px 0px -10px; font-size: 14px" @click="state.showCronDialog = true">Cron表达式</el-button>
+										<el-button style="margin: 0px -20px 0px -10px; font-size: 14px" @click="state.showCronDialog = true">Cron expression</el-button>
 									</el-space>
 								</template>
 							</el-input>
 						</el-form-item>
 					</el-col>
 					<el-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12" class="mb20">
-						<el-form-item label="起始时间">
-							<el-date-picker v-model="state.ruleForm.startTime" type="datetime" placeholder="起始时间" style="width: 100%" format="YYYY-MM-DD HH:mm:ss" value-format="YYYY-MM-DD HH:mm:ss" />
+						<el-form-item label="start time">
+							<el-date-picker v-model="state.ruleForm.startTime" type="datetime" placeholder="start time" style="width: 100%" format="YYYY-MM-DD HH:mm:ss" value-format="YYYY-MM-DD HH:mm:ss" />
 						</el-form-item>
 					</el-col>
 					<el-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12" class="mb20">
-						<el-form-item label="结束时间">
-							<el-date-picker v-model="state.ruleForm.endTime" type="datetime" placeholder="结束时间" style="width: 100%" format="YYYY-MM-DD HH:mm:ss" value-format="YYYY-MM-DD HH:mm:ss" />
+						<el-form-item label="end time">
+							<el-date-picker v-model="state.ruleForm.endTime" type="datetime" placeholder="end time" style="width: 100%" format="YYYY-MM-DD HH:mm:ss" value-format="YYYY-MM-DD HH:mm:ss" />
 						</el-form-item>
 					</el-col>
 					<el-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12" class="mb20">
-						<el-form-item label="最大触发次数">
-							<el-input-number v-model="state.ruleForm.maxNumberOfRuns" placeholder="最大触发次数" class="w100" />
+						<el-form-item label="Maximum trigger count">
+							<el-input-number v-model="state.ruleForm.maxNumberOfRuns" placeholder="Maximum trigger count" class="w100" />
 						</el-form-item>
 					</el-col>
 					<el-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12" class="mb20">
-						<el-form-item label="最大出错次数">
-							<el-input-number v-model="state.ruleForm.maxNumberOfErrors" placeholder="最大出错次数" class="w100" />
+						<el-form-item label="Maximum number of errors">
+							<el-input-number v-model="state.ruleForm.maxNumberOfErrors" placeholder="Maximum number of errors" class="w100" />
 						</el-form-item>
 					</el-col>
 					<el-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12" class="mb20">
-						<el-form-item label="重试次数">
-							<el-input-number v-model="state.ruleForm.numRetries" placeholder="重试次数" class="w100" />
+						<el-form-item label="Number of retries">
+							<el-input-number v-model="state.ruleForm.numRetries" placeholder="Number of retries" class="w100" />
 						</el-form-item>
 					</el-col>
 					<el-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12" class="mb20">
-						<el-form-item label="重试间隔(ms)">
-							<el-input-number v-model="state.ruleForm.retryTimeout" placeholder="重试间隔ms" class="w100" />
+						<el-form-item label="Retry interval (ms)">
+							<el-input-number v-model="state.ruleForm.retryTimeout" placeholder="Retry interval ms" class="w100" />
 						</el-form-item>
 					</el-col>
 					<el-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12" class="mb20">
-						<el-form-item label="立即启动">
+						<el-form-item label="Start now">
 							<el-radio-group v-model="state.ruleForm.startNow">
-								<el-radio :value="true">是</el-radio>
-								<el-radio :value="false">否</el-radio>
+								<el-radio :value="true">Yes</el-radio>
+								<el-radio :value="false">no</el-radio>
 							</el-radio-group>
 						</el-form-item>
 					</el-col>
 					<el-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12" class="mb20">
-						<el-form-item label="启动时执行一次">
+						<el-form-item label="Execute once at startup">
 							<el-radio-group v-model="state.ruleForm.runOnStart">
-								<el-radio :value="true">是</el-radio>
-								<el-radio :value="false">否</el-radio>
+								<el-radio :value="true">Yes</el-radio>
+								<el-radio :value="false">no</el-radio>
 							</el-radio-group>
 						</el-form-item>
 					</el-col>
@@ -101,29 +101,29 @@
 						<el-form-item>
 							<template v-slot:label>
 								<div>
-									重置触发次数
-									<el-tooltip raw-content content="是否在启动时重置最大触发次数等于一次的作业<br/>解决因持久化数据已完成一次触发但启动时不再执行的问题" placement="top">
+									Reset trigger count
+									<el-tooltip raw-content content="Whether to reset jobs with a maximum trigger count equal to one at startup<br/>Resolve the issue where jobs that have already triggered once due to persisted data do not execute again at startup" placement="top">
 										<SvgIcon name="fa fa-question-circle-o" :size="15" style="vertical-align: middle" />
 									</el-tooltip>
 								</div>
 							</template>
 							<el-radio-group v-model="state.ruleForm.resetOnlyOnce">
-								<el-radio :value="true">是</el-radio>
-								<el-radio :value="false">否</el-radio>
+								<el-radio :value="true">Yes</el-radio>
+								<el-radio :value="false">no</el-radio>
 							</el-radio-group>
 						</el-form-item>
 					</el-col>
 					<el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="mb20">
-						<el-form-item label="描述信息" prop="description">
-							<el-input v-model="state.ruleForm.description" placeholder="描述信息" clearable type="textarea" />
+						<el-form-item label="Description information" prop="description">
+							<el-input v-model="state.ruleForm.description" placeholder="Description information" clearable type="textarea" />
 						</el-form-item>
 					</el-col>
 				</el-row>
 			</el-form>
 			<template #footer>
 				<span class="dialog-footer">
-					<el-button @click="cancel">取 消</el-button>
-					<el-button type="primary" @click="submit">确 定</el-button>
+					<el-button @click="cancel">Cancel</el-button>
+					<el-button type="primary" @click="submit">Confirm</el-button>
 				</span>
 			</template>
 		</el-dialog>
@@ -132,7 +132,7 @@
 			<template #header>
 				<div style="color: #fff">
 					<el-icon size="16" style="margin-right: 3px; display: inline; vertical-align: middle"> <ele-Edit /> </el-icon>
-					<span> Cron表达式生成器 </span>
+					<span> Cron expression generator </span>
 				</div>
 			</template>
 			<vcrontab id="vcrontab" @hide="state.showCronDialog = false" @fill="crontabFill" :expression="cronValue"></vcrontab>
@@ -151,7 +151,7 @@ import { getAPI } from '/@/utils/axios-utils';
 import { SysJobApi } from '/@/api-services/api';
 import { UpdateJobTriggerInput } from '/@/api-services/models';
 
-// Macro 标识符数据结构
+// Macro identifier data structure
 interface MacroData {
 	key: string;
 	description: string;
@@ -169,21 +169,21 @@ const state = reactive({
 });
 
 const macroData: MacroData[] = reactive([
-	{ key: '@secondly', description: '每秒 .0000000' },
-	{ key: '@minutely', description: '每分钟 00' },
-	{ key: '@hourly', description: '每小时 00:00' },
-	{ key: '@daily', description: '每天 00:00:00' },
-	{ key: '@monthly', description: '每月 1 号 00:00:00' },
-	{ key: '@weekly', description: '每周日 00:00:00' },
-	{ key: '@yearly', description: '每年 1 月 1 号 00:00:00' },
-	{ key: '@workday', description: '每周一至周五 00:00:00' },
+	{ key: '@secondly', description: '0.0000000 per second' },
+	{ key: '@minutely', description: '00 per minute' },
+	{ key: '@hourly', description: 'Every hour 00:00' },
+	{ key: '@daily', description: 'Every day 00:00:00' },
+	{ key: '@monthly', description: '00:00:00 on the 1st of every month' },
+	{ key: '@weekly', description: 'EverySunday 00:00:00' },
+	{ key: '@yearly', description: 'Every January 1st 00:00:00' },
+	{ key: '@workday', description: 'Every Monday to Friday 00:00:00' },
 ]);
 
-// 间隔周期值
+// interval value
 const periodValue: WritableComputedRef<number | undefined> = computed({
 	get() {
 		const defaultValue: number | undefined = undefined;
-		// 触发器周期不是周期，返回默认值
+		// Trigger period is not a period, return default value
 		if (state.ruleForm.triggerType != 'Furion.Schedule.PeriodTrigger') return defaultValue;
 		if (!state.ruleForm.args) return defaultValue;
 
@@ -197,14 +197,14 @@ const periodValue: WritableComputedRef<number | undefined> = computed({
 	},
 });
 
-// cron 表达式值
+// cron expression value
 const cronValue: WritableComputedRef<string> = computed({
 	get() {
 		const defaultValue = '';
-		// 触发器周期不是周期，返回默认值
+		// Trigger period is not a period, return default value
 		if (state.ruleForm.triggerType != 'Furion.Schedule.CronTrigger') return defaultValue;
 		if (!state.ruleForm.args) return defaultValue;
-		// Furion 的 cron 表达式有2个入参
+		// Furion's cron expression has 2 input parameters
 		const value = String(state.ruleForm.args);
 		const parameters = value.split(',');
 		if (parameters.length < 2) return defaultValue;
@@ -220,47 +220,47 @@ const cronValue: WritableComputedRef<string> = computed({
 	set(value: string) {
 		if (state.ruleForm.args == value) return;
 		const newValue = value.trim();
-		// 第二个参数值参阅 https://furion.baiqian.ltd/docs/cron#2624-cronstringformat-%E6%A0%BC%E5%BC%8F%E5%8C%96
+		// For the second parameter value, please refer to https://furion.baiqian.ltd/docs/cron#2624-cronstringformat-%E6%A0%BC%E5%BC%8F%E5%8C%96
 		let cronStringFormatValue = -1;
-		// 如果是 Macro 标识符，使用默认格式
+		// If it is a Macro identifier, use the default format
 		if (newValue.startsWith('@'))
-			cronStringFormatValue = 0; // 默认格式，书写顺序：分 时 天 月 周
+			cronStringFormatValue = 0; // Default format, writing order: minutes, hours, days, months, weeks
 		else {
 			if (newValue.split(' ').length == 6)
-				cronStringFormatValue = 2; // 带秒格式，书写顺序：秒 分 时 天 月 周
-			else cronStringFormatValue = 3; // 带秒和年格式，书写顺序：秒 分 时 天 月 周 年
+				cronStringFormatValue = 2; // With seconds format, writing order: seconds, minutes, hours, days, months, weeks
+			else cronStringFormatValue = 3; // With seconds and year format, writing order: seconds, minutes, hours, days, months, anniversary
 		}
 		state.ruleForm.args = `"${newValue}",${cronStringFormatValue}`;
 	},
 });
 
-// 打开弹窗
+// Open pop-up window
 const openDialog = (row: any) => {
 	state.ruleForm = JSON.parse(JSON.stringify(row));
 	state.isShowDialog = true;
 	ruleFormRef.value?.resetFields();
 };
 
-// 关闭弹窗
+// Close pop-up window
 const closeDialog = () => {
 	emits('handleQuery');
 	state.isShowDialog = false;
 };
 
-// 取消
+// Cancel
 const cancel = () => {
 	state.isShowDialog = false;
 };
 
-// 提交
+// submit
 const submit = () => {
 	ruleFormRef.value.validate(async (valid: boolean) => {
 		if (!valid) return;
 		if (state.ruleForm.triggerType == 'Furion.Schedule.PeriodTrigger' && !periodValue.value) {
-			ElMessage.warning('间隔时间不能为空');
+			ElMessage.warning('intervaltimecannot benull');
 			return;
 		} else if (state.ruleForm.triggerType == 'Furion.Schedule.CronTrigger' && !cronValue.value) {
-			ElMessage.warning('Cron表达式不能为空');
+			ElMessage.warning('Cron expressioncannot benull');
 			return;
 		}
 
@@ -273,17 +273,17 @@ const submit = () => {
 	});
 };
 
-// cron窗体确定后值
+// cron form determines the value after
 const crontabFill = (value: string | null | undefined) => {
 	cronValue.value = value == null || value == undefined ? '' : value;
 };
 
-// macro 下拉选中回调
+// macro drop-down selection callback
 const macroDropDownCommand = (item: MacroData) => {
 	cronValue.value = item.key;
 };
 
-// 导出对象
+// Export object
 defineExpose({ openDialog });
 </script>
 

@@ -1,13 +1,13 @@
-﻿// Admin.NET 项目的版权、商标、专利和其他相关权利均受相应法律法规的保护。使用本项目应遵守相关法律法规和许可证的要求。
+﻿// The copyright, trademark, patent and other related rights of the Admin.NET project are protected by corresponding laws and regulations. Use of this project shall comply with relevant laws, regulations and license requirements.
 //
-// 本项目主要遵循 MIT 许可证和 Apache 许可证（版本 2.0）进行分发和使用。许可证位于源代码树根目录中的 LICENSE-MIT 和 LICENSE-APACHE 文件。
+// This project is distributed and used primarily under the MIT License and the Apache License (version 2.0). The license is located in the LICENSE-MIT and LICENSE-APACHE files in the root of the source tree.
 //
-// 不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！
+// This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project!
 
 namespace Admin.NET.Core.Service;
 
 /// <summary>
-/// 系统存储过程服务 🧩
+/// System stored procedure service 🧩
 /// </summary>
 [ApiDescriptionSettings(Order = 102)]
 public class SysProcService : IDynamicApiController, ITransient
@@ -20,7 +20,7 @@ public class SysProcService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 导出存储过程数据-指定列，没有指定的字段会被隐藏 🔖
+    /// Export stored procedure data - specify columns, unspecified fields will be hidden 🔖
     /// </summary>
     /// <returns></returns>
     public async Task<IActionResult> PocExport2(ExportProcInput input)
@@ -41,7 +41,7 @@ public class SysProcService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 根据模板导出存储过程数据 🔖
+    /// Export stored procedure data based on template 🔖
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
@@ -57,7 +57,7 @@ public class SysProcService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 获取存储过程返回表-Oracle、达梦参数顺序不能错 🔖
+    /// Get the stored procedure return table - Oracle and Dameng parameter order cannot be wrong 🔖
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
@@ -68,8 +68,8 @@ public class SysProcService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 获取存储过程返回数据集-Oracle、达梦参数顺序不能错
-    /// Oracle 返回table、table1，其他返回table1、table2。适用于报表、复杂详细页面等 🔖
+    /// Obtain the data set returned by the stored procedure-Oracle and Dameng parameter order cannot be wrong
+    /// Oracle returns table, table1, others return table1, table2. Suitable for reports, complex detailed pages, etc. 🔖
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
@@ -81,7 +81,7 @@ public class SysProcService : IDynamicApiController, ITransient
     }
 
     ///// <summary>
-    ///// 根据配置表获取对映存储过程
+    ///// Get the mapping stored procedure according to the configuration table
     ///// </summary>
     ///// <param name="input"></param>
     ///// <returns></returns>

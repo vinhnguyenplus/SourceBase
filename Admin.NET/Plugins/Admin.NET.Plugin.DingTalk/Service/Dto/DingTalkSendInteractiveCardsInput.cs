@@ -1,79 +1,79 @@
-﻿// Admin.NET 项目的版权、商标、专利和其他相关权利均受相应法律法规的保护。使用本项目应遵守相关法律法规和许可证的要求。
+﻿// The copyright, trademark, patent and other related rights of the Admin.NET project are protected by corresponding laws and regulations. Use of this project shall comply with relevant laws, regulations and license requirements.
 //
-// 本项目主要遵循 MIT 许可证和 Apache 许可证（版本 2.0）进行分发和使用。许可证位于源代码树根目录中的 LICENSE-MIT 和 LICENSE-APACHE 文件。
+// This project is distributed and used primarily under the MIT License and the Apache License (version 2.0). The license is located in the LICENSE-MIT and LICENSE-APACHE files in the root of the source tree.
 //
-// 不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！
+// This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project!
 
 namespace Admin.NET.Plugin.DingTalk;
 
 public class DingTalkSendInteractiveCardsInput
 {
     /// <summary>
-    /// 互动卡片的消息模板Id
+    /// Message template ID of interactive card
     /// </summary>
-    [Required(ErrorMessage = "互动卡片的消息模板Id必填!")]
+    [Required(ErrorMessage = "The message template ID of the interactive card is required!")]
     public string? CardTemplateId { get; set; }
 
     /// <summary>
-    /// 群Id
+    /// GroupId
     /// </summary>
     /// <remarks>
-    /// 1、基于群模板创建的群。
-    /// 企业内部应用，调用创建群接口获取open_conversation_id参数值。
-    /// 2、安装群聊酷应用的群。
-    /// 企业内部应用，通过群内安装酷应用事件获取回调参数OpenConversationId参数值。
+    /// 1. A group created based on a group template.
+    /// For internal enterprise applications, call the create group interface to obtain the open_conversation_id parameter value.
+    /// 2. Install the group chat cool application.
+    /// For internal enterprise applications, the callback parameter OpenConversationId parameter value is obtained through the cool application installation event in the group.
     /// </remarks>
     public string OpenConversationId { get; set; }
 
     /// <summary>
-    /// 接收人userId列表
+    /// Recipient userId list
     /// </summary>
     /// <remarks>
-    /// 单聊：receiverUserIdList填写用户ID，最大值20。
-    /// 群聊：receiverUserIdList填写用户ID，表示当前对应ID的群内用户可见
-    /// receiverUserIdList参数不填写，表示当前群内所有用户可见
+    /// Single chat: receiverUserIdList fills in the user ID, the maximum value is 20.
+    /// Group chat: fill in the user ID in receiverUserIdList, indicating that the current users in the group with the corresponding ID are visible
+    /// If the receiverUserIdList parameter is not filled in, it means that all users in the current group are visible.
     /// </remarks>
-    [Required(ErrorMessage = "接收人userId列表必填!")]
+    [Required(ErrorMessage = "Recipient userId list is required!")]
     public List<string>? ReceiverUserIdList { get; set; }
 
     /// <summary>
-    /// 唯一标示卡片的外部编码
+    /// An external encoding that uniquely identifies the card
     /// </summary>
-    [Required(ErrorMessage = "唯一标示卡片的外部编码必填!")]
+    [Required(ErrorMessage = "The external code that uniquely identifies the card is required!")]
     public string? OutTrackId { get; set; }
 
     /// <summary>
-    /// 机器人的编码
+    /// Robot coding
     /// </summary>
     public string RobotCode { get; set; }
 
     /// <summary>
-    /// 发送的会话类型
+    /// Sent session type
     /// </summary>
-    [Required(ErrorMessage = "会话类型必填!")]
+    [Required(ErrorMessage = "Conversation type is required!")]
     public DingTalkConversationTypeEnum? ConversationType { get; set; }
 
     /// <summary>
-    /// 卡片回调时的路由Key，用于查询注册的callbackUrl
+    /// Routing Key during card callback, used to query the registered callbackUrl
     /// </summary>
     public string CallbackRouteKey { get; set; }
 
     /// <summary>
-    /// 卡片公有数据
+    /// Card public data
     /// </summary>
-    [Required(ErrorMessage = "卡片公有数据必填!")]
+    [Required(ErrorMessage = "Card public data is required!")]
     public DingTalkCardData CardData { get; set; }
 }
 
 public class GetDingTalkCardMessageReadStatusInput
 {
     /// <summary>
-    /// 机器人的编码
+    /// Robot coding
     /// </summary>
     public string RobotCode { set; get; }
 
     /// <summary>
-    /// 消息唯一标识，可通过批量发送人与机器人会话中机器人消息接口返回参数中processQueryKey字段获取。
+    /// The unique identifier of the message can be obtained through the processQueryKey field in the return parameter of the robot message interface in the conversation between the batch sender and the robot.
     /// </summary>
     public string ProcessQueryKey { set; get; }
 }
@@ -81,7 +81,7 @@ public class GetDingTalkCardMessageReadStatusInput
 public class GetDingTalkCardMessageReadStatusOutput
 {
     /// <summary>
-    /// 消息发送状态，SUCCESS：成功、RECALLED：已撤回、PROCESSING： 处理中
+    /// Message sending status, SUCCESS: successful, RECALLED: withdrawn, PROCESSING: processing
     /// </summary>
     public string SendStatus { get; set; }
 
@@ -92,22 +92,22 @@ public class GetDingTalkCardMessageReadStatusOutput
 }
 
 /// <summary>
-/// 钉钉卡片消息已读情况
+/// DingTalk card message read status
 /// </summary>
 public class DingTalkCardMessageReadInfoList
 {
     /// <summary>
-    /// 消息接收者名称
+    /// Message recipient name
     /// </summary>
     public string Name { set; get; }
 
     /// <summary>
-    /// 消息接收者的userId
+    /// The userId of the message recipient
     /// </summary>
     public string UserId { set; get; }
 
     /// <summary>
-    /// 已读状态，READ：已读、UNREAD：未读
+    /// Read status, READ: read, UNREAD: unread
     /// </summary>
     public string ReadStatus { set; get; }
 }

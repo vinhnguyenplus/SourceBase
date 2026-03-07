@@ -1,18 +1,18 @@
-﻿// Admin.NET 项目的版权、商标、专利和其他相关权利均受相应法律法规的保护。使用本项目应遵守相关法律法规和许可证的要求。
+﻿// The copyright, trademark, patent and other related rights of the Admin.NET project are protected by corresponding laws and regulations. Use of this project shall comply with relevant laws, regulations and license requirements.
 //
-// 本项目主要遵循 MIT 许可证和 Apache 许可证（版本 2.0）进行分发和使用。许可证位于源代码树根目录中的 LICENSE-MIT 和 LICENSE-APACHE 文件。
+// This project is distributed and used primarily under the MIT License and the Apache License (version 2.0). The license is located in the LICENSE-MIT and LICENSE-APACHE files in the root of the source tree.
 //
-// 不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！
+// This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project!
 
 namespace Admin.NET.Core;
 
 /// <summary>
-/// 字符串扩展方法
+/// String extension methods
 /// </summary>
 public static class StringExtension
 {
     /// <summary>
-    /// 字符串截断
+    /// String truncation
     /// </summary>
     public static string Truncate(this string str, int maxLength, string ellipsis = "...")
     {
@@ -20,14 +20,14 @@ public static class StringExtension
         if (maxLength <= 0) return string.Empty;
         if (str.Length <= maxLength) return str;
 
-        // 确保省略号不会导致字符串超出最大长度
+        // Ensure that ellipsis does not cause the string to exceed the maximum length
         int ellipsisLength = ellipsis?.Length ?? 0;
         int truncateLength = Math.Min(maxLength, str.Length - ellipsisLength);
         return str[..truncateLength] + ellipsis;
     }
 
     /// <summary>
-    /// 单词首字母全部大写
+    /// All capital letters of words
     /// </summary>
     public static string ToTitleCase(this string str)
     {
@@ -35,7 +35,7 @@ public static class StringExtension
     }
 
     /// <summary>
-    /// 检查是否包含子串，忽略大小写
+    /// Check if a substring is contained, ignoring case
     /// </summary>
     public static bool ContainsIgnoreCase(this string str, string substring)
     {
@@ -44,7 +44,7 @@ public static class StringExtension
     }
 
     /// <summary>
-    /// 判断是否是 JSON 数据
+    /// Determine whether it is JSON data
     /// </summary>
     public static bool IsJson(this string str)
     {
@@ -54,31 +54,31 @@ public static class StringExtension
     }
 
     /// <summary>
-    /// 判断是否是 HTML 数据
+    /// Determine whether it is HTML data
     /// </summary>
     public static bool IsHtml(this string str)
     {
         if (string.IsNullOrWhiteSpace(str)) return false;
         str = str.Trim();
 
-        // 检查是否以 <!DOCTYPE html> 或 <html> 开头
+        // Check if it starts with <!DOCTYPE html> or <html>
         if (str.StartsWith("<!DOCTYPE html>", StringComparison.OrdinalIgnoreCase) || str.StartsWith("<html>", StringComparison.OrdinalIgnoreCase))
         {
             return true;
         }
 
-        // 检查是否包含 HTML 标签
+        // Check if HTML tags are included
         return Regex.IsMatch(str, @"<\s*[^>]+>.*<\s*/\s*[^>]+>|<\s*[^>]+\s*/>", RegexOptions.Singleline | RegexOptions.IgnoreCase);
     }
 
     /// <summary>
-    /// 字符串反转
+    /// String reverse
     /// </summary>
     public static string Reverse(this string str)
     {
         if (string.IsNullOrEmpty(str)) return str;
 
-        // 使用 Span<char> 提高性能
+        // Using Span<char> to improve performance
         Span<char> charSpan = stackalloc char[str.Length];
         for (int i = 0; i < str.Length; i++)
         {
@@ -88,27 +88,27 @@ public static class StringExtension
     }
 
     /// <summary>
-    /// 转首字母小写
+    /// Convert first letter to lower case
     /// </summary>
     public static string ToFirstLetterLowerCase(this string input)
     {
         if (string.IsNullOrWhiteSpace(input)) return input;
-        if (input.Length == 1) return input.ToLower(); // 处理单字符字符串
+        if (input.Length == 1) return input.ToLower(); // Handle single character strings
 
         return char.ToLower(input[0]) + input[1..];
     }
 
     /// <summary>
-    /// 渲染字符串，替换占位符
+    /// Render a string, replacing placeholders
     /// </summary>
-    /// <param name="template">模板内容</param>
-    /// <param name="parameters">参数对象</param>
+    /// <param name="template">Template content</param>
+    /// <param name="parameters">parameter object</param>
     /// <returns></returns>
     public static string Render(this string template, object parameters)
     {
         if (string.IsNullOrWhiteSpace(template)) return template;
 
-        // 将参数转换为字典（忽略大小写）
+        // Convert arguments to dictionary (ignoring case)
         var paramDict = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
         if (parameters != null)
         {
@@ -118,16 +118,16 @@ public static class StringExtension
             }
         }
 
-        // 使用正则表达式替换占位符
+        // Replace placeholders using regular expressions
         return Regex.Replace(template, @"\{(\w+)\}", match =>
         {
-            string key = match.Groups[1].Value; // 获取占位符中的 key
+            string key = match.Groups[1].Value; // Get the key in the placeholder
             return paramDict.TryGetValue(key, out string value) ? value : string.Empty;
         });
     }
 
     /// <summary>
-    /// 驼峰转下划线
+    /// camelback to underline
     /// </summary>
     /// <param name="str"></param>
     /// <param name="isToUpper"></param>

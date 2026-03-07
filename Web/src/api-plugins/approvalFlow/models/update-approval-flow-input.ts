@@ -2,7 +2,7 @@
 /* eslint-disable */
 /**
  * ApprovalFlow
- * <br/><u><b><font color='FF0000'> 👮不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！</font></b></u>
+ * <br/><u><b><font color='FF0000'> 👮This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project! </font></b></u>
  *
  * OpenAPI spec version: 1.0.0
  * 
@@ -12,103 +12,103 @@
  * Do not edit the class manually.
  */
 /**
- * 审批流更新输入参数
+ * Approval workflowUpdateInputParameter
  * @export
  * @interface UpdateApprovalFlowInput
  */
 export interface UpdateApprovalFlowInput {
     /**
-     * 创建时间
+     * Creation Time
      * @type {Date}
      * @memberof UpdateApprovalFlowInput
      */
     createTime?: Date;
     /**
-     * 更新时间
+     * Update Time
      * @type {Date}
      * @memberof UpdateApprovalFlowInput
      */
     updateTime?: Date | null;
     /**
-     * 创建者Id
+     * CreatorId
      * @type {number}
      * @memberof UpdateApprovalFlowInput
      */
     createUserId?: number | null;
     /**
-     * 创建者姓名
+     * Creator name
      * @type {string}
      * @memberof UpdateApprovalFlowInput
      */
     createUserName?: string | null;
     /**
-     * 修改者Id
+     * Modifier ID
      * @type {number}
      * @memberof UpdateApprovalFlowInput
      */
     updateUserId?: number | null;
     /**
-     * 修改者姓名
+     * Modifier name
      * @type {string}
      * @memberof UpdateApprovalFlowInput
      */
     updateUserName?: string | null;
     /**
-     * 软删除
+     * soft delete
      * @type {boolean}
      * @memberof UpdateApprovalFlowInput
      */
     isDelete?: boolean;
     /**
-     * 创建者部门Id
+     * CreatorDepartmentId
      * @type {number}
      * @memberof UpdateApprovalFlowInput
      */
     createOrgId?: number | null;
     /**
-     * 创建者部门名称
+     * CreatorDepartment namecall
      * @type {string}
      * @memberof UpdateApprovalFlowInput
      */
     createOrgName?: string | null;
     /**
-     * 编号
+     * Number
      * @type {string}
      * @memberof UpdateApprovalFlowInput
      */
     code?: string | null;
     /**
-     * 名称
+     * name
      * @type {string}
      * @memberof UpdateApprovalFlowInput
      */
     name?: string | null;
     /**
-     * 表单
+     * form
      * @type {string}
      * @memberof UpdateApprovalFlowInput
      */
     formJson?: string | null;
     /**
-     * 流程
+     * Process
      * @type {string}
      * @memberof UpdateApprovalFlowInput
      */
     flowJson?: string | null;
     /**
-     * 状态
+     * state
      * @type {number}
      * @memberof UpdateApprovalFlowInput
      */
     status?: number | null;
     /**
-     * 备注
+     * Remarks
      * @type {string}
      * @memberof UpdateApprovalFlowInput
      */
     remark?: string | null;
     /**
-     * 主键Id
+     * Primary keyId
      * @type {number}
      * @memberof UpdateApprovalFlowInput
      */

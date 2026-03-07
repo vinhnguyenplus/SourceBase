@@ -1,8 +1,8 @@
-﻿// Admin.NET 项目的版权、商标、专利和其他相关权利均受相应法律法规的保护。使用本项目应遵守相关法律法规和许可证的要求。
+﻿// The copyright, trademark, patent and other related rights of the Admin.NET project are protected by corresponding laws and regulations. Use of this project shall comply with relevant laws, regulations and license requirements.
 //
-// 本项目主要遵循 MIT 许可证和 Apache 许可证（版本 2.0）进行分发和使用。许可证位于源代码树根目录中的 LICENSE-MIT 和 LICENSE-APACHE 文件。
+// This project is distributed and used primarily under the MIT License and the Apache License (version 2.0). The license is located in the LICENSE-MIT and LICENSE-APACHE files in the root of the source tree.
 //
-// 不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！
+// This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project!
 
 using System.Security.Claims;
 using System.Security.Cryptography;
@@ -10,7 +10,7 @@ using System.Security.Cryptography;
 namespace Admin.NET.Core.Service;
 
 /// <summary>
-/// 开放接口身份服务 🧩
+/// Open interface identity service 🧩
 /// </summary>
 [ApiDescriptionSettings(Order = 244)]
 public class SysOpenAccessService : IDynamicApiController, ITransient
@@ -19,7 +19,7 @@ public class SysOpenAccessService : IDynamicApiController, ITransient
     private readonly SysCacheService _sysCacheService;
 
     /// <summary>
-    /// 开放接口身份服务构造函数
+    /// Open interface identity service constructor
     /// </summary>
     public SysOpenAccessService(SqlSugarRepository<SysOpenAccess> sysOpenAccessRep,
         SysCacheService sysCacheService)
@@ -29,19 +29,19 @@ public class SysOpenAccessService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 生成签名
+    /// Generate signature
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
-    [DisplayName("生成签名")]
+    [DisplayName("Generate signature")]
     public string GenerateSignature(GenerateSignatureInput input)
     {
-        // 密钥
+        // key
         var appSecretByte = Encoding.UTF8.GetBytes(input.AccessSecret);
 
-        // 拼接参数
+        // Splicing parameters
         var parameter = $"{input.Method.ToString().ToUpper()}&{input.Url}&{input.AccessKey}&{input.Timestamp}&{input.Nonce}";
-        // 使用 HMAC-SHA256 协议创建基于哈希的消息身份验证代码 (HMAC)，以appSecretByte 作为密钥，对上面拼接的参数进行计算签名，所得签名进行 Base-64 编码
+        // Create a hash-based message authentication code (HMAC) using the HMAC-SHA256 protocol, using appSecretByte as the key, compute a signature on the concatenated parameters above, and base-64 encode the resulting signature
         using HMAC hmac = new HMACSHA256();
         hmac.Key = appSecretByte;
         var sign = Convert.ToBase64String(hmac.ComputeHash(Encoding.UTF8.GetBytes(parameter)));
@@ -49,11 +49,11 @@ public class SysOpenAccessService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 获取开放接口身份分页列表 🔖
+    /// Get the paging list of open interface identities 🔖
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
-    [DisplayName("获取开放接口身份分页列表")]
+    [DisplayName("Get paginated list of open interface identities")]
     public async Task<SqlSugarPagedList<OpenAccessOutput>> Page(OpenAccessInput input)
     {
         return await _sysOpenAccessRep.AsQueryable()
@@ -70,12 +70,12 @@ public class SysOpenAccessService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 增加开放接口身份 🔖
+    /// Add open interface identity 🔖
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
     [ApiDescriptionSettings(Name = "Add"), HttpPost]
-    [DisplayName("增加开放接口身份")]
+    [DisplayName("Increase open interface identity")]
     public async Task AddOpenAccess(AddOpenAccessInput input)
     {
         if (await _sysOpenAccessRep.AsQueryable().AnyAsync(u => u.AccessKey == input.AccessKey && u.Id != input.Id))
@@ -86,12 +86,12 @@ public class SysOpenAccessService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 更新开放接口身份 🔖
+    /// Update open interface identity 🔖
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
     [ApiDescriptionSettings(Name = "Update"), HttpPost]
-    [DisplayName("更新开放接口身份")]
+    [DisplayName("Update open interface identity")]
     public async Task UpdateOpenAccess(UpdateOpenAccessInput input)
     {
         if (await _sysOpenAccessRep.AsQueryable().AnyAsync(u => u.AccessKey == input.AccessKey && u.Id != input.Id))
@@ -104,12 +104,12 @@ public class SysOpenAccessService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 删除开放接口身份 🔖
+    /// Delete open interface identity 🔖
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
     [ApiDescriptionSettings(Name = "Delete"), HttpPost]
-    [DisplayName("删除开放接口身份")]
+    [DisplayName("Delete open interface identity")]
     public async Task DeleteOpenAccess(DeleteOpenAccessInput input)
     {
         var openAccess = await _sysOpenAccessRep.GetFirstAsync(u => u.Id == input.Id);
@@ -120,17 +120,17 @@ public class SysOpenAccessService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 创建密钥 🔖
+    /// Create key 🔖
     /// </summary>
     /// <returns></returns>
-    [DisplayName("创建密钥")]
+    [DisplayName("Create key")]
     public async Task<string> CreateSecret()
     {
         return await Task.FromResult(Convert.ToBase64String(Guid.NewGuid().ToByteArray())[..^2]);
     }
 
     /// <summary>
-    /// 根据 Key 获取对象
+    /// Get object based on Key
     /// </summary>
     /// <param name="accessKey"></param>
     /// <returns></returns>
@@ -149,7 +149,7 @@ public class SysOpenAccessService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// Signature 身份验证事件默认实现
+    /// Signature authentication event default implementation
     /// </summary>
     [NonAction]
     public static SignatureAuthenticationEvent GetSignatureAuthenticationEventImpl()
@@ -167,7 +167,7 @@ public class SysOpenAccessService : IDynamicApiController, ITransient
                 }
                 catch (Exception ex)
                 {
-                    logger.LogError(ex, "开放接口身份验证");
+                    logger.LogError(ex, "Open interface authentication");
                     return Task.FromResult("");
                 }
             },

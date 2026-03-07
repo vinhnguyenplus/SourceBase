@@ -1,11 +1,11 @@
 <template>
-	<!-- 将render函数变量写在temolate标签中 -->
+	<!-- Write the render function variable in the temolate tag -->
 	<render></render>
 </template>
 
 <script lang="ts" setup>
 import { ref, watch, h } from 'vue';
-// 定义父组件传过来的值
+// Define the value passed by the parent component
 const props = defineProps<{
 	fn: any;
 }>();
@@ -16,8 +16,8 @@ watch(
 		render.value = h('div', null, props.fn);
 	},
 	{
-		deep: true, //确认是否深入监听
-		immediate: true, //确认是否以当前的初始值执行handler的函数
+		deep: true, // Confirm whether to monitor deeply
+		immediate: true, // Confirm whether to execute the handler function with the current initial value
 	}
 );
 </script>

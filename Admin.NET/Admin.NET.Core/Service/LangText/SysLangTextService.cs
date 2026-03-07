@@ -1,17 +1,17 @@
-﻿// Admin.NET 项目的版权、商标、专利和其他相关权利均受相应法律法规的保护。使用本项目应遵守相关法律法规和许可证的要求。
+﻿// The copyright, trademark, patent and other related rights of the Admin.NET project are protected by corresponding laws and regulations. Use of this project shall comply with relevant laws, regulations and license requirements.
 //
-// 本项目主要遵循 MIT 许可证和 Apache 许可证（版本 2.0）进行分发和使用。许可证位于源代码树根目录中的 LICENSE-MIT 和 LICENSE-APACHE 文件。
+// This project is distributed and used primarily under the MIT License and the Apache License (version 2.0). The license is located in the LICENSE-MIT and LICENSE-APACHE files in the root of the source tree.
 //
-// 不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！
+// This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project!
 
 using Newtonsoft.Json;
 
 namespace Admin.NET.Core.Service;
 
 /// <summary>
-/// 翻译服务 🧩
+/// Translation service 🧩
 /// </summary>
-[ApiDescriptionSettings(Order = 100, Description = "翻译服务")]
+[ApiDescriptionSettings(Order = 100, Description = "Translation services")]
 public partial class SysLangTextService : IDynamicApiController, ITransient
 {
     private readonly SqlSugarRepository<SysLangText> _sysLangTextRep;
@@ -29,11 +29,11 @@ public partial class SysLangTextService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 分页查询翻译表 🔖
+    /// Paginated query translation table 🔖
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
-    [DisplayName("分页查询翻译表")]
+    [DisplayName("Paginated query translation table")]
     [ApiDescriptionSettings(Name = "Page"), HttpPost]
     public async Task<SqlSugarPagedList<SysLangTextOutput>> Page(PageSysLangTextInput input)
     {
@@ -49,7 +49,7 @@ public partial class SysLangTextService : IDynamicApiController, ITransient
         return await query.OrderBuilder(input).ToPagedListAsync(input.Page, input.PageSize);
     }
 
-    [DisplayName("获取翻译表")]
+    [DisplayName("ObtainTranslation Table")]
     [ApiDescriptionSettings(Name = "List"), HttpPost]
     public async Task<List<SysLangTextOutput>> List(ListSysLangTextInput input)
     {
@@ -61,11 +61,11 @@ public partial class SysLangTextService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 获取翻译表详情 ℹ️
+    /// Get translation table details ℹ️
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
-    [DisplayName("获取翻译表详情")]
+    [DisplayName("Get translation table details")]
     [ApiDescriptionSettings(Name = "Detail"), HttpGet]
     public async Task<SysLangText> Detail([FromQuery] QueryByIdSysLangTextInput input)
     {
@@ -73,11 +73,11 @@ public partial class SysLangTextService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 增加翻译表 ➕
+    /// Add translation table ➕
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
-    [DisplayName("增加翻译表")]
+    [DisplayName("Add translation table")]
     [ApiDescriptionSettings(Name = "Add"), HttpPost]
     public async Task<long> Add(AddSysLangTextInput input)
     {
@@ -86,11 +86,11 @@ public partial class SysLangTextService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 更新翻译表 ✏️
+    /// Update translation table ✏️
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
-    [DisplayName("更新翻译表")]
+    [DisplayName("Update translation table")]
     [ApiDescriptionSettings(Name = "Update"), HttpPost]
     public async Task Update(UpdateSysLangTextInput input)
     {
@@ -101,34 +101,34 @@ public partial class SysLangTextService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 删除翻译表 ❌
+    /// Delete translation table ❌
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
-    [DisplayName("删除翻译表")]
+    [DisplayName("DeleteTranslation Table")]
     [ApiDescriptionSettings(Name = "Delete"), HttpPost]
     public async Task Delete(DeleteSysLangTextInput input)
     {
         var entity = await _sysLangTextRep.GetFirstAsync(u => u.Id == input.Id) ?? throw Oops.Oh(ErrorCodeEnum.D1002);
 
-        await _sysLangTextRep.DeleteAsync(entity);   //真删除
+        await _sysLangTextRep.DeleteAsync(entity);   // Really delete
         _sysLangTextCacheService.DeleteCache(entity.EntityName, entity.FieldName, entity.EntityId, entity.LangCode);
     }
 
     /// <summary>
-    /// 批量删除翻译表 ❌
+    /// Delete translation tables in batches ❌
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
-    [DisplayName("批量删除翻译表")]
+    [DisplayName("Batch delete translation table")]
     [ApiDescriptionSettings(Name = "BatchDelete"), HttpPost]
-    public async Task BatchDelete([Required(ErrorMessage = "主键列表不能为空")] List<DeleteSysLangTextInput> input)
+    public async Task BatchDelete([Required(ErrorMessage = "Primary key list cannot be empty")] List<DeleteSysLangTextInput> input)
     {
         var exp = Expressionable.Create<SysLangText>();
         foreach (var row in input) exp = exp.Or(it => it.Id == row.Id);
         var list = await _sysLangTextRep.AsQueryable().Where(exp.ToExpression()).ToListAsync();
 
-        await _sysLangTextRep.DeleteAsync(list);   //真删除
+        await _sysLangTextRep.DeleteAsync(list);   // Really delete
         foreach (var item in list)
         {
             _sysLangTextCacheService.DeleteCache(item.EntityName, item.FieldName, item.EntityId, item.LangCode);
@@ -138,42 +138,42 @@ public partial class SysLangTextService : IDynamicApiController, ITransient
     private static readonly object _sysLangTextBatchSaveLock = new object();
 
     /// <summary>
-    /// 批量保存翻译表 ✏️
+    /// Save translation tables in batches ✏️
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
-    [DisplayName("批量保存翻译表")]
+    [DisplayName("Batch save translation table")]
     [ApiDescriptionSettings(Name = "BatchSave"), HttpPost]
-    public void BatchSave([Required(ErrorMessage = "列表不能为空")] List<ImportSysLangTextInput> input)
+    public void BatchSave([Required(ErrorMessage = "The list cannot be empty")] List<ImportSysLangTextInput> input)
     {
         lock (_sysLangTextBatchSaveLock)
         {
-            // 校验并过滤必填基本类型为null的字段
+            // Verify and filter fields whose required basic type is null
             var rows = input.Where(x =>
             {
                 if (!string.IsNullOrWhiteSpace(x.Error)) return false;
                 if (x.EntityId == null)
                 {
-                    x.Error = "所属实体ID不能为空";
+                    x.Error = "The entity ID cannot be empty";
                     return false;
                 }
                 return true;
             }).Adapt<List<SysLangText>>();
 
             var storageable = _sysLangTextRep.Context.Storageable(rows)
-                .SplitError(it => string.IsNullOrWhiteSpace(it.Item.EntityName), "所属实体名不能为空")
-                .SplitError(it => it.Item.EntityName?.Length > 255, "所属实体名长度不能超过255个字符")
-                .SplitError(it => string.IsNullOrWhiteSpace(it.Item.FieldName), "字段名不能为空")
-                .SplitError(it => it.Item.FieldName?.Length > 255, "字段名长度不能超过255个字符")
-                .SplitError(it => string.IsNullOrWhiteSpace(it.Item.LangCode), "语言代码不能为空")
-                .SplitError(it => it.Item.LangCode?.Length > 255, "语言代码长度不能超过255个字符")
-                .SplitError(it => string.IsNullOrWhiteSpace(it.Item.Content), "翻译内容不能为空")
+                .SplitError(it => string.IsNullOrWhiteSpace(it.Item.EntityName), "The name of the entity to which it belongs cannot be empty.")
+                .SplitError(it => it.Item.EntityName?.Length > 255, "The length of the entity name cannot exceed 255 characters.")
+                .SplitError(it => string.IsNullOrWhiteSpace(it.Item.FieldName), "Field name cannot be empty")
+                .SplitError(it => it.Item.FieldName?.Length > 255, "Field name length cannot exceed 255 characters")
+                .SplitError(it => string.IsNullOrWhiteSpace(it.Item.LangCode), "Language code cannot be empty")
+                .SplitError(it => it.Item.LangCode?.Length > 255, "The language code length cannot exceed 255 characters")
+                .SplitError(it => string.IsNullOrWhiteSpace(it.Item.Content), "Translation content cannot be empty")
                 .WhereColumns(it => new { it.EntityId, it.EntityName, it.FieldName, it.LangCode })
                 .SplitInsert(it => it.NotAny())
                 .SplitUpdate(it => it.Any())
                 .ToStorage();
 
-            storageable.AsInsertable.ExecuteCommand();// 不存在插入
+            storageable.AsInsertable.ExecuteCommand();// There is no insertion
             storageable.AsUpdateable.UpdateColumns(it => new
             {
                 it.EntityName,
@@ -181,50 +181,50 @@ public partial class SysLangTextService : IDynamicApiController, ITransient
                 it.FieldName,
                 it.LangCode,
                 it.Content,
-            }).ExecuteCommand();// 存在更新
+            }).ExecuteCommand();// There is an update
             foreach (var item in rows)
             {
                 _sysLangTextCacheService.DeleteCache(item.EntityName, item.FieldName, item.EntityId, item.LangCode);
             }
             if (storageable.ErrorList.Any())
             {
-                throw Oops.Oh($"处理过程中出现以下错误：{string.Join("；", storageable.ErrorList.Distinct())}");
+                throw Oops.Oh($"The following error occurred during processing: {string.Join("；", storageable.ErrorList.Distinct())}");
             }
         }
     }
 
     /// <summary>
-    /// 导出翻译表记录 🔖
+    /// Export translation table records 🔖
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
-    [DisplayName("导出翻译表记录")]
+    [DisplayName("Export translation table records")]
     [ApiDescriptionSettings(Name = "Export"), HttpPost, NonUnify]
     public async Task<IActionResult> Export(PageSysLangTextInput input)
     {
         var list = (await Page(input)).Items?.Adapt<List<ExportSysLangTextOutput>>() ?? new();
         if (input.SelectKeyList?.Count > 0) list = list.Where(x => input.SelectKeyList.Contains(x.Id)).ToList();
-        return ExcelHelper.ExportTemplate(list, "翻译表导出记录");
+        return ExcelHelper.ExportTemplate(list, "Translation table export records");
     }
 
     /// <summary>
-    /// 下载翻译表数据导入模板 ⬇️
+    /// Download translation table data import template ⬇️
     /// </summary>
     /// <returns></returns>
-    [DisplayName("下载翻译表数据导入模板")]
+    [DisplayName("Download translation table data import template")]
     [ApiDescriptionSettings(Name = "Import"), HttpGet, NonUnify]
     public IActionResult DownloadTemplate()
     {
-        return ExcelHelper.ExportTemplate(new List<ExportSysLangTextOutput>(), "翻译表导入模板");
+        return ExcelHelper.ExportTemplate(new List<ExportSysLangTextOutput>(), "Translation table import template");
     }
 
     private static readonly object _sysLangTextImportLock = new object();
 
     /// <summary>
-    /// 导入翻译表记录 💾
+    /// Import translation table records 💾
     /// </summary>
     /// <returns></returns>
-    [DisplayName("导入翻译表记录")]
+    [DisplayName("Import translation table records")]
     [ApiDescriptionSettings(Name = "Import"), HttpPost, NonUnify, UnitOfWork]
     public IActionResult ImportData([Required] IFormFile file)
     {
@@ -234,33 +234,33 @@ public partial class SysLangTextService : IDynamicApiController, ITransient
             {
                 _sqlSugarClient.Utilities.PageEach(list, 2048, pageItems =>
                 {
-                    // 校验并过滤必填基本类型为null的字段
+                    // Verify and filter fields whose required basic type is null
                     var rows = pageItems.Where(x =>
                     {
                         if (!string.IsNullOrWhiteSpace(x.Error)) return false;
                         if (x.EntityId == null)
                         {
-                            x.Error = "所属实体ID不能为空";
+                            x.Error = "The entity ID cannot be empty";
                             return false;
                         }
                         return true;
                     }).Adapt<List<SysLangText>>();
 
                     var storageable = _sysLangTextRep.Context.Storageable(rows)
-                        .SplitError(it => string.IsNullOrWhiteSpace(it.Item.EntityName), "所属实体名不能为空")
-                        .SplitError(it => it.Item.EntityName?.Length > 255, "所属实体名长度不能超过255个字符")
-                        .SplitError(it => string.IsNullOrWhiteSpace(it.Item.FieldName), "字段名不能为空")
-                        .SplitError(it => it.Item.FieldName?.Length > 255, "字段名长度不能超过255个字符")
-                        .SplitError(it => string.IsNullOrWhiteSpace(it.Item.LangCode), "语言代码不能为空")
-                        .SplitError(it => it.Item.LangCode?.Length > 255, "语言代码长度不能超过255个字符")
-                        .SplitError(it => string.IsNullOrWhiteSpace(it.Item.Content), "翻译内容不能为空")
-                        .SplitError(it => it.Item.Content?.Length > 255, "翻译内容长度不能超过255个字符")
+                        .SplitError(it => string.IsNullOrWhiteSpace(it.Item.EntityName), "The name of the entity to which it belongs cannot be empty.")
+                        .SplitError(it => it.Item.EntityName?.Length > 255, "The length of the entity name cannot exceed 255 characters.")
+                        .SplitError(it => string.IsNullOrWhiteSpace(it.Item.FieldName), "Field name cannot be empty")
+                        .SplitError(it => it.Item.FieldName?.Length > 255, "Field name length cannot exceed 255 characters")
+                        .SplitError(it => string.IsNullOrWhiteSpace(it.Item.LangCode), "Language code cannot be empty")
+                        .SplitError(it => it.Item.LangCode?.Length > 255, "The language code length cannot exceed 255 characters")
+                        .SplitError(it => string.IsNullOrWhiteSpace(it.Item.Content), "Translation content cannot be empty")
+                        .SplitError(it => it.Item.Content?.Length > 255, "Translated content cannot exceed 255 characters in length")
                         .WhereColumns(it => new { it.EntityId, it.EntityName, it.FieldName, it.LangCode })
                         .SplitInsert(it => it.NotAny())
                         .SplitUpdate(it => it.Any())
                         .ToStorage();
 
-                    storageable.AsInsertable.ExecuteCommand();// 不存在插入
+                    storageable.AsInsertable.ExecuteCommand();// There is no insertion
                     storageable.AsUpdateable.UpdateColumns(it => new
                     {
                         it.EntityName,
@@ -268,13 +268,13 @@ public partial class SysLangTextService : IDynamicApiController, ITransient
                         it.FieldName,
                         it.LangCode,
                         it.Content,
-                    }).ExecuteCommand();// 存在更新
+                    }).ExecuteCommand();// There is an update
 
                     foreach (var item in rows)
                     {
                         _sysLangTextCacheService.DeleteCache(item.EntityName, item.FieldName, item.EntityId, item.LangCode);
                     }
-                    // 标记错误信息
+                    // Mark error message
                     markerErrorAction.Invoke(storageable, pageItems, rows);
                 });
             });
@@ -284,33 +284,33 @@ public partial class SysLangTextService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// DEEPSEEK 翻译接口
+    /// DEEPSEEK translation interface
     /// </summary>
     /// <returns></returns>
-    [DisplayName("DEEPSEEK 翻译接口")]
+    [DisplayName("DEEPSEEK Translation API")]
     [ApiDescriptionSettings(Name = "AiTranslateText"), HttpPost]
     public async Task<string> AiTranslateText(AiTranslateTextInput input)
     {
-        // 需要先把DeepSeek.example复制改名为DeepSeek.json文件，添加你的 API KEY
+        // You need to first copy DeepSeek.example and rename it to DeepSeek.json file, and add your API KEY
         var deepSeekOptions = App.GetConfig<DeepSeekOptions>("DeepSeekSettings", true);
         if (deepSeekOptions == null)
         {
-            throw new InvalidOperationException("DeepSeek.json文件 未定义");
+            throw new InvalidOperationException("DeepSeek.jsonDocument Not yetDefinition");
         }
         if (string.IsNullOrEmpty(deepSeekOptions.ApiKey))
         {
-            throw new InvalidOperationException("环境变量 DEEPSEEK_API_KEY 未定义");
+            throw new InvalidOperationException("Environment variable DEEPSEEK_API_KEY is not defined");
         }
 
         using (HttpClient client = new HttpClient())
         {
-            // 构建请求头
+            // Build request headers
             client.DefaultRequestHeaders.Add("Authorization", $"Bearer {deepSeekOptions.ApiKey}");
 
-            // 构建系统提示词
+            // Build system prompt words
             string systemPrompt = BuildSystemPrompt(deepSeekOptions.SourceLang, input.TargetLang);
 
-            // 构建请求体
+            // Build request body
             var requestBody = new
             {
                 model = "deepseek-chat",
@@ -323,38 +323,38 @@ public partial class SysLangTextService : IDynamicApiController, ITransient
                 max_tokens = 2000
             };
 
-            // 使用 Newtonsoft.Json 序列化
+            // Serialization using Newtonsoft.Json
             var json = JsonConvert.SerializeObject(requestBody);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-            // 发送请求
+            // Send request
             HttpResponseMessage response = await client.PostAsync(deepSeekOptions.ApiUrl, content);
 
-            // 处理响应
+            // Handle response
             string responseBody = await response.Content.ReadAsStringAsync();
 
             if (!response.IsSuccessStatusCode)
             {
-                // 使用 Newtonsoft.Json 反序列化错误响应
+                // Deserializing error responses using Newtonsoft.Json
                 var errorResponse = JsonConvert.DeserializeObject<ErrorResponse>(responseBody);
                 string errorMsg = errorResponse?.error?.message ?? $"HTTP {response.StatusCode}: {response.ReasonPhrase}";
-                throw new HttpRequestException($"翻译API返回错误：{errorMsg}");
+                throw new HttpRequestException($"Translation API returned an error: {errorMsg}");
             }
 
-            // 解析有效响应
+            // Parse valid responses
             var result = JsonConvert.DeserializeObject<TranslationResponse>(responseBody);
 
             if (result?.choices == null || result.choices.Length == 0 ||
                 result.choices[0]?.message?.content == null)
             {
-                throw new InvalidOperationException("API返回无效的翻译结果");
+                throw new InvalidOperationException("The API returned an invalid translation result");
             }
 
             return result.choices[0].message.content.Trim();
         }
     }
 
-    // JSON 响应模型
+    // JSON response model
     private class TranslationResponse
     {
         public Choice[] choices { get; set; }
@@ -381,56 +381,56 @@ public partial class SysLangTextService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 生成提示词
+    /// Generate prompt words
     /// </summary>
     /// <param name="sourceLang"></param>
     /// <param name="targetLang"></param>
     /// <returns></returns>
     private static string BuildSystemPrompt(string sourceLang, string targetLang)
     {
-        return $@"作为企业软件系统专业翻译，严格遵守以下铁律：
+        return $@"As a professional translator of enterprise software systems，Strictly adhere to the following iron rules：
 
-■ 核心原则
-1. 严格逐符号翻译（{sourceLang}→{targetLang}）
-2. 禁止添加/删除/改写任何内容
-3. 保持批量翻译的编号格式
+■ nuclearPrinciple of the Heart
+1. Strictly translate symbol by symbol（{sourceLang}→{targetLang}）
+2. ProhibitedAdd to/Delete/Rewrite anythingcontent
+3. Keep batch translationNumberFormat
 
-■ 符号保留规则
-! 所有符号必须原样保留：
-• 编程符号：\${{ }} <% %> @ # & |
-• UI占位符：{{0}} %s [ ]
-• 货币单位：¥100.00 kg cm²
-• 中文符号：【 】 《 》 ：
+■ Symbol Retention Rules
+! All symbols must be preserved as is：
+• Programming symbols：\${{ }} <% %> @ # & |
+• UIPlaceholder：{{0}} %s [ ]
+• Currency unit：¥100.00 kg cm²
+• inText symbol：【 】 《 》 ：
 
-■ 中文符号位置规范
-# 三级处理机制：
-1. 成对符号必须保持完整结构：
-   ✓ 正确：【Warning】Text
-   ✗ 禁止：Warning【 】Text
+■ inSpecification for the Position of Text Symbols
+# ThreeLevel processing mechanism：
+1. Paired symbols must remain completewholeStructure：
+   ✓ justSure：【Warning】Text
+   ✗ Prohibited：Warning【 】Text
 
-2. 独立符号位置：
-   • 优先句尾 → Text】?
-   • 次选句首 → 】Text?
-   • 禁止句中 → Text】Text?
+2. Independent symbol position：
+   • Prefer sentence endings → Text】?
+   • Secondary sentence starter → 】Text?
+   • Prohibited sentencein → Text】Text?
 
-3. 跨字符串符号处理：
-   • 前段含【时 → 保留在段尾（""Synchronize【""）
-   • 后段含】时 → 保留在段首（""】authorization data?""）
-   • 符号后接字母时添加空格：】 Authorization
+3. Cross-string symbol processing：
+   • Contains the front section【time → Keep at the end of the paragraph（""Synchronize【""）
+   • Contains the latter part】time → Keep at the beginning of the paragraph（""】authorization data?""）
+   • A symbol followed by a lettertimeAdd tonullgrid：】 Authorization
 
-■ 语法规范
-• 外文 → 被动语态（""Item was created""）
-• 中文 → 主动语态（""已创建项目""）
-• 禁止推测上下文（只翻译当前字符串内容）
+■ Grammar rules
+• Foreign language → Passive voice（""Item was created""）
+• intext → Active voice（""Project created""）
+• Do not speculate about the context（Translate only the current stringcontent）
 
-■ 错误预防（绝对禁止）
-✗ 将中文符号改为西式符号（】→]）
-✗ 移动非中文符号位置
-✗ 添加原文不存在的内容
-✗ 合并/拆分原始字符串
+■ mistakePrevention（Absolutely prohibited）
+✗ willinChange Chinese punctuation to Western-style punctuation（】→]）
+✗ Mobile noninCharacter Symbol Position
+✗ Add toThe original text does not existcontent
+✗ Merge/demolishpointsOriginal string
 
-■ 批量处理
-▸ 严格保持原始JSON结构
-▸ 语言键名精确匹配（zh-cn/en/it等）";
+■ Batch processing
+▸ Strictly maintain the originalJSONStructure
+▸ LanguageExact key name match（zh-cn/en/itWait）";
     }
 }

@@ -25,18 +25,18 @@ const state = reactive({
     page: 1,
     pageSize: 20,
     total: 0,
-    field: 'createTime', // 默认的排序字段
-    order: 'descending', // 排序方向
-    descStr: 'descending', // 降序排序的关键字符
+    field: 'createTime', // Default sort field
+    order: 'descending', // Sorting direction
+    descStr: 'descending', // Key characters for sorting in descending order
   },
   tableData: [],
 });
 
-// 页面加载时
+// When the page loads
 onMounted(async () => {
 });
 
-// 查询操作
+// Query operation
 const handleQuery = async (params: any = {}) => {
   state.tableLoading = true;
   state.tableParams = Object.assign(state.tableParams, params);
@@ -46,41 +46,41 @@ const handleQuery = async (params: any = {}) => {
   state.tableLoading = false;
 };
 
-// 列排序
+// Column sort
 const sortChange = async (column: any) => {
   state.tableParams.field = column.prop;
   state.tableParams.order = column.order;
   await handleQuery();
 };
 
-// 删除
+// delete
 const delSysLangText = (row: any) => {
-  ElMessageBox.confirm(`确定要删除吗?`, "提示", {
-    confirmButtonText: "确定",
-    cancelButtonText: "取消",
+  ElMessageBox.confirm(`ConfirmwantDelete??`, "Prompt", {
+    confirmButtonText: "Confirm",
+    cancelButtonText: "Cancel",
     type: "warning",
   }).then(async () => {
     await sysLangTextApi.delete({ id: row.id });
     handleQuery();
-    ElMessage.success("删除成功");
+    ElMessage.success("Deleted successfully");
   }).catch(() => {});
 };
 
-// 批量删除
+// Batch delete
 const batchDelSysLangText = () => {
-  ElMessageBox.confirm(`确定要删除${state.selectData.length}条记录吗?`, "提示", {
-    confirmButtonText: "确定",
-    cancelButtonText: "取消",
+  ElMessageBox.confirm(`Are you sure you want to delete ${state.selectData.length} records?`, "Prompt", {
+    confirmButtonText: "Confirm",
+    cancelButtonText: "Cancel",
     type: "warning",
   }).then(async () => {
     await sysLangTextApi.batchDelete(state.selectData.map(u => ({ id: u.id }) )).then(res => {
-      ElMessage.success(`成功批量删除${res.data.result}条记录`);
+      ElMessage.success(`Successfully deleted ${res.data.result} records in bulk`);
       handleQuery();
     });
   }).catch(() => {});
 };
 
-// 导出数据
+// Export data
 const exportSysLangTextCommand = async (command: string) => {
   try {
     state.exportLoading = true;
@@ -107,55 +107,55 @@ handleQuery();
       <el-form :model="state.tableQueryParams" ref="queryForm" labelWidth="90">
         <el-row>
           <el-col :xs="24" :sm="12" :md="12" :lg="8" :xl="4" class="mb10">
-            <el-form-item label="关键字">
-              <el-input v-model="state.tableQueryParams.keyword" clearable placeholder="请输入模糊查询关键字"/>
+            <el-form-item label="Keywords">
+              <el-input v-model="state.tableQueryParams.keyword" clearable placeholder="Please enter fuzzy search keywords"/>
             </el-form-item>
           </el-col>
           <el-col :xs="24" :sm="12" :md="12" :lg="8" :xl="4" class="mb10" v-if="state.showAdvanceQueryUI">
-            <el-form-item label="所属实体名">
-              <el-input v-model="state.tableQueryParams.entityName" clearable placeholder="请输入所属实体名"/>
+            <el-form-item label="Name of the affiliated entity">
+              <el-input v-model="state.tableQueryParams.entityName" clearable placeholder="Please enter the name of the entity you belong to"/>
             </el-form-item>
           </el-col>
           <el-col :xs="24" :sm="12" :md="12" :lg="8" :xl="4" class="mb10" v-if="state.showAdvanceQueryUI">
-            <el-form-item label="所属实体ID">
-              <el-input v-model="state.tableQueryParams.entityId" clearable placeholder="请输入所属实体ID"/>
+            <el-form-item label="Associated Entity ID">
+              <el-input v-model="state.tableQueryParams.entityId" clearable placeholder="Please enter the affiliated entity ID"/>
             </el-form-item>
           </el-col>
           <el-col :xs="24" :sm="12" :md="12" :lg="8" :xl="4" class="mb10" v-if="state.showAdvanceQueryUI">
-            <el-form-item label="字段名">
-              <el-input v-model="state.tableQueryParams.fieldName" clearable placeholder="请输入字段名"/>
+            <el-form-item label="Field Name">
+              <el-input v-model="state.tableQueryParams.fieldName" clearable placeholder="Please enter a field name"/>
             </el-form-item>
           </el-col>
           <el-col :xs="24" :sm="12" :md="12" :lg="8" :xl="4" class="mb10" v-if="state.showAdvanceQueryUI">
-            <el-form-item label="语言代码">
-              <el-input v-model="state.tableQueryParams.langCode" clearable placeholder="请输入语言代码"/>
+            <el-form-item label="Language code">
+              <el-input v-model="state.tableQueryParams.langCode" clearable placeholder="Please enter language code"/>
             </el-form-item>
           </el-col>
           <el-col :xs="24" :sm="12" :md="12" :lg="8" :xl="4" class="mb10" v-if="state.showAdvanceQueryUI">
-            <el-form-item label="翻译内容">
-              <el-input v-model="state.tableQueryParams.content" clearable placeholder="请输入翻译内容"/>
+            <el-form-item label="Translate content">
+              <el-input v-model="state.tableQueryParams.content" clearable placeholder="Please enter the content to be translated"/>
             </el-form-item>
           </el-col>
           <el-col :xs="24" :sm="12" :md="12" :lg="8" :xl="4" class="mb10">
             <el-form-item >
               <el-button-group style="display: flex; align-items: center;">
-                <el-button type="primary"  icon="ele-Search" @click="handleQuery" v-auth="'sysLangText:page'" v-reclick="1000"> 查询 </el-button>
-                <el-button icon="ele-Refresh" @click="() => state.tableQueryParams = {}"> 重置 </el-button>
-                <el-button icon="ele-ZoomIn" @click="() => state.showAdvanceQueryUI = true" v-if="!state.showAdvanceQueryUI" style="margin-left:5px;"> 高级查询 </el-button>
-                <el-button icon="ele-ZoomOut" @click="() => state.showAdvanceQueryUI = false" v-if="state.showAdvanceQueryUI" style="margin-left:5px;"> 隐藏 </el-button>
-                <el-button type="danger" style="margin-left:5px;" icon="ele-Delete" @click="batchDelSysLangText" :disabled="state.selectData.length == 0" v-auth="'sysLangText:batchDelete'"> 删除 </el-button>
-                <el-button type="primary" style="margin-left:5px;" icon="ele-Plus" @click="editDialogRef.openDialog(null, '新增翻译')" v-auth="'sysLangText:add'"> 新增 </el-button>
+                <el-button type="primary"  icon="ele-Search" @click="handleQuery" v-auth="'sysLangText:page'" v-reclick="1000"> Query </el-button>
+                <el-button icon="ele-Refresh" @click="() => state.tableQueryParams = {}"> Reset </el-button>
+                <el-button icon="ele-ZoomIn" @click="() => state.showAdvanceQueryUI = true" v-if="!state.showAdvanceQueryUI" style="margin-left:5px;"> Advanced query </el-button>
+                <el-button icon="ele-ZoomOut" @click="() => state.showAdvanceQueryUI = false" v-if="state.showAdvanceQueryUI" style="margin-left:5px;"> hide </el-button>
+                <el-button type="danger" style="margin-left:5px;" icon="ele-Delete" @click="batchDelSysLangText" :disabled="state.selectData.length == 0" v-auth="'sysLangText:batchDelete'"> Delete </el-button>
+                <el-button type="primary" style="margin-left:5px;" icon="ele-Plus" @click="editDialogRef.openDialog(null, 'Add Translation')" v-auth="'sysLangText:add'"> Add New </el-button>
                 <el-dropdown :show-timeout="70" :hide-timeout="50" @command="exportSysLangTextCommand">
-                  <el-button type="primary" style="margin-left:5px;" icon="ele-FolderOpened" v-reclick="20000" v-auth="'sysLangText:export'"> 导出 </el-button>
+                  <el-button type="primary" style="margin-left:5px;" icon="ele-FolderOpened" v-reclick="20000" v-auth="'sysLangText:export'"> Export </el-button>
                   <template #dropdown>
                     <el-dropdown-menu>
-                      <el-dropdown-item command="select" :disabled="state.selectData.length == 0">导出选中</el-dropdown-item>
-                      <el-dropdown-item command="current">导出本页</el-dropdown-item>
-                      <el-dropdown-item command="all">导出全部</el-dropdown-item>
+                      <el-dropdown-item command="select" :disabled="state.selectData.length == 0">Export Selected</el-dropdown-item>
+                      <el-dropdown-item command="current">ExportThis page</el-dropdown-item>
+                      <el-dropdown-item command="all">Export all</el-dropdown-item>
                     </el-dropdown-menu>
                   </template>
                 </el-dropdown>
-                <el-button type="warning" style="margin-left:5px;" icon="ele-MostlyCloudy" @click="importDataRef.openDialog()" v-auth="'sysLangText:import'"> 导入 </el-button>
+                <el-button type="warning" style="margin-left:5px;" icon="ele-MostlyCloudy" @click="importDataRef.openDialog()" v-auth="'sysLangText:import'"> import </el-button>
               </el-button-group>
             </el-form-item>
           </el-col>
@@ -165,21 +165,21 @@ handleQuery();
     <el-card class="full-table" shadow="hover" style="margin-top: 5px">
       <el-table :data="state.tableData" @selection-change="(val: any[]) => { state.selectData = val; }" style="width: 100%" v-loading="state.tableLoading" tooltip-effect="light" row-key="id" @sort-change="sortChange" border>
         <el-table-column type="selection" width="40" align="center" v-if="auth('sysLangText:batchDelete') || auth('sysLangText:export')" />
-        <el-table-column type="index" label="序号" width="55" align="center"/>
-        <el-table-column prop='entityName' label='所属实体名' show-overflow-tooltip />
-        <el-table-column prop='entityId' label='所属实体ID' show-overflow-tooltip />
-        <el-table-column prop='fieldName' label='字段名' show-overflow-tooltip />
-        <el-table-column prop='langCode' label='语言代码' show-overflow-tooltip />
-        <el-table-column prop='content' label='翻译内容' show-overflow-tooltip />
-        <el-table-column label="修改记录" width="100" align="center" show-overflow-tooltip>
+        <el-table-column type="index" label="No" width="55" align="center"/>
+        <el-table-column prop='entityName' label='Name of the affiliated entity' show-overflow-tooltip />
+        <el-table-column prop='entityId' label='Associated Entity ID' show-overflow-tooltip />
+        <el-table-column prop='fieldName' label='Field Name' show-overflow-tooltip />
+        <el-table-column prop='langCode' label='Language code' show-overflow-tooltip />
+        <el-table-column prop='content' label='Translate content' show-overflow-tooltip />
+        <el-table-column label="Modify records" width="100" align="center" show-overflow-tooltip>
           <template #default="scope">
             <ModifyRecord :data="scope.row" />
           </template>
         </el-table-column>
-        <el-table-column label="操作" width="140" align="center" fixed="right" show-overflow-tooltip v-if="auth('sysLangText:update') || auth('sysLangText:delete')">
+        <el-table-column label="Operation" width="140" align="center" fixed="right" show-overflow-tooltip v-if="auth('sysLangText:update') || auth('sysLangText:delete')">
           <template #default="scope">
-            <el-button icon="ele-Edit" size="small" text type="primary" @click="editDialogRef.openDialog(scope.row, '编辑翻译')" v-auth="'sysLangText:update'"> 编辑 </el-button>
-            <el-button icon="ele-Delete" size="small" text type="primary" @click="delSysLangText(scope.row)" v-auth="'sysLangText:delete'"> 删除 </el-button>
+            <el-button icon="ele-Edit" size="small" text type="primary" @click="editDialogRef.openDialog(scope.row, 'Edit translation')" v-auth="'sysLangText:update'"> Edit </el-button>
+            <el-button icon="ele-Delete" size="small" text type="primary" @click="delSysLangText(scope.row)" v-auth="'sysLangText:delete'"> Delete </el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -194,7 +194,7 @@ handleQuery();
               size="small"
               background />
       <ImportData ref="importDataRef" :import="sysLangTextApi.importData" :download="sysLangTextApi.downloadTemplate" v-auth="'sysLangText:import'" @refresh="handleQuery"/>
-      <printDialog ref="printDialogRef" :title="'打印翻译'" @reloadTable="handleQuery" />
+      <printDialog ref="printDialogRef" :title="'Print translation'" @reloadTable="handleQuery" />
       <editDialog ref="editDialogRef" @reloadTable="handleQuery" />
     </el-card>
   </div>

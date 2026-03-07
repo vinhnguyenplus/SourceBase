@@ -10,24 +10,24 @@
 			<el-form :model="state.ruleForm" ref="ruleFormRef" label-width="auto">
 				<el-row :gutter="35">
 					<el-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12" class="mb20">
-						<el-form-item label="显示文本" prop="label" :rules="[{ required: true, message: '显示文本不能为空', trigger: 'blur' }]">
-							<g-multi-lang-Input entityName="SysDictData" fieldName="Label" :entityId="state.ruleForm.id" v-model="state.ruleForm.label" placeholder="显示文本" clearable />
+						<el-form-item label="Display Text" prop="label" :rules="[{ required: true, message: 'Display text cannot be empty', trigger: 'blur' }]">
+							<g-multi-lang-Input entityName="SysDictData" fieldName="Label" :entityId="state.ruleForm.id" v-model="state.ruleForm.label" placeholder="Display Text" clearable />
 						</el-form-item>
 					</el-col>
 					<el-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12" class="mb20">
-						<el-form-item label="字典值" prop="value" :rules="[{ required: true, message: '字典值不能为空', trigger: 'blur' }]">
-							<el-input v-model="state.ruleForm.value" placeholder="字典值" :disabled="state.isSysFlag" clearable />
+						<el-form-item label="Dictionary value" prop="value" :rules="[{ required: true, message: 'Dictionary value cannot be empty', trigger: 'blur' } ]">
+							<el-input v-model="state.ruleForm.value" placeholder="Dictionary value" :disabled="state.isSysFlag" clearable />
 						</el-form-item>
 					</el-col>
 					<el-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12" class="mb20">
-						<el-form-item label="编码" prop="code">
-							<el-input v-model="state.ruleForm.code" placeholder="编码" :disabled="state.isSysFlag" clearable />
+						<el-form-item label="Encoding" prop="code">
+							<el-input v-model="state.ruleForm.code" placeholder="Encoding" :disabled="state.isSysFlag" clearable />
 						</el-form-item>
 					</el-col>
 					<el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="mb20">
-						<el-form-item label="标签类型">
+						<el-form-item label="Tag type">
 							<el-radio-group v-model="state.ruleForm.tagType">
-								<el-radio value="primary"><el-tag type="primary">主题色</el-tag></el-radio>
+								<el-radio value="primary"><el-tag type="primary">theme color</el-tag></el-radio>
 								<el-radio value="success"><el-tag type="success">success</el-tag></el-radio>
 								<el-radio value="info"><el-tag type="info">info</el-tag></el-radio>
 								<el-radio value="warning"><el-tag type="warning">warning</el-tag></el-radio>
@@ -36,44 +36,44 @@
 						</el-form-item>
 					</el-col>
 					<el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="mb20">
-						<el-form-item label="样式(Style)" prop="styleSetting">
-							<el-input v-model="state.ruleForm.styleSetting" placeholder="样式(Style)" clearable />
+						<el-form-item label="Style" prop="styleSetting">
+							<el-input v-model="state.ruleForm.styleSetting" placeholder="Style" clearable />
 						</el-form-item>
 					</el-col>
 					<el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="mb20">
-						<el-form-item label="样式(Class)" prop="classSetting">
-							<el-input v-model="state.ruleForm.classSetting" placeholder="样式(Class)" clearable />
+						<el-form-item label="Style (Class)" prop="classSetting">
+							<el-input v-model="state.ruleForm.classSetting" placeholder="Style (Class)" clearable />
 						</el-form-item>
 					</el-col>
 					<el-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12" class="mb20">
-						<el-form-item label="状态">
+						<el-form-item label="state">
 							<el-radio-group v-model="state.ruleForm.status" :disabled="state.isSysFlag">
-								<el-radio :value="1">启用</el-radio>
-								<el-radio :value="2">禁用</el-radio>
+								<el-radio :value="1">enable</el-radio>
+								<el-radio :value="2">Disable</el-radio>
 							</el-radio-group>
 						</el-form-item>
 					</el-col>
 					<el-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12" class="mb20">
-						<el-form-item label="排序">
-							<el-input-number v-model="state.ruleForm.orderNo" placeholder="排序" class="w100" />
+						<el-form-item label="Sort">
+							<el-input-number v-model="state.ruleForm.orderNo" placeholder="Sort" class="w100" />
 						</el-form-item>
 					</el-col>
 					<el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="mb20">
-						<el-form-item label="备注">
-							<el-input v-model="state.ruleForm.remark" placeholder="请输入备注内容" clearable type="textarea" />
+						<el-form-item label="Remarks">
+							<el-input v-model="state.ruleForm.remark" placeholder="Please enter the remark content" clearable type="textarea" />
 						</el-form-item>
 					</el-col>
 					<el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="mb20">
-						<el-form-item label="拓展数据">
-							<el-input v-model="state.ruleForm.extData" placeholder="请输入拓展数据" clearable type="textarea" :rows="6" />
+						<el-form-item label="Expand data">
+							<el-input v-model="state.ruleForm.extData" placeholder="Please enter extended data" clearable type="textarea" :rows="6" />
 						</el-form-item>
 					</el-col>
 				</el-row>
 			</el-form>
 			<template #footer>
 				<span class="dialog-footer">
-					<el-button @click="cancel">取 消</el-button>
-					<el-button type="primary" @click="submit">确 定</el-button>
+					<el-button @click="cancel">Cancel</el-button>
+					<el-button type="primary" @click="submit">Confirm</el-button>
 				</span>
 			</template>
 		</el-dialog>
@@ -99,7 +99,7 @@ const state = reactive({
 	ruleForm: {} as UpdateDictDataInput,
 });
 
-// 打开弹窗
+// Open pop-up window
 const openDialog = (row: any) => {
 	if (row.dictType?.sysFlag) 
 		state.isSysFlag = row.dictType.sysFlag !== 2;
@@ -113,18 +113,18 @@ const openDialog = (row: any) => {
 	ruleFormRef.value?.resetFields();
 };
 
-// 关闭弹窗
+// Close pop-up window
 const closeDialog = () => {
 	emits('handleQuery');
 	state.isShowDialog = false;
 };
 
-// 取消
+// Cancel
 const cancel = () => {
 	state.isShowDialog = false;
 };
 
-// 提交
+// submit
 const submit = () => {
 	ruleFormRef.value.validate(async (valid: boolean) => {
 		if (!valid) return;
@@ -138,6 +138,6 @@ const submit = () => {
 	});
 };
 
-// 导出对象
+// Export object
 defineExpose({ openDialog });
 </script>

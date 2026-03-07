@@ -1,10 +1,10 @@
 <template>
 	<div class="user-news-container">
 		<el-tabs stretch class="content-box">
-			<el-tab-pane label="站内信">
+			<el-tab-pane label="Inbox message">
 				<template #label>
 					<el-icon><ele-Bell /></el-icon>
-					<span style="margin-left: 5px">站内信</span>
+					<span style="margin-left: 5px">Inbox message</span>
 				</template>
 				<div class="notice-box">
 					<template v-if="noticeList.length > 0">
@@ -23,17 +23,17 @@
                             
 						</div>
 					</template>
-					<el-empty description="没有新消息" v-else style="height: 85%;"></el-empty>
+					<el-empty description="No newinformation" v-else style="height: 85%;"></el-empty>
 				</div>
-				<div class="notice-foot" @click="goToNotice" v-if="noticeList.length > 0">前往通知中心</div>
+				<div class="notice-foot" @click="goToNotice" v-if="noticeList.length > 0">Go to notification center</div>
 			</el-tab-pane>
-			<el-tab-pane label="我的">
+			<el-tab-pane label="mine">
 				<template #label>
 					<el-icon><ele-Position /></el-icon>
-					<span style="margin-left: 5px">我的</span>
+					<span style="margin-left: 5px">mine</span>
 				</template>
 				<div class="notice-box" style="height: 435px;">
-					<el-empty description="没有新消息" style="height: 85%;"></el-empty>
+					<el-empty description="No newinformation" style="height: 85%;"></el-empty>
 				</div>
 			</el-tab-pane>
 		</el-tabs>
@@ -41,7 +41,7 @@
 			<template #header>
 				<div style="color: #fff">
 					<el-icon size="16" style="margin-right: 3px; display: inline; vertical-align: middle"> <ele-Bell /> </el-icon>
-					<span> 消息详情 </span>
+					<span> Message Details </span>
 				</div>
 			</template>
 			<div class="w-e-text-container">
@@ -49,7 +49,7 @@
 			</div>
 			<template #footer>
 				<span class="dialog-footer">
-					<el-button type="primary" @click="state.dialogVisible = false">确认</el-button>
+					<el-button type="primary" @click="state.dialogVisible = false">Confirm</el-button>
 				</span>
 			</template>
 		</el-dialog>
@@ -73,16 +73,16 @@ const state = reactive({
 	dialogVisible: false,
 	content: '',
 });
-// 前往通知中心点击
+// Go to the notification center and click
 const goToNotice = () => {
 	router.push('/dashboard/notice');
 };
-// 查看消息详情
+// View message details
 const viewNoticeDetail = async (notice: any) => {
 	state.content = notice.content;
 	state.dialogVisible = true;
 
-	// 设置已读
+	// Set read
 	notice.readStatus = 1;
 	await getAPI(SysNoticeApi).apiSysNoticeSetReadPost({ id: notice.id });
 };

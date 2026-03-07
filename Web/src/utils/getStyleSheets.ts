@@ -1,9 +1,9 @@
 import { nextTick } from 'vue';
 import * as svg from '@element-plus/icons-vue';
-// import 本地样式类名数组
+// import array of local style class names
 import { iconfonntClassList, fontAwesomeClassList } from '../assets/icons';
 
-// 获取阿里字体图标
+// Get Alibaba font icon
 const getAlicdnIconfont = () => {
 	return new Promise((resolve, reject) => {
 		nextTick(() => {
@@ -22,7 +22,7 @@ const getAlicdnIconfont = () => {
 					}
 				}
 			}
-			// 从本地读取阿里字体
+			// Read Alibaba fonts locally
 			if (sheetsIconList.length == 0) {
 				for (let i = 0; i < iconfonntClassList.length; i++) {
 					sheetsIconList.push(iconfonntClassList[i]);
@@ -30,12 +30,12 @@ const getAlicdnIconfont = () => {
 			}
 
 			if (sheetsIconList.length > 0) resolve(sheetsIconList);
-			else reject('未获取到值，请刷新重试');
+			else reject('Value not obtained, please refresh and try again');
 		});
 	});
 };
 
-// 初始化获取 css 样式，获取 element plus 自带 svg 图标，增加了 ele- 前缀，使用时：ele-Aim
+// Initialize to get the css style, get the svg icon that comes with element plus, add the ele- prefix, when using: ele-Aim
 const getElementPlusIconfont = () => {
 	return new Promise((resolve, reject) => {
 		nextTick(() => {
@@ -45,12 +45,12 @@ const getElementPlusIconfont = () => {
 				sheetsIconList.push(`ele-${icons[i].name}`);
 			}
 			if (sheetsIconList.length > 0) resolve(sheetsIconList);
-			else reject('未获取到值，请刷新重试');
+			else reject('Value not obtained, please refresh and try again');
 		});
 	});
 };
 
-// 初始化获取 css 样式，这里使用 fontawesome 的图标
+// Initialize to obtain css style, here use fontawesome icon
 const getAwesomeIconfont = () => {
 	return new Promise((resolve, reject) => {
 		nextTick(() => {
@@ -71,7 +71,7 @@ const getAwesomeIconfont = () => {
 					}
 				}
 			}
-			// 从本地读取阿里字体
+			// Read Alibaba fonts locally
 			if (sheetsIconList.length == 0) {
 				for (let i = 0; i < fontAwesomeClassList.length; i++) {
 					sheetsIconList.push(fontAwesomeClassList[i]);
@@ -79,16 +79,16 @@ const getAwesomeIconfont = () => {
 			}
 
 			if (sheetsIconList.length > 0) resolve(sheetsIconList.reverse());
-			else reject('未获取到值，请刷新重试');
+			else reject('Value not obtained, please refresh and try again');
 		});
 	});
 };
 
 /**
- * 获取字体图标 `document.styleSheets`
- * @method ali 获取阿里字体图标 `<i class="iconfont 图标类名"></i>`
- * @method ele 获取 element plus 自带图标 `<i class="图标类名"></i>`
- * @method ali 获取 fontawesome 的图标 `<i class="fa 图标类名"></i>`
+ * ObtainFonticon `document.styleSheets`
+ * @method ali ObtainAlibaba Fonticon `<i class="iconfont icon-class-name"></i>`
+ * @method ele Obtain element plus comes withicon `<i class="icon class name"></i>`
+ * @method ali Obtain fontawesome oficon `<i class="fa icon class name"></i>`
  */
 const initIconfont = {
 	// iconfont
@@ -105,5 +105,5 @@ const initIconfont = {
 	},
 };
 
-// 导出方法
+// Export method
 export default initIconfont;

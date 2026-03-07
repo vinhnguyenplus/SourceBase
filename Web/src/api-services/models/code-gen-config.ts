@@ -1,8 +1,8 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Admin.NET 通用权限开发平台
- * 让 .NET 开发更简单、更通用、更流行。整合最新技术，模块插件式开发，前后端分离，开箱即用。<br/><u><b><font color='FF0000'> 👮不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！</font></b></u>
+ * Admin.NET General Permission Development Platform
+ * let .NET Develop more simply、More general、More popular。wholeIn line with the latest technology，Modular Plugin-Based Development，Frontend and backendpointsLeave，Ready to use out of the box。<br/><u><b><font color='FF0000'> 👮This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project! </font></b></u>
  *
  * OpenAPI spec version: 1.0.0
  * 
@@ -13,7 +13,7 @@
  */
 
  /**
- * 代码生成详细配置参数
+ * code generationDetailedConfigurationParameter
  *
  * @export
  * @interface CodeGenConfig
@@ -21,7 +21,7 @@
 export interface CodeGenConfig {
 
     /**
-     * 主键Id
+     * Primary keyId
      *
      * @type {number}
      * @memberof CodeGenConfig
@@ -29,7 +29,7 @@ export interface CodeGenConfig {
     id?: number;
 
     /**
-     * 代码生成主表ID
+     * code generationMain TableID
      *
      * @type {number}
      * @memberof CodeGenConfig
@@ -37,7 +37,7 @@ export interface CodeGenConfig {
     codeGenId?: number;
 
     /**
-     * 数据库字段名
+     * DataWarehouseField Name
      *
      * @type {string}
      * @memberof CodeGenConfig
@@ -45,7 +45,7 @@ export interface CodeGenConfig {
     columnName?: string | null;
 
     /**
-     * 主外键
+     * Masterforeign key
      *
      * @type {string}
      * @memberof CodeGenConfig
@@ -53,7 +53,7 @@ export interface CodeGenConfig {
     columnKey?: string | null;
 
     /**
-     * 实体属性名
+     * Entity attributeName
      *
      * @type {string}
      * @memberof CodeGenConfig
@@ -61,7 +61,7 @@ export interface CodeGenConfig {
     propertyName?: string | null;
 
     /**
-     * 字段数据长度
+     * Field data length
      *
      * @type {number}
      * @memberof CodeGenConfig
@@ -69,7 +69,7 @@ export interface CodeGenConfig {
     columnLength?: number;
 
     /**
-     * 数据库字段名(首字母小写)
+     * DataWarehouseField Name(lowercase first letter)
      *
      * @type {string}
      * @memberof CodeGenConfig
@@ -77,7 +77,7 @@ export interface CodeGenConfig {
     lowerPropertyName?: string | null;
 
     /**
-     * 字段描述
+     * FieldDescription
      *
      * @type {string}
      * @memberof CodeGenConfig
@@ -85,7 +85,7 @@ export interface CodeGenConfig {
     columnComment?: string | null;
 
     /**
-     * .NET类型
+     * .NETType
      *
      * @type {string}
      * @memberof CodeGenConfig
@@ -93,7 +93,7 @@ export interface CodeGenConfig {
     netType?: string | null;
 
     /**
-     * 数据库中类型（物理类型）
+     * DataWarehouseinType（PhysicsType）
      *
      * @type {string}
      * @memberof CodeGenConfig
@@ -101,7 +101,7 @@ export interface CodeGenConfig {
     dataType?: string | null;
 
     /**
-     * 字段数据默认值
+     * FieldDataDefault value
      *
      * @type {string}
      * @memberof CodeGenConfig
@@ -109,7 +109,7 @@ export interface CodeGenConfig {
     defaultValue?: string | null;
 
     /**
-     * 可空.NET类型
+     * Nullable.NETType
      *
      * @type {string}
      * @memberof CodeGenConfig
@@ -117,7 +117,7 @@ export interface CodeGenConfig {
     nullableNetType?: string | null;
 
     /**
-     * 作用类型（字典）
+     * Type of effect（dictionary）
      *
      * @type {string}
      * @memberof CodeGenConfig
@@ -125,7 +125,7 @@ export interface CodeGenConfig {
     effectType?: string | null;
 
     /**
-     * 外键库标识
+     * Foreign key library identifier
      *
      * @type {string}
      * @memberof CodeGenConfig
@@ -133,7 +133,7 @@ export interface CodeGenConfig {
     fkConfigId?: string | null;
 
     /**
-     * 外键实体名称
+     * Foreign key entity name
      *
      * @type {string}
      * @memberof CodeGenConfig
@@ -141,7 +141,7 @@ export interface CodeGenConfig {
     fkEntityName?: string | null;
 
     /**
-     * 外键表名称
+     * Foreign key table name
      *
      * @type {string}
      * @memberof CodeGenConfig
@@ -149,7 +149,7 @@ export interface CodeGenConfig {
     fkTableName?: string | null;
 
     /**
-     * 外键实体名称(首字母小写)
+     * Foreign key entity name(lowercase first letter)
      *
      * @type {string}
      * @memberof CodeGenConfig
@@ -157,7 +157,7 @@ export interface CodeGenConfig {
     lowerFkEntityName?: string | null;
 
     /**
-     * 外键链接字段
+     * Foreign key link field
      *
      * @type {string}
      * @memberof CodeGenConfig
@@ -165,7 +165,7 @@ export interface CodeGenConfig {
     fkLinkColumnName?: string | null;
 
     /**
-     * 外键显示字段
+     * Foreign key display field
      *
      * @type {Array<string>}
      * @memberof CodeGenConfig
@@ -173,7 +173,7 @@ export interface CodeGenConfig {
     fkDisplayColumnList?: Array<string> | null;
 
     /**
-     * 外键显示字段(首字母小写)
+     * Foreign key display field(lowercase first letter)
      *
      * @type {Array<string>}
      * @memberof CodeGenConfig
@@ -181,7 +181,7 @@ export interface CodeGenConfig {
     lowerFkDisplayColumnsList?: Array<string> | null;
 
     /**
-     * 外键显示字段.NET类型
+     * Foreign key display field .NET type
      *
      * @type {string}
      * @memberof CodeGenConfig
@@ -189,7 +189,7 @@ export interface CodeGenConfig {
     fkColumnNetType?: string | null;
 
     /**
-     * 父级字段
+     * Parent field
      *
      * @type {string}
      * @memberof CodeGenConfig
@@ -197,7 +197,7 @@ export interface CodeGenConfig {
     pidColumn?: string | null;
 
     /**
-     * 字典code
+     * dictionarycode
      *
      * @type {string}
      * @memberof CodeGenConfig
@@ -205,7 +205,7 @@ export interface CodeGenConfig {
     dictTypeCode?: string | null;
 
     /**
-     * 查询方式
+     * Query method
      *
      * @type {string}
      * @memberof CodeGenConfig
@@ -213,7 +213,7 @@ export interface CodeGenConfig {
     queryType?: string | null;
 
     /**
-     * 是否是查询条件
+     * Is it a query condition?
      *
      * @type {string}
      * @memberof CodeGenConfig
@@ -221,7 +221,7 @@ export interface CodeGenConfig {
     whetherQuery?: string | null;
 
     /**
-     * 列表是否缩进（字典）
+     * Whether the list is indented（dictionary）
      *
      * @type {string}
      * @memberof CodeGenConfig
@@ -229,7 +229,7 @@ export interface CodeGenConfig {
     whetherRetract?: string | null;
 
     /**
-     * 是否必填（字典）
+     * Is it required?（dictionary）
      *
      * @type {string}
      * @memberof CodeGenConfig
@@ -237,7 +237,7 @@ export interface CodeGenConfig {
     whetherRequired?: string | null;
 
     /**
-     * 是否可排序（字典）
+     * Is it sortable?（dictionary）
      *
      * @type {string}
      * @memberof CodeGenConfig
@@ -245,7 +245,7 @@ export interface CodeGenConfig {
     whetherSortable?: string | null;
 
     /**
-     * 列表显示
+     * List Display
      *
      * @type {string}
      * @memberof CodeGenConfig
@@ -253,7 +253,7 @@ export interface CodeGenConfig {
     whetherTable?: string | null;
 
     /**
-     * 增改
+     * Additions and changes
      *
      * @type {string}
      * @memberof CodeGenConfig
@@ -261,7 +261,7 @@ export interface CodeGenConfig {
     whetherAddUpdate?: string | null;
 
     /**
-     * 导入
+     * import
      *
      * @type {string}
      * @memberof CodeGenConfig
@@ -269,7 +269,7 @@ export interface CodeGenConfig {
     whetherImport?: string | null;
 
     /**
-     * 是否是通用字段
+     * YesnoYesGeneralField
      *
      * @type {string}
      * @memberof CodeGenConfig
@@ -277,7 +277,7 @@ export interface CodeGenConfig {
     whetherCommon?: string | null;
 
     /**
-     * 排序
+     * Sort
      *
      * @type {number}
      * @memberof CodeGenConfig
@@ -285,7 +285,7 @@ export interface CodeGenConfig {
     orderNo?: number;
 
     /**
-     * 是否是选择器控件
+     * YesnoYesSelector control
      *
      * @type {boolean}
      * @memberof CodeGenConfig
@@ -293,7 +293,7 @@ export interface CodeGenConfig {
     isSelectorEffectType?: boolean;
 
     /**
-     * 去掉尾部Id的属性名
+     * Remove the tailIdofAttributeName
      *
      * @type {string}
      * @memberof CodeGenConfig
@@ -301,7 +301,7 @@ export interface CodeGenConfig {
     propertyNameTrimEndId?: string | null;
 
     /**
-     * 去掉尾部Id的属性名
+     * Remove the tailIdofAttributeName
      *
      * @type {string}
      * @memberof CodeGenConfig
@@ -309,7 +309,7 @@ export interface CodeGenConfig {
     lowerPropertyNameTrimEndId?: string | null;
 
     /**
-     * 扩展属性名称
+     * ExpandAttributename
      *
      * @type {string}
      * @memberof CodeGenConfig
@@ -317,7 +317,7 @@ export interface CodeGenConfig {
     extendedPropertyName?: string | null;
 
     /**
-     * 首字母小写的扩展属性名称
+     * Extension with lowercase initialAttributename
      *
      * @type {string}
      * @memberof CodeGenConfig

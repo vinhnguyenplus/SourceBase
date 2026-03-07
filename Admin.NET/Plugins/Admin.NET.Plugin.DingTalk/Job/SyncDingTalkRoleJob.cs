@@ -1,8 +1,8 @@
-﻿// Admin.NET 项目的版权、商标、专利和其他相关权利均受相应法律法规的保护。使用本项目应遵守相关法律法规和许可证的要求。
+﻿// The copyright, trademark, patent and other related rights of the Admin.NET project are protected by corresponding laws and regulations. Use of this project shall comply with relevant laws, regulations and license requirements.
 //
-// 本项目主要遵循 MIT 许可证和 Apache 许可证（版本 2.0）进行分发和使用。许可证位于源代码树根目录中的 LICENSE-MIT 和 LICENSE-APACHE 文件。
+// This project is distributed and used primarily under the MIT License and the Apache License (version 2.0). The license is located in the LICENSE-MIT and LICENSE-APACHE files in the root of the source tree.
 //
-// 不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！
+// This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project!
 
 using Admin.NET.Plugin.DingTalk;
 using Furion.Schedule;
@@ -12,9 +12,9 @@ using Microsoft.Extensions.Logging;
 namespace Admin.NET.Plugin.Job;
 
 /// <summary>
-/// 同步钉钉角色job,自动同步触发器请在web页面按需求设置
+/// To synchronize DingTalk role jobs, please set the automatic synchronization trigger according to your needs on the web page.
 /// </summary>
-[JobDetail("SyncDingTalkRoleJob", Description = "同步钉钉角色", GroupName = "default", Concurrent = false)]
+[JobDetail("SyncDingTalkRoleJob", Description = "Synchronize DingTalk Roles", GroupName = "default", Concurrent = false)]
 public class SyncDingTalkRoleJob : IJob
 {
     private readonly IServiceScopeFactory _scopeFactory;
@@ -34,13 +34,13 @@ public class SyncDingTalkRoleJob : IJob
         var _dingTalkRoleRepo = serviceScope.ServiceProvider.GetRequiredService<SqlSugarRepository<DingTalkRoleUser>>();
         var _dingTalkOptions = serviceScope.ServiceProvider.GetRequiredService<IOptions<DingTalkOptions>>();
 
-        // 获取Token
+        // Get Token
         var tokenRes = await _dingTalkApi.GetDingTalkToken(_dingTalkOptions.Value.ClientId, _dingTalkOptions.Value.ClientSecret);
         if (tokenRes.ErrCode != 0)
             throw Oops.Oh(tokenRes.ErrMsg);
 
         var dingTalkRoleUserList = new List<DingTalkRoleUser>();
-        // 获取角色列表
+        // Get role list
         var roleIdsRes = await _dingTalkApi.GetDingTalkRoleList(tokenRes.AccessToken, new GetDingTalkCurrentRoleListInput
         { });
         if (roleIdsRes.Success)
@@ -52,7 +52,7 @@ public class SyncDingTalkRoleJob : IJob
         {
             foreach (var role_item in item.roles)
             {
-                // 根据角色id获取指定角色的员工列表
+                // Get the list of employees in a specified role based on the role id
                 var role_user = await _dingTalkApi.GetDingTalkRoleSimplelist(
                     tokenRes.AccessToken,
                     new GetDingTalkCurrentRoleSimplelistInput()
@@ -81,15 +81,15 @@ public class SyncDingTalkRoleJob : IJob
             }
         }
 
-        // 判断新增还是更新
+        // Determine whether to add or update
         var sysDingTalkRoleList = await _dingTalkRoleRepo.AsQueryable().ToListAsync();
-        // 需要更新的用户Id
+        // User ID that needs to be updated
         var uDingTalkRole = dingTalkRoleUserList.Where(u => sysDingTalkRoleList.Any(m => m.DingTalkUserId == u.DingTalkUserId && m.groupId == u.groupId));
-        // 需要新增的用户Id
+        // Need to add new user ID
         var iDingTalkRole = dingTalkRoleUserList.Where(u => !sysDingTalkRoleList.Any(m => m.DingTalkUserId == u.DingTalkUserId && m.groupId == u.groupId));
-        // 需要删除的数据
+        // Data that needs to be deleted
         var dDingTalkRole = sysDingTalkRoleList.Where(u => !dingTalkRoleUserList.Any(m => m.DingTalkUserId == u.DingTalkUserId && m.groupId == u.groupId)).ToList();
-        // 新增钉钉角色
+        // Added DingTalk character
         var iUser = iDingTalkRole.Select(res => new DingTalkRoleUser
         {
             DingTalkUserId = res.DingTalkUserId,
@@ -103,7 +103,7 @@ public class SyncDingTalkRoleJob : IJob
             await _dingTalkRoleRepo.CopyNew().AsInsertable(iUser).ExecuteCommandAsync();
         }
 
-        // 更新钉钉角色
+        // Update DingTalk character
         var uUser = uDingTalkRole.Select(res => new DingTalkRoleUser
         {
             Id = sysDingTalkRoleList.Where(u => u.DingTalkUserId == res.DingTalkUserId).Select(u => u.Id).FirstOrDefault(),
@@ -113,7 +113,7 @@ public class SyncDingTalkRoleJob : IJob
             roleId = res.roleId,
             roleName = res.roleName
         }).ToList();
-        //添加需要删除的数据
+        //Add data that needs to be deleted
         Parallel.ForEach(dDingTalkRole, user => user.IsDelete = true);
         uUser.AddRange(dDingTalkRole);
         if (uUser.Count > 0)
@@ -134,7 +134,7 @@ public class SyncDingTalkRoleJob : IJob
 
         var originColor = Console.ForegroundColor;
         Console.ForegroundColor = ConsoleColor.Blue;
-        Console.WriteLine("【" + DateTime.Now + "】同步钉钉角色");
+        Console.WriteLine("【" + DateTime.Now + "】Synchronized DingTalk characters");
         Console.ForegroundColor = originColor;
     }
 }

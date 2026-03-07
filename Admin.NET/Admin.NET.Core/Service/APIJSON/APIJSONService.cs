@@ -1,13 +1,13 @@
-﻿// Admin.NET 项目的版权、商标、专利和其他相关权利均受相应法律法规的保护。使用本项目应遵守相关法律法规和许可证的要求。
+﻿// The copyright, trademark, patent and other related rights of the Admin.NET project are protected by corresponding laws and regulations. Use of this project shall comply with relevant laws, regulations and license requirements.
 //
-// 本项目主要遵循 MIT 许可证和 Apache 许可证（版本 2.0）进行分发和使用。许可证位于源代码树根目录中的 LICENSE-MIT 和 LICENSE-APACHE 文件。
+// This project is distributed and used primarily under the MIT License and the Apache License (version 2.0). The license is located in the LICENSE-MIT and LICENSE-APACHE files in the root of the source tree.
 //
-// 不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！
+// This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project!
 
 namespace Admin.NET.Core.Service;
 
 /// <summary>
-/// APIJSON服务 🧩
+/// APIJSON service 🧩
 /// </summary>
 [ApiDescriptionSettings(Order = 100)]
 public class APIJSONService : IDynamicApiController, ITransient
@@ -28,19 +28,19 @@ public class APIJSONService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 统一查询入口 🔖
+    /// Unified query portal 🔖
     /// </summary>
     /// <param name="jobject"></param>
-    /// <remarks>参数：{"[]":{"SYSLOGOP":{}}}</remarks>
+    /// <remarks>Parameters: {"[]":{"SYSLOGOP":{}}}</remarks>
     /// <returns></returns>
     [HttpPost("get")]
-    [DisplayName("APIJSON统一查询")]
+    [DisplayName("APIJSON Unified Query")]
     public JObject Query([FromBody] JObject jobject)
     {
         var database = jobject["@database"]?.ToString();
         if (!string.IsNullOrEmpty(database))
         {
-            // 设置数据库
+            // Set up database
             var provider = _db.AsTenant().GetConnectionScope(database);
             jobject.Remove("@database");
             return new SelectTable(_identityService, _tableMapper, provider).Query(jobject);
@@ -49,13 +49,13 @@ public class APIJSONService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 查询 🔖
+    /// Query 🔖
     /// </summary>
     /// <param name="table"></param>
     /// <param name="jobject"></param>
     /// <returns></returns>
     [HttpPost("get/{table}")]
-    [DisplayName("APIJSON查询")]
+    [DisplayName("APIJSON query")]
     public JObject QueryByTable([FromRoute] string table, [FromBody] JObject jobject)
     {
         var ht = new JObject
@@ -63,19 +63,19 @@ public class APIJSONService : IDynamicApiController, ITransient
             { table + "[]", jobject }
         };
 
-        // 自动添加总计数量
+        // Automatically add total quantity
         if (jobject["query"] != null && jobject["query"].ToString() != "0" && jobject["total@"] == null)
             ht.Add("total@", "");
 
-        // 每页最大1000条数据
+        // Maximum 1000 pieces of data per page
         if (jobject["count"] != null && int.Parse(jobject["count"].ToString()) > 1000)
-            throw Oops.Bah("count分页数量最大不能超过1000");
+            throw Oops.Bah("The maximum number of count paging cannot exceed 1000");
 
         jobject.Remove("@debug");
 
         var hasTableKey = false;
         var ignoreConditions = new List<string> { "page", "count", "query" };
-        var tableConditions = new JObject(); // 表的其它查询条件，比如过滤、字段等
+        var tableConditions = new JObject(); // Other query conditions for the table, such as filtering, fields, etc.
         foreach (var item in jobject)
         {
             if (item.Key.Equals(table, StringComparison.CurrentCultureIgnoreCase))
@@ -99,12 +99,12 @@ public class APIJSONService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 新增 🔖
+    /// New 🔖
     /// </summary>
-    /// <param name="tables">表对象或数组，若没有传Id则后端生成Id</param>
+    /// <param name="tables">Table object or array, if no Id is passed, the backend will generate the Id.</param>
     /// <returns></returns>
     [HttpPost("add")]
-    [DisplayName("APIJSON新增")]
+    [DisplayName("APIJSONAdd New")]
     [UnitOfWork]
     public JObject Add([FromBody] JObject tables)
     {
@@ -114,10 +114,10 @@ public class APIJSONService : IDynamicApiController, ITransient
             var talbeName = table.Key.Trim();
             var role = _identityService.GetRole();
             if (!role.Insert.Table.Contains(talbeName, StringComparer.CurrentCultureIgnoreCase))
-                throw Oops.Bah($"没权限添加{talbeName}");
+                throw Oops.Bah($"No permission to add {talbeName}");
 
             JToken result;
-            // 批量插入
+            // Batch insert
             if (table.Value is JArray)
             {
                 var ids = new List<object>();
@@ -129,7 +129,7 @@ public class APIJSONService : IDynamicApiController, ITransient
                 }
                 result = JToken.FromObject(new { id = ids, count = ids.Count });
             }
-            // 单条插入
+            // Single insert
             else
             {
                 var cols = table.Value.ToObject<JObject>();
@@ -142,12 +142,12 @@ public class APIJSONService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 更新（只支持Id作为条件） 🔖
+    /// Update (only supports Id as condition) 🔖
     /// </summary>
-    /// <param name="tables">支持多表、多Id批量更新</param>
+    /// <param name="tables">Supports batch updates of multiple tables and multiple IDs</param>
     /// <returns></returns>
     [HttpPost("update")]
-    [DisplayName("APIJSON更新")]
+    [DisplayName("APIJSON update")]
     [UnitOfWork]
     public JObject Edit([FromBody] JObject tables)
     {
@@ -163,12 +163,12 @@ public class APIJSONService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 删除（支持非Id条件、支持批量） 🔖
+    /// Delete (supports non-Id conditions, supports batch) 🔖
     /// </summary>
     /// <param name="tables"></param>
     /// <returns></returns>
     [HttpPost("delete")]
-    [DisplayName("APIJSON删除")]
+    [DisplayName("APIJSON Delete")]
     [UnitOfWork]
     public JObject Delete([FromBody] JObject tables)
     {
@@ -178,11 +178,11 @@ public class APIJSONService : IDynamicApiController, ITransient
         {
             var talbeName = table.Key.Trim();
             if (role.Delete == null || role.Delete.Table == null)
-                throw Oops.Bah("delete权限未配置");
+                throw Oops.Bah("delete permission is not configured");
             if (!role.Delete.Table.Contains(talbeName, StringComparer.CurrentCultureIgnoreCase))
-                throw Oops.Bah($"没权限删除{talbeName}");
+                throw Oops.Bah($"No permission to delete {tableName}");
             //if (!value.ContainsKey("id"))
-            //    throw Oops.Bah("未传主键id");
+            //    throw Oops.Bah("Primary key id not passed");
 
             var value = JObject.Parse(table.Value.ToString());
             var sb = new StringBuilder(100);
@@ -202,11 +202,11 @@ public class APIJSONService : IDynamicApiController, ITransient
                 }
             }
             if (!parameters.Any())
-                throw Oops.Bah("请输入删除条件");
+                throw Oops.Bah("Please enter the deletion criteria");
 
             var whereSql = sb.ToString().TrimEnd(" and ");
-            var count = _db.Deleteable<object>().AS(talbeName).Where(whereSql, parameters).ExecuteCommand(); // 无实体删除
-            value.Add("count", count); // 命中数量
+            var count = _db.Deleteable<object>().AS(talbeName).Where(whereSql, parameters).ExecuteCommand(); // Delete without entity
+            value.Add("count", count); // Number of hits
             ht.Add(talbeName, value);
         }
         return ht;

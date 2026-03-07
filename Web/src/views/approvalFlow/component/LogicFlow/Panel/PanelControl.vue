@@ -1,16 +1,16 @@
 <template>
 	<div class="panel-control">
 		<el-button-group>
-			<el-button type="default" size="small" @click="$_zoomIn">放大</el-button>
-			<el-button type="default" size="small" @click="$_zoomOut">缩小</el-button>
-			<el-button type="default" size="small" @click="$_zoomReset">大小适应</el-button>
-			<el-button type="default" size="small" @click="$_translateRest">定位还原</el-button>
-			<el-button type="default" size="small" @click="$_reset">还原(大小&定位)</el-button>
-			<el-button type="default" size="small" @click="$_undo" :disabled="state.undoDisable">上一步(ctrl+z)</el-button>
-			<el-button type="default" size="small" @click="$_redo" :disabled="state.redoDisable">下一步(ctrl+y)</el-button>
-			<el-button type="default" size="small" @click="$_download">下载图片</el-button>
-			<el-button type="default" size="small" @click="$_catData">查看数据</el-button>
-			<el-button type="default" size="small" @click="$_showMiniMap">查看缩略图</el-button>
+			<el-button type="default" size="small" @click="$_zoomIn">Zoom in</el-button>
+			<el-button type="default" size="small" @click="$_zoomOut">Reduce</el-button>
+			<el-button type="default" size="small" @click="$_zoomReset">Size adaptation</el-button>
+			<el-button type="default" size="small" @click="$_translateRest">Positioningrestore</el-button>
+			<el-button type="default" size="small" @click="$_reset">Restore (Size & Position)</el-button>
+			<el-button type="default" size="small" @click="$_undo" :disabled="state.undoDisable">Previous step (ctrl+z)</el-button>
+			<el-button type="default" size="small" @click="$_redo" :disabled="state.redoDisable">Next step (Ctrl+Y)</el-button>
+			<el-button type="default" size="small" @click="$_download">Download image</el-button>
+			<el-button type="default" size="small" @click="$_catData">ViewData</el-button>
+			<el-button type="default" size="small" @click="$_showMiniMap">View thumbnails</el-button>
 		</el-button-group>
 	</div>
 </template>

@@ -1,8 +1,8 @@
-// Admin.NET 项目的版权、商标、专利和其他相关权利均受相应法律法规的保护。使用本项目应遵守相关法律法规和许可证的要求。
+// The copyright, trademark, patent and other related rights of the Admin.NET project are protected by corresponding laws and regulations. Use of this project shall comply with relevant laws, regulations and license requirements.
 //
-// 本项目主要遵循 MIT 许可证和 Apache 许可证（版本 2.0）进行分发和使用。许可证位于源代码树根目录中的 LICENSE-MIT 和 LICENSE-APACHE 文件。
+// This project is distributed and used primarily under the MIT License and the Apache License (version 2.0). The license is located in the LICENSE-MIT and LICENSE-APACHE files in the root of the source tree.
 //
-// 不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！
+// This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project!
 
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Org.BouncyCastle.Crypto.Parameters;
@@ -12,7 +12,7 @@ using Swashbuckle.AspNetCore.SwaggerGen;
 namespace Admin.NET.Core.Service;
 
 /// <summary>
-/// 系统通用服务 🧩
+/// System general services 🧩
 /// </summary>
 [ApiDescriptionSettings(Order = 101)]
 [AllowAnonymous]
@@ -38,10 +38,10 @@ public class SysCommonService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 获取国密公钥私钥对 🏆
+    /// Obtain the national secret public key and private key pair 🏆
     /// </summary>
     /// <returns></returns>
-    [DisplayName("获取国密公钥私钥对")]
+    [DisplayName("Obtain the national secret public key and private key pair")]
     public SmKeyPairOutput GetSmKeyPair()
     {
         var kp = GM.GenerateKeyPair();
@@ -56,10 +56,10 @@ public class SysCommonService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 获取所有接口/动态API 🔖
+    /// Get all interfaces/dynamic APIs 🔖
     /// </summary>
     /// <returns></returns>
-    [DisplayName("获取所有接口/动态API")]
+    [DisplayName("Get all interfaces/dynamic APIs")]
     public List<ApiOutput> GetApiList()
     {
         var apiList = new List<ApiOutput>();
@@ -81,65 +81,65 @@ public class SysCommonService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 下载标记错误的临时Excel（全局）
+    /// Download temporary Excel with errors flagged (global)
     /// </summary>
     /// <returns></returns>
-    [DisplayName("下载标记错误的临时Excel（全局）")]
+    [DisplayName("Download Temporarily Marked Incorrect Excel (Global)")]
     public async Task<IActionResult> DownloadErrorExcelTemp([FromQuery] string fileName = null)
     {
         var userId = App.User?.FindFirst(ClaimConst.UserId)?.Value;
         var resultStream = App.GetRequiredService<SysCacheService>().Get<MemoryStream>(CacheConst.KeyExcelTemp + userId);
 
-        if (resultStream == null) throw Oops.Oh("错误标记文件已过期。");
+        if (resultStream == null) throw Oops.Oh("The error flag file is expired.");
 
         return await Task.FromResult(new FileStreamResult(resultStream, "application/octet-stream")
         {
-            FileDownloadName = $"{(string.IsNullOrEmpty(fileName) ? "错误标记＿" + DateTime.Now.ToString("yyyyMMddhhmmss") : fileName)}.xlsx"
+            FileDownloadName = $"{(string.IsNullOrEmpty(fileName) ? "mistakeMark＿" + DateTime.Now.ToString("yyyyMMddhhmmss") : fileName)}.xlsx"
         });
     }
 
     /// <summary>
-    /// 加密字符串 🔖
+    /// Encrypted string 🔖
     /// </summary>
     /// <returns></returns>
     [SuppressMonitor]
-    [DisplayName("加密字符串")]
+    [DisplayName("Encrypted string")]
     public dynamic EncryptPlainText([Required] string plainText)
     {
         return CryptogramUtil.Encrypt(plainText);
     }
 
     /// <summary>
-    /// 接口压测 🔖
+    /// Interface pressure test 🔖
     /// </summary>
     /// <returns></returns>
-    [DisplayName("接口压测")]
+    [DisplayName("Interface pressure test")]
     public async Task<StressTestOutput> StressTest(StressTestInput input)
     {
-        // 限制仅超管用户才能使用此功能
+        // Restrict that only super-admin users can use this function
         if (!_userManager.SuperAdmin) throw Oops.Oh(ErrorCodeEnum.SA001);
 
         var stopwatch = new Stopwatch();
-        var responseTimes = new List<double>();  //响应时间集合
+        var responseTimes = new List<double>();  // Response time collection
         input.RequestMethod = input.RequestMethod.ToUpper();
         long totalRequests = 0, successfulRequests = 0, failedRequests = 0;
 
         stopwatch.Start();
         var semaphore = new SemaphoreSlim(input.MaxDegreeOfParallelism!.Value > 0 ? input.MaxDegreeOfParallelism.Value : Environment.ProcessorCount);
 
-        #region 参数构建
+        #region ParameterConstruct
 
-        // 构建基础URI（不包括路径和查询参数）
+        // Build base URI (excluding path and query parameters)
         var baseUriBuilder = new UriBuilder(input.RequestUri);
         var queryString = HttpUtility.ParseQueryString(baseUriBuilder.Query);
 
-        // 替换路径参数到baseUriBuilder.Path
+        // Replace path parameter to baseUriBuilder.Path
         foreach (var param in input.PathParameters)
         {
             baseUriBuilder.Path = baseUriBuilder.Path.Replace($"{{{param.Key}}}", param.Value, StringComparison.OrdinalIgnoreCase);
         }
 
-        // 构建Query参数
+        // Build Query parameters
         foreach (var param in input.QueryParameters)
         {
             queryString[param.Key] = param.Value;
@@ -148,10 +148,10 @@ public class SysCommonService : IDynamicApiController, ITransient
         baseUriBuilder.Query = queryString.ToString() ?? string.Empty;
         var fullUri = baseUriBuilder.Uri;
 
-        // 创建一次性的HttpRequestMessage模板
+        // Create a one-time HttpRequestMessage template
         HttpRequestMessage requestTemplate = CreateRequestMessage(input, fullUri);
 
-        #endregion 参数构建
+        #endregion ParameterConstruct
 
         var tasks = Enumerable.Range(0, input.NumberOfRounds!.Value * input.NumberOfRequests!.Value).Select(async _ =>
         {
@@ -171,7 +171,7 @@ public class SysCommonService : IDynamicApiController, ITransient
 
                     using (var response = await _httpClient.SendAsync(request))
                     {
-                        response.EnsureSuccessStatusCode(); // 抛出错误状态码异常
+                        response.EnsureSuccessStatusCode(); // Throws error status code exception
 
                         requestStopwatch.Stop();
                         responseTimes.Add(requestStopwatch.Elapsed.TotalMilliseconds);
@@ -221,9 +221,9 @@ public class SysCommonService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 创建请求消息
+    /// Create request message
     /// </summary>
-    /// <param name="input">输入参数</param>
+    /// <param name="input">input parameters</param>
     /// <param name="fullUri">url</param>
     /// <returns></returns>
     private HttpRequestMessage CreateRequestMessage(StressTestInput input, Uri fullUri)
@@ -234,10 +234,10 @@ public class SysCommonService : IDynamicApiController, ITransient
             "PUT" => new HttpRequestMessage(HttpMethod.Put, fullUri),
             "POST" => new HttpRequestMessage(HttpMethod.Post, fullUri),
             "DELETE" => new HttpRequestMessage(HttpMethod.Delete, fullUri),
-            _ => throw Oops.Bah("请求方式异常")
+            _ => throw Oops.Bah("Abnormal request method")
         };
 
-        // 设置请求头
+        // Set request header
         foreach (var header in input.Headers)
         {
             request.Headers.Add(header.Key, header.Value);
@@ -246,10 +246,10 @@ public class SysCommonService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 计算百分位请求耗时
+    /// Calculate percentile request time
     /// </summary>
-    /// <param name="times">请求耗时列表</param>
-    /// <param name="percentile">百分位</param>
+    /// <param name="times">Request time-consuming list</param>
+    /// <param name="percentile">percentile</param>
     /// <returns></returns>
     private double CalculatePercentile(List<double> times, double percentile)
     {

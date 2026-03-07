@@ -1,13 +1,13 @@
-// Admin.NET 项目的版权、商标、专利和其他相关权利均受相应法律法规的保护。使用本项目应遵守相关法律法规和许可证的要求。
+// The copyright, trademark, patent and other related rights of the Admin.NET project are protected by corresponding laws and regulations. Use of this project shall comply with relevant laws, regulations and license requirements.
 //
-// 本项目主要遵循 MIT 许可证和 Apache 许可证（版本 2.0）进行分发和使用。许可证位于源代码树根目录中的 LICENSE-MIT 和 LICENSE-APACHE 文件。
+// This project is distributed and used primarily under the MIT License and the Apache License (version 2.0). The license is located in the LICENSE-MIT and LICENSE-APACHE files in the root of the source tree.
 //
-// 不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！
+// This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project!
 
 namespace Admin.NET.Core.Service;
 
 /// <summary>
-/// 系统机构服务 🧩
+/// System Organization Services 🧩
 /// </summary>
 [ApiDescriptionSettings(Order = 470)]
 public class SysOrgService : IDynamicApiController, ITransient
@@ -35,17 +35,17 @@ public class SysOrgService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 获取机构列表 🔖
+    /// Get list of institutions 🔖
     /// </summary>
     /// <returns></returns>
-    [DisplayName("获取机构列表")]
+    [DisplayName("Get the list of organizations")]
     public async Task<List<SysOrg>> GetList([FromQuery] OrgInput input)
     {
-        // 获取拥有的机构Id集合
+        // Get the set of owned institution IDs
         var userOrgIdList = await GetUserOrgIdList();
 
         var queryable = _sysOrgRep.AsQueryable().WhereIF(input.TenantId > 0, u => u.TenantId == input.TenantId).OrderBy(u => new { u.OrderNo, u.Id });
-        // 带条件筛选时返回列表数据
+        // Return list data when filtering with conditions
         if (!string.IsNullOrWhiteSpace(input.Name) || !string.IsNullOrWhiteSpace(input.Code) || !string.IsNullOrWhiteSpace(input.Type))
         {
             return await queryable.WhereIF(userOrgIdList.Count > 0, u => userOrgIdList.Contains(u.Id))
@@ -63,7 +63,7 @@ public class SysOrgService : IDynamicApiController, ITransient
         else
         {
             orgTree = await queryable.ToTreeAsync(u => u.Children, u => u.Pid, input.Id, userOrgIdList.Select(d => (object)d).ToArray());
-            // 递归禁用没权限的机构（防止用户修改或创建无权的机构和用户）
+            // Recursively disable organizations without permissions (prevent users from modifying or creating organizations and users without permissions)
             HandlerOrgTree(orgTree, userOrgIdList);
         }
 
@@ -76,7 +76,7 @@ public class SysOrgService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 递归禁用没权限的机构
+    /// Recursively disable organizations without authority
     /// </summary>
     /// <param name="orgTree"></param>
     /// <param name="userOrgIdList"></param>
@@ -84,21 +84,21 @@ public class SysOrgService : IDynamicApiController, ITransient
     {
         foreach (var org in orgTree)
         {
-            org.Disabled = !userOrgIdList.Contains(org.Id); // 设置禁用/不可选择
+            org.Disabled = !userOrgIdList.Contains(org.Id); // Setting disabled/not selectable
             if (org.Children != null)
                 HandlerOrgTree(org.Children, userOrgIdList);
         }
     }
 
     /// <summary>
-    /// 获取机构树 🔖
+    /// Get the institution tree 🔖
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
-    [DisplayName("获取机构树")]
+    [DisplayName("Get organization tree")]
     public async Task<List<OrgTreeOutput>> GetTree([FromQuery] OrgInput input)
     {
-        // 获取拥有的机构Id集合
+        // Get the set of owned institution IDs
         var userOrgIdList = await GetUserOrgIdList();
 
         var queryable = _sysOrgRep.AsQueryable().WhereIF(input.TenantId > 0, u => u.TenantId == input.TenantId).OrderBy(u => new { u.OrderNo, u.Id });
@@ -110,7 +110,7 @@ public class SysOrgService : IDynamicApiController, ITransient
         else
         {
             orgTree = await queryable.Select<OrgTreeOutput>().ToTreeAsync(u => u.Children, u => u.Pid, input.Id, userOrgIdList.Select(d => (object)d).ToArray());
-            // 递归禁用没权限的机构（防止用户修改或创建无权的机构和用户）
+            // Recursively disable organizations without permissions (prevent users from modifying or creating organizations and users without permissions)
             HandlerOrgTree(orgTree, userOrgIdList);
         }
 
@@ -123,7 +123,7 @@ public class SysOrgService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 递归禁用没权限的机构
+    /// Recursively disable organizations without authority
     /// </summary>
     /// <param name="orgTree"></param>
     /// <param name="userOrgIdList"></param>
@@ -131,19 +131,19 @@ public class SysOrgService : IDynamicApiController, ITransient
     {
         foreach (var org in orgTree)
         {
-            org.Disabled = !userOrgIdList.Contains(org.Id); // 设置禁用/不可选择
+            org.Disabled = !userOrgIdList.Contains(org.Id); // Setting disabled/not selectable
             if (org.Children != null)
                 HandlerOrgTree(org.Children, userOrgIdList);
         }
     }
 
     /// <summary>
-    /// 增加机构 🔖
+    /// Add organization 🔖
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
     [ApiDescriptionSettings(Name = "Add"), HttpPost]
-    [DisplayName("增加机构")]
+    [DisplayName("Add institutions")]
     public async Task<long> AddOrg(AddOrgInput input)
     {
         if (!_userManager.SuperAdmin && input.Pid == 0)
@@ -154,14 +154,14 @@ public class SysOrgService : IDynamicApiController, ITransient
 
         if (!_userManager.SuperAdmin && input.Pid != 0)
         {
-            // 新增机构父Id不是0，则进行权限校验
+            // If the parent ID of the new organization is not 0, permission verification will be performed.
             var orgIdList = await GetUserOrgIdList();
-            // 新增机构的父机构不在自己的数据范围内
+            // The parent organization of the newly added organization is not within the scope of your own data
             if (orgIdList.Count < 1 || !orgIdList.Contains(input.Pid))
                 throw Oops.Oh(ErrorCodeEnum.D2003);
         }
 
-        // 删除与此父机构有关的用户机构缓存
+        // Delete user institution cache related to this parent institution
         if (input.Pid == 0)
         {
             DeleteAllUserOrgCache(0, 0);
@@ -178,7 +178,7 @@ public class SysOrgService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 批量增加机构
+    /// Add institutions in batches
     /// </summary>
     /// <param name="orgs"></param>
     /// <returns></returns>
@@ -191,13 +191,13 @@ public class SysOrgService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 更新机构 🔖
+    /// Update organization 🔖
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
     [UnitOfWork]
     [ApiDescriptionSettings(Name = "Update"), HttpPost]
-    [DisplayName("更新机构")]
+    [DisplayName("Update organization")]
     public async Task UpdateOrg(UpdateOrgInput input)
     {
         if (!_userManager.SuperAdmin && input.Pid == 0)
@@ -208,11 +208,11 @@ public class SysOrgService : IDynamicApiController, ITransient
             //var pOrg = await _sysOrgRep.GetFirstAsync(u => u.Id == input.Pid);
             //_ = pOrg ?? throw Oops.Oh(ErrorCodeEnum.D2000);
 
-            // 若父机构发生变化则清空用户机构缓存
+            // If the parent organization changes, clear the user organization cache.
             var sysOrg = await _sysOrgRep.GetFirstAsync(u => u.Id == input.Id);
             if (sysOrg != null && sysOrg.Pid != input.Pid)
             {
-                // 删除与此机构、新父机构有关的用户机构缓存
+                // Delete user institution cache related to this institution, new parent institution
                 DeleteAllUserOrgCache(sysOrg.Id, input.Pid);
             }
         }
@@ -222,12 +222,12 @@ public class SysOrgService : IDynamicApiController, ITransient
         if (await _sysOrgRep.IsAnyAsync(u => u.Name == input.Name && u.Code == input.Code && u.Id != input.Id))
             throw Oops.Oh(ErrorCodeEnum.D2002);
 
-        // 父Id不能为自己的子节点
+        // The parent ID cannot be its own child node
         var childIdList = await GetChildIdListWithSelfById(input.Id);
         if (childIdList.Contains(input.Pid))
             throw Oops.Oh(ErrorCodeEnum.D2001);
 
-        // 是否有权限操作此机构
+        // Do you have permission to operate this organization?
         if (!_userManager.SuperAdmin)
         {
             var orgIdList = await GetUserOrgIdList();
@@ -239,18 +239,18 @@ public class SysOrgService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 删除机构 🔖
+    /// Delete organization 🔖
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
     [UnitOfWork]
     [ApiDescriptionSettings(Name = "Delete"), HttpPost]
-    [DisplayName("删除机构")]
+    [DisplayName("Delete institution")]
     public async Task DeleteOrg(DeleteOrgInput input)
     {
         var sysOrg = await _sysOrgRep.GetFirstAsync(u => u.Id == input.Id) ?? throw Oops.Oh(ErrorCodeEnum.D1002);
 
-        // 是否有权限操作此机构
+        // Do you have permission to operate this organization?
         if (!_userManager.SuperAdmin)
         {
             var orgIdList = await GetUserOrgIdList();
@@ -258,51 +258,51 @@ public class SysOrgService : IDynamicApiController, ITransient
                 throw Oops.Oh(ErrorCodeEnum.D2003);
         }
 
-        // 若机构为租户默认机构禁止删除
+        // If the institution is the tenant's default institution, deletion is prohibited.
         var isTenantOrg = await _sysOrgRep.ChangeRepository<SqlSugarRepository<SysTenant>>()
             .IsAnyAsync(u => u.OrgId == input.Id);
         if (isTenantOrg)
             throw Oops.Oh(ErrorCodeEnum.D2008);
 
-        // 若机构有用户则禁止删除
+        // If the organization has users, deletion is prohibited
         var orgHasEmp = await _sysOrgRep.ChangeRepository<SqlSugarRepository<SysUser>>()
             .IsAnyAsync(u => u.OrgId == input.Id);
         if (orgHasEmp)
             throw Oops.Oh(ErrorCodeEnum.D2004);
 
-        // 若扩展机构有用户则禁止删除
+        // If the extension organization has users, deletion is prohibited.
         var hasExtOrgEmp = await _sysUserExtOrgService.HasUserOrg(sysOrg.Id);
         if (hasExtOrgEmp)
             throw Oops.Oh(ErrorCodeEnum.D2005);
 
-        // 若子机构有用户则禁止删除
+        // If the sub-organization has users, deletion is prohibited.
         var childOrgTreeList = await _sysOrgRep.AsQueryable().ToChildListAsync(u => u.Pid, input.Id, true);
         var childOrgIdList = childOrgTreeList.Select(u => u.Id).ToList();
 
-        // 若子机构有用户则禁止删除
+        // If the sub-organization has users, deletion is prohibited.
         var cOrgHasEmp = await _sysOrgRep.ChangeRepository<SqlSugarRepository<SysUser>>()
             .IsAnyAsync(u => childOrgIdList.Contains(u.OrgId));
         if (cOrgHasEmp) throw Oops.Oh(ErrorCodeEnum.D2007);
 
-        // 若有绑定注册方案则禁止删除
+        // If there is a binding registration plan, deletion is prohibited.
         var hasUserRegWay = await _sysOrgRep.Context.Queryable<SysUserRegWay>().AnyAsync(u => u.OrgId == input.Id);
         if (hasUserRegWay) throw Oops.Oh(ErrorCodeEnum.D2010);
 
-        // 删除与此机构、父机构有关的用户机构缓存
+        // Delete user organization cache related to this organization and parent organization
         DeleteAllUserOrgCache(sysOrg.Id, sysOrg.Pid);
 
-        // 级联删除机构子节点
+        // Cascade deletion of organization sub-nodes
         await _sysOrgRep.DeleteAsync(u => childOrgIdList.Contains(u.Id));
 
-        // 级联删除角色机构数据
+        // Cascade deletion of role organization data
         await _sysRoleOrgService.DeleteRoleOrgByOrgIdList(childOrgIdList);
 
-        // 级联删除用户机构数据
+        // Cascade deletion of user organization data
         await _sysUserExtOrgService.DeleteUserExtOrgByOrgIdList(childOrgIdList);
     }
 
     /// <summary>
-    /// 删除与此机构、父机构有关的用户机构缓存
+    /// Delete user organization cache related to this organization and parent organization
     /// </summary>
     /// <param name="orgId"></param>
     /// <param name="orgPid"></param>
@@ -327,7 +327,7 @@ public class SysOrgService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 获取当前用户机构Id集合
+    /// Get the current user institution ID collection
     /// </summary>
     /// <returns></returns>
     [NonAction]
@@ -338,54 +338,54 @@ public class SysOrgService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 根据指定用户Id获取机构Id集合
+    /// Get the institution ID collection based on the specified user ID
     /// </summary>
     /// <returns></returns>
     [NonAction]
     public async Task<List<long>> GetUserOrgIdList(long userId, long userOrgId)
     {
-        var orgIdList = _sysCacheService.Get<List<long>>($"{CacheConst.KeyUserOrg}{userId}"); // 取缓存
+        var orgIdList = _sysCacheService.Get<List<long>>($"{CacheConst.KeyUserOrg}{userId}"); // Get cache
         if (orgIdList is { Count: >= 1 }) return orgIdList;
 
-        // 本人创建机构集合
+        // I create an organization collection
         var orgList0 = await _sysOrgRep.AsQueryable().Where(u => u.CreateUserId == userId).Select(u => u.Id).ToListAsync();
 
-        // 扩展机构集合
+        // Extended Institutional Collection
         var orgList1 = await _sysUserExtOrgService.GetUserExtOrgList(userId);
 
-        // 角色机构集合
+        // role agency collection
         var orgList2 = await GetUserRoleOrgIdList(userId, userOrgId);
 
-        // 机构并集
+        // Organizational union
         orgIdList = orgList1.Select(u => u.OrgId).Union(orgList2).Union(orgList0).ToList();
 
-        // 当前所属机构
+        // Current affiliation
         if (!orgIdList.Contains(userOrgId)) orgIdList.Add(userOrgId);
 
-        _sysCacheService.Set($"{CacheConst.KeyUserOrg}{userId}", orgIdList, TimeSpan.FromDays(7)); // 存缓存
+        _sysCacheService.Set($"{CacheConst.KeyUserOrg}{userId}", orgIdList, TimeSpan.FromDays(7)); // cache
         return orgIdList;
     }
 
     /// <summary>
-    /// 获取用户角色机构Id集合
+    /// Get the user role organization ID collection
     /// </summary>
     /// <param name="userId"></param>
-    /// <param name="userOrgId">用户的机构Id</param>
+    /// <param name="userOrgId">User's institution ID</param>
     /// <returns></returns>
     private async Task<List<long>> GetUserRoleOrgIdList(long userId, long userOrgId)
     {
         var roleList = await _sysUserRoleService.GetUserRoleList(userId);
 
-        if (roleList.Count < 1) return new(); // 空机构Id集合
+        if (roleList.Count < 1) return new(); // Empty organization ID collection
 
         return await GetUserOrgIdList(roleList, userId, userOrgId);
     }
 
     /// <summary>
-    /// 判定用户是否有某角色权限
+    /// Determine whether the user has certain role permissions
     /// </summary>
     /// <param name="userId"></param>
-    /// <param name="role">角色代码</param>
+    /// <param name="role">role code</param>
     /// <returns></returns>
     [NonAction]
     public async Task<bool> GetUserHasRole(long userId, SysRole role)
@@ -402,21 +402,21 @@ public class SysOrgService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 根据角色Id集合获取机构Id集合
+    /// Get the organization ID set based on the role ID set
     /// </summary>
     /// <param name="roleList"></param>
     /// <param name="userId"></param>
-    /// <param name="userOrgId">用户的机构Id</param>
+    /// <param name="userOrgId">User's institution ID</param>
     /// <returns></returns>
     private async Task<List<long>> GetUserOrgIdList(List<SysRole> roleList, long userId, long userOrgId)
     {
-        // 按最大范围策略设定(若同时拥有ALL和SELF权限，则结果ALL)
+        // Set according to the maximum scope policy (if you have both ALL and SELF permissions, the result is ALL)
         int strongerDataScopeType = (int)DataScopeEnum.Self;
 
-        // 自定义数据范围的角色集合
+        // Role collection for custom data ranges
         var customDataScopeRoleIdList = new List<long>();
 
-        // 数据范围的机构集合
+        // Institutional collection of data ranges
         var dataScopeOrgIdList = new List<long>();
 
         if (roleList is { Count: > 0 })
@@ -426,32 +426,32 @@ public class SysOrgService : IDynamicApiController, ITransient
                 if (u.DataScope == DataScopeEnum.Define)
                 {
                     customDataScopeRoleIdList.Add(u.Id);
-                    strongerDataScopeType = (int)u.DataScope; // 自定义数据权限时也要更新最大范围
+                    strongerDataScopeType = (int)u.DataScope; // When customizing data permissions, the maximum range must also be updated.
                 }
                 else if ((int)u.DataScope <= strongerDataScopeType)
                 {
                     strongerDataScopeType = (int)u.DataScope;
-                    // 根据数据范围获取机构集合
+                    // Get the institution collection based on the data range
                     var orgIds = GetOrgIdListByDataScope(userOrgId, strongerDataScopeType).GetAwaiter().GetResult();
                     dataScopeOrgIdList = dataScopeOrgIdList.Union(orgIds).ToList();
                 }
             });
         }
 
-        // 缓存当前用户最大角色数据范围
+        // Cache the current user's maximum role data range
         _sysCacheService.Set(CacheConst.KeyRoleMaxDataScope + userId, strongerDataScopeType, TimeSpan.FromDays(7));
 
-        // 根据角色集合获取机构集合
+        // Get the organization collection based on the role collection
         var roleOrgIdList = await _sysRoleOrgService.GetRoleOrgIdList(customDataScopeRoleIdList);
 
-        // 并集机构集合
+        // Union set of institutions
         return roleOrgIdList.Union(dataScopeOrgIdList).ToList();
     }
 
     /// <summary>
-    /// 根据数据范围获取机构Id集合
+    /// Get the institution ID collection based on the data range
     /// </summary>
-    /// <param name="userOrgId">用户的机构Id</param>
+    /// <param name="userOrgId">User's institution ID</param>
     /// <param name="dataScope"></param>
     /// <returns></returns>
     private async Task<List<long>> GetOrgIdListByDataScope(long userOrgId, int dataScope)
@@ -460,15 +460,15 @@ public class SysOrgService : IDynamicApiController, ITransient
         var orgIdList = new List<long>();
         switch (dataScope)
         {
-            // 若数据范围是全部，则获取所有机构Id集合
+            // If the data range is all, get the set of all institution IDs
             case (int)DataScopeEnum.All:
                 orgIdList = await _sysOrgRep.AsQueryable().Select(u => u.Id).ToListAsync();
                 break;
-            // 若数据范围是本部门及以下，则获取本节点和子节点集合
+            // If the data range is this department and below, obtain the set of this node and sub-nodes.
             case (int)DataScopeEnum.DeptChild:
                 orgIdList = await GetChildIdListWithSelfById(orgId);
                 break;
-            // 若数据范围是本部门不含子节点，则直接返回本部门
+            // If the data range is this department and does not contain child nodes, then it will be returned directly to this department.
             case (int)DataScopeEnum.Dept:
                 orgIdList.Add(orgId);
                 break;
@@ -477,7 +477,7 @@ public class SysOrgService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 根据节点Id获取子节点Id集合(包含自己)
+    /// Get the set of child node IDs based on the node ID (including itself)
     /// </summary>
     /// <param name="pid"></param>
     /// <returns></returns>

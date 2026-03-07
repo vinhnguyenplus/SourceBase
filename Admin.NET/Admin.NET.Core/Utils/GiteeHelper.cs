@@ -1,13 +1,13 @@
-﻿// Admin.NET 项目的版权、商标、专利和其他相关权利均受相应法律法规的保护。使用本项目应遵守相关法律法规和许可证的要求。
+﻿// The copyright, trademark, patent and other related rights of the Admin.NET project are protected by corresponding laws and regulations. Use of this project shall comply with relevant laws, regulations and license requirements.
 //
-// 本项目主要遵循 MIT 许可证和 Apache 许可证（版本 2.0）进行分发和使用。许可证位于源代码树根目录中的 LICENSE-MIT 和 LICENSE-APACHE 文件。
+// This project is distributed and used primarily under the MIT License and the Apache License (version 2.0). The license is located in the LICENSE-MIT and LICENSE-APACHE files in the root of the source tree.
 //
-// 不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！
+// This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project!
 
 namespace Admin.NET.Core;
 
 /// <summary>
-/// Gitee接口帮助类
+/// Gitee interface helper class
 /// </summary>
 public class GiteeHelper
 {
@@ -15,14 +15,14 @@ public class GiteeHelper
     private static readonly HttpClient Client = new();
 
     /// <summary>
-    /// 下载仓库 zip
+    /// Download repository zip
     /// </summary>
     /// <remarks>https://gitee.com/api/v5/swagger#/getV5ReposOwnerRepoZipball</remarks>
     /// <returns></returns>
     public static async Task<Stream> DownloadRepoZip(string owner, string repo, string accessToken = null, string @ref = null)
     {
-        if (string.IsNullOrWhiteSpace(owner)) throw Oops.Bah($"参数 {nameof(owner)} 不能为空");
-        if (string.IsNullOrWhiteSpace(repo)) throw Oops.Bah($"参数 {nameof(repo)} 不能为空");
+        if (string.IsNullOrWhiteSpace(owner)) throw Oops.Bah($"Parameter {nameof(owner)} cannot be empty");
+        if (string.IsNullOrWhiteSpace(repo)) throw Oops.Bah($"Parameter {nameof(repo)} cannot be empty");
         var query = BuilderQueryString(new
         {
             access_token = accessToken,
@@ -32,7 +32,7 @@ public class GiteeHelper
     }
 
     /// <summary>
-    /// 构建Query参数
+    /// Build Query parameters
     /// </summary>
     /// <returns></returns>
     private static string BuilderQueryString([System.Diagnostics.CodeAnalysis.NotNull] object obj)
@@ -44,11 +44,11 @@ public class GiteeHelper
             var val = prop.GetValue(obj);
             if (val == null) continue;
 
-            // 以元组形式校验参数集
+            // Verify parameter set as tuple
             var name = prop.Name.Trim('@');
             if (val is Tuple<object, string> { Item1: not null } tuple)
             {
-                if (!tuple.Item2.Split(",").Any(x => x.Trim().Equals(tuple.Item1))) throw Oops.Oh($"参数 {name} 的值只能为：{tuple.Item2}");
+                if (!tuple.Item2.Split(",").Any(x => x.Trim().Equals(tuple.Item1))) throw Oops.Oh($"The value of parameter {name} can only be: {tuple.Item2}");
                 query[name] = tuple.Item1.ToString();
                 continue;
             }

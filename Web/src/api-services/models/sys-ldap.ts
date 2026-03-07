@@ -1,8 +1,8 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Admin.NET 通用权限开发平台
- * 让 .NET 开发更简单、更通用、更流行。整合最新技术，模块插件式开发，前后端分离，开箱即用。<br/><u><b><font color='FF0000'> 👮不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！</font></b></u>
+ * Admin.NET General Permission Development Platform
+ * let .NET Develop more simply、More general、More popular。wholeIn line with the latest technology，Modular Plugin-Based Development，Frontend and backendpointsLeave，Ready to use out of the box。<br/><u><b><font color='FF0000'> 👮This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project! </font></b></u>
  *
  * OpenAPI spec version: 1.0.0
  * 
@@ -14,7 +14,7 @@
 
 import { StatusEnum } from './status-enum';
  /**
- * 系统域登录信息配置表
+ * System Domain Login Information Configuration Table
  *
  * @export
  * @interface SysLdap
@@ -22,7 +22,7 @@ import { StatusEnum } from './status-enum';
 export interface SysLdap {
 
     /**
-     * 雪花Id
+     * SnowflakeId
      *
      * @type {number}
      * @memberof SysLdap
@@ -30,7 +30,7 @@ export interface SysLdap {
     id?: number;
 
     /**
-     * 创建时间
+     * Creation Time
      *
      * @type {Date}
      * @memberof SysLdap
@@ -38,7 +38,7 @@ export interface SysLdap {
     createTime?: Date;
 
     /**
-     * 更新时间
+     * Update Time
      *
      * @type {Date}
      * @memberof SysLdap
@@ -46,7 +46,7 @@ export interface SysLdap {
     updateTime?: Date | null;
 
     /**
-     * 创建者Id
+     * CreatorId
      *
      * @type {number}
      * @memberof SysLdap
@@ -54,7 +54,7 @@ export interface SysLdap {
     createUserId?: number | null;
 
     /**
-     * 创建者姓名
+     * Creator name
      *
      * @type {string}
      * @memberof SysLdap
@@ -62,7 +62,7 @@ export interface SysLdap {
     createUserName?: string | null;
 
     /**
-     * 修改者Id
+     * Modifier ID
      *
      * @type {number}
      * @memberof SysLdap
@@ -70,7 +70,7 @@ export interface SysLdap {
     updateUserId?: number | null;
 
     /**
-     * 修改者姓名
+     * Modifier name
      *
      * @type {string}
      * @memberof SysLdap
@@ -78,7 +78,7 @@ export interface SysLdap {
     updateUserName?: string | null;
 
     /**
-     * 软删除
+     * soft delete
      *
      * @type {boolean}
      * @memberof SysLdap
@@ -86,7 +86,7 @@ export interface SysLdap {
     isDelete?: boolean;
 
     /**
-     * 软删除时间
+     * soft delete time
      *
      * @type {Date}
      * @memberof SysLdap
@@ -94,7 +94,7 @@ export interface SysLdap {
     deleteTime?: Date | null;
 
     /**
-     * 租户Id
+     * Tenant ID
      *
      * @type {number}
      * @memberof SysLdap
@@ -102,7 +102,7 @@ export interface SysLdap {
     tenantId?: number | null;
 
     /**
-     * 主机
+     * Host
      *
      * @type {string}
      * @memberof SysLdap
@@ -110,7 +110,7 @@ export interface SysLdap {
     host: string;
 
     /**
-     * 端口
+     * port
      *
      * @type {number}
      * @memberof SysLdap
@@ -118,7 +118,7 @@ export interface SysLdap {
     port?: number;
 
     /**
-     * 用户搜索基准
+     * User search benchmark
      *
      * @type {string}
      * @memberof SysLdap
@@ -126,7 +126,7 @@ export interface SysLdap {
     baseDn: string;
 
     /**
-     * 绑定DN(有管理权限制的用户)
+     * Bind DN(with management restrictionsUser)
      *
      * @type {string}
      * @memberof SysLdap
@@ -134,7 +134,7 @@ export interface SysLdap {
     bindDn: string;
 
     /**
-     * 绑定密码(有管理权限制的用户密码)
+     * Bind password(with management restrictionsUserpassword)
      *
      * @type {string}
      * @memberof SysLdap
@@ -142,7 +142,7 @@ export interface SysLdap {
     bindPass: string;
 
     /**
-     * 用户过滤规则
+     * User filtering rules
      *
      * @type {string}
      * @memberof SysLdap
@@ -150,7 +150,7 @@ export interface SysLdap {
     authFilter: string;
 
     /**
-     * Ldap版本
+     * LDAP Version
      *
      * @type {number}
      * @memberof SysLdap
@@ -158,7 +158,7 @@ export interface SysLdap {
     version?: number;
 
     /**
-     * 绑定域账号字段属性值
+     * Bind domain account field attribute value
      *
      * @type {string}
      * @memberof SysLdap
@@ -166,7 +166,7 @@ export interface SysLdap {
     bindAttrAccount: string;
 
     /**
-     * 绑定用户EmployeeId属性值
+     * Bind the user's EmployeeId property value
      *
      * @type {string}
      * @memberof SysLdap
@@ -174,7 +174,7 @@ export interface SysLdap {
     bindAttrEmployeeId: string;
 
     /**
-     * 绑定Code属性值
+     * Bind the Code propertyvalue
      *
      * @type {string}
      * @memberof SysLdap

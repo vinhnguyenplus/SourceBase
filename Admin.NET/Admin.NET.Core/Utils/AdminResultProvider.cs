@@ -1,19 +1,19 @@
-// Admin.NET 项目的版权、商标、专利和其他相关权利均受相应法律法规的保护。使用本项目应遵守相关法律法规和许可证的要求。
+// The copyright, trademark, patent and other related rights of the Admin.NET project are protected by corresponding laws and regulations. Use of this project shall comply with relevant laws, regulations and license requirements.
 //
-// 本项目主要遵循 MIT 许可证和 Apache 许可证（版本 2.0）进行分发和使用。许可证位于源代码树根目录中的 LICENSE-MIT 和 LICENSE-APACHE 文件。
+// This project is distributed and used primarily under the MIT License and the Apache License (version 2.0). The license is located in the LICENSE-MIT and LICENSE-APACHE files in the root of the source tree.
 //
-// 不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！
+// This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project!
 
 namespace Admin.NET.Core;
 
 /// <summary>
-/// 全局规范化结果
+/// Global normalization results
 /// </summary>
 [UnifyModel(typeof(AdminResult<>))]
 public class AdminResultProvider : IUnifyResultProvider
 {
     /// <summary>
-    /// JWT 授权异常返回值
+    /// JWT authorization exception return value
     /// </summary>
     /// <param name="context"></param>
     /// <param name="metadata"></param>
@@ -24,7 +24,7 @@ public class AdminResultProvider : IUnifyResultProvider
     }
 
     /// <summary>
-    /// 异常返回值
+    /// Exception return value
     /// </summary>
     /// <param name="context"></param>
     /// <param name="metadata"></param>
@@ -35,7 +35,7 @@ public class AdminResultProvider : IUnifyResultProvider
     }
 
     /// <summary>
-    /// 成功返回值
+    /// Successful return value
     /// </summary>
     /// <param name="context"></param>
     /// <param name="data"></param>
@@ -46,7 +46,7 @@ public class AdminResultProvider : IUnifyResultProvider
     }
 
     /// <summary>
-    /// 验证失败返回值
+    /// Verification failure return value
     /// </summary>
     /// <param name="context"></param>
     /// <param name="metadata"></param>
@@ -57,7 +57,7 @@ public class AdminResultProvider : IUnifyResultProvider
     }
 
     /// <summary>
-    /// 特定状态码返回值
+    /// Specific status code return value
     /// </summary>
     /// <param name="context"></param>
     /// <param name="statusCode"></param>
@@ -65,26 +65,26 @@ public class AdminResultProvider : IUnifyResultProvider
     /// <returns></returns>
     public async Task OnResponseStatusCodes(HttpContext context, int statusCode, UnifyResultSettingsOptions unifyResultSettings)
     {
-        // 设置响应状态码
+        // Set response status code
         UnifyContext.SetResponseStatusCodes(context, statusCode, unifyResultSettings);
 
         switch (statusCode)
         {
-            // 处理 401 状态码
+            // Handling 401 status code
             case StatusCodes.Status401Unauthorized:
-                var msg = "401 登录已过期，请重新登录";
-                // 若存在身份验证失败消息，则返回消息内容
+                var msg = "401 Login has expired, please log in again";
+                // If there is an authentication failure message, the message content is returned.
                 if (context.Items.TryGetValue(SignatureAuthenticationDefaults.AuthenticateFailMsgKey, out var authFailMsg))
                     msg = authFailMsg + "";
                 await context.Response.WriteAsJsonAsync(RESTfulResult(statusCode, msg: msg),
                     App.GetOptions<JsonOptions>()?.JsonSerializerOptions);
                 break;
-            // 处理 403 状态码
+            // Handling 403 status codes
             case StatusCodes.Status403Forbidden:
-                await context.Response.WriteAsJsonAsync(RESTfulResult(statusCode, msg: "403 禁止访问，没有权限"),
+                await context.Response.WriteAsJsonAsync(RESTfulResult(statusCode, msg: "403 Forbidden, no permission"),
                     App.GetOptions<JsonOptions>()?.JsonSerializerOptions);
                 break;
-            // 处理 302 状态码
+            // Handling 302 status code
             case StatusCodes.Status302Found:
                 if (context.Response.Headers.TryGetValue("Location", out var redirectUrl))
                 {
@@ -92,7 +92,7 @@ public class AdminResultProvider : IUnifyResultProvider
                 }
                 else
                 {
-                    var errorMessage = "302 跳转失败，没有提供 Location 头信息";
+                    var errorMessage = "302 redirection failed, no Location header provided";
                     await context.Response.WriteAsJsonAsync(RESTfulResult(statusCode, msg: errorMessage),
                         App.GetOptions<JsonOptions>()?.JsonSerializerOptions);
                 }
@@ -101,7 +101,7 @@ public class AdminResultProvider : IUnifyResultProvider
     }
 
     /// <summary>
-    /// 返回成功结果集
+    /// Return successful result set
     /// </summary>
     /// <param name="message"></param>
     /// <param name="data"></param>
@@ -112,7 +112,7 @@ public class AdminResultProvider : IUnifyResultProvider
     }
 
     /// <summary>
-    /// 返回失败结果集
+    /// Return failure result set
     /// </summary>
     /// <param name="message"></param>
     /// <param name="code"></param>
@@ -124,7 +124,7 @@ public class AdminResultProvider : IUnifyResultProvider
     }
 
     /// <summary>
-    /// 返回 RESTful 风格结果集
+    /// Return RESTful style result set
     /// </summary>
     /// <param name="statusCode"></param>
     /// <param name="succeeded"></param>
@@ -133,7 +133,7 @@ public class AdminResultProvider : IUnifyResultProvider
     /// <returns></returns>
     private static AdminResult<object> RESTfulResult(int statusCode, bool succeeded = default, object data = default, object msg = default)
     {
-        //// 统一返回值脱敏处理
+        //// Unified return value desensitization processing
         //if (data?.GetType() == typeof(String))
         //{
         //    data = App.GetRequiredService<ISensitiveDetectionProvider>().ReplaceAsync(data.ToString(), '*').GetAwaiter().GetResult();
@@ -156,38 +156,38 @@ public class AdminResultProvider : IUnifyResultProvider
 }
 
 /// <summary>
-/// 全局返回结果
+/// Global return results
 /// </summary>
 /// <typeparam name="T"></typeparam>
 public class AdminResult<T>
 {
     /// <summary>
-    /// 状态码
+    /// status code
     /// </summary>
     public int Code { get; set; }
 
     /// <summary>
-    /// 类型success、warning、error
+    /// Type success, warning, error
     /// </summary>
     public string Type { get; set; }
 
     /// <summary>
-    /// 错误信息
+    /// error message
     /// </summary>
     public string Message { get; set; }
 
     /// <summary>
-    /// 数据
+    /// data
     /// </summary>
     public T Result { get; set; }
 
     /// <summary>
-    /// 附加数据
+    /// Additional data
     /// </summary>
     public object Extras { get; set; }
 
     /// <summary>
-    /// 时间
+    /// time
     /// </summary>
     public DateTime Time { get; set; }
 }

@@ -1,65 +1,65 @@
-// Admin.NET 项目的版权、商标、专利和其他相关权利均受相应法律法规的保护。使用本项目应遵守相关法律法规和许可证的要求。
+// The copyright, trademark, patent and other related rights of the Admin.NET project are protected by corresponding laws and regulations. Use of this project shall comply with relevant laws, regulations and license requirements.
 //
-// 本项目主要遵循 MIT 许可证和 Apache 许可证（版本 2.0）进行分发和使用。许可证位于源代码树根目录中的 LICENSE-MIT 和 LICENSE-APACHE 文件。
+// This project is distributed and used primarily under the MIT License and the Apache License (version 2.0). The license is located in the LICENSE-MIT and LICENSE-APACHE files in the root of the source tree.
 //
-// 不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！
+// This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project!
 
 namespace Admin.NET.Core;
 
 /// <summary>
-/// 分页泛型集合
+/// Paginated generic collection
 /// </summary>
 /// <typeparam name="TEntity"></typeparam>
 public class SqlSugarPagedList<TEntity>
 {
     /// <summary>
-    /// 页码
+    /// page number
     /// </summary>
     public int Page { get; set; }
 
     /// <summary>
-    /// 页容量
+    /// page capacity
     /// </summary>
     public int PageSize { get; set; }
 
     /// <summary>
-    /// 总条数
+    /// Total number of items
     /// </summary>
     public int Total { get; set; }
 
     /// <summary>
-    /// 总页数
+    /// Total pages
     /// </summary>
     public int TotalPages { get; set; }
 
     /// <summary>
-    /// 当前页集合
+    /// current page collection
     /// </summary>
     public IEnumerable<TEntity> Items { get; set; }
 
     /// <summary>
-    /// 是否有上一页
+    /// Is there a previous page?
     /// </summary>
     public bool HasPrevPage { get; set; }
 
     /// <summary>
-    /// 是否有下一页
+    /// Is there a next page?
     /// </summary>
     public bool HasNextPage { get; set; }
 }
 
 /// <summary>
-/// 分页拓展类
+/// Pagination extension class
 /// </summary>
 public static class SqlSugarPagedExtensions
 {
     /// <summary>
-    /// 分页拓展
+    /// Pagination expansion
     /// </summary>
-    /// <param name="query"><see cref="ISugarQueryable{TEntity}"/>对象</param>
-    /// <param name="pageIndex">当前页码，从1开始</param>
-    /// <param name="pageSize">页码容量</param>
-    /// <param name="expression">查询结果 Select 表达式</param>
+    /// <param name="query"><see cref="ISugarQueryable{TEntity}"/>Object</param>
+    /// <param name="pageIndex">Current page number, starting from 1</param>
+    /// <param name="pageSize">Page capacity</param>
+    /// <param name="expression">Query results Select expression</param>
     /// <returns></returns>
     public static SqlSugarPagedList<TResult> ToPagedList<TEntity, TResult>(this ISugarQueryable<TEntity> query, int pageIndex, int pageSize,
         Expression<Func<TEntity, TResult>> expression)
@@ -70,11 +70,11 @@ public static class SqlSugarPagedExtensions
     }
 
     /// <summary>
-    /// 分页拓展
+    /// Pagination expansion
     /// </summary>
-    /// <param name="query"><see cref="ISugarQueryable{TEntity}"/>对象</param>
-    /// <param name="pageIndex">当前页码，从1开始</param>
-    /// <param name="pageSize">页码容量</param>
+    /// <param name="query"><see cref="ISugarQueryable{TEntity}"/>Object</param>
+    /// <param name="pageIndex">Current page number, starting from 1</param>
+    /// <param name="pageSize">Page capacity</param>
     /// <returns></returns>
     public static SqlSugarPagedList<TEntity> ToPagedList<TEntity>(this ISugarQueryable<TEntity> query, int pageIndex, int pageSize)
     {
@@ -84,12 +84,12 @@ public static class SqlSugarPagedExtensions
     }
 
     /// <summary>
-    /// 分页拓展
+    /// Pagination expansion
     /// </summary>
-    /// <param name="query"><see cref="ISugarQueryable{TEntity}"/>对象</param>
-    /// <param name="pageIndex">当前页码，从1开始</param>
-    /// <param name="pageSize">页码容量</param>
-    /// <param name="expression">查询结果 Select 表达式</param>
+    /// <param name="query"><see cref="ISugarQueryable{TEntity}"/>Object</param>
+    /// <param name="pageIndex">Current page number, starting from 1</param>
+    /// <param name="pageSize">Page capacity</param>
+    /// <param name="expression">Query results Select expression</param>
     /// <returns></returns>
     public static async Task<SqlSugarPagedList<TResult>> ToPagedListAsync<TEntity, TResult>(this ISugarQueryable<TEntity> query, int pageIndex, int pageSize,
         Expression<Func<TEntity, TResult>> expression)
@@ -100,11 +100,11 @@ public static class SqlSugarPagedExtensions
     }
 
     /// <summary>
-    /// 分页拓展
+    /// Pagination expansion
     /// </summary>
-    /// <param name="query"><see cref="ISugarQueryable{TEntity}"/>对象</param>
-    /// <param name="pageIndex">当前页码，从1开始</param>
-    /// <param name="pageSize">页码容量</param>
+    /// <param name="query"><see cref="ISugarQueryable{TEntity}"/>Object</param>
+    /// <param name="pageIndex">Current page number, starting from 1</param>
+    /// <param name="pageSize">Page capacity</param>
     /// <returns></returns>
     public static async Task<SqlSugarPagedList<TEntity>> ToPagedListAsync<TEntity>(this ISugarQueryable<TEntity> query, int pageIndex, int pageSize)
     {
@@ -114,11 +114,11 @@ public static class SqlSugarPagedExtensions
     }
 
     /// <summary>
-    /// 脱敏分页拓展
+    /// Desensitized paging expansion
     /// </summary>
-    /// <param name="query"><see cref="ISugarQueryable{TEntity}"/>对象</param>
-    /// <param name="pageIndex">当前页码，从1开始</param>
-    /// <param name="pageSize">页码容量</param>
+    /// <param name="query"><see cref="ISugarQueryable{TEntity}"/>Object</param>
+    /// <param name="pageIndex">Current page number, starting from 1</param>
+    /// <param name="pageSize">Page capacity</param>
     /// <returns></returns>
     public static async Task<SqlSugarPagedList<TEntity>> ToPagedListDataMaskAsync<TEntity>(this ISugarQueryable<TEntity> query, int pageIndex, int pageSize) where TEntity : class
     {
@@ -129,11 +129,11 @@ public static class SqlSugarPagedExtensions
     }
 
     /// <summary>
-    /// 脱敏分页拓展
+    /// Desensitized paging expansion
     /// </summary>
-    /// <param name="list">集合对象</param>
-    /// <param name="pageIndex">当前页码，从1开始</param>
-    /// <param name="pageSize">页码容量</param>
+    /// <param name="list">Collection object</param>
+    /// <param name="pageIndex">Current page number, starting from 1</param>
+    /// <param name="pageSize">Page capacity</param>
     /// <returns></returns>
     public static SqlSugarPagedList<TEntity> ToPagedListDataMask<TEntity>(this IEnumerable<TEntity> list, int pageIndex, int pageSize) where TEntity : class
     {
@@ -144,11 +144,11 @@ public static class SqlSugarPagedExtensions
     }
 
     /// <summary>
-    /// 分页拓展
+    /// Pagination expansion
     /// </summary>
-    /// <param name="list">集合对象</param>
-    /// <param name="pageIndex">当前页码，从1开始</param>
-    /// <param name="pageSize">页码容量</param>
+    /// <param name="list">Collection object</param>
+    /// <param name="pageIndex">Current page number, starting from 1</param>
+    /// <param name="pageSize">Page capacity</param>
     /// <returns></returns>
     public static SqlSugarPagedList<TEntity> ToPagedList<TEntity>(this IEnumerable<TEntity> list, int pageIndex, int pageSize)
     {
@@ -158,13 +158,13 @@ public static class SqlSugarPagedExtensions
     }
 
     /// <summary>
-    /// 创建 <see cref="SqlSugarPagedList{TEntity}"/> 对象
+    /// Create a <see cref="SqlSugarPagedList{TEntity}"/> object
     /// </summary>
     /// <typeparam name="TEntity"></typeparam>
-    /// <param name="items">分页内容的对象集合</param>
-    /// <param name="total">总条数</param>
-    /// <param name="pageIndex">当前页码，从1开始</param>
-    /// <param name="pageSize">页码容量</param>
+    /// <param name="items">Collection of objects for paginated content</param>
+    /// <param name="total">Total number of items</param>
+    /// <param name="pageIndex">Current page number, starting from 1</param>
+    /// <param name="pageSize">Page capacity</param>
     /// <returns></returns>
     private static SqlSugarPagedList<TEntity> CreateSqlSugarPagedList<TEntity>(IEnumerable<TEntity> items, int total, int pageIndex, int pageSize)
     {

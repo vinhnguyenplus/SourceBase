@@ -1,8 +1,8 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Admin.NET 通用权限开发平台
- * 让 .NET 开发更简单、更通用、更流行。整合最新技术，模块插件式开发，前后端分离，开箱即用。<br/><u><b><font color='FF0000'> 👮不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！</font></b></u>
+ * Admin.NET General Permission Development Platform
+ * let .NET Develop more simply、More general、More popular。wholeIn line with the latest technology，Modular Plugin-Based Development，Frontend and backendpointsLeave，Ready to use out of the box。<br/><u><b><font color='FF0000'> 👮This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project! </font></b></u>
  *
  * OpenAPI spec version: 1.0.0
  * 
@@ -28,46 +28,46 @@ export const SysCodeGenConfigApiAxiosParamCreator = function (configuration?: Co
     return {
         /**
          * 
-         * @summary 获取代码生成配置详情 🔖
-         * @param {number} [id] 主键Id
-         * @param {number} [codeGenId] 代码生成主表ID
-         * @param {string} [columnName] 数据库字段名
-         * @param {string} [columnKey] 主外键
-         * @param {string} [propertyName] 实体属性名
-         * @param {number} [columnLength] 字段数据长度
-         * @param {string} [lowerPropertyName] 数据库字段名(首字母小写)
-         * @param {string} [columnComment] 字段描述
-         * @param {string} [netType] .NET类型
-         * @param {string} [dataType] 数据库中类型（物理类型）
-         * @param {string} [defaultValue] 字段数据默认值
-         * @param {string} [nullableNetType] 可空.NET类型
-         * @param {string} [effectType] 作用类型（字典）
-         * @param {string} [fkConfigId] 外键库标识
-         * @param {string} [fkEntityName] 外键实体名称
-         * @param {string} [fkTableName] 外键表名称
-         * @param {string} [lowerFkEntityName] 外键实体名称(首字母小写)
-         * @param {string} [fkLinkColumnName] 外键链接字段
-         * @param {string} [fkDisplayColumns] 外键显示字段
-         * @param {Array<string>} [fkDisplayColumnList] 外键显示字段
-         * @param {Array<string>} [lowerFkDisplayColumnsList] 外键显示字段(首字母小写)
-         * @param {string} [fkColumnNetType] 外键显示字段.NET类型
-         * @param {string} [pidColumn] 父级字段
-         * @param {string} [dictTypeCode] 字典code
-         * @param {string} [queryType] 查询方式
-         * @param {string} [whetherQuery] 是否是查询条件
-         * @param {string} [whetherRetract] 列表是否缩进（字典）
-         * @param {string} [whetherRequired] 是否必填（字典）
-         * @param {string} [whetherSortable] 是否可排序（字典）
-         * @param {string} [whetherTable] 列表显示
-         * @param {string} [whetherAddUpdate] 增改
-         * @param {string} [whetherImport] 导入
-         * @param {string} [whetherCommon] 是否是通用字段
-         * @param {number} [orderNo] 排序
-         * @param {boolean} [isSelectorEffectType] 是否是选择器控件
-         * @param {string} [propertyNameTrimEndId] 去掉尾部Id的属性名
-         * @param {string} [lowerPropertyNameTrimEndId] 去掉尾部Id的属性名
-         * @param {string} [extendedPropertyName] 扩展属性名称
-         * @param {string} [lowerExtendedPropertyName] 首字母小写的扩展属性名称
+         * @summary Get code generation configuration details 🔖
+         * @param {number} [id] Primary keyId
+         * @param {number} [codeGenId] code generationMain TableID
+         * @param {string} [columnName] DataWarehouseField Name
+         * @param {string} [columnKey] Masterforeign key
+         * @param {string} [propertyName] Entity attributeName
+         * @param {number} [columnLength] Field data length
+         * @param {string} [lowerPropertyName] DataWarehouseField Name(lowercase first letter)
+         * @param {string} [columnComment] FieldDescription
+         * @param {string} [netType] .NETType
+         * @param {string} [dataType] DataWarehouseinType（PhysicsType）
+         * @param {string} [defaultValue] FieldDataDefault value
+         * @param {string} [nullableNetType] Nullable.NETType
+         * @param {string} [effectType] Type of effect（dictionary）
+         * @param {string} [fkConfigId] Foreign key library identifier
+         * @param {string} [fkEntityName] Foreign key entity name
+         * @param {string} [fkTableName] Foreign key table name
+         * @param {string} [lowerFkEntityName] Foreign key entity name(lowercase first letter)
+         * @param {string} [fkLinkColumnName] Foreign key link field
+         * @param {string} [fkDisplayColumns] Foreign key display field
+         * @param {Array<string>} [fkDisplayColumnList] Foreign key display field
+         * @param {Array<string>} [lowerFkDisplayColumnsList] Foreign key display field(lowercase first letter)
+         * @param {string} [fkColumnNetType] Foreign key display field .NET type
+         * @param {string} [pidColumn] Parent field
+         * @param {string} [dictTypeCode] dictionarycode
+         * @param {string} [queryType] Query method
+         * @param {string} [whetherQuery] Is it a query condition?
+         * @param {string} [whetherRetract] Whether the list is indented（dictionary）
+         * @param {string} [whetherRequired] Is it required?（dictionary）
+         * @param {string} [whetherSortable] Is it sortable?（dictionary）
+         * @param {string} [whetherTable] List Display
+         * @param {string} [whetherAddUpdate] Additions and changes
+         * @param {string} [whetherImport] import
+         * @param {string} [whetherCommon] YesnoYesGeneralField
+         * @param {number} [orderNo] Sort
+         * @param {boolean} [isSelectorEffectType] YesnoYesSelector control
+         * @param {string} [propertyNameTrimEndId] Remove the tailIdofAttributeName
+         * @param {string} [lowerPropertyNameTrimEndId] Remove the tailIdofAttributeName
+         * @param {string} [extendedPropertyName] ExpandAttributename
+         * @param {string} [lowerExtendedPropertyName] Extension with lowercase initialAttributename
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -266,46 +266,46 @@ export const SysCodeGenConfigApiAxiosParamCreator = function (configuration?: Co
         },
         /**
          * 
-         * @summary 获取代码生成配置列表 🔖
-         * @param {number} [id] 主键Id
-         * @param {number} [codeGenId] 代码生成主表ID
-         * @param {string} [columnName] 数据库字段名
-         * @param {string} [columnKey] 主外键
-         * @param {string} [propertyName] 实体属性名
-         * @param {number} [columnLength] 字段数据长度
-         * @param {string} [lowerPropertyName] 数据库字段名(首字母小写)
-         * @param {string} [columnComment] 字段描述
-         * @param {string} [netType] .NET类型
-         * @param {string} [dataType] 数据库中类型（物理类型）
-         * @param {string} [defaultValue] 字段数据默认值
-         * @param {string} [nullableNetType] 可空.NET类型
-         * @param {string} [effectType] 作用类型（字典）
-         * @param {string} [fkConfigId] 外键库标识
-         * @param {string} [fkEntityName] 外键实体名称
-         * @param {string} [fkTableName] 外键表名称
-         * @param {string} [lowerFkEntityName] 外键实体名称(首字母小写)
-         * @param {string} [fkLinkColumnName] 外键链接字段
-         * @param {string} [fkDisplayColumns] 外键显示字段
-         * @param {Array<string>} [fkDisplayColumnList] 外键显示字段
-         * @param {Array<string>} [lowerFkDisplayColumnsList] 外键显示字段(首字母小写)
-         * @param {string} [fkColumnNetType] 外键显示字段.NET类型
-         * @param {string} [pidColumn] 父级字段
-         * @param {string} [dictTypeCode] 字典code
-         * @param {string} [queryType] 查询方式
-         * @param {string} [whetherQuery] 是否是查询条件
-         * @param {string} [whetherRetract] 列表是否缩进（字典）
-         * @param {string} [whetherRequired] 是否必填（字典）
-         * @param {string} [whetherSortable] 是否可排序（字典）
-         * @param {string} [whetherTable] 列表显示
-         * @param {string} [whetherAddUpdate] 增改
-         * @param {string} [whetherImport] 导入
-         * @param {string} [whetherCommon] 是否是通用字段
-         * @param {number} [orderNo] 排序
-         * @param {boolean} [isSelectorEffectType] 是否是选择器控件
-         * @param {string} [propertyNameTrimEndId] 去掉尾部Id的属性名
-         * @param {string} [lowerPropertyNameTrimEndId] 去掉尾部Id的属性名
-         * @param {string} [extendedPropertyName] 扩展属性名称
-         * @param {string} [lowerExtendedPropertyName] 首字母小写的扩展属性名称
+         * @summary Get a list of code generation configurations 🔖
+         * @param {number} [id] Primary keyId
+         * @param {number} [codeGenId] code generationMain TableID
+         * @param {string} [columnName] DataWarehouseField Name
+         * @param {string} [columnKey] Masterforeign key
+         * @param {string} [propertyName] Entity attributeName
+         * @param {number} [columnLength] Field data length
+         * @param {string} [lowerPropertyName] DataWarehouseField Name(lowercase first letter)
+         * @param {string} [columnComment] FieldDescription
+         * @param {string} [netType] .NETType
+         * @param {string} [dataType] DataWarehouseinType（PhysicsType）
+         * @param {string} [defaultValue] FieldDataDefault value
+         * @param {string} [nullableNetType] Nullable.NETType
+         * @param {string} [effectType] Type of effect（dictionary）
+         * @param {string} [fkConfigId] Foreign key library identifier
+         * @param {string} [fkEntityName] Foreign key entity name
+         * @param {string} [fkTableName] Foreign key table name
+         * @param {string} [lowerFkEntityName] Foreign key entity name(lowercase first letter)
+         * @param {string} [fkLinkColumnName] Foreign key link field
+         * @param {string} [fkDisplayColumns] Foreign key display field
+         * @param {Array<string>} [fkDisplayColumnList] Foreign key display field
+         * @param {Array<string>} [lowerFkDisplayColumnsList] Foreign key display field(lowercase first letter)
+         * @param {string} [fkColumnNetType] Foreign key display field .NET type
+         * @param {string} [pidColumn] Parent field
+         * @param {string} [dictTypeCode] dictionarycode
+         * @param {string} [queryType] Query method
+         * @param {string} [whetherQuery] Is it a query condition?
+         * @param {string} [whetherRetract] Whether the list is indented（dictionary）
+         * @param {string} [whetherRequired] Is it required?（dictionary）
+         * @param {string} [whetherSortable] Is it sortable?（dictionary）
+         * @param {string} [whetherTable] List Display
+         * @param {string} [whetherAddUpdate] Additions and changes
+         * @param {string} [whetherImport] import
+         * @param {string} [whetherCommon] YesnoYesGeneralField
+         * @param {number} [orderNo] Sort
+         * @param {boolean} [isSelectorEffectType] YesnoYesSelector control
+         * @param {string} [propertyNameTrimEndId] Remove the tailIdofAttributeName
+         * @param {string} [lowerPropertyNameTrimEndId] Remove the tailIdofAttributeName
+         * @param {string} [extendedPropertyName] ExpandAttributename
+         * @param {string} [lowerExtendedPropertyName] Extension with lowercase initialAttributename
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -504,7 +504,7 @@ export const SysCodeGenConfigApiAxiosParamCreator = function (configuration?: Co
         },
         /**
          * 
-         * @summary 更新代码生成配置 🔖
+         * @summary Update code generation configuration 🔖
          * @param {Array<CodeGenConfig>} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -561,46 +561,46 @@ export const SysCodeGenConfigApiFp = function(configuration?: Configuration) {
     return {
         /**
          * 
-         * @summary 获取代码生成配置详情 🔖
-         * @param {number} [id] 主键Id
-         * @param {number} [codeGenId] 代码生成主表ID
-         * @param {string} [columnName] 数据库字段名
-         * @param {string} [columnKey] 主外键
-         * @param {string} [propertyName] 实体属性名
-         * @param {number} [columnLength] 字段数据长度
-         * @param {string} [lowerPropertyName] 数据库字段名(首字母小写)
-         * @param {string} [columnComment] 字段描述
-         * @param {string} [netType] .NET类型
-         * @param {string} [dataType] 数据库中类型（物理类型）
-         * @param {string} [defaultValue] 字段数据默认值
-         * @param {string} [nullableNetType] 可空.NET类型
-         * @param {string} [effectType] 作用类型（字典）
-         * @param {string} [fkConfigId] 外键库标识
-         * @param {string} [fkEntityName] 外键实体名称
-         * @param {string} [fkTableName] 外键表名称
-         * @param {string} [lowerFkEntityName] 外键实体名称(首字母小写)
-         * @param {string} [fkLinkColumnName] 外键链接字段
-         * @param {string} [fkDisplayColumns] 外键显示字段
-         * @param {Array<string>} [fkDisplayColumnList] 外键显示字段
-         * @param {Array<string>} [lowerFkDisplayColumnsList] 外键显示字段(首字母小写)
-         * @param {string} [fkColumnNetType] 外键显示字段.NET类型
-         * @param {string} [pidColumn] 父级字段
-         * @param {string} [dictTypeCode] 字典code
-         * @param {string} [queryType] 查询方式
-         * @param {string} [whetherQuery] 是否是查询条件
-         * @param {string} [whetherRetract] 列表是否缩进（字典）
-         * @param {string} [whetherRequired] 是否必填（字典）
-         * @param {string} [whetherSortable] 是否可排序（字典）
-         * @param {string} [whetherTable] 列表显示
-         * @param {string} [whetherAddUpdate] 增改
-         * @param {string} [whetherImport] 导入
-         * @param {string} [whetherCommon] 是否是通用字段
-         * @param {number} [orderNo] 排序
-         * @param {boolean} [isSelectorEffectType] 是否是选择器控件
-         * @param {string} [propertyNameTrimEndId] 去掉尾部Id的属性名
-         * @param {string} [lowerPropertyNameTrimEndId] 去掉尾部Id的属性名
-         * @param {string} [extendedPropertyName] 扩展属性名称
-         * @param {string} [lowerExtendedPropertyName] 首字母小写的扩展属性名称
+         * @summary Get code generation configuration details 🔖
+         * @param {number} [id] Primary keyId
+         * @param {number} [codeGenId] code generationMain TableID
+         * @param {string} [columnName] DataWarehouseField Name
+         * @param {string} [columnKey] Masterforeign key
+         * @param {string} [propertyName] Entity attributeName
+         * @param {number} [columnLength] Field data length
+         * @param {string} [lowerPropertyName] DataWarehouseField Name(lowercase first letter)
+         * @param {string} [columnComment] FieldDescription
+         * @param {string} [netType] .NETType
+         * @param {string} [dataType] DataWarehouseinType（PhysicsType）
+         * @param {string} [defaultValue] FieldDataDefault value
+         * @param {string} [nullableNetType] Nullable.NETType
+         * @param {string} [effectType] Type of effect（dictionary）
+         * @param {string} [fkConfigId] Foreign key library identifier
+         * @param {string} [fkEntityName] Foreign key entity name
+         * @param {string} [fkTableName] Foreign key table name
+         * @param {string} [lowerFkEntityName] Foreign key entity name(lowercase first letter)
+         * @param {string} [fkLinkColumnName] Foreign key link field
+         * @param {string} [fkDisplayColumns] Foreign key display field
+         * @param {Array<string>} [fkDisplayColumnList] Foreign key display field
+         * @param {Array<string>} [lowerFkDisplayColumnsList] Foreign key display field(lowercase first letter)
+         * @param {string} [fkColumnNetType] Foreign key display field .NET type
+         * @param {string} [pidColumn] Parent field
+         * @param {string} [dictTypeCode] dictionarycode
+         * @param {string} [queryType] Query method
+         * @param {string} [whetherQuery] Is it a query condition?
+         * @param {string} [whetherRetract] Whether the list is indented（dictionary）
+         * @param {string} [whetherRequired] Is it required?（dictionary）
+         * @param {string} [whetherSortable] Is it sortable?（dictionary）
+         * @param {string} [whetherTable] List Display
+         * @param {string} [whetherAddUpdate] Additions and changes
+         * @param {string} [whetherImport] import
+         * @param {string} [whetherCommon] YesnoYesGeneralField
+         * @param {number} [orderNo] Sort
+         * @param {boolean} [isSelectorEffectType] YesnoYesSelector control
+         * @param {string} [propertyNameTrimEndId] Remove the tailIdofAttributeName
+         * @param {string} [lowerPropertyNameTrimEndId] Remove the tailIdofAttributeName
+         * @param {string} [extendedPropertyName] ExpandAttributename
+         * @param {string} [lowerExtendedPropertyName] Extension with lowercase initialAttributename
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -613,46 +613,46 @@ export const SysCodeGenConfigApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary 获取代码生成配置列表 🔖
-         * @param {number} [id] 主键Id
-         * @param {number} [codeGenId] 代码生成主表ID
-         * @param {string} [columnName] 数据库字段名
-         * @param {string} [columnKey] 主外键
-         * @param {string} [propertyName] 实体属性名
-         * @param {number} [columnLength] 字段数据长度
-         * @param {string} [lowerPropertyName] 数据库字段名(首字母小写)
-         * @param {string} [columnComment] 字段描述
-         * @param {string} [netType] .NET类型
-         * @param {string} [dataType] 数据库中类型（物理类型）
-         * @param {string} [defaultValue] 字段数据默认值
-         * @param {string} [nullableNetType] 可空.NET类型
-         * @param {string} [effectType] 作用类型（字典）
-         * @param {string} [fkConfigId] 外键库标识
-         * @param {string} [fkEntityName] 外键实体名称
-         * @param {string} [fkTableName] 外键表名称
-         * @param {string} [lowerFkEntityName] 外键实体名称(首字母小写)
-         * @param {string} [fkLinkColumnName] 外键链接字段
-         * @param {string} [fkDisplayColumns] 外键显示字段
-         * @param {Array<string>} [fkDisplayColumnList] 外键显示字段
-         * @param {Array<string>} [lowerFkDisplayColumnsList] 外键显示字段(首字母小写)
-         * @param {string} [fkColumnNetType] 外键显示字段.NET类型
-         * @param {string} [pidColumn] 父级字段
-         * @param {string} [dictTypeCode] 字典code
-         * @param {string} [queryType] 查询方式
-         * @param {string} [whetherQuery] 是否是查询条件
-         * @param {string} [whetherRetract] 列表是否缩进（字典）
-         * @param {string} [whetherRequired] 是否必填（字典）
-         * @param {string} [whetherSortable] 是否可排序（字典）
-         * @param {string} [whetherTable] 列表显示
-         * @param {string} [whetherAddUpdate] 增改
-         * @param {string} [whetherImport] 导入
-         * @param {string} [whetherCommon] 是否是通用字段
-         * @param {number} [orderNo] 排序
-         * @param {boolean} [isSelectorEffectType] 是否是选择器控件
-         * @param {string} [propertyNameTrimEndId] 去掉尾部Id的属性名
-         * @param {string} [lowerPropertyNameTrimEndId] 去掉尾部Id的属性名
-         * @param {string} [extendedPropertyName] 扩展属性名称
-         * @param {string} [lowerExtendedPropertyName] 首字母小写的扩展属性名称
+         * @summary Get a list of code generation configurations 🔖
+         * @param {number} [id] Primary keyId
+         * @param {number} [codeGenId] code generationMain TableID
+         * @param {string} [columnName] DataWarehouseField Name
+         * @param {string} [columnKey] Masterforeign key
+         * @param {string} [propertyName] Entity attributeName
+         * @param {number} [columnLength] Field data length
+         * @param {string} [lowerPropertyName] DataWarehouseField Name(lowercase first letter)
+         * @param {string} [columnComment] FieldDescription
+         * @param {string} [netType] .NETType
+         * @param {string} [dataType] DataWarehouseinType（PhysicsType）
+         * @param {string} [defaultValue] FieldDataDefault value
+         * @param {string} [nullableNetType] Nullable.NETType
+         * @param {string} [effectType] Type of effect（dictionary）
+         * @param {string} [fkConfigId] Foreign key library identifier
+         * @param {string} [fkEntityName] Foreign key entity name
+         * @param {string} [fkTableName] Foreign key table name
+         * @param {string} [lowerFkEntityName] Foreign key entity name(lowercase first letter)
+         * @param {string} [fkLinkColumnName] Foreign key link field
+         * @param {string} [fkDisplayColumns] Foreign key display field
+         * @param {Array<string>} [fkDisplayColumnList] Foreign key display field
+         * @param {Array<string>} [lowerFkDisplayColumnsList] Foreign key display field(lowercase first letter)
+         * @param {string} [fkColumnNetType] Foreign key display field .NET type
+         * @param {string} [pidColumn] Parent field
+         * @param {string} [dictTypeCode] dictionarycode
+         * @param {string} [queryType] Query method
+         * @param {string} [whetherQuery] Is it a query condition?
+         * @param {string} [whetherRetract] Whether the list is indented（dictionary）
+         * @param {string} [whetherRequired] Is it required?（dictionary）
+         * @param {string} [whetherSortable] Is it sortable?（dictionary）
+         * @param {string} [whetherTable] List Display
+         * @param {string} [whetherAddUpdate] Additions and changes
+         * @param {string} [whetherImport] import
+         * @param {string} [whetherCommon] YesnoYesGeneralField
+         * @param {number} [orderNo] Sort
+         * @param {boolean} [isSelectorEffectType] YesnoYesSelector control
+         * @param {string} [propertyNameTrimEndId] Remove the tailIdofAttributeName
+         * @param {string} [lowerPropertyNameTrimEndId] Remove the tailIdofAttributeName
+         * @param {string} [extendedPropertyName] ExpandAttributename
+         * @param {string} [lowerExtendedPropertyName] Extension with lowercase initialAttributename
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -665,7 +665,7 @@ export const SysCodeGenConfigApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary 更新代码生成配置 🔖
+         * @summary Update code generation configuration 🔖
          * @param {Array<CodeGenConfig>} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -688,46 +688,46 @@ export const SysCodeGenConfigApiFactory = function (configuration?: Configuratio
     return {
         /**
          * 
-         * @summary 获取代码生成配置详情 🔖
-         * @param {number} [id] 主键Id
-         * @param {number} [codeGenId] 代码生成主表ID
-         * @param {string} [columnName] 数据库字段名
-         * @param {string} [columnKey] 主外键
-         * @param {string} [propertyName] 实体属性名
-         * @param {number} [columnLength] 字段数据长度
-         * @param {string} [lowerPropertyName] 数据库字段名(首字母小写)
-         * @param {string} [columnComment] 字段描述
-         * @param {string} [netType] .NET类型
-         * @param {string} [dataType] 数据库中类型（物理类型）
-         * @param {string} [defaultValue] 字段数据默认值
-         * @param {string} [nullableNetType] 可空.NET类型
-         * @param {string} [effectType] 作用类型（字典）
-         * @param {string} [fkConfigId] 外键库标识
-         * @param {string} [fkEntityName] 外键实体名称
-         * @param {string} [fkTableName] 外键表名称
-         * @param {string} [lowerFkEntityName] 外键实体名称(首字母小写)
-         * @param {string} [fkLinkColumnName] 外键链接字段
-         * @param {string} [fkDisplayColumns] 外键显示字段
-         * @param {Array<string>} [fkDisplayColumnList] 外键显示字段
-         * @param {Array<string>} [lowerFkDisplayColumnsList] 外键显示字段(首字母小写)
-         * @param {string} [fkColumnNetType] 外键显示字段.NET类型
-         * @param {string} [pidColumn] 父级字段
-         * @param {string} [dictTypeCode] 字典code
-         * @param {string} [queryType] 查询方式
-         * @param {string} [whetherQuery] 是否是查询条件
-         * @param {string} [whetherRetract] 列表是否缩进（字典）
-         * @param {string} [whetherRequired] 是否必填（字典）
-         * @param {string} [whetherSortable] 是否可排序（字典）
-         * @param {string} [whetherTable] 列表显示
-         * @param {string} [whetherAddUpdate] 增改
-         * @param {string} [whetherImport] 导入
-         * @param {string} [whetherCommon] 是否是通用字段
-         * @param {number} [orderNo] 排序
-         * @param {boolean} [isSelectorEffectType] 是否是选择器控件
-         * @param {string} [propertyNameTrimEndId] 去掉尾部Id的属性名
-         * @param {string} [lowerPropertyNameTrimEndId] 去掉尾部Id的属性名
-         * @param {string} [extendedPropertyName] 扩展属性名称
-         * @param {string} [lowerExtendedPropertyName] 首字母小写的扩展属性名称
+         * @summary Get code generation configuration details 🔖
+         * @param {number} [id] Primary keyId
+         * @param {number} [codeGenId] code generationMain TableID
+         * @param {string} [columnName] DataWarehouseField Name
+         * @param {string} [columnKey] Masterforeign key
+         * @param {string} [propertyName] Entity attributeName
+         * @param {number} [columnLength] Field data length
+         * @param {string} [lowerPropertyName] DataWarehouseField Name(lowercase first letter)
+         * @param {string} [columnComment] FieldDescription
+         * @param {string} [netType] .NETType
+         * @param {string} [dataType] DataWarehouseinType（PhysicsType）
+         * @param {string} [defaultValue] FieldDataDefault value
+         * @param {string} [nullableNetType] Nullable.NETType
+         * @param {string} [effectType] Type of effect（dictionary）
+         * @param {string} [fkConfigId] Foreign key library identifier
+         * @param {string} [fkEntityName] Foreign key entity name
+         * @param {string} [fkTableName] Foreign key table name
+         * @param {string} [lowerFkEntityName] Foreign key entity name(lowercase first letter)
+         * @param {string} [fkLinkColumnName] Foreign key link field
+         * @param {string} [fkDisplayColumns] Foreign key display field
+         * @param {Array<string>} [fkDisplayColumnList] Foreign key display field
+         * @param {Array<string>} [lowerFkDisplayColumnsList] Foreign key display field(lowercase first letter)
+         * @param {string} [fkColumnNetType] Foreign key display field .NET type
+         * @param {string} [pidColumn] Parent field
+         * @param {string} [dictTypeCode] dictionarycode
+         * @param {string} [queryType] Query method
+         * @param {string} [whetherQuery] Is it a query condition?
+         * @param {string} [whetherRetract] Whether the list is indented（dictionary）
+         * @param {string} [whetherRequired] Is it required?（dictionary）
+         * @param {string} [whetherSortable] Is it sortable?（dictionary）
+         * @param {string} [whetherTable] List Display
+         * @param {string} [whetherAddUpdate] Additions and changes
+         * @param {string} [whetherImport] import
+         * @param {string} [whetherCommon] YesnoYesGeneralField
+         * @param {number} [orderNo] Sort
+         * @param {boolean} [isSelectorEffectType] YesnoYesSelector control
+         * @param {string} [propertyNameTrimEndId] Remove the tailIdofAttributeName
+         * @param {string} [lowerPropertyNameTrimEndId] Remove the tailIdofAttributeName
+         * @param {string} [extendedPropertyName] ExpandAttributename
+         * @param {string} [lowerExtendedPropertyName] Extension with lowercase initialAttributename
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -736,46 +736,46 @@ export const SysCodeGenConfigApiFactory = function (configuration?: Configuratio
         },
         /**
          * 
-         * @summary 获取代码生成配置列表 🔖
-         * @param {number} [id] 主键Id
-         * @param {number} [codeGenId] 代码生成主表ID
-         * @param {string} [columnName] 数据库字段名
-         * @param {string} [columnKey] 主外键
-         * @param {string} [propertyName] 实体属性名
-         * @param {number} [columnLength] 字段数据长度
-         * @param {string} [lowerPropertyName] 数据库字段名(首字母小写)
-         * @param {string} [columnComment] 字段描述
-         * @param {string} [netType] .NET类型
-         * @param {string} [dataType] 数据库中类型（物理类型）
-         * @param {string} [defaultValue] 字段数据默认值
-         * @param {string} [nullableNetType] 可空.NET类型
-         * @param {string} [effectType] 作用类型（字典）
-         * @param {string} [fkConfigId] 外键库标识
-         * @param {string} [fkEntityName] 外键实体名称
-         * @param {string} [fkTableName] 外键表名称
-         * @param {string} [lowerFkEntityName] 外键实体名称(首字母小写)
-         * @param {string} [fkLinkColumnName] 外键链接字段
-         * @param {string} [fkDisplayColumns] 外键显示字段
-         * @param {Array<string>} [fkDisplayColumnList] 外键显示字段
-         * @param {Array<string>} [lowerFkDisplayColumnsList] 外键显示字段(首字母小写)
-         * @param {string} [fkColumnNetType] 外键显示字段.NET类型
-         * @param {string} [pidColumn] 父级字段
-         * @param {string} [dictTypeCode] 字典code
-         * @param {string} [queryType] 查询方式
-         * @param {string} [whetherQuery] 是否是查询条件
-         * @param {string} [whetherRetract] 列表是否缩进（字典）
-         * @param {string} [whetherRequired] 是否必填（字典）
-         * @param {string} [whetherSortable] 是否可排序（字典）
-         * @param {string} [whetherTable] 列表显示
-         * @param {string} [whetherAddUpdate] 增改
-         * @param {string} [whetherImport] 导入
-         * @param {string} [whetherCommon] 是否是通用字段
-         * @param {number} [orderNo] 排序
-         * @param {boolean} [isSelectorEffectType] 是否是选择器控件
-         * @param {string} [propertyNameTrimEndId] 去掉尾部Id的属性名
-         * @param {string} [lowerPropertyNameTrimEndId] 去掉尾部Id的属性名
-         * @param {string} [extendedPropertyName] 扩展属性名称
-         * @param {string} [lowerExtendedPropertyName] 首字母小写的扩展属性名称
+         * @summary Get a list of code generation configurations 🔖
+         * @param {number} [id] Primary keyId
+         * @param {number} [codeGenId] code generationMain TableID
+         * @param {string} [columnName] DataWarehouseField Name
+         * @param {string} [columnKey] Masterforeign key
+         * @param {string} [propertyName] Entity attributeName
+         * @param {number} [columnLength] Field data length
+         * @param {string} [lowerPropertyName] DataWarehouseField Name(lowercase first letter)
+         * @param {string} [columnComment] FieldDescription
+         * @param {string} [netType] .NETType
+         * @param {string} [dataType] DataWarehouseinType（PhysicsType）
+         * @param {string} [defaultValue] FieldDataDefault value
+         * @param {string} [nullableNetType] Nullable.NETType
+         * @param {string} [effectType] Type of effect（dictionary）
+         * @param {string} [fkConfigId] Foreign key library identifier
+         * @param {string} [fkEntityName] Foreign key entity name
+         * @param {string} [fkTableName] Foreign key table name
+         * @param {string} [lowerFkEntityName] Foreign key entity name(lowercase first letter)
+         * @param {string} [fkLinkColumnName] Foreign key link field
+         * @param {string} [fkDisplayColumns] Foreign key display field
+         * @param {Array<string>} [fkDisplayColumnList] Foreign key display field
+         * @param {Array<string>} [lowerFkDisplayColumnsList] Foreign key display field(lowercase first letter)
+         * @param {string} [fkColumnNetType] Foreign key display field .NET type
+         * @param {string} [pidColumn] Parent field
+         * @param {string} [dictTypeCode] dictionarycode
+         * @param {string} [queryType] Query method
+         * @param {string} [whetherQuery] Is it a query condition?
+         * @param {string} [whetherRetract] Whether the list is indented（dictionary）
+         * @param {string} [whetherRequired] Is it required?（dictionary）
+         * @param {string} [whetherSortable] Is it sortable?（dictionary）
+         * @param {string} [whetherTable] List Display
+         * @param {string} [whetherAddUpdate] Additions and changes
+         * @param {string} [whetherImport] import
+         * @param {string} [whetherCommon] YesnoYesGeneralField
+         * @param {number} [orderNo] Sort
+         * @param {boolean} [isSelectorEffectType] YesnoYesSelector control
+         * @param {string} [propertyNameTrimEndId] Remove the tailIdofAttributeName
+         * @param {string} [lowerPropertyNameTrimEndId] Remove the tailIdofAttributeName
+         * @param {string} [extendedPropertyName] ExpandAttributename
+         * @param {string} [lowerExtendedPropertyName] Extension with lowercase initialAttributename
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -784,7 +784,7 @@ export const SysCodeGenConfigApiFactory = function (configuration?: Configuratio
         },
         /**
          * 
-         * @summary 更新代码生成配置 🔖
+         * @summary Update code generation configuration 🔖
          * @param {Array<CodeGenConfig>} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -804,46 +804,46 @@ export const SysCodeGenConfigApiFactory = function (configuration?: Configuratio
 export class SysCodeGenConfigApi extends BaseAPI {
     /**
      * 
-     * @summary 获取代码生成配置详情 🔖
-     * @param {number} [id] 主键Id
-     * @param {number} [codeGenId] 代码生成主表ID
-     * @param {string} [columnName] 数据库字段名
-     * @param {string} [columnKey] 主外键
-     * @param {string} [propertyName] 实体属性名
-     * @param {number} [columnLength] 字段数据长度
-     * @param {string} [lowerPropertyName] 数据库字段名(首字母小写)
-     * @param {string} [columnComment] 字段描述
-     * @param {string} [netType] .NET类型
-     * @param {string} [dataType] 数据库中类型（物理类型）
-     * @param {string} [defaultValue] 字段数据默认值
-     * @param {string} [nullableNetType] 可空.NET类型
-     * @param {string} [effectType] 作用类型（字典）
-     * @param {string} [fkConfigId] 外键库标识
-     * @param {string} [fkEntityName] 外键实体名称
-     * @param {string} [fkTableName] 外键表名称
-     * @param {string} [lowerFkEntityName] 外键实体名称(首字母小写)
-     * @param {string} [fkLinkColumnName] 外键链接字段
-     * @param {string} [fkDisplayColumns] 外键显示字段
-     * @param {Array<string>} [fkDisplayColumnList] 外键显示字段
-     * @param {Array<string>} [lowerFkDisplayColumnsList] 外键显示字段(首字母小写)
-     * @param {string} [fkColumnNetType] 外键显示字段.NET类型
-     * @param {string} [pidColumn] 父级字段
-     * @param {string} [dictTypeCode] 字典code
-     * @param {string} [queryType] 查询方式
-     * @param {string} [whetherQuery] 是否是查询条件
-     * @param {string} [whetherRetract] 列表是否缩进（字典）
-     * @param {string} [whetherRequired] 是否必填（字典）
-     * @param {string} [whetherSortable] 是否可排序（字典）
-     * @param {string} [whetherTable] 列表显示
-     * @param {string} [whetherAddUpdate] 增改
-     * @param {string} [whetherImport] 导入
-     * @param {string} [whetherCommon] 是否是通用字段
-     * @param {number} [orderNo] 排序
-     * @param {boolean} [isSelectorEffectType] 是否是选择器控件
-     * @param {string} [propertyNameTrimEndId] 去掉尾部Id的属性名
-     * @param {string} [lowerPropertyNameTrimEndId] 去掉尾部Id的属性名
-     * @param {string} [extendedPropertyName] 扩展属性名称
-     * @param {string} [lowerExtendedPropertyName] 首字母小写的扩展属性名称
+     * @summary Get code generation configuration details 🔖
+     * @param {number} [id] Primary keyId
+     * @param {number} [codeGenId] code generationMain TableID
+     * @param {string} [columnName] DataWarehouseField Name
+     * @param {string} [columnKey] Masterforeign key
+     * @param {string} [propertyName] Entity attributeName
+     * @param {number} [columnLength] Field data length
+     * @param {string} [lowerPropertyName] DataWarehouseField Name(lowercase first letter)
+     * @param {string} [columnComment] FieldDescription
+     * @param {string} [netType] .NETType
+     * @param {string} [dataType] DataWarehouseinType（PhysicsType）
+     * @param {string} [defaultValue] FieldDataDefault value
+     * @param {string} [nullableNetType] Nullable.NETType
+     * @param {string} [effectType] Type of effect（dictionary）
+     * @param {string} [fkConfigId] Foreign key library identifier
+     * @param {string} [fkEntityName] Foreign key entity name
+     * @param {string} [fkTableName] Foreign key table name
+     * @param {string} [lowerFkEntityName] Foreign key entity name(lowercase first letter)
+     * @param {string} [fkLinkColumnName] Foreign key link field
+     * @param {string} [fkDisplayColumns] Foreign key display field
+     * @param {Array<string>} [fkDisplayColumnList] Foreign key display field
+     * @param {Array<string>} [lowerFkDisplayColumnsList] Foreign key display field(lowercase first letter)
+     * @param {string} [fkColumnNetType] Foreign key display field .NET type
+     * @param {string} [pidColumn] Parent field
+     * @param {string} [dictTypeCode] dictionarycode
+     * @param {string} [queryType] Query method
+     * @param {string} [whetherQuery] Is it a query condition?
+     * @param {string} [whetherRetract] Whether the list is indented（dictionary）
+     * @param {string} [whetherRequired] Is it required?（dictionary）
+     * @param {string} [whetherSortable] Is it sortable?（dictionary）
+     * @param {string} [whetherTable] List Display
+     * @param {string} [whetherAddUpdate] Additions and changes
+     * @param {string} [whetherImport] import
+     * @param {string} [whetherCommon] YesnoYesGeneralField
+     * @param {number} [orderNo] Sort
+     * @param {boolean} [isSelectorEffectType] YesnoYesSelector control
+     * @param {string} [propertyNameTrimEndId] Remove the tailIdofAttributeName
+     * @param {string} [lowerPropertyNameTrimEndId] Remove the tailIdofAttributeName
+     * @param {string} [extendedPropertyName] ExpandAttributename
+     * @param {string} [lowerExtendedPropertyName] Extension with lowercase initialAttributename
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SysCodeGenConfigApi
@@ -853,46 +853,46 @@ export class SysCodeGenConfigApi extends BaseAPI {
     }
     /**
      * 
-     * @summary 获取代码生成配置列表 🔖
-     * @param {number} [id] 主键Id
-     * @param {number} [codeGenId] 代码生成主表ID
-     * @param {string} [columnName] 数据库字段名
-     * @param {string} [columnKey] 主外键
-     * @param {string} [propertyName] 实体属性名
-     * @param {number} [columnLength] 字段数据长度
-     * @param {string} [lowerPropertyName] 数据库字段名(首字母小写)
-     * @param {string} [columnComment] 字段描述
-     * @param {string} [netType] .NET类型
-     * @param {string} [dataType] 数据库中类型（物理类型）
-     * @param {string} [defaultValue] 字段数据默认值
-     * @param {string} [nullableNetType] 可空.NET类型
-     * @param {string} [effectType] 作用类型（字典）
-     * @param {string} [fkConfigId] 外键库标识
-     * @param {string} [fkEntityName] 外键实体名称
-     * @param {string} [fkTableName] 外键表名称
-     * @param {string} [lowerFkEntityName] 外键实体名称(首字母小写)
-     * @param {string} [fkLinkColumnName] 外键链接字段
-     * @param {string} [fkDisplayColumns] 外键显示字段
-     * @param {Array<string>} [fkDisplayColumnList] 外键显示字段
-     * @param {Array<string>} [lowerFkDisplayColumnsList] 外键显示字段(首字母小写)
-     * @param {string} [fkColumnNetType] 外键显示字段.NET类型
-     * @param {string} [pidColumn] 父级字段
-     * @param {string} [dictTypeCode] 字典code
-     * @param {string} [queryType] 查询方式
-     * @param {string} [whetherQuery] 是否是查询条件
-     * @param {string} [whetherRetract] 列表是否缩进（字典）
-     * @param {string} [whetherRequired] 是否必填（字典）
-     * @param {string} [whetherSortable] 是否可排序（字典）
-     * @param {string} [whetherTable] 列表显示
-     * @param {string} [whetherAddUpdate] 增改
-     * @param {string} [whetherImport] 导入
-     * @param {string} [whetherCommon] 是否是通用字段
-     * @param {number} [orderNo] 排序
-     * @param {boolean} [isSelectorEffectType] 是否是选择器控件
-     * @param {string} [propertyNameTrimEndId] 去掉尾部Id的属性名
-     * @param {string} [lowerPropertyNameTrimEndId] 去掉尾部Id的属性名
-     * @param {string} [extendedPropertyName] 扩展属性名称
-     * @param {string} [lowerExtendedPropertyName] 首字母小写的扩展属性名称
+     * @summary Get a list of code generation configurations 🔖
+     * @param {number} [id] Primary keyId
+     * @param {number} [codeGenId] code generationMain TableID
+     * @param {string} [columnName] DataWarehouseField Name
+     * @param {string} [columnKey] Masterforeign key
+     * @param {string} [propertyName] Entity attributeName
+     * @param {number} [columnLength] Field data length
+     * @param {string} [lowerPropertyName] DataWarehouseField Name(lowercase first letter)
+     * @param {string} [columnComment] FieldDescription
+     * @param {string} [netType] .NETType
+     * @param {string} [dataType] DataWarehouseinType（PhysicsType）
+     * @param {string} [defaultValue] FieldDataDefault value
+     * @param {string} [nullableNetType] Nullable.NETType
+     * @param {string} [effectType] Type of effect（dictionary）
+     * @param {string} [fkConfigId] Foreign key library identifier
+     * @param {string} [fkEntityName] Foreign key entity name
+     * @param {string} [fkTableName] Foreign key table name
+     * @param {string} [lowerFkEntityName] Foreign key entity name(lowercase first letter)
+     * @param {string} [fkLinkColumnName] Foreign key link field
+     * @param {string} [fkDisplayColumns] Foreign key display field
+     * @param {Array<string>} [fkDisplayColumnList] Foreign key display field
+     * @param {Array<string>} [lowerFkDisplayColumnsList] Foreign key display field(lowercase first letter)
+     * @param {string} [fkColumnNetType] Foreign key display field .NET type
+     * @param {string} [pidColumn] Parent field
+     * @param {string} [dictTypeCode] dictionarycode
+     * @param {string} [queryType] Query method
+     * @param {string} [whetherQuery] Is it a query condition?
+     * @param {string} [whetherRetract] Whether the list is indented（dictionary）
+     * @param {string} [whetherRequired] Is it required?（dictionary）
+     * @param {string} [whetherSortable] Is it sortable?（dictionary）
+     * @param {string} [whetherTable] List Display
+     * @param {string} [whetherAddUpdate] Additions and changes
+     * @param {string} [whetherImport] import
+     * @param {string} [whetherCommon] YesnoYesGeneralField
+     * @param {number} [orderNo] Sort
+     * @param {boolean} [isSelectorEffectType] YesnoYesSelector control
+     * @param {string} [propertyNameTrimEndId] Remove the tailIdofAttributeName
+     * @param {string} [lowerPropertyNameTrimEndId] Remove the tailIdofAttributeName
+     * @param {string} [extendedPropertyName] ExpandAttributename
+     * @param {string} [lowerExtendedPropertyName] Extension with lowercase initialAttributename
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SysCodeGenConfigApi
@@ -902,7 +902,7 @@ export class SysCodeGenConfigApi extends BaseAPI {
     }
     /**
      * 
-     * @summary 更新代码生成配置 🔖
+     * @summary Update code generation configuration 🔖
      * @param {Array<CodeGenConfig>} [body] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}

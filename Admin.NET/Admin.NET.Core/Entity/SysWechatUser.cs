@@ -1,28 +1,28 @@
-﻿// Admin.NET 项目的版权、商标、专利和其他相关权利均受相应法律法规的保护。使用本项目应遵守相关法律法规和许可证的要求。
+﻿// The copyright, trademark, patent and other related rights of the Admin.NET project are protected by corresponding laws and regulations. Use of this project shall comply with relevant laws, regulations and license requirements.
 //
-// 本项目主要遵循 MIT 许可证和 Apache 许可证（版本 2.0）进行分发和使用。许可证位于源代码树根目录中的 LICENSE-MIT 和 LICENSE-APACHE 文件。
+// This project is distributed and used primarily under the MIT License and the Apache License (version 2.0). The license is located in the LICENSE-MIT and LICENSE-APACHE files in the root of the source tree.
 //
-// 不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！
+// This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project!
 
 namespace Admin.NET.Core;
 
 /// <summary>
-/// 系统微信用户表
+/// System WeChat user table
 /// </summary>
-[SugarTable(null, "系统微信用户表")]
+[SugarTable(null, "System WeChat user table")]
 [SysTable]
 [SugarIndex("index_{table}_N", nameof(NickName), OrderByType.Asc)]
 [SugarIndex("index_{table}_M", nameof(Mobile), OrderByType.Asc)]
 public partial class SysWechatUser : EntityBase
 {
     /// <summary>
-    /// 系统用户Id
+    /// System user ID
     /// </summary>
-    [SugarColumn(ColumnDescription = "系统用户Id")]
+    [SugarColumn(ColumnDescription = "System User ID")]
     public long UserId { get; set; }
 
     /// <summary>
-    /// 系统用户
+    /// system user
     /// </summary>
     [Newtonsoft.Json.JsonIgnore]
     [System.Text.Json.Serialization.JsonIgnore]
@@ -30,10 +30,10 @@ public partial class SysWechatUser : EntityBase
     public SysUser SysUser { get; set; }
 
     /// <summary>
-    /// 平台类型
+    /// platform type
     /// </summary>
-    [SugarColumn(ColumnDescription = "平台类型")]
-    public PlatformTypeEnum PlatformType { get; set; } = PlatformTypeEnum.微信公众号;
+    [SugarColumn(ColumnDescription = "Platform Type")]
+    public PlatformTypeEnum PlatformType { get; set; } = PlatformTypeEnum.WeChat Official Account;
 
     /// <summary>
     /// OpenId
@@ -43,9 +43,9 @@ public partial class SysWechatUser : EntityBase
     public virtual string OpenId { get; set; }
 
     /// <summary>
-    /// 会话密钥
+    /// session key
     /// </summary>
-    [SugarColumn(ColumnDescription = "会话密钥", Length = 256)]
+    [SugarColumn(ColumnDescription = "Session key", Length = 256)]
     [MaxLength(256)]
     public string? SessionKey { get; set; }
 
@@ -57,57 +57,57 @@ public partial class SysWechatUser : EntityBase
     public string? UnionId { get; set; }
 
     /// <summary>
-    /// 昵称
+    /// Nick name
     /// </summary>
-    [SugarColumn(ColumnDescription = "昵称", Length = 64)]
+    [SugarColumn(ColumnDescription = "Nickname", Length = 64)]
     [MaxLength(64)]
     public string? NickName { get; set; }
 
     /// <summary>
-    /// 头像
+    /// avatar
     /// </summary>
-    [SugarColumn(ColumnDescription = "头像", Length = 256)]
+    [SugarColumn(ColumnDescription = "Avatar", Length = 256)]
     [MaxLength(256)]
     public string? Avatar { get; set; }
 
     /// <summary>
-    /// 手机号码
+    /// phone number
     /// </summary>
-    [SugarColumn(ColumnDescription = "手机号码", Length = 16)]
+    [SugarColumn(ColumnDescription = "Mobile phone number", Length = 16)]
     [MaxLength(16)]
     public string? Mobile { get; set; }
 
     /// <summary>
-    /// 性别
+    /// gender
     /// </summary>
-    [SugarColumn(ColumnDescription = "性别")]
+    [SugarColumn(ColumnDescription = "gender")]
     public int? Sex { get; set; }
 
     /// <summary>
-    /// 语言
+    /// language
     /// </summary>
-    [SugarColumn(ColumnDescription = "语言", Length = 64)]
+    [SugarColumn(ColumnDescription = "Language", Length = 64)]
     [MaxLength(64)]
     public string? Language { get; set; }
 
     /// <summary>
-    /// 城市
+    /// City
     /// </summary>
-    [SugarColumn(ColumnDescription = "城市", Length = 64)]
+    [SugarColumn(ColumnDescription = "city", Length = 64)]
     [MaxLength(64)]
     public string? City { get; set; }
 
     /// <summary>
-    /// 省
+    /// Province
     /// </summary>
-    [SugarColumn(ColumnDescription = "省", Length = 64)]
+    [SugarColumn(ColumnDescription = "Province", Length = 64)]
     [MaxLength(64)]
     public string? Province { get; set; }
 
     /// <summary>
-    /// 国家
+    /// nation
     /// </summary>
-    [SugarColumn(ColumnDescription = "国家", Length = 64)]
+    [SugarColumn(ColumnDescription = "Country", Length = 64)]
     [MaxLength(64)]
     public string? Country { get; set; }
 
@@ -124,15 +124,15 @@ public partial class SysWechatUser : EntityBase
     public string? RefreshToken { get; set; }
 
     /// <summary>
-    /// 过期时间
+    /// Expiration time
     /// </summary>
     [SugarColumn(ColumnDescription = "ExpiresIn")]
     public int? ExpiresIn { get; set; }
 
     /// <summary>
-    /// 用户授权的作用域，使用逗号分隔
+    /// User authorization scopes, separated by commas
     /// </summary>
-    [SugarColumn(ColumnDescription = "授权作用域", Length = 64)]
+    [SugarColumn(ColumnDescription = "Authorization Scope", Length = 64)]
     [MaxLength(64)]
     public string? Scope { get; set; }
 }

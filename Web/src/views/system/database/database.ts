@@ -14,11 +14,11 @@ export interface EditRecordRow {
 
 export const yesNoSelect = [
 	{
-		label: '是',
+		label: 'Yes',
 		value: 1,
 	},
 	{
-		label: '否',
+		label: 'no',
 		value: 0,
 	},
 ];

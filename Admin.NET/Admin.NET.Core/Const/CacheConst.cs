@@ -1,128 +1,128 @@
-// Admin.NET 项目的版权、商标、专利和其他相关权利均受相应法律法规的保护。使用本项目应遵守相关法律法规和许可证的要求。
+// The copyright, trademark, patent and other related rights of the Admin.NET project are protected by corresponding laws and regulations. Use of this project shall comply with relevant laws, regulations and license requirements.
 //
-// 本项目主要遵循 MIT 许可证和 Apache 许可证（版本 2.0）进行分发和使用。许可证位于源代码树根目录中的 LICENSE-MIT 和 LICENSE-APACHE 文件。
+// This project is distributed and used primarily under the MIT License and the Apache License (version 2.0). The license is located in the LICENSE-MIT and LICENSE-APACHE files in the root of the source tree.
 //
-// 不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！
+// This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project!
 
 namespace Admin.NET.Core;
 
 /// <summary>
-/// 缓存相关常量
+/// Cache related constants
 /// </summary>
 public class CacheConst
 {
     /// <summary>
-    /// 用户权限缓存（按钮集合）
+    /// User permission cache (button collection)
     /// </summary>
     public const string KeyUserButton = "sys_user_button:";
 
     /// <summary>
-    /// 用户机构缓存
+    /// User organization cache
     /// </summary>
     public const string KeyUserOrg = "sys_user_org:";
 
     /// <summary>
-    /// 角色最大数据范围缓存
+    /// Role maximum data range cache
     /// </summary>
     public const string KeyRoleMaxDataScope = "sys_role_maxDataScope:";
 
     /// <summary>
-    /// 在线用户缓存
+    /// Online user caching
     /// </summary>
     public const string KeyUserOnline = "sys_user_online:";
 
     /// <summary>
-    /// 图形验证码缓存
+    /// Graphical verification code cache
     /// </summary>
     public const string KeyVerCode = "sys_verCode:";
 
     /// <summary>
-    /// 手机验证码缓存
+    /// Mobile phone verification code cache
     /// </summary>
     public const string KeyPhoneVerCode = "sys_phoneVerCode:";
 
     /// <summary>
-    /// 密码错误次数缓存
+    /// Password error count cache
     /// </summary>
     public const string KeyPasswordErrorTimes = "sys_password_error_times:";
 
     /// <summary>
-    /// 租户缓存
+    /// Tenant cache
     /// </summary>
     public const string KeyTenant = "sys_tenant";
 
     /// <summary>
-    /// 常量下拉框
+    /// constant drop down box
     /// </summary>
     public const string KeyConst = "sys_const:";
 
     /// <summary>
-    /// 所有缓存关键字集合
+    /// All cached keyword sets
     /// </summary>
     public const string KeyAll = "sys_keys";
 
     /// <summary>
-    /// SqlSugar二级缓存
+    /// SqlSugar second level cache
     /// </summary>
     public const string SqlSugar = "sys_sqlSugar:";
 
     /// <summary>
-    /// 开放接口身份缓存
+    /// Open interface identity cache
     /// </summary>
     public const string KeyOpenAccess = "sys_open_access:";
 
     /// <summary>
-    /// 开放接口身份随机数缓存
+    /// Open interface identity random number cache
     /// </summary>
     public const string KeyOpenAccessNonce = "sys_open_access_nonce:";
 
     /// <summary>
-    /// 登录黑名单
+    /// Login blacklist
     /// </summary>
     public const string KeyBlacklist = "sys_blacklist:";
 
     /// <summary>
-    /// 系统配置缓存
+    /// System configuration cache
     /// </summary>
     public const string KeyConfig = "sys_config:";
 
     /// <summary>
-    /// 系统租户配置缓存
+    /// System tenant configuration cache
     /// </summary>
     public const string KeyTenantConfig = "sys_tenant_config:";
 
     /// <summary>
-    /// 系统用户配置缓存
+    /// System user configuration cache
     /// </summary>
     public const string KeyUserConfig = "sys_user_config:";
 
     /// <summary>
-    /// 系统字典缓存
+    /// System dictionary cache
     /// </summary>
     public const string KeyDict = "sys_dict:";
 
     /// <summary>
-    /// 系统租户字典缓存
+    /// System tenant dictionary cache
     /// </summary>
     public const string KeyTenantDict = "sys_tenant_dict:";
 
     /// <summary>
-    /// 重复请求(幂等)字典缓存
+    /// Repeated requests for (idempotent) dictionary cache
     /// </summary>
     public const string KeyIdempotent = "sys_idempotent:";
 
     /// <summary>
-    /// Excel临时文件缓存
+    /// Excel temporary file cache
     /// </summary>
     public const string KeyExcelTemp = "sys_excel_temp:";
 
     /// <summary>
-    /// 系统更新命令日志缓存
+    /// System update command log cache
     /// </summary>
     public const string KeySysUpdateLog = "sys_update_log";
 
     /// <summary>
-    /// 系统更新间隔标记缓存
+    /// System update interval tag cache
     /// </summary>
     public const string KeySysUpdateInterval = "sys_update_interval";
 }

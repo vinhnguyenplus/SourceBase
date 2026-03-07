@@ -1,7 +1,7 @@
-// 引入所有 element-plus 语言包
+// Import All element-plus Language pack
 import * as elementLocales from 'element-plus/es/locale/index';
 
-// 构建映射表
+// Build a mapping table
 export const localeMap = {
 	af: elementLocales.af,
 	'ar-eg': elementLocales.arEg,

@@ -1,68 +1,68 @@
-// Admin.NET 项目的版权、商标、专利和其他相关权利均受相应法律法规的保护。使用本项目应遵守相关法律法规和许可证的要求。
+// The copyright, trademark, patent and other related rights of the Admin.NET project are protected by corresponding laws and regulations. Use of this project shall comply with relevant laws, regulations and license requirements.
 //
-// 本项目主要遵循 MIT 许可证和 Apache 许可证（版本 2.0）进行分发和使用。许可证位于源代码树根目录中的 LICENSE-MIT 和 LICENSE-APACHE 文件。
+// This project is distributed and used primarily under the MIT License and the Apache License (version 2.0). The license is located in the LICENSE-MIT and LICENSE-APACHE files in the root of the source tree.
 //
-// 不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！
+// This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project!
 
 namespace Admin.NET.Core;
 
 /// <summary>
-/// 系统在线用户表
+/// System online user table
 /// </summary>
-[SugarTable(null, "系统在线用户表")]
+[SugarTable(null, "System online user table")]
 [SysTable]
 public partial class SysOnlineUser : EntityBaseTenantId
 {
     /// <summary>
-    /// 连接Id
+    /// ConnectionId
     /// </summary>
-    [SugarColumn(ColumnDescription = "连接Id")]
+    [SugarColumn(ColumnDescription = "Connection ID")]
     public string? ConnectionId { get; set; }
 
     /// <summary>
-    /// 用户Id
+    /// UserId
     /// </summary>
-    [SugarColumn(ColumnDescription = "用户Id")]
+    [SugarColumn(ColumnDescription = "UserId")]
     public long UserId { get; set; }
 
     /// <summary>
-    /// 账号
+    /// account
     /// </summary>
-    [SugarColumn(ColumnDescription = "账号", Length = 32)]
+    [SugarColumn(ColumnDescription = "Account number", Length = 32)]
     [Required, MaxLength(32)]
     public virtual string UserName { get; set; }
 
     /// <summary>
-    /// 真实姓名
+    /// real name
     /// </summary>
-    [SugarColumn(ColumnDescription = "真实姓名", Length = 32)]
+    [SugarColumn(ColumnDescription = "Real Name", Length = 32)]
     [MaxLength(32)]
     public string? RealName { get; set; }
 
     /// <summary>
-    /// 连接时间
+    /// connection time
     /// </summary>
-    [SugarColumn(ColumnDescription = "连接时间")]
+    [SugarColumn(ColumnDescription = "Connection Time")]
     public DateTime? Time { get; set; }
 
     /// <summary>
-    /// 连接IP
+    /// Connect IP
     /// </summary>
-    [SugarColumn(ColumnDescription = "连接IP", Length = 256)]
+    [SugarColumn(ColumnDescription = "Connect IP", Length = 256)]
     [MaxLength(256)]
     public string? Ip { get; set; }
 
     /// <summary>
-    /// 浏览器
+    /// Browser
     /// </summary>
-    [SugarColumn(ColumnDescription = "浏览器", Length = 128)]
+    [SugarColumn(ColumnDescription = "Browser", Length = 128)]
     [MaxLength(128)]
     public string? Browser { get; set; }
 
     /// <summary>
-    /// 操作系统
+    /// operating system
     /// </summary>
-    [SugarColumn(ColumnDescription = "操作系统", Length = 128)]
+    [SugarColumn(ColumnDescription = "operating system", Length = 128)]
     [MaxLength(128)]
     public string? Os { get; set; }
 }

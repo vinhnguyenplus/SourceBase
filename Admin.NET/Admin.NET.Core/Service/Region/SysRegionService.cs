@@ -1,8 +1,8 @@
-// Admin.NET 项目的版权、商标、专利和其他相关权利均受相应法律法规的保护。使用本项目应遵守相关法律法规和许可证的要求。
+// The copyright, trademark, patent and other related rights of the Admin.NET project are protected by corresponding laws and regulations. Use of this project shall comply with relevant laws, regulations and license requirements.
 //
-// 本项目主要遵循 MIT 许可证和 Apache 许可证（版本 2.0）进行分发和使用。许可证位于源代码树根目录中的 LICENSE-MIT 和 LICENSE-APACHE 文件。
+// This project is distributed and used primarily under the MIT License and the Apache License (version 2.0). The license is located in the LICENSE-MIT and LICENSE-APACHE files in the root of the source tree.
 //
-// 不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！
+// This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project!
 
 using NewLife.Http;
 using NewLife.Serialization;
@@ -10,7 +10,7 @@ using NewLife.Serialization;
 namespace Admin.NET.Core.Service;
 
 /// <summary>
-/// 系统行政区域服务 🧩
+/// System administrative area services 🧩
 /// </summary>
 [ApiDescriptionSettings(Order = 310)]
 public class SysRegionService : IDynamicApiController, ITransient
@@ -25,11 +25,11 @@ public class SysRegionService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 获取行政区域分页列表 🔖
+    /// Get the paging list of administrative regions 🔖
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
-    [DisplayName("获取行政区域分页列表")]
+    [DisplayName("Get paginated list of administrative regions")]
     public async Task<SqlSugarPagedList<SysRegion>> Page(PageRegionInput input)
     {
         return await _sysRegionRep.AsQueryable()
@@ -40,33 +40,33 @@ public class SysRegionService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 获取行政区域列表 🔖
+    /// Get a list of administrative regions 🔖
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
-    [DisplayName("获取行政区域列表")]
+    [DisplayName("Get the list of administrative regions")]
     public async Task<List<SysRegion>> GetList([FromQuery] RegionInput input)
     {
         return await _sysRegionRep.GetListAsync(u => u.Pid == input.Id);
     }
 
     /// <summary>
-    /// 获取行政区域树 🔖
+    /// Get administrative region tree 🔖
     /// </summary>
     /// <returns></returns>
-    [DisplayName("获取行政区域树")]
+    [DisplayName("Obtain administrative region tree")]
     public async Task<List<SysRegion>> GetTree()
     {
         return await _sysRegionRep.AsQueryable().ToTreeAsync(u => u.Children, u => u.Pid, null);
     }
 
     /// <summary>
-    /// 增加行政区域 🔖
+    /// Add administrative area 🔖
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
     [ApiDescriptionSettings(Name = "Add"), HttpPost]
-    [DisplayName("增加行政区域")]
+    [DisplayName("Add administrative area")]
     public async Task<long> AddRegion(AddRegionInput input)
     {
         input.Code = input.Code?.Trim() ?? "";
@@ -89,12 +89,12 @@ public class SysRegionService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 更新行政区域 🔖
+    /// Update administrative region 🔖
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
     [ApiDescriptionSettings(Name = "Update"), HttpPost]
-    [DisplayName("更新行政区域")]
+    [DisplayName("Update administrative area")]
     public async Task UpdateRegion(UpdateRegionInput input)
     {
         input.Code = input.Code?.Trim() ?? "";
@@ -120,7 +120,7 @@ public class SysRegionService : IDynamicApiController, ITransient
         var isExist = await _sysRegionRep.IsAnyAsync(u => (u.Name == input.Name && u.Code == input.Code) && u.Id != sysRegion.Id);
         if (isExist) throw Oops.Oh(ErrorCodeEnum.R2002);
 
-        //// 父Id不能为自己的子节点
+        //// The parent ID cannot be its own child node
         //var regionTreeList = await _sysRegionRep.AsQueryable().ToChildListAsync(u => u.Pid, input.Id, true);
         //var childIdList = regionTreeList.Select(u => u.Id).ToList();
         //if (childIdList.Contains(input.Pid))
@@ -130,12 +130,12 @@ public class SysRegionService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 删除行政区域 🔖
+    /// Delete administrative area 🔖
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
     [ApiDescriptionSettings(Name = "Delete"), HttpPost]
-    [DisplayName("删除行政区域")]
+    [DisplayName("Delete administrative area")]
     public async Task DeleteRegion(DeleteRegionInput input)
     {
         var regionTreeList = await _sysRegionRep.AsQueryable().ToChildListAsync(u => u.Pid, input.Id, true);
@@ -144,14 +144,14 @@ public class SysRegionService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 同步行政区域 🔖
+    /// Synchronize administrative areas 🔖
     /// </summary>
     /// <returns></returns>
-    [DisplayName("同步行政区域")]
+    [DisplayName("Synchronize administrative areas")]
     public async Task Sync()
     {
         var syncLevel = await _sysConfigService.GetConfigValue<int>(ConfigConst.SysRegionSyncLevel);
-        if (syncLevel is < 1 or > 5) syncLevel = 3;//默认区县级
+        if (syncLevel is < 1 or > 5) syncLevel = 3;// Default district and county level
 
         await _sysRegionRep.AsTenant().UseTranAsync(async () =>
         {
@@ -165,7 +165,7 @@ public class SysRegionService : IDynamicApiController, ITransient
         // var context = BrowsingContext.New(AngleSharp.Configuration.Default.WithDefaultLoader());
         // var dom = await context.OpenAsync(_url);
         //
-        // // 省级列表
+        // // Provincial list
         // var itemList = dom.QuerySelectorAll("table.provincetable tr.provincetr td a");
         // if (itemList.Length == 0) throw Oops.Oh(ErrorCodeEnum.R2005);
         //
@@ -186,7 +186,7 @@ public class SysRegionService : IDynamicApiController, ITransient
         //     };
         //     list.Add(region);
         //
-        //     // 市级
+        //     // Municipal level
         //     if (!string.IsNullOrEmpty(item.Href))
         //     {
         //         var dom1 = await context.OpenAsync(item.Href);
@@ -204,16 +204,16 @@ public class SysRegionService : IDynamicApiController, ITransient
         //                 Level = 2,
         //             };
         //
-        //             // 若URL中查询的一级行政区域缺少Code则通过二级区域填充
+        //             // If the first-level administrative area queried in the URL lacks Code, it will be filled in through the second-level area.
         //             if (list.Count == 1 && !string.IsNullOrEmpty(region1.Code))
         //                 region.Code = region1.Code.Substring(0, 2).PadRight(region1.Code.Length, '0');
         //
-        //             // 同步层级为“1-省级”退出
+        //             // Exit when the synchronization level is "1-provincial level"
         //             if (syncLevel < 2) break;
         //
         //             list.Add(region1);
         //
-        //             // 区县级
+        //             //District and county level
         //             if (string.IsNullOrEmpty(item1.Href) || syncLevel <= 2) continue;
         //
         //             var dom2 = await context.OpenAsync(item1.Href);
@@ -232,7 +232,7 @@ public class SysRegionService : IDynamicApiController, ITransient
         //                 };
         //                 list.Add(region2);
         //
-        //                 // 街道级
+        //                 // street level
         //                 if (string.IsNullOrEmpty(item2.Href) || syncLevel <= 3) continue;
         //
         //                 var dom3 = await context.OpenAsync(item2.Href);
@@ -251,7 +251,7 @@ public class SysRegionService : IDynamicApiController, ITransient
         //                     };
         //                     list.Add(region3);
         //
-        //                     // 村级
+        //                     // village level
         //                     if (string.IsNullOrEmpty(item3.Href) || syncLevel <= 4) continue;
         //
         //                     var dom4 = await context.OpenAsync(item3.Href);
@@ -273,13 +273,13 @@ public class SysRegionService : IDynamicApiController, ITransient
         //         }
         //     }
         //
-        //     //按省份同步快速写入提升同步效率，全部一次性写入容易出现从统计局获取数据失败
+        //     //Synchronize fast writing by province to improve synchronization efficiency. All one-time writes are prone to failure in obtaining data from the Bureau of Statistics.
         //     await _sysRegionRep.Context.Fastest<SysRegion>().BulkCopyAsync(list);
         // }
     }
 
     /// <summary>
-    /// 从统计局地图页面同步
+    /// Synchronize from the Bureau of Statistics map page
     /// </summary>
     /// <param name="syncLevel"></param>
     private async Task SyncByMap(int syncLevel)
@@ -288,7 +288,7 @@ public class SysRegionService : IDynamicApiController, ITransient
         client.DefaultRequestHeaders.Add("Referer", "http://xzqh.mca.gov.cn/map");
         var html = await client.GetStringAsync("http://xzqh.mca.gov.cn/map");
 
-        var municipalityList = new List<string> { "北京", "天津", "上海", "重庆" };
+        var municipalityList = new List<string> { "Beijing", "Tianjin", "Shanghai", "Chongqing" };
         var provList = Regex.Match(html, @"(?<=var json = )(\[\{.*?\}\])(?=;)").Value.ToJsonEntity<List<Dictionary<string, string>>>();
         foreach (var dict1 in provList)
         {
@@ -322,7 +322,7 @@ public class SysRegionService : IDynamicApiController, ITransient
                 };
                 if (municipalityList.Any(m => city.Name.StartsWith(m)))
                 {
-                    city.Name = "市辖区";
+                    city.Name = "Municipal district";
                     if (province.Code == city.Code) city.Code = province.Code.Substring(0, 2) + "0100";
                 }
                 list.Add(city);
@@ -344,25 +344,25 @@ public class SysRegionService : IDynamicApiController, ITransient
                     };
                     if (city.Code.IsNullOrEmpty())
                     {
-                        // 省直辖县级行政单位 节点无Code编码处理
+                        // Provincial and county-level administrative units have no code encoding for nodes.
                         city.Code = county.Code.Substring(0, 3).PadRight(6, '0');
                     }
                     list.Add(county);
                 }
             }
 
-            // 按省份同步快速写入提升同步效率，全部一次性写入容易出现从统计局获取数据失败
-            // 仅当数据量大于1000或非Oracle数据库时采用大数据量写入方式（SqlSugar官方已说明，数据量小于1000时，其性能不如普通插入, oracle此方法不支持事务）
+            // Fast write synchronization by province improves synchronization efficiency. All one-time writes are prone to failure in obtaining data from the Bureau of Statistics.
+            // The large data writing method is only used when the data volume is greater than 1000 or in non-Oracle databases (SqlSugar has officially stated that when the data volume is less than 1000, its performance is not as good as ordinary insertion, and Oracle does not support transactions with this method)
             if (list.Count > 1000 && _sysRegionRep.Context.CurrentConnectionConfig.DbType != SqlSugar.DbType.Oracle)
             {
-                // 执行大数据量写入
+                // Perform large data volume writes
                 try
                 {
                     await _sysRegionRep.Context.Fastest<SysRegion>().BulkCopyAsync(list);
                 }
                 catch (SqlSugarException)
                 {
-                    // 若写入失败则尝试普通插入方式
+                    // If writing fails, try normal insertion.
                     await _sysRegionRep.InsertRangeAsync(list);
                 }
             }
@@ -372,7 +372,7 @@ public class SysRegionService : IDynamicApiController, ITransient
             }
         }
 
-        // 获取选择数据
+        // Get selection data
         async Task<List<Dictionary<string, string>>> GetSelectList(string prov, string prefecture = null)
         {
             var data = "";

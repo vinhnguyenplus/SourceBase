@@ -4,15 +4,15 @@
 			<template #header>
 				<div style="color: #fff">
 					<el-icon size="16" style="margin-right: 3px; display: inline; vertical-align: middle"> <ele-Switch /> </el-icon>
-					<span>切换租户</span>
+					<span>Switch Tenant</span>
 				</div>
 			</template>
 			<el-form :model="state.ruleForm" ref="ruleFormRef" label-width="auto">
 				<el-row :gutter="35">
 					<el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="mb20">
-						<el-form-item label="租户" prop="id" :rules="[{ required: true, message: '租户不能为空', trigger: 'blur' }]">
-							<el-select v-model="state.ruleForm.id" value-key="id" placeholder="租户" class="w100">
-								<el-option v-for="(item, index) in state.tenantList" :key="index" :label="`${item.label ?? '默认'} (${item.host})`" :value="item.value" />
+						<el-form-item label="tenant" prop="id" :rules="[{ required: true, message: 'Tenant cannot be empty', trigger: 'blur' }]">
+							<el-select v-model="state.ruleForm.id" value-key="id" placeholder="tenant" class="w100">
+								<el-option v-for="(item, index) in state.tenantList" :key="index" :label="`${item.label ?? 'Default'} (${item.host})`" :value="item.value" />
 							</el-select>
 						</el-form-item>
 					</el-col>
@@ -20,8 +20,8 @@
 			</el-form>
 			<template #footer>
 				<span class="dialog-footer">
-					<el-button @click="() => state.isShowDialog = false">取 消</el-button>
-					<el-button type="primary" @click="submit">确 定</el-button>
+					<el-button @click="() => state.isShowDialog = false">Cancel</el-button>
+					<el-button type="primary" @click="submit">Confirm</el-button>
 				</span>
 			</template>
 		</el-dialog>
@@ -45,7 +45,7 @@ const state = reactive({
 	tenantList: [] as Array<any>
 });
 
-// 打开弹窗
+// Open pop-up window
 const openDialog = async () => {
 	state.tenantList = await getAPI(SysTenantApi).apiSysTenantListGet().then(res => res.data.result ?? []);
 	state.ruleForm.id = userStore.userInfos.currentTenantId as any;
@@ -54,7 +54,7 @@ const openDialog = async () => {
 	state.loading = false;
 };
 
-// 提交
+// submit
 const submit = () => {
 	ruleFormRef.value.validate(async (valid: boolean) => {
 		if (!valid) return;
@@ -65,6 +65,6 @@ const submit = () => {
 	});
 };
 
-// 导出对象
+// Export object
 defineExpose({ openDialog });
 </script>

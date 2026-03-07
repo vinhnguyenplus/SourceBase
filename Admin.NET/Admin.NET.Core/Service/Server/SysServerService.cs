@@ -1,8 +1,8 @@
-﻿// Admin.NET 项目的版权、商标、专利和其他相关权利均受相应法律法规的保护。使用本项目应遵守相关法律法规和许可证的要求。
+﻿// The copyright, trademark, patent and other related rights of the Admin.NET project are protected by corresponding laws and regulations. Use of this project shall comply with relevant laws, regulations and license requirements.
 //
-// 本项目主要遵循 MIT 许可证和 Apache 许可证（版本 2.0）进行分发和使用。许可证位于源代码树根目录中的 LICENSE-MIT 和 LICENSE-APACHE 文件。
+// This project is distributed and used primarily under the MIT License and the Apache License (version 2.0). The license is located in the LICENSE-MIT and LICENSE-APACHE files in the root of the source tree.
 //
-// 不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！
+// This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project!
 
 #if NET10_0_OR_GREATER
 
@@ -15,9 +15,9 @@ using ReflectionHelper = XiHan.Framework.Utils.Reflections.ReflectionHelper;
 namespace Admin.NET.Core.Service;
 
 /// <summary>
-/// 系统服务器监控服务 🧩
+/// System server monitoring service 🧩
 /// </summary>
-[ApiDescriptionSettings(Order = 290, Description = "服务器监控")]
+[ApiDescriptionSettings(Order = 290, Description = "Server monitoring")]
 public class SysServerService : IDynamicApiController, ITransient
 {
     public SysServerService()
@@ -27,10 +27,10 @@ public class SysServerService : IDynamicApiController, ITransient
 #if NET10_0_OR_GREATER
 
     /// <summary>
-    /// 获取服务器硬件信息
+    /// Get server hardware information
     /// </summary>
     /// <returns></returns>
-    [DisplayName("获取服务器硬件信息")]
+    [DisplayName("Obtain server hardware information")]
     public SystemInfo HardwareInfo()
     {
         var hardwareInfo = SystemInfoManager.GetSystemInfo();
@@ -38,10 +38,10 @@ public class SysServerService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 获取服务器运行时信息
+    /// Get server runtime information
     /// </summary>
     /// <returns></returns>
-    [DisplayName("获取服务器运行时信息")]
+    [DisplayName("Get server runtime information")]
     public XiHan.Framework.Utils.Runtime.RuntimeInfo RuntimeInfo()
     {
         var systemRuntimeInfo = new XiHan.Framework.Utils.Runtime.RuntimeInfo();
@@ -49,10 +49,10 @@ public class SysServerService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 获取框架主要程序集
+    /// Get the framework main assembly
     /// </summary>
     /// <returns></returns>
-    [DisplayName("获取框架主要程序集")]
+    [DisplayName("Get the main assemblies of the framework")]
     public List<NuGetPackage> NuGetPackagesInfo()
     {
         var nuGetPackages = ReflectionHelper.GetNuGetPackages("Admin.NET");
@@ -62,33 +62,33 @@ public class SysServerService : IDynamicApiController, ITransient
 #endif // NET10_0_OR_GREATER
 
     /// <summary>
-    /// 获取服务器配置信息 🔖
+    /// Get server configuration information 🔖
     /// </summary>
     /// <returns></returns>
-    [DisplayName("获取服务器配置信息")]
+    [DisplayName("Get server configuration information")]
     public dynamic GetServerBase()
     {
         return new
         {
-            HostName = Environment.MachineName, // 主机名称
-            SystemOs = ComputerUtil.GetOSInfo(),//RuntimeInformation.OSDescription, // 操作系统
-            OsArchitecture = Environment.OSVersion.Platform.ToString() + " " + RuntimeInformation.OSArchitecture.ToString(), // 系统架构
-            ProcessorCount = Environment.ProcessorCount + " 核", // CPU核心数
-            SysRunTime = ComputerUtil.GetRunTime(), // 系统运行时间
-            RemoteIp = ComputerUtil.GetIpFromOnline(), // 外网地址
-            LocalIp = App.HttpContext?.Connection?.LocalIpAddress!.MapToIPv4().ToString(), // 本地地址
-            FrameworkDescription = RuntimeInformation.FrameworkDescription + " / " + App.GetOptions<DbConnectionOptions>().ConnectionConfigs[0].DbType.ToString(), // NET框架 + 数据库类型
+            HostName = Environment.MachineName, // hostname
+            SystemOs = ComputerUtil.GetOSInfo(),// RuntimeInformation.OSDescription, // operating system
+            OsArchitecture = Environment.OSVersion.Platform.ToString() + " " + RuntimeInformation.OSArchitecture.ToString(), // System architecture
+            ProcessorCount = Environment.ProcessorCount + " nuclear", // Number of CPU cores
+            SysRunTime = ComputerUtil.GetRunTime(), // System running time
+            RemoteIp = ComputerUtil.GetIpFromOnline(), // External network address
+            LocalIp = App.HttpContext?.Connection?.LocalIpAddress!.MapToIPv4().ToString(), // local address
+            FrameworkDescription = RuntimeInformation.FrameworkDescription + " / " + App.GetOptions<DbConnectionOptions>().ConnectionConfigs[0].DbType.ToString(), // NET framework + database type
             Environment = App.HostEnvironment.IsDevelopment() ? "Development" : "Production",
-            Wwwroot = App.WebHostEnvironment.WebRootPath, // 网站根目录
-            Stage = App.HostEnvironment.IsStaging() ? "Stage环境" : "非Stage环境", // 是否Stage环境
+            Wwwroot = App.WebHostEnvironment.WebRootPath, // Website root directory
+            Stage = App.HostEnvironment.IsStaging() ? "Stage environment" : "Non-Stage Environment", // Whether Stage environment
         };
     }
 
     /// <summary>
-    /// 获取服务器使用信息 🔖
+    /// Get server usage information 🔖
     /// </summary>
     /// <returns></returns>
-    [DisplayName("获取服务器使用信息")]
+    [DisplayName("Get server usage information")]
     public dynamic GetServerUsed()
     {
         var programStartTime = Process.GetCurrentProcess().StartTime;
@@ -99,32 +99,32 @@ public class SysServerService : IDynamicApiController, ITransient
         var memoryMetrics = ComputerUtil.GetComputerInfo();
         return new
         {
-            memoryMetrics.FreeRam, // 空闲内存
-            memoryMetrics.UsedRam, // 已用内存
-            memoryMetrics.TotalRam, // 总内存
-            memoryMetrics.RamRate, // 内存使用率
-            memoryMetrics.CpuRates, // Cpu使用率多CPU未完成
-            memoryMetrics.CpuRate, // Cpu 1使用率
-            StartTime = programStartTime.ToString("yyyy-MM-dd HH:mm:ss"), // 服务启动时间
-            RunTime = programRunTime, // 服务运行时间
+            memoryMetrics.FreeRam, // free memory
+            memoryMetrics.UsedRam, // Used memory
+            memoryMetrics.TotalRam, // total memory
+            memoryMetrics.RamRate, // memory usage
+            memoryMetrics.CpuRates, // CPU UsageMulti-CPU Not Completed
+            memoryMetrics.CpuRate, // CPU 1 usage
+            StartTime = programStartTime.ToString("yyyy-MM-dd HH:mm:ss"), // Service start time
+            RunTime = programRunTime, // Service running time
         };
     }
 
     /// <summary>
-    /// 获取服务器磁盘信息 🔖
+    /// Get server disk information 🔖
     /// </summary>
     /// <returns></returns>
-    [DisplayName("获取服务器磁盘信息")]
+    [DisplayName("Get server disk information")]
     public dynamic GetServerDisk()
     {
         return ComputerUtil.GetDiskInfos();
     }
 
     /// <summary>
-    /// 获取框架主要程序集 🔖
+    /// Get the framework main assembly 🔖
     /// </summary>
     /// <returns></returns>
-    [DisplayName("获取框架主要程序集")]
+    [DisplayName("Get the main assemblies of the framework")]
     public dynamic GetAssemblyList()
     {
         var furionAssembly = typeof(App).Assembly.GetName();

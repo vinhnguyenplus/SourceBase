@@ -15,7 +15,7 @@ class StartNode extends CircleNode {
 }
 
 class StartModel extends CircleNodeModel {
-    // 自定义节点形状属性
+    // Custom node shape properties
     initNodeData(data) {
         data.text = {
             value: (data.text && data.text.value) || '',
@@ -27,12 +27,12 @@ class StartModel extends CircleNodeModel {
         super.initNodeData(data)
         this.r = 20
     }
-    // 自定义节点样式属性
+    // Custom node style properties
     getNodeStyle() {
         const style = super.getNodeStyle()
         return style
     }
-    // 自定义锚点样式
+    // Custom anchor style
     getAnchorStyle() {
         const style = super.getAnchorStyle()
         style.hover.r = 8
@@ -40,7 +40,7 @@ class StartModel extends CircleNodeModel {
         style.hover.stroke = 'rgb(24, 125, 255)'
         return style
     }
-    // 自定义节点outline
+    // Custom node outline
     getOutlineStyle() {
         const style = super.getOutlineStyle()
         style.stroke = '#88f'
@@ -49,7 +49,7 @@ class StartModel extends CircleNodeModel {
     getConnectedTargetRules() {
         const rules = super.getConnectedTargetRules()
         const notAsTarget = {
-            message: '起始节点不能作为连线的终点',
+            message: 'The starting node cannot be used as the endpoint of a connection',
             validate: () => false
         }
         rules.push(notAsTarget)

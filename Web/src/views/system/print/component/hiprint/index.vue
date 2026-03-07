@@ -1,6 +1,6 @@
 <template>
 	<el-row :gutter="8" style="margin-bottom: 10px">
-		<!-- 流程下拉 模板选择 -->
+		<!-- Process drop-down template selection -->
 		<el-col :span="4">
 			<el-select v-model="mode" showSearch @change="changeMode" :defaultValue="0" option-label-prop="label" class="w100">
 				<el-option v-for="(opt, idx) in state.modeList" :key="idx" :label="opt.name" :value="idx">
@@ -10,22 +10,22 @@
 		</el-col>
 
 		<el-col :span="20">
-			<el-select v-model="state.curPaper.type" placeholder="默认纸张" style="width: 120px" @change="setPaper">
+			<el-select v-model="state.curPaper.type" placeholder="Default paper" style="width: 120px" @change="setPaper">
 				<el-option v-for="item in state.paperTypes" :key="item.type" :label="item.type" :value="item.type" />
 			</el-select>
 			<el-divider style="height: calc(100% - 5px); margin: 0 10px" direction="vertical" />
-			<!-- 纸张设置 -->
+			<!-- Paper settings -->
 			<el-button-group>
-				<el-popover v-model="state.paperPopVisible" placement="bottom" width="300" title="设置纸张宽高(mm)">
+				<el-popover v-model="state.paperPopVisible" placement="bottom" width="300" title="Set paper width and height (mm)">
 					<div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px">
-						<el-input type="number" v-model="state.paperWidth" style="width: 100px; text-align: center" place="宽（mm）"></el-input>~
-						<el-input type="number" v-model="state.paperHeight" style="width: 100px; text-align: center" place="高（mm）"></el-input>
+						<el-input type="number" v-model="state.paperWidth" style="width: 100px; text-align: center" place="Width (mm)"></el-input>~
+						<el-input type="number" v-model="state.paperHeight" style="width: 100px; text-align: center" place="Height (mm)"></el-input>
 					</div>
 					<div>
-						<el-button type="primary" style="width: 100%" @click="otherPaper">确定</el-button>
+						<el-button type="primary" style="width: 100%" @click="otherPaper">Confirm</el-button>
 					</div>
 					<template #reference>
-						<el-button :type="'other' == curPaperType ? 'primary' : ''">自定义宽高</el-button>
+						<el-button :type="'other' == curPaperType ? 'primary' : ''">Custom width and height</el-button>
 					</template>
 				</el-popover>
 			</el-button-group>
@@ -33,46 +33,46 @@
 			<el-input-number style="margin-left: 5px; width: 130px" v-model="state.scaleValue" :precision="2" :step="0.1" :min="state.scaleMin" :max="state.scaleMax" @change="changeScale"></el-input-number>
 			<el-divider style="height: calc(100% - 5px); margin: 0 10px" direction="vertical" />
 			<el-button-group>
-				<el-tooltip content="左对齐" placement="bottom">
+				<el-tooltip content="left aligned" placement="bottom">
 					<el-button icon="ele-Back" @click="setElsAlign('left')"> </el-button>
 				</el-tooltip>
-				<el-tooltip content="居中" placement="bottom">
+				<el-tooltip content="center" placement="bottom">
 					<el-button icon="ele-FullScreen" @click="setElsAlign('vertical')"> </el-button>
 				</el-tooltip>
-				<el-tooltip content="右对齐" placement="bottom">
+				<el-tooltip content="Align right" placement="bottom">
 					<el-button icon="ele-Right" @click="setElsAlign('right')"> </el-button>
 				</el-tooltip>
-				<el-tooltip content="顶对齐" placement="bottom">
+				<el-tooltip content="top aligned" placement="bottom">
 					<el-button icon="ele-Top" @click="setElsAlign('top')"> </el-button>
 				</el-tooltip>
-				<el-tooltip content="垂直居中" placement="bottom">
+				<el-tooltip content="verticalcenter" placement="bottom">
 					<el-button icon="ele-DCaret" @click="setElsAlign('horizontal')"> </el-button>
 				</el-tooltip>
-				<el-tooltip content="底对齐" placement="bottom">
+				<el-tooltip content="bottom aligned" placement="bottom">
 					<el-button icon="ele-Bottom" @click="setElsAlign('bottom')"> </el-button>
 				</el-tooltip>
-				<el-tooltip content="横向分散" placement="bottom">
+				<el-tooltip content="Horizontal dispersion" placement="bottom">
 					<el-button icon="ele-Sort" @click="setElsAlign('distributeHor')"> </el-button>
 				</el-tooltip>
-				<el-tooltip content="纵向分散" placement="bottom">
+				<el-tooltip content="Vertical dispersion" placement="bottom">
 					<el-button icon="ele-Switch" @click="setElsAlign('distributeVer')"> </el-button>
 				</el-tooltip>
 			</el-button-group>
 			<el-divider style="height: calc(100% - 5px); margin: 0 10px" direction="vertical" />
 			<el-button-group>
-				<el-tooltip content="旋转" placement="bottom">
+				<el-tooltip content="rotate" placement="bottom">
 					<el-button icon="ele-RefreshRight" @click="rotatePaper"></el-button>
 				</el-tooltip>
-				<el-tooltip content="预览" placement="bottom">
+				<el-tooltip content="Preview" placement="bottom">
 					<el-button icon="ele-View" @click="preView"></el-button>
 				</el-tooltip>
-				<el-tooltip content="清空模板" placement="bottom">
+				<el-tooltip content="Clear template" placement="bottom">
 					<el-button icon="ele-Delete" @click="clearPaper"></el-button>
 				</el-tooltip>
-				<el-tooltip content="直接打印" placement="bottom">
+				<el-tooltip content="Print directly" placement="bottom">
 					<el-button icon="ele-Printer" @click="print"> </el-button>
 				</el-tooltip>
-				<el-tooltip content="模板JSON" placement="bottom">
+				<el-tooltip content="TemplateJSON" placement="bottom">
 					<el-button icon="ele-Coin" @click="viewJson"> </el-button>
 				</el-tooltip>
 			</el-button-group>
@@ -92,27 +92,27 @@
 		</el-col>
 		<el-col :span="6" class="params_setting_container" style="height: 100%;">
 			<el-tabs type="border-card" style="height: 100%; overflow: auto;">
-				<el-tab-pane label="属性" style="height: 100%;">
+				<el-tab-pane label="Attribute" style="height: 100%;">
                     <!-- <CardPro full-height shadow="never"> -->
 						<el-row class="hinnn-layout-sider">
 							<div id="PrintElementOptionSetting"></div>
 						</el-row>
 					<!-- </CardPro> -->
 				</el-tab-pane>
-				<el-tab-pane label="测试数据">
-					<el-button @click="formatPrintDataDemo()" style="margin-bottom: 10px; width: 100%">格式化字符串</el-button>
-					<el-input v-model="printDataDemo" type="textarea" style="width: 100%" :rows="30" placeholder="对整个文档的完整测试数据"></el-input>
+				<el-tab-pane label="Test data">
+					<el-button @click="formatPrintDataDemo()" style="margin-bottom: 10px; width: 100%">Formatted string</el-button>
+					<el-input v-model="printDataDemo" type="textarea" style="width: 100%" :rows="30" placeholder="Complete test data for the entire document"></el-input>
 				</el-tab-pane>
 			</el-tabs>
 		</el-col>
 	</el-row>
 
-	<el-drawer title="打印模板" v-model="state.templateDialogVisible">
+	<el-drawer title="Print template" v-model="state.templateDialogVisible">
 		<vue-json-pretty :data="state.templateContent" showLength showIcon showLineNumber showSelectController />
 	</el-drawer>
 
-	<!-- 预览 -->
-	<PrintPreview ref="preViewRef" title="预览" />
+	<!-- Preview -->
+	<PrintPreview ref="preViewRef" title="Preview" />
 </template>
 
 <script lang="ts" setup name="hiprintDesign">
@@ -142,19 +142,19 @@ var props = defineProps({
 });
 
 let hiprintTemplate = ref();
-let mode = ref(0); // 模板选择
+let mode = ref(0); // Template selection
 
 const preViewRef = ref();
 const printDataDemo = ref('');
 const state = reactive({
 	modeList: [] as any,
-	// 当前纸张
+	// Current paper
 	curPaper: {
 		type: 'A4',
 		width: 220,
 		height: 296.6,
 	} as IPaperType,
-	// 纸张类型
+	// Paper type
 	paperTypes: [
 		{
 			type: 'A3',
@@ -200,7 +200,7 @@ const state = reactive({
 	scaleValue: 1,
 	scaleMax: 5,
 	scaleMin: 0.5,
-	// 自定义纸张
+	// Custom paper
 	paperPopVisible: false,
 	paperWidth: 220,
 	paperHeight: 80,
@@ -209,7 +209,7 @@ const state = reactive({
 	templateContent: '',
 });
 
-// 计算当前纸张类型
+// Calculate current paper type
 const curPaperType = computed(() => {
 	let { width, height } = state.curPaper;
 	let type = 'other';
@@ -224,47 +224,47 @@ const curPaperType = computed(() => {
 	return type;
 });
 
-// 选择模板
+// Select template
 const changeMode = () => {
 	let provider = providers[mode.value];
 	hiprint.init({
 		providers: [provider.f],
 	});
-	// 渲染自定义选项
+	// Rendering customization options
 	const hiprintEpContainerEl = document.getElementById('hiprintEpContainer');
 	if (hiprintEpContainerEl) {
 		hiprintEpContainerEl.innerHTML = '';
 	}
 	hiprint.PrintElementTypeManager.build('.hiprintEpContainer', provider.value);
 
-	// 渲染绘画模板
+	// Render painting template
 	const hiprintPrintTemplate = document.getElementById('hiprint-printTemplate');
 	if (hiprintPrintTemplate) {
 		hiprintPrintTemplate.innerHTML = '';
 	}
-	// 初始化打印模板设计器
+	// Initialize the print template designer
 	let template = {};
 	hiprintTemplate.value = new hiprint.PrintTemplate({
 		template: template,
 		settingContainer: '#PrintElementOptionSetting',
 		paginationContainer: '.hiprint-printPagination',
 		fontList: [
-			{ title: '微软雅黑', value: 'Microsoft YaHei' },
-			{ title: '黑体', value: 'STHeitiSC-Light' },
+			{ title: 'Microsoft YaHei', value: 'Microsoft YaHei' },
+			{ title: 'black body', value: 'STHeitiSC-Light' },
 			{ title: 'Arial', value: 'Arial' },
-			{ title: '宋体', value: 'SimSun' },
-			{ title: '华为楷体', value: 'STKaiti' },
+			{ title: 'Song Dynasty', value: 'SimSun' },
+			{ title: 'Huawei regular script', value: 'STKaiti' },
 			{ title: 'cursive', value: 'cursive' },
 			{ title: 'Vector', value: 'Vector' },
 		],
 	});
 	hiprintTemplate.value.design('#hiprint-printTemplate');
-	// 获取当前放大比例, 当zoom时传true才会有
+	// Get the current magnification ratio, which will only be available when true is passed when zooming.
 	state.scaleValue = hiprintTemplate.value.editingPanel?.scale ?? 1;
 };
 
 /**
- * 设置纸张大小
+ * Set paper size
  * @param type [A3, A4, A5, B3, B4, B5, other]
  * @param value {width,height} mm
  */
@@ -279,11 +279,11 @@ const setPaper = (type: string, value?: { width: number; height: number }) => {
 			hiprintTemplate.value.setPaper(value?.width, value?.height);
 		}
 	} catch (error) {
-		ElMessage.error(`操作失败: ${error}`);
+		ElMessage.error(`Operation failed: ${error}`);
 	}
 };
 
-// 改变缩放比例
+// Change zoom ratio
 const changeScale = (currentValue: number, oldValue: number) => {
 	let big = false;
 	currentValue <= oldValue ? (big = false) : (big = true);
@@ -295,36 +295,36 @@ const changeScale = (currentValue: number, oldValue: number) => {
 		if (scaleVal < state.scaleMin) scaleVal = 0.5;
 	}
 	if (hiprintTemplate.value) {
-		// scaleVal: 放大缩小值, false: 不保存(不传也一样), 如果传 true, 打印时也会放大
+		// scaleVal: enlarge or reduce the value, false: do not save (the same is true if it is not passed), if true is passed, it will also be enlarged when printing.
 		hiprintTemplate.value.zoom(scaleVal);
 		state.scaleValue = scaleVal;
 	}
 };
 
-// 旋转模板
+// Rotate template
 const rotatePaper = () => {
 	if (hiprintTemplate.value) {
 		hiprintTemplate.value.rotatePaper();
 	}
 };
 
-// 对齐模板
+// Align template
 const setElsAlign = (e: any) => {
 	hiprintTemplate.value.setElsAlign(e);
 };
 
-// 清空模板
+// Clear template
 const clearPaper = () => {
-	ElMessageBox.confirm('是否确认清空模板信息?', '警告', {
-		confirmButtonText: '确定',
-		cancelButtonText: '取消',
+	ElMessageBox.confirm('Are you sure to clear the template information?', 'warning', {
+		confirmButtonText: 'Confirm',
+		cancelButtonText: 'Cancel',
 		type: 'warning',
 	})
 		.then(() => {
 			try {
 				hiprintTemplate.value.clear();
 			} catch (error) {
-				ElMessage.error(`操作失败: ${error}`);
+				ElMessage.error(`Operation failed: ${error}`);
 			}
 		})
 		.catch((err) => {
@@ -332,7 +332,7 @@ const clearPaper = () => {
 		});
 };
 
-// 自定义纸张
+// Custom paper
 const otherPaper = () => {
 	let value = {
 		width: 0,
@@ -344,26 +344,26 @@ const otherPaper = () => {
 	setPaper('other', value);
 };
 
-// 预览
+// Preview
 const preView = () => {
 	let { width } = state.curPaper;
 	let printData = null;
 	try {
 		printData = JSON.parse(printDataDemo.value);
 	} catch (e) {
-		console.log('出错：' + e);
+		console.log('Error:' + e);
 	}
 	if (printData == null) {
 		printData = printDataDefault;
 	}
 	preViewRef.value.showDialog(hiprintTemplate.value, printData, width);
 };
-// 直接打印
+// Print directly
 const print = () => {
 	preView();
 };
 
-// 查看模板JSON
+// View template JSON
 const viewJson = () => {
 	if (hiprintTemplate.value) {
 		var templateJson = JSON.stringify(hiprintTemplate.value.getJson() || {});
@@ -378,35 +378,35 @@ onMounted(() => {
 	});
 	mode.value = props.modeIndex;
 	changeMode();
-	// otherPaper(); // 默认纸张
+	// otherPaper(); //Default paper
 });
 
-// 初始化纸张大小
+// Initialize paper size
 const initPaper = () => {
 	var template = hiprintTemplate.value.getJson();
 	var width = template.panels[0].width;
 	var height = template.panels[0].height;
 	const paperType = state.paperTypes.find((x) => x.width == width && x.height == height);
-	state.curPaper = { type: paperType?.type || '', width: width, height: height }; // 计算纸张类型和状态
-	hiprintTemplate.value.setPaper(width, height); // 设置纸张大小
+	state.curPaper = { type: paperType?.type || '', width: width, height: height }; // Calculate paper type and status
+	hiprintTemplate.value.setPaper(width, height); // Set paper size
 };
 
-// 设置预览测试数据
+// Set up preview test data
 const setPrintDataDemo = (strData: string | null | undefined) => {
 	printDataDemo.value = strData as string;
 };
 
-// 格式化打印测试数据
+// Format and print test data
 const formatPrintDataDemo = () => {
 	try {
 		const obj = JSON.parse(printDataDemo.value);
 		printDataDemo.value = JSON.stringify(obj, null, 2);
 	} catch (e) {
-		ElMessageBox.alert('出错:' + e);
+		ElMessageBox.alert('Error:' + e);
 	}
 };
 
-// 导出对象
+// Export object
 defineExpose({ hiprintTemplate, printDataDemo, setPrintDataDemo, initPaper, mode });
 </script>
 
@@ -437,7 +437,7 @@ defineExpose({ hiprintTemplate, printDataDemo, setPrintDataDemo, initPaper, mode
     }
 }
 
-// 默认图片
+// Default picture
 :deep(.hiprint-printElement-image-content) {
 	img {
 		content: url('~@/assets/logo.png');

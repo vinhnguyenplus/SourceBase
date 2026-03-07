@@ -2,19 +2,19 @@
     <div class="notice-container">
         <el-card shadow="hover" :body-style="{ padding: 5 }">
             <el-form :model="state.queryParams" ref="queryForm" :inline="true">
-                <el-form-item label="标题">
-                    <el-input v-model="state.queryParams.title" placeholder="标题" clearable />
+                <el-form-item label="title">
+                    <el-input v-model="state.queryParams.title" placeholder="title" clearable />
                 </el-form-item>
-                <el-form-item label="类型">
-                    <el-select v-model="state.queryParams.type" placeholder="类型" clearable>
-                        <el-option label="通知" :value="1" />
-                        <el-option label="公告" :value="2" />
+                <el-form-item label="Type">
+                    <el-select v-model="state.queryParams.type" placeholder="Type" clearable>
+                        <el-option label="Notice" :value="1" />
+                        <el-option label="Announcement" :value="2" />
                     </el-select>
                 </el-form-item>
                 <el-form-item>
                     <el-button-group>
-                        <el-button type="primary" icon="ele-Search" @click="handleQuery"> 查询 </el-button>
-                        <el-button icon="ele-Refresh" @click="resetQuery"> 重置 </el-button>
+                        <el-button type="primary" icon="ele-Search" @click="handleQuery"> Query </el-button>
+                        <el-button icon="ele-Refresh" @click="resetQuery"> reset </el-button>
                     </el-button-group>
                 </el-form-item>
             </el-form>
@@ -23,27 +23,27 @@
         <el-card class="full-table" shadow="hover" style="margin-top: 5px">
             <el-table :data="state.noticeData" style="width: 100%" v-loading="state.loading" border
                 :row-class-name="tableRowClassName">
-                <el-table-column type="index" label="序号" width="55" align="center" />
-                <el-table-column prop="sysNotice.title" label="标题" width="250" header-align="center" show-overflow-tooltip />
-                <el-table-column prop="sysNotice.content" label="内容" header-align="center" show-overflow-tooltip>
+                <el-table-column type="index" label="No" width="55" align="center" />
+                <el-table-column prop="sysNotice.title" label="title" width="250" header-align="center" show-overflow-tooltip />
+                <el-table-column prop="sysNotice.content" label="content" header-align="center" show-overflow-tooltip>
                     <template #default="scope"> {{ removeHtml(scope.row.sysNotice.content) }} </template>
                 </el-table-column>
-                <el-table-column prop="sysNotice.type" label="类型" width="100" align="center">
+                <el-table-column prop="sysNotice.type" label="Type" width="100" align="center">
                     <template #default="scope">
                         <g-sys-dict v-model="scope.row.sysNotice.type" code="NoticeTypeEnum" />
                     </template>
                 </el-table-column>
-                <el-table-column prop="sysNotice.createTime" label="创建时间" width="180" align="center" />
-                <el-table-column prop="readStatus" label="阅读状态" width="100" align="center">
+                <el-table-column prop="sysNotice.createTime" label="Creation Time" width="180" align="center" />
+                <el-table-column prop="readStatus" label="Reading status" width="100" align="center">
                     <template #default="scope">
                         <g-sys-dict v-model="scope.row.readStatus" code="NoticeUserStatusEnum" />
                     </template>
                 </el-table-column>
-                <el-table-column prop="sysNotice.publicUserName" label="发布者" width="130" align="center" />
-                <el-table-column prop="sysNotice.publicTime" label="发布时间" width="180" align="center" />
-                <el-table-column label="操作" width="100" align="center" fixed="right">
+                <el-table-column prop="sysNotice.publicUserName" label="Publisher" width="130" align="center" />
+                <el-table-column prop="sysNotice.publicTime" label="Release Time" width="180" align="center" />
+                <el-table-column label="Operation" width="100" align="center" fixed="right">
                     <template #default="scope">
-                        <el-button icon="ele-InfoFilled" size="small" text type="primary" @click="viewDetail(scope.row)"> 详情 </el-button>
+                        <el-button icon="ele-InfoFilled" size="small" text type="primary" @click="viewDetail(scope.row)"> Details </el-button>
                     </template>
                 </el-table-column>
             </el-table>
@@ -60,7 +60,7 @@
             <template #header>
                 <div style="color: #fff">
                     <el-icon size="16" style="margin-right: 3px; display: inline; vertical-align: middle"> <ele-Bell /></el-icon>
-                    <span> 消息详情 </span>
+                    <span> Message Details </span>
                 </div>
             </template>
             <div class="w-e-text-container">
@@ -68,7 +68,7 @@
             </div>
             <template #footer>
                 <span class="dialog-footer">
-                    <el-button type="primary" @click="state.dialogVisible = false">确认</el-button>
+                    <el-button type="primary" @click="state.dialogVisible = false">Confirm</el-button>
                 </span>
             </template>
         </el-dialog>
@@ -104,7 +104,7 @@ onMounted(async () => {
     handleQuery();
 });
 
-// 查询操作
+// Query operation
 const handleQuery = async () => {
     state.loading = true;
     const pageNoticeInput = {
@@ -118,23 +118,23 @@ const handleQuery = async () => {
     state.tableParams.total = res.data.result?.total;
     state.loading = false;
 };
-// 重置操作
+// reset operation
 const resetQuery = () => {
     state.queryParams.title = undefined;
     state.queryParams.type = undefined;
     handleQuery();
 };
-// 改变页面容量
+// Change page capacity
 const handleSizeChange = (val: number) => {
     state.tableParams.pageSize = val;
     handleQuery();
 };
-// 改变页码序号
+// Change page number
 const handleCurrentChange = (val: number) => {
     state.tableParams.page = val;
     handleQuery();
 };
-// 查看详情
+// check the details
 const viewDetail = async (row: any) => {
     state.content = row.sysNotice.content;
     state.dialogVisible = true;

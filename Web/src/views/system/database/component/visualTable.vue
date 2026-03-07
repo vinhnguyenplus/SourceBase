@@ -19,13 +19,13 @@
 						justify-content: center;
 					"
 				>
-					图例：
+					Legend:
 					<div>
-						一对多
+						oneRight
 						<div style="height: 5px; width: 80px; background-color: rgba(0, 255, 0, 0.5)"></div>
 					</div>
 					<div style="margin-left: 10px">
-						一对一
+						one-on-one
 						<div style="height: 5px; width: 80px; background-color: rgba(255, 0, 0, 0.5)"></div>
 					</div>
 				</div>
@@ -37,13 +37,13 @@
 
 			<template #node="{ node }">
 				<div style="width: 500px; background-color: #f39930">
-					<div style="height: 30px; display: flex; align-items: center; justify-content: center">{{ node.text }} - 【{{ node.data.columns.length }}列】</div>
+					<div style="height: 30px; display: flex; align-items: center; justify-content: center">{{ node.text }} - [{{ node.data.columns.length }} column]</div>
 					<table class="c-data-table">
 						<tr>
-							<th>列名</th>
-							<th>类型</th>
-							<th>长度</th>
-							<th>描述</th>
+							<th>List</th>
+							<th>Type</th>
+							<th>length</th>
+							<th>Description</th>
 						</tr>
 						<template v-for="column of node.data.columns">
 							<tr>
@@ -88,7 +88,7 @@ onMounted(async () => {
 	showGraph();
 });
 
-// 获取可视化表和字段
+// Get visualization tables and fields
 const showGraph = async () => {
 	var res = await getAPI(SysDatabaseApi).apiSysDatabaseVisualDbTableGet();
 	const visualTableList: any = res.data.result?.visualTableList;

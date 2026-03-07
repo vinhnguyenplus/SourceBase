@@ -10,33 +10,33 @@
 			<el-form :model="state.ruleForm" ref="ruleFormRef" label-width="auto">
 				<el-row :gutter="35">
 					<el-col :xs="8" :sm="8" :md="8" :lg="8" :xl="8" class="mb20 time-padding-right">
-						<el-form-item label="日程时间" prop="scheduleTime" :rules="[{ required: true, message: '日程时间不能为空', trigger: 'blur' }]">
-							<el-date-picker v-model="state.ruleForm.scheduleTime" type="datetime" placeholder="请选择日程日期" format="YYYY-MM-DD" value-format="YYYY-MM-DD HH:mm:ss" class="w100" />
+						<el-form-item label="schedule time" prop="scheduleTime" :rules="[{ required: true, message: 'Schedule time cannot be empty', trigger: 'blur' }]">
+							<el-date-picker v-model="state.ruleForm.scheduleTime" type="datetime" placeholder="Please select a schedule date" format="YYYY-MM-DD" value-format="YYYY-MM-DD HH:mm:ss" class="w100" />
 						</el-form-item>
 					</el-col>
 					<el-col :xs="5" :sm="5" :md="5" :lg="5" :xl="5" class="mb20 time-padding">
-						<el-form-item prop="startTime" :rules="[{ required: true, message: '开始时间不能为空', trigger: 'blur' }]">
+						<el-form-item prop="startTime" :rules="[{ required: true, message: 'Start time cannot be empty', trigger: 'blur' }]">
 							<el-time-select v-model="state.ruleForm.startTime" format="HH:mm" start="00:00" end="23:45" step="00:15" class="w100" clearable @change="ChangeEndTime()" />
 						</el-form-item>
 					</el-col>
-					<span>至</span>
+					<span>to</span>
 					<el-col :xs="5" :sm="5" :md="5" :lg="5" :xl="5" class="mb20 time-padding">
-						<el-form-item prop="endTime" :rules="[{ required: true, message: '结束时间不能为空', trigger: 'blur' }]">
+						<el-form-item prop="endTime" :rules="[{ required: true, message: 'End time cannot be empty', trigger: 'blur' }]">
 							<el-time-select v-model="state.ruleForm.endTime" :min-time="state.ruleForm.startTime" format="HH:mm" start="00:00" end="23:45" step="00:15" class="w100" clearable />
 						</el-form-item>
 					</el-col>
 					<el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="mb20">
-						<el-form-item label="日程内容" prop="content" :rules="[{ required: true, message: '内容内容不能为空', trigger: 'blur' }]">
-							<el-input v-model="state.ruleForm.content" placeholder="内容内容" clearable type="textarea" />
+						<el-form-item label="Schedule content" prop="content" :rules="[{ required: true, message: 'Content cannot be empty', trigger: 'blur' }]">
+							<el-input v-model="state.ruleForm.content" placeholder="content content" clearable type="textarea" />
 						</el-form-item>
 					</el-col>
 				</el-row>
 			</el-form>
 			<template #footer>
 				<span class="dialog-footer">
-					<el-button v-if="state.showRemove" @click="remove">删除</el-button>
-					<el-button @click="cancel">取 消</el-button>
-					<el-button type="primary" @click="submit">确 定</el-button>
+					<el-button v-if="state.showRemove" @click="remove">Delete</el-button>
+					<el-button @click="cancel">Cancel</el-button>
+					<el-button type="primary" @click="submit">Confirm</el-button>
 				</span>
 			</template>
 		</el-dialog>
@@ -63,10 +63,10 @@ const state = reactive({
 	ruleForm: {} as any,
 });
 
-// 页面初始化
+// Page initialization
 onMounted(() => {});
 
-// 打开弹窗
+// Open pop-up window
 const openDialog = (row: any, showRemove: boolean = false) => {
 	ruleFormRef.value?.resetFields();
 	state.showRemove = showRemove;
@@ -76,18 +76,18 @@ const openDialog = (row: any, showRemove: boolean = false) => {
 	state.isShowDialog = true;
 };
 
-// 关闭弹窗
+// Close pop-up window
 const closeDialog = () => {
 	emits('handleQuery', true);
 	state.isShowDialog = false;
 };
 
-// 取消
+// Cancel
 const cancel = () => {
 	state.isShowDialog = false;
 };
 
-// 提交
+// submit
 const submit = () => {
 	ruleFormRef.value.validate(async (valid: boolean) => {
 		if (!valid) return;
@@ -100,24 +100,24 @@ const submit = () => {
 	});
 };
 
-// 删除
+// delete
 const remove = () => {
-	ElMessageBox.confirm(`确定删除吗?`, '提示', {
-		confirmButtonText: '确定',
-		cancelButtonText: '取消',
+	ElMessageBox.confirm(`Are you sure to delete?`, 'Prompt', {
+		confirmButtonText: 'Confirm',
+		cancelButtonText: 'Cancel',
 		type: 'warning',
 	})
 		.then(async () => {
 			await getAPI(SysScheduleApi).apiSysScheduleDeletePost(state.ruleForm);
 			closeDialog();
-			ElMessage.success('操作成功');
+			ElMessage.success('Operation successful');
 		})
 		.catch(() => {});
 };
 
-// 开始时间改变
+// start time change
 const ChangeEndTime = () => {
-	// 转成日期
+	// Conversion date
 	var timeStr = state.ruleForm.startTime;
 	var parts = timeStr.split(':');
 	var hours = parseInt(parts[0], 10);
@@ -135,7 +135,7 @@ const ChangeEndTime = () => {
 	}
 };
 
-// 导出对象
+// Export object
 defineExpose({ openDialog });
 </script>
 

@@ -1,65 +1,65 @@
 /**
- * 时间日期转换
- * @param date 当前时间，new Date() 格式
- * @param format 需要转换的时间格式字符串
- * @description format 字符串随意，如 `YYYY-mm、YYYY-mm-dd`
- * @description format 季度："YYYY-mm-dd HH:MM:SS QQQQ"
- * @description format 星期："YYYY-mm-dd HH:MM:SS WWW"
- * @description format 几周："YYYY-mm-dd HH:MM:SS ZZZ"
- * @description format 季度 + 星期 + 几周："YYYY-mm-dd HH:MM:SS WWW QQQQ ZZZ"
- * @returns 返回拼接后的时间字符串
+ * timespacedayTerm Conversion
+ * @param date Currenttimespace，new Date() Format
+ * @param format Needs to be convertedtime formatString
+ * @description format Arbitrary string，such as `YYYY-mm、YYYY-mm-dd`
+ * @description format quarter："YYYY-mm-dd HH:MM:SS QQQQ"
+ * @description format week："YYYY-mm-dd HH:MM:SS WWW"
+ * @description format how many / severalweek："YYYY-mm-dd HH:MM:SS ZZZ"
+ * @description format quarter + week + how many / severalweek："YYYY-mm-dd HH:MM:SS WWW QQQQ ZZZ"
+ * @returns Return the concatenatedtimeintermediate string
  */
 export function formatDate(date: Date, format: string): string {
-	let we = date.getDay(); // 星期
-	let z = getWeek(date); // 周
-	let qut = Math.floor((date.getMonth() + 3) / 3).toString(); // 季度
+	let we = date.getDay(); // Week
+	let z = getWeek(date); // week
+	let qut = Math.floor((date.getMonth() + 3) / 3).toString(); // quarter
 	const opt: { [key: string]: string } = {
-		'Y+': date.getFullYear().toString(), // 年
-		'm+': (date.getMonth() + 1).toString(), // 月(月份从0开始，要+1)
-		'd+': date.getDate().toString(), // 日
-		'H+': date.getHours().toString(), // 时
-		'M+': date.getMinutes().toString(), // 分
-		'S+': date.getSeconds().toString(), // 秒
-		'q+': qut, // 季度
+		'Y+': date.getFullYear().toString(), // Year
+		'm+': (date.getMonth() + 1).toString(), // Month (the month starts from 0 and needs to be +1)
+		'd+': date.getDate().toString(), // day
+		'H+': date.getHours().toString(), // hour
+		'M+': date.getMinutes().toString(), // point
+		'S+': date.getSeconds().toString(), // Second
+		'q+': qut, // quarter
 	};
-	// 中文数字 (星期)
+	// Chinese numerals (weekday)
 	const week: { [key: string]: string } = {
-		'0': '日',
-		'1': '一',
-		'2': '二',
-		'3': '三',
-		'4': '四',
-		'5': '五',
-		'6': '六',
+		'0': 'day',
+		'1': 'one',
+		'2': 'Two',
+		'3': 'Three',
+		'4': 'Four',
+		'5': 'five',
+		'6': 'Six',
 	};
-	// 中文数字（季度）
+	// Chinese numbers (quarterly)
 	const quarter: { [key: string]: string } = {
-		'1': '一',
-		'2': '二',
-		'3': '三',
-		'4': '四',
+		'1': 'one',
+		'2': 'Two',
+		'3': 'Three',
+		'4': 'Four',
 	};
-	if (/(W+)/.test(format)) format = format.replace(RegExp.$1, RegExp.$1.length > 1 ? (RegExp.$1.length > 2 ? '星期' + week[we] : '周' + week[we]) : week[we]);
-	if (/(Q+)/.test(format)) format = format.replace(RegExp.$1, RegExp.$1.length == 4 ? '第' + quarter[qut] + '季度' : quarter[qut]);
-	if (/(Z+)/.test(format)) format = format.replace(RegExp.$1, RegExp.$1.length == 3 ? '第' + z + '周' : z + '');
+	if (/(W+)/.test(format)) format = format.replace(RegExp.$1, RegExp.$1.length > 1 ? (RegExp.$1.length > 2 ? 'week' + week[we] : 'week' + week[we]) : week[we]);
+	if (/(Q+)/.test(format)) format = format.replace(RegExp.$1, RegExp.$1.length == 4 ? 'Number' + quarter[qut] + 'quarter' : quarter[qut]);
+	if (/(Z+)/.test(format)) format = format.replace(RegExp.$1, RegExp.$1.length == 3 ? 'Number' + z + 'week' : z + '');
 	for (let k in opt) {
 		let r = new RegExp('(' + k + ')').exec(format);
-		// 若输入的长度不为1，则前面补零
+		// If the input length is not 1, zeros will be added to the front.
 		if (r) format = format.replace(r[1], RegExp.$1.length == 1 ? opt[k] : opt[k].padStart(RegExp.$1.length, '0'));
 	}
 	return format;
 }
 
 /**
- * 获取当前日期是第几周
- * @param dateTime 当前传入的日期值
- * @returns 返回第几周数字值
+ * ObtainCurrentdayperiodYesNumberhow many / severalweek
+ * @param dateTime Currently passed indayperiodvalue
+ * @returns ReturnNumberhow many / severalweekNumbervalue
  */
 export function getWeek(dateTime: Date): number {
 	let temptTime = new Date(dateTime.getTime());
-	// 周几
+	// Day of the week
 	let weekday = temptTime.getDay() || 7;
-	// 周1+5天=周六
+	// 1+5 days of the week = Saturday
 	temptTime.setDate(temptTime.getDate() - weekday + 1 + 5);
 	let firstDay = new Date(temptTime.getFullYear(), 0, 1);
 	let dayOfWeek = firstDay.getDay();
@@ -72,74 +72,74 @@ export function getWeek(dateTime: Date): number {
 }
 
 /**
- * 将时间转换为 `几秒前`、`几分钟前`、`几小时前`、`几天前`
- * @param param 当前时间，new Date() 格式或者字符串时间格式
- * @param format 需要转换的时间格式字符串
- * @description param 10秒：  10 * 1000
- * @description param 1分：   60 * 1000
- * @description param 1小时： 60 * 60 * 1000
- * @description param 24小时：60 * 60 * 24 * 1000
- * @description param 3天：   60 * 60* 24 * 1000 * 3
- * @returns 返回拼接后的时间字符串
+ * willtimeconvert to `a few seconds ago`、`A few minutes ago`、`hours ago`、`a few days ago`
+ * @param param Currenttimespace，new Date() FormatorStringtime format
+ * @param format Needs to be convertedtime formatString
+ * @description param 10second：  10 * 1000
+ * @description param 1points：   60 * 1000
+ * @description param 1smalltime： 60 * 60 * 1000
+ * @description param 24smalltime：60 * 60 * 24 * 1000
+ * @description param 3sky：   60 * 60* 24 * 1000 * 3
+ * @returns Return the concatenatedtimeintermediate string
  */
 export function formatPast(param: string | Date, format: string = 'YYYY-mm-dd'): string {
-	// 传入格式处理、存储转换值
+	// Incoming format processing, storing conversion values
 	let t: any, s: number;
-	// 获取js 时间戳
+	// Get js timestamp
 	let time: number = new Date().getTime();
-	// 是否是对象
+	// Is it an object
 	typeof param === 'string' || 'object' ? (t = new Date(param).getTime()) : (t = param);
-	// 当前时间戳 - 传入时间戳
+	// current timestamp - incoming timestamp
 	time = Number.parseInt(`${time - t}`);
 	if (time < 10000) {
-		// 10秒内
-		return '刚刚';
+		// within 10 seconds
+		return 'just now';
 	} else if (time < 60000 && time >= 10000) {
-		// 超过10秒少于1分钟内
+		// More than 10 seconds and less than 1 minute
 		s = Math.floor(time / 1000);
-		return `${s}秒前`;
+		return `${s} seconds ago`;
 	} else if (time < 3600000 && time >= 60000) {
-		// 超过1分钟少于1小时
+		// More than 1 minute and less than 1 hour
 		s = Math.floor(time / 60000);
-		return `${s}分钟前`;
+		return `${s} minutes ago`;
 	} else if (time < 86400000 && time >= 3600000) {
-		// 超过1小时少于24小时
+		// More than 1 hour less than 24 hours
 		s = Math.floor(time / 3600000);
-		return `${s}小时前`;
+		return `${s} hours ago`;
 	} else if (time < 259200000 && time >= 86400000) {
-		// 超过1天少于3天内
+		// More than 1 day and less than 3 days
 		s = Math.floor(time / 86400000);
-		return `${s}天前`;
+		return `${s} days ago`;
 	} else {
-		// 超过3天
+		// more than 3 days
 		let date = typeof param === 'string' || 'object' ? new Date(param) : param;
 		return formatDate(date, format);
 	}
 }
 
 /**
- * 时间问候语
- * @param param 当前时间，new Date() 格式
- * @description param 调用 `formatAxis(new Date())` 输出 `上午好`
- * @returns 返回拼接后的时间字符串
+ * timeInterrogative Greeting
+ * @param param Currenttimespace，new Date() Format
+ * @description param Call `formatAxis(new Date())` Output `good morning`
+ * @returns Return the concatenatedtimeintermediate string
  */
 export function formatAxis(param: Date): string {
 	let hour: number = new Date(param).getHours();
-	if (hour < 6) return '凌晨好';
-	else if (hour < 9) return '早上好';
-	else if (hour < 12) return '上午好';
-	else if (hour < 14) return '中午好';
-	else if (hour < 17) return '下午好';
-	else if (hour < 19) return '傍晚好';
-	else if (hour < 22) return '晚上好';
-	else return '夜里好';
+	if (hour < 6) return 'Good early morning';
+	else if (hour < 9) return 'good morning';
+	else if (hour < 12) return 'good morning';
+	else if (hour < 14) return 'good noon';
+	else if (hour < 17) return 'good afternoon';
+	else if (hour < 19) return 'Good evening';
+	else if (hour < 22) return 'Good evening';
+	else return 'Good night';
 }
 
 /**
- * 获取两个时间相差的秒数
- * @dateBegin 开始时间，new Date() 格式
- * @dateEnd 结束时间，new Date() 格式
- * @returns 返回秒数
+ * ObtainTwotimewith a time differencesecondnumber
+ * @dateBegin start time，new Date() Format
+ * @dateEnd end time，new Date() Format
+ * @returns Returnsecondnumber
  */
 export function getTimeDiff(dateBegin: Date, dateEnd: Date,) {
 	var dateDiff = dateEnd.getTime() - dateBegin.getTime();
@@ -147,44 +147,44 @@ export function getTimeDiff(dateBegin: Date, dateEnd: Date,) {
 }
 
 /**
- * 格式化两个时间差
- * @dateBegin 开始时间，new Date() 格式
- * @dateEnd 结束时间，new Date() 格式
- * @description dateBegin 2025-1-1，dateEnd 2025-1-2 10:10:10 ：   1天10时10分10秒
- * @returns 返回拼接后的时间字符串
+ * Format twotimeinterval difference
+ * @dateBegin start time，new Date() Format
+ * @dateEnd end time，new Date() Format
+ * @description dateBegin 2025-1-1，dateEnd 2025-1-2 10:10:10 ：   1sky10time10points10second
+ * @returns Return the concatenatedtimeintermediate string
  */
 export function formatTimeDiff(dateBegin: Date, dateEnd: Date,) {
-	var dateDiff = dateEnd.getTime() - dateBegin.getTime();//时间差的毫秒数
-	var dayDiff = Math.floor(dateDiff / (24 * 3600 * 1000));//计算出相差天数
-	var leave1 = dateDiff % (24 * 3600 * 1000)    //计算天数后剩余的毫秒数
-	var hours = Math.floor(leave1 / (3600 * 1000))//计算出小时数
-	//计算相差分钟数
-	var leave2 = leave1 % (3600 * 1000)    //计算小时数后剩余的毫秒数
-	var minutes = Math.floor(leave2 / (60 * 1000))//计算相差分钟数
-	//计算相差秒数
-	var leave3 = leave2 % (60 * 1000)      //计算分钟数后剩余的毫秒数
+	var dateDiff = dateEnd.getTime() - dateBegin.getTime();// Time difference in milliseconds
+	var dayDiff = Math.floor(dateDiff / (24 * 3600 * 1000));// Calculate the difference in days
+	var leave1 = dateDiff % (24 * 3600 * 1000)    // Calculate the number of milliseconds remaining after days
+	var hours = Math.floor(leave1 / (3600 * 1000))// Calculate hours
+	//Calculate difference in minutes
+	var leave2 = leave1 % (3600 * 1000)    // Calculate the number of milliseconds remaining after hours
+	var minutes = Math.floor(leave2 / (60 * 1000))// Calculate difference in minutes
+	//Calculate the difference in seconds
+	var leave3 = leave2 % (60 * 1000)      // Calculate the number of milliseconds remaining after minutes
 	var seconds = Math.round(leave3 / 1000);
 	var result = "";
 	if (dayDiff > 0) {
-		result += dayDiff + "天";
+		result += dayDiff + "sky";
 	}
 	if (hours > 0) {
-		result += hours + "时";
+		result += hours + "time";
 	}
 	if (minutes > 0) {
-		result += minutes + "分";
+		result += minutes + "points";
 	}
 	if (seconds >= 0) {
-		result += seconds + "秒";
+		result += seconds + "second";
 	}
 	return result;
 }
 
 /**
- * 将时间字符串格式化为 `YYYY-mm-dd HH:MM:SS` 格式
- * @param timeStr 时间字符串，支持非时区格式，如 `YYYYmmdd`、`YYYYmmddHH`、`YYYYmmddHHMM`、`YYYYmmddHHMMSS`、`YYYY/mm/dd`、`YYYY年mm月dd日`等
- * @param length 返回的时间字符串长度，默认0表示自动识别长度
- * @returns 返回格式化后的时间字符串
+ * willtimeformatted as a string `YYYY-mm-dd HH:MM:SS` Format
+ * @param timeStr timeintermediate string，Support nontimeBlock format，such as `YYYYmmdd`、`YYYYmmddHH`、`YYYYmmddHHMM`、`YYYYmmddHHMMSS`、`YYYY/mm/dd`、`YYYY year mm month dd day`Wait
+ * @param length returnedtimeintermediate stringlength，Default0Indicates automatic recognitionlength
+ * @returns Return the formattedtimeintermediate string
  */
 export function formatDateString(timeStr: string | null | undefined, length: number = 0): string {
 	if (!timeStr) return '';
@@ -194,7 +194,7 @@ export function formatDateString(timeStr: string | null | undefined, length: num
 
 	if (len <= 4) return str;
 
-	// 处理奇数长度：在最后一位前补0
+	// Handling odd lengths: pad 0 before last digit
 	if (len & 1) {
 		len++;
 		str = str.slice(0, -1) + '0' + str.slice(-1);
@@ -202,16 +202,16 @@ export function formatDateString(timeStr: string | null | undefined, length: num
 
 	str = str.padEnd(14, '0');
 
-	// 提取各时间部分
+	// Extract each time part
 	const [year, month, day, hour, minute, second] = [0, 4, 6, 8, 10, 12].map(index => str.slice(index, (index || 2) + 2));
 
-	// 计算长度，长度为10时，显示分钟
+	// Calculate the length. When the length is 10, minutes will be displayed.
 	const targetLength = length > 0 ? length : len + (len - 4) / 2 + (len == 10 ? 3 : 0);
 
-	// 处理0/00的修正函数
+	// Correction function to handle 0/00
 	const fixZero = (value: string) => ['0', '00'].includes(value) ? '01' : value;
 
-	// 生成完整格式字符串
+	// Generate full format string
 	const fullFormat = `${year}-${fixZero(month)}-${fixZero(day)} ${hour}:${minute}:${second}`;
 
 	return fullFormat.slice(0, targetLength);

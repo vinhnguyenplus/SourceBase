@@ -2,39 +2,39 @@
 	<div class="sys-open-access-container">
 		<el-card shadow="hover" :body-style="{ padding: 5 }">
 			<el-form :model="state.queryParams" ref="queryForm" :inline="true">
-				<el-form-item label="身份标识">
-					<el-input v-model="state.queryParams.accessKey" placeholder="身份标识" clearable />
+				<el-form-item label="Identity mark">
+					<el-input v-model="state.queryParams.accessKey" placeholder="Identity mark" clearable />
 				</el-form-item>
 				<el-form-item>
 					<el-button-group>
-						<el-button type="primary" icon="ele-Search" @click="handleQuery" v-auth="'sysOpenAccess:page'"> 查询 </el-button>
-						<el-button icon="ele-Refresh" @click="resetQuery"> 重置 </el-button>
+						<el-button type="primary" icon="ele-Search" @click="handleQuery" v-auth="'sysOpenAccess:page'"> Query </el-button>
+						<el-button icon="ele-Refresh" @click="resetQuery"> reset </el-button>
 					</el-button-group>
 				</el-form-item>
 				<el-form-item>
-					<el-button type="primary" icon="ele-Plus" @click="openAddOpenAccess" v-auth="'sysOpenAccess:add'"> 新增 </el-button>
-					<el-button icon="ele-QuestionFilled" @click="openHelp"> 说明 </el-button>
+					<el-button type="primary" icon="ele-Plus" @click="openAddOpenAccess" v-auth="'sysOpenAccess:add'"> Add New </el-button>
+					<el-button icon="ele-QuestionFilled" @click="openHelp"> illustrate </el-button>
 				</el-form-item>
 			</el-form>
 		</el-card>
 
 		<el-card class="full-table" shadow="hover" style="margin-top: 5px">
 			<el-table :data="state.openAccessData" style="width: 100%" v-loading="state.loading" border>
-				<el-table-column type="index" label="序号" width="55" align="center" />
-				<el-table-column prop="accessKey" label="身份标识" header-align="center" show-overflow-tooltip />
-				<el-table-column prop="accessSecret" label="密钥" header-align="center" show-overflow-tooltip />
-				<el-table-column prop="bindUserAccount" label="绑定用户账号" header-align="center" show-overflow-tooltip />
-				<el-table-column prop="bindTenantName" label="绑定租户名称" header-align="center" show-overflow-tooltip />
-				<el-table-column label="修改记录" width="100" align="center" show-overflow-tooltip>
+				<el-table-column type="index" label="No" width="55" align="center" />
+				<el-table-column prop="accessKey" label="Identity mark" header-align="center" show-overflow-tooltip />
+				<el-table-column prop="accessSecret" label="key" header-align="center" show-overflow-tooltip />
+				<el-table-column prop="bindUserAccount" label="Bind userAccount number" header-align="center" show-overflow-tooltip />
+				<el-table-column prop="bindTenantName" label="Bind tenant name" header-align="center" show-overflow-tooltip />
+				<el-table-column label="Modify records" width="100" align="center" show-overflow-tooltip>
 					<template #default="scope">
 						<ModifyRecord :data="scope.row" />
 					</template>
 				</el-table-column>
-				<el-table-column label="操作" width="200" fixed="right" align="center" show-overflow-tooltip>
+				<el-table-column label="Operation" width="200" fixed="right" align="center" show-overflow-tooltip>
 					<template #default="scope">
-						<el-button icon="ele-Edit" size="small" text type="primary" @click="openEditOpenAccess(scope.row)" v-auth="'sysOpenAccess:update'" :disabled="scope.row.status === 1"> 编辑 </el-button>
-						<el-button icon="ele-Delete" size="small" text type="danger" @click="delOpenAccess(scope.row)" v-auth="'sysOpenAccess:delete'" :disabled="scope.row.status === 1"> 删除 </el-button>
-						<el-button size="small" text @click="openGenerateSign(scope.row)"> 生成签名 </el-button>
+						<el-button icon="ele-Edit" size="small" text type="primary" @click="openEditOpenAccess(scope.row)" v-auth="'sysOpenAccess:update'" :disabled="scope.row.status === 1"> Edit </el-button>
+						<el-button icon="ele-Delete" size="small" text type="danger" @click="delOpenAccess(scope.row)" v-auth="'sysOpenAccess:delete'" :disabled="scope.row.status === 1"> Delete </el-button>
+						<el-button size="small" text @click="openGenerateSign(scope.row)"> Generate signature </el-button>
 					</template>
 				</el-table-column>
 			</el-table>
@@ -90,7 +90,7 @@ onMounted(async () => {
 	handleQuery();
 });
 
-// 查询操作
+// Query operation
 const handleQuery = async () => {
 	state.loading = true;
 	let params = Object.assign(state.queryParams, state.tableParams);
@@ -100,57 +100,57 @@ const handleQuery = async () => {
 	state.loading = false;
 };
 
-// 重置操作
+// reset operation
 const resetQuery = () => {
 	state.queryParams.accessKey = undefined;
 	handleQuery();
 };
 
-// 打开新增页面
+// Open new page
 const openAddOpenAccess = () => {
-	state.editOpenAccessTitle = '添加开放接口身份';
+	state.editOpenAccessTitle = 'Add open interface identity';
 	editOpenAccessRef.value?.openDialog({ type: 1 });
 };
 
-// 打开编辑页面
+// Open the edit page
 const openEditOpenAccess = (row: any) => {
-	state.editOpenAccessTitle = '编辑开放接口身份';
+	state.editOpenAccessTitle = 'Edit open interface identity';
 	editOpenAccessRef.value?.openDialog(row);
 };
 
-// 删除
+// delete
 const delOpenAccess = (row: any) => {
-	ElMessageBox.confirm(`确定删除开放接口身份：【${row.accessKey}】?`, '提示', {
-		confirmButtonText: '确定',
-		cancelButtonText: '取消',
+	ElMessageBox.confirm(`Are you sure to delete the open interface identity: [${row.accessKey}]?`, 'Prompt', {
+		confirmButtonText: 'Confirm',
+		cancelButtonText: 'Cancel',
 		type: 'warning',
 	})
 		.then(async () => {
 			await getAPI(SysOpenAccessApi).apiSysOpenAccessDeletePost({ id: row.id });
 			handleQuery();
-			ElMessage.success('删除成功');
+			ElMessage.success('Deleted successfully');
 		})
 		.catch(() => {});
 };
 
-// 改变页面容量
+// Change page capacity
 const handleSizeChange = (val: number) => {
 	state.tableParams.pageSize = val;
 	handleQuery();
 };
 
-// 改变页码序号
+// Change page number
 const handleCurrentChange = (val: number) => {
 	state.tableParams.page = val;
 	handleQuery();
 };
 
-// 打开说明页面
+// Open help page
 const openHelp = () => {
 	helpViewRef.value?.openDialog();
 };
 
-// 打开生成签名
+// Open generate signature
 const openGenerateSign = (row: any) => {
 	generateSignRef.value?.openDialog(row);
 };

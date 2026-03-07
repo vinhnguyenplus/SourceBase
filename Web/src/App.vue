@@ -28,14 +28,14 @@ import localeMap from '../lang/elementLocales'
 const currentLang = Local.get('themeConfig')?.globalI18n || 'zh-cn'
 const locale = computed(() => localeMap[currentLang] || localeMap['zh-cn'])
 
-// 引入组件
+// Introduce components
 const LockScreen = defineAsyncComponent(() => import('/@/layout/lockScreen/index.vue'));
 const Settings = defineAsyncComponent(() => import('/@/layout/navBars/topBar/settings.vue'));
 const CloseFull = defineAsyncComponent(() => import('/@/layout/navBars/topBar/closeFull.vue'));
 // const Upgrade = defineAsyncComponent(() => import('/@/layout/upgrade/index.vue'));
 // const Sponsors = defineAsyncComponent(() => import('/@/layout/sponsors/index.vue'));
 
-// 定义变量内容
+// Define variable content
 const settingsRef = ref();
 const route = useRoute();
 const stores = useTagsViewRoutes();
@@ -43,14 +43,14 @@ const storesThemeConfig = useThemeConfig();
 const { themeConfig } = storeToRefs(storesThemeConfig);
 const needUpdate = ref(false);
 
-// 设置锁屏时组件显示隐藏
+// Set the component to be displayed and hidden when the lock screen is set
 const setLockScreen = computed(() => {
-	// 防止锁屏后，刷新出现不相关界面
+	// Prevent irrelevant interfaces from appearing after refreshing after locking the screen
 	// https://gitee.com/lyt-top/vue-next-admin/issues/I6AF8P
 	return themeConfig.value.isLockScreen ? themeConfig.value.lockScreenTime > 1 : themeConfig.value.lockScreenTime >= 0;
 });
 
-// // 获取版本号
+// // Get the version number
 // const getVersion = computed(() => {
 // 	let isVersion = false;
 // 	if (route.path !== '/login') {
@@ -64,44 +64,44 @@ const setLockScreen = computed(() => {
 // 	needUpdate.value = true;
 // }, 60000);
 
-// 获取全局组件大小，直接响应 themeConfig
+// Get the global component size and directly respond to themeConfig
 const getGlobalComponentSize = computed(() => {
 	return themeConfig.value.globalComponentSize;
 });
-// 获取全局 i18n
+// Get global i18n
 // const getGlobalI18n = computed(() => {
 //return messages.value[locale.value];
 // });
-// 设置初始化，防止刷新时恢复默认
+// Set initialization to prevent restoration to default when refreshing
 onBeforeMount(() => {
-	// 设置批量第三方 icon 图标
+	// Set batch third-party icon icons
 	setIntroduction.cssCdn();
-	// 设置批量第三方 js
+	// Set up batch third-party js
 	setIntroduction.jsCdn();
 });
-// 页面加载时
+// When the page loads
 onMounted(() => {
 	nextTick(() => {
-		// 监听布局配'置弹窗点击打开
+		// Click to open the listening layout configuration pop-up window.
 		mittBus.on('openSettingsDrawer', () => {
 			settingsRef.value.openDrawer();
 		});
-		// 获取缓存中的布局配置
+		// Get layout configuration from cache
 		if (Local.get('themeConfig')) {
 			storesThemeConfig.setThemeConfig({ themeConfig: Local.get('themeConfig') });
 			document.documentElement.style.cssText = Local.get('themeConfigStyle');
 		}
-		// 获取缓存中的全屏配置
+		// Get full-screen configuration from cache
 		if (Session.get('isTagsViewCurrenFull')) {
 			stores.setCurrenFullscreen(Session.get('isTagsViewCurrenFull'));
 		}
 	});
 });
-// 页面销毁时，关闭监听布局配置/i18n监听
+// When the page is destroyed, turn off the listening layout configuration/i18n listening
 onUnmounted(() => {
 	mittBus.off('openSettingsDrawer', () => { });
 });
-// 监听路由的变化，设置网站标题
+// Monitor routing changes and set website titles
 watch(
 	() => route.path,
 	() => {
@@ -112,7 +112,7 @@ watch(
 	}
 );
 
-// 加载系统信息
+// Load system information
 const loadSysInfo = () => {
 	getAPI(SysConfigApi)
 		.apiSysConfigSysInfoGet()
@@ -120,60 +120,60 @@ const loadSysInfo = () => {
 			if (res.data.type != 'success') return;
 
 			const data = res.data.result;
-			// 系统logo
+			// System logo
 			themeConfig.value.logoUrl = data.logo;
-			// 主标题
+			// main title
 			themeConfig.value.globalTitle = data.title;
-			// 副标题
+			// subtitle
 			themeConfig.value.globalViceTitle = data.viceTitle;
-			// 系统说明
+			// System description
 			themeConfig.value.globalViceTitleMsg = data.viceDesc;
-			// Icp备案信息
+			// ICP filing information
 			themeConfig.value.icp = data.icp;
 			themeConfig.value.icpUrl = data.icpUrl;
-			// 水印
+			// watermark
 			themeConfig.value.isWatermark = data.watermark != null;
 			themeConfig.value.watermarkText = data.watermark;
-			// 版权说明
+			// Copyright statement
 			themeConfig.value.copyright = data.copyright;
-			// 登录验证
+			// Login verification
 			themeConfig.value.secondVer = data.secondVer == 1;
 			themeConfig.value.captcha = data.captcha == 1;
-			// 登陆时隐藏租户
+			// Hide tenants when logging in
 			themeConfig.value.hideTenantForLogin = data.hideTenantForLogin;
-			// 注册功能
+			// Registration function
 			themeConfig.value.registration = data.enableReg == 1;
-			// 更新配置加载状态
+			// Update configuration loading status
 			themeConfig.value.isLoaded = true;
 
-			// 更新 favicon
+			// Update favicon
 			updateFavicon(data.logo);
 
-			// 保存配置
+			// Save configuration
 			Local.remove('themeConfig');
 			Local.set('themeConfig', storesThemeConfig.themeConfig);
 		})
 		.catch(() => {
-			// 置空 logo 地址
+			// Leave the logo address blank
 			themeConfig.value.logoUrl = '';
-			// 保存配置
+			// Save configuration
 			Local.remove('themeConfig');
 			Local.set('themeConfig', storesThemeConfig.themeConfig);
 			return;
 		});
 };
 
-// 更新 favicon
+// Update favicon
 const updateFavicon = (url: string): void => {
 	const favicon = document.getElementById('favicon') as HTMLAnchorElement;
 	favicon!.href = url ? url : 'data:;base64,=';
 };
 
-// 加载系统信息
+// Load system information
 loadSysInfo();
 const langStore = useLangStore();
 langStore.loadLanguages();
-// 阻止火狐浏览器在拖动时打开新窗口
+// Prevent Firefox from opening new windows while dragging
 document.body.ondrop = function (event) {
 	event.preventDefault();
 	event.stopPropagation();

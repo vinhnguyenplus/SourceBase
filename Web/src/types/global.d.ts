@@ -1,4 +1,4 @@
-// 申明外部 npm 插件模块
+// Declare external npm plugin modules
 declare module 'vue-grid-layout';
 declare module 'vue-signature-pad';
 declare module 'vform3-builds';
@@ -12,7 +12,7 @@ declare module 'js-cookie';
 declare module 'vue-plugin-hiprint';
 declare module 'vcrontab-3';
 
-// 声明一个模块，防止引入文件时报错
+// Declare a module to prevent errors when importing files
 declare module '*.json';
 declare module '*.png';
 declare module '*.jpg';
@@ -20,14 +20,14 @@ declare module '*.scss';
 declare module '*.ts';
 declare module '*.js';
 
-// 声明文件，*.vue 后缀的文件交给 vue 模块来处理
+// Declaration files, files with *.vue suffix are handed over to the vue module for processing
 declare module '*.vue' {
 	import type { DefineComponent } from 'vue';
 	const component: DefineComponent<{}, {}, any>;
 	export default component;
 }
 
-// 声明文件，定义全局变量
+// Declaration file, define global variables
 /* eslint-disable */
 declare interface Window {
 	nextLoading: boolean;
@@ -36,7 +36,7 @@ declare interface Window {
 	__env__: any;
 }
 
-// 声明路由当前项类型
+// Declare the current item type of the route
 declare type RouteItem<T = any> = {
 	path: string;
 	name?: string | symbol | undefined | null;
@@ -68,46 +68,46 @@ declare type RouteItem<T = any> = {
 	id?: string | number;
 };
 
-// 声明路由 to from
+// Declare route to from
 declare interface RouteToFrom<T = any> extends RouteItem {
 	path?: string;
 	children?: T[];
 }
 
-// 声明路由当前项类型集合
+// Declare route current item type collection
 declare type RouteItems<T extends RouteItem = any> = T[];
 
-// 声明 ref
+// declare ref
 declare type RefType<T = any> = T | null;
 
-// 声明 HTMLElement
+// Declare HTMLElement
 declare type HtmlType = HTMLElement | string | undefined | null;
 
-// 申明 children 可选
+// Declare children optional
 declare type ChilType<T = any> = {
 	children?: T[];
 };
 
-// 申明 数组
+// declare array
 declare type EmptyArrayType<T = any> = T[];
 
-// 申明 对象
+// declare object
 declare type EmptyObjectType<T = any> = {
 	[key: string]: T;
 };
 
-// 申明 select option
+// Declare select option
 declare type SelectOptionType = {
 	value: string | number;
 	label: string | number;
 };
 
-// 鼠标滚轮滚动类型
+// Mouse wheel scroll type
 declare interface WheelEventType extends WheelEvent {
 	wheelDelta: number;
 }
 
-// table 数据格式公共类型
+// table data format public type
 declare interface TableType<T = any> {
 	total: number;
 	loading: boolean;
@@ -118,7 +118,7 @@ declare interface TableType<T = any> {
 	};
 }
 
-// 字典数据结构
+// dictionary data structure
 declare interface DictItem {
 	typeCode: string;
 	label: string;

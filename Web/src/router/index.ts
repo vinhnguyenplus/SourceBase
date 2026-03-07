@@ -12,39 +12,39 @@ import { initFrontEndControlRoutes } from '/@/router/frontEnd';
 import { initBackEndControlRoutes } from '/@/router/backEnd';
 
 /**
- * 1、前端控制路由时：isRequestRoutes 为 false，需要写 roles，需要走 setFilterRoute 方法。
- * 2、后端控制路由时：isRequestRoutes 为 true，不需要写 roles，不需要走 setFilterRoute 方法），
- * 相关方法已拆解到对应的 `backEnd.ts` 与 `frontEnd.ts`（他们互不影响，不需要同时改 2 个文件）。
- * 特别说明：
- * 1、前端控制：路由菜单由前端去写（无菜单管理界面，有角色管理界面），角色管理中有 roles 属性，需返回到 userInfo 中。
- * 2、后端控制：路由菜单由后端返回（有菜单管理界面、有角色管理界面）
+ * 1、Frontend routing controltime：isRequestRoutes for false，Need to write roles，Need to go setFilterRoute Method。
+ * 2、Backend-controlled routingtime：isRequestRoutes for true，unnecessarywrite roles，unnecessaryGo setFilterRoute Method），
+ * The relevant methods have been broken down to the corresponding `backEnd.ts` and `frontEnd.ts`（They do not affect each other.，unnecessarySametimeChange 2 a file）。
+ * Specialillustrate：
+ * 1、Front-end control：RoutermenuWritten by the front end（NoneMenu managementinterface，haverole managementinterface），role managementinhave roles Attribute，need to return to userInfo in。
+ * 2、Backend control：RoutermenuReturned by the backend（haveMenu managementinterface、haverole managementinterface）
  */
 
-// 读取 `/src/stores/themeConfig.ts` 是否开启后端控制路由配置
+// Read `/src/stores/themeConfig.ts` to check whether to enable backend control routing configuration
 const storesThemeConfig = useThemeConfig(pinia);
 const { themeConfig } = storeToRefs(storesThemeConfig);
 const { isRequestRoutes } = themeConfig.value;
 
 /**
- * 创建一个可以被 Vue 应用程序使用的路由实例
+ * Createonecan be Vue The routing instance used by the application
  * @method createRouter(options: RouterOptions): Router
- * @link 参考：https://next.router.vuejs.org/zh/api/#createrouter
+ * @link Reference：https://next.router.vuejs.org/zh/api/#createrouter
  */
 export const router = createRouter({
 	history: createWebHashHistory(),
 	/**
-	 * 说明：
-	 * 1、notFoundAndNoPower 默认添加 404、401 界面，防止一直提示 No match found for location with path 'xxx'
-	 * 2、backEnd.ts(后端控制路由)、frontEnd.ts(前端控制路由) 中也需要加 notFoundAndNoPower 404、401 界面。
-	 *    防止 404、401 不在 layout 布局中，不设置的话，404、401 界面将全屏显示
+	 * illustrate：
+	 * 1、notFoundAndNoPower DefaultAdd to 404、401 interface，PreventoneStraightPrompt No match found for location with path 'xxx'
+	 * 2、backEnd.ts(Backend-controlled routing)、frontEnd.ts(Frontend routing control) inAlso needs to be added notFoundAndNoPower 404、401 interface。
+	 *    Prevent 404、401 Not here layout Layoutin，If not set，404、401 The interface will go full screenDisplay
 	 */
 	routes: [...notFoundAndNoPower, ...staticRoutes],
 });
 
 /**
- * 路由多级嵌套数组处理成一维数组
- * @param arr 传入路由菜单数据数组
- * @returns 返回处理后的一维路由菜单数组
+ * Number of nested route levelsgroupprocessed intooneDimensiongroup
+ * @param arr Incoming routemenuDatanumbergroup
+ * @returns Return processedoneVeriRoutermenunumbergroup
  */
 export function formatFlatteningRoutes(arr: any) {
 	if (arr.length <= 0) return false;
@@ -57,11 +57,11 @@ export function formatFlatteningRoutes(arr: any) {
 }
 
 /**
- * 一维数组处理成多级嵌套数组（只保留二级：也就是二级以上全部处理成只有二级，keep-alive 支持二级缓存）
- * @description isKeepAlive 处理 `name` 值，进行缓存。顶级关闭，全部不缓存
- * @link 参考：https://v3.cn.vuejs.org/api/built-in-components.html#keep-alive
- * @param arr 处理后的一维路由菜单数组
- * @returns 返回将一维数组重新处理成 `定义动态路由（dynamicRoutes）` 的格式
+ * oneDimensiongroupProcess into multi-level nested numbersgroup（Keep onlyTwolevel：justYesTwoAll levels above processed into onlyTwolevel，keep-alive SupportTwolevelcache）
+ * @description isKeepAlive Handle `name` value，carry outcache。TopClose，All notcache
+ * @link Reference：https://v3.cn.vuejs.org/api/built-in-components.html#keep-alive
+ * @param arr processedoneVeriRoutermenunumbergroup
+ * @returns Return willoneDimensiongroupReprocess into `Define dynamic routes (dynamicRoutes)` format
  */
 export function formatTwoStageRoutes(arr: any) {
 	if (arr.length <= 0) return false;
@@ -73,15 +73,15 @@ export function formatTwoStageRoutes(arr: any) {
 		if (v.path === '/') {
 			newArr.push({ component: v.component, name: v.name, path: v.path, redirect: v.redirect, meta: v.meta, children: [] });
 		} else {
-			// 判断是否是动态路由（xx/:id/:name），用于 tagsView 等中使用
-			// 修复：https://gitee.com/lyt-top/vue-next-admin/issues/I3YX6G
+			// Determine whether it is a dynamic route (xx/:id/:name), used in tagsView, etc.
+			// Fix: https://gitee.com/lyt-top/vue-next-admin/issues/I3YX6G
 			if (v.path.indexOf('/:') > -1) {
 				v.meta['isDynamic'] = true;
 				v.meta['isDynamicPath'] = v.path;
 			}
 			newArr[0].children.push({ ...v });
-			// 存 name 值，keep-alive 中 include 使用，实现路由的缓存
-			// 路径：/@/layout/routerView/parent.vue
+			// Store the name value and use it in include in keep-alive to implement route caching.
+			// Path:/@/layout/routerView/parent.vue
 			if (newArr[0].meta.isKeepAlive && v.meta.isKeepAlive) {
 				cacheList.push(v.name);
 			}
@@ -92,7 +92,7 @@ export function formatTwoStageRoutes(arr: any) {
 	return newArr;
 }
 
-// 路由加载前
+// Before routing is loaded
 router.beforeEach(async (to, from, next) => {
 	NProgress.configure({ showSpinner: false });
 	if (to.meta.title) NProgress.start();
@@ -113,10 +113,10 @@ router.beforeEach(async (to, from, next) => {
 			const { routesList } = storeToRefs(storesRoutesList);
 			if (routesList.value.length === 0) {
 				if (isRequestRoutes) {
-					// 后端控制路由：路由数据初始化，防止刷新时丢失
+					// Backend control routing: routing data initialization to prevent loss during refresh
 					await initBackEndControlRoutes();
-					// 解决刷新时，一直跳 404 页面问题，关联问题 No match found for location with path 'xxx'
-					// to.query 防止页面刷新时，普通路由带参数时，参数丢失。动态路由（xxx/:id/:name"）isDynamic 无需处理
+					// Solve the problem of always jumping to the 404 page when refreshing, and the related problem No match found for location with path 'xxx'
+					// to.query prevents the parameters from being lost when the page is refreshed and ordinary routes have parameters. Dynamic routing (xxx/:id/:name") isDynamic No processing required
 					next({ path: to.path, query: to.query });
 				} else {
 					// https://gitee.com/lyt-top/vue-next-admin/issues/I5F1HP
@@ -130,10 +130,10 @@ router.beforeEach(async (to, from, next) => {
 	}
 });
 
-// 路由加载后
+// After routing is loaded
 router.afterEach(() => {
 	NProgress.done();
 });
 
-// 导出路由
+// Export route
 export default router;

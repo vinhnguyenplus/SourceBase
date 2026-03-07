@@ -54,7 +54,7 @@ const props = defineProps({
 	},
 	placeholder: {
 		type: String,
-		default: '请输入关键词'
+		default: 'Please enterKeyword'
 	},
 	queryParams: {
 		type: Object,
@@ -88,7 +88,7 @@ const state = reactive({
 	loading: false
 })
 
-// 远程查询方法
+// Remote query method
 const remoteMethod = debounce((query: string = '') => {
 	if (query) {
 		state.loading = true;
@@ -104,7 +104,7 @@ const remoteMethod = debounce((query: string = '') => {
 	}
 }, 500);
 
-// 选择值改变事件
+// Select value change event
 const handleChange = (row: any) => {
 	if (props.multiple && !state.selectedValues) state.selectedValues = [];
 	if (typeof row[props.valueField] === 'string') row[props.valueField] = row[props.valueField]?.trim();

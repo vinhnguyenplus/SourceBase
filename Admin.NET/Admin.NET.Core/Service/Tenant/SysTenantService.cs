@@ -1,13 +1,13 @@
-// Admin.NET 项目的版权、商标、专利和其他相关权利均受相应法律法规的保护。使用本项目应遵守相关法律法规和许可证的要求。
+// The copyright, trademark, patent and other related rights of the Admin.NET project are protected by corresponding laws and regulations. Use of this project shall comply with relevant laws, regulations and license requirements.
 //
-// 本项目主要遵循 MIT 许可证和 Apache 许可证（版本 2.0）进行分发和使用。许可证位于源代码树根目录中的 LICENSE-MIT 和 LICENSE-APACHE 文件。
+// This project is distributed and used primarily under the MIT License and the Apache License (version 2.0). The license is located in the LICENSE-MIT and LICENSE-APACHE files in the root of the source tree.
 //
-// 不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！
+// This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project!
 
 namespace Admin.NET.Core.Service;
 
 /// <summary>
-/// 系统租户管理服务 🧩
+/// System tenant management service 🧩
 /// </summary>
 [ApiDescriptionSettings(Order = 390)]
 public class SysTenantService : IDynamicApiController, ITransient
@@ -58,11 +58,11 @@ public class SysTenantService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 获取租户分页列表 🔖
+    /// Get paginated list of tenants 🔖
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
-    [DisplayName("获取租户分页列表")]
+    [DisplayName("Get a paginated list of tenants")]
     public async Task<SqlSugarPagedList<TenantOutput>> Page(PageTenantInput input)
     {
         return await _sysTenantRep.AsQueryable()
@@ -97,11 +97,11 @@ public class SysTenantService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 获取租户列表
+    /// Get tenant list
     /// </summary>
     /// <returns></returns>
     [AllowAnonymous]
-    [DisplayName("获取租户列表"), HttpGet]
+    [DisplayName("Get tenant list"), HttpGet]
     public async Task<dynamic> GetList()
     {
         return await _sysTenantRep.AsQueryable()
@@ -116,7 +116,7 @@ public class SysTenantService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 获取当前租户系统信息
+    /// Get current tenant system information
     /// </summary>
     /// <returns></returns>
     [NonAction]
@@ -134,7 +134,7 @@ public class SysTenantService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 获取库隔离的租户列表
+    /// Get the list of tenants isolated by the library
     /// </summary>
     /// <returns></returns>
     [NonAction]
@@ -144,13 +144,13 @@ public class SysTenantService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 增加租户 🔖
+    /// Add tenant 🔖
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
     [UnitOfWork]
     [ApiDescriptionSettings(Name = "Add"), HttpPost]
-    [DisplayName("增加租户")]
+    [DisplayName("Add tenant")]
     public async Task AddTenant(AddTenantInput input)
     {
         var isExist = await _sysOrgRep.IsAnyAsync(u => u.Name == input.Name);
@@ -163,12 +163,12 @@ public class SysTenantService : IDynamicApiController, ITransient
         isExist = await _sysUserRep.AsQueryable().ClearFilter().AnyAsync(u => u.Account == input.AdminAccount);
         if (isExist) throw Oops.Oh(ErrorCodeEnum.D1301);
 
-        // 从库配置判断
+        // Judging from the library configuration
         if (!string.IsNullOrWhiteSpace(input.SlaveConnections) && !JSON.IsValid(input.SlaveConnections)) throw Oops.Oh(ErrorCodeEnum.D1302);
 
         switch (input.TenantType)
         {
-            // Id隔离时设置与主库一致
+            // When the ID is isolated, the settings are consistent with the main library.
             case TenantTypeEnum.Id:
                 var config = _sysTenantRep.AsSugarClient().CurrentConnectionConfig;
                 input.DbType = config.DbType;
@@ -186,7 +186,7 @@ public class SysTenantService : IDynamicApiController, ITransient
         if (input.EnableReg == YesNoEnum.N) input.RegWayId = null;
         var tenant = input.Adapt<TenantOutput>();
 
-        // 设置logo
+        // Set logo
         SetLogoUrl(tenant, input.LogoBase64, input.LogoFileName);
 
         tenant.Id = _sysTenantRep.InsertReturnEntity(tenant).Id;
@@ -196,7 +196,7 @@ public class SysTenantService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 设置logo
+    /// Set logo
     /// </summary>
     /// <param name="tenant"></param>
     /// <param name="logoBase64"></param>
@@ -206,7 +206,7 @@ public class SysTenantService : IDynamicApiController, ITransient
     {
         if (string.IsNullOrEmpty(tenant?.Logo) && string.IsNullOrEmpty(tenant?.Logo)) return;
 
-        // 旧图标文件相对路径
+        // Old icon file relative path
         var oldSysLogoRelativeFilePath = tenant.Logo ?? "";
         var oldSysLogoAbsoluteFilePath = Path.Combine(App.WebHostEnvironment.WebRootPath, oldSysLogoRelativeFilePath.TrimStart('/'));
 
@@ -216,35 +216,35 @@ public class SysTenantService : IDynamicApiController, ITransient
         var base64Data = groups["data"].Value;
         var binData = Convert.FromBase64String(base64Data);
 
-        // 根据文件名取扩展名
+        // Get extension based on file name
         var ext = string.IsNullOrWhiteSpace(logoFileName) ? ".png" : Path.GetExtension(logoFileName);
 
-        // 本地图标保存路径
+        // Local icon saving path
         var fileName = $"{tenant.ViceTitle}-logo{ext}".ToLower();
         var path = _uploadOptions.Path.Replace("/{yyyy}/{MM}/{dd}", "");
         path = path.StartsWith("/") || Regex.IsMatch(path, "^[A-Z|a-z]:") ? path : Path.Combine(App.WebHostEnvironment.WebRootPath, path);
         var absoluteFilePath = Path.Combine(path, fileName);
 
-        // 删除已存在文件
+        // Delete existing files
         if (File.Exists(oldSysLogoAbsoluteFilePath)) File.Delete(oldSysLogoAbsoluteFilePath);
 
-        // 创建文件夹
+        // Create folder
         var absoluteFileDir = Path.GetDirectoryName(absoluteFilePath);
         if (!Directory.Exists(absoluteFileDir)) Directory.CreateDirectory(absoluteFileDir);
 
-        // 保存图标文件
+        // Save icon file
         File.WriteAllBytesAsync(absoluteFilePath, binData);
 
-        // 保存图标配置
+        // Save icon configuration
         tenant.Logo = $"/upload/{fileName}";
     }
 
     /// <summary>
-    /// 设置租户状态 🔖
+    /// Set tenant status 🔖
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
-    [DisplayName("设置租户状态")]
+    [DisplayName("Set tenant status")]
     public async Task<int> SetStatus(TenantInput input)
     {
         var tenant = await _sysTenantRep.GetFirstAsync(u => u.Id == input.Id);
@@ -257,7 +257,7 @@ public class SysTenantService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 新增租户初始化
+    /// New tenant initialization
     /// </summary>
     /// <param name="tenant"></param>
     private async Task InitNewTenant(TenantOutput tenant)
@@ -265,60 +265,60 @@ public class SysTenantService : IDynamicApiController, ITransient
         var tenantId = tenant.Id;
         var tenantName = tenant.Name;
 
-        // 初始化机构
+        // Initialization mechanism
         var newOrg = new SysOrg { TenantId = tenantId, Pid = 0, Name = tenantName, Code = tenantName, Remark = tenantName, };
         await _sysOrgRep.InsertAsync(newOrg);
 
-        // 初始化默认角色
-        var newRole = new SysRole { TenantId = tenantId, Name = CommonConst.DefaultBaseRoleName, Code = CommonConst.DefaultBaseRoleCode, DataScope = DataScopeEnum.Self, Remark = "此角色为系统自动创建角色" };
+        // Initialize default role
+        var newRole = new SysRole { TenantId = tenantId, Name = CommonConst.DefaultBaseRoleName, Code = CommonConst.DefaultBaseRoleCode, DataScope = DataScopeEnum.Self, Remark = "This role is automatically created by the system" };
         var baseRole = await _sysRoleRep.InsertReturnEntityAsync(newRole);
         var baseRoleMenuIdList = GetBaseRoleMenuIdList().ToList();
         await _sysRoleMenuService.GrantRoleMenu(new RoleMenuInput { Id = baseRole.Id, MenuIdList = baseRoleMenuIdList.Select(u => u.MenuId).ToList() });
 
-        // 初始化职位
-        var newPos = new SysPos { TenantId = tenantId, Name = "管理员-" + tenantName, Code = tenantName, Remark = tenantName };
+        // Initialize position
+        var newPos = new SysPos { TenantId = tenantId, Name = "Administrator-" + tenantName, Code = tenantName, Remark = tenantName };
         await _sysPosRep.InsertAsync(newPos);
 
-        // 初始化租户管理员账号
+        // Initialize tenant administrator account
         var password = await _sysConfigService.GetConfigValue<string>(ConfigConst.SysPassword);
         var newUser = new SysUser
         {
             TenantId = tenantId,
             Account = tenant.AdminAccount,
             Password = CryptogramUtil.Encrypt(password),
-            NickName = "系统管理员",
+            NickName = "system administrator",
             Email = tenant.Email,
             Phone = tenant.Phone,
             AccountType = AccountTypeEnum.SysAdmin,
             OrgId = newOrg.Id,
             PosId = newPos.Id,
             Birthday = DateTime.Parse("2000-01-01"),
-            RealName = "系统管理员",
-            Remark = "系统管理员" + tenantName,
+            RealName = "system administrator",
+            Remark = "system administrator" + tenantName,
         };
         await _sysUserRep.InsertAsync(newUser);
 
-        // 关联租户组织机构和管理员用户
+        // Associate tenant organization and admin user
         await _sysTenantRep.UpdateAsync(u => new SysTenant { UserId = newUser.Id, OrgId = newOrg.Id }, u => u.Id == tenantId);
 
-        // 默认租户管理员角色菜单集合
+        // Default tenant administrator role menu collection
         var menuList = GetTenantDefaultMenuList().ToList();
         await GrantMenu(new TenantMenuInput { Id = tenantId, MenuIdList = menuList.Select(u => u.MenuId).ToList() });
     }
 
     /// <summary>
-    /// 获取租户默认菜单
+    /// Get tenant default menu
     /// </summary>
-    /// <param name="ignoreHome">如果某租户需要定制主页，可以忽略</param>
+    /// <param name="ignoreHome">If a tenant needs to customize the homepage, you can ignore it.</param>
     /// <returns></returns>
     [NonAction]
     public IEnumerable<SysTenantMenu> GetTenantDefaultMenuList(bool ignoreHome = false)
     {
         var menuList = new List<SysMenu>();
 
-        // 默认数据库配置
+        // Default database configuration
         var defaultConfig = App.GetOptions<DbConnectionOptions>().ConnectionConfigs.FirstOrDefault();
-        //从程序集中获取种子菜单数据，种子菜单存在于其他类库中，需要动态加载
+        //Get the seed menu data from the assembly. The seed menu exists in other class libraries and needs to be loaded dynamically.
         var menuSeedDataTypeList = GetSeedDataTypes(defaultConfig, nameof(SysMenuSeedData));
         var allMenuList = new List<SysMenu>();
         foreach (var menu in menuSeedDataTypeList)
@@ -330,7 +330,7 @@ public class SysTenantService : IDynamicApiController, ITransient
             }
         }
 
-        //实现三个层级的菜单
+        //Implement a three-level menu
         var topMenuList = allMenuList.Where(u => u.Pid == 0 && u.Type == MenuTypeEnum.Dir).ToList();
         menuList.AddRange(topMenuList);
 
@@ -342,7 +342,7 @@ public class SysTenantService : IDynamicApiController, ITransient
         {
             menuList.AddRange(endMenuList);
         }
-        //是否需要排除首页菜单
+        //Do you need to exclude the homepage menu?
         if (ignoreHome) menuList = menuList.Where(u => !(u.Type == MenuTypeEnum.Menu && u.Name == "home")).ToList();
 
         menuList = menuList.Distinct().ToList();
@@ -356,11 +356,11 @@ public class SysTenantService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 获取种子数据类型
+    /// Get seed data type
     /// </summary>
-    /// <param name="config">数据库连接配置</param>
+    /// <param name="config">Database connection configuration</param>
     /// <param name="typeName"></param>
-    /// <returns>种子数据类型列表</returns>
+    /// <returns>List of seed data types</returns>
     [NonAction]
     private List<Type> GetSeedDataTypes(DbConnectionConfig config, string typeName)
     {
@@ -372,7 +372,7 @@ public class SysTenantService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 获取租户默认菜单
+    /// Get tenant default menu
     /// </summary>
     /// <returns></returns>
     [NonAction]
@@ -381,13 +381,13 @@ public class SysTenantService : IDynamicApiController, ITransient
         var menuList = new List<SysMenu>();
         var allMenuList = new SysMenuSeedData().HasData().ToList();
 
-        var dashboardMenu = allMenuList.First(u => u.Type == MenuTypeEnum.Dir && u.Title == "工作台");
+        var dashboardMenu = allMenuList.First(u => u.Type == MenuTypeEnum.Dir && u.Title == "Workbench");
         menuList.AddRange(allMenuList.ToChildList(u => u.Id, u => u.Pid, dashboardMenu.Id));
 
-        var systemMenu = allMenuList.First(u => u.Type == MenuTypeEnum.Dir && u.Title == "系统管理");
+        var systemMenu = allMenuList.First(u => u.Type == MenuTypeEnum.Dir && u.Title == "System Management");
         menuList.Add(systemMenu);
-        menuList.AddRange(allMenuList.ToChildList(u => u.Id, u => u.Pid, u => u.Pid == systemMenu.Id && new[] { "机构管理", "个人中心" }.Contains(u.Title)));
-        menuList = menuList.Where(u => !new[] { "增加", "编辑", "删除" }.Contains(u.Title)).ToList();
+        menuList.AddRange(allMenuList.ToChildList(u => u.Id, u => u.Pid, u => u.Pid == systemMenu.Id && new[] { "Organizational Management", "Personal Center" }.Contains(u.Title)));
+        menuList = menuList.Where(u => !new[] { "increase", "Edit", "Delete" }.Contains(u.Title)).ToList();
 
         return menuList.Select(u => new SysTenantMenu
         {
@@ -398,19 +398,19 @@ public class SysTenantService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 删除租户 🔖
+    /// Delete tenant 🔖
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
     [UnitOfWork]
     [ApiDescriptionSettings(Name = "Delete"), HttpPost]
-    [DisplayName("删除租户")]
+    [DisplayName("Delete tenant")]
     public async Task DeleteTenant(DeleteTenantInput input)
     {
-        // 禁止删除默认租户
+        // Disable deletion of default tenant
         if (input.Id.ToString() == SqlSugarConst.MainConfigId) throw Oops.Oh(ErrorCodeEnum.D1023);
 
-        // 若账号为开放接口绑定租户则禁止删除
+        // If the account is an open interface bound to a tenant, deletion is prohibited.
         var isOpenAccessTenant = await _sysTenantRep.ChangeRepository<SqlSugarRepository<SysOpenAccess>>().IsAnyAsync(u => u.BindTenantId == input.Id);
         if (isOpenAccessTenant) throw Oops.Oh(ErrorCodeEnum.D1031);
 
@@ -418,7 +418,7 @@ public class SysTenantService : IDynamicApiController, ITransient
 
         await CacheTenant(input.Id);
 
-        // 删除与租户相关的表数据
+        // Delete table data related to tenant
         await _sysTenantMenuRep.AsDeleteable().Where(u => u.TenantId == input.Id).ExecuteCommandAsync();
         await _sysTenantRep.Context.Deleteable<SysTenantConfigData>().Where(u => u.TenantId == input.Id).ExecuteCommandAsync();
 
@@ -441,12 +441,12 @@ public class SysTenantService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 更新租户 🔖
+    /// Update tenant 🔖
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
     [ApiDescriptionSettings(Name = "Update"), HttpPost]
-    [DisplayName("更新租户")]
+    [DisplayName("Update tenant")]
     public async Task UpdateTenant(UpdateTenantInput input)
     {
         var isExist = await _sysOrgRep.IsAnyAsync(u => u.Name == input.Name && u.Id != input.OrgId);
@@ -459,7 +459,7 @@ public class SysTenantService : IDynamicApiController, ITransient
         isExist = await _sysUserRep.AsQueryable().ClearFilter().AnyAsync(u => u.Account == input.AdminAccount && u.Id != input.UserId);
         if (isExist) throw Oops.Oh(ErrorCodeEnum.D1301);
 
-        // Id隔离时设置与主库一致
+        // When the ID is isolated, the settings are consistent with the main library.
         switch (input.TenantType)
         {
             case TenantTypeEnum.Id:
@@ -476,71 +476,71 @@ public class SysTenantService : IDynamicApiController, ITransient
             default:
                 throw Oops.Oh(ErrorCodeEnum.D3004);
         }
-        // 从库配置判断
+        // Judging from the library configuration
         if (!string.IsNullOrWhiteSpace(input.SlaveConnections) && !JSON.IsValid(input.SlaveConnections))
             throw Oops.Oh(ErrorCodeEnum.D1302);
 
-        // 设置logo
+        // Set logo
         var tenant = input.Adapt<SysTenant>();
         if (!string.IsNullOrWhiteSpace(input.LogoBase64)) SetLogoUrl(tenant, input.LogoBase64, input.LogoFileName);
 
-        // 更新租户信息
+        // Update tenant information
         await _sysTenantRep.AsUpdateable(tenant).IgnoreColumns(true).ExecuteCommandAsync();
 
-        // 更新系统机构
+        // Update system organization
         await _sysOrgRep.UpdateAsync(u => new SysOrg() { Name = input.Name }, u => u.Id == input.OrgId);
 
-        // 更新系统用户
+        // Update system user
         await _sysUserRep.UpdateAsync(u => new SysUser() { Account = input.AdminAccount, Phone = input.Phone, Email = input.Email }, u => u.Id == input.UserId);
 
         await CacheTenant(input.Id);
     }
 
     /// <summary>
-    /// 授权租户菜单 🔖
+    /// Authorized Tenant Menu 🔖
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
     [UnitOfWork]
-    [DisplayName("授权租户菜单")]
+    [DisplayName("Authorized Tenant Menu")]
     public async Task GrantMenu(TenantMenuInput input)
     {
-        // 获取需要授权的菜单列表
+        // Get a list of menus that require authorization
         var menuList = await _sysTenantRep.Context.Queryable<SysMenu>()
             .Where(u => input.MenuIdList.Contains(u.Id))
             .InnerJoin<SysTenantMenu>((u, t) => t.TenantId == input.Id && u.Id == t.MenuId)
             .ToListAsync();
 
-        // 检查是否存在重复菜单
+        // Check if duplicate menu exists
         if (menuList.Where(u => u.Type != MenuTypeEnum.Btn).GroupBy(u => new { u.Pid, u.Title }).Any(u => u.Count() > 1) ||
             menuList.Where(u => u.Type == MenuTypeEnum.Btn).GroupBy(u => u.Permission).Any(u => u.Count() > 1))
             throw Oops.Oh(ErrorCodeEnum.D1304);
 
-        // 检查路由是否重复
+        // Check if routes are duplicated
         if (menuList.Where(u => !string.IsNullOrWhiteSpace(u.Name)).GroupBy(u => u.Name).Any(u => u.Count() > 1))
             throw Oops.Oh(ErrorCodeEnum.D4009);
 
-        //获取默认租户授权菜单，种子数据主键ID保持不变，防止重复
+        //Obtain the default tenant authorization menu, and the seed data primary key ID remains unchanged to prevent duplication.
         var tenantMenuList = input.Id == SqlSugarConst.DefaultTenantId ? await _sysTenantMenuRep.AsQueryable().Where(u => u.TenantId == input.Id).ToListAsync() : null;
 
         List<long> tenantIdList = [input.Id];
         if (input.TenantIdList?.Count > 0) tenantIdList.AddRange(input.TenantIdList);
-        // 删除旧记录
+        // Delete old records
         await _sysTenantMenuRep.AsDeleteable().Where(u => tenantIdList.Contains(u.TenantId)).ExecuteCommandAsync();
 
-        // 追加父级菜单
+        // Append parent menu
         var allIdList = await _sysTenantRep.Context.Queryable<SysMenu>().Select(u => new { u.Id, u.Pid }).ToListAsync();
         var pIdList = allIdList.ToChildList(u => u.Pid, u => u.Id, u => input.MenuIdList.Contains(u.Id)).Select(u => u.Pid).Distinct().ToList();
         input.MenuIdList = input.MenuIdList.Concat(pIdList).Distinct().Where(u => u != 0).ToList();
 
-        // 保存租户菜单
+        // Save tenant menu
         List<SysTenantMenu> sysTenantMenuList = new();
         tenantIdList.ForEach(tenantId =>
         {
             sysTenantMenuList.AddRange(input.MenuIdList.Select(menuId => new SysTenantMenu { TenantId = tenantId, MenuId = menuId }));
         });
 
-        //默认租户授权菜单主键ID不变
+        //The default tenant authorization menu primary key ID remains unchanged
         foreach (var item in sysTenantMenuList)
         {
             var tenantMenu = tenantMenuList.FirstOrDefault(u => u.TenantId == item.TenantId && u.MenuId == item.MenuId);
@@ -548,16 +548,16 @@ public class SysTenantService : IDynamicApiController, ITransient
         }
         await _sysTenantMenuRep.InsertRangeAsync(sysTenantMenuList);
 
-        // 清除菜单权限缓存
+        // Clear menu permission cache
         SysMenuService.DeleteMenuCache();
     }
 
     /// <summary>
-    /// 获取租户菜单Id集合 🔖
+    /// Get tenant menu ID collection 🔖
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
-    [DisplayName("获取租户菜单Id集合")]
+    [DisplayName("Get the tenant menu ID collection")]
     public async Task<List<long>> GetTenantMenuList([FromQuery] BaseIdInput input)
     {
         var menuIds = await _sysTenantMenuRep.AsQueryable().Where(u => u.TenantId == input.Id).Select(u => u.MenuId).ToListAsync();
@@ -565,11 +565,11 @@ public class SysTenantService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 重置租户管理员密码 🔖
+    /// Reset tenant administrator password 🔖
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
-    [DisplayName("重置租户管理员密码")]
+    [DisplayName("resetTenant managementmemberpassword")]
     public async Task<string> ResetPwd(TenantUserInput input)
     {
         var password = await _sysConfigService.GetConfigValue<string>(ConfigConst.SysPassword);
@@ -579,12 +579,12 @@ public class SysTenantService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 切换租户 🔖
+    /// Switch tenant 🔖
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
     [UnitOfWork]
-    [DisplayName("切换租户")]
+    [DisplayName("Switch Tenant")]
     public async Task<LoginOutput> ChangeTenant(BaseIdInput input)
     {
         var userId = (App.HttpContext?.User.FindFirst(ClaimConst.UserId)?.Value)?.ToLong();
@@ -596,11 +596,11 @@ public class SysTenantService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 进入租管端 🔖
+    /// Enter the rental management terminal 🔖
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
-    [DisplayName("进入租管端")]
+    [DisplayName("Enter the rental management terminal")]
     public async Task<LoginOutput> GoTenant(BaseIdInput input)
     {
         var tenant = await _sysTenantRep.GetFirstAsync(u => u.Id == input.Id) ?? throw Oops.Oh(ErrorCodeEnum.D1002);
@@ -609,12 +609,12 @@ public class SysTenantService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 同步授权菜单(用于版本更新后，同步授权数据) 🔖
+    /// Synchronize authorization menu (used to synchronize authorization data after version update) 🔖
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
     [UnitOfWork]
-    [DisplayName("同步授权菜单")]
+    [DisplayName("Synchronous Authorization Menu")]
     public async Task SyncGrantMenu(BaseIdInput input)
     {
         var menuIdList = input.Id == SqlSugarConst.DefaultTenantId
@@ -635,14 +635,14 @@ public class SysTenantService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 在非单用户登录模式下获取登录令牌
+    /// Obtain login token in non-single-user login mode
     /// </summary>
     /// <param name="user"></param>
     /// <returns></returns>
     [NonAction]
     public async Task<LoginOutput> GetAccessTokenInNotSingleLogin(SysUser user)
     {
-        // 使用非单用户模式登录
+        // Log in using non-single-user mode
         var singleLogin = _sysCacheService.Get<bool>($"{CacheConst.KeyConfig}{ConfigConst.SysSingleLogin}");
         try
         {
@@ -651,26 +651,26 @@ public class SysTenantService : IDynamicApiController, ITransient
         }
         finally
         {
-            // 恢复单用户登录参数
+            // Restore single-user login parameters
             if (singleLogin) _sysCacheService.Set($"{CacheConst.KeyConfig}{ConfigConst.SysSingleLogin}", true);
         }
     }
 
     /// <summary>
-    /// 缓存所有租户
+    /// Cache all tenants
     /// </summary>
     /// <param name="tenantId"></param>
     /// <returns></returns>
     [NonAction]
     public async Task CacheTenant(long tenantId = 0)
     {
-        // 移除 ISqlSugarClient 中的库连接并排除默认主库
+        // Remove library connection in ISqlSugarClient and exclude default main library
         if (tenantId > 0 && tenantId.ToString() != SqlSugarConst.MainConfigId)
             _sysTenantRep.AsTenant().RemoveConnection(tenantId);
 
         var tenantList = await _sysTenantRep.GetListAsync();
 
-        // 对租户库连接进行SM2加密
+        // SM2 encryption for tenant library connections
         foreach (var tenant in tenantList.Where(tenant => !string.IsNullOrWhiteSpace(tenant.Connection)))
             tenant.Connection = CryptogramUtil.SM2Encrypt(tenant.Connection);
 
@@ -678,12 +678,12 @@ public class SysTenantService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 创建租户数据库 🔖
+    /// Create tenant database 🔖
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
     [ApiDescriptionSettings(Name = "CreateDb"), HttpPost]
-    [DisplayName("创建租户数据库")]
+    [DisplayName("Create tenant database")]
     public async Task CreateDb(TenantInput input)
     {
         var tenant = await _sysTenantRep.GetSingleAsync(u => u.Id == input.Id);
@@ -695,7 +695,7 @@ public class SysTenantService : IDynamicApiController, ITransient
         if (string.IsNullOrWhiteSpace(tenant.Connection) || tenant.Connection.Length < 10)
             throw Oops.Oh(ErrorCodeEnum.Z1004);
 
-        // 默认数据库配置
+        // Default database configuration
         var defaultConfig = App.GetOptions<DbConnectionOptions>().ConnectionConfigs.FirstOrDefault();
 
         var config = new DbConnectionConfig
@@ -714,18 +714,18 @@ public class SysTenantService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 获取租户下的用户列表 🔖
+    /// Get the user list under the tenant 🔖
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
-    [DisplayName("获取租户下的用户列表")]
+    [DisplayName("Get the user list under the tenant")]
     public async Task<List<SysUser>> UserList(TenantIdInput input)
     {
         return await _sysUserRep.AsQueryable().ClearFilter().Where(u => u.TenantId == input.TenantId).ToListAsync();
     }
 
     /// <summary>
-    /// 获取租户数据库连接
+    /// Get tenant database connection
     /// </summary>
     /// <returns></returns>
     [NonAction]
@@ -733,32 +733,32 @@ public class SysTenantService : IDynamicApiController, ITransient
     {
         var iTenant = _sysTenantRep.AsTenant();
 
-        // 若已存在租户库连接，则直接返回
+        // If there is already a tenant library connection, return directly
         if (iTenant.IsAnyConnection(tenantId.ToString())) return iTenant.GetConnectionScope(tenantId.ToString());
 
         lock (iTenant)
         {
-            // 从缓存里面获取租户信息
+            // Get tenant information from cache
             var tenant = _sysCacheService.Get<List<SysTenant>>(CacheConst.KeyTenant)?.FirstOrDefault(u => u.Id == tenantId);
             if (tenant == null || tenant.TenantType == TenantTypeEnum.Id) return null;
 
-            // 获取默认库连接配置
+            // Get the default library connection configuration
             var dbOptions = App.GetOptions<DbConnectionOptions>();
             var mainConnConfig = dbOptions.ConnectionConfigs.First(u => u.ConfigId.ToString() == SqlSugarConst.MainConfigId);
 
-            // 设置租户库连接配置
+            // Set tenant library connection configuration
             var tenantConnConfig = new DbConnectionConfig
             {
                 ConfigId = tenant.Id.ToString(),
                 DbType = tenant.DbType,
                 TenantType = tenant.TenantType,
                 IsAutoCloseConnection = true,
-                ConnectionString = CryptogramUtil.SM2Decrypt(tenant.Connection), // 对租户库连接进行SM2解密
+                ConnectionString = CryptogramUtil.SM2Decrypt(tenant.Connection), // SM2 decryption of tenant library connections
                 DbSettings = new DbSettings()
                 {
                     EnableUnderLine = mainConnConfig.DbSettings.EnableUnderLine,
                 },
-                SlaveConnectionConfigs = JSON.IsValid(tenant.SlaveConnections) ? JSON.Deserialize<List<SlaveConnectionConfig>>(tenant.SlaveConnections) : null // 从库连接配置
+                SlaveConnectionConfigs = JSON.IsValid(tenant.SlaveConnections) ? JSON.Deserialize<List<SlaveConnectionConfig>>(tenant.SlaveConnections) : null // Slave library connection configuration
             };
             iTenant.AddConnection(tenantConnConfig);
 

@@ -37,56 +37,56 @@ import type { TabsPaneContext } from 'element-plus';
 import initIconfont from '/@/utils/getStyleSheets';
 import '/@/theme/iconSelector.scss';
 
-// 定义父组件传过来的值
+// Define the value passed by the parent component
 const props = defineProps({
-	// 输入框前置内容
+	// Input box prefix content
 	prepend: {
 		type: String,
 		default: () => 'ele-Pointer',
 	},
-	// 输入框占位文本
+	// Input box placeholder text
 	placeholder: {
 		type: String,
-		default: () => '请输入内容搜索图标或者选择图标',
+		default: () => 'Please enter the content to search for the icon or select the icon',
 	},
-	// 输入框占位文本
+	// Input box placeholder text
 	size: {
 		type: String,
 		default: () => 'default',
 	},
-	// 弹窗标题
+	// Pop-up window title
 	title: {
 		type: String,
-		default: () => '请选择图标',
+		default: () => 'Please select an icon',
 	},
-	// 禁用
+	// Disable
 	disabled: {
 		type: Boolean,
 		default: () => false,
 	},
-	// 是否可清空
+	// Whether it can be cleared
 	clearable: {
 		type: Boolean,
 		default: () => true,
 	},
-	// 自定义空状态描述文字
+	// Custom empty status description text
 	emptyDescription: {
 		type: String,
-		default: () => '无相关图标',
+		default: () => 'No related icons',
 	},
-	// 双向绑定值，默认为 modelValue，
-	// 参考：https://v3.cn.vuejs.org/guide/migration/v-model.html#%E8%BF%81%E7%A7%BB%E7%AD%96%E7%95%A5
-	// 参考：https://v3.cn.vuejs.org/guide/component-custom-events.html#%E5%A4%9A%E4%B8%AA-v-model-%E7%BB%91%E5%AE%9A
+	// Two-way binding value, default is modelValue,
+	// Reference: https://v3.cn.vuejs.org/guide/migration/v-model.html#%E8%BF%81%E7%A7%BB%E7%AD%96%E7%95%A5
+	// Reference: https://v3.cn.vuejs.org/guide/component-custom-events.html#%E5%A4%9A%E4%B8%AA-v-model-%E7%BB%91%E5%AE%9A
 	modelValue: String,
 });
 
-// 定义子组件向父组件传值/事件
+// Define child components to pass values/events to parent components
 const emit = defineEmits(['update:modelValue', 'get', 'clear']);
 
-// 引入组件
+// Introduce components
 const IconList = defineAsyncComponent(() => import('/@/components/iconSelector/list.vue'));
 
-// 定义变量内容
+// Define variable content
 const inputWidthRef = ref();
 const state = reactive({
 	fontIconPrefix: '',
@@ -101,7 +101,7 @@ const state = reactive({
 	},
 });
 
-// 图标搜索及图标数据显示
+// Icon search and icon data display
 const fontIconSheetsFilterList = computed(() => {
 	const list = fontIconTabNameList();
 	if (!state.fontIconSearch) return list;
@@ -110,7 +110,7 @@ const fontIconSheetsFilterList = computed(() => {
 		if (item.toLowerCase().indexOf(search) !== -1) return item;
 	});
 });
-// 根据 tab name 类型设置图标
+// Set icon according to tab name type
 const fontIconTabNameList = () => {
 	let iconList: any = [];
 	if (state.fontIconTabActive === 'ali') iconList = state.fontIconList.ali;
@@ -118,56 +118,56 @@ const fontIconTabNameList = () => {
 	else if (state.fontIconTabActive === 'awe') iconList = state.fontIconList.awe;
 	return iconList;
 };
-// 处理 icon 双向绑定数值回显
+// Process icon two-way binding value echo
 const initModeValueEcho = () => {
 	if (props.modelValue === '') return ((<string | undefined>state.fontIconPlaceholder) = props.placeholder);
 	(<string | undefined>state.fontIconPlaceholder) = props.modelValue;
 	(<string | undefined>state.fontIconPrefix) = props.modelValue;
 };
-// 处理 icon 类型，用于回显时，tab 高亮与初始化数据
+// Process icon type, used for tab highlighting and initialization data when echoing
 const initFontIconName = () => {
 	let name = 'ali';
 	if (props.modelValue == undefined) name = 'ele';
 	else if (props.modelValue!.indexOf('iconfont') > -1) name = 'ali';
 	else if (props.modelValue!.indexOf('ele-') > -1) name = 'ele';
 	else if (props.modelValue!.indexOf('fa') > -1) name = 'awe';
-	// 初始化 tab 高亮回显
+	// Initialize tab highlight echo
 	state.fontIconTabActive = name;
 	return name;
 };
-// 初始化数据
+// initialization data
 const initFontIconData = async (name: string) => {
 	if (name === 'ali') {
-		// 阿里字体图标使用 `iconfont xxx`
+		// Ali font icon uses `iconfont xxx`
 		if (state.fontIconList.ali.length > 0) return;
 		await initIconfont.ali().then((res: any) => {
 			state.fontIconList.ali = res.map((i: string) => `iconfont ${i}`);
 		});
 	} else if (name === 'ele') {
-		// element plus 图标
+		// element plus icon
 		if (state.fontIconList.ele.length > 0) return;
 		await initIconfont.ele().then((res: any) => {
 			state.fontIconList.ele = res;
 		});
 	} else if (name === 'awe') {
-		// fontawesome字体图标使用 `fa xxx`
+		// fontawesome font icon uses `fa xxx`
 		if (state.fontIconList.awe.length > 0) return;
 		await initIconfont.awe().then((res: any) => {
 			state.fontIconList.awe = res.map((i: string) => `fa ${i}`);
 		});
 	}
-	// 初始化 input 的 placeholder
-	// 参考（单项数据流）：https://cn.vuejs.org/v2/guide/components-props.html?#%E5%8D%95%E5%90%91%E6%95%B0%E6%8D%AE%E6%B5%81
+	// Initialize input placeholder
+	// Reference (single data flow): https://cn.vuejs.org/v2/guide/components-props.html?#%E5%8D%95%E5%90%91%E6%95%B0%E6%8D%AE%E6%B5%81
 	state.fontIconPlaceholder = props.placeholder;
-	// 初始化双向绑定回显
+	// Initialize two-way binding echo
 	initModeValueEcho();
 };
-// 图标点击切换
+// Click the icon to switch
 const onIconClick = (pane: TabsPaneContext) => {
 	initFontIconData(pane.paneName as string);
 	inputWidthRef.value.focus();
 };
-// 获取当前点击的 icon 图标
+// Get the currently clicked icon
 const onColClick = (v: string) => {
 	state.fontIconPlaceholder = v;
 	state.fontIconPrefix = v;
@@ -175,31 +175,31 @@ const onColClick = (v: string) => {
 	emit('update:modelValue', state.fontIconPrefix);
 	inputWidthRef.value.focus();
 };
-// 清空当前点击的 icon 图标
+// Clear the currently clicked icon
 const onClearFontIcon = () => {
 	state.fontIconPrefix = '';
 	emit('clear', state.fontIconPrefix);
 	emit('update:modelValue', state.fontIconPrefix);
 };
-// 获取 input 的宽度
+// Get the width of input
 const getInputWidth = () => {
 	nextTick(() => {
 		state.fontIconWidth = inputWidthRef.value.$el.offsetWidth;
 	});
 };
-// 监听页面宽度改变
+// Monitor page width changes
 const initResize = () => {
 	window.addEventListener('resize', () => {
 		getInputWidth();
 	});
 };
-// 页面加载时
+// When the page loads
 onMounted(() => {
 	initFontIconData(initFontIconName());
 	initResize();
 	getInputWidth();
 });
-// 监听双向绑定 modelValue 的变化
+// Monitor changes in two-way binding modelValue
 watch(
 	() => props.modelValue,
 	() => {

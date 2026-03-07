@@ -8,48 +8,48 @@
 				</div>
 			</template>
 			<el-tabs v-model="state.selectedTabName">
-				<el-tab-pane label="插件信息">
+				<el-tab-pane label="Plugin Information">
 					<el-form :model="state.ruleForm" ref="ruleFormRef" label-width="auto" style="height: 500px">
 						<el-row :gutter="35">
 							<el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="mb20">
-								<el-form-item label="功能名称" prop="name" :rules="[{ required: true, message: '功能名称不能为空', trigger: 'blur' }]">
-									<el-input v-model="state.ruleForm.name" placeholder="功能名称" clearable />
+								<el-form-item label="Function Name" prop="name" :rules="[{ required: true, message: 'Function name cannot be empty', trigger: 'blur' }]">
+									<el-input v-model="state.ruleForm.name" placeholder="Function Name" clearable />
 								</el-form-item>
 							</el-col>
 							<el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="mb20">
-								<el-form-item label="程序集名称">
-									<el-input v-model="state.ruleForm.assemblyName" placeholder="程序集名称" clearable />
+								<el-form-item label="Assembly Name">
+									<el-input v-model="state.ruleForm.assemblyName" placeholder="Assembly Name" clearable />
 								</el-form-item>
 							</el-col>
 							<el-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12" class="mb20">
-								<el-form-item label="排序">
-									<el-input-number v-model="state.ruleForm.orderNo" placeholder="排序" class="w100" />
+								<el-form-item label="Sort">
+									<el-input-number v-model="state.ruleForm.orderNo" placeholder="Sort" class="w100" />
 								</el-form-item>
 							</el-col>
 							<el-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12" class="mb20">
-								<el-form-item label="状态">
+								<el-form-item label="state">
 									<el-radio-group v-model="state.ruleForm.status">
-										<el-radio :value="1">启用</el-radio>
-										<el-radio :value="2">禁用</el-radio>
+										<el-radio :value="1">enable</el-radio>
+										<el-radio :value="2">Disable</el-radio>
 									</el-radio-group>
 								</el-form-item>
 							</el-col>
 							<el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="mb20">
-								<el-form-item label="备注">
-									<el-input v-model="state.ruleForm.remark" placeholder="请输入备注内容" clearable type="textarea" />
+								<el-form-item label="Remarks">
+									<el-input v-model="state.ruleForm.remark" placeholder="Please enter the remark content" clearable type="textarea" />
 								</el-form-item>
 							</el-col>
 						</el-row>
 					</el-form>
 				</el-tab-pane>
-				<el-tab-pane label="C# 代码">
+				<el-tab-pane label="C# code">
 					<div ref="monacoEditorRef" style="width: 100%; height: 500px"></div>
 				</el-tab-pane>
 			</el-tabs>
 			<template #footer>
 				<span class="dialog-footer">
-					<el-button @click="cancel">取 消</el-button>
-					<el-button type="primary" @click="submit">确 定</el-button>
+					<el-button @click="cancel">Cancel</el-button>
+					<el-button type="primary" @click="submit">Confirm</el-button>
 				</span>
 			</template>
 		</el-dialog>
@@ -74,69 +74,69 @@ const monacoEditorRef = ref();
 const state = reactive({
 	isShowDialog: false,
 	ruleForm: {} as UpdatePluginInput,
-	selectedTabName: '0', // 选中的 tab
+	selectedTabName: '0', // selected tab
 });
 
-// 初始化monacoEditor对象
+// Initialize the monacoEditor object
 var monacoEditor: any = null;
 const initMonacoEditor = () => {
 	monacoEditor = monaco.editor.create(monacoEditorRef.value, {
-		theme: 'vs-dark', // 主题 vs vs-dark hc-black
-		value: '', // 默认显示的值
+		theme: 'vs-dark', // theme vs vs-dark hc-black
+		value: '', // The value displayed by default
 		language: 'csharp',
 		formatOnPaste: true,
-		wordWrap: 'on', //自动换行，注意大小写
+		wordWrap: 'on', // Automatically wrap lines, pay attention to capitalization
 		wrappingIndent: 'indent',
-		folding: true, // 是否折叠
-		foldingHighlight: true, // 折叠等高线
-		foldingStrategy: 'indentation', // 折叠方式  auto | indentation
-		showFoldingControls: 'always', // 是否一直显示折叠 always | mouSEOver
-		disableLayerHinting: true, // 等宽优化
-		emptySelectionClipboard: false, // 空选择剪切板
-		selectionClipboard: false, // 选择剪切板
-		automaticLayout: true, // 自动布局
-		codeLens: false, // 代码镜头
-		scrollBeyondLastLine: false, // 滚动完最后一行后再滚动一屏幕
-		colorDecorators: true, // 颜色装饰器
-		accessibilitySupport: 'auto', // 辅助功能支持  "auto" | "off" | "on"
-		lineNumbers: 'on', // 行号 取值： "on" | "off" | "relative" | "interval" | function
-		lineNumbersMinChars: 5, // 行号最小字符   number
+		folding: true, // Whether to fold
+		foldingHighlight: true, // Collapse contours
+		foldingStrategy: 'indentation', // Folding mode auto | indentation
+		showFoldingControls: 'always', // Whether to always display the fold always | mouSEOver
+		disableLayerHinting: true, // Equal width optimization
+		emptySelectionClipboard: false, // Empty selection clipboard
+		selectionClipboard: false, // Select clipboard
+		automaticLayout: true, // autolayout
+		codeLens: false, // code lens
+		scrollBeyondLastLine: false, // Scroll one more screen after scrolling the last line
+		colorDecorators: true, // color decorator
+		accessibilitySupport: 'auto', // Accessibility support "auto" | "off" | "on"
+		lineNumbers: 'on', // Line number Values: "on" | "off" | "relative" | "interval" | function
+		lineNumbersMinChars: 5, // Minimum characters for line number number
 		//enableSplitViewResizing: false,
-		readOnly: false, //是否只读  取值 true | false
+		readOnly: false, // Whether to read only the value true | false
 	});
 };
 
-// 打开弹窗
+// Open pop-up window
 const openDialog = (row: any) => {
 	state.ruleForm = JSON.parse(JSON.stringify(row));
 	state.isShowDialog = true;
 	ruleFormRef.value?.resetFields();
 
-	// 延迟拿值防止取不到
+	// Delay the value to prevent failure to obtain it
 	setTimeout(() => {
 		if (monacoEditor == null) initMonacoEditor();
 	}, 1);
 };
 
-// 关闭弹窗
+// Close pop-up window
 const closeDialog = () => {
 	emits('handleQuery');
 	state.isShowDialog = false;
 };
 
-// 取消
+// Cancel
 const cancel = () => {
 	state.isShowDialog = false;
 };
 
-// 提交
+// submit
 const submit = () => {
 	ruleFormRef.value.validate(async (valid: boolean) => {
 		if (!valid) return;
 
 		state.ruleForm.csharpCode = monacoEditor.getValue();
 		if (state.ruleForm.csharpCode.length < 100) {
-			ElMessage.warning('请正确编写 C# 代码');
+			ElMessage.warning('Please write C# code correctly');
 			return;
 		}
 		if (state.ruleForm.id != undefined && state.ruleForm.id > 0) {
@@ -148,6 +148,6 @@ const submit = () => {
 	});
 };
 
-// 导出对象
+// Export object
 defineExpose({ openDialog });
 </script>

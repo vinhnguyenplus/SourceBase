@@ -1,9 +1,9 @@
-<!--可编辑表格 
-  1.实现表格内编辑并同步数据到父组件(emit)；
-  2. 支持自由录入和下拉选择 
-  3.内置删除、移动功能 
-  4. 支持任意业务模型
-  使用注意：1. 业务模型需要id列,以支持删除 2.下拉选项用数组[label :string,value :any]输入 3. 父组件需要update:modelValue，并将父组件的数据更新
+<!--editable table 
+  1.achievetableinsideEditandsyncDataTo fathergrouppiece(emit)；
+  2. Supports free input and dropdown selection 
+  3.Built-inDelete、Mobility function 
+  4. Supports any business model
+  Usage Notes：1. Business model neededidcolumn,to supportDelete 2.Drop-downOptionsusing numbersgroup[label :string,value :any]Input 3. Fathergroupitem neededupdate:modelValue，and will fathergrouppiece ofDataUpdate
   -->
 <template>
 	<el-table :data="localData" border="true" stripe="true">
@@ -20,7 +20,7 @@
 				</template>
 			</template>
 		</el-table-column>
-		<el-table-column label="操作" width="75">
+		<el-table-column label="Operation" width="75">
 			<template #default="{ row }">
 				<el-button-group>
 					<el-button text type="danger" :icon="Delete" @click="removeUser(row.id)"></el-button>

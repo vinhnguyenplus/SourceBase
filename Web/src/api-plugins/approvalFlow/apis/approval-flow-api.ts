@@ -2,7 +2,7 @@
 /* eslint-disable */
 /**
  * ApprovalFlow
- * <br/><u><b><font color='FF0000'> 👮不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！</font></b></u>
+ * <br/><u><b><font color='FF0000'> 👮This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project! </font></b></u>
  *
  * OpenAPI spec version: 1.0.0
  * 
@@ -35,7 +35,7 @@ export const ApprovalFlowApiAxiosParamCreator = function (configuration?: Config
     return {
         /**
          * 
-         * @summary 增加审批流
+         * @summary increaseApproval workflow
          * @param {AddApprovalFlowInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -83,7 +83,7 @@ export const ApprovalFlowApiAxiosParamCreator = function (configuration?: Config
         },
         /**
          * 
-         * @summary 删除审批流
+         * @summary DeleteApproval workflow
          * @param {BaseIdInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -131,8 +131,8 @@ export const ApprovalFlowApiAxiosParamCreator = function (configuration?: Config
         },
         /**
          * 
-         * @summary 获取审批流
-         * @param {number} id 主键Id
+         * @summary ObtainApproval workflow
+         * @param {number} id Primary keyId
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -183,7 +183,7 @@ export const ApprovalFlowApiAxiosParamCreator = function (configuration?: Config
         },
         /**
          * 
-         * @summary 根据编码获取审批流信息
+         * @summary According toEncodingObtainApproval flow information
          * @param {string} [code] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -231,23 +231,23 @@ export const ApprovalFlowApiAxiosParamCreator = function (configuration?: Config
         },
         /**
          * 
-         * @summary 获取审批流列表
-         * @param {string} [code] 编号
-         * @param {string} [name] 名称
-         * @param {string} [remark] 备注
-         * @param {number} [page] 当前页码
-         * @param {number} [pageSize] 页码容量
-         * @param {string} [field] 排序字段
-         * @param {string} [order] 排序方向
-         * @param {string} [descStr] 降序排序
-         * @param {Array<string>} [searchFields] 字段名称集合
-         * @param {string} [searchKeyword] 关键字
-         * @param {string} [keyword] 模糊查询关键字
-         * @param {FilterLogicEnum} [filterLogic] 过滤条件
-         * @param {Array<Filter>} [filterFilters] 筛选过滤条件子项
-         * @param {string} [filterField] 字段名称
-         * @param {FilterOperatorEnum} [filterOperator] 逻辑运算符
-         * @param {any} [filterValue] 字段值
+         * @summary ObtainApproval Workflow List
+         * @param {string} [code] Number
+         * @param {string} [name] name
+         * @param {string} [remark] Remarks
+         * @param {number} [page] Current page number
+         * @param {number} [pageSize] Page capacity
+         * @param {string} [field] SortField
+         * @param {string} [order] SortDirection
+         * @param {string} [descStr] Descending orderSort
+         * @param {Array<string>} [searchFields] Field nameSet
+         * @param {string} [searchKeyword] Keywords
+         * @param {string} [keyword] BlurryQueryKeywords
+         * @param {FilterLogicEnum} [filterLogic] filter conditions
+         * @param {Array<Filter>} [filterFilters] Filterfilter conditionschilditem
+         * @param {string} [filterField] Field name
+         * @param {FilterOperatorEnum} [filterOperator] Logical operator
+         * @param {any} [filterValue] Fieldvalue
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -354,7 +354,7 @@ export const ApprovalFlowApiAxiosParamCreator = function (configuration?: Config
         },
         /**
          * 
-         * @summary 分页查询审批流
+         * @summary pointsPageQueryApproval workflow
          * @param {ApprovalFlowInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -402,7 +402,7 @@ export const ApprovalFlowApiAxiosParamCreator = function (configuration?: Config
         },
         /**
          * 
-         * @summary 更新审批流
+         * @summary UpdateApproval workflow
          * @param {UpdateApprovalFlowInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -459,7 +459,7 @@ export const ApprovalFlowApiFp = function(configuration?: Configuration) {
     return {
         /**
          * 
-         * @summary 增加审批流
+         * @summary increaseApproval workflow
          * @param {AddApprovalFlowInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -473,7 +473,7 @@ export const ApprovalFlowApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary 删除审批流
+         * @summary DeleteApproval workflow
          * @param {BaseIdInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -487,8 +487,8 @@ export const ApprovalFlowApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary 获取审批流
-         * @param {number} id 主键Id
+         * @summary ObtainApproval workflow
+         * @param {number} id Primary keyId
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -501,7 +501,7 @@ export const ApprovalFlowApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary 根据编码获取审批流信息
+         * @summary According toEncodingObtainApproval flow information
          * @param {string} [code] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -515,23 +515,23 @@ export const ApprovalFlowApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary 获取审批流列表
-         * @param {string} [code] 编号
-         * @param {string} [name] 名称
-         * @param {string} [remark] 备注
-         * @param {number} [page] 当前页码
-         * @param {number} [pageSize] 页码容量
-         * @param {string} [field] 排序字段
-         * @param {string} [order] 排序方向
-         * @param {string} [descStr] 降序排序
-         * @param {Array<string>} [searchFields] 字段名称集合
-         * @param {string} [searchKeyword] 关键字
-         * @param {string} [keyword] 模糊查询关键字
-         * @param {FilterLogicEnum} [filterLogic] 过滤条件
-         * @param {Array<Filter>} [filterFilters] 筛选过滤条件子项
-         * @param {string} [filterField] 字段名称
-         * @param {FilterOperatorEnum} [filterOperator] 逻辑运算符
-         * @param {any} [filterValue] 字段值
+         * @summary ObtainApproval Workflow List
+         * @param {string} [code] Number
+         * @param {string} [name] name
+         * @param {string} [remark] Remarks
+         * @param {number} [page] Current page number
+         * @param {number} [pageSize] Page capacity
+         * @param {string} [field] SortField
+         * @param {string} [order] SortDirection
+         * @param {string} [descStr] Descending orderSort
+         * @param {Array<string>} [searchFields] Field nameSet
+         * @param {string} [searchKeyword] Keywords
+         * @param {string} [keyword] BlurryQueryKeywords
+         * @param {FilterLogicEnum} [filterLogic] filter conditions
+         * @param {Array<Filter>} [filterFilters] Filterfilter conditionschilditem
+         * @param {string} [filterField] Field name
+         * @param {FilterOperatorEnum} [filterOperator] Logical operator
+         * @param {any} [filterValue] Fieldvalue
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -544,7 +544,7 @@ export const ApprovalFlowApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary 分页查询审批流
+         * @summary pointsPageQueryApproval workflow
          * @param {ApprovalFlowInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -558,7 +558,7 @@ export const ApprovalFlowApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary 更新审批流
+         * @summary UpdateApproval workflow
          * @param {UpdateApprovalFlowInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -581,7 +581,7 @@ export const ApprovalFlowApiFactory = function (configuration?: Configuration, b
     return {
         /**
          * 
-         * @summary 增加审批流
+         * @summary increaseApproval workflow
          * @param {AddApprovalFlowInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -591,7 +591,7 @@ export const ApprovalFlowApiFactory = function (configuration?: Configuration, b
         },
         /**
          * 
-         * @summary 删除审批流
+         * @summary DeleteApproval workflow
          * @param {BaseIdInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -601,8 +601,8 @@ export const ApprovalFlowApiFactory = function (configuration?: Configuration, b
         },
         /**
          * 
-         * @summary 获取审批流
-         * @param {number} id 主键Id
+         * @summary ObtainApproval workflow
+         * @param {number} id Primary keyId
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -611,7 +611,7 @@ export const ApprovalFlowApiFactory = function (configuration?: Configuration, b
         },
         /**
          * 
-         * @summary 根据编码获取审批流信息
+         * @summary According toEncodingObtainApproval flow information
          * @param {string} [code] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -621,23 +621,23 @@ export const ApprovalFlowApiFactory = function (configuration?: Configuration, b
         },
         /**
          * 
-         * @summary 获取审批流列表
-         * @param {string} [code] 编号
-         * @param {string} [name] 名称
-         * @param {string} [remark] 备注
-         * @param {number} [page] 当前页码
-         * @param {number} [pageSize] 页码容量
-         * @param {string} [field] 排序字段
-         * @param {string} [order] 排序方向
-         * @param {string} [descStr] 降序排序
-         * @param {Array<string>} [searchFields] 字段名称集合
-         * @param {string} [searchKeyword] 关键字
-         * @param {string} [keyword] 模糊查询关键字
-         * @param {FilterLogicEnum} [filterLogic] 过滤条件
-         * @param {Array<Filter>} [filterFilters] 筛选过滤条件子项
-         * @param {string} [filterField] 字段名称
-         * @param {FilterOperatorEnum} [filterOperator] 逻辑运算符
-         * @param {any} [filterValue] 字段值
+         * @summary ObtainApproval Workflow List
+         * @param {string} [code] Number
+         * @param {string} [name] name
+         * @param {string} [remark] Remarks
+         * @param {number} [page] Current page number
+         * @param {number} [pageSize] Page capacity
+         * @param {string} [field] SortField
+         * @param {string} [order] SortDirection
+         * @param {string} [descStr] Descending orderSort
+         * @param {Array<string>} [searchFields] Field nameSet
+         * @param {string} [searchKeyword] Keywords
+         * @param {string} [keyword] BlurryQueryKeywords
+         * @param {FilterLogicEnum} [filterLogic] filter conditions
+         * @param {Array<Filter>} [filterFilters] Filterfilter conditionschilditem
+         * @param {string} [filterField] Field name
+         * @param {FilterOperatorEnum} [filterOperator] Logical operator
+         * @param {any} [filterValue] Fieldvalue
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -646,7 +646,7 @@ export const ApprovalFlowApiFactory = function (configuration?: Configuration, b
         },
         /**
          * 
-         * @summary 分页查询审批流
+         * @summary pointsPageQueryApproval workflow
          * @param {ApprovalFlowInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -656,7 +656,7 @@ export const ApprovalFlowApiFactory = function (configuration?: Configuration, b
         },
         /**
          * 
-         * @summary 更新审批流
+         * @summary UpdateApproval workflow
          * @param {UpdateApprovalFlowInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -676,7 +676,7 @@ export const ApprovalFlowApiFactory = function (configuration?: Configuration, b
 export class ApprovalFlowApi extends BaseAPI {
     /**
      * 
-     * @summary 增加审批流
+     * @summary increaseApproval workflow
      * @param {AddApprovalFlowInput} [body] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -687,7 +687,7 @@ export class ApprovalFlowApi extends BaseAPI {
     }
     /**
      * 
-     * @summary 删除审批流
+     * @summary DeleteApproval workflow
      * @param {BaseIdInput} [body] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -698,8 +698,8 @@ export class ApprovalFlowApi extends BaseAPI {
     }
     /**
      * 
-     * @summary 获取审批流
-     * @param {number} id 主键Id
+     * @summary ObtainApproval workflow
+     * @param {number} id Primary keyId
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ApprovalFlowApi
@@ -709,7 +709,7 @@ export class ApprovalFlowApi extends BaseAPI {
     }
     /**
      * 
-     * @summary 根据编码获取审批流信息
+     * @summary According toEncodingObtainApproval flow information
      * @param {string} [code] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -720,23 +720,23 @@ export class ApprovalFlowApi extends BaseAPI {
     }
     /**
      * 
-     * @summary 获取审批流列表
-     * @param {string} [code] 编号
-     * @param {string} [name] 名称
-     * @param {string} [remark] 备注
-     * @param {number} [page] 当前页码
-     * @param {number} [pageSize] 页码容量
-     * @param {string} [field] 排序字段
-     * @param {string} [order] 排序方向
-     * @param {string} [descStr] 降序排序
-     * @param {Array<string>} [searchFields] 字段名称集合
-     * @param {string} [searchKeyword] 关键字
-     * @param {string} [keyword] 模糊查询关键字
-     * @param {FilterLogicEnum} [filterLogic] 过滤条件
-     * @param {Array<Filter>} [filterFilters] 筛选过滤条件子项
-     * @param {string} [filterField] 字段名称
-     * @param {FilterOperatorEnum} [filterOperator] 逻辑运算符
-     * @param {any} [filterValue] 字段值
+     * @summary ObtainApproval Workflow List
+     * @param {string} [code] Number
+     * @param {string} [name] name
+     * @param {string} [remark] Remarks
+     * @param {number} [page] Current page number
+     * @param {number} [pageSize] Page capacity
+     * @param {string} [field] SortField
+     * @param {string} [order] SortDirection
+     * @param {string} [descStr] Descending orderSort
+     * @param {Array<string>} [searchFields] Field nameSet
+     * @param {string} [searchKeyword] Keywords
+     * @param {string} [keyword] BlurryQueryKeywords
+     * @param {FilterLogicEnum} [filterLogic] filter conditions
+     * @param {Array<Filter>} [filterFilters] Filterfilter conditionschilditem
+     * @param {string} [filterField] Field name
+     * @param {FilterOperatorEnum} [filterOperator] Logical operator
+     * @param {any} [filterValue] Fieldvalue
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ApprovalFlowApi
@@ -746,7 +746,7 @@ export class ApprovalFlowApi extends BaseAPI {
     }
     /**
      * 
-     * @summary 分页查询审批流
+     * @summary pointsPageQueryApproval workflow
      * @param {ApprovalFlowInput} [body] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -757,7 +757,7 @@ export class ApprovalFlowApi extends BaseAPI {
     }
     /**
      * 
-     * @summary 更新审批流
+     * @summary UpdateApproval workflow
      * @param {UpdateApprovalFlowInput} [body] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}

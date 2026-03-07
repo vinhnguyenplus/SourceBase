@@ -1,25 +1,25 @@
-﻿// Admin.NET 项目的版权、商标、专利和其他相关权利均受相应法律法规的保护。使用本项目应遵守相关法律法规和许可证的要求。
+﻿// The copyright, trademark, patent and other related rights of the Admin.NET project are protected by corresponding laws and regulations. Use of this project shall comply with relevant laws, regulations and license requirements.
 //
-// 本项目主要遵循 MIT 许可证和 Apache 许可证（版本 2.0）进行分发和使用。许可证位于源代码树根目录中的 LICENSE-MIT 和 LICENSE-APACHE 文件。
+// This project is distributed and used primarily under the MIT License and the Apache License (version 2.0). The license is located in the LICENSE-MIT and LICENSE-APACHE files in the root of the source tree.
 //
-// 不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！
+// This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project!
 
 namespace Admin.NET.Core;
 
 public class CryptogramUtil
 {
-    public static readonly bool StrongPassword = App.GetConfig<bool>("Cryptogram:StrongPassword"); // 是否开启密码强度验证
-    public static readonly string PasswordStrengthValidation = App.GetConfig<string>("Cryptogram:PasswordStrengthValidation"); // 密码强度验证正则表达式
-    public static readonly string PasswordStrengthValidationMsg = App.GetConfig<string>("Cryptogram:PasswordStrengthValidationMsg"); // 密码强度验证提示
-    public static readonly string CryptoType = App.GetConfig<string>("Cryptogram:CryptoType"); // 加密类型
-    public static readonly string PublicKey = App.GetConfig<string>("Cryptogram:PublicKey"); // 公钥
-    public static readonly string PrivateKey = App.GetConfig<string>("Cryptogram:PrivateKey"); // 私钥
+    public static readonly bool StrongPassword = App.GetConfig<bool>("Cryptogram:StrongPassword"); // Whether to enable password strength verification
+    public static readonly string PasswordStrengthValidation = App.GetConfig<string>("Cryptogram:PasswordStrengthValidation"); // Password strength verification regular expression
+    public static readonly string PasswordStrengthValidationMsg = App.GetConfig<string>("Cryptogram:PasswordStrengthValidationMsg"); // Password strength verification prompts
+    public static readonly string CryptoType = App.GetConfig<string>("Cryptogram:CryptoType"); // Encryption type
+    public static readonly string PublicKey = App.GetConfig<string>("Cryptogram:PublicKey"); // public key
+    public static readonly string PrivateKey = App.GetConfig<string>("Cryptogram:PrivateKey"); // private key
 
     public static readonly string SM4_key = "0123456789abcdeffedcba9876543210";
     public static readonly string SM4_iv = "595298c7c6fd271f0402f804c33d3f66";
 
     /// <summary>
-    /// 加密
+    /// encryption
     /// </summary>
     /// <param name="plainText"></param>
     /// <returns></returns>
@@ -41,7 +41,7 @@ public class CryptogramUtil
     }
 
     /// <summary>
-    /// 解密
+    /// Decrypt
     /// </summary>
     /// <param name="cipherText"></param>
     /// <returns></returns>
@@ -59,7 +59,7 @@ public class CryptogramUtil
     }
 
     /// <summary>
-    /// SM2加密
+    /// SM2 encryption
     /// </summary>
     /// <param name="plainText"></param>
     /// <returns></returns>
@@ -69,7 +69,7 @@ public class CryptogramUtil
     }
 
     /// <summary>
-    /// SM2解密
+    /// SM2 decryption
     /// </summary>
     /// <param name="cipherText"></param>
     /// <returns></returns>
@@ -79,7 +79,7 @@ public class CryptogramUtil
     }
 
     /// <summary>
-    /// SM4加密（ECB）
+    /// SM4 encryption (ECB)
     /// </summary>
     /// <param name="plainText"></param>
     /// <returns></returns>
@@ -89,7 +89,7 @@ public class CryptogramUtil
     }
 
     /// <summary>
-    /// SM4解密（ECB）
+    /// SM4 Decryption (ECB)
     /// </summary>
     /// <param name="cipherText"></param>
     /// <returns></returns>
@@ -99,7 +99,7 @@ public class CryptogramUtil
     }
 
     /// <summary>
-    /// SM4加密（CBC）
+    /// SM4 encryption (CBC)
     /// </summary>
     /// <param name="plainText"></param>
     /// <returns></returns>
@@ -109,7 +109,7 @@ public class CryptogramUtil
     }
 
     /// <summary>
-    /// SM4解密（CBC）
+    /// SM4 Decryption (CBC)
     /// </summary>
     /// <param name="cipherText"></param>
     /// <returns></returns>

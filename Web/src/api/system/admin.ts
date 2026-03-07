@@ -7,35 +7,35 @@ enum Api {
 	NuGetPackagesInfo = '/api/sysServer/nuGetPackagesInfo',
 }
 
-// 根据字典类型编码获取字典值集合
+// Get a collection of dictionary values ​​based on dictionary type encoding
 export const getDictDataList = (params?: any) =>
 	request({
 		url: `${Api.DictTypeDataList}/${params}`,
 		method: 'get',
 	});
 
-// 获取所有字典
+// Get all dictionaries
 export const getAllDictList = () =>
 	request({
 		url: `${Api.AllDictList}`,
 		method: 'get',
 	});
 
-	// 获取硬件信息
+	// Get hardware information
 export const getHardwareInfo = () =>
 	request({
 		url: `${Api.HardwareInfo}`,
 		method: 'post',
 	});
 
-// 获取运行时信息
+// Get runtime information
 export const getRuntimeInfo = () =>
 	request({
 		url: `${Api.RuntimeInfo}`,
 		method: 'post',
 	});
 
-// 获取NuGet包信息
+// Get NuGet package information
 export const getNuGetPackagesInfo = () =>
 	request({
 		url: `${Api.NuGetPackagesInfo}`,

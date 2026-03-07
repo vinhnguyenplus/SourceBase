@@ -1,17 +1,17 @@
-// Admin.NET 项目的版权、商标、专利和其他相关权利均受相应法律法规的保护。使用本项目应遵守相关法律法规和许可证的要求。
+// The copyright, trademark, patent and other related rights of the Admin.NET project are protected by corresponding laws and regulations. Use of this project shall comply with relevant laws, regulations and license requirements.
 //
-// 本项目主要遵循 MIT 许可证和 Apache 许可证（版本 2.0）进行分发和使用。许可证位于源代码树根目录中的 LICENSE-MIT 和 LICENSE-APACHE 文件。
+// This project is distributed and used primarily under the MIT License and the Apache License (version 2.0). The license is located in the LICENSE-MIT and LICENSE-APACHE files in the root of the source tree.
 //
-// 不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！
+// This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project!
 
 using OnceMi.AspNetCore.OSS;
 
 namespace Admin.NET.Core.Service;
 
 /// <summary>
-/// 系统文件存储提供者服务 🧩
+/// System file storage provider service 🧩
 /// </summary>
-[ApiDescriptionSettings(Order = 411, Description = "文件存储提供者")]
+[ApiDescriptionSettings(Order = 411, Description = "file storage provider")]
 public class SysFileProviderService : IDynamicApiController, ITransient
 {
     private readonly UserManager _userManager;
@@ -35,11 +35,11 @@ public class SysFileProviderService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 获取文件存储提供者分页列表 🔖
+    /// Get a paginated list of file storage providers 🔖
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
-    [DisplayName("获取文件存储提供者分页列表")]
+    [DisplayName("Get a paginated list of file storage providers")]
     [NonAction]
     public async Task<SqlSugarPagedList<SysFileProvider>> GetFileProviderPage([FromQuery] PageFileProviderInput input)
     {
@@ -53,10 +53,10 @@ public class SysFileProviderService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 获取文件存储提供者列表 🔖
+    /// Get a list of file storage providers 🔖
     /// </summary>
     /// <returns></returns>
-    [DisplayName("获取文件存储提供者列表")]
+    [DisplayName("Get the list of file storage providers")]
     [NonAction]
     public async Task<List<SysFileProvider>> GetFileProviderList()
     {
@@ -68,28 +68,28 @@ public class SysFileProviderService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 增加文件存储提供者 🔖
+    /// Add file storage provider 🔖
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
     [ApiDescriptionSettings(Name = "Add"), HttpPost]
-    [DisplayName("增加文件存储提供者")]
+    [DisplayName("Add file storage provider")]
     [NonAction]
     public async Task AddFileProvider(AddFileProviderInput input)
     {
-        // 验证输入参数
+        // Validate input parameters
         if (input == null)
-            throw Oops.Oh("输入参数不能为空").StatusCode(400);
+            throw Oops.Oh("Input parameters cannot be empty").StatusCode(400);
 
         if (string.IsNullOrWhiteSpace(input.Provider))
-            throw Oops.Oh("存储提供者不能为空").StatusCode(400);
+            throw Oops.Oh("Storage provider cannot be null").StatusCode(400);
 
         if (string.IsNullOrWhiteSpace(input.BucketName))
-            throw Oops.Oh("存储桶名称不能为空").StatusCode(400);
+            throw Oops.Oh("Bucket name cannot be empty").StatusCode(400);
 
-        // 验证提供者类型
+        // Authentication provider type
         if (!Enum.TryParse<OSSProvider>(input.Provider, true, out _))
-            throw Oops.Oh($"不支持的存储提供者类型: {input.Provider}").StatusCode(400);
+            throw Oops.Oh($"Unsupported storage provider type: {input.Provider}").StatusCode(400);
 
         var isExist = await _sysFileProviderRep.AsQueryable()
             .AnyAsync(u => u.Provider == input.Provider && u.BucketName == input.BucketName);
@@ -98,34 +98,34 @@ public class SysFileProviderService : IDynamicApiController, ITransient
 
         var fileProvider = input.Adapt<SysFileProvider>();
 
-        // 验证配置完整性
+        // Verify configuration integrity
         await ValidateProviderConfiguration(fileProvider);
 
-        // 处理默认提供者逻辑
+        // Handle default provider logic
         await HandleDefaultProviderLogic(fileProvider);
 
         await _sysFileProviderRep.InsertAsync(fileProvider);
 
-        // 清除缓存
+        // clear cache
         await ClearCache();
 
-        // 清除OSS服务缓存
+        // Clear OSS service cache
         _ossServiceManager?.ClearCache();
     }
 
     /// <summary>
-    /// 更新文件存储提供者 🔖
+    /// Update file storage provider 🔖
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
     [ApiDescriptionSettings(Name = "Update"), HttpPost]
-    [DisplayName("更新文件存储提供者")]
+    [DisplayName("Update file storage provider")]
     [NonAction]
     public async Task UpdateFileProvider(UpdateFileProviderInput input)
     {
-        // 验证输入参数
+        // Validate input parameters
         if (input == null)
-            throw Oops.Oh("输入参数不能为空").StatusCode(400);
+            throw Oops.Oh("Input parameters cannot be empty").StatusCode(400);
 
         var isExist = await _sysFileProviderRep.AsQueryable()
             .AnyAsync(u => u.Provider == input.Provider && u.BucketName == input.BucketName && u.Id != input.Id);
@@ -134,38 +134,38 @@ public class SysFileProviderService : IDynamicApiController, ITransient
 
         var fileProvider = input.Adapt<SysFileProvider>();
 
-        // 验证配置完整性
+        // Verify configuration integrity
         await ValidateProviderConfiguration(fileProvider);
 
-        // 处理默认提供者逻辑
+        // Handle default provider logic
         await HandleDefaultProviderLogic(fileProvider);
 
         await _sysFileProviderRep.AsUpdateable(fileProvider).IgnoreColumns(ignoreAllNullColumns: true).ExecuteCommandAsync();
 
-        // 清除缓存
+        // clear cache
         await ClearCache();
 
-        // 清除OSS服务缓存
+        // Clear OSS service cache
         _ossServiceManager?.ClearCache();
     }
 
     /// <summary>
-    /// 删除文件存储提供者 🔖
+    /// Remove file storage provider 🔖
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
     [ApiDescriptionSettings(Name = "Delete"), HttpPost]
-    [DisplayName("删除文件存储提供者")]
+    [DisplayName("Remove file storage provider")]
     [NonAction]
     public async Task DeleteFileProvider(DeleteFileProviderInput input)
     {
-        // 检查是否为默认提供者
-        var provider = await _sysFileProviderRep.GetByIdAsync(input.Id) ?? throw Oops.Oh("存储提供者不存在").StatusCode(400);
+        // Check if it is the default provider
+        var provider = await _sysFileProviderRep.GetByIdAsync(input.Id) ?? throw Oops.Oh("Storage provider does not exist").StatusCode(400);
         var isDefault = provider.IsDefault == true;
 
         await _sysFileProviderRep.DeleteByIdAsync(input.Id);
 
-        // 如果删除的是默认提供者，自动设置第一个启用的提供者为默认
+        // If the default provider is deleted, the first enabled provider is automatically set as the default.
         if (isDefault)
         {
             var firstEnabledProvider = await _sysFileProviderRep.AsQueryable()
@@ -181,23 +181,23 @@ public class SysFileProviderService : IDynamicApiController, ITransient
                     .Where(p => p.Id == firstEnabledProvider.Id)
                     .ExecuteCommandAsync();
 
-                Debug.WriteLine($"自动设置新的默认提供者: {firstEnabledProvider.DisplayName}");
+                Debug.WriteLine($"Automatically set the new default provider: {firstEnabledProvider.DisplayName}");
             }
         }
 
-        // 清除缓存
+        // clear cache
         await ClearCache();
 
-        // 清除OSS服务缓存
+        // Clear OSS service cache
         _ossServiceManager?.ClearCache();
     }
 
     /// <summary>
-    /// 获取文件存储提供者详情 🔖
+    /// Get file storage provider details 🔖
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
-    [DisplayName("获取文件存储提供者详情")]
+    [DisplayName("Get file storage provider details")]
     [NonAction]
     public async Task<SysFileProvider> GetFileProvider([FromQuery] QueryFileProviderInput input)
     {
@@ -205,7 +205,7 @@ public class SysFileProviderService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 根据提供者和存储桶获取配置
+    /// Get configuration based on provider and bucket
     /// </summary>
     /// <param name="provider"></param>
     /// <param name="bucketName"></param>
@@ -218,7 +218,7 @@ public class SysFileProviderService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 根据ID获取配置
+    /// Get configuration based on ID
     /// </summary>
     /// <param name="id"></param>
     /// <returns></returns>
@@ -230,9 +230,9 @@ public class SysFileProviderService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 根据存储桶名称获取存储提供者
+    /// Get storage provider based on bucket name
     /// </summary>
-    /// <param name="bucketName">存储桶名称</param>
+    /// <param name="bucketName">bucket name</param>
     /// <returns></returns>
     [NonAction]
     public async Task<SysFileProvider?> GetProviderByBucketName(string bucketName)
@@ -245,7 +245,7 @@ public class SysFileProviderService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 获取默认存储提供者
+    /// Get default storage provider
     /// </summary>
     /// <returns></returns>
     [NonAction]
@@ -253,20 +253,20 @@ public class SysFileProviderService : IDynamicApiController, ITransient
     {
         var providers = await GetCachedFileProviders();
 
-        // 优先返回标记为默认的提供者
+        // Providers marked as default are returned first
         var defaultProvider = providers.FirstOrDefault(p => p.IsDefault == true);
         if (defaultProvider != null)
             return defaultProvider;
 
-        // 如果没有标记为默认的，返回第一个启用的提供者（兼容旧逻辑）
+        // If not marked as default, returns the first enabled provider (compatible with old logic)
         return providers.FirstOrDefault();
     }
 
     /// <summary>
-    /// 获取默认存储提供者信息 🔖
+    /// Get default storage provider information 🔖
     /// </summary>
     /// <returns></returns>
-    [DisplayName("获取默认存储提供者信息")]
+    [DisplayName("Get default storage provider information")]
     [NonAction]
     public async Task<SysFileProvider?> GetDefaultProviderInfo()
     {
@@ -274,31 +274,31 @@ public class SysFileProviderService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 设置默认存储提供者 🔖
+    /// Set default storage provider 🔖
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
     [ApiDescriptionSettings(Name = "SetDefault"), HttpPost]
-    [DisplayName("设置默认存储提供者")]
+    [DisplayName("Set default storage provider")]
     [NonAction]
     public async Task SetDefaultProvider(SetDefaultProviderInput input)
     {
-        // 验证提供者是否存在且启用
-        var provider = await _sysFileProviderRep.GetByIdAsync(input.Id) ?? throw Oops.Oh("存储提供者不存在").StatusCode(400);
+        // Verify that the provider exists and is enabled
+        var provider = await _sysFileProviderRep.GetByIdAsync(input.Id) ?? throw Oops.Oh("Storage provider does not exist").StatusCode(400);
         if (provider.IsEnable != true)
-            throw Oops.Oh("只能设置启用状态的存储提供者为默认").StatusCode(400);
+            throw Oops.Oh("Only enabled storage providers can be set as default").StatusCode(400);
 
-        // 开启事务，确保数据一致性
+        // Start transactions to ensure data consistency
         await _sysFileProviderRep.AsTenant().BeginTranAsync();
         try
         {
-            // 先将所有提供者的默认标识设为false
+            // First set the default identity of all providers to false
             await _sysFileProviderRep.AsUpdateable()
                 .SetColumns(p => p.IsDefault == false)
                 .Where(p => p.IsDefault == true)
                 .ExecuteCommandAsync();
 
-            // 设置指定提供者为默认
+            // Set the specified provider as default
             await _sysFileProviderRep.AsUpdateable()
                 .SetColumns(p => p.IsDefault == true)
                 .Where(p => p.Id == input.Id)
@@ -306,13 +306,13 @@ public class SysFileProviderService : IDynamicApiController, ITransient
 
             await _sysFileProviderRep.AsTenant().CommitTranAsync();
 
-            // 清除缓存
+            // clear cache
             await ClearCache();
 
-            // 清除OSS服务缓存
+            // Clear OSS service cache
             _ossServiceManager?.ClearCache();
 
-            Debug.WriteLine($"已设置默认存储提供者: {provider.DisplayName}");
+            Debug.WriteLine($"Default storage provider set: {provider.DisplayName}");
         }
         catch (Exception)
         {
@@ -322,7 +322,7 @@ public class SysFileProviderService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 获取缓存的文件提供者列表
+    /// Get a list of cached file providers
     /// </summary>
     /// <returns></returns>
     [NonAction]
@@ -339,7 +339,7 @@ public class SysFileProviderService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 清除缓存
+    /// clear cache
     /// </summary>
     /// <returns></returns>
     [NonAction]
@@ -350,7 +350,7 @@ public class SysFileProviderService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 获取所有可用的存储桶列表
+    /// Get a list of all available buckets
     /// </summary>
     /// <returns></returns>
     [NonAction]
@@ -361,7 +361,7 @@ public class SysFileProviderService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 获取存储桶和提供者的映射关系
+    /// Get the mapping relationship between buckets and providers
     /// </summary>
     /// <returns></returns>
     [NonAction]
@@ -385,64 +385,64 @@ public class SysFileProviderService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 验证存储提供者配置
+    /// Verify storage provider configuration
     /// </summary>
-    /// <param name="provider">存储提供者配置</param>
+    /// <param name="provider">Storage provider configuration</param>
     /// <returns></returns>
     [NonAction]
     private async Task ValidateProviderConfiguration(SysFileProvider provider)
     {
         if (provider == null)
-            throw Oops.Oh("存储提供者配置不能为空").StatusCode(400);
+            throw Oops.Oh("Storage provider configuration cannot be empty").StatusCode(400);
 
-        // 基础字段验证
+        // Basic field validation
         if (string.IsNullOrWhiteSpace(provider.Provider))
-            throw Oops.Oh("存储提供者类型不能为空").StatusCode(400);
+            throw Oops.Oh("Storage provider type cannot be null").StatusCode(400);
 
         if (string.IsNullOrWhiteSpace(provider.BucketName))
-            throw Oops.Oh("存储桶名称不能为空").StatusCode(400);
+            throw Oops.Oh("Bucket name cannot be empty").StatusCode(400);
 
         if (string.IsNullOrWhiteSpace(provider.Endpoint))
-            throw Oops.Oh("端点地址不能为空").StatusCode(400);
+            throw Oops.Oh("Endpoint Addresscannot benull").StatusCode(400);
 
-        // 所有提供者都需要AccessKey和SecretKey
+        // All providers require AccessKey and SecretKey
         if (string.IsNullOrWhiteSpace(provider.AccessKey))
-            throw Oops.Oh($"{provider.Provider} AccessKey不能为空").StatusCode(400);
+            throw Oops.Oh($"{provider.Provider} AccessKey cannot be empty").StatusCode(400);
         if (string.IsNullOrWhiteSpace(provider.SecretKey))
-            throw Oops.Oh($"{provider.Provider} SecretKey不能为空").StatusCode(400);
+            throw Oops.Oh($"{provider.Provider} SecretKey cannot be empty").StatusCode(400);
 
-        // 根据不同提供者验证特定字段
+        // Validate specific fields against different providers
         switch (provider.Provider.ToUpper())
         {
             case "ALIYUN":
                 if (string.IsNullOrWhiteSpace(provider.Region))
-                    throw Oops.Oh("阿里云Region不能为空").StatusCode(400);
+                    throw Oops.Oh("Alibaba Cloud Region cannot be empty").StatusCode(400);
                 break;
 
             case "QCLOUD":
                 if (string.IsNullOrWhiteSpace(provider.Endpoint))
-                    throw Oops.Oh("腾讯云Endpoint(AppId)不能为空").StatusCode(400);
+                    throw Oops.Oh("Tencent Cloud Endpoint (AppId) cannot be empty").StatusCode(400);
                 if (string.IsNullOrWhiteSpace(provider.Region))
-                    throw Oops.Oh("腾讯云Region不能为空").StatusCode(400);
+                    throw Oops.Oh("Tencent Cloud Region cannot be empty").StatusCode(400);
                 break;
 
             case "MINIO":
-                // Minio只需要AccessKey和SecretKey，已在上面验证
+                // Minio only requires AccessKey and SecretKey, verified above
                 break;
 
             default:
-                throw Oops.Oh($"不支持的存储提供者类型: {provider.Provider}").StatusCode(400);
+                throw Oops.Oh($"Unsupported storage provider type: {provider.Provider}").StatusCode(400);
         }
 
-        // 验证存储桶名称格式
+        // Verify bucket name format
         await ValidateBucketName(provider.Provider, provider.BucketName);
     }
 
     /// <summary>
-    /// 验证存储桶名称格式
+    /// Verify bucket name format
     /// </summary>
-    /// <param name="provider">存储提供者类型</param>
-    /// <param name="bucketName">存储桶名称</param>
+    /// <param name="provider">Storage provider type</param>
+    /// <param name="bucketName">bucket name</param>
     /// <returns></returns>
     [NonAction]
     private async Task ValidateBucketName(string provider, string bucketName)
@@ -453,30 +453,30 @@ public class SysFileProviderService : IDynamicApiController, ITransient
         switch (provider.ToUpper())
         {
             case "ALIYUN":
-                // 阿里云存储桶命名规则
+                // Alibaba Cloud bucket naming rules
                 if (bucketName.Length < 3 || bucketName.Length > 63)
-                    throw Oops.Oh("阿里云存储桶名称长度必须在3-63字符之间").StatusCode(400);
+                    throw Oops.Oh("Alibaba Cloud bucket name length must be between 3-63 characters").StatusCode(400);
 
                 if (!Regex.IsMatch(bucketName, @"^[a-z0-9][a-z0-9\-]*[a-z0-9]$"))
-                    throw Oops.Oh("阿里云存储桶名称只能包含小写字母、数字和短横线，且必须以字母或数字开头和结尾").StatusCode(400);
+                    throw Oops.Oh("Alibaba Cloud bucket names can only contain lowercase letters, numbers, and hyphens, and must start and end with a letter or number").StatusCode(400);
                 break;
 
             case "QCLOUD":
-                // 腾讯云存储桶命名规则
+                // Tencent Cloud storage bucket naming rules
                 if (bucketName.Length < 1 || bucketName.Length > 40)
-                    throw Oops.Oh("腾讯云存储桶名称长度必须在1-40字符之间").StatusCode(400);
+                    throw Oops.Oh("The Tencent Cloud storage bucket name must be between 1 and 40 characters long").StatusCode(400);
 
                 if (!Regex.IsMatch(bucketName, @"^[a-z0-9][a-z0-9\-]*[a-z0-9]$"))
-                    throw Oops.Oh("腾讯云存储桶名称只能包含小写字母、数字和短横线，且必须以字母或数字开头和结尾").StatusCode(400);
+                    throw Oops.Oh("Tencent Cloud storage bucket names can only contain lowercase letters, numbers, and hyphens, and must start and end with a letter or number").StatusCode(400);
                 break;
 
             case "MINIO":
-                // Minio存储桶命名规则
+                // Minio bucket naming rules
                 if (bucketName.Length < 3 || bucketName.Length > 63)
-                    throw Oops.Oh("Minio存储桶名称长度必须在3-63字符之间").StatusCode(400);
+                    throw Oops.Oh("Minio bucket name length must be between 3 and 63 characters").StatusCode(400);
 
                 if (!Regex.IsMatch(bucketName, @"^[a-z0-9][a-z0-9\-\.]*[a-z0-9]$"))
-                    throw Oops.Oh("Minio存储桶名称只能包含小写字母、数字、短横线和点，且必须以字母或数字开头和结尾").StatusCode(400);
+                    throw Oops.Oh("Minio bucket names can only contain lowercase letters, numbers, hyphens, and dots, and must start and end with a letter or number").StatusCode(400);
                 break;
         }
 
@@ -484,36 +484,36 @@ public class SysFileProviderService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 处理默认提供者逻辑
+    /// Handle default provider logic
     /// </summary>
-    /// <param name="provider">存储提供者配置</param>
+    /// <param name="provider">Storage provider configuration</param>
     /// <returns></returns>
     [NonAction]
     private async Task HandleDefaultProviderLogic(SysFileProvider provider)
     {
-        // 如果设置为默认提供者
+        // If set as default provider
         if (provider.IsDefault == true)
         {
-            // 确保只有一个默认提供者，将其他提供者的默认标识设为false
+            // Make sure there is only one default provider, set the other providers' default flags to false
             await _sysFileProviderRep.AsUpdateable()
                 .SetColumns(p => p.IsDefault == false)
                 .Where(p => p.IsDefault == true && p.Id != provider.Id)
                 .ExecuteCommandAsync();
         }
         else
-        // 如果没有设置IsDefault值，默认为false
+        // If the IsDefault value is not set, the default is false
         {
             provider.IsDefault ??= false;
         }
 
-        // 检查是否还有其他默认提供者，如果没有且当前提供者启用，则设为默认
+        // Check if there are other default providers, if there are none and the current provider is enabled, make it the default
         var hasDefaultProvider = await _sysFileProviderRep.AsQueryable()
             .Where(p => p.IsDefault == true && p.IsEnable == true && p.Id != provider.Id)
             .AnyAsync();
 
         if (!hasDefaultProvider && provider.IsEnable == true && provider.IsDefault != true)
         {
-            // 如果没有其他默认提供者且当前提供者启用，则设为默认
+            // Set as default if there is no other default provider and current provider is enabled
             provider.IsDefault = true;
         }
     }

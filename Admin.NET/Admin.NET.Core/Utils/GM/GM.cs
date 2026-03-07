@@ -1,8 +1,8 @@
-﻿// Admin.NET 项目的版权、商标、专利和其他相关权利均受相应法律法规的保护。使用本项目应遵守相关法律法规和许可证的要求。
+﻿// The copyright, trademark, patent and other related rights of the Admin.NET project are protected by corresponding laws and regulations. Use of this project shall comply with relevant laws, regulations and license requirements.
 //
-// 本项目主要遵循 MIT 许可证和 Apache 许可证（版本 2.0）进行分发和使用。许可证位于源代码树根目录中的 LICENSE-MIT 和 LICENSE-APACHE 文件。
+// This project is distributed and used primarily under the MIT License and the Apache License (version 2.0). The license is located in the LICENSE-MIT and LICENSE-APACHE files in the root of the source tree.
 //
-// 不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！
+// This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project!
 
 using Org.BouncyCastle.Asn1;
 using Org.BouncyCastle.Asn1.GM;
@@ -22,9 +22,9 @@ namespace Admin.NET.Core;
 
 /**
  *
- * 用BC的注意点：
- * 这个版本的BC对SM3withSM2的结果为asn1格式的r和s，如果需要直接拼接的r||s需要自己转换。下面rsAsn1ToPlainByteArray、rsPlainByteArrayToAsn1就在干这事。
- * 这个版本的BC对SM2的结果为C1||C2||C3，据说为旧标准，新标准为C1||C3||C2，用新标准的需要自己转换。下面（被注释掉的）changeC1C2C3ToC1C3C2、changeC1C3C2ToC1C2C3就在干这事。java版的高版本有加上C1C3C2，csharp版没准以后也会加，但目前还没有，java版的目前可以初始化时“ SM2Engine sm2Engine = new SM2Engine(SM2Engine.Mode.C1C3C2);”。
+ * useBCPoints to note：
+ * This version ofBCCorrectSM3withSM2The result isasn1Format'srands，If direct concatenation is neededr||sNeed selfselfConvert。BelowrsAsn1ToPlainByteArray、rsPlainByteArrayToAsn1Just doing this。
+ * This version ofBCCorrectSM2The result isC1||C2||C3，It is said to be the old standard，The new standard isC1||C3||C2，Need to use the new standardselfConvert。Below（Commented out）changeC1C2C3ToC1C3C2、changeC1C3C2ToC1C2C3Just doing this。javaThe higher version of the edition has been addedC1C3C2，csharpThe edition might be added in the future too，But not yet，javaThe current version is availableBeginningInitializationtime“ SM2Engine sm2Engine = new SM2Engine(SM2Engine.Mode.C1C3C2);”。
  *
  */
 
@@ -38,7 +38,7 @@ public class GM
      * @param msg
      * @param userId
      * @param privateKey
-     * @return r||s，直接拼接byte数组的rs
+     * @return r||s，Direct concatenationbytenumbergroupofrs
      */
 
     public static byte[] SignSm3WithSm2(byte[] msg, byte[] userId, AsymmetricKeyParameter privateKey)
@@ -66,7 +66,7 @@ public class GM
     *
     * @param msg
     * @param userId
-    * @param rs r||s，直接拼接byte数组的rs
+    * @param rs r||s，Direct concatenationbytenumbergroupofrs
     * @param publicKey
     * @return
     */
@@ -96,14 +96,14 @@ public class GM
     }
 
     /**
-     * bc加解密使用旧标c1||c2||c3，此方法在加密后调用，将结果转化为c1||c3||c2
+     * bcEncryption and decryption use the old tagc1||c2||c3，This method is called after encryption，Convert the result toc1||c3||c2
      * @param c1c2c3
      * @return
      */
 
     private static byte[] ChangeC1C2C3ToC1C3C2(byte[] c1c2c3)
     {
-        int c1Len = (x9ECParameters.Curve.FieldSize + 7) / 8 * 2 + 1; //sm2p256v1的这个固定65。可看GMNamedCurves、ECCurve代码。
+        int c1Len = (x9ECParameters.Curve.FieldSize + 7) / 8 * 2 + 1; // This is fixed to 65 for sm2p256v1. You can see the GMNamedCurves and ECCurve codes.
         const int c3Len = 32; //new SM3Digest().getDigestSize();
         byte[] result = new byte[c1c2c3.Length];
         Buffer.BlockCopy(c1c2c3, 0, result, 0, c1Len); //c1
@@ -113,14 +113,14 @@ public class GM
     }
 
     /**
-     * bc加解密使用旧标c1||c3||c2，此方法在解密前调用，将密文转化为c1||c2||c3再去解密
+     * bcEncryption and decryption use the old tagc1||c3||c2，This method is called before decryption，Convert ciphertext toc1||c2||c3Decrypt again
      * @param c1c3c2
      * @return
      */
 
     private static byte[] ChangeC1C3C2ToC1C2C3(byte[] c1c3c2)
     {
-        int c1Len = (x9ECParameters.Curve.FieldSize + 7) / 8 * 2 + 1; //sm2p256v1的这个固定65。可看GMNamedCurves、ECCurve代码。
+        int c1Len = (x9ECParameters.Curve.FieldSize + 7) / 8 * 2 + 1; // This is fixed to 65 for sm2p256v1. You can see the GMNamedCurves and ECCurve codes.
         const int c3Len = 32; //new SM3Digest().GetDigestSize();
         byte[] result = new byte[c1c3c2.Length];
         Buffer.BlockCopy(c1c3c2, 0, result, 0, c1Len); //c1: 0->65
@@ -217,7 +217,7 @@ public class GM
     }
 
     /**
-     * BC的SM3withSM2签名得到的结果的rs是asn1格式的，这个方法转化成直接拼接r||s
+     * BCofSM3withSM2Signatureof the obtained resultrsYesasn1Format's，This method is converted into direct concatenationr||s
      * @param rsDer rs in asn1 format
      * @return sign result in plain byte array
      */
@@ -234,7 +234,7 @@ public class GM
     }
 
     /**
-     * BC的SM3withSM2验签需要的rs是asn1格式的，这个方法将直接拼接r||s的字节数组转化成asn1格式
+     * BCofSM3withSM2Required for signature verificationrsYesasn1Format's，This method will concatenate directlyr||snumber of bytesgroupconvert intoasn1Format
      * @param sign in plain byte array
      * @return rs result in asn1 format
      */
@@ -253,7 +253,7 @@ public class GM
         return new DerSequence(v).GetEncoded("DER");
     }
 
-    // 生成公私匙对
+    // Generate public and private key pairs
     public static AsymmetricCipherKeyPair GenerateKeyPair()
     {
         ECKeyPairGenerator kpGen = new();
@@ -283,7 +283,7 @@ public class GM
         }
         catch (Exception)
         {
-            //log.Error(file.Name + "读取失败，异常：" + e);
+            //log.Error(file.Name + "Reading failed, exception: " + e);
         }
         finally
         {
@@ -311,7 +311,7 @@ public class GM
     }
 
     /**
-     * 字节数组拼接
+     * Number of bytesgroupsplicing
      *
      * @param params
      * @return
@@ -329,11 +329,11 @@ public class GM
     }
 
     /**
-     * 密钥派生函数
+     * keyDerived function
      *
      * @param Z
      * @param klen
-     * 生成klen字节数长度的密钥
+     * GenerateklenNumber of byteslengthofkey
      * @return
      */
 
@@ -385,7 +385,7 @@ public class GM
     public static byte[] Sm4EncryptECB(byte[] keyBytes, byte[] plain, string algo)
     {
         if (keyBytes.Length != 16) throw new ArgumentException("err key length");
-        //NoPadding 的情况下需要校验数据长度是16的倍数.
+        //In the case of NoPadding, the verification data length needs to be a multiple of 16.
         if (plain.Length % 16 != 0 && algo.Contains("NoPadding")) throw new ArgumentException("err data length");
 
         KeyParameter key = ParameterUtilities.CreateKeyParameter("SM4", keyBytes);
@@ -411,9 +411,9 @@ public class GM
     public const string SM4_CBC_PKCS7PADDING = "SM4/CBC/PKCS7Padding";
 
     /**
-     * cfca官网CSP沙箱导出的sm2文件
-     * @param pem 二进制原文
-     * @param pwd 密码
+     * cfcaOfficial websiteCSPSandboxExportofsm2Document
+     * @param pem TwoOriginal numeral system text
+     * @param pwd password
      * @return
      */
 
@@ -440,7 +440,7 @@ public class GM
         Asn1OctetString pubKeyX509 = (Asn1OctetString)pubSeq[1];
         X509Certificate x509 = new X509CertificateParser().ReadCertificate(pubKeyX509.GetOctets());
         sm2Cert.publicKey = x509.GetPublicKey();
-        sm2Cert.certId = x509.SerialNumber.ToString(10); //这里转10进制，有啥其他进制要求的自己改改
+        sm2Cert.certId = x509.SerialNumber.ToString(10); // This is converted to decimal. If you have any other base requirements, you can change it yourself.
         return sm2Cert;
     }
 
@@ -456,7 +456,7 @@ public class GM
 
         X509Certificate x509 = new X509CertificateParser().ReadCertificate(cert);
         sm2Cert.publicKey = x509.GetPublicKey();
-        sm2Cert.certId = x509.SerialNumber.ToString(10); //这里转10进制，有啥其他进制要求的自己改改
+        sm2Cert.certId = x509.SerialNumber.ToString(10); // This is converted to decimal. If you have any other base requirements, you can change it yourself.
         return sm2Cert;
     }
 

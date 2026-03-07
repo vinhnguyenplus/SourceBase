@@ -9,13 +9,13 @@ import { useThemeConfig } from '/@/stores/themeConfig';
 import { Local } from '/@/utils/storage';
 import { verifyUrl } from '/@/utils/toolsValidate';
 
-// 引入组件
+// Introduce components
 const SvgIcon = defineAsyncComponent(() => import('/@/components/svgIcon/index.vue'));
 
 /**
- * 导出全局注册 element plus svg 图标
- * @param app vue 实例
- * @description 使用：https://element-plus.gitee.io/zh-CN/component/icon.html
+ * ExportGlobal Registration element plus svg icon
+ * @param app vue Example
+ * @description Use：https://element-plus.gitee.io/zh-CN/component/icon.html
  */
 export function elSvg(app: App) {
 	const icons = svg as any;
@@ -26,7 +26,7 @@ export function elSvg(app: App) {
 }
 
 /**
- * 设置浏览器标题国际化
+ * SettingsBrowsertitleInternationalization
  * @method const title = useTitle(); ==> title()
  */
 export function useTitle() {
@@ -46,29 +46,29 @@ export function useTitle() {
 }
 
 /**
- * 设置 自定义 tagsView 名称、 自定义 tagsView 名称国际化
- * @param params 路由 query、params 中的 tagsViewName
- * @returns 返回当前 tagsViewName 名称
+ * Settings Customize tagsView name、 Customize tagsView nameInternationalization
+ * @param params Router query、params inof tagsViewName
+ * @returns Return current tagsViewName name
  */
 export function setTagsViewNameI18n(item: any) {
 	let tagsViewName: string = '';
 	const { query, params, meta } = item;
-	// 修复tagsViewName匹配到其他含下列单词的路由
+	// Fix tagsViewName to match other routes containing the following words
 	const pattern = /^\{("(zh-cn|en|zh-tw)":"[^,]+",?){1,3}}$/;
 	if (query?.tagsViewName || params?.tagsViewName) {
 		tagsViewName = query?.tagsViewName || params?.tagsViewName;
 	} else {
-		// 非自定义 tagsView 名称
+		// Non-custom tagsView name
 		tagsViewName = meta.title;
 	}
 	return tagsViewName;
 }
 
 /**
- * 图片懒加载
- * @param el dom 目标元素
- * @param arr 列表数据
- * @description data-xxx 属性用于存储页面或应用程序的私有自定义数据
+ * Image lazy loading
+ * @param el dom GoalYuanplain
+ * @param arr ListData
+ * @description data-xxx AttributeUsed to store private pages or applicationscustom data
  */
 export const lazyImg = (el: string, arr: EmptyArrayType) => {
 	const io = new IntersectionObserver((res) => {
@@ -89,8 +89,8 @@ export const lazyImg = (el: string, arr: EmptyArrayType) => {
 };
 
 /**
- * 全局组件大小
- * @returns 返回 `window.localStorage` 中读取的缓存值 `globalComponentSize`
+ * GlobalComponent size
+ * @returns Return `window.localStorage` inReadcachevalue `globalComponentSize`
  */
 export const globalComponentSize = (): string => {
 	const stores = useThemeConfig(pinia);
@@ -99,9 +99,9 @@ export const globalComponentSize = (): string => {
 };
 
 /**
- * 对象深克隆
- * @param obj 源对象
- * @returns 克隆后的对象
+ * Deep cloning of objects
+ * @param obj Source Object
+ * @returns Cloned object
  */
 export function deepClone(obj: EmptyObjectType) {
 	let newObj: EmptyObjectType;
@@ -121,7 +121,7 @@ export function deepClone(obj: EmptyObjectType) {
 }
 
 /**
- * 判断是否是移动端
+ * JudgmentYesnoYesMobile
  */
 export function isMobile() {
 	if (navigator.userAgent.match(/('phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone')/i)) {
@@ -132,10 +132,10 @@ export function isMobile() {
 }
 
 /**
- * 判断数组对象中所有属性是否为空，为空则删除当前行对象
- * @description @感谢大黄
- * @param list 数组对象
- * @returns 删除空值后的数组对象
+ * Judgment numbergroupObjectinAllAttributeYesnofornull，fornullthenDeleteCurrent row object
+ * @description @Thanks, Big Huang
+ * @param list numbergroupObject
+ * @returns Deletenullvaluethe number aftergroupObject
  */
 export function handleEmpty(list: EmptyArrayType) {
 	const arr = [];
@@ -153,8 +153,8 @@ export function handleEmpty(list: EmptyArrayType) {
 }
 
 /**
- * 打开外部链接
- * @param val 当前点击项菜单
+ * OpenExternal links
+ * @param val Current clicked itemmenu
  */
 export function handleOpenLink(val: RouteItem) {
 	const { origin, pathname } = window.location;
@@ -164,16 +164,16 @@ export function handleOpenLink(val: RouteItem) {
 }
 
 /**
- * 统一批量导出
- * @method elSvg 导出全局注册 element plus svg 图标
- * @method useTitle 设置浏览器标题国际化
- * @method setTagsViewNameI18n 设置 自定义 tagsView 名称、 自定义 tagsView 名称国际化
- * @method lazyImg 图片懒加载
- * @method globalComponentSize() element plus 全局组件大小
- * @method deepClone 对象深克隆
- * @method isMobile 判断是否是移动端
- * @method handleEmpty 判断数组对象中所有属性是否为空，为空则删除当前行对象
- * @method handleOpenLink 打开外部链接
+ * uniteoneBatchExport
+ * @method elSvg ExportGlobal Registration element plus svg icon
+ * @method useTitle SettingsBrowsertitleInternationalization
+ * @method setTagsViewNameI18n Settings Customize tagsView name、 Customize tagsView nameInternationalization
+ * @method lazyImg Image lazy loading
+ * @method globalComponentSize() element plus GlobalComponent size
+ * @method deepClone Deep cloning of objects
+ * @method isMobile JudgmentYesnoYesMobile
+ * @method handleEmpty Judgment numbergroupObjectinAllAttributeYesnofornull，fornullthenDeleteCurrent row object
+ * @method handleOpenLink OpenExternal links
  */
 const other = {
 	elSvg: (app: App) => {
@@ -205,5 +205,5 @@ const other = {
 	},
 };
 
-// 统一批量导出
+// Unified batch export
 export default other;

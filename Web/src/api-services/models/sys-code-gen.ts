@@ -1,8 +1,8 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Admin.NET 通用权限开发平台
- * 让 .NET 开发更简单、更通用、更流行。整合最新技术，模块插件式开发，前后端分离，开箱即用。<br/><u><b><font color='FF0000'> 👮不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！</font></b></u>
+ * Admin.NET General Permission Development Platform
+ * let .NET Develop more simply、More general、More popular。wholeIn line with the latest technology，Modular Plugin-Based Development，Frontend and backendpointsLeave，Ready to use out of the box。<br/><u><b><font color='FF0000'> 👮This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project! </font></b></u>
  *
  * OpenAPI spec version: 1.0.0
  * 
@@ -14,7 +14,7 @@
 
 import { TableUniqueConfigItem } from './table-unique-config-item';
  /**
- * 代码生成表
+ * code generation table
  *
  * @export
  * @interface SysCodeGen
@@ -22,7 +22,7 @@ import { TableUniqueConfigItem } from './table-unique-config-item';
 export interface SysCodeGen {
 
     /**
-     * 雪花Id
+     * SnowflakeId
      *
      * @type {number}
      * @memberof SysCodeGen
@@ -30,7 +30,7 @@ export interface SysCodeGen {
     id?: number;
 
     /**
-     * 创建时间
+     * Creation Time
      *
      * @type {Date}
      * @memberof SysCodeGen
@@ -38,7 +38,7 @@ export interface SysCodeGen {
     createTime?: Date;
 
     /**
-     * 更新时间
+     * Update Time
      *
      * @type {Date}
      * @memberof SysCodeGen
@@ -46,7 +46,7 @@ export interface SysCodeGen {
     updateTime?: Date | null;
 
     /**
-     * 创建者Id
+     * CreatorId
      *
      * @type {number}
      * @memberof SysCodeGen
@@ -54,7 +54,7 @@ export interface SysCodeGen {
     createUserId?: number | null;
 
     /**
-     * 创建者姓名
+     * Creator name
      *
      * @type {string}
      * @memberof SysCodeGen
@@ -62,7 +62,7 @@ export interface SysCodeGen {
     createUserName?: string | null;
 
     /**
-     * 修改者Id
+     * Modifier ID
      *
      * @type {number}
      * @memberof SysCodeGen
@@ -70,7 +70,7 @@ export interface SysCodeGen {
     updateUserId?: number | null;
 
     /**
-     * 修改者姓名
+     * Modifier name
      *
      * @type {string}
      * @memberof SysCodeGen
@@ -78,7 +78,7 @@ export interface SysCodeGen {
     updateUserName?: string | null;
 
     /**
-     * 作者姓名
+     * Author's Name
      *
      * @type {string}
      * @memberof SysCodeGen
@@ -86,7 +86,7 @@ export interface SysCodeGen {
     authorName?: string | null;
 
     /**
-     * 是否移除表前缀
+     * Whether to remove the table prefix
      *
      * @type {string}
      * @memberof SysCodeGen
@@ -94,7 +94,7 @@ export interface SysCodeGen {
     tablePrefix?: string | null;
 
     /**
-     * 生成方式
+     * Generation method
      *
      * @type {string}
      * @memberof SysCodeGen
@@ -102,7 +102,7 @@ export interface SysCodeGen {
     generateType?: string | null;
 
     /**
-     * 库定位器名
+     * Library Locator Name
      *
      * @type {string}
      * @memberof SysCodeGen
@@ -110,7 +110,7 @@ export interface SysCodeGen {
     configId?: string | null;
 
     /**
-     * 库名
+     * Library name
      *
      * @type {string}
      * @memberof SysCodeGen
@@ -118,7 +118,7 @@ export interface SysCodeGen {
     dbNickName?: string | null;
 
     /**
-     * 数据库名(保留字段)
+     * DataLibrary name(ReserveField)
      *
      * @type {string}
      * @memberof SysCodeGen
@@ -126,7 +126,7 @@ export interface SysCodeGen {
     dbName?: string | null;
 
     /**
-     * 数据库类型
+     * Database type
      *
      * @type {string}
      * @memberof SysCodeGen
@@ -134,7 +134,7 @@ export interface SysCodeGen {
     dbType?: string | null;
 
     /**
-     * 数据库链接
+     * Database link
      *
      * @type {string}
      * @memberof SysCodeGen
@@ -142,7 +142,7 @@ export interface SysCodeGen {
     connectionString?: string | null;
 
     /**
-     * 数据库表名
+     * Database table name
      *
      * @type {string}
      * @memberof SysCodeGen
@@ -150,7 +150,7 @@ export interface SysCodeGen {
     tableName?: string | null;
 
     /**
-     * 命名空间
+     * namespace
      *
      * @type {string}
      * @memberof SysCodeGen
@@ -158,7 +158,7 @@ export interface SysCodeGen {
     nameSpace?: string | null;
 
     /**
-     * 业务名
+     * Business Name
      *
      * @type {string}
      * @memberof SysCodeGen
@@ -166,7 +166,7 @@ export interface SysCodeGen {
     busName?: string | null;
 
     /**
-     * 表唯一字段配置
+     * Table unique field configuration
      *
      * @type {string}
      * @memberof SysCodeGen
@@ -174,7 +174,7 @@ export interface SysCodeGen {
     tableUniqueConfig?: string | null;
 
     /**
-     * 是否生成菜单
+     * Generate menu?
      *
      * @type {boolean}
      * @memberof SysCodeGen
@@ -182,7 +182,7 @@ export interface SysCodeGen {
     generateMenu?: boolean;
 
     /**
-     * 菜单图标
+     * Menu icon
      *
      * @type {string}
      * @memberof SysCodeGen
@@ -190,7 +190,7 @@ export interface SysCodeGen {
     menuIcon?: string | null;
 
     /**
-     * 菜单编码
+     * Menu encoding
      *
      * @type {number}
      * @memberof SysCodeGen
@@ -198,7 +198,7 @@ export interface SysCodeGen {
     menuPid?: number | null;
 
     /**
-     * 页面目录
+     * Page directory
      *
      * @type {string}
      * @memberof SysCodeGen
@@ -206,7 +206,7 @@ export interface SysCodeGen {
     pagePath?: string | null;
 
     /**
-     * 支持打印类型
+     * Supported print types
      *
      * @type {string}
      * @memberof SysCodeGen
@@ -214,7 +214,7 @@ export interface SysCodeGen {
     printType?: string | null;
 
     /**
-     * 打印模版名称
+     * Print Template Name
      *
      * @type {string}
      * @memberof SysCodeGen
@@ -222,7 +222,7 @@ export interface SysCodeGen {
     printName?: string | null;
 
     /**
-     * 表唯一字段列表
+     * table onlyoneFieldList
      *
      * @type {Array<TableUniqueConfigItem>}
      * @memberof SysCodeGen

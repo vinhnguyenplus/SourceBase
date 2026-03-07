@@ -2,7 +2,7 @@
 /* eslint-disable */
 /**
  * ApprovalFlow
- * <br/><u><b><font color='FF0000'> 👮不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！</font></b></u>
+ * <br/><u><b><font color='FF0000'> 👮This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project! </font></b></u>
  *
  * OpenAPI spec version: 1.0.0
  * 
@@ -14,7 +14,7 @@
 import { Filter } from './filter';
 import { Search } from './search';
 /**
- * 审批流分页查询输入参数
+ * Approval workflowpointsPageQueryInputParameter
  * @export
  * @interface ApprovalFlowInput
  */
@@ -26,7 +26,7 @@ export interface ApprovalFlowInput {
      */
     search?: Search;
     /**
-     * 模糊查询关键字
+     * BlurryQueryKeywords
      * @type {string}
      * @memberof ApprovalFlowInput
      */
@@ -38,49 +38,49 @@ export interface ApprovalFlowInput {
      */
     filter?: Filter;
     /**
-     * 当前页码
+     * Current page number
      * @type {number}
      * @memberof ApprovalFlowInput
      */
     page?: number;
     /**
-     * 页码容量
+     * Page capacity
      * @type {number}
      * @memberof ApprovalFlowInput
      */
     pageSize?: number;
     /**
-     * 排序字段
+     * SortField
      * @type {string}
      * @memberof ApprovalFlowInput
      */
     field?: string | null;
     /**
-     * 排序方向
+     * SortDirection
      * @type {string}
      * @memberof ApprovalFlowInput
      */
     order?: string | null;
     /**
-     * 降序排序
+     * Descending orderSort
      * @type {string}
      * @memberof ApprovalFlowInput
      */
     descStr?: string | null;
     /**
-     * 编号
+     * Number
      * @type {string}
      * @memberof ApprovalFlowInput
      */
     code?: string | null;
     /**
-     * 名称
+     * name
      * @type {string}
      * @memberof ApprovalFlowInput
      */
     name?: string | null;
     /**
-     * 备注
+     * Remarks
      * @type {string}
      * @memberof ApprovalFlowInput
      */

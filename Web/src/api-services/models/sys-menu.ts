@@ -1,8 +1,8 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Admin.NET 通用权限开发平台
- * 让 .NET 开发更简单、更通用、更流行。整合最新技术，模块插件式开发，前后端分离，开箱即用。<br/><u><b><font color='FF0000'> 👮不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！</font></b></u>
+ * Admin.NET General Permission Development Platform
+ * let .NET Develop more simply、More general、More popular。wholeIn line with the latest technology，Modular Plugin-Based Development，Frontend and backendpointsLeave，Ready to use out of the box。<br/><u><b><font color='FF0000'> 👮This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project! </font></b></u>
  *
  * OpenAPI spec version: 1.0.0
  * 
@@ -16,7 +16,7 @@ import { MenuTypeEnum } from './menu-type-enum';
 import { StatusEnum } from './status-enum';
 import { SysMenu } from './sys-menu';
  /**
- * 系统菜单表
+ * System Menu Table
  *
  * @export
  * @interface SysMenu
@@ -24,7 +24,7 @@ import { SysMenu } from './sys-menu';
 export interface SysMenu {
 
     /**
-     * 雪花Id
+     * SnowflakeId
      *
      * @type {number}
      * @memberof SysMenu
@@ -32,7 +32,7 @@ export interface SysMenu {
     id?: number;
 
     /**
-     * 创建时间
+     * Creation Time
      *
      * @type {Date}
      * @memberof SysMenu
@@ -40,7 +40,7 @@ export interface SysMenu {
     createTime?: Date;
 
     /**
-     * 更新时间
+     * Update Time
      *
      * @type {Date}
      * @memberof SysMenu
@@ -48,7 +48,7 @@ export interface SysMenu {
     updateTime?: Date | null;
 
     /**
-     * 创建者Id
+     * CreatorId
      *
      * @type {number}
      * @memberof SysMenu
@@ -56,7 +56,7 @@ export interface SysMenu {
     createUserId?: number | null;
 
     /**
-     * 创建者姓名
+     * Creator name
      *
      * @type {string}
      * @memberof SysMenu
@@ -64,7 +64,7 @@ export interface SysMenu {
     createUserName?: string | null;
 
     /**
-     * 修改者Id
+     * Modifier ID
      *
      * @type {number}
      * @memberof SysMenu
@@ -72,7 +72,7 @@ export interface SysMenu {
     updateUserId?: number | null;
 
     /**
-     * 修改者姓名
+     * Modifier name
      *
      * @type {string}
      * @memberof SysMenu
@@ -80,7 +80,7 @@ export interface SysMenu {
     updateUserName?: string | null;
 
     /**
-     * 父Id
+     * Parent ID
      *
      * @type {number}
      * @memberof SysMenu
@@ -94,7 +94,7 @@ export interface SysMenu {
     type?: MenuTypeEnum;
 
     /**
-     * 路由名称
+     * Route Name
      *
      * @type {string}
      * @memberof SysMenu
@@ -102,7 +102,7 @@ export interface SysMenu {
     name?: string | null;
 
     /**
-     * 路由地址
+     * Routing Address
      *
      * @type {string}
      * @memberof SysMenu
@@ -110,7 +110,7 @@ export interface SysMenu {
     path?: string | null;
 
     /**
-     * 组件路径
+     * component path
      *
      * @type {string}
      * @memberof SysMenu
@@ -118,7 +118,7 @@ export interface SysMenu {
     component?: string | null;
 
     /**
-     * 重定向
+     * Redirect
      *
      * @type {string}
      * @memberof SysMenu
@@ -126,7 +126,7 @@ export interface SysMenu {
     redirect?: string | null;
 
     /**
-     * 权限标识
+     * Permission Identifier
      *
      * @type {string}
      * @memberof SysMenu
@@ -134,7 +134,7 @@ export interface SysMenu {
     permission?: string | null;
 
     /**
-     * 菜单名称
+     * Menu name
      *
      * @type {string}
      * @memberof SysMenu
@@ -142,7 +142,7 @@ export interface SysMenu {
     title: string;
 
     /**
-     * 图标
+     * icon
      *
      * @type {string}
      * @memberof SysMenu
@@ -150,7 +150,7 @@ export interface SysMenu {
     icon?: string | null;
 
     /**
-     * 是否内嵌
+     * YesnoEmbedded
      *
      * @type {boolean}
      * @memberof SysMenu
@@ -158,7 +158,7 @@ export interface SysMenu {
     isIframe?: boolean;
 
     /**
-     * 外链链接
+     * External links
      *
      * @type {string}
      * @memberof SysMenu
@@ -166,7 +166,7 @@ export interface SysMenu {
     outLink?: string | null;
 
     /**
-     * 是否隐藏
+     * Whether to hide
      *
      * @type {boolean}
      * @memberof SysMenu
@@ -174,7 +174,7 @@ export interface SysMenu {
     isHide?: boolean;
 
     /**
-     * 是否缓存
+     * Whether to cache
      *
      * @type {boolean}
      * @memberof SysMenu
@@ -182,7 +182,7 @@ export interface SysMenu {
     isKeepAlive?: boolean;
 
     /**
-     * 是否固定
+     * Is it fixed?
      *
      * @type {boolean}
      * @memberof SysMenu
@@ -190,7 +190,7 @@ export interface SysMenu {
     isAffix?: boolean;
 
     /**
-     * 排序
+     * Sort
      *
      * @type {number}
      * @memberof SysMenu
@@ -204,7 +204,7 @@ export interface SysMenu {
     status?: StatusEnum;
 
     /**
-     * 备注
+     * Remarks
      *
      * @type {string}
      * @memberof SysMenu
@@ -212,7 +212,7 @@ export interface SysMenu {
     remark?: string | null;
 
     /**
-     * 菜单子项
+     * menuchilditem
      *
      * @type {Array<SysMenu>}
      * @memberof SysMenu

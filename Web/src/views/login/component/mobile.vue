@@ -1,7 +1,7 @@
 <template>
 	<el-form size="large" class="login-content-form">
 		<el-form-item class="login-animation1" v-if="!props.tenantInfo.id && !themeConfig.hideTenantForLogin">
-			<el-select v-model="state.ruleForm.tenantId" placeholder="请选择租户" clearable style="width: 100%" filterable>
+			<el-select v-model="state.ruleForm.tenantId" placeholder="Please select a tenant" clearable style="width: 100%" filterable>
 				<template #prefix>
 					<i class="iconfont icon-shuxingtu el-input__icon"></i>
 				</template>
@@ -9,7 +9,7 @@
 			</el-select>
 		</el-form-item>
 		<el-form-item class="login-animation1">
-			<el-input text placeholder="请输入手机号" v-model="state.ruleForm.phone" clearable autocomplete="off">
+			<el-input text placeholder="Please enter your phone number" v-model="state.ruleForm.phone" clearable autocomplete="off">
 				<template #prefix>
 					<i class="iconfont icon-dianhua el-input__icon"></i>
 				</template>
@@ -17,7 +17,7 @@
 		</el-form-item>
 		<el-form-item class="login-animation2">
 			<el-col :span="15">
-				<el-input text maxlength="6" placeholder="请输入验证码" v-model="state.ruleForm.code" clearable autocomplete="off">
+				<el-input text maxlength="6" placeholder="Please enter the verification code" v-model="state.ruleForm.code" clearable autocomplete="off">
 					<template #prefix>
 						<el-icon class="el-input__icon"><ele-Position /></el-icon>
 					</template>
@@ -32,10 +32,10 @@
 		</el-form-item>
 		<el-form-item class="login-animation3">
 			<el-button round type="primary" v-waves class="login-content-submit" @click="onSignIn">
-				<span>登 录</span>
+				<span>Log in</span>
 			</el-button>
 		</el-form-item>
-		<div class="font12 mt30 login-animation4 login-msg">* 温馨提示：建议使用谷歌、Microsoft Edge，版本 79.0.1072.62 及以上浏览器，360浏览器请使用极速模式</div>
+		<div class="font12 mt30 login-animation4 login-msg">* Warm reminder: It is recommended to use Google, Microsoft Edge, version 79.0.1072.62 and above browsers, please use the fast mode for 360 browsers</div>
 	</el-form>
 </template>
 
@@ -62,51 +62,51 @@ const state = reactive({
 		phone: '',
 		code: '',
 	},
-	btnText: '获取验证码',
+	btnText: 'ObtainVerification Code',
 	loading: false,
 	disabled: false,
 	timer: null as any,
 });
 
-// 获取短信验证码
+// Get SMS verification code
 const getSmsCode = async () => {
 	state.ruleForm.code = '';
 	if (!verifyPhone(state.ruleForm.phone)) {
-		ElMessage.error('请正确输入手机号码！');
+		ElMessage.error('Please enter the phone number correctly!');
 		return;
 	}
 
 	await getAPI(SysSmsApi).apiSysSmsSendSmsPhoneNumberTemplateIdPost(state.ruleForm.phone, '0');
 
-	// 倒计时期间禁止点击
+	// Clicking is prohibited during the countdown
 	state.disabled = true;
 
-	// 清除定时器
+	// clear timer
 	state.timer && clearInterval(state.timer);
 
-	// 开启定时器
+	// Start timer
 	var duration = 60;
 	state.timer = setInterval(() => {
 		duration--;
-		state.btnText = `${duration} 秒后重新获取`;
+		state.btnText = `${duration} secondafter againObtain`;
 		if (duration <= 0) {
-			state.btnText = '获取验证码';
-			state.disabled = false; // 恢复按钮可以点击
-			clearInterval(state.timer); // 清除掉定时器
+			state.btnText = 'ObtainVerification Code';
+			state.disabled = false; // The restore button is clickable
+			clearInterval(state.timer); // clear timer
 		}
 	}, 1000);
 };
 
-// 登录
+// Log in
 const onSignIn = async () => {
 	state.ruleForm.tenantId ??= props.tenantInfo.id ?? props.tenantInfo.list[0]?.value ?? undefined;
 	const res = await getAPI(SysAuthApi).apiSysAuthLoginPhonePost(state.ruleForm);
 	if (res.data.result?.accessToken == undefined) {
-		ElMessage.error('登录失败，请检查账号！');
+		ElMessage.error('LoginFailure，Please checkAccount number！');
 		return;
 	}
 
-	// // 系统登录
+	// // System login
 	// await accountRef.value?.saveTokenAndInitRoutes(res.data.result?.accessToken);
 };
 </script>

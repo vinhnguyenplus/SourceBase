@@ -1,8 +1,8 @@
-// Admin.NET 项目的版权、商标、专利和其他相关权利均受相应法律法规的保护。使用本项目应遵守相关法律法规和许可证的要求。
+// The copyright, trademark, patent and other related rights of the Admin.NET project are protected by corresponding laws and regulations. Use of this project shall comply with relevant laws, regulations and license requirements.
 //
-// 本项目主要遵循 MIT 许可证和 Apache 许可证（版本 2.0）进行分发和使用。许可证位于源代码树根目录中的 LICENSE-MIT 和 LICENSE-APACHE 文件。
+// This project is distributed and used primarily under the MIT License and the Apache License (version 2.0). The license is located in the LICENSE-MIT and LICENSE-APACHE files in the root of the source tree.
 //
-// 不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！
+// This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project!
 
 using MiniExcelLibs;
 
@@ -14,17 +14,17 @@ public static class MiniExcelUtil
     private const string DirectoryName = "export";
 
     /// <summary>
-    /// 导出模板Excel
+    /// Export template Excel
     /// </summary>
     /// <returns></returns>
     public static async Task<IActionResult> ExportExcelTemplate<T>(string fileName = null) where T : class, new()
     {
         var values = Array.Empty<T>();
-        // 在内存中当开辟空间
+        // Create space in memory
         var memoryStream = new MemoryStream();
-        // 将数据写到内存当中
+        // Write data to memory
         await memoryStream.SaveAsAsync(values, sheetName: SheetName);
-        // 从0的位置开始写入
+        // Start writing from position 0
         memoryStream.Seek(0, SeekOrigin.Begin);
         return new FileStreamResult(memoryStream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
         {
@@ -33,7 +33,7 @@ public static class MiniExcelUtil
     }
 
     /// <summary>
-    /// 获取导入数据Excel
+    /// Get imported data Excel
     /// </summary>
     /// <param name="file"></param>
     /// <returns></returns>
@@ -46,7 +46,7 @@ public static class MiniExcelUtil
     }
 
     /// <summary>
-    /// 获取导出数据excel地址
+    /// Get exported data excel address
     /// </summary>
     /// <returns></returns>
     public static async Task<string> GetExportDataExcelUrl<T>(IEnumerable<T> exportData) where T : class, new()
@@ -62,7 +62,7 @@ public static class MiniExcelUtil
         }
         catch (Exception error)
         {
-            throw Oops.Oh("出现错误：" + error);
+            throw Oops.Oh("An error occurred:" + error);
         }
         var host = CommonUtil.GetLocalhost();
         return $"{host}/{DirectoryName}/{fileName}";

@@ -12,7 +12,7 @@
 					<img :src="state.cropperImg" class="cropper-warp-left-img" />
 				</div>
 				<div class="cropper-warp-right">
-					<div class="cropper-warp-right-title">预览</div>
+					<div class="cropper-warp-right-title">Preview</div>
 					<div class="cropper-warp-right-item">
 						<div class="cropper-warp-right-value">
 							<img :src="state.cropperImgBase64" class="cropper-warp-right-value-img" />
@@ -38,10 +38,10 @@
 						:on-change="selectPicture"
 						:on-exceed="selectPictureExceed"
 					>
-						<el-button icon="ele-Picture">选择图片</el-button>
+						<el-button icon="ele-Picture">Select picture</el-button>
 					</el-upload>
-					<el-button @click="onCancel">取 消</el-button>
-					<el-button type="primary" @click="onSubmit">确 定</el-button>
+					<el-button @click="onCancel">Cancel</el-button>
+					<el-button type="primary" @click="onSubmit">Confirm</el-button>
 				</span>
 			</template>
 		</el-dialog>
@@ -63,7 +63,7 @@ const props = defineProps({
 });
 const emits = defineEmits(['uploadCropperImg']);
 const uploadSignRef = ref<UploadInstance>();
-// 定义变量内容
+// Define variable content
 const state = reactive({
 	isShowDialog: false,
 	cropperImg: '',
@@ -71,7 +71,7 @@ const state = reactive({
 	cropper: '' as RefType,
 });
 
-// 打开弹窗
+// Open pop-up window
 const openDialog = (imgs: string) => {
 	state.cropperImg = imgs;
 	state.isShowDialog = true;
@@ -79,22 +79,22 @@ const openDialog = (imgs: string) => {
 		initCropper();
 	});
 };
-// 关闭弹窗
+// Close pop-up window
 const closeDialog = () => {
 	state.cropper.destroy();
 	state.isShowDialog = false;
 };
-// 取消
+// Cancel
 const onCancel = () => {
 	closeDialog();
 };
-// 更换/上传
+// Change/upload
 const onSubmit = async () => {
 	const img = await getCroppedCanvas();
 	emits('uploadCropperImg', { img: img });
 	closeDialog();
 };
-// 初始化cropperjs图片裁剪
+// Initialize cropperjs image cropping
 const initCropper = () => {
 	const letImg = <HTMLImageElement>document.querySelector('.cropper-warp-left-img');
 	if (letImg) {
@@ -116,7 +116,7 @@ const initCropper = () => {
 	});
 };
 
-// 获取裁切后的图片 (包装为Promise)
+// Get the cropped image (wrapped in Promise)
 const getCroppedCanvas = () => {
 	return new Promise((resolve) => {
 		state.cropper.getCroppedCanvas().toBlob((blob: any) => {
@@ -125,14 +125,14 @@ const getCroppedCanvas = () => {
 	});
 };
 
-// 选择图片
+// Select picture
 const selectPicture = async (file: any) => {
 	let URL = window.URL || window.webkitURL;
 	state.cropperImg = URL.createObjectURL(file.raw);
 	state.cropper.replace(state.cropperImg);
 };
 
-// 选择图片超出数量限制时执行
+// Executed when the number of selected pictures exceeds the limit
 const selectPictureExceed: UploadProps['onExceed'] = (files) => {
 	uploadSignRef.value!.clearFiles();
 	const file = files[0] as UploadRawFile;
@@ -140,7 +140,7 @@ const selectPictureExceed: UploadProps['onExceed'] = (files) => {
 	uploadSignRef.value!.handleStart(file);
 };
 
-// 暴露变量
+// exposure variables
 defineExpose({
 	openDialog,
 });

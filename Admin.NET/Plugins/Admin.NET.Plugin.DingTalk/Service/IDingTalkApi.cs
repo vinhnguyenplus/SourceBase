@@ -1,26 +1,26 @@
-﻿// Admin.NET 项目的版权、商标、专利和其他相关权利均受相应法律法规的保护。使用本项目应遵守相关法律法规和许可证的要求。
+﻿// The copyright, trademark, patent and other related rights of the Admin.NET project are protected by corresponding laws and regulations. Use of this project shall comply with relevant laws, regulations and license requirements.
 //
-// 本项目主要遵循 MIT 许可证和 Apache 许可证（版本 2.0）进行分发和使用。许可证位于源代码树根目录中的 LICENSE-MIT 和 LICENSE-APACHE 文件。
+// This project is distributed and used primarily under the MIT License and the Apache License (version 2.0). The license is located in the LICENSE-MIT and LICENSE-APACHE files in the root of the source tree.
 //
-// 不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！
+// This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project!
 
 namespace Admin.NET.Plugin.DingTalk;
 
 public interface IDingTalkApi : IHttpDeclarative
 {
     /// <summary>
-    /// 获取企业内部应用的access_token
+    /// Obtain the access_token of the internal application of the enterprise
     /// </summary>
-    /// <param name="appkey">应用的唯一标识key</param>
-    /// <param name="appsecret"> 应用的密钥。AppKey和AppSecret可在钉钉开发者后台的应用详情页面获取。</param>
+    /// <param name="appkey">The unique identification key of the application</param>
+    /// <param name="appsecret"> The application key. AppKey and AppSecret can be obtained from the application details page of DingTalk Developer Backend.</param>
     /// <returns></returns>
     [Get("https://oapi.dingtalk.com/gettoken")]
     Task<GetDingTalkTokenOutput> GetDingTalkToken([Query] string appkey, [Query] string appsecret);
 
     /// <summary>
-    /// 获取在职员工列表
+    /// Get a list of current employees
     /// </summary>
-    /// <param name="access_token">调用该接口的应用凭证</param>
+    /// <param name="access_token">Application credentials for calling this interface</param>
     /// <param name="input"></param>
     /// <returns></returns>
     [Post("https://oapi.dingtalk.com/topapi/smartwork/hrm/employee/queryonjob")]
@@ -33,9 +33,9 @@ public interface IDingTalkApi : IHttpDeclarative
     );
 
     /// <summary>
-    /// 获取员工花名册字段信息
+    /// Get employee roster field information
     /// </summary>
-    /// <param name="access_token">调用该接口的应用凭证</param>
+    /// <param name="access_token">Application credentials for calling this interface</param>
     /// <param name="input"></param>
     /// <returns></returns>
     [Post("https://oapi.dingtalk.com/topapi/smartwork/hrm/employee/v2/list")]
@@ -48,14 +48,14 @@ public interface IDingTalkApi : IHttpDeclarative
     );
 
     /// <summary>
-    /// 发送钉钉互动卡片
+    /// Send DingTalk interactive cards
     /// </summary>
-    /// <param name="token">调用该接口的访问凭证</param>
+    /// <param name="token">Access credentials for calling this interface</param>
     /// <param name="input"></param>
     /// <returns></returns>
     /// <remarks>
-    /// 钉钉官方文档显示接口不再支持新应用接入, 已接入的应用可继续调用
-    /// 推荐更新接口https://open.dingtalk.com/document/orgapp/create-and-deliver-cards?spm=ding_open_doc.document.0.0.67fc50988Pf0mc
+    /// DingTalk’s official documentation shows that the interface no longer supports the access of new applications, and already accessed applications can continue to be called.
+    /// Recommended update interface https://open.dingtalk.com/document/orgapp/create-and-deliver-cards?spm=ding_open_doc.document.0.0.67fc50988Pf0mc
     /// </remarks>
     [Post("https://api.dingtalk.com/v1.0/im/interactiveCards/send")]
     [Obsolete]
@@ -66,7 +66,7 @@ public interface IDingTalkApi : IHttpDeclarative
     );
 
     /// <summary>
-    /// 获取钉钉卡片消息读取状态
+    /// Get DingTalk card message reading status
     /// </summary>
     /// <param name="token"></param>
     /// <param name="input"></param>
@@ -78,9 +78,9 @@ public interface IDingTalkApi : IHttpDeclarative
     );
 
     /// <summary>
-    /// 获取角色列表
+    /// Get role list
     /// </summary>
-    /// <param name="access_token">调用该接口的应用凭证</param>
+    /// <param name="access_token">Application credentials for calling this interface</param>
     /// <param name="input"></param>
     /// <returns></returns>
     [Post("https://oapi.dingtalk.com/topapi/role/list")]
@@ -91,9 +91,9 @@ public interface IDingTalkApi : IHttpDeclarative
     );
 
     /// <summary>
-    /// 获取指定角色的员工列表
+    /// Get a list of employees with a specified role
     /// </summary>
-    /// <param name="access_token">调用该接口的应用凭证</param>
+    /// <param name="access_token">Application credentials for calling this interface</param>
     /// <param name="input"></param>
     /// <returns></returns>
     [Post("https://oapi.dingtalk.com/topapi/role/simplelist")]
@@ -104,7 +104,7 @@ public interface IDingTalkApi : IHttpDeclarative
     );
 
     /// <summary>
-    /// 创建并投放钉钉消息卡片
+    /// Create and deliver DingTalk message cards
     /// </summary>
     /// <param name="token"></param>
     /// <param name="input"></param>
@@ -117,9 +117,9 @@ public interface IDingTalkApi : IHttpDeclarative
     );
 
     /// <summary>
-    /// 获取部门列表列表
+    /// Get list of department lists
     /// </summary>
-    /// <param name="access_token">调用该接口的应用凭证</param>
+    /// <param name="access_token">Application credentials for calling this interface</param>
     /// <param name="input"></param>
     /// <returns></returns>
     [Post("https://oapi.dingtalk.com/topapi/v2/department/listsub")]
@@ -130,7 +130,7 @@ public interface IDingTalkApi : IHttpDeclarative
     );
 
     /// <summary>
-    /// 发起审批实例
+    /// Initiate an approval instance
     /// </summary>
     /// <param name="token"></param>
     /// <param name="input"></param>
@@ -143,7 +143,7 @@ public interface IDingTalkApi : IHttpDeclarative
     );
 
     /// <summary>
-    /// 查询审批实例
+    /// Query approval examples
     /// </summary>
     /// <param name="token"></param>
     /// <param name="processInstanceId"></param>

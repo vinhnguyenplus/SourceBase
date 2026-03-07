@@ -1,7 +1,7 @@
 <template>
 	<div class="layout-navbars-close-full" v-if="isTagsViewCurrenFull">
 		<div class="layout-navbars-close-full-icon">
-			<SvgIcon name="ele-Close" title="关闭全屏" @click="onCloseFullscreen" />
+			<SvgIcon name="ele-Close" title="Exit full screen" @click="onCloseFullscreen" />
 		</div>
 	</div>
 </template>
@@ -10,11 +10,11 @@
 import { storeToRefs } from 'pinia';
 import { useTagsViewRoutes } from '/@/stores/tagsViewRoutes';
 
-// 定义变量内容
+// Define variable content
 const stores = useTagsViewRoutes();
 const { isTagsViewCurrenFull } = storeToRefs(stores);
 
-// 关闭当前全屏
+// Close current full screen
 const onCloseFullscreen = () => {
 	stores.setCurrenFullscreen(false);
 };

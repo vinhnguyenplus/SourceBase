@@ -1,8 +1,8 @@
-// Admin.NET 项目的版权、商标、专利和其他相关权利均受相应法律法规的保护。使用本项目应遵守相关法律法规和许可证的要求。
+// The copyright, trademark, patent and other related rights of the Admin.NET project are protected by corresponding laws and regulations. Use of this project shall comply with relevant laws, regulations and license requirements.
 //
-// 本项目主要遵循 MIT 许可证和 Apache 许可证（版本 2.0）进行分发和使用。许可证位于源代码树根目录中的 LICENSE-MIT 和 LICENSE-APACHE 文件。
+// This project is distributed and used primarily under the MIT License and the Apache License (version 2.0). The license is located in the LICENSE-MIT and LICENSE-APACHE files in the root of the source tree.
 //
-// 不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！
+// This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project!
 
 using Microsoft.AspNetCore.Authentication;
 using System.Security.Claims;
@@ -12,7 +12,7 @@ using System.Text.Encodings.Web;
 namespace Admin.NET.Core;
 
 /// <summary>
-/// Signature 身份验证处理
+/// Signature authentication processing
 /// </summary>
 public sealed class SignatureAuthenticationHandler : AuthenticationHandler<SignatureAuthenticationOptions>
 {
@@ -46,30 +46,30 @@ public sealed class SignatureAuthenticationHandler : AuthenticationHandler<Signa
     }
 
     /// <summary>
-    /// 确保创建的 Event 类型是 DigestEvents
+    /// Make sure the Event type you create is DigestEvents
     /// </summary>
     /// <returns></returns>
-    protected override Task<object> CreateEventsAsync() => throw new NotImplementedException($"{nameof(SignatureAuthenticationOptions)}.{nameof(SignatureAuthenticationOptions.Events)} 需要提供一个实例");
+    protected override Task<object> CreateEventsAsync() => throw new NotImplementedException($"{nameof(SignatureAuthenticationOptions)}.{nameof(SignatureAuthenticationOptions.Events)} requires an instance to be provided");
 
     protected override async Task<AuthenticateResult> HandleAuthenticateAsync()
     {
         var accessKey = Request.Headers["accessKey"].FirstOrDefault();
-        var timestampStr = Request.Headers["timestamp"].FirstOrDefault(); // 精确到秒
+        var timestampStr = Request.Headers["timestamp"].FirstOrDefault(); // Accurate to the second
         var nonce = Request.Headers["nonce"].FirstOrDefault();
         var sign = Request.Headers["sign"].FirstOrDefault();
 
         if (string.IsNullOrEmpty(accessKey))
-            return await AuthenticateResultFailAsync("accessKey 不能为空");
+            return await AuthenticateResultFailAsync("accessKey cannot be empty");
         if (string.IsNullOrEmpty(timestampStr))
-            return await AuthenticateResultFailAsync("timestamp 不能为空");
+            return await AuthenticateResultFailAsync("timestamp cannot be empty");
         if (string.IsNullOrEmpty(nonce))
-            return await AuthenticateResultFailAsync("nonce 不能为空");
+            return await AuthenticateResultFailAsync("Nonce cannot be empty");
         if (string.IsNullOrEmpty(sign))
-            return await AuthenticateResultFailAsync("sign 不能为空");
+            return await AuthenticateResultFailAsync("sign cannot be empty");
 
-        // 验证请求数据是否在可接受的时间内
+        // Verify that the requested data is within an acceptable time
         if (!long.TryParse(timestampStr, out var timestamp))
-            return await AuthenticateResultFailAsync("timestamp 值不合法");
+            return await AuthenticateResultFailAsync("timestamp value is illegal");
 
         var requestDate = DateTimeUtil.ConvertUnixTime(timestamp);
 
@@ -79,27 +79,27 @@ public sealed class SignatureAuthenticationHandler : AuthenticationHandler<Signa
         var utcNow = TimeProvider.GetUtcNow();
 #endif
         if (requestDate > utcNow.Add(Options.AllowedDateDrift).LocalDateTime || requestDate < utcNow.Subtract(Options.AllowedDateDrift).LocalDateTime)
-            return await AuthenticateResultFailAsync("timestamp 值已超过允许的偏差范围");
+            return await AuthenticateResultFailAsync("The timestamp value exceeds the allowed deviation range");
 
-        // 获取 accessSecret
+        // Get accessSecret
         var getAccessSecretContext = new GetAccessSecretContext(Context, Scheme, Options) { AccessKey = accessKey };
         var accessSecret = await Events.GetAccessSecret(getAccessSecretContext);
         if (string.IsNullOrEmpty(accessSecret))
-            return await AuthenticateResultFailAsync("accessKey 无效");
+            return await AuthenticateResultFailAsync("accessKey Noneeffect");
 
-        // 校验签名
+        // Verify signature
         var appSecretByte = Encoding.UTF8.GetBytes(accessSecret);
         string serverSign = SignData(appSecretByte, GetMessageForSign(Context));
 
         if (serverSign != sign)
-            return await AuthenticateResultFailAsync("sign 无效的签名");
+            return await AuthenticateResultFailAsync("sign Invalid signature");
 
-        // 重放检测
+        // Replay detection
         var cacheKey = $"{CacheConst.KeyOpenAccessNonce}{accessKey}|{nonce}";
-        if (_sysCacheService.ExistKey(cacheKey)) return await AuthenticateResultFailAsync("重复的请求");
-        _sysCacheService.Set(cacheKey, null, Options.AllowedDateDrift * 2); // 缓存过期时间为偏差范围时间的2倍
+        if (_sysCacheService.ExistKey(cacheKey)) return await AuthenticateResultFailAsync("Duplicate request");
+        _sysCacheService.Set(cacheKey, null, Options.AllowedDateDrift * 2); // The cache expiration time is twice the deviation range time
 
-        // 已验证成功
+        // Verified successfully
         var signatureValidatedContext = new SignatureValidatedContext(Context, Scheme, Options)
         {
             Principal = new ClaimsPrincipal(new ClaimsIdentity(SignatureAuthenticationDefaults.AuthenticationScheme)),
@@ -123,29 +123,29 @@ public sealed class SignatureAuthenticationHandler : AuthenticationHandler<Signa
             AuthenticateFailure = authResult.Failure,
         };
         await Events.Challenge(challengeContext);
-        // 质询已处理
+        // Inquiry has been handled
         if (challengeContext.Handled) return;
 
         await base.HandleChallengeAsync(properties);
     }
 
     /// <summary>
-    /// 获取用于签名的消息
+    /// Get the message for signing
     /// </summary>
     /// <returns></returns>
     private static string GetMessageForSign(HttpContext context)
     {
-        var method = context.Request.Method; // 请求方法（大写）
-        var url = context.Request.Path; // 请求 url，去除协议、域名、参数，以 / 开头
-        var accessKey = context.Request.Headers["accessKey"].FirstOrDefault(); // 身份标识
-        var timestamp = context.Request.Headers["timestamp"].FirstOrDefault(); // 时间戳，精确到秒
-        var nonce = context.Request.Headers["nonce"].FirstOrDefault(); // 唯一随机数
+        var method = context.Request.Method; // Request method (uppercase)
+        var url = context.Request.Path; // Request url, remove protocol, domain name, parameters, start with /
+        var accessKey = context.Request.Headers["accessKey"].FirstOrDefault(); // Identity mark
+        var timestamp = context.Request.Headers["timestamp"].FirstOrDefault(); // Timestamp, accurate to seconds
+        var nonce = context.Request.Headers["nonce"].FirstOrDefault(); // unique random number
 
         return $"{method}&{url}&{accessKey}&{timestamp}&{nonce}";
     }
 
     /// <summary>
-    /// 对数据进行签名
+    /// Sign data
     /// </summary>
     /// <param name="secret"></param>
     /// <param name="data"></param>
@@ -164,13 +164,13 @@ public sealed class SignatureAuthenticationHandler : AuthenticationHandler<Signa
     }
 
     /// <summary>
-    /// 返回验证失败结果，并在 Items 中增加 <see cref="SignatureAuthenticationDefaults.AuthenticateFailMsgKey"/>，记录身份验证失败消息
+    /// Return the verification failure result, and add <see cref="SignatureAuthenticationDefaults.AuthenticateFailMsgKey"/> in Items to record the authentication failure message
     /// </summary>
     /// <param name="message"></param>
     /// <returns></returns>
     private Task<AuthenticateResult> AuthenticateResultFailAsync(string message)
     {
-        // 写入身份验证失败消息
+        // Write authentication failure message
         Context.Items[SignatureAuthenticationDefaults.AuthenticateFailMsgKey] = message;
         return Task.FromResult(AuthenticateResult.Fail(message));
     }

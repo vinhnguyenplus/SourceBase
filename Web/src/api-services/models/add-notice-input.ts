@@ -1,8 +1,8 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Admin.NET 通用权限开发平台
- * 让 .NET 开发更简单、更通用、更流行。整合最新技术，模块插件式开发，前后端分离，开箱即用。<br/><u><b><font color='FF0000'> 👮不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！</font></b></u>
+ * Admin.NET General Permission Development Platform
+ * let .NET Develop more simply、More general、More popular。wholeIn line with the latest technology，Modular Plugin-Based Development，Frontend and backendpointsLeave，Ready to use out of the box。<br/><u><b><font color='FF0000'> 👮This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project! </font></b></u>
  *
  * OpenAPI spec version: 1.0.0
  * 
@@ -23,7 +23,7 @@ import { NoticeTypeEnum } from './notice-type-enum';
 export interface AddNoticeInput {
 
     /**
-     * 雪花Id
+     * SnowflakeId
      *
      * @type {number}
      * @memberof AddNoticeInput
@@ -31,7 +31,7 @@ export interface AddNoticeInput {
     id?: number;
 
     /**
-     * 创建时间
+     * Creation Time
      *
      * @type {Date}
      * @memberof AddNoticeInput
@@ -39,7 +39,7 @@ export interface AddNoticeInput {
     createTime?: Date;
 
     /**
-     * 更新时间
+     * Update Time
      *
      * @type {Date}
      * @memberof AddNoticeInput
@@ -47,7 +47,7 @@ export interface AddNoticeInput {
     updateTime?: Date | null;
 
     /**
-     * 创建者Id
+     * CreatorId
      *
      * @type {number}
      * @memberof AddNoticeInput
@@ -55,7 +55,7 @@ export interface AddNoticeInput {
     createUserId?: number | null;
 
     /**
-     * 创建者姓名
+     * Creator name
      *
      * @type {string}
      * @memberof AddNoticeInput
@@ -63,7 +63,7 @@ export interface AddNoticeInput {
     createUserName?: string | null;
 
     /**
-     * 修改者Id
+     * Modifier ID
      *
      * @type {number}
      * @memberof AddNoticeInput
@@ -71,7 +71,7 @@ export interface AddNoticeInput {
     updateUserId?: number | null;
 
     /**
-     * 修改者姓名
+     * Modifier name
      *
      * @type {string}
      * @memberof AddNoticeInput
@@ -79,7 +79,7 @@ export interface AddNoticeInput {
     updateUserName?: string | null;
 
     /**
-     * 标题
+     * title
      *
      * @type {string}
      * @memberof AddNoticeInput
@@ -87,7 +87,7 @@ export interface AddNoticeInput {
     title: string;
 
     /**
-     * 内容
+     * content
      *
      * @type {string}
      * @memberof AddNoticeInput
@@ -101,7 +101,7 @@ export interface AddNoticeInput {
     type?: NoticeTypeEnum;
 
     /**
-     * 发布人Id
+     * PublisherId
      *
      * @type {number}
      * @memberof AddNoticeInput
@@ -109,7 +109,7 @@ export interface AddNoticeInput {
     publicUserId?: number;
 
     /**
-     * 发布人姓名
+     * Publisher name
      *
      * @type {string}
      * @memberof AddNoticeInput
@@ -117,7 +117,7 @@ export interface AddNoticeInput {
     publicUserName?: string | null;
 
     /**
-     * 发布机构Id
+     * Issuing Organization Id
      *
      * @type {number}
      * @memberof AddNoticeInput
@@ -125,7 +125,7 @@ export interface AddNoticeInput {
     publicOrgId?: number;
 
     /**
-     * 发布机构名称
+     * Issuing organization name
      *
      * @type {string}
      * @memberof AddNoticeInput
@@ -133,7 +133,7 @@ export interface AddNoticeInput {
     publicOrgName?: string | null;
 
     /**
-     * 发布时间
+     * Release Time
      *
      * @type {Date}
      * @memberof AddNoticeInput
@@ -141,7 +141,7 @@ export interface AddNoticeInput {
     publicTime?: Date | null;
 
     /**
-     * 撤回时间
+     * Withdrawal Time
      *
      * @type {Date}
      * @memberof AddNoticeInput

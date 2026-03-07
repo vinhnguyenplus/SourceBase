@@ -2,39 +2,39 @@
 	<div class="sys-server-container">
 		<el-row :gutter="8">
 			<el-col :md="12" :sm="24">
-				<el-card shadow="hover" header="系统信息">
+				<el-card shadow="hover" header="System information">
 					<table class="sysInfo_table">
 						<tbody>
 							<tr>
-								<td class="sysInfo_td">主机名称：</td>
+								<td class="sysInfo_td">Host name:</td>
 								<td class="sysInfo_td">{{ state.machineBaseInfo.hostName }}</td>
 							</tr>
 							<tr>
-								<td class="sysInfo_td">操作系统：</td>
+								<td class="sysInfo_td">Operating system:</td>
 								<td class="sysInfo_td">{{ state.machineBaseInfo.systemOs }}</td>
 							</tr>
 							<tr>
-								<td class="sysInfo_td">系统架构：</td>
+								<td class="sysInfo_td">System architecture:</td>
 								<td class="sysInfo_td">{{ state.machineBaseInfo.osArchitecture }}</td>
 							</tr>
 							<tr>
-								<td class="sysInfo_td">CPU核数：</td>
+								<td class="sysInfo_td">CPU cores:</td>
 								<td class="sysInfo_td">{{ state.machineBaseInfo.processorCount }}</td>
 							</tr>
 							<tr>
-								<td class="sysInfo_td">运行时长：</td>
+								<td class="sysInfo_td">Runtime:</td>
 								<td class="sysInfo_td">{{ state.machineBaseInfo.sysRunTime }}</td>
 							</tr>
 							<tr>
-								<td class="sysInfo_td">外网地址：</td>
+								<td class="sysInfo_td">External network address:</td>
 								<td class="sysInfo_td">{{ state.machineBaseInfo.remoteIp }}</td>
 							</tr>
 							<tr>
-								<td class="sysInfo_td">内网地址：</td>
+								<td class="sysInfo_td">Intranet address:</td>
 								<td class="sysInfo_td">{{ state.machineBaseInfo.localIp }}</td>
 							</tr>
 							<tr>
-								<td class="sysInfo_td">运行框架：</td>
+								<td class="sysInfo_td">Run the framework:</td>
 								<td class="sysInfo_td">{{ state.machineBaseInfo.frameworkDescription }}</td>
 							</tr>
 						</tbody>
@@ -42,7 +42,7 @@
 				</el-card>
 			</el-col>
 			<el-col :md="12" :sm="24">
-				<el-card shadow="hover" header="使用信息">
+				<el-card shadow="hover" header="Use information">
 					<el-row>
 						<el-col :xs="12" :sm="12" :md="12" :lg="12" :xl="12" style="text-align: center">
 							<el-progress
@@ -53,9 +53,9 @@
 								<template #default>
 									<span>{{ state.machineUseInfo.ramRate }}<br /></span>
 									<span style="font-size: 10px">
-										已用:{{ state.machineUseInfo.usedRam }}<br />
-										剩余:{{ state.machineUseInfo.freeRam }}<br />
-										内存使用率
+										Used: {{ state.machineUseInfo.usedRam }}<br />
+										Remaining: {{ state.machineUseInfo.freeRam }}<br />
+										Memory Usage
 									</span>
 								</template>
 							</el-progress>
@@ -68,7 +68,7 @@
 							>
 								<template #default>
 									<span>{{ state.machineUseInfo.cpuRate }}<br /></span>
-									<span style="font-size: 10px"> CPU使用率 </span>
+									<span style="font-size: 10px"> CPU Usage </span>
 								</template>
 							</el-progress>
 						</el-col>
@@ -78,23 +78,23 @@
 						<table class="sysInfo_table">
 							<tbody>
 								<tr>
-									<td class="sysInfo_td">启动时间：</td>
+									<td class="sysInfo_td">Start Time:</td>
 									<td class="sysInfo_td">{{ state.machineUseInfo.startTime }}</td>
 								</tr>
 								<tr>
-									<td class="sysInfo_td">运行时长：</td>
+									<td class="sysInfo_td">Runtime:</td>
 									<td class="sysInfo_td">{{ state.machineUseInfo.runTime }}</td>
 								</tr>
 								<tr>
-									<td class="sysInfo_td">网站目录：</td>
+									<td class="sysInfo_td">Website directory:</td>
 									<td class="sysInfo_td">{{ state.machineBaseInfo.wwwroot }}</td>
 								</tr>
 								<tr>
-									<td class="sysInfo_td">开发环境：</td>
+									<td class="sysInfo_td">Development Environment:</td>
 									<td class="sysInfo_td">{{ state.machineBaseInfo.environment }}</td>
 								</tr>
 								<tr>
-									<td class="sysInfo_td">环境变量：</td>
+									<td class="sysInfo_td">Environment variables:</td>
 									<td class="sysInfo_td">{{ state.machineBaseInfo.stage }}</td>
 								</tr>
 							</tbody>
@@ -106,7 +106,7 @@
 
 		<el-row :gutter="8">
 			<el-col :md="24" :sm="24">
-				<el-card shadow="hover" header="程序集信息" style="margin-top: 5px; --el-card-padding: 10px">
+				<el-card shadow="hover" header="Assembly information" style="margin-top: 5px; --el-card-padding: 10px">
 					<div v-for="d in state.assemblyInfo" :key="d.name" style="display: inline-block; margin: 4px; text-align: left">
 						<el-tag round>
 							<div style="display: inline-flex">
@@ -121,7 +121,7 @@
 
 		<el-row :gutter="8">
 			<el-col :md="24" :sm="24">
-				<el-card shadow="hover" header="磁盘信息" style="margin-top: 5px">
+				<el-card shadow="hover" header="disk information" style="margin-top: 5px">
 					<el-row>
 						<el-col
 							:span="4"
@@ -138,8 +138,8 @@
 								<template #default>
 									<span>{{ d.availablePercent }}%<br /></span>
 									<span style="font-size: 10px">
-										已用:{{ d.used }}GB<br />
-										剩余:{{ d.availableFreeSpace }}GB<br />
+										Used: {{ d.used }}GB<br />
+										Remaining:{{ d.availableFreeSpace }}GB<br />
 										{{ d.diskName }}
 									</span>
 								</template>
@@ -173,31 +173,31 @@ onMounted(async () => {
 	loadAssemblyInfo();
 });
 
-// 服务器配置信息
+// Server configuration information
 const loadMachineBaseInfo = async () => {
 	var res = await getAPI(SysServerApi).apiSysServerServerBaseGet();
 	state.machineBaseInfo = res.data.result;
 };
 
-// 服务器内存信息
+// Server memory information
 const loadMachineUseInfo = async () => {
 	var res = await getAPI(SysServerApi).apiSysServerServerUsedGet();
 	state.machineUseInfo = res.data.result;
 };
 
-// 服务器磁盘信息
+// Server disk information
 const loadMachineDiskInfo = async () => {
 	var res = await getAPI(SysServerApi).apiSysServerServerDiskGet();
 	state.machineDiskInfo = res.data.result;
 };
 
-// 框架程序集信息
+// Framework assembly information
 const loadAssemblyInfo = async () => {
 	var res = await getAPI(SysServerApi).apiSysServerAssemblyListGet();
 	state.assemblyInfo = res.data.result;
 };
 
-// 实时刷新内存
+// Refresh memory in real time
 const refreshData = () => {
 	loadMachineUseInfo();
 };

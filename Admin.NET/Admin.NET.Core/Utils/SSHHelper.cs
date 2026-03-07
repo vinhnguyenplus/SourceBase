@@ -1,15 +1,15 @@
-﻿// Admin.NET 项目的版权、商标、专利和其他相关权利均受相应法律法规的保护。使用本项目应遵守相关法律法规和许可证的要求。
+﻿// The copyright, trademark, patent and other related rights of the Admin.NET project are protected by corresponding laws and regulations. Use of this project shall comply with relevant laws, regulations and license requirements.
 //
-// 本项目主要遵循 MIT 许可证和 Apache 许可证（版本 2.0）进行分发和使用。许可证位于源代码树根目录中的 LICENSE-MIT 和 LICENSE-APACHE 文件。
+// This project is distributed and used primarily under the MIT License and the Apache License (version 2.0). The license is located in the LICENSE-MIT and LICENSE-APACHE files in the root of the source tree.
 //
-// 不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！
+// This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project!
 
 using Renci.SshNet;
 
 namespace Admin.NET.Core
 {
     /// <summary>
-    /// SSH/Sftp 工具类
+    /// SSH/Sftp tools
     /// </summary>
     public class SSHHelper : IDisposable
     {
@@ -21,7 +21,7 @@ namespace Admin.NET.Core
         }
 
         /// <summary>
-        /// 连接
+        /// connect
         /// </summary>
         private void Connect()
         {
@@ -30,7 +30,7 @@ namespace Admin.NET.Core
         }
 
         /// <summary>
-        /// 是否存在同名文件
+        /// Does a file with the same name exist?
         /// </summary>
         /// <param name="ftpFileName"></param>
         /// <returns></returns>
@@ -42,7 +42,7 @@ namespace Admin.NET.Core
         }
 
         /// <summary>
-        /// 删除文件
+        /// Delete files
         /// </summary>
         /// <param name="ftpFileName"></param>
         public void DeleteFile(string ftpFileName)
@@ -53,7 +53,7 @@ namespace Admin.NET.Core
         }
 
         /// <summary>
-        /// 下载到指定目录
+        /// Download to the specified directory
         /// </summary>
         /// <param name="ftpFileName"></param>
         /// <param name="localFileName"></param>
@@ -68,7 +68,7 @@ namespace Admin.NET.Core
         }
 
         /// <summary>
-        /// 读取字节
+        /// Read bytes
         /// </summary>
         /// <param name="ftpFileName"></param>
         /// <returns></returns>
@@ -80,7 +80,7 @@ namespace Admin.NET.Core
         }
 
         /// <summary>
-        /// 读取流
+        /// Read stream
         /// </summary>
         /// <param name="path"></param>
         /// <returns></returns>
@@ -90,7 +90,7 @@ namespace Admin.NET.Core
         }
 
         /// <summary>
-        /// 继续下载
+        /// Continue downloading
         /// </summary>
         /// <param name="ftpFileName"></param>
         /// <param name="localFileName"></param>
@@ -100,7 +100,7 @@ namespace Admin.NET.Core
         }
 
         /// <summary>
-        /// 重命名
+        /// Rename
         /// </summary>
         /// <param name="oldPath"></param>
         /// <param name="newPath"></param>
@@ -110,7 +110,7 @@ namespace Admin.NET.Core
         }
 
         /// <summary>
-        /// 指定目录下文件
+        /// Files in specified directory
         /// </summary>
         /// <param name="folder"></param>
         /// <param name="filters"></param>
@@ -130,7 +130,7 @@ namespace Admin.NET.Core
         }
 
         /// <summary>
-        /// 上传指定目录文件
+        /// Upload files in the specified directory
         /// </summary>
         /// <param name="localFileName"></param>
         /// <param name="ftpFileName"></param>
@@ -147,7 +147,7 @@ namespace Admin.NET.Core
         }
 
         /// <summary>
-        /// 上传字节
+        /// Upload bytes
         /// </summary>
         /// <param name="bs"></param>
         /// <param name="ftpFileName"></param>
@@ -161,7 +161,7 @@ namespace Admin.NET.Core
         }
 
         /// <summary>
-        /// 上传流
+        /// Upload stream
         /// </summary>
         /// <param name="fileStream"></param>
         /// <param name="ftpFileName"></param>
@@ -176,7 +176,7 @@ namespace Admin.NET.Core
         }
 
         /// <summary>
-        /// 创建目录
+        /// Create directory
         /// </summary>
         /// <param name="sftp"></param>
         /// <param name="dir"></param>
@@ -198,7 +198,7 @@ namespace Admin.NET.Core
         }
 
         /// <summary>
-        /// 释放对象
+        /// Release object
         /// </summary>
         public void Dispose()
         {

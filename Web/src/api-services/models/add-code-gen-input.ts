@@ -1,8 +1,8 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Admin.NET 通用权限开发平台
- * 让 .NET 开发更简单、更通用、更流行。整合最新技术，模块插件式开发，前后端分离，开箱即用。<br/><u><b><font color='FF0000'> 👮不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！</font></b></u>
+ * Admin.NET General Permission Development Platform
+ * let .NET Develop more simply、More general、More popular。wholeIn line with the latest technology，Modular Plugin-Based Development，Frontend and backendpointsLeave，Ready to use out of the box。<br/><u><b><font color='FF0000'> 👮This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project! </font></b></u>
  *
  * OpenAPI spec version: 1.0.0
  * 
@@ -30,7 +30,7 @@ export interface AddCodeGenInput {
     search?: Search;
 
     /**
-     * 模糊查询关键字
+     * BlurryQueryKeywords
      *
      * @type {string}
      * @memberof AddCodeGenInput
@@ -44,7 +44,7 @@ export interface AddCodeGenInput {
     filter?: Filter;
 
     /**
-     * 当前页码
+     * Current page number
      *
      * @type {number}
      * @memberof AddCodeGenInput
@@ -52,7 +52,7 @@ export interface AddCodeGenInput {
     page?: number;
 
     /**
-     * 页码容量
+     * Page capacity
      *
      * @type {number}
      * @memberof AddCodeGenInput
@@ -60,7 +60,7 @@ export interface AddCodeGenInput {
     pageSize?: number;
 
     /**
-     * 排序字段
+     * SortField
      *
      * @type {string}
      * @memberof AddCodeGenInput
@@ -68,7 +68,7 @@ export interface AddCodeGenInput {
     field?: string | null;
 
     /**
-     * 排序方向
+     * SortDirection
      *
      * @type {string}
      * @memberof AddCodeGenInput
@@ -76,7 +76,7 @@ export interface AddCodeGenInput {
     order?: string | null;
 
     /**
-     * 降序排序
+     * Descending orderSort
      *
      * @type {string}
      * @memberof AddCodeGenInput
@@ -84,7 +84,7 @@ export interface AddCodeGenInput {
     descStr?: string | null;
 
     /**
-     * 类名
+     * Class name
      *
      * @type {string}
      * @memberof AddCodeGenInput
@@ -92,7 +92,7 @@ export interface AddCodeGenInput {
     className?: string | null;
 
     /**
-     * 是否移除表前缀
+     * Whether to remove the table prefix
      *
      * @type {string}
      * @memberof AddCodeGenInput
@@ -100,7 +100,7 @@ export interface AddCodeGenInput {
     tablePrefix?: string | null;
 
     /**
-     * 库定位器名
+     * Library Locator Name
      *
      * @type {string}
      * @memberof AddCodeGenInput
@@ -108,7 +108,7 @@ export interface AddCodeGenInput {
     configId?: string | null;
 
     /**
-     * 数据库名(保留字段)
+     * DataLibrary name(ReserveField)
      *
      * @type {string}
      * @memberof AddCodeGenInput
@@ -116,7 +116,7 @@ export interface AddCodeGenInput {
     dbName?: string | null;
 
     /**
-     * 数据库类型
+     * Database type
      *
      * @type {string}
      * @memberof AddCodeGenInput
@@ -124,7 +124,7 @@ export interface AddCodeGenInput {
     dbType?: string | null;
 
     /**
-     * 数据库链接
+     * Database link
      *
      * @type {string}
      * @memberof AddCodeGenInput
@@ -132,7 +132,7 @@ export interface AddCodeGenInput {
     connectionString?: string | null;
 
     /**
-     * 功能名（数据库表名称）
+     * Function Name（Database table namecall）
      *
      * @type {string}
      * @memberof AddCodeGenInput
@@ -140,7 +140,7 @@ export interface AddCodeGenInput {
     tableComment?: string | null;
 
     /**
-     * 表唯一字段列表
+     * table onlyoneFieldList
      *
      * @type {Array<TableUniqueConfigItem>}
      * @memberof AddCodeGenInput
@@ -148,7 +148,7 @@ export interface AddCodeGenInput {
     tableUniqueList?: Array<TableUniqueConfigItem> | null;
 
     /**
-     * 菜单应用分类（应用编码）
+     * menuApplicationpointsClass（ApplicationEncoding）
      *
      * @type {string}
      * @memberof AddCodeGenInput
@@ -156,7 +156,7 @@ export interface AddCodeGenInput {
     menuApplication?: string | null;
 
     /**
-     * 菜单父级
+     * menuParent
      *
      * @type {number}
      * @memberof AddCodeGenInput
@@ -164,7 +164,7 @@ export interface AddCodeGenInput {
     menuPid?: number | null;
 
     /**
-     * 菜单图标
+     * Menu icon
      *
      * @type {string}
      * @memberof AddCodeGenInput
@@ -172,7 +172,7 @@ export interface AddCodeGenInput {
     menuIcon?: string | null;
 
     /**
-     * 页面目录
+     * Page directory
      *
      * @type {string}
      * @memberof AddCodeGenInput
@@ -180,7 +180,7 @@ export interface AddCodeGenInput {
     pagePath?: string | null;
 
     /**
-     * 支持打印类型
+     * Supported print types
      *
      * @type {string}
      * @memberof AddCodeGenInput
@@ -188,7 +188,7 @@ export interface AddCodeGenInput {
     printType?: string | null;
 
     /**
-     * 打印模版名称
+     * Print Template Name
      *
      * @type {string}
      * @memberof AddCodeGenInput
@@ -196,7 +196,7 @@ export interface AddCodeGenInput {
     printName?: string | null;
 
     /**
-     * 数据库表名
+     * Database table name
      *
      * @type {string}
      * @memberof AddCodeGenInput
@@ -204,7 +204,7 @@ export interface AddCodeGenInput {
     tableName: string;
 
     /**
-     * 业务名（业务代码包名称）
+     * Business Name（Business code packagename）
      *
      * @type {string}
      * @memberof AddCodeGenInput
@@ -212,7 +212,7 @@ export interface AddCodeGenInput {
     busName: string;
 
     /**
-     * 命名空间
+     * namespace
      *
      * @type {string}
      * @memberof AddCodeGenInput
@@ -220,7 +220,7 @@ export interface AddCodeGenInput {
     nameSpace: string;
 
     /**
-     * 作者姓名
+     * Author's Name
      *
      * @type {string}
      * @memberof AddCodeGenInput
@@ -228,7 +228,7 @@ export interface AddCodeGenInput {
     authorName: string;
 
     /**
-     * 生成方式
+     * Generation method
      *
      * @type {string}
      * @memberof AddCodeGenInput
@@ -236,7 +236,7 @@ export interface AddCodeGenInput {
     generateType: string;
 
     /**
-     * 是否生成菜单
+     * Generate menu?
      *
      * @type {boolean}
      * @memberof AddCodeGenInput

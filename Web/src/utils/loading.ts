@@ -2,12 +2,12 @@ import { nextTick } from 'vue';
 import '/@/theme/loading.scss';
 
 /**
- * 页面全局 Loading
- * @method start 创建 loading
- * @method done 移除 loading
+ * Page Global Loading
+ * @method start Create loading
+ * @method done Remove loading
  */
 export const NextLoading = {
-	// 创建 loading
+	// Create loading
 	start: () => {
 		const bodys: Element = document.body;
 		const div = <HTMLElement>document.createElement('div');
@@ -31,7 +31,7 @@ export const NextLoading = {
 		bodys.insertBefore(div, bodys.childNodes[0]);
 		window.nextLoading = true;
 	},
-	// 移除 loading
+	// Remove loading
 	done: (time: number = 0) => {
 		nextTick(() => {
 			setTimeout(() => {

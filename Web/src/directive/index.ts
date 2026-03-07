@@ -3,19 +3,19 @@ import { authDirective } from '/@/directive/authDirective';
 import { wavesDirective, dragDirective, reclickDirective } from '/@/directive/customDirective';
 
 /**
- * 导出指令方法：v-xxx
- * @methods authDirective 用户权限指令，用法：v-auth
- * @methods wavesDirective 按钮波浪指令，用法：v-waves
- * @methods dragDirective 自定义拖动指令，用法：v-drag
- * @methods reclickDirective 重复按钮提交指令，用法：v-reclick
+ * ExportInstruction Method：v-xxx
+ * @methods authDirective UserPermission command，Usage：v-auth
+ * @methods wavesDirective buttonWave command，Usage：v-waves
+ * @methods dragDirective CustomizeDrag command，Usage：v-drag
+ * @methods reclickDirective RepeatbuttonSubmit command，Usage：v-reclick
  */
 export function directive(app: App) {
-	// 用户权限指令
+	// User permission instructions
 	authDirective(app);
-	// 按钮波浪指令
+	// button wave command
 	wavesDirective(app);
-	// // 自定义拖动指令
+	// //Custom drag command
 	// dragDirective(app);
-	// 重复按钮提交指令
+	// Repeat button submit command
 	reclickDirective(app);
 }

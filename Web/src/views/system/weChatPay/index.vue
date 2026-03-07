@@ -2,44 +2,44 @@
 	<div class="weChatPay-container">
 		<el-card shadow="hover" :body-style="{ padding: 5 }">
 			<el-form :model="state.queryParams" ref="queryForm" :inline="true">
-				<el-form-item label="订单号">
-					<el-input v-model="state.queryParams.keyword" clearable placeholder="请输入订单号" />
+				<el-form-item label="Order Number">
+					<el-input v-model="state.queryParams.keyword" clearable placeholder="Please enter the order number" />
 				</el-form-item>
-				<el-form-item label="创建时间">
-					<el-date-picker placeholder="请选择创建时间" value-format="YYYY/MM/DD" type="daterange" v-model="state.queryParams.createTimeRange" />
+				<el-form-item label="Creation Time">
+					<el-date-picker placeholder="Please select creation time" value-format="YYYY/MM/DD" type="daterange" v-model="state.queryParams.createTimeRange" />
 				</el-form-item>
 				<el-form-item>
 					<el-button-group>
-						<el-button type="primary" icon="ele-Search" @click="handleQuery"> 查询 </el-button>
-						<el-button icon="ele-Refresh" @click="resetQuery"> 重置 </el-button>
+						<el-button type="primary" icon="ele-Search" @click="handleQuery"> Query </el-button>
+						<el-button icon="ele-Refresh" @click="resetQuery"> reset </el-button>
 					</el-button-group>
 				</el-form-item>
 				<el-form-item>
-					<el-button type="primary" icon="ele-Plus" @click="openAddDialog">新增模拟数据</el-button>
+					<el-button type="primary" icon="ele-Plus" @click="openAddDialog">Add simulation data</el-button>
 				</el-form-item>
 			</el-form>
 		</el-card>
 
 		<el-card class="full-table" shadow="hover" style="margin-top: 5px">
 			<el-table :data="state.tableData" style="width: 100%" v-loading="state.loading" border>
-				<el-table-column type="index" label="序号" width="55" align="center" />
-				<el-table-column prop="outTradeNumber" label="商户订单号" width="180"></el-table-column>
-				<el-table-column prop="transactionId" label="支付订单号" width="220"></el-table-column>
-				<el-table-column prop="description" label="描述" width="180"></el-table-column>
-				<el-table-column prop="total" :formatter="amountFormatter" label="金额" width="70"></el-table-column>
-				<el-table-column prop="tradeState" label="状态" width="70">
+				<el-table-column type="index" label="No" width="55" align="center" />
+				<el-table-column prop="outTradeNumber" label="Merchant Order Number" width="180"></el-table-column>
+				<el-table-column prop="transactionId" label="Payment Order Number" width="220"></el-table-column>
+				<el-table-column prop="description" label="Description" width="180"></el-table-column>
+				<el-table-column prop="total" :formatter="amountFormatter" label="Amount" width="70"></el-table-column>
+				<el-table-column prop="tradeState" label="state" width="70">
 					<template #default="scope">
-						<el-tag v-if="scope.row.tradeState == 'SUCCESS'" type="success"> 完成 </el-tag>
-						<el-tag v-else-if="scope.row.tradeState == 'REFUND'" type="danger"> 退款 </el-tag>
-						<el-tag v-else type="info"> 未完成 </el-tag>
+						<el-tag v-if="scope.row.tradeState == 'SUCCESS'" type="success"> Completed </el-tag>
+						<el-tag v-else-if="scope.row.tradeState == 'REFUND'" type="danger"> Refund </el-tag>
+						<el-tag v-else type="info"> Incomplete </el-tag>
 					</template>
 				</el-table-column>
-				<el-table-column prop="attachment" label="附加信息" width="180"></el-table-column>
-				<el-table-column prop="tags" label="业务类型" width="90"></el-table-column>
-				<el-table-column prop="createTime" label="创建时间" width="150"></el-table-column>
-				<el-table-column prop="successTime" label="完成时间" width="150"></el-table-column>
-				<el-table-column prop="businessId" label="业务ID" width="130"></el-table-column>
-				<el-table-column label="操作" align="center" fixed="right">
+				<el-table-column prop="attachment" label="Additional Information" width="180"></el-table-column>
+				<el-table-column prop="tags" label="BusinessType" width="90"></el-table-column>
+				<el-table-column prop="createTime" label="Creation Time" width="150"></el-table-column>
+				<el-table-column prop="successTime" label="completion time" width="150"></el-table-column>
+				<el-table-column prop="businessId" label="Business ID" width="130"></el-table-column>
+				<el-table-column label="Operation" align="center" fixed="right">
 					<template #default="scope">
 						<el-button
               text
@@ -47,10 +47,10 @@
 							type="primary"
 							v-if="scope.row.qrcodeContent != null && scope.row.qrcodeContent != '' && (scope.row.tradeState === '' || !scope.row.tradeState)"
 							@click="openQrDialog(scope.row.qrcodeContent)"
-							>付款二维码</el-button
+							>Payment QR code</el-button
 						>
-						<el-button size="small" text type="primary" v-if="scope.row.tradeState === 'REFUND'" @click="openRefundDialog(scope.row.transactionId)">查看退款</el-button>
-						<el-button size="small" text type="primary" v-if="scope.row.tradeState === 'SUCCESS'" @click="doRefund(scope.row)">全额退款</el-button>
+						<el-button size="small" text type="primary" v-if="scope.row.tradeState === 'REFUND'" @click="openRefundDialog(scope.row.transactionId)">View refund</el-button>
+						<el-button size="small" text type="primary" v-if="scope.row.tradeState === 'SUCCESS'" @click="doRefund(scope.row)">Full refund</el-button>
 					</template>
 				</el-table-column>
 			</el-table>
@@ -71,24 +71,24 @@
 			<template #header>
 				<div style="color: #fff">
 					<el-icon size="16" style="margin-right: 3px; display: inline; vertical-align: middle"> <ele-Edit /> </el-icon>
-					<span>新增模拟数据</span>
+					<span>Add simulation data</span>
 				</div>
 			</template>
 			<el-form>
-				<el-form-item label="商品">
-					<el-input v-model="addData.description" placeholder="必填" clearable />
+				<el-form-item label="Product">
+					<el-input v-model="addData.description" placeholder="Required" clearable />
 				</el-form-item>
-				<el-form-item label="金额(分)">
-					<el-input v-model="addData.total" placeholder="必填，填数字,单位是分" clearable />
+				<el-form-item label="Amount(points)">
+					<el-input v-model="addData.total" placeholder="Required, fill in the number, the unit is minutes" clearable />
 				</el-form-item>
-				<el-form-item label="附加信息">
+				<el-form-item label="Additional Information">
 					<el-input v-model="addData.attachment" clearable />
 				</el-form-item>
 			</el-form>
 			<template #footer>
 				<span class="dialog-footer">
-					<el-button @click="closeAddDialog">取 消</el-button>
-					<el-button type="primary" @click="saveData">确 定</el-button>
+					<el-button @click="closeAddDialog">Cancel</el-button>
+					<el-button type="primary" @click="saveData">Confirm</el-button>
 				</span>
 			</template>
 		</el-dialog>
@@ -96,7 +96,7 @@
 			<template #header>
 				<div style="color: #fff">
 					<el-icon size="16" style="margin-right: 3px; display: inline; vertical-align: middle"> <ele-View /> </el-icon>
-					<span>付款二维码</span>
+					<span>Payment QR code</span>
 				</div>
 			</template>
 			<div ref="qrDiv"></div>
@@ -106,25 +106,25 @@
 			<template #header>
 				<div style="color: #fff">
 					<el-icon size="16" style="margin-right: 3px; display: inline; vertical-align: middle"> <ele-Document /> </el-icon>
-					<span>退款信息</span>
+					<span>Refund Information</span>
 				</div>
 			</template>
 			<el-table :data="subTableData" style="width: 100%" tooltip-effect="light" row-key="id" border>
-				<el-table-column type="index" label="序号" width="55" align="center" />
-				<el-table-column prop="outRefundNumber" label="商户退款号" width="180"></el-table-column>
-				<el-table-column prop="transactionId" label="支付订单号" width="220"></el-table-column>
-				<el-table-column prop="refund" label="金额(分)" width="70"></el-table-column>
-				<el-table-column prop="reason" label="退款原因" width="180"></el-table-column>
-				<el-table-column prop="tradeState" label="状态" width="70">
+				<el-table-column type="index" label="No" width="55" align="center" />
+				<el-table-column prop="outRefundNumber" label="Merchant refund number" width="180"></el-table-column>
+				<el-table-column prop="transactionId" label="Payment Order Number" width="220"></el-table-column>
+				<el-table-column prop="refund" label="Amount(points)" width="70"></el-table-column>
+				<el-table-column prop="reason" label="Reason for refund" width="180"></el-table-column>
+				<el-table-column prop="tradeState" label="state" width="70">
 					<template #default="scope">
-						<el-tag v-if="scope.row.tradeState == 'SUCCESS'" type="success"> 完成 </el-tag>
-						<el-tag v-else-if="scope.row.tradeState == 'REFUND'" type="danger"> 退款 </el-tag>
-						<el-tag v-else type="info"> 未完成 </el-tag>
+						<el-tag v-if="scope.row.tradeState == 'SUCCESS'" type="success"> Completed </el-tag>
+						<el-tag v-else-if="scope.row.tradeState == 'REFUND'" type="danger"> Refund </el-tag>
+						<el-tag v-else type="info"> Incomplete </el-tag>
 					</template>
 				</el-table-column>
-				<el-table-column prop="remark" label="备注" width="180"></el-table-column>
-				<el-table-column prop="createTime" label="创建时间" width="150"></el-table-column>
-				<el-table-column prop="successTime" label="完成时间" width="150"></el-table-column>
+				<el-table-column prop="remark" label="Remarks" width="180"></el-table-column>
+				<el-table-column prop="createTime" label="Creation Time" width="150"></el-table-column>
+				<el-table-column prop="successTime" label="completion time" width="150"></el-table-column>
 			</el-table>
 		</el-dialog>
 	</div>
@@ -160,12 +160,12 @@ const state = reactive({
 	editTenantTitle: '',
 });
 
-// 页面初始化
+// Page initialization
 onMounted(async () => {
 	handleQuery();
 });
 
-// 查询操作
+// Query operation
 const handleQuery = async () => {
 	state.loading = true;
 	let params = Object.assign(state.queryParams, state.tableParams);
@@ -176,18 +176,18 @@ const handleQuery = async () => {
 	state.loading = false;
 };
 
-// 重置操作
+// reset operation
 const resetQuery = () => {
 	state.queryParams.keyword = undefined;
 	state.queryParams.createTimeRange = undefined;
 	handleQuery();
 };
 
-// 退款
+// Refund
 const doRefund = async (orderInfo: any) => {
-	ElMessageBox.prompt(`确定进行退款：${orderInfo.total / 100}元？请输入退款理由`, '提示', {
-		confirmButtonText: '确定',
-		cancelButtonText: '取消',
+	ElMessageBox.prompt(`Confirm refund: ${orderInfo.total / 100} yuan? Please enter the reason for the refund`, 'Prompt', {
+		confirmButtonText: 'Confirm',
+		cancelButtonText: 'Cancel',
 	})
 		.then(async ({ value }) => {
 			let resp = await refundDomestic({
@@ -197,13 +197,13 @@ const doRefund = async (orderInfo: any) => {
 				total: orderInfo.total,
 			});
 			if (resp.data.code == 200) {
-				ElMessage.success(`【${value}】退款申请成功`);
+				ElMessage.success(`【${value}】Refund application successful`);
 			} else {
-				ElMessage.error('操作失败：' + resp.data.message);
+				ElMessage.error('Operation failed:' + resp.data.message);
 			}
 		})
 		.catch(() => {
-			ElMessage.error('取消操作');
+			ElMessage.error('Cancel operation');
 		});
 };
 
@@ -211,7 +211,7 @@ const amountFormatter = (row: any, column: any, cellValue: number, index: number
 	return (cellValue / 100).toFixed(2);
 };
 
-// 打开新增页面
+// Open new page
 const openAddDialog = () => {
 	addData.value = {
 		description: null,
@@ -221,12 +221,12 @@ const openAddDialog = () => {
 	showAddDialog.value = true;
 };
 
-// 关闭新增页面
+// Close the new page
 const closeAddDialog = () => {
 	showAddDialog.value = false;
 };
 
-// 打开扫码页面
+// Open the code scanning page
 const openQrDialog = (code: string) => {
 	showQrDialog.value = true;
 	nextTick(() => {
@@ -241,7 +241,7 @@ const openQrDialog = (code: string) => {
 	});
 };
 
-// 打开退款页面
+// Open the refund page
 const openRefundDialog = async (code: string) => {
 	var res = await getRefundListByID(code);
 	if (res.data.code === 200) {
@@ -249,11 +249,11 @@ const openRefundDialog = async (code: string) => {
 		subTableData.value = tmpRows;
 		showRefundDialog.value = true;
 	} else {
-		ElMessage.error('获取退款列表失败，' + res.data.message);
+		ElMessage.error('Failed to obtain refund list,' + res.data.message);
 	}
 };
 
-// 保存数据
+// save data
 const saveData = async () => {
 	var res = await createPay(addData.value);
 	if (res.data.code === 200) {
@@ -262,17 +262,17 @@ const saveData = async () => {
 		openQrDialog(code);
 		handleQuery();
 	} else {
-		ElMessage.error('新建失败，' + res.data.message);
+		ElMessage.error('Creation failed,' + res.data.message);
 	}
 };
 
-// 改变页面容量
+// Change page capacity
 const handleSizeChange = (val: number) => {
 	state.tableParams.pageSize = val;
 	handleQuery();
 };
 
-// 改变页码序号
+// Change page number
 const handleCurrentChange = (val: number) => {
 	state.tableParams.page = val;
 	handleQuery();

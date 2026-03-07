@@ -1,7 +1,7 @@
 <template>
-	<card-pro shadow="hover" title="我的日程" prefix-icon="ele-Calendar" class="item-background">
+	<card-pro shadow="hover" title="My schedule" prefix-icon="ele-Calendar" class="item-background">
 		<template #suffix>
-			<el-button type="primary" icon="ele-CirclePlus" round plain @click="openAddSchedule" style="float: right">添加日程</el-button>
+			<el-button type="primary" icon="ele-CirclePlus" round plain @click="openAddSchedule" style="float: right">Add schedule</el-button>
 		</template>
 
 		<div class="custome-canlendar">
@@ -9,9 +9,9 @@
 				<template #header="{ date }">
 					<span>{{ date }}</span>
 					<el-button-group>
-						<el-button size="small" @click="selectDate('prev-month')"> 上个月 </el-button>
-						<el-button size="small" @click="selectDate('today')">今天</el-button>
-						<el-button size="small" @click="selectDate('next-month')"> 下个月 </el-button>
+						<el-button size="small" @click="selectDate('prev-month')"> Last month </el-button>
+						<el-button size="small" @click="selectDate('today')">Today</el-button>
+						<el-button size="small" @click="selectDate('next-month')"> Next month </el-button>
 					</el-button-group>
 				</template>
 				<template #date-cell="{ data }">
@@ -50,9 +50,9 @@
 
 <script lang="ts">
 export default {
-	title: '日程',
+	title: 'schedule',
 	icon: 'ele-Calendar',
-	description: '日程演示',
+	description: 'Schedule presentation',
 };
 </script>
 
@@ -72,8 +72,8 @@ import { SysSchedule } from '/@/api-services/models';
 const calendar = ref<CalendarInstance>();
 const editScheduleRef = ref<InstanceType<typeof EditSchedule>>();
 const state = reactive({
-	ScheduleData: [] as Array<SysSchedule>, // 日程列表数据
-	TodayScheduleData: [] as Array<SysSchedule>, // 当天列表数据
+	ScheduleData: [] as Array<SysSchedule>, // schedule list data
+	TodayScheduleData: [] as Array<SysSchedule>, // Today's list data
 	calendarValue: new Date(),
 	queryParams: {
 		scheduleTime: new Date(),
@@ -84,12 +84,12 @@ const state = reactive({
 	currentMonth: '',
 });
 
-// 页面初始化
+// Page initialization
 onMounted(async () => {
 	await handleQuery();
 });
 
-// 查询操作
+// Query operation
 const handleQuery = async () => {
 	state.queryParams.startTime = dayjs(GetMonthFirstDay(state.calendarValue)).add(-1, 'month').toDate();
 	state.queryParams.endTime = dayjs(GetMonthLastDay(state.calendarValue)).add(1, 'month').toDate();
@@ -109,35 +109,35 @@ const selectDate = async (val: CalendarDateType) => {
 	calendar.value.selectDate(val);
 	await handleQuery();
 };
-// 删除
+// delete
 const delItem = (row: any) => {
-	ElMessageBox.confirm(`确定删日程：${row.startTime}-${row.endTime}【${row.content}】?`, '提示', {
-		confirmButtonText: '确定',
-		cancelButtonText: '取消',
+	ElMessageBox.confirm(`Are you sure you want to delete the schedule: ${row.startTime}-${row.endTime}【${row.content}】?`, 'Prompt', {
+		confirmButtonText: 'Confirm',
+		cancelButtonText: 'Cancel',
 		type: 'warning',
 	})
 		.then(async () => {
 			await getAPI(SysScheduleApi).apiSysScheduleDeletePost(row);
 			await handleQuery();
-			ElMessage.success('删除成功');
+			ElMessage.success('Deleted successfully');
 		})
 		.catch(() => {});
 };
 
-// 修改状态
+// Modify status
 const changeStatus = async (row: any) => {
 	await getAPI(SysScheduleApi)
 		.apiSysScheduleSetStatusPost({ id: row.id, status: row.status == 1 ? 0 : 1 })
 		.then(() => {
 			row.status = row.status == 1 ? 0 : 1;
-			ElMessage.success('日程状态设置成功');
+			ElMessage.success('schedulestateSettingssuccess');
 		})
 		.catch(() => {
-			ElMessage.success('日程状态设置异常');
+			ElMessage.success('schedulestateConfiguration exception');
 		});
 };
 
-// 农历转换
+// Lunar calendar conversion
 const solarDate2lunar = (solarDate: any) => {
 	var solar = solarDate.split('-');
 	var lunar = calendarCom.solar2lunar(solar[0], solar[1], solar[2]);
@@ -145,7 +145,7 @@ const solarDate2lunar = (solarDate: any) => {
 	return lunar.IMonthCn + lunar.IDayCn;
 };
 
-// 按天查询
+// Query by day
 const handleQueryByDate = async (date: any) => {
 	state.queryParams.startTime = FormatDateDelHMS(date);
 	state.queryParams.endTime = FormatDateEndHMS(date);
@@ -154,22 +154,22 @@ const handleQueryByDate = async (date: any) => {
 	state.TodayScheduleData = res.data.result ?? [];
 };
 
-// 打开新增页面
+// Open new page
 const openAddSchedule = () => {
 	var timerange = GetRecentTime();
 
-	state.editTitle = '添加日程';
+	state.editTitle = 'Add schedule';
 	editScheduleRef.value?.openDialog({ id: undefined, status: 0, orderNo: 100, scheduleTime: state.queryParams.scheduleTime, startTime: timerange.startTime, endTime: timerange.endTime });
 };
 
-// 打开编辑页面
+// Open the edit page
 const openEditSchedule = async (row: any) => {
 	if (row.status == 1) return;
-	state.editTitle = '编辑日程';
+	state.editTitle = 'Editschedule';
 	editScheduleRef.value?.openDialog(row, true);
 };
 
-// 点击日历中的日期
+// Click on a date in the calendar
 const handleClickDate = async (data: any) => {
 	if (state.currentMonth != dayjs(data.day).format('YYYYMM')) {
 		await handleQuery();
@@ -178,7 +178,7 @@ const handleClickDate = async (data: any) => {
 	state.queryParams.scheduleTime = data.day;
 };
 
-// 获取当月第一天
+// Get the first day of the month
 const GetMonthFirstDay = (date: any) => {
 	var newDate = new Date(date);
 	newDate.setDate(1);
@@ -188,7 +188,7 @@ const GetMonthFirstDay = (date: any) => {
 	return newDate;
 };
 
-// 获取当月最后一天
+// Get the last day of the month
 const GetMonthLastDay = (date: any) => {
 	var newDate = new Date(date);
 	newDate.setMonth(newDate.getMonth() + 1);
@@ -199,7 +199,7 @@ const GetMonthLastDay = (date: any) => {
 	return newDate;
 };
 
-// 去掉时分秒的日期
+// Date with hours, minutes and seconds removed
 const FormatDateDelHMS = (date: any) => {
 	var newDate = new Date(date);
 	newDate.setHours(0);
@@ -216,15 +216,15 @@ const FormatDateEndHMS = (date: any) => {
 	return newDate;
 };
 
-// 格式化日期
+// Format date
 const FormatDate = (date: any) => {
 	return dayjs(date).format('YYYY-MM-DD');
 };
 
-// 获取最近的初始时间  EndTime默认为StartTime + 1(hour)
+// Get the latest initial time. EndTime defaults to StartTime + 1(hour)
 const GetRecentTime = () => {
 	var date = new Date();
-	// 计算最近的开始时间
+	// Calculate the most recent start time
 	var currentHour = date.getHours();
 	var currentMin = date.getMinutes();
 
@@ -232,42 +232,42 @@ const GetRecentTime = () => {
 	var endHour = dayjs(date).format('HH');
 	var starMin = '00';
 	var endMin = '00';
-	// 如果当前时间已经23 那么starHour和endHour都是23
+	// If the current time is already 23, then starHour and endHour are both 23
 	if (currentHour == 23) {
 		starHour = '23';
 		endHour = '23';
 		starMin = '00';
 		endMin = '45';
 	} else {
-		// 判断分钟数属于那个层级
+		// Determine which level the minutes belong to
 		if (currentMin < 15) {
 			starMin = '15';
 			endMin = '15';
-			// 计算结束时间
+			// Calculate end time
 			date.setHours(date.getHours() + 1);
 			endHour = dayjs(date).format('HH');
 		} else if (currentMin >= 15 && currentMin < 30) {
 			starMin = '30';
 			endMin = '30';
 
-			// 计算结束时间
+			// Calculate end time
 			date.setHours(date.getHours() + 1);
 			endHour = dayjs(date).format('HH');
 		} else if (currentMin >= 30 && currentMin < 45) {
 			starMin = '45';
 			endMin = '45';
-			// 计算结束时间
+			// Calculate end time
 			date.setHours(date.getHours() + 1);
 			endHour = dayjs(date).format('HH');
 		} else if (currentMin >= 45) {
-			// 分钟 : 00
+			// Minutes: 00
 			starMin = '00';
 			endMin = '00';
 
-			// 开始时间+1
+			// Start time +1
 			date.setHours(date.getHours() + 1);
 			starHour = dayjs(date).format('HH');
-			// 计算结束时间
+			// Calculate end time
 			date.setHours(date.getHours() + 1);
 			endHour = dayjs(date).format('HH');
 		}
@@ -310,7 +310,7 @@ const GetRecentTime = () => {
 			color: #fff;
 			background-color: var(--el-color-primary);
 		}
-		/*小红点样式*/
+		/*Little red dot style*/
 		.el-badge {
 			position: absolute;
 			left: 0;
@@ -320,7 +320,7 @@ const GetRecentTime = () => {
 	}
 }
 
-// 日程列表
+// schedule list
 .schedule-list {
 	overflow-y: auto;
 	height: 150px;

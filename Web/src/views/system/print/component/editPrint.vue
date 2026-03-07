@@ -13,8 +13,8 @@
 				</div>
 				<template #footer>
 					<span class="dialog-footer" style="margin-top: 10px">
-						<el-button @click="cancel">取 消</el-button>
-						<el-button type="primary" @click="submit">保存模板</el-button>
+						<el-button @click="cancel">Cancel</el-button>
+						<el-button type="primary" @click="submit">Save template</el-button>
 					</span>
 				</template>
 			</el-dialog>
@@ -30,50 +30,50 @@
 			<el-form :model="state.ruleForm" ref="ruleFormRef" label-width="auto">
 				<el-row :gutter="10">
 					<el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="mb20">
-						<el-form-item label="模板名称" prop="name" :rules="[{ required: true, message: '模板名称不能为空', trigger: 'blur' }]">
-							<el-input v-model="state.ruleForm.name" placeholder="模板名称" clearable />
+						<el-form-item label="Template Name" prop="name" :rules="[{ required: true, message: 'Template name cannot be empty', trigger: 'blur' }]">
+							<el-input v-model="state.ruleForm.name" placeholder="Template Name" clearable />
 						</el-form-item>
 					</el-col>
 
 					<el-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12" class="mb20">
-						<el-form-item label="排序">
-							<el-input-number v-model="state.ruleForm.orderNo" placeholder="排序" class="w100" />
+						<el-form-item label="Sort">
+							<el-input-number v-model="state.ruleForm.orderNo" placeholder="Sort" class="w100" />
 						</el-form-item>
 					</el-col>
 					<el-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12" class="mb20">
-						<el-form-item label="状态">
+						<el-form-item label="state">
 							<el-radio-group v-model="state.ruleForm.status">
-								<el-radio :value="1">启用</el-radio>
-								<el-radio :value="2">禁用</el-radio>
+								<el-radio :value="1">enable</el-radio>
+								<el-radio :value="2">Disable</el-radio>
 							</el-radio-group>
 						</el-form-item>
 					</el-col>
 					<el-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12" class="mb20">
-						<el-form-item label="打印类型">
+						<el-form-item label="Print Type">
               <g-sys-dict v-model="state.ruleForm.printType" code="PrintTypeEnum" render-as="radio" />
 						</el-form-item>
 					</el-col>
 					<el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="mb20">
-						<el-form-item label="客户端服务地址">
-							<el-input v-model="state.ruleForm.clientServiceAddress" placeholder="客户端服务地址" clearable />
+						<el-form-item label="Client service address">
+							<el-input v-model="state.ruleForm.clientServiceAddress" placeholder="Client service address" clearable />
 						</el-form-item>
 					</el-col>
 					<el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="mb20">
-						<el-form-item label="打印参数">
-							<el-input v-model="state.ruleForm.printParam" placeholder="请输入打印参数" clearable type="textarea" />
+						<el-form-item label="Print parameters">
+							<el-input v-model="state.ruleForm.printParam" placeholder="Please enter printing parameters" clearable type="textarea" />
 						</el-form-item>
 					</el-col>
 					<el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="mb20">
-						<el-form-item label="备注">
-							<el-input v-model="state.ruleForm.remark" placeholder="请输入备注内容" clearable type="textarea" />
+						<el-form-item label="Remarks">
+							<el-input v-model="state.ruleForm.remark" placeholder="Please enter the remark content" clearable type="textarea" />
 						</el-form-item>
 					</el-col>
 				</el-row>
 			</el-form>
 			<template #footer>
 				<span class="dialog-footer">
-					<el-button @click="templateCancel">取 消</el-button>
-					<el-button type="primary" @click="templateSubmit">确 定</el-button>
+					<el-button @click="templateCancel">Cancel</el-button>
+					<el-button type="primary" @click="templateSubmit">Confirm</el-button>
 				</span>
 			</template>
 		</el-dialog>
@@ -100,10 +100,10 @@ const state = reactive({
 	showDialog2: false,
 });
 
-// 页面初始化
+// Page initialization
 onMounted(async () => {});
 
-// 打开弹窗
+// Open pop-up window
 const openDialog = (row: any) => {
 	state.ruleForm = JSON.parse(JSON.stringify(row));
 	if (state.ruleForm?.template) {
@@ -117,7 +117,7 @@ const openDialog = (row: any) => {
 	});
 };
 
-// 加载模板
+// Load template
 const loadTemplate = () => {
 	hiprintDesignRef.value?.hiprintTemplate.clear();
 	hiprintDesignRef.value?.setPrintDataDemo(state.ruleForm.printDataDemo);
@@ -127,12 +127,12 @@ const loadTemplate = () => {
 	}
 };
 
-// 取消
+// Cancel
 const cancel = () => {
 	state.isShowDialog = false;
 };
 
-// 提交
+// submit
 const submit = async () => {
 	state.showDialog2 = true;
 	if (state.ruleForm.orderNo == undefined) state.ruleForm.orderNo = 100;
@@ -140,12 +140,12 @@ const submit = async () => {
 	if (state.ruleForm.printType == undefined) state.ruleForm.printType = 1;
 };
 
-// 模板设置取消
+// Template setting canceled
 const templateCancel = () => {
 	state.showDialog2 = false;
 };
 
-// 模板设置提交
+// Template settings submitted
 const templateSubmit = async () => {
 	let templateJson = hiprintDesignRef.value?.hiprintTemplate.getJson();
 	templateJson.panels[0].index = hiprintDesignRef.value?.mode;
@@ -162,6 +162,6 @@ const templateSubmit = async () => {
 	emits('handleQuery');
 };
 
-// 导出对象
+// Export object
 defineExpose({ openDialog });
 </script>

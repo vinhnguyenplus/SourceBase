@@ -1,12 +1,12 @@
 <template>
 	<div class="mqtt-box">
-		<h1 class="header">MQTTX在线测试客户端</h1>
+		<h1 class="header">MQTTX Online Test Client</h1>
 		<el-card :model="connection">
-			<h1>连接参数(Configuration)</h1>
+			<h1>Connection Parameters (Configuration)</h1>
 			<el-form label-position="top" :model="connection">
 				<el-row :gutter="6">
 					<el-col :span="8">
-						<el-form-item prop="host" label="协议|主机|端口">
+						<el-form-item prop="host" label="Protocol|Host|Port">
 							<el-input v-model="connection.host" :disabled="connSuccess" type="password" show-password>
 								<template #prepend>
 									<el-select v-model="connection.protocol" class="w80" :disabled="connSuccess" @change="handleProtocolChange">
@@ -21,27 +21,27 @@
 						</el-form-item>
 					</el-col>
 					<el-col :span="0">
-						<el-form-item prop="clientId" label="标识(Client ID)唯一性">
+						<el-form-item prop="clientId" label="Uniqueness of Identifier (Client ID)">
 							<el-input v-model="connection.clientId"> </el-input>
 						</el-form-item>
 					</el-col>
 					<el-col :span="0">
-						<el-form-item prop="username" label="账号(Username)">
+						<el-form-item prop="username" label="Account(Username)">
 							<el-input v-model="connection.username"></el-input>
 						</el-form-item>
 					</el-col>
 					<el-col :span="0">
-						<el-form-item prop="password" label="密码(Password)">
+						<el-form-item prop="password" label="Password">
 							<el-input v-model="connection.password" type="password" show-password></el-input>
 						</el-form-item>
 					</el-col>
 					<el-col :span="4">
-						<el-form-item prop="regpacket" label="设备包名(Regpacket)">
+						<el-form-item prop="regpacket" label="Device package name (Regpacket)">
 							<el-input v-model="connection.repacket" :disabled="connSuccess" @input="syncdhtreg" @change="init_topic"></el-input>
 						</el-form-item>
 					</el-col>
 					<el-col :span="4">
-						<el-form-item prop="dhtRegpack" label="共享传感器(dhtRegpacket)">
+						<el-form-item prop="dhtRegpack" label="Shared sensor (dhtRegpacket)">
 							<el-input v-model="connection.dhtRegpack" :disabled="connSuccess" @change="init_topic"></el-input>
 						</el-form-item>
 					</el-col>
@@ -55,27 +55,27 @@
 							:loading="btnLoadingType === 'connect'"
 							:style="{ display: client.connected ? 'none' : '' }"
 						>
-							{{ client.connected ? '已连接(Connected)' : '连接(Connect)' }}
+							{{ client.connected ? 'Connected' : 'Connect' }}
 						</el-button>
-						<el-button v-if="client.connected" class="sub-btn" type="warning" :icon="Discount" @click="destroyConnection" :loading="btnLoadingType === 'disconnect'"> 断开(Disconnect) </el-button>
+						<el-button v-if="client.connected" class="sub-btn" type="warning" :icon="Discount" @click="destroyConnection" :loading="btnLoadingType === 'disconnect'"> Disconnect </el-button>
 					</el-col>
 				</el-row>
 			</el-form>
 		</el-card>
 
 		<el-card shadow="hover">
-			<h1>订阅(Subscribe)</h1>
+			<h1>Subscribe</h1>
 			<el-form label-position="top" :model="subscription">
 				<el-row :gutter="6">
 					<el-col :span="12">
-						<el-form-item prop="topic" label="订阅主题(Topic)">
+						<el-form-item prop="topic" label="Subscribe to topic(Topic)">
 							<el-input v-model="connection.subTopics" :disabled="subscribedSuccess" type="password" show-password></el-input>
 						</el-form-item>
 					</el-col>
 					<el-col :span="4">
-						<el-form-item prop="qos" label="订阅质量(QoS)">
+						<el-form-item prop="qos" label="Quality of Subscription (QoS)">
 							<el-select v-model="subscription.qos" :disabled="subscribedSuccess">
-								<el-option v-for="qos in qosList" :key="qos" :label="qos == 0 ? '0 至多一次' : qos == 1 ? '1 至少一次' : '2 仅仅一次'" :value="qos"></el-option>
+								<el-option v-for="qos in qosList" :key="qos" :label="qos == 0 ? '0 at most once' : qos == 1 ? '1 at least once' : '2 exactly once'" :value="qos"></el-option>
 							</el-select>
 						</el-form-item>
 					</el-col>
@@ -89,10 +89,10 @@
 							:disabled="!client.connected || subscribedSuccess"
 							@click="doSubscribe"
 						>
-							{{ subscribedSuccess ? '已订阅(Subscribed)' : '订阅(Subscribe)' }}
+							{{ subscribedSuccess ? 'Subscribed' : 'Subscribe' }}
 						</el-button>
 						<el-button v-if="subscribedSuccess" type="warning" :icon="Discount" class="sub-btn" :loading="btnLoadingType === 'unsubscribe'" :disabled="!client.connected" @click="doUnSubscribe">
-							取消(Unsubscribe)
+							Unsubscribe
 						</el-button>
 					</el-col>
 				</el-row>
@@ -100,26 +100,26 @@
 		</el-card>
 
 		<el-card shadow="hover">
-			<h1>发布(Publish)</h1>
+			<h1>Publish</h1>
 			<el-form label-position="top" :model="publish">
 				<el-row :gutter="6">
 					<el-col :span="8">
-						<el-form-item prop="topic" label="发布主题(Topic)">
+						<el-form-item prop="topic" label="Publish topic(Topic)">
 							<el-input v-model="connection.pubTopic" type="password" show-password></el-input>
 						</el-form-item>
 					</el-col>
 					<el-col :span="4">
-						<el-form-item prop="qos" label="发布质量(QoS)">
+						<el-form-item prop="qos" label="Release Quality (QoS)">
 							<el-select v-model="publish.qos">
-								<el-option v-for="qos in qosList" :key="qos" :label="qos == 0 ? '0 至多一次' : qos == 1 ? '1 至少一次' : '2 仅仅一次'" :value="qos"></el-option>
+								<el-option v-for="qos in qosList" :key="qos" :label="qos == 0 ? '0 at most once' : qos == 1 ? '1 at least once' : '2 exactly once'" :value="qos"></el-option>
 							</el-select>
 						</el-form-item>
 					</el-col>
 					<el-col :span="4">
-						<el-form-item prop="retain" label="发布保留(Retain)">
+						<el-form-item prop="retain" label="Release Retain">
 							<el-select v-model="publish.retain">
-								<el-option value="false" label="false 不保留"></el-option>
-								<el-option value="true" label="true 不保留"></el-option>
+								<el-option value="false" label="false does not retain"></el-option>
+								<el-option value="true" label="true not retained"></el-option>
 							</el-select>
 						</el-form-item>
 					</el-col>
@@ -127,20 +127,20 @@
 
 				<el-row :gutter="6">
 					<el-col :span="16">
-						<el-form-item prop="payload" label="操作指令(Payload)">
+						<el-form-item prop="payload" label="Operation Command (Payload)">
 							<el-input v-model="publish.payload" clearable maxlength="64" show-word-limit>
 								<!--<template #prepend>
 								<el-button :icon="Operation" />
 								</template> -->
 								<template #append>
-									<el-select v-model="publish.payload" placeholder="选择指令" style="width: 115px">
-										<el-option label="状态查询" value="55 AA AA AA AA 91 CF" />
-										<el-option label="全部打开" value="55 AA AA AA AA 81 A4 01" />
-										<el-option label="全部关闭" value="55 AA AA AA AA 81 A4 00" />
-										<el-option label="一路开关" value="55 AA AA AA AA 81 BA 01" />
-										<el-option label="二路开关" value="55 AA AA AA AA 81 BA 02" />
-										<el-option label="三路开关" value="55 AA AA AA AA 81 BA 03" />
-										<el-option label="四路开关" value="55 AA AA AA AA 81 BA 04" />
+									<el-select v-model="publish.payload" placeholder="Select command" style="width: 115px">
+										<el-option label="Status query" value="55 AA AA AA AA 91 CF" />
+										<el-option label="Open all" value="55 AA AA AA AA 81 A4 01" />
+										<el-option label="Turn off all" value="55 AA AA AA AA 81 A4 00" />
+										<el-option label="Single-pole switch" value="55 AA AA AA AA 81 BA 01" />
+										<el-option label="Two-way switch" value="55 AA AA AA AA 81 BA 02" />
+										<el-option label="Three-way switch" value="55 AA AA AA AA 81 BA 03" />
+										<el-option label="Fourroadswitch" value="55 AA AA AA AA 81 BA 04" />
 									</el-select>
 								</template>
 							</el-input>
@@ -148,7 +148,7 @@
 					</el-col>
 					<el-col :span="8" class="text-right">
 						<el-button type="success" :icon="Position" class="sub-btn" :loading="btnLoadingType === 'publish'" :disabled="!client.connected" @click="doPublish(publish.payload, connection.pubTopic)">
-							发布(Publish)
+							Publish
 						</el-button>
 					</el-col>
 				</el-row>
@@ -157,122 +157,122 @@
 
 		<el-card shadow="hover">
 			<h1>
-				<el-button @click="clsmsg" type="success" :icon="Delete" title="点击清空历史记录">接收(Receive)</el-button>
-				<el-tag title="接收次数">收 {{ recvnum }}</el-tag>
+				<el-button @click="clsmsg" type="success" :icon="Delete" title="Click to clear history">Receive</el-button>
+				<el-tag title="Number of receptions">Receive {{ recvnum }}</el-tag>
 				<el-tag :title="dht_tm">{{ dht_wsd }}</el-tag>
-				<el-tag title="设备已工作时长">{{ parseInt(runSeconds) }} 秒</el-tag>
+				<el-tag title="Device operating time">{{ parseInt(runSeconds) }} seconds</el-tag>
 				<el-button
 					type="success"
-					title="关闭一路"
+					title="close all the way"
 					:disabled="!connection.onlineStatus || !client.connected"
 					v-if="connection.ch1_Status"
 					icon="ele-Check"
 					id="ch1"
 					v-reclick="2000"
 					@click="switchLight('55 AA AA AA AA 81 01 00')"
-					>关闭</el-button
+					>Close</el-button
 				>
 				<el-button
 					type="warning"
-					title="打开一路"
+					title="open all the way"
 					:disabled="!connection.onlineStatus || !client.connected"
 					v-else="!connection.ch1_Status"
 					icon="ele-CloseBold"
 					id="ch1"
 					v-reclick="2000"
 					@click="switchLight('55 AA AA AA AA 81 01 01')"
-					>打开</el-button
+					>Open</el-button
 				>
 				<el-button
 					type="success"
-					title="关闭二路"
+					title="Close second road"
 					:disabled="!connection.onlineStatus || !client.connected"
 					v-if="connection.ch2_Status"
 					icon="ele-Check"
 					id="ch2"
 					v-reclick="2000"
 					@click="switchLight('55 AA AA AA AA 81 02 00')"
-					>关闭</el-button
+					>Close</el-button
 				>
 				<el-button
 					type="warning"
-					title="打开二路"
+					title="Turn on channel two"
 					:disabled="!connection.onlineStatus || !client.connected"
 					v-else="!connection.ch2_Status"
 					icon="ele-CloseBold"
 					id="ch2"
 					v-reclick="2000"
 					@click="switchLight('55 AA AA AA AA 81 02 01')"
-					>打开</el-button
+					>Open</el-button
 				>
 				<el-button
 					type="success"
-					title="关闭三路"
+					title="Turn off three channels"
 					:disabled="!connection.onlineStatus || !client.connected"
 					v-if="connection.ch3_Status"
 					icon="ele-Check"
 					id="ch3"
 					v-reclick="2000"
 					@click="switchLight('55 AA AA AA AA 81 03 00')"
-					>关闭</el-button
+					>Close</el-button
 				>
 				<el-button
 					type="warning"
-					title="打开三路"
+					title="open three way"
 					:disabled="!connection.onlineStatus || !client.connected"
 					v-else="!connection.ch3_Status"
 					icon="ele-CloseBold"
 					id="ch3"
 					v-reclick="2000"
 					@click="switchLight('55 AA AA AA AA 81 03 01')"
-					>打开</el-button
+					>Open</el-button
 				>
 				<el-button
 					type="success"
-					title="关闭四路"
+					title="Close four roads"
 					:disabled="!connection.onlineStatus || !client.connected"
 					v-if="connection.ch4_Status"
 					icon="ele-Check"
 					id="ch4"
 					v-reclick="2000"
 					@click="switchLight('55 AA AA AA AA 81 04 00')"
-					>关闭</el-button
+					>Close</el-button
 				>
 				<el-button
 					type="warning"
-					title="打开四路"
+					title="Turn on the four channels"
 					:disabled="!connection.onlineStatus || !client.connected"
 					v-else="!connection.ch4_Status"
 					icon="ele-CloseBold"
 					id="ch4"
 					v-reclick="2000"
 					@click="switchLight('55 AA AA AA AA 81 04 01')"
-					>打开</el-button
+					>Open</el-button
 				>
 				<el-button
 					type="danger"
-					title="四路全部关闭"
+					title="All four roads are closed"
 					:disabled="!connection.onlineStatus || !client.connected"
 					v-if="connection.all_Status"
 					icon="ele-SwitchButton"
 					id="ch5"
 					@click="switchLight('55 AA AA AA AA 81 A4 00')"
-					>全关</el-button
+					>Completely closed</el-button
 				>
 				<el-button
 					type="success"
-					title="四路全部打开"
+					title="FourroadOpen all"
 					:disabled="!connection.onlineStatus || !client.connected"
 					v-else="!connection.all_Status"
 					icon="ele-Switch"
 					id="ch5"
 					@click="switchLight('55 AA AA AA AA 81 A4 01')"
-					>全开</el-button
+					>Fully open</el-button
 				>
 
-				<el-alert v-if="!client.connected || !connection.onlineStatus" title="网络服务断开或设备离线!" center type="warning" effect="light" style="margin-top: 4px" />
+				<el-alert v-if="!client.connected || !connection.onlineStatus" title="Network service disconnected or device offline!" center type="warning" effect="light" style="margin-top: 4px" />
 			</h1>
-			<!-- 绑定接收日志，只读 -->
+			<!-- Bind to receive log, read-only -->
 			<el-col :span="24">
 				<el-input type="textarea" :rows="8" id="recv" v-model="receivedMessages" readonly class="log"></el-input>
 			</el-col>
@@ -283,36 +283,36 @@
 <script setup lang="ts" name="mqttx">
 import { reactive, ref, onMounted, nextTick } from 'vue';
 import { Search, ChatDotSquare, TopRight, Star, Operation, Setting, Connection, Discount, Open, Delete, Position } from '@element-plus/icons-vue';
-//import * as MQTT from 'mqtt/dist/mqtt.min'; // 针对4.3.7版本的引用方法。5.7.x会提示错误 (import * as MQTT from "mqtt")
+//import * as MQTT from 'mqtt/dist/mqtt.min'; // Reference method for version 4.3.7. 5.7.x will prompt an error (import * as MQTT from "mqtt")
 import * as MQTT from "mqtt"
-import mittBus from '/@/utils/mitt'; // 事件总线mitt 解决打包后错误Uncaught (in promise) ReferenceError: Cannot access 'oe' before initialization
+import mittBus from '/@/utils/mitt'; // Event bus mitt solves the post-packaging error Uncaught (in promise) ReferenceError: Cannot access 'oe' before initialization
 
 // vue 3 + vite use MQTT.js refer to https://github.com/mqttjs/MQTT.js/issues/1269
 // https://github.com/mqttjs/MQTT.js#qos
-const qosList = [0, 1, 2]; // 质量
+const qosList = [0, 1, 2]; // quality
 const now = new Date();
 const recvnum = ref(0);
-const dht_wd = ref(0); // 温度、湿度
+const dht_wd = ref(0); // temperature, humidity
 const dht_sd = ref(0);
-const dht_tm = ref(''); // 同步时间
-const dht_wsd = ref('温度0℃,湿度0%');
-const runSeconds = ref(0); // 工作时长
+const dht_tm = ref(''); // sync time
+const dht_wsd = ref('Temperature 0℃, Humidity 0%');
+const runSeconds = ref(0); // working hours
 
-// mqtt客户端变量 let或const
+// mqtt client variable let or const
 const client = ref({
-	connected: false, //未连接
+	connected: false, // Not connected
 } as MQTT.MqttClient);
 
 const receivedMessages = ref('');
-const subscribedSuccess = ref(false); //订阅成功标志
-const connSuccess = ref(false); //连接成功标志
+const subscribedSuccess = ref(false); // Subscription success sign
+const connSuccess = ref(false); // Connection success sign
 const btnLoadingType = ref('');
-const retryTimes = ref(0); //重连次数
+const retryTimes = ref(0); // Number of reconnections
 
 /**
  * this demo uses EMQX Public MQTT Broker (https://www.emqx.com/en/mqtt/public-mqtt5-broker), here are the details:
- * 参考https://github.com/emqx/MQTT-Client-Examples
- * 方法https://github.com/mqttjs/MQTT.js
+ * Referencehttps://github.com/emqx/MQTT-Client-Examples
+ * Methodhttps://github.com/mqttjs/MQTT.js
  * Broker host: broker.emqx.io
  * WebSocket port: 8083
  * WebSocket over TLS/SSL port: 8084
@@ -330,15 +330,15 @@ const connection = reactive({
 	clientId: 'emqx_vue3_' + Math.random().toString(16).substring(2, 8),
 	username: '',
 	password: '',
-	repacket: 'd1ca1ff51f04', //注册包（改为您的注册包）
-	dhtRegpack: 'd1ca1ff51f04', //温度注册包（可以相同可以共享传感器）
-	mqttToken: '0804d4c44c1f1bd11dea461481f19868', //授权TOKEN自己约定
+	repacket: 'd1ca1ff51f04', // Registration package (change to your registration package)
+	dhtRegpack: 'd1ca1ff51f04', // Temperature registration package (can be the same and share sensors)
+	mqttToken: '0804d4c44c1f1bd11dea461481f19868', // Authorize TOKEN to make your own agreement
 	keepalive: 30,
-	clean: true, //清除 clean session
-	connectTimeout: 30 * 1000, // ms 超时毫秒
-	reconnectPeriod: 5000, // ms 重连毫秒
-	resubscribe: true, //重新订阅
-	//定义您自己的主题
+	clean: true, // clear clean session
+	connectTimeout: 30 * 1000, // ms timeout in milliseconds
+	reconnectPeriod: 5000, // ms reconnect milliseconds
+	resubscribe: true, // resubscribe
+	//Define your own theme
 	subTopic: 'mqtt/admintnet/#0#/out',
 	willTopic: 'mqtt/admintnet/#0#/will',
 	dhtTopic: 'mqtt/admintnet/#0#/dht',
@@ -351,30 +351,30 @@ const connection = reactive({
 	ch3_Status: false,
 	ch4_Status: false,
 	all_Status: false,
-	isAC: null, //强电true
+	isAC: null, // Strong power true
 });
-// 初始化主题
+// Initialize theme
 const init_topic = () => {
-	let st = 'mqtt/admintnet/#0#/out'; //订阅主题
-	let pt = 'mqtt/admintnet/#0#/into'; //发布主题
+	let st = 'mqtt/admintnet/#0#/out'; // Subscribe to topics
+	let pt = 'mqtt/admintnet/#0#/into'; // Post topic
 	let ptbody = '{"token":"{0}","cmd":"{1}","cmdpara":"{2}","clientid":"{3}"}';
-	let wt = 'mqtt/admintnet/#0#/will'; //遗嘱主题
-	let dh = 'mqtt/admintnet/#0#/dht'; //温湿度
+	let wt = 'mqtt/admintnet/#0#/will'; // Will topics
+	let dh = 'mqtt/admintnet/#0#/dht'; // Temperature and humidity
 	connection.subTopic = st.replace('#0#', connection.repacket);
 	connection.willTopic = wt.replace('#0#', connection.repacket);
-	connection.dhtTopic = dh.replace('#0#', connection.dhtRegpack); //温湿度
+	connection.dhtTopic = dh.replace('#0#', connection.dhtRegpack); // Temperature and humidity
 	connection.pubTopic = pt.replace('#0#', connection.repacket);
 	connection.subTopics = [connection.subTopic, connection.willTopic, connection.dhtTopic];
 	connection.pubPayload = ptbody;
 	//console.log(connection.subTopics);
 };
 
-// 默认注册包同步和传感器包名一致，反之不动
+// By default, the registration package synchronization is consistent with the sensor package name, and vice versa.
 const syncdhtreg = () => {
 	connection.dhtRegpack = connection.repacket;
 };
 
-// 字符串替换模拟  string.format(str,ar1,arn)
+// String replacement simulation string.format(str,ar1,arn)
 const stringFormat = (formatted, args) => {
 	for (let i = 0; i < args.length; i++) {
 		let regexp = new RegExp('\\{' + i + '\\}', 'gi');
@@ -388,17 +388,17 @@ onMounted(async () => {
 	nextTick(() => {});
 });
 
-// topic & QoS for MQTT subscribing 订阅主题(多个)
+// topic & QoS for MQTT subscribing Subscribing to topics (multiple)
 const subscription = ref({
 	topic: `$(connection.subTopics.value)`,
 	qos: 0 as MQTT.QoS,
 });
 
-// topic, QoS & payload for publishing message 发布主题
+// topic, QoS & payload for publishing message publishing topic
 const publish = ref({
 	topic: `${connection.pubTopic}`,
 	qos: 0 as MQTT.QoS,
-	retain: false, //保留否
+	retain: false, // Keep No
 	payload: '55 AA AA AA AA 91 CF', //'{ "msg": "Hello, I am browser." }',
 });
 
@@ -414,13 +414,13 @@ const initData = () => {
 const handleOnReConnect = () => {
 	retryTimes.value++;
 	connection.clientId = 'emqx_vue3_' + Math.random().toString(16).substring(2, 8);
-	console.log(retryTimes.value, '重试次数');
+	console.log(retryTimes.value, 'Number of retries');
 	if (retryTimes.value > 5) {
 		try {
-			client.value.end(); //重连超过5次断开
+			client.value.end(); // Disconnected after reconnecting more than 5 times
 			initData();
 			console.log('connection maxReconnectTimes limit, stop retry');
-			appmessage(now.toLocaleString() + '|超出重连接次数，停止重试' + retryTimes.value);
+			appmessage(now.toLocaleString() + '|Exceeded the number of reconnections, stop retrying' + retryTimes.value);
 		} catch (error) {
 			console.log('handleOnReConnect catch error:', error);
 		}
@@ -437,13 +437,13 @@ const handleOnReConnect = () => {
  * for more details about "mqtt.connect" method & options,
  * please refer to https://github.com/mqttjs/MQTT.js#mqttconnecturl-options
  */
-// create MQTT connection 创建连接
+// create MQTT connection create connection
 const createConnection = () => {
 	try {
 		btnLoadingType.value = 'connect';
 		const { protocol, host, port, ...options } = connection;
-		const connectUrl = `${protocol}://${host}:${port}/mqtt`; //组成新的连接字符串
-		console.log(connectUrl, '连接地址');
+		const connectUrl = `${protocol}:// ${host}:${port}/mqtt`; // form a new connection string
+		console.log(connectUrl, 'Connection address');
 		client.value = MQTT.connect(connectUrl, options);
 		if (client.value.on) {
 			// https://github.com/mqttjs/MQTT.js#event-connect
@@ -452,31 +452,31 @@ const createConnection = () => {
 				btnLoadingType.value = '';
 				connSuccess.value = true; //client.value.connected;
 				console.log('connection successful', client.value.connected);
-				appmessage(now.toLocaleString() + '|连接服务成功');
+				appmessage(now.toLocaleString() + '|Connection to the service was successful');
 			});
 
-			// https://github.com/mqttjs/MQTT.js#event-reconnect 重连回调
+			// https://github.com/mqttjs/MQTT.js#event-reconnect reconnect callback
 			client.value.on('reconnect', handleOnReConnect);
 			// https://github.com/mqttjs/MQTT.js#event-error
 			client.value.on('error', (error) => {
 				console.log('connection error:', error);
-				appmessage(now.toLocaleString() + '|发生错误：' + error);
+				appmessage(now.toLocaleString() + '|An error occurred:' + error);
 			});
 
-			// https://github.com/mqttjs/MQTT.js#event-message 接收消息，处理方法单独定义
+			// https://github.com/mqttjs/MQTT.js#event-message receives messages and the processing method is defined separately
 			client.value.on('message', (topic: string, message) => {
-				//处理方法
-				recvnum.value++; //接收次数累计
-				doAction(topic, message); //处理
+				//Treatment method
+				recvnum.value++; // Accumulated number of receptions
+				doAction(topic, message); // deal with
 				receivedMessages.value = receivedMessages.value.concat(
-					//拼接字符串输出
+					//Concatenate string output
 					now.toLocaleString() + ' ' + `${topic}\r\n` + message.toString() + '\r\n'
 				);
-				// console.log(now.toLocaleString()+`收到消息: ${message} from topic: ${topic}`);
-				//滚动此方法可行
+				// console.log(now.toLocaleString()+`Received message: ${message} from topic: ${topic}`);
+				//This method of scrolling works
 				nextTick(() => {
 					setTimeout(() => {
-						syncBottom(); //滚动到底部
+						syncBottom(); // scroll to bottom
 					}, 50);
 				});
 			});
@@ -487,41 +487,41 @@ const createConnection = () => {
 	}
 };
 
-// 处理事件
+// handle events
 const doAction = (t, msg) => {
-	let res = JSON.parse(msg.toString()); //必须规范的json格式否则出错，双引号不能是单引号；；；后不安全但强大 eval('(' + message.toString() + ')'); //JSON.parse(message.toString());//json对象
+	let res = JSON.parse(msg.toString()); // The json format must be standardized otherwise an error will occur. Double quotes cannot be single quotes;;; is unsafe but powerful eval('(' + message.toString() + ')'); //JSON.parse(message.toString());//json object
 
-	// 消息不能带''否则错误
-	let regp = res.regpacket; // 接收的注册包
-	let regs = connection.repacket; // 订阅的注册包
-	let isOK = regp == regs ? true : false; // 是不是本设备的消息
+	// The message cannot contain '' otherwise an error will occur.
+	let regp = res.regpacket; // Registration package received
+	let regs = connection.repacket; // Subscription registration package
+	let isOK = regp == regs ? true : false; // Is it a message from this device?
 	if (!isOK || regp == null) {
-		return; // 不是丢弃
+		return; // Not discarded
 	}
 
 	if (t == connection.dhtTopic) {
-		// 温湿度
+		// Temperature and humidity
 		let rp = res.regpacket;
 		let wd = res.temperature;
 		let sd = res.humidity;
 		let sj = res.time;
 		let sc = res.runsec;
 		if (rp != connection.dhtRegpack) {
-			// 来自订阅的温湿度包
+			// Temperature and humidity package from subscription
 			return;
 		}
 		if (rp != null) {
-			dht_wd.value = wd; // 实际应用时替换此3个变量即可
+			dht_wd.value = wd; // In actual application, just replace these 3 variables
 			dht_sd.value = sd;
-			dht_tm.value = '更新时间:' + sj;
+			dht_tm.value = 'Update time:' + sj;
 			runSeconds.value = sc;
-			dht_wsd.value = '温度:' + dht_wd.value + '℃,湿度:' + dht_sd.value + '%';
-			//state.option.title.text="实时温湿度变化趋势图(运行"+parseInt(sc)+"秒)";
-			//updatechart(false);//实时数据(这种方法是实时推送，如果用 定时器 是定时显示的)updatewsd_time(false)
+			dht_wsd.value = 'Temperature:' + dht_wd.value + '℃,humidity:' + dht_sd.value + '%';
+			//state.option.title.text="Real-time temperature and humidity change trend chart (run"+parseInt(sc)+"seconds)";
+			//updatechart(false);//Real-time data (this method is real-time push, if you use a timer, it will be displayed regularly) updatewsd_time(false)
 		}
 	}
 	if (t == connection.willTopic) {
-		// 遗嘱
+		// will
 		if (res.redata == 'offline') {
 			connection.onlineStatus = false;
 		} else {
@@ -532,13 +532,13 @@ const doAction = (t, msg) => {
 		let rp0 = res.regpacket;
 		if (rp0 != undefined) {
 			if (rp0 == regs) {
-				op(res.redata); // 该设备执行指令其他放弃
+				op(res.redata); // The device executes instructions other than to abandon
 			}
 		}
 	}
 };
 
-// 处理开关状态(自定义的指令，需要修改为您自己的指令)
+// Handle switch status (customized instructions, need to be modified to your own instructions)
 const op = (cmd: any) => {
 	if (cmd == '55 AA AA AA AA 82 01 01') {
 		connection.ch1_Status = true;
@@ -596,7 +596,7 @@ const op = (cmd: any) => {
 	}
 };
 
-// 自动同步滚动（建议延时执行）textarea:any=null
+// Automatic synchronous scrolling (delayed execution recommended) textarea:any=null
 const syncBottom = () => {
 	const textarea = document.getElementById('recv');
 	if (textarea) {
@@ -604,26 +604,26 @@ const syncBottom = () => {
 	}
 };
 
-// subscribe topic 开始订阅
+// subscribe topic start subscribing
 // https://github.com/mqttjs/MQTT.js#mqttclientsubscribetopictopic-arraytopic-object-options-callback
 const doSubscribe = () => {
 	btnLoadingType.value = 'subscribe';
 	const { topic, qos } = subscription.value;
-	console.log(connection.subTopics, '订阅主题');
+	console.log(connection.subTopics, 'Subscribe to topics');
 	client.value.subscribe(connection.subTopics, { qos }, (error: Error, granted: mqtt.ISubscriptionGrant[]) => {
 		btnLoadingType.value = '';
 		if (error) {
 			console.log('subscribe error:', error);
 			return;
 		}
-		subscribedSuccess.value = true; //订阅成功
-		// 连接成功，发布首个问询指令
-		switchLight('55 AA AA AA AA 91 CF'); //发送首页问询指令
-		console.log('订阅成功subscribe successfully:', granted);
+		subscribedSuccess.value = true; // Subscription successful
+		// The connection is successful and the first inquiry command is issued.
+		switchLight('55 AA AA AA AA 91 CF'); // Send homepage inquiry instructions
+		console.log('Subscription successful', granted);
 	});
 };
 
-// unsubscribe topic 取消订阅
+// unsubscribe topic unsubscribe
 // https://github.com/mqttjs/MQTT.js#mqttclientunsubscribetopictopic-array-options-callback
 const doUnSubscribe = () => {
 	btnLoadingType.value = 'unsubscribe';
@@ -639,45 +639,45 @@ const doUnSubscribe = () => {
 	});
 };
 
-// publish message发布消息
+// publish messagepublish message
 // https://github.com/mqttjs/MQTT.js#mqttclientpublishtopic-message-options-callback
 const doPublish = (b, t) => {
 	//btnLoadingType.value = "publish";
 	const { topic, qos, payload, retain } = publish.value;
-	//console.log(t+b,"发布内容")
-	let paybody = stringFormat(connection.pubPayload, [connection.mqttToken, b ?? publish.value.payload, '', connection.clientId]); //标准格式payload
+	//console.log(t+b,"Publish content")
+	let paybody = stringFormat(connection.pubPayload, [connection.mqttToken, b ?? publish.value.payload, '', connection.clientId]); // Standard format payload
 	client.value.publish(t ?? connection.pubTopic, paybody, { qos }, (error) => {
 		nextTick(() => {
-			// 测试延时
+			// Test delay
 			setTimeout(() => {
 				btnLoadingType.value = '';
 			}, 50);
 		});
 		if (error) {
-			appmessage(now.toLocaleString() + '|发布消息错误.' + error);
+			appmessage(now.toLocaleString() + '|Publish message error.' + error);
 			console.log('publish error:', error);
 			return;
 		}
 	});
 };
 
-// 消息追加消息框
+// Message append message box
 const appmessage = (msg) => {
 	receivedMessages.value = receivedMessages.value.concat(
-		// 拼接字符串输出
+		// Concatenate string output
 		msg + '\r\n'
 	);
 };
 
-// 开关
+// switch
 const switchLight = (cmd) => {
 	if (!client.value.connected) {
-		appmessage('尚未连接到服务!');
+		appmessage('Not connected to the service yet!');
 		return;
 	}
 	let paybody = stringFormat(connection.pubPayload, [connection.mqttToken, cmd ?? publish.value.payload, '', connection.clientId]);
 	const { topic, qos, payload, retain } = publish.value;
-	//console.log(t+b,"发布内容")
+	//console.log(t+b,"Publish content")
 	client.value.publish(connection.pubTopic, paybody, { qos }, retain, (error) => {
 		btnLoadingType.value = '';
 		if (error) {
@@ -687,7 +687,7 @@ const switchLight = (cmd) => {
 	});
 };
 
-// disconnect 端口连接
+// disconnect port connection
 // https://github.com/mqttjs/MQTT.js#mqttclientendforce-options-callback
 const destroyConnection = () => {
 	if (client.value.connected) {
@@ -696,22 +696,22 @@ const destroyConnection = () => {
 			client.value.end(false, () => {
 				initData();
 				connSuccess.value = false;
-				//console.log("断开成功 disconnected successfully");
-				appmessage(now.toLocaleString() + '|连接已断开.');
+				//console.log("disconnected successfully");
+				appmessage(now.toLocaleString() + '|Connection has been disconnected.');
 			});
 		} catch (error) {
 			btnLoadingType.value = '';
-			console.log('断开错误 disconnect error:', error);
+			console.log('disconnect error disconnect error:', error);
 		}
 	}
 };
 
-// 端口随协议而改变
+// Ports vary by protocol
 const handleProtocolChange = (value: string) => {
 	connection.port = value === 'wss' ? 8084 : 8083;
 };
 
-// 清空消息框
+// Clear message box
 const clsmsg = () => {
 	receivedMessages.value = '';
 };

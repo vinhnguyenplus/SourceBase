@@ -6,7 +6,7 @@ import { formatDate } from '/@/utils/formatTime';
 import { getAPI } from '/@/utils/axios-utils';
 import { SysLangApi } from '/@/api-services/api';
 
-//父级传递来的函数，用于回调
+//Function passed from parent for callback
 const emit = defineEmits(["reloadTable"]);
 const ruleFormRef = ref();
 
@@ -19,26 +19,26 @@ const state = reactive({
 	dropdownData: {} as any,
 });
 
-// 自行添加其他规则
+// Add other rules yourself
 const rules = ref<FormRules>({
-	name: [{ required: true, message: '请选择语言名称！', trigger: 'blur', },],
-	code: [{ required: true, message: '请选择语言代码！', trigger: 'blur', },],
-	isoCode: [{ required: true, message: '请选择ISO 语言代码！', trigger: 'blur', },],
-	urlCode: [{ required: true, message: '请选择URL 语言代码！', trigger: 'blur', },],
-	direction: [{ required: true, message: '请选择书写方向！', trigger: 'blur', },],
-	dateFormat: [{ required: true, message: '请选择日期格式！', trigger: 'blur', },],
-	timeFormat: [{ required: true, message: '请选择时间格式！', trigger: 'blur', },],
-	weekStart: [{ required: true, message: '请选择每周起始日！', trigger: 'blur', },],
-	grouping: [{ required: true, message: '请选择分组符号！', trigger: 'blur', },],
-	decimalPoint: [{ required: true, message: '请选择小数点符号！', trigger: 'blur', },],
-	active: [{ required: true, message: '请选择是否启用！', trigger: 'blur', },],
+	name: [{ required: true, message: 'Please select a language name!', trigger: 'blur', },],
+	code: [{ required: true, message: 'Please select the language code!', trigger: 'blur', },],
+	isoCode: [{ required: true, message: 'Please select an ISO language code!', trigger: 'blur', },],
+	urlCode: [{ required: true, message: 'Please select a URL language code!', trigger: 'blur', },],
+	direction: [{ required: true, message: 'Please select the writing direction!', trigger: 'blur', },],
+	dateFormat: [{ required: true, message: 'Please select a date format!', trigger: 'blur', },],
+	timeFormat: [{ required: true, message: 'Please select a time format!', trigger: 'blur', },],
+	weekStart: [{ required: true, message: 'Please select the starting day of the week!', trigger: 'blur', },],
+	grouping: [{ required: true, message: 'Please select a grouping symbol!', trigger: 'blur', },],
+	decimalPoint: [{ required: true, message: 'Please select a decimal point symbol!', trigger: 'blur', },],
+	active: [{ required: true, message: 'Please choose whether to enable it!', trigger: 'blur', },],
 });
 
-// 页面加载时
+// When the page loads
 onMounted(async () => {
 });
 
-// 打开弹窗
+// Open pop-up window
 const openDialog = async (row: any, title: string) => {
 	state.title = title;
 	row = row ?? { direction: 1, weekStart: 7, active: false };
@@ -46,13 +46,13 @@ const openDialog = async (row: any, title: string) => {
 	state.showDialog = true;
 };
 
-// 关闭弹窗
+// Close pop-up window
 const closeDialog = () => {
 	emit("reloadTable");
 	state.showDialog = false;
 };
 
-// 提交
+// submit
 const submit = async () => {
 	ruleFormRef.value.validate(async (isValid: boolean, fields?: any) => {
 		if (isValid) {
@@ -64,14 +64,14 @@ const submit = async () => {
 			closeDialog();
 		} else {
 			ElMessage({
-				message: `表单有${Object.keys(fields).length}处验证失败，请修改后再提交`,
+				message: `The form failed to verify at ${Object.keys(fields).length}, please modify it before submitting.`,
 				type: "error",
 			});
 		}
 	});
 };
 
-//将属性或者函数暴露给父组件
+//Expose properties or functions to parent components
 defineExpose({ openDialog });
 </script>
 <template>
@@ -88,82 +88,82 @@ defineExpose({ openDialog });
 						<el-input v-model="state.ruleForm.id" />
 					</el-form-item>
 					<el-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12" class="mb20">
-						<el-form-item label="语言名称" prop="name">
-							<el-input v-model="state.ruleForm.name" placeholder="请输入语言名称" maxlength="255"
+						<el-form-item label="Language name" prop="name">
+							<el-input v-model="state.ruleForm.name" placeholder="Please enter language name" maxlength="255"
 								show-word-limit clearable />
 						</el-form-item>
 					</el-col>
 					<el-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12" class="mb20">
-						<el-form-item label="语言代码" prop="code">
-							<el-input v-model="state.ruleForm.code" placeholder="请输入语言代码" maxlength="255"
+						<el-form-item label="Language code" prop="code">
+							<el-input v-model="state.ruleForm.code" placeholder="Please enter language code" maxlength="255"
 								show-word-limit clearable />
 						</el-form-item>
 					</el-col>
 					<el-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12" class="mb20">
-						<el-form-item label="ISO 语言代码" prop="isoCode">
-							<el-input v-model="state.ruleForm.isoCode" placeholder="请输入ISO 语言代码" maxlength="255"
+						<el-form-item label="ISO language code" prop="isoCode">
+							<el-input v-model="state.ruleForm.isoCode" placeholder="Please enter the ISO language code" maxlength="255"
 								show-word-limit clearable />
 						</el-form-item>
 					</el-col>
 					<el-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12" class="mb20">
-						<el-form-item label="URL 语言代码" prop="urlCode">
-							<el-input v-model="state.ruleForm.urlCode" placeholder="请输入URL 语言代码" maxlength="255"
+						<el-form-item label="URL language code" prop="urlCode">
+							<el-input v-model="state.ruleForm.urlCode" placeholder="Please enter the URL language code" maxlength="255"
 								show-word-limit clearable />
 						</el-form-item>
 					</el-col>
 					<el-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12" class="mb20">
-						<el-form-item label="书写方向" prop="direction">
+						<el-form-item label="Writing direction" prop="direction">
 							<g-sys-dict v-model="state.ruleForm.direction" code="DirectionEnum" render-as="select"
-								placeholder="请选书写方向" clearable filterable />
+								placeholder="Please select writing direction" clearable filterable />
 						</el-form-item>
 					</el-col>
 					<el-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12" class="mb20">
-						<el-form-item label="日期格式" prop="dateFormat">
-							<el-input v-model="state.ruleForm.dateFormat" placeholder="请输入日期格式" maxlength="255"
+						<el-form-item label="date format" prop="dateFormat">
+							<el-input v-model="state.ruleForm.dateFormat" placeholder="Please enter the date format" maxlength="255"
 								show-word-limit clearable />
 						</el-form-item>
 					</el-col>
 					<el-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12" class="mb20">
-						<el-form-item label="时间格式" prop="timeFormat">
-							<el-input v-model="state.ruleForm.timeFormat" placeholder="请输入时间格式" maxlength="255"
+						<el-form-item label="time format" prop="timeFormat">
+							<el-input v-model="state.ruleForm.timeFormat" placeholder="Please enter the time format" maxlength="255"
 								show-word-limit clearable />
 						</el-form-item>
 					</el-col>
 					<el-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12" class="mb20">
-						<el-form-item label="每周起始日" prop="weekStart">
+						<el-form-item label="Start day of the week" prop="weekStart">
 							<g-sys-dict v-model="state.ruleForm.weekStart" code="WeekEnum" render-as="select"
-								placeholder="请选每周起始日" clearable filterable />
+								placeholder="Please chooseStart day of the week" clearable filterable />
 						</el-form-item>
 					</el-col>
 					<el-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12" class="mb20">
-						<el-form-item label="分组符号" prop="grouping">
-							<el-input v-model="state.ruleForm.grouping" placeholder="请输入分组符号" maxlength="255"
+						<el-form-item label="Grouping symbols" prop="grouping">
+							<el-input v-model="state.ruleForm.grouping" placeholder="Please enter grouping symbol" maxlength="255"
 								show-word-limit clearable />
 						</el-form-item>
 					</el-col>
 					<el-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12" class="mb20">
-						<el-form-item label="小数点符号" prop="decimalPoint">
-							<el-input v-model="state.ruleForm.decimalPoint" placeholder="请输入小数点符号" maxlength="255"
+						<el-form-item label="Decimal point symbol" prop="decimalPoint">
+							<el-input v-model="state.ruleForm.decimalPoint" placeholder="Please enter the decimal point symbol" maxlength="255"
 								show-word-limit clearable />
 						</el-form-item>
 					</el-col>
 					<el-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12" class="mb20">
-						<el-form-item label="千分位分隔符" prop="thousandsSep">
-							<el-input v-model="state.ruleForm.thousandsSep" placeholder="请输入千分位分隔符" maxlength="255"
+						<el-form-item label="thousands separator" prop="thousandsSep">
+							<el-input v-model="state.ruleForm.thousandsSep" placeholder="Please enter thousandth separator" maxlength="255"
 								show-word-limit clearable />
 						</el-form-item>
 					</el-col>
 					<el-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12" class="mb20">
-						<el-form-item label="是否启用" prop="active">
-							<el-switch v-model="state.ruleForm.active" active-text="是" inactive-text="否" />
+						<el-form-item label="Enable or not" prop="active">
+							<el-switch v-model="state.ruleForm.active" active-text="Yes" inactive-text="no" />
 						</el-form-item>
 					</el-col>
 				</el-row>
 			</el-form>
 			<template #footer>
 				<span class="dialog-footer">
-					<el-button @click="() => state.showDialog = false">取 消</el-button>
-					<el-button @click="submit" type="primary" v-reclick="1000">确 定</el-button>
+					<el-button @click="() => state.showDialog = false">Cancel</el-button>
+					<el-button @click="submit" type="primary" v-reclick="1000">Confirm</el-button>
 				</span>
 			</template>
 		</el-dialog>

@@ -1,8 +1,8 @@
-﻿// Admin.NET 项目的版权、商标、专利和其他相关权利均受相应法律法规的保护。使用本项目应遵守相关法律法规和许可证的要求。
+﻿// The copyright, trademark, patent and other related rights of the Admin.NET project are protected by corresponding laws and regulations. Use of this project shall comply with relevant laws, regulations and license requirements.
 //
-// 本项目主要遵循 MIT 许可证和 Apache 许可证（版本 2.0）进行分发和使用。许可证位于源代码树根目录中的 LICENSE-MIT 和 LICENSE-APACHE 文件。
+// This project is distributed and used primarily under the MIT License and the Apache License (version 2.0). The license is located in the LICENSE-MIT and LICENSE-APACHE files in the root of the source tree.
 //
-// 不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！
+// This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project!
 
 namespace Admin.NET.Plugin.K3Cloud.Service;
 
@@ -19,7 +19,7 @@ public class ErpPushResultInfo
     public object? Id { get; set; }
 
     /// <summary>
-    /// 编码
+    /// coding
     /// </summary>
     public string? Number { get; set; }
 
@@ -32,28 +32,28 @@ public class ErpPushResultInfo_ResponseStatus
     public int? ErrorCode { get; set; }
 
     /// <summary>
-    /// 错误代码MsgCode说明
-    ///0：默认
-    ///1：上下文丢失 会话过期
-    ///2：没有权限
-    ///3：操作标识为空
-    ///4：异常
-    ///5：单据标识为空
-    ///6：数据库操作失败
-    ///7：许可错误
-    ///8：参数错误
-    ///9：指定字段/值不存在
-    ///10：未找到对应数据
-    ///11：验证失败
-    ///12：不可操作
-    ///13：网控冲突
-    ///14：调用限制
-    ///15：禁止管理员登录
+    /// Error code MsgCode description
+    ///0: default
+    ///1: Context lost and session expired
+    ///2: No permission
+    ///3: The operation identifier is empty
+    ///4: Abnormal
+    ///5: The document ID is empty
+    ///6: Database operation failed
+    ///7: License error
+    ///8: Parameter error
+    ///9: The specified field/value does not exist
+    ///10: No corresponding data found
+    ///11: Verification failed
+    ///12: Inoperable
+    ///13: Network control conflict
+    ///14: Call restrictions
+    ///15: Prohibit administrator login
     /// </summary>
     public int? MsgCode { get; set; }
 
     /// <summary>
-    /// 如果失败，具体失败原因
+    /// If failed, specific reasons for failure
     /// </summary>
     public List<ErpPushResultInfo_Errors> Errors { get; set; }
 }

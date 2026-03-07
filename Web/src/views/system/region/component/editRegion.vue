@@ -10,11 +10,11 @@
 			<el-form :model="state.ruleForm" ref="ruleFormRef" label-width="auto">
 				<el-row :gutter="35">
 					<!-- <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="mb20">
-						<el-form-item label="上级名称">
+						<el-form-item label="Superior Name">
 							<el-cascader
 								:options="regionData"
 								:props="cascaderProps"
-								placeholder="请选择上级名称"
+								placeholder="Please select the name of the supervisor"
 								clearable
 								class="w100"
 								v-model="ruleForm.pid"
@@ -27,45 +27,45 @@
 						</el-form-item>
 					</el-col> -->
 					<el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="mb20">
-						<el-form-item label="上级行政Id" prop="pid" v-show="false" :rules="[{ required: true, message: '上级行政Id不能为空', trigger: 'blur' }]">
-							<el-input v-model="state.ruleForm.pid" placeholder="上级行政Id或上级行政代码或默认0" clearable />
+						<el-form-item label="Superior administrative ID" prop="pid" v-show="false" :rules="[{ required: true, message: 'The superior administrative Id cannot be empty', trigger: 'blur' }]">
+							<el-input v-model="state.ruleForm.pid" placeholder="Superior administrative ID or superior administrative code or default 0" clearable />
 						</el-form-item>
-                        <el-form-item label="上级行政" v-if="!state.ruleForm.id">
+                        <el-form-item label="Higher administration" v-if="!state.ruleForm.id">
                             <!-- <span>{{state.parentNamePath}}</span> -->
                             <el-input v-model="state.parentNamePath" disabled></el-input>
                         </el-form-item>
 					</el-col>
 					<el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="mb20">
-						<el-form-item label="行政名称" prop="name" :rules="[{ required: true, message: '行政名称不能为空', trigger: 'blur' }]">
-							<el-input v-model="state.ruleForm.name" placeholder="行政名称" clearable />
+						<el-form-item label="Administrative name" prop="name" :rules="[{ required: true, message: 'Administrative name cannot be empty', trigger: 'blur' }]">
+							<el-input v-model="state.ruleForm.name" placeholder="Administrative name" clearable />
 						</el-form-item>
 					</el-col>
 					<el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="mb20">
-						<el-form-item label="行政代码" prop="code" :rules="[{ required: true, message: '行政代码不能为空', trigger: 'blur' }]">
-							<el-input v-model="state.ruleForm.code" placeholder="行政代码" clearable />
+						<el-form-item label="Administrative code" prop="code" :rules="[{ required: true, message: 'Administrative code cannot be empty', trigger: 'blur' }]">
+							<el-input v-model="state.ruleForm.code" placeholder="Administrative code" clearable />
 						</el-form-item>
 					</el-col>
 					<el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="mb20">
-						<el-form-item label="区号" prop="cityCode">
-							<el-input v-model="state.ruleForm.cityCode" placeholder="区号" clearable />
+						<el-form-item label="Area code" prop="cityCode">
+							<el-input v-model="state.ruleForm.cityCode" placeholder="Area code" clearable />
 						</el-form-item>
 					</el-col>
 					<el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="mb20">
-						<el-form-item label="排序">
-							<el-input-number v-model="state.ruleForm.orderNo" placeholder="排序" class="w100" />
+						<el-form-item label="Sort">
+							<el-input-number v-model="state.ruleForm.orderNo" placeholder="Sort" class="w100" />
 						</el-form-item>
 					</el-col>
 					<el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="mb20">
-						<el-form-item label="备注">
-							<el-input v-model="state.ruleForm.remark" placeholder="请输入备注内容" clearable type="textarea" />
+						<el-form-item label="Remarks">
+							<el-input v-model="state.ruleForm.remark" placeholder="Please enter the remark content" clearable type="textarea" />
 						</el-form-item>
 					</el-col>
 				</el-row>
 			</el-form>
 			<template #footer>
 				<span class="dialog-footer">
-					<el-button @click="cancel">取 消</el-button>
-					<el-button type="primary" @click="submit">确 定</el-button>
+					<el-button @click="cancel">Cancel</el-button>
+					<el-button type="primary" @click="submit">Confirm</el-button>
 				</span>
 			</template>
 		</el-dialog>
@@ -87,10 +87,10 @@ const ruleFormRef = ref();
 const state = reactive({
 	isShowDialog: false,
 	ruleForm: {} as UpdateRegionInput,
-    parentNamePath: '顶级'
+    parentNamePath: 'Top'
 });
 
-// 打开弹窗
+// Open pop-up window
 const openDialog = (row: any, parentNamePath?: string) => {
     if(parentNamePath) state.parentNamePath = parentNamePath;
 
@@ -99,18 +99,18 @@ const openDialog = (row: any, parentNamePath?: string) => {
 	ruleFormRef.value?.resetFields();
 };
 
-// 关闭弹窗
+// Close pop-up window
 const closeDialog = () => {
 	emits('handleQuery');
 	state.isShowDialog = false;
 };
 
-// 取消
+// Cancel
 const cancel = () => {
 	state.isShowDialog = false;
 };
 
-// 提交
+// submit
 const submit = () => {
 	ruleFormRef.value.validate(async (valid: boolean) => {
 		if (!valid) return;
@@ -123,6 +123,6 @@ const submit = () => {
 	});
 };
 
-// 导出对象
+// Export object
 defineExpose({ openDialog });
 </script>

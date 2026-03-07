@@ -1,13 +1,13 @@
-﻿// Admin.NET 项目的版权、商标、专利和其他相关权利均受相应法律法规的保护。使用本项目应遵守相关法律法规和许可证的要求。
+﻿// The copyright, trademark, patent and other related rights of the Admin.NET project are protected by corresponding laws and regulations. Use of this project shall comply with relevant laws, regulations and license requirements.
 //
-// 本项目主要遵循 MIT 许可证和 Apache 许可证（版本 2.0）进行分发和使用。许可证位于源代码树根目录中的 LICENSE-MIT 和 LICENSE-APACHE 文件。
+// This project is distributed and used primarily under the MIT License and the Apache License (version 2.0). The license is located in the LICENSE-MIT and LICENSE-APACHE files in the root of the source tree.
 //
-// 不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！
+// This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project!
 
 namespace Admin.NET.Core.Service;
 
 /// <summary>
-/// 系统动态插件服务 🧩
+/// System dynamic plug-in service 🧩
 /// </summary>
 [ApiDescriptionSettings(Order = 245)]
 public class SysPluginService : IDynamicApiController, ITransient
@@ -26,11 +26,11 @@ public class SysPluginService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 获取动态插件列表 🧩
+    /// Get dynamic plugin list 🧩
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
-    [DisplayName("获取动态插件列表")]
+    [DisplayName("Get dynamic plugin list")]
     public async Task<SqlSugarPagedList<SysPlugin>> Page(PagePluginInput input)
     {
         return await _sysPluginRep.AsQueryable()
@@ -41,36 +41,36 @@ public class SysPluginService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 增加动态插件 🧩
+    /// Add dynamic plug-in 🧩
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
     [ApiDescriptionSettings(Name = "Add"), HttpPost]
-    [DisplayName("增加动态插件")]
+    [DisplayName("Add dynamic plug-in")]
     public async Task AddPlugin(AddPluginInput input)
     {
         var isExist = await _sysPluginRep.IsAnyAsync(u => u.Name == input.Name || u.AssemblyName == input.AssemblyName);
         if (isExist) throw Oops.Oh(ErrorCodeEnum.D1900);
 
-        // 添加动态程序集/接口
+        // Add dynamic assembly/interface
         input.AssemblyName = CompileAssembly(input.CsharpCode, input.AssemblyName);
 
         await _sysPluginRep.InsertAsync(input.Adapt<SysPlugin>());
     }
 
     /// <summary>
-    /// 更新动态插件 🧩
+    /// Update dynamic plugin 🧩
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
     [ApiDescriptionSettings(Name = "Update"), HttpPost]
-    [DisplayName("更新动态插件")]
+    [DisplayName("Updatedynamic plug-in")]
     public async Task UpdatePlugin(UpdatePluginInput input)
     {
         var isExist = await _sysPluginRep.IsAnyAsync(u => (u.Name == input.Name || u.AssemblyName == input.AssemblyName) && u.Id != input.Id);
         if (isExist) throw Oops.Oh(ErrorCodeEnum.D1900);
 
-        // 先移除再添加动态程序集/接口
+        // Remove and then add dynamic assemblies/interfaces
         RemoveAssembly(input.AssemblyName);
         input.AssemblyName = CompileAssembly(input.CsharpCode);
 
@@ -78,47 +78,47 @@ public class SysPluginService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 删除动态插件 🧩
+    /// Delete dynamic plugin 🧩
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
     [ApiDescriptionSettings(Name = "Delete"), HttpPost]
-    [DisplayName("删除动态插件")]
+    [DisplayName("Remove dynamic plugin")]
     public async Task DeletePlugin(DeletePluginInput input)
     {
         var plugin = await _sysPluginRep.GetByIdAsync(input.Id);
         if (plugin == null) return;
 
-        // 移除动态程序集/接口
+        // Remove dynamic assembly/interface
         RemoveAssembly(plugin.AssemblyName);
 
         await _sysPluginRep.DeleteAsync(u => u.Id == input.Id);
     }
 
     /// <summary>
-    /// 添加动态程序集/接口 🧩
+    /// Add dynamic assembly/interface 🧩
     /// </summary>
     /// <param name="csharpCode"></param>
-    /// <param name="assemblyName">程序集名称</param>
+    /// <param name="assemblyName">Assembly name</param>
     /// <returns></returns>
-    [DisplayName("添加动态程序集/接口")]
+    [DisplayName("Add dynamic assembly/interface")]
     public string CompileAssembly([FromBody] string csharpCode, [FromQuery] string assemblyName = default)
     {
-        // 编译 C# 代码并返回动态程序集
+        // Compile C# code and return dynamic assembly
         var dynamicAssembly = App.CompileCSharpClassCode(csharpCode, assemblyName);
 
-        // 将程序集添加进动态 WebAPI 应用部件
+        // Add an assembly into a dynamic WebAPI application part
         _provider.AddAssembliesWithNotifyChanges(dynamicAssembly);
 
-        // 返回动态程序集名称
+        // Returns dynamic assembly name
         return dynamicAssembly.GetName().Name;
     }
 
     /// <summary>
-    /// 移除动态程序集/接口 🧩
+    /// Remove dynamic assembly/interface 🧩
     /// </summary>
     [ApiDescriptionSettings(Name = "RemoveAssembly"), HttpPost]
-    [DisplayName("移除动态程序集/接口")]
+    [DisplayName("Remove dynamic assembly/interface")]
     public void RemoveAssembly(string assemblyName)
     {
         _provider.RemoveAssembliesWithNotifyChanges(assemblyName);

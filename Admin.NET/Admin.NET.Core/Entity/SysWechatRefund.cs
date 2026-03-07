@@ -1,97 +1,97 @@
-﻿// Admin.NET 项目的版权、商标、专利和其他相关权利均受相应法律法规的保护。使用本项目应遵守相关法律法规和许可证的要求。
+﻿// The copyright, trademark, patent and other related rights of the Admin.NET project are protected by corresponding laws and regulations. Use of this project shall comply with relevant laws, regulations and license requirements.
 //
-// 本项目主要遵循 MIT 许可证和 Apache 许可证（版本 2.0）进行分发和使用。许可证位于源代码树根目录中的 LICENSE-MIT 和 LICENSE-APACHE 文件。
+// This project is distributed and used primarily under the MIT License and the Apache License (version 2.0). The license is located in the LICENSE-MIT and LICENSE-APACHE files in the root of the source tree.
 //
-// 不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！
+// This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project!
 
 namespace Admin.NET.Core;
 
 /// <summary>
-/// 系统微信支付退款表
+/// System WeChat payment refund form
 /// </summary>
-[SugarTable(null, "系统微信支付退款表")]
+[SugarTable(null, "System WeChat payment refund form")]
 [SysTable]
 [SugarIndex("index_{table}_W", nameof(WechatPayId), OrderByType.Asc)]
 public partial class SysWechatRefund : EntityBase
 {
     /// <summary>
-    /// 定单主键
+    /// Order primary key
     /// </summary>
-    [SugarColumn(ColumnDescription = "定单主键")]
+    [SugarColumn(ColumnDescription = "Order Primary Key")]
     public long WechatPayId { get; set; }
 
     /// <summary>
-    /// 商户退款号
+    /// Merchant refund number
     /// </summary>
-    [SugarColumn(ColumnDescription = "商户退款号")]
+    [SugarColumn(ColumnDescription = "Merchant refund number")]
     [Required]
     public virtual string OutRefundNumber { get; set; }
 
     /// <summary>
-    /// 退款订单号
+    /// Refund order number
     /// </summary>
-    [SugarColumn(ColumnDescription = "退款订单号")]
+    [SugarColumn(ColumnDescription = "RefundOrder Number")]
     [Required]
     public virtual string TransactionId { get; set; }
 
     /// <summary>
-    /// 退款原因
+    /// Reason for refund
     /// </summary>
-    [SugarColumn(ColumnDescription = "退款原因")]
+    [SugarColumn(ColumnDescription = "Reason for refund")]
     public string? Reason { get; set; }
 
     /// <summary>
-    /// 退款渠道
+    /// Refund channels
     /// </summary>
-    [SugarColumn(ColumnDescription = "退款渠道")]
+    [SugarColumn(ColumnDescription = "Refund channels")]
     public string? Channel { get; set; }
 
     /// <summary>
-    /// 退款入账账户
+    /// Refund into account
     /// </summary>
     /// <remarks>
-    /// 取当前退款单的退款入账方，有以下几种情况：
-    /// 1）退回银行卡：{银行名称}{卡类型}{ 卡尾号}
-    /// 2）退回支付用户零钱: 支付用户零钱
-    /// 3）退还商户: 商户基本账户商户结算银行账户
-    /// 4）退回支付用户零钱通: 支付用户零钱通
+    /// To obtain the refund account of the current refund order, there are the following situations:
+    /// 1) Return bank card: {bank name}{card type}{card tail number}
+    /// 2) Return the payment user’s change: Pay the user’s change
+    /// 3) Return to merchant: Merchant basic account Merchant settlement bank account
+    /// 4) Return payment user Lingqiantong: Payment user Lingqiantong
     /// </remarks>
-    [SugarColumn(ColumnDescription = "退款入账账户")]
+    [SugarColumn(ColumnDescription = "Refund into account")]
     public string? UserReceivedAccount { get; set; }
 
     /// <summary>
-    /// 退款状态
+    /// Refund status
     /// </summary>
-    [SugarColumn(ColumnDescription = "退款状态")]
+    [SugarColumn(ColumnDescription = "Refund status")]
     public string? TradeState { get; set; }
 
     /// <summary>
-    /// 交易状态描述
+    /// Transaction status description
     /// </summary>
-    [SugarColumn(ColumnDescription = "交易状态描述")]
+    [SugarColumn(ColumnDescription = "Transaction status description")]
     public string? TradeStateDescription { get; set; }
 
     /// <summary>
-    /// 订单总金额
+    /// Total order amount
     /// </summary>
-    [SugarColumn(ColumnDescription = "退款金额")]
+    [SugarColumn(ColumnDescription = "Refund amount")]
     public int Refund { get; set; }
 
     /// <summary>
-    /// 支完成时间
+    /// payment completion time
     /// </summary>
-    [SugarColumn(ColumnDescription = "完成时间")]
+    [SugarColumn(ColumnDescription = "completion time")]
     public DateTime? SuccessTime { get; set; }
 
     /// <summary>
-    /// 回调通知地址
+    /// Callback notification address
     /// </summary>
-    [SugarColumn(ColumnDescription = "回调通知地址")]
+    [SugarColumn(ColumnDescription = "Callback notification address")]
     public string? NotifyUrl { get; set; }
 
     /// <summary>
-    /// 备注
+    /// Remark
     /// </summary>
-    [SugarColumn(ColumnDescription = "备注")]
+    [SugarColumn(ColumnDescription = "Remarks")]
     public string? Remark { get; set; }
 }

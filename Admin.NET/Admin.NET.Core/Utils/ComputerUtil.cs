@@ -1,15 +1,15 @@
-// Admin.NET 项目的版权、商标、专利和其他相关权利均受相应法律法规的保护。使用本项目应遵守相关法律法规和许可证的要求。
+// The copyright, trademark, patent and other related rights of the Admin.NET project are protected by corresponding laws and regulations. Use of this project shall comply with relevant laws, regulations and license requirements.
 //
-// 本项目主要遵循 MIT 许可证和 Apache 许可证（版本 2.0）进行分发和使用。许可证位于源代码树根目录中的 LICENSE-MIT 和 LICENSE-APACHE 文件。
+// This project is distributed and used primarily under the MIT License and the Apache License (version 2.0). The license is located in the LICENSE-MIT and LICENSE-APACHE files in the root of the source tree.
 //
-// 不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！
+// This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project!
 
 namespace Admin.NET.Core;
 
 public static class ComputerUtil
 {
     /// <summary>
-    /// 内存信息
+    /// memory information
     /// </summary>
     /// <returns></returns>
     public static MemoryMetrics GetComputerInfo()
@@ -41,7 +41,7 @@ public static class ComputerUtil
     }
 
     /// <summary>
-    /// 获取正确的操作系统版本（Linux获取发行版本）
+    /// Get the correct operating system version (Linux gets the distribution version)
     /// </summary>
     /// <returns></returns>
     public static String GetOSInfo()
@@ -68,7 +68,7 @@ public static class ComputerUtil
     }
 
     /// <summary>
-    /// 磁盘信息
+    /// disk information
     /// </summary>
     /// <returns></returns>
     public static List<DiskInfo> GetDiskInfos()
@@ -145,7 +145,7 @@ public static class ComputerUtil
     }
 
     /// <summary>
-    /// 获取外网IP地址
+    /// Get external IP address
     /// </summary>
     /// <returns></returns>
     public static string GetIpFromOnline()
@@ -205,7 +205,7 @@ public static class ComputerUtil
     }
 
     /// <summary>
-    /// 获取系统运行时间
+    /// Get system running time
     /// </summary>
     /// <returns></returns>
     public static string GetRunTime()
@@ -214,10 +214,10 @@ public static class ComputerUtil
         string output = "";
         if (IsMacOS())
         {
-            // macOS 获取系统启动时间：
+            // macOS gets the system startup time:
             // sysctl -n kern.boottime | awk '{print $4}' | tr -d ','
-            // 返回：1705379131
-            // 使用date格式化即可
+            // Return: 1705379131
+            // Just use date formatting
             output = ShellUtil.Bash("date -r $(sysctl -n kern.boottime | awk '{print $4}' | tr -d ',') +\"%Y-%m-%d %H:%M:%S\"").Trim();
             runTime = DateTimeUtil.FormatTime((DateTime.Now - output.ParseToDateTime()).TotalMilliseconds.ToString().Split('.')[0].ParseToLong());
         }
@@ -247,7 +247,7 @@ public static class ComputerUtil
 }
 
 /// <summary>
-/// 内存信息
+/// memory information
 /// </summary>
 public class MemoryMetrics
 {
@@ -264,70 +264,70 @@ public class MemoryMetrics
     public double Free { get; set; }
 
     /// <summary>
-    /// 已用内存
+    /// Used memory
     /// </summary>
     public string UsedRam { get; set; }
 
     /// <summary>
-    /// CPU使用率%
+    /// CPU usage%
     /// </summary>
     public List<string> CpuRates { get; set; }
 
     public string CpuRate { get; set; }
 
     /// <summary>
-    /// 总内存 GB
+    /// Total memory GB
     /// </summary>
     public string TotalRam { get; set; }
 
     /// <summary>
-    /// 内存使用率 %
+    /// Memory usage %
     /// </summary>
     public string RamRate { get; set; }
 
     /// <summary>
-    /// 空闲内存
+    /// free memory
     /// </summary>
     public string FreeRam { get; set; }
 }
 
 /// <summary>
-/// 磁盘信息
+/// disk information
 /// </summary>
 public class DiskInfo
 {
     /// <summary>
-    /// 磁盘名
+    /// disk name
     /// </summary>
     public string DiskName { get; set; }
 
     /// <summary>
-    /// 类型名
+    /// Type name
     /// </summary>
     public string TypeName { get; set; }
 
     /// <summary>
-    /// 总剩余
+    /// total surplus
     /// </summary>
     public decimal TotalFree { get; set; }
 
     /// <summary>
-    /// 总量
+    /// total amount
     /// </summary>
     public decimal TotalSize { get; set; }
 
     /// <summary>
-    /// 已使用
+    /// Already used
     /// </summary>
     public decimal Used { get; set; }
 
     /// <summary>
-    /// 可使用
+    /// Available
     /// </summary>
     public decimal AvailableFreeSpace { get; set; }
 
     /// <summary>
-    /// 使用百分比
+    /// Use percentage
     /// </summary>
     public decimal AvailablePercent { get; set; }
 }
@@ -335,7 +335,7 @@ public class DiskInfo
 public class MemoryMetricsClient
 {
     /// <summary>
-    /// windows系统获取内存信息
+    /// Windows system obtains memory information
     /// </summary>
     /// <returns></returns>
     public static MemoryMetrics GetWindowsMetrics()
@@ -359,10 +359,10 @@ public class MemoryMetricsClient
             output = output.Replace("@", string.Empty).Replace("{", string.Empty).Replace("}", string.Empty).Trim();
             var lines = output.Trim().Split(';', (char)StringSplitOptions.RemoveEmptyEntries);
 
-            // 跳过表头与分隔线（通常为前两行）
+            // Skip headers and separators (usually the first two rows)
             if (lines.Length >= 2)
             {
-                // 解析并转换为MB（原单位为KB）
+                // Parse and convert to MB (original unit is KB)
                 metrics.Free = Math.Round(double.Parse(lines[0].Split(new[] { '=' }, StringSplitOptions.RemoveEmptyEntries)[1]) / 1024, 0);
                 metrics.Total = Math.Round(double.Parse(lines[1].Split(new[] { '=' }, StringSplitOptions.RemoveEmptyEntries)[1]) / 1024, 0);
             }
@@ -373,7 +373,7 @@ public class MemoryMetricsClient
     }
 
     /// <summary>
-    /// Unix系统获取
+    /// Unix system acquisition
     /// </summary>
     /// <returns></returns>
     public static MemoryMetrics GetUnixMetrics()
@@ -390,16 +390,16 @@ public class MemoryMetricsClient
     }
 
     /// <summary>
-    /// macOS系统获取
+    /// macOS system acquisition
     /// </summary>
     /// <returns></returns>
     public static MemoryMetrics GetMacOSMetrics()
     {
         var metrics = new MemoryMetrics();
-        //物理内存大小
+        //physical memory size
         var total = ShellUtil.Bash("sysctl -n hw.memsize | awk '{printf \"%.2f\", $1/1024/1024}'");
         metrics.Total = float.Parse(total.Replace("%", string.Empty));
-        //TODO:占用内存，检查效率
+        //TODO: Occupy memory, check efficiency
         var free = ShellUtil.Bash("top -l 1 -s 0 | awk '/PhysMem/ {print $6+$8}'");
         metrics.Free = float.Parse(free);
         metrics.Used = metrics.Total - metrics.Free;
@@ -410,7 +410,7 @@ public class MemoryMetricsClient
 public class ShellUtil
 {
     /// <summary>
-    /// linux 系统命令
+    /// linux system commands
     /// </summary>
     /// <param name="command"></param>
     /// <returns></returns>
@@ -436,7 +436,7 @@ public class ShellUtil
     }
 
     /// <summary>
-    /// windows CMD 系统命令
+    /// windows CMD system command
     /// </summary>
     /// <param name="fileName"></param>
     /// <param name="args"></param>
@@ -459,7 +459,7 @@ public class ShellUtil
     }
 
     /// <summary>
-    /// Windows POWERSHELL 系统命令
+    /// Windows POWERSHELL system commands
     /// </summary>
     /// <param name="script"></param>
     /// <returns></returns>
@@ -481,7 +481,7 @@ public class ShellUtil
 public class ShellHelper
 {
     /// <summary>
-    /// Linux 系统命令
+    /// Linux system commands
     /// </summary>
     /// <param name="command"></param>
     /// <returns></returns>
@@ -507,7 +507,7 @@ public class ShellHelper
     }
 
     /// <summary>
-    /// Windows CMD 系统命令
+    /// Windows CMD system command
     /// </summary>
     /// <param name="fileName"></param>
     /// <param name="args"></param>
@@ -530,7 +530,7 @@ public class ShellHelper
     }
 
     /// <summary>
-    /// Windows POWERSHELL 系统命令
+    /// Windows POWERSHELL system commands
     /// </summary>
     /// <param name="script"></param>
     /// <returns></returns>

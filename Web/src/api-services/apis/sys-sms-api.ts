@@ -1,8 +1,8 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Admin.NET 通用权限开发平台
- * 让 .NET 开发更简单、更通用、更流行。整合最新技术，模块插件式开发，前后端分离，开箱即用。<br/><u><b><font color='FF0000'> 👮不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！</font></b></u>
+ * Admin.NET General Permission Development Platform
+ * let .NET Develop more simply、More general、More popular。wholeIn line with the latest technology，Modular Plugin-Based Development，Frontend and backendpointsLeave，Ready to use out of the box。<br/><u><b><font color='FF0000'> 👮This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project! </font></b></u>
  *
  * OpenAPI spec version: 1.0.0
  * 
@@ -27,9 +27,9 @@ export const SysSmsApiAxiosParamCreator = function (configuration?: Configuratio
     return {
         /**
          * 
-         * @summary 阿里云发送短信 📨
-         * @param {string} phoneNumber 手机号
-         * @param {string} templateId 短信模板id
+         * @summary Alibaba Cloud sends SMS 📨
+         * @param {string} phoneNumber Mobile phone number
+         * @param {string} templateId Short messageTemplateid
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -82,10 +82,10 @@ export const SysSmsApiAxiosParamCreator = function (configuration?: Configuratio
         },
         /**
          * 
-         * @summary 发送短信模板
-         * @param {any} body 短信内容
-         * @param {string} phoneNumber 手机号
-         * @param {string} templateId 短信模板id
+         * @summary Send SMS template
+         * @param {any} body Short messagecontent
+         * @param {string} phoneNumber Mobile phone number
+         * @param {string} templateId Short messageTemplateid
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -146,9 +146,9 @@ export const SysSmsApiAxiosParamCreator = function (configuration?: Configuratio
         },
         /**
          * 
-         * @summary 自定义短信接口发送短信 📨
-         * @param {string} phoneNumber 手机号
-         * @param {string} templateId 短信模板id
+         * @summary Send SMS via custom SMS interface 📨
+         * @param {string} phoneNumber Mobile phone number
+         * @param {string} templateId Short messageTemplateid
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -201,9 +201,9 @@ export const SysSmsApiAxiosParamCreator = function (configuration?: Configuratio
         },
         /**
          * 
-         * @summary 发送短信 📨
+         * @summary Send a text message 📨
          * @param {string} phoneNumber 
-         * @param {string} templateId 短信模板id
+         * @param {string} templateId Short messageTemplateid
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -256,9 +256,9 @@ export const SysSmsApiAxiosParamCreator = function (configuration?: Configuratio
         },
         /**
          * 
-         * @summary 腾讯云发送短信 📨
+         * @summary Tencent Cloud sends SMS 📨
          * @param {string} phoneNumber 
-         * @param {string} templateId 短信模板id
+         * @param {string} templateId Short messageTemplateid
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -311,7 +311,7 @@ export const SysSmsApiAxiosParamCreator = function (configuration?: Configuratio
         },
         /**
          * 
-         * @summary 校验短信验证码
+         * @summary Verify SMS verification code
          * @param {SmsVerifyCodeInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -368,9 +368,9 @@ export const SysSmsApiFp = function(configuration?: Configuration) {
     return {
         /**
          * 
-         * @summary 阿里云发送短信 📨
-         * @param {string} phoneNumber 手机号
-         * @param {string} templateId 短信模板id
+         * @summary Alibaba Cloud sends SMS 📨
+         * @param {string} phoneNumber Mobile phone number
+         * @param {string} templateId Short messageTemplateid
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -383,10 +383,10 @@ export const SysSmsApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary 发送短信模板
-         * @param {any} body 短信内容
-         * @param {string} phoneNumber 手机号
-         * @param {string} templateId 短信模板id
+         * @summary Send SMS template
+         * @param {any} body Short messagecontent
+         * @param {string} phoneNumber Mobile phone number
+         * @param {string} templateId Short messageTemplateid
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -399,9 +399,9 @@ export const SysSmsApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary 自定义短信接口发送短信 📨
-         * @param {string} phoneNumber 手机号
-         * @param {string} templateId 短信模板id
+         * @summary Send SMS via custom SMS interface 📨
+         * @param {string} phoneNumber Mobile phone number
+         * @param {string} templateId Short messageTemplateid
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -414,9 +414,9 @@ export const SysSmsApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary 发送短信 📨
+         * @summary Send a text message 📨
          * @param {string} phoneNumber 
-         * @param {string} templateId 短信模板id
+         * @param {string} templateId Short messageTemplateid
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -429,9 +429,9 @@ export const SysSmsApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary 腾讯云发送短信 📨
+         * @summary Tencent Cloud sends SMS 📨
          * @param {string} phoneNumber 
-         * @param {string} templateId 短信模板id
+         * @param {string} templateId Short messageTemplateid
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -444,7 +444,7 @@ export const SysSmsApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary 校验短信验证码
+         * @summary Verify SMS verification code
          * @param {SmsVerifyCodeInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -467,9 +467,9 @@ export const SysSmsApiFactory = function (configuration?: Configuration, basePat
     return {
         /**
          * 
-         * @summary 阿里云发送短信 📨
-         * @param {string} phoneNumber 手机号
-         * @param {string} templateId 短信模板id
+         * @summary Alibaba Cloud sends SMS 📨
+         * @param {string} phoneNumber Mobile phone number
+         * @param {string} templateId Short messageTemplateid
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -478,10 +478,10 @@ export const SysSmsApiFactory = function (configuration?: Configuration, basePat
         },
         /**
          * 
-         * @summary 发送短信模板
-         * @param {any} body 短信内容
-         * @param {string} phoneNumber 手机号
-         * @param {string} templateId 短信模板id
+         * @summary Send SMS template
+         * @param {any} body Short messagecontent
+         * @param {string} phoneNumber Mobile phone number
+         * @param {string} templateId Short messageTemplateid
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -490,9 +490,9 @@ export const SysSmsApiFactory = function (configuration?: Configuration, basePat
         },
         /**
          * 
-         * @summary 自定义短信接口发送短信 📨
-         * @param {string} phoneNumber 手机号
-         * @param {string} templateId 短信模板id
+         * @summary Send SMS via custom SMS interface 📨
+         * @param {string} phoneNumber Mobile phone number
+         * @param {string} templateId Short messageTemplateid
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -501,9 +501,9 @@ export const SysSmsApiFactory = function (configuration?: Configuration, basePat
         },
         /**
          * 
-         * @summary 发送短信 📨
+         * @summary Send a text message 📨
          * @param {string} phoneNumber 
-         * @param {string} templateId 短信模板id
+         * @param {string} templateId Short messageTemplateid
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -512,9 +512,9 @@ export const SysSmsApiFactory = function (configuration?: Configuration, basePat
         },
         /**
          * 
-         * @summary 腾讯云发送短信 📨
+         * @summary Tencent Cloud sends SMS 📨
          * @param {string} phoneNumber 
-         * @param {string} templateId 短信模板id
+         * @param {string} templateId Short messageTemplateid
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -523,7 +523,7 @@ export const SysSmsApiFactory = function (configuration?: Configuration, basePat
         },
         /**
          * 
-         * @summary 校验短信验证码
+         * @summary Verify SMS verification code
          * @param {SmsVerifyCodeInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -543,9 +543,9 @@ export const SysSmsApiFactory = function (configuration?: Configuration, basePat
 export class SysSmsApi extends BaseAPI {
     /**
      * 
-     * @summary 阿里云发送短信 📨
-     * @param {string} phoneNumber 手机号
-     * @param {string} templateId 短信模板id
+     * @summary Alibaba Cloud sends SMS 📨
+     * @param {string} phoneNumber Mobile phone number
+     * @param {string} templateId Short messageTemplateid
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SysSmsApi
@@ -555,10 +555,10 @@ export class SysSmsApi extends BaseAPI {
     }
     /**
      * 
-     * @summary 发送短信模板
-     * @param {any} body 短信内容
-     * @param {string} phoneNumber 手机号
-     * @param {string} templateId 短信模板id
+     * @summary Send SMS template
+     * @param {any} body Short messagecontent
+     * @param {string} phoneNumber Mobile phone number
+     * @param {string} templateId Short messageTemplateid
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SysSmsApi
@@ -568,9 +568,9 @@ export class SysSmsApi extends BaseAPI {
     }
     /**
      * 
-     * @summary 自定义短信接口发送短信 📨
-     * @param {string} phoneNumber 手机号
-     * @param {string} templateId 短信模板id
+     * @summary Send SMS via custom SMS interface 📨
+     * @param {string} phoneNumber Mobile phone number
+     * @param {string} templateId Short messageTemplateid
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SysSmsApi
@@ -580,9 +580,9 @@ export class SysSmsApi extends BaseAPI {
     }
     /**
      * 
-     * @summary 发送短信 📨
+     * @summary Send a text message 📨
      * @param {string} phoneNumber 
-     * @param {string} templateId 短信模板id
+     * @param {string} templateId Short messageTemplateid
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SysSmsApi
@@ -592,9 +592,9 @@ export class SysSmsApi extends BaseAPI {
     }
     /**
      * 
-     * @summary 腾讯云发送短信 📨
+     * @summary Tencent Cloud sends SMS 📨
      * @param {string} phoneNumber 
-     * @param {string} templateId 短信模板id
+     * @param {string} templateId Short messageTemplateid
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SysSmsApi
@@ -604,7 +604,7 @@ export class SysSmsApi extends BaseAPI {
     }
     /**
      * 
-     * @summary 校验短信验证码
+     * @summary Verify SMS verification code
      * @param {SmsVerifyCodeInput} [body] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}

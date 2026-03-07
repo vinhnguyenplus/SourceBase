@@ -4,13 +4,13 @@
 			<template #header>
 				<div style="color: #fff">
 					<el-icon size="16" style="margin-right: 3px; display: inline; vertical-align: middle"> <ele-UploadFilled /> </el-icon>
-					<span> 数据导入 </span>
+					<span> Data Import </span>
 				</div>
 			</template>
 			
 			<el-row :gutter="15" v-loading="state.loading">
 				<el-col :span="24" class="mb10">
-					<el-button icon="ele-Download" v-reclick="3000" @click="download" :disabled="state.loading">模板</el-button>
+					<el-button icon="ele-Download" v-reclick="3000" @click="download" :disabled="state.loading">Template</el-button>
 				</el-col>
 				
 				<el-col :span="24" class="mb15 flex">
@@ -23,32 +23,32 @@
 						ref="uploadRef"
 					>
 						<template #trigger>
-							<el-button class="mr10" type="primary" icon="ele-MostlyCloudy" :disabled="state.isCompleted || state.loading">选择文件</el-button>
+							<el-button class="mr10" type="primary" icon="ele-MostlyCloudy" :disabled="state.isCompleted || state.loading">Select File</el-button>
 						</template>
 					</el-upload>
-					<span class="selected-file">{{ state.selectedFile ? state.selectedFile.name : '未选择文件' }}</span>
+					<span class="selected-file">{{ state.selectedFile ? state.selectedFile.name : 'No file selected' }}</span>
 				</el-col>
 				
-				<!-- 错误提示区域 -->
+				<!-- Error prompt area -->
 				<el-col :span="24" v-if="state.importResultUrl" class="mt10">
 					<div v-if="state.hasError" style="color: red; margin-bottom: 10px;">
-						导入完毕，存在部分错误，请下载导入结果查看详情
+						Import completed, there are some errors, please download the import results to view details
 					</div>
 					<el-link type="primary" :underline="false" @click="downloadImportResult">
-						<el-icon class="mr5"><ele-Download /></el-icon>下载导入结果
+						<el-icon class="mr5"><ele-Download /></el-icon>Download import results
 					</el-link>
 				</el-col>
 			</el-row>
 
 			<template #footer>
 				<span class="dialog-footer">
-					<el-button @click="closeDialog" :disabled="state.loading">取 消</el-button>
+					<el-button @click="closeDialog" :disabled="state.loading">Cancel</el-button>
 					<el-button 
 						type="primary" 
 						@click="state.isCompleted ? closeDialog() : submitImport()"
 						:disabled="(!state.selectedFile && !state.isCompleted) || state.loading"
 					>
-						{{ state.isCompleted ? '关 闭' : '确 定' }}
+						{{ state.isCompleted ? 'Close' : 'Confirm' }}
 					</el-button>
 				</span>
 			</template>
@@ -73,17 +73,17 @@ const state = reactive({
   importResultName: '' as string
 });
 
-// 定义子组件向父组件传值/事件
+// Define child components to pass values/events to parent components
 const props = defineProps(['import', 'download']);
 const emit = defineEmits(['refresh']);
 
-// 打开弹窗
+// Open pop-up window
 const openDialog = () => {
   resetDialog();
   state.isShowDialog = true;
 };
 
-// 重置对话框状态
+// Reset dialog state
 const resetDialog = () => {
   state.isCompleted = false;
   state.hasError = false;
@@ -93,7 +93,7 @@ const resetDialog = () => {
   uploadRef.value?.clearFiles();
 };
 
-// 关闭弹窗
+// Close pop-up window
 const closeDialog = () => {
   state.isShowDialog = false;
   if (state.importResultUrl) {
@@ -101,7 +101,7 @@ const closeDialog = () => {
   }
 };
 
-// 选择文件超出上限事件
+// Select file exceeds limit event
 const handleExceed: UploadProps['onExceed'] = (files) => {
   uploadRef.value!.clearFiles();
   const file = files[0] as UploadRawFile;
@@ -109,12 +109,12 @@ const handleExceed: UploadProps['onExceed'] = (files) => {
   uploadRef.value!.handleStart(file);
 }
 
-// 文件选择变更事件
+// File selection change event
 const handleFileChange = (file: UploadFile) => {
   state.selectedFile = file.raw as File;
 };
 
-// 提交导入
+// Submit import
 const submitImport = async () => {
   if (!state.selectedFile) return;
   
@@ -122,10 +122,10 @@ const submitImport = async () => {
     state.loading = true;
     const res = await props.import(state.selectedFile);
     
-    // 处理导入结果
+    // Processing the import results
     const contentType = res.headers['content-type'] || '';
     if (contentType.includes('application/json')) {
-      // JSON响应处理（无错误文件）
+      // JSON response handling (no error file)
       const decoder = new TextDecoder('utf-8');
       const data = decoder.decode(res.data);
       const result = JSON.parse(data);
@@ -134,16 +134,16 @@ const submitImport = async () => {
         ElMessage.success(result.message);
         emit('refresh');
         state.hasError = false;
-        closeDialog();  // 关键修改：成功导入后直接关闭对话框
+        closeDialog();  // Key modification: close the dialog box directly after successful import
       } else {
         ElMessage.error(result.message);
         state.hasError = false;
       }
     } else {
-      // 二进制响应处理（有错误文件）
+      // Binary response handling (with error files)
       const blob = new Blob([res.data]);
       const contentDisposition = res.headers['content-disposition'];
-      let filename = '导入结果.xlsx';
+      let filename = 'Import Results.xlsx';
       
       if (contentDisposition) {
         const match = contentDisposition.match(/filename="?([^"]+)"?/);
@@ -152,32 +152,32 @@ const submitImport = async () => {
         }
       }
       
-      // 清除旧URL
+      // Clear old URLs
       if (state.importResultUrl) {
         URL.revokeObjectURL(state.importResultUrl);
       }
       
-      // 创建导入结果URL
+      // Create import result URL
       state.importResultUrl = URL.createObjectURL(blob);
       state.importResultName = filename;
       state.isCompleted = true;
       state.hasError = true;
       
-	  //刷新列表显示
+	  //Refresh list display
 	  emit('refresh');
 
-      ElMessage.warning('导入完成，存在部分错误');
+      ElMessage.warning('Import completed, there are some errors');
     }
   } catch (error) {
-    console.error('导入错误:', error);
-    ElMessage.error('导入过程中发生错误');
+    console.error('Import error:', error);
+    ElMessage.error('An error occurred during the import process');
     state.hasError = false;
   } finally {
     state.loading = false;
   }
 };
 
-// 下载导入结果
+// Download import results
 const downloadImportResult = () => {
   if (!state.importResultUrl) return;
   
@@ -188,18 +188,18 @@ const downloadImportResult = () => {
   link.click();
   document.body.removeChild(link);
   
-  // 关闭对话框（可选，根据需求决定是否保留）
+  // Close the dialog box (optional, decide whether to keep it according to your needs)
   // closeDialog();
 };
 
-// 下载模板
+// Download template
 const download = () => {
   props.download()
     .then((res: any) => downloadStreamFile(res))
-    .catch((err: any) => ElMessage.error('下载错误: ' + err));
+    .catch((err: any) => ElMessage.error('Download error: ' + err));
 }
 
-// 导出对象
+// Export object
 defineExpose({ openDialog, closeDialog });
 </script>
 

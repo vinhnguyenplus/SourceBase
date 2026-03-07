@@ -6,7 +6,7 @@
 					<th v-for="(citem, ci) in $props.columns" :key="ci" v-show="citem.ifShow == undefined ? true : citem.ifShow" style="text-align: center">
 						{{ citem.label }}
 					</th>
-					<th style="text-align: center" v-show="!$props.disabled">操作</th>
+					<th style="text-align: center" v-show="!$props.disabled">Operation</th>
 				</tr>
 			</thead>
 			<tbody class="el-table-tbody">
@@ -18,7 +18,7 @@
 						</el-select>
 					</td>
 					<td style="text-align: center" v-show="!$props.disabled">
-						<el-button type="danger" @click="del(item, index)">删除</el-button>
+						<el-button type="danger" @click="del(item, index)">Delete</el-button>
 					</td>
 				</tr>
 			</tbody>
@@ -31,7 +31,7 @@
 						</el-select>
 					</td>
 					<td class="el-table-cell el-table-cell-ellipsis" style="text-align: center" v-show="!$props.disabled">
-						<el-button type="primary" @click="add">添加</el-button>
+						<el-button type="primary" @click="add">Add to</el-button>
 					</td>
 				</tr>
 			</tfoot>
@@ -110,7 +110,7 @@ async function add() {
 				console.error(error);
 			}
 			if (errors) {
-				msgs.push((_b = (_a = errors == null ? void 0 : errors[0]) == null ? void 0 : _a.message) != null ? _b : `${field} 必填！`);
+				msgs.push((_b = (_a = errors == null ? void 0 : errors[0]) == null ? void 0 : _a.message) != null ? _b : `${field} is required!`);
 			}
 		});
 	}

@@ -3,7 +3,7 @@
 		<div class="noticebar" style="display: flex">
 			<NoticeBar />
 			<div class="editlayout">
-				<el-tooltip content="编辑/保存布局" placement="bottom">
+				<el-tooltip content="Edit/Save Layout" placement="bottom">
 					<el-button v-if="customizing" type="warning" icon="ele-Check" circle plain @click="save"></el-button>
 					<el-button v-else type="warning" icon="ele-Edit" circle plain @click="custom"></el-button>
 				</el-tooltip>
@@ -13,16 +13,16 @@
 		<div :class="['widgets-home', customizing ? 'customizing' : '']" ref="main">
 			<div class="widgets-content">
 				<!-- <div class="widgets-top">
-				<div class="widgets-top-title">控制台</div>
+				<div class="widgets-top-title">Console</div>
 				<div class="widgets-top-actions">
-					<el-button v-if="customizing" type="primary" icon="ele-Check" round @click="save">完成</el-button>
-					<el-button v-else type="primary" icon="ele-Edit" round @click="custom">自定义</el-button>
+					<el-button v-if="customizing" type="primary" icon="ele-Check" round @click="save">Completed</el-button>
+					<el-button v-else type="primary" icon="ele-Edit" round @click="custom">Customize</el-button>
 				</div>
 			</div> -->
 				<div class="widgets" ref="widgetsRef">
 					<div class="widgets-wrapper">
 						<div v-if="nowCompsList.length <= 0" class="no-widgets">
-							<el-empty description="没有部件啦" :image-size="300"></el-empty>
+							<el-empty description="No parts" :image-size="300"></el-empty>
 						</div>
 						<el-row :gutter="8">
 							<el-col v-for="(item, index) in grid.layout" :key="index" :md="item" :xs="24">
@@ -48,7 +48,7 @@
 			<div v-if="customizing" class="widgets-aside">
 				<div class="widgets-top">
 					<div class="widgets-aside-title">
-						<el-icon><ele-CirclePlusFilled /></el-icon>添加部件
+						<el-icon><ele-CirclePlusFilled /></el-icon>Add parts
 					</div>
 					<div class="widgets-top-actions">
 						<div class="widgets-aside-close" @click="close">
@@ -109,7 +109,7 @@
 					<el-main class="nopadding">
 						<div class="widgets-list">
 							<div v-if="myCompsList.length <= 0" class="widgets-list-nodata">
-								<el-empty description="没有部件啦" :image-size="60"></el-empty>
+								<el-empty description="No parts" :image-size="60"></el-empty>
 							</div>
 							<div v-for="item in myCompsList" :key="item.title" class="widgets-list-item">
 								<div class="item-logo">
@@ -128,7 +128,7 @@
 						</div>
 					</el-main>
 					<el-footer style="height: 51px">
-						<el-button @click="backDefault">恢复默认</el-button>
+						<el-button @click="backDefault">Restore default</el-button>
 					</el-footer>
 				</el-container>
 			</div>
@@ -194,7 +194,7 @@ const myCompsList = computed(() => {
 
 const nowCompsList = computed(() => grid.value.copmsList.flat());
 
-// 开启自定义
+// Turn on customization
 const custom = () => {
 	customizing.value = true;
 	const oldWidth = widgetsRef.value?.offsetWidth || 0;
@@ -206,7 +206,7 @@ const custom = () => {
 	});
 };
 
-// 设置布局
+// Set layout
 const setLayout = (layout: number[]) => {
 	grid.value.layout = layout;
 	const diff = grid.value.layout.length - grid.value.copmsList.length;
@@ -217,24 +217,24 @@ const setLayout = (layout: number[]) => {
 	}
 };
 
-// 追加
+// Append
 const push = (item: any) => {
 	grid.value.copmsList[0].push(item.key);
 };
 
-// 隐藏组件
+// Hide component
 const remove = (item: string) => {
 	grid.value.copmsList = grid.value.copmsList.map((list) => list.filter((comp) => comp !== item));
 };
 
-// 保存
+// save
 const save = () => {
 	customizing.value = false;
 	widgetsRef.value?.style.removeProperty('transform');
 	Local.set('grid', grid.value);
 };
 
-// 恢复默认
+// Restore default
 const backDefault = () => {
 	customizing.value = false;
 	widgetsRef.value?.style.removeProperty('transform');
@@ -242,7 +242,7 @@ const backDefault = () => {
 	Local.remove('grid');
 };
 
-// 关闭
+// closure
 const close = () => {
 	customizing.value = false;
 	widgetsRef.value?.style.removeProperty('transform');

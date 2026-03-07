@@ -20,7 +20,7 @@ const emit = defineEmits(['change', 'update:modelValue']);
 
 const props = defineProps({
     /**
-     * 绑定的值，支持多种类型
+     * Boundvalue，Supports multipleType
      * @example
      * <tag-switch v-model="value" code="xxxx" />
    */
@@ -31,7 +31,7 @@ const props = defineProps({
     },
 
     /**
-     * 字典编码，用于获取字典项 (同sys-dict)
+     * Dictionary Encoding，used forObtaindictionaryitem (Samesys-dict)
      * @example 'gender'
    */
     code: {
@@ -40,7 +40,7 @@ const props = defineProps({
     },
     
     /**
-     * switch 状态为 on 时的值，默认true (同el-switch)
+     * switch statefor on timeofvalue，Defaulttrue (Sameel-switch)
      * @example true
      */
     activeValue: {
@@ -48,7 +48,7 @@ const props = defineProps({
         default: true,
     },
     /**
-     * switch的状态为 off 时的值，默false (同el-switch)
+     * switchofstatefor off timeofvalue，Silentfalse (Sameel-switch)
      * @example false
      */
     inactiveValue: {

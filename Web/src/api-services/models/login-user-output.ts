@@ -1,8 +1,8 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Admin.NET 通用权限开发平台
- * 让 .NET 开发更简单、更通用、更流行。整合最新技术，模块插件式开发，前后端分离，开箱即用。<br/><u><b><font color='FF0000'> 👮不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！</font></b></u>
+ * Admin.NET General Permission Development Platform
+ * let .NET Develop more simply、More general、More popular。wholeIn line with the latest technology，Modular Plugin-Based Development，Frontend and backendpointsLeave，Ready to use out of the box。<br/><u><b><font color='FF0000'> 👮This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project! </font></b></u>
  *
  * OpenAPI spec version: 1.0.0
  * 
@@ -14,7 +14,7 @@
 
 import { AccountTypeEnum } from './account-type-enum';
  /**
- * 用户登录信息
+ * User loginInformation
  *
  * @export
  * @interface LoginUserOutput
@@ -22,7 +22,7 @@ import { AccountTypeEnum } from './account-type-enum';
 export interface LoginUserOutput {
 
     /**
-     * 用户id
+     * Userid
      *
      * @type {number}
      * @memberof LoginUserOutput
@@ -30,7 +30,7 @@ export interface LoginUserOutput {
     id?: number;
 
     /**
-     * 账号名称
+     * Account name
      *
      * @type {string}
      * @memberof LoginUserOutput
@@ -38,7 +38,7 @@ export interface LoginUserOutput {
     account?: string | null;
 
     /**
-     * 真实姓名
+     * Real Name
      *
      * @type {string}
      * @memberof LoginUserOutput
@@ -46,7 +46,7 @@ export interface LoginUserOutput {
     realName?: string | null;
 
     /**
-     * 电话
+     * Telephone
      *
      * @type {string}
      * @memberof LoginUserOutput
@@ -54,7 +54,7 @@ export interface LoginUserOutput {
     phone?: string | null;
 
     /**
-     * 身份证
+     * ID card
      *
      * @type {string}
      * @memberof LoginUserOutput
@@ -62,7 +62,7 @@ export interface LoginUserOutput {
     idCardNum?: string | null;
 
     /**
-     * 邮箱
+     * Email
      *
      * @type {string}
      * @memberof LoginUserOutput
@@ -76,7 +76,7 @@ export interface LoginUserOutput {
     accountType?: AccountTypeEnum;
 
     /**
-     * 头像
+     * Avatar
      *
      * @type {string}
      * @memberof LoginUserOutput
@@ -84,7 +84,7 @@ export interface LoginUserOutput {
     avatar?: string | null;
 
     /**
-     * 个人简介
+     * Personal Profile
      *
      * @type {string}
      * @memberof LoginUserOutput
@@ -92,7 +92,7 @@ export interface LoginUserOutput {
     introduction?: string | null;
 
     /**
-     * 地址
+     * address
      *
      * @type {string}
      * @memberof LoginUserOutput
@@ -100,7 +100,7 @@ export interface LoginUserOutput {
     address?: string | null;
 
     /**
-     * 电子签名
+     * Electronic signature
      *
      * @type {string}
      * @memberof LoginUserOutput
@@ -108,7 +108,7 @@ export interface LoginUserOutput {
     signature?: string | null;
 
     /**
-     * 机构Id
+     * Organization ID
      *
      * @type {number}
      * @memberof LoginUserOutput
@@ -116,7 +116,7 @@ export interface LoginUserOutput {
     orgId?: number;
 
     /**
-     * 机构名称
+     * Organization name
      *
      * @type {string}
      * @memberof LoginUserOutput
@@ -124,7 +124,7 @@ export interface LoginUserOutput {
     orgName?: string | null;
 
     /**
-     * 机构类型
+     * Institution type
      *
      * @type {string}
      * @memberof LoginUserOutput
@@ -132,7 +132,7 @@ export interface LoginUserOutput {
     orgType?: string | null;
 
     /**
-     * 职位名称
+     * Job title
      *
      * @type {string}
      * @memberof LoginUserOutput
@@ -140,7 +140,7 @@ export interface LoginUserOutput {
     posName?: string | null;
 
     /**
-     * 按钮权限集合
+     * buttonPermission set
      *
      * @type {Array<string>}
      * @memberof LoginUserOutput
@@ -148,7 +148,7 @@ export interface LoginUserOutput {
     buttons?: Array<string> | null;
 
     /**
-     * 角色集合
+     * role collection
      *
      * @type {Array<number>}
      * @memberof LoginUserOutput
@@ -156,7 +156,7 @@ export interface LoginUserOutput {
     roleIds?: Array<number> | null;
 
     /**
-     * 水印文字
+     * WatermarkText
      *
      * @type {string}
      * @memberof LoginUserOutput
@@ -164,7 +164,7 @@ export interface LoginUserOutput {
     watermarkText?: string | null;
 
     /**
-     * 租户Id
+     * Tenant ID
      *
      * @type {number}
      * @memberof LoginUserOutput
@@ -172,7 +172,7 @@ export interface LoginUserOutput {
     tenantId?: number | null;
 
     /**
-     * 当前切换到的租户Id
+     * Currently switched toTenant ID
      *
      * @type {number}
      * @memberof LoginUserOutput
@@ -180,7 +180,7 @@ export interface LoginUserOutput {
     currentTenantId?: number | null;
 
     /**
-     * 语言代码
+     * Language code
      *
      * @type {string}
      * @memberof LoginUserOutput

@@ -1,50 +1,50 @@
-// Admin.NET 项目的版权、商标、专利和其他相关权利均受相应法律法规的保护。使用本项目应遵守相关法律法规和许可证的要求。
+// The copyright, trademark, patent and other related rights of the Admin.NET project are protected by corresponding laws and regulations. Use of this project shall comply with relevant laws, regulations and license requirements.
 //
-// 本项目主要遵循 MIT 许可证和 Apache 许可证（版本 2.0）进行分发和使用。许可证位于源代码树根目录中的 LICENSE-MIT 和 LICENSE-APACHE 文件。
+// This project is distributed and used primarily under the MIT License and the Apache License (version 2.0). The license is located in the LICENSE-MIT and LICENSE-APACHE files in the root of the source tree.
 //
-// 不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！
+// This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project!
 
 namespace Admin.NET.Core;
 
 /// <summary>
-/// 框架实体基类Id
+/// Framework entity base class ID
 /// </summary>
 public abstract class EntityBaseId
 {
     /// <summary>
-    /// 雪花Id
+    /// SnowflakeId
     /// </summary>
-    [SugarColumn(ColumnName = "Id", ColumnDescription = "主键Id", IsPrimaryKey = true, IsIdentity = false)]
+    [SugarColumn(ColumnName = "Id", ColumnDescription = "Primary keyId", IsPrimaryKey = true, IsIdentity = false)]
     public virtual long Id { get; set; }
 }
 
 /// <summary>
-/// 框架实体基类
+/// Framework entity base class
 /// </summary>
 [SugarIndex("index_{table}_CT", nameof(CreateTime), OrderByType.Asc)]
 public abstract class EntityBase : EntityBaseId
 {
     /// <summary>
-    /// 创建时间
+    /// creation time
     /// </summary>
-    [SugarColumn(ColumnDescription = "创建时间", IsNullable = true, IsOnlyIgnoreUpdate = true)]
+    [SugarColumn(ColumnDescription = "Creation Time", IsNullable = true, IsOnlyIgnoreUpdate = true)]
     public virtual DateTime CreateTime { get; set; }
 
     /// <summary>
-    /// 更新时间
+    /// Update time
     /// </summary>
-    [SugarColumn(ColumnDescription = "更新时间")]
+    [SugarColumn(ColumnDescription = "Update Time")]
     public virtual DateTime? UpdateTime { get; set; }
 
     /// <summary>
-    /// 创建者Id
+    /// CreatorId
     /// </summary>
     [OwnerUser]
-    [SugarColumn(ColumnDescription = "创建者Id", IsOnlyIgnoreUpdate = true)]
+    [SugarColumn(ColumnDescription = "CreatorId", IsOnlyIgnoreUpdate = true)]
     public virtual long? CreateUserId { get; set; }
 
     ///// <summary>
-    ///// 创建者
+    /////Creator
     ///// </summary>
     //[Newtonsoft.Json.JsonIgnore]
     //[System.Text.Json.Serialization.JsonIgnore]
@@ -52,19 +52,19 @@ public abstract class EntityBase : EntityBaseId
     //public virtual SysUser CreateUser { get; set; }
 
     /// <summary>
-    /// 创建者姓名
+    /// Creator name
     /// </summary>
-    [SugarColumn(ColumnDescription = "创建者姓名", Length = 64, IsOnlyIgnoreUpdate = true)]
+    [SugarColumn(ColumnDescription = "Creator name", Length = 64, IsOnlyIgnoreUpdate = true)]
     public virtual string? CreateUserName { get; set; }
 
     /// <summary>
-    /// 修改者Id
+    /// Modifier ID
     /// </summary>
-    [SugarColumn(ColumnDescription = "修改者Id")]
+    [SugarColumn(ColumnDescription = "Modifier ID")]
     public virtual long? UpdateUserId { get; set; }
 
     ///// <summary>
-    ///// 修改者
+    /////Modifier
     ///// </summary>
     //[Newtonsoft.Json.JsonIgnore]
     //[System.Text.Json.Serialization.JsonIgnore]
@@ -72,51 +72,51 @@ public abstract class EntityBase : EntityBaseId
     //public virtual SysUser UpdateUser { get; set; }
 
     /// <summary>
-    /// 修改者姓名
+    /// Modifier name
     /// </summary>
-    [SugarColumn(ColumnDescription = "修改者姓名", Length = 64)]
+    [SugarColumn(ColumnDescription = "Modifier name", Length = 64)]
     public virtual string? UpdateUserName { get; set; }
 }
 
 /// <summary>
-/// 框架实体基类（删除标志）
+/// Framework entity base class (remove flag)
 /// </summary>
 [SugarIndex("index_{table}_D", nameof(IsDelete), OrderByType.Asc)]
 [SugarIndex("index_{table}_DT", nameof(DeleteTime), OrderByType.Asc)]
 public abstract class EntityBaseDel : EntityBase, IDeletedFilter
 {
     /// <summary>
-    /// 软删除
+    /// soft delete
     /// </summary>
-    [SugarColumn(ColumnDescription = "软删除")]
+    [SugarColumn(ColumnDescription = "soft delete")]
     public virtual bool IsDelete { get; set; } = false;
 
     /// <summary>
-    /// 软删除时间
+    /// soft delete time
     /// </summary>
-    [SugarColumn(ColumnDescription = "软删除时间")]
+    [SugarColumn(ColumnDescription = "soft delete time")]
     public virtual DateTime? DeleteTime { get; set; }
 }
 
 /// <summary>
-/// 机构实体基类（数据权限）
+/// Institutional entity base class (data permissions)
 /// </summary>
 public abstract class EntityBaseOrg : EntityBase, IOrgIdFilter
 {
     /// <summary>
-    /// 机构Id
+    /// InstitutionId
     /// </summary>
-    [SugarColumn(ColumnDescription = "机构Id", IsNullable = true)]
+    [SugarColumn(ColumnDescription = "Organization ID", IsNullable = true)]
     public virtual long OrgId { get; set; }
 
     ///// <summary>
-    ///// 创建者部门Id
+    /////Creator department ID
     ///// </summary>
-    //[SugarColumn(ColumnDescription = "创建者部门Id", IsOnlyIgnoreUpdate = true)]
+    //[SugarColumn(ColumnDescription = "Creator DepartmentId", IsOnlyIgnoreUpdate = true)]
     //public virtual long? CreateOrgId { get; set; }
 
     ///// <summary>
-    ///// 创建者部门
+    /////Creator department
     ///// </summary>
     //[Newtonsoft.Json.JsonIgnore]
     //[System.Text.Json.Serialization.JsonIgnore]
@@ -124,80 +124,80 @@ public abstract class EntityBaseOrg : EntityBase, IOrgIdFilter
     //public virtual SysOrg CreateOrg { get; set; }
 
     ///// <summary>
-    ///// 创建者部门名称
+    /////Creator department name
     ///// </summary>
-    //[SugarColumn(ColumnDescription = "创建者部门名称", Length = 64, IsOnlyIgnoreUpdate = true)]
+    //[SugarColumn(ColumnDescription = "Creator Department Name", Length = 64, IsOnlyIgnoreUpdate = true)]
     //public virtual string? CreateOrgName { get; set; }
 }
 
 /// <summary>
-/// 机构实体基类（数据权限、删除标志）
+/// Institutional entity base class (data permissions, deletion flag)
 /// </summary>
 public abstract class EntityBaseOrgDel : EntityBaseDel, IOrgIdFilter
 {
     /// <summary>
-    /// 机构Id
+    /// InstitutionId
     /// </summary>
-    [SugarColumn(ColumnDescription = "机构Id", IsNullable = true)]
+    [SugarColumn(ColumnDescription = "Organization ID", IsNullable = true)]
     public virtual long OrgId { get; set; }
 }
 
 /// <summary>
-/// 租户实体基类
+/// Tenant entity base class
 /// </summary>
 public abstract class EntityBaseTenant : EntityBase, ITenantIdFilter
 {
     /// <summary>
-    /// 租户Id
+    /// TenantId
     /// </summary>
-    [SugarColumn(ColumnDescription = "租户Id", IsOnlyIgnoreUpdate = true)]
+    [SugarColumn(ColumnDescription = "Tenant ID", IsOnlyIgnoreUpdate = true)]
     public virtual long? TenantId { get; set; }
 }
 
 /// <summary>
-/// 租户实体基类（删除标志）
+/// Tenant entity base class (remove flag)
 /// </summary>
 public abstract class EntityBaseTenantDel : EntityBaseDel, ITenantIdFilter
 {
     /// <summary>
-    /// 租户Id
+    /// TenantId
     /// </summary>
-    [SugarColumn(ColumnDescription = "租户Id", IsOnlyIgnoreUpdate = true)]
+    [SugarColumn(ColumnDescription = "Tenant ID", IsOnlyIgnoreUpdate = true)]
     public virtual long? TenantId { get; set; }
 }
 
 /// <summary>
-/// 租户实体基类Id
+/// Tenant entity base class ID
 /// </summary>
 public abstract class EntityBaseTenantId : EntityBaseId, ITenantIdFilter
 {
     /// <summary>
-    /// 租户Id
+    /// TenantId
     /// </summary>
-    [SugarColumn(ColumnDescription = "租户Id", IsOnlyIgnoreUpdate = true)]
+    [SugarColumn(ColumnDescription = "Tenant ID", IsOnlyIgnoreUpdate = true)]
     public virtual long? TenantId { get; set; }
 }
 
 /// <summary>
-/// 租户机构实体基类（数据权限）
+/// Tenant Organization Entity Base Class (Data Permissions)
 /// </summary>
 public abstract class EntityBaseTenantOrg : EntityBaseOrg, ITenantIdFilter
 {
     /// <summary>
-    /// 租户Id
+    /// TenantId
     /// </summary>
-    [SugarColumn(ColumnDescription = "租户Id", IsOnlyIgnoreUpdate = true)]
+    [SugarColumn(ColumnDescription = "Tenant ID", IsOnlyIgnoreUpdate = true)]
     public virtual long? TenantId { get; set; }
 }
 
 /// <summary>
-/// 租户机构实体基类（数据权限、删除标志）
+/// Tenant organization entity base class (data permissions, deletion flag)
 /// </summary>
 public abstract class EntityBaseTenantOrgDel : EntityBaseOrgDel, ITenantIdFilter
 {
     /// <summary>
-    /// 租户Id
+    /// TenantId
     /// </summary>
-    [SugarColumn(ColumnDescription = "租户Id", IsOnlyIgnoreUpdate = true)]
+    [SugarColumn(ColumnDescription = "Tenant ID", IsOnlyIgnoreUpdate = true)]
     public virtual long? TenantId { get; set; }
 }

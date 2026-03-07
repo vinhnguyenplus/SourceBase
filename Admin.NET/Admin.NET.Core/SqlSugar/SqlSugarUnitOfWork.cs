@@ -1,23 +1,23 @@
-﻿// Admin.NET 项目的版权、商标、专利和其他相关权利均受相应法律法规的保护。使用本项目应遵守相关法律法规和许可证的要求。
+﻿// The copyright, trademark, patent and other related rights of the Admin.NET project are protected by corresponding laws and regulations. Use of this project shall comply with relevant laws, regulations and license requirements.
 //
-// 本项目主要遵循 MIT 许可证和 Apache 许可证（版本 2.0）进行分发和使用。许可证位于源代码树根目录中的 LICENSE-MIT 和 LICENSE-APACHE 文件。
+// This project is distributed and used primarily under the MIT License and the Apache License (version 2.0). The license is located in the LICENSE-MIT and LICENSE-APACHE files in the root of the source tree.
 //
-// 不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！
+// This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project!
 
 namespace Admin.NET.Core;
 
 /// <summary>
-/// SqlSugar 事务和工作单元
+/// SqlSugar transactions and units of work
 /// </summary>
 public sealed class SqlSugarUnitOfWork : IUnitOfWork
 {
     /// <summary>
-    /// SqlSugar 对象
+    /// SqlSugar object
     /// </summary>
     private readonly ISqlSugarClient _sqlSugarClient;
 
     /// <summary>
-    /// 构造函数
+    /// Constructor
     /// </summary>
     /// <param name="sqlSugarClient"></param>
     public SqlSugarUnitOfWork(ISqlSugarClient sqlSugarClient)
@@ -26,7 +26,7 @@ public sealed class SqlSugarUnitOfWork : IUnitOfWork
     }
 
     /// <summary>
-    /// 开启工作单元处理
+    /// Enable work unit processing
     /// </summary>
     /// <param name="context"></param>
     /// <param name="unitOfWork"></param>
@@ -37,7 +37,7 @@ public sealed class SqlSugarUnitOfWork : IUnitOfWork
     }
 
     /// <summary>
-    /// 提交工作单元处理
+    /// Submit work unit for processing
     /// </summary>
     /// <param name="resultContext"></param>
     /// <param name="unitOfWork"></param>
@@ -48,7 +48,7 @@ public sealed class SqlSugarUnitOfWork : IUnitOfWork
     }
 
     /// <summary>
-    /// 回滚工作单元处理
+    /// Rollback unit of work processing
     /// </summary>
     /// <param name="resultContext"></param>
     /// <param name="unitOfWork"></param>
@@ -59,7 +59,7 @@ public sealed class SqlSugarUnitOfWork : IUnitOfWork
     }
 
     /// <summary>
-    /// 执行完毕（无论成功失败）
+    /// Execution completed (regardless of success or failure)
     /// </summary>
     /// <param name="context"></param>
     /// <param name="resultContext"></param>

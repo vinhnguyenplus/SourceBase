@@ -29,13 +29,13 @@
 					<div class="login-right-warp-main-form">
 						<div v-if="!state.isScan">
 							<el-tabs v-model="state.tabsActiveName">
-								<el-tab-pane label="账号登录" name="account" v-if="state.tabsActiveName != 'register'">
+								<el-tab-pane label="Account login" name="account" v-if="state.tabsActiveName != 'register'">
 									<Account :tenant-info="tenantInfo" />
 								</el-tab-pane>
-								<el-tab-pane label="手机号登录" name="mobile" v-if="state.tabsActiveName != 'register'">
+								<el-tab-pane label="Login with phone number" name="mobile" v-if="state.tabsActiveName != 'register'">
 									<Mobile :tenant-info="tenantInfo" />
 								</el-tab-pane>
-								<el-tab-pane label="用户注册" name="register" v-if="state.tabsActiveName == 'register'">
+								<el-tab-pane label="User Registration" name="register" v-if="state.tabsActiveName == 'register'">
 									<Register :tenant-info="tenantInfo" @goLogin="() => state.tabsActiveName = 'account'" />
 								</el-tab-pane>
 							</el-tabs>
@@ -47,10 +47,10 @@
 						</div>
 						<div class="login-content-main-bottom" v-if="getThemeConfig.registration">
 							<template v-if="state.tabsActiveName != 'register'">
-								没有账号? 去<el-link class="login-content-main-left-register" @click="() => state.tabsActiveName = 'register'">注册账号</el-link>
+								Don’t have an account? Go<el-link class="login-content-main-left-register" @click="() => state.tabsActiveName = 'register'">Register an account</el-link>
 							</template>
 							<template v-else>
-								已有账户? 去<el-link class="login-content-main-bottom-register" @click="() => state.tabsActiveName = 'account'">登录账号</el-link>
+								Already have an account? Go<el-link class="login-content-main-bottom-register" @click="() => state.tabsActiveName = 'account'">Login Account</el-link>
 							</template>
 						</div>
 					</div>
@@ -77,7 +77,7 @@ import {SysTenantApi} from '/@/api-services';
 import {useRoute} from 'vue-router';
 import {Local} from '/@/utils/storage';
 
-// 引入组件
+// Introduce components
 const Register = defineAsyncComponent(() => import('./component/register.vue'));
 const Account = defineAsyncComponent(() => import('./component/account.vue'));
 const Mobile = defineAsyncComponent(() => import('./component/mobile.vue'));
@@ -96,20 +96,20 @@ const state = reactive({
 	isScan: false,
 });
 
-// 获取布局配置信息
+// Get layout configuration information
 const getThemeConfig = computed(() => {
 	return themeConfig.value;
 });
 
-// 页面加载时
+// When the page loads
 onMounted(async () => {
-	// 地址栏存在wayid参数时，默认切换到注册界面
+	// When the wayid parameter exists in the address bar, it switches to the registration interface by default.
 	if (route.query.wayid != undefined) state.tabsActiveName = 'register';
 	await getTenantInfo();
 	NextLoading.done();
 });
 
-// 获取租户信息
+// Get tenant information
 const getTenantInfo = async () => {
 	if (themeConfig.value.hideTenantForLogin) {
 		return tenantInfo.value;
@@ -121,7 +121,7 @@ const getTenantInfo = async () => {
 	return tenantInfo.value;
 }
 
-// 计算登录右侧容器高度(根据是否启用租户选择来决定高度)
+// Calculate the height of the container on the right side of the login (the height is determined based on whether tenant selection is enabled)
 const loginRightWarpHeight = !tenantInfo.value?.id && themeConfig.value.hideTenantForLogin ? '600px' : '660px';
 </script>
 
@@ -206,7 +206,7 @@ const loginRightWarpHeight = !tenantInfo.value?.id && themeConfig.value.hideTena
 				}
 			}
 			.login-right-warp-one {
-				&::before {  //上
+				&::before {  // superior
 					filter: hue-rotate(0deg);
 					top: 0;
                     left: -100%;
@@ -215,7 +215,7 @@ const loginRightWarpHeight = !tenantInfo.value?.id && themeConfig.value.hideTena
 					background: linear-gradient(90deg, transparent, var(--el-color-primary));
 					animation: loginLeft 3s linear infinite;
 				}
-				&::after { //右
+				&::after { // right
 					filter: hue-rotate(0deg);
 					top: -100%;
 					right: 0;
@@ -227,7 +227,7 @@ const loginRightWarpHeight = !tenantInfo.value?.id && themeConfig.value.hideTena
 				}
 			}
 			.login-right-warp-two {
-				&::before { //下
+				&::before { // Down
 					filter: hue-rotate(0deg);
 					bottom: 0;
 					right: -100%;
@@ -237,7 +237,7 @@ const loginRightWarpHeight = !tenantInfo.value?.id && themeConfig.value.hideTena
 					animation: loginRight 3s linear infinite;
 					animation-delay: 1.4s;
 				}
-				&::after { //左
+				&::after { // Left
 					filter: hue-rotate(0deg);
 					bottom: -100%;
 					left: 0;
@@ -319,7 +319,7 @@ const loginRightWarpHeight = !tenantInfo.value?.id && themeConfig.value.hideTena
 				}
 			}
 		}
-		/* 在这里可以添加一个伪元素来覆盖原内容，实现磨砂效果 */
+		/* Here you can add a pseudo element to cover the original content and achieve a frosted effect. */
 		.login-right-warp::before {
 			content: '';
 			position: absolute;
@@ -328,11 +328,11 @@ const loginRightWarpHeight = !tenantInfo.value?.id && themeConfig.value.hideTena
 			width: 100%;
 			height: 100%;
 			background-color: rgba(255, 255, 255, 1);
-			filter: blur(4px); /* 调整模糊半径以改变磨砂效果强度 */
+			filter: blur(4px); /* tonewholeBlurryChange the radius to adjust the matte effectStrongdegree */
 			z-index: 1;
 		}
 
-		/* 保持原有内容可见，放置在伪元素下方 */
+		/* Keep the original content visible and place it below the pseudo element */
 		.login-right-warp > * {
 			position: absolute;
 			z-index: 2;

@@ -2,7 +2,7 @@
 /* eslint-disable */
 /**
  * ApprovalFlow
- * <br/><u><b><font color='FF0000'> 👮不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！</font></b></u>
+ * <br/><u><b><font color='FF0000'> 👮This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project! </font></b></u>
  *
  * OpenAPI spec version: 1.0.0
  * 
@@ -12,97 +12,97 @@
  * Do not edit the class manually.
  */
 /**
- * 审批流输出参数
+ * Approval workflow outputParameter
  * @export
  * @interface ApprovalFlowOutput
  */
 export interface ApprovalFlowOutput {
     /**
-     * 主键Id
+     * Primary keyId
      * @type {number}
      * @memberof ApprovalFlowOutput
      */
     id?: number;
     /**
-     * 编号
+     * Number
      * @type {string}
      * @memberof ApprovalFlowOutput
      */
     code?: string | null;
     /**
-     * 名称
+     * name
      * @type {string}
      * @memberof ApprovalFlowOutput
      */
     name?: string | null;
     /**
-     * 表单
+     * form
      * @type {string}
      * @memberof ApprovalFlowOutput
      */
     formJson?: string | null;
     /**
-     * 流程
+     * Process
      * @type {string}
      * @memberof ApprovalFlowOutput
      */
     flowJson?: string | null;
     /**
-     * 备注
+     * Remarks
      * @type {string}
      * @memberof ApprovalFlowOutput
      */
     remark?: string | null;
     /**
-     * 创建时间
+     * Creation Time
      * @type {Date}
      * @memberof ApprovalFlowOutput
      */
     createTime?: Date | null;
     /**
-     * 更新时间
+     * Update Time
      * @type {Date}
      * @memberof ApprovalFlowOutput
      */
     updateTime?: Date | null;
     /**
-     * 创建者Id
+     * CreatorId
      * @type {number}
      * @memberof ApprovalFlowOutput
      */
     createUserId?: number | null;
     /**
-     * 创建者姓名
+     * Creator name
      * @type {string}
      * @memberof ApprovalFlowOutput
      */
     createUserName?: string | null;
     /**
-     * 修改者Id
+     * Modifier ID
      * @type {number}
      * @memberof ApprovalFlowOutput
      */
     updateUserId?: number | null;
     /**
-     * 修改者姓名
+     * Modifier name
      * @type {string}
      * @memberof ApprovalFlowOutput
      */
     updateUserName?: string | null;
     /**
-     * 创建者部门Id
+     * CreatorDepartmentId
      * @type {number}
      * @memberof ApprovalFlowOutput
      */
     createOrgId?: number | null;
     /**
-     * 创建者部门名称
+     * CreatorDepartment namecall
      * @type {string}
      * @memberof ApprovalFlowOutput
      */
     createOrgName?: string | null;
     /**
-     * 软删除
+     * soft delete
      * @type {boolean}
      * @memberof ApprovalFlowOutput
      */

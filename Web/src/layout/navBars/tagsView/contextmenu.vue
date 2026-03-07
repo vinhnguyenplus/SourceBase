@@ -25,7 +25,7 @@
 <script setup lang="ts" name="layoutTagsViewContextmenu">
 import { computed, reactive, onMounted, onUnmounted, watch } from 'vue';
 
-// 定义父组件传过来的值
+// Define the value passed by the parent component
 const props = defineProps({
 	dropdown: {
 		type: Object,
@@ -38,20 +38,20 @@ const props = defineProps({
 	},
 });
 
-// 定义子组件向父组件传值/事件
+// Define child components to pass values/events to parent components
 const emit = defineEmits(['currentContextmenuClick']);
 
-// 定义变量内容
+// Define variable content
 const state = reactive({
 	isShow: false,
 	dropdownList: [
-		{ contextMenuClickId: 0, txt: '刷新', affix: false, icon: 'ele-RefreshRight' },
-		{ contextMenuClickId: 1, txt: '关闭', affix: false, icon: 'ele-Close' },
-		{ contextMenuClickId: 2, txt: '关闭其它', affix: false, icon: 'ele-CircleClose' },
-		{ contextMenuClickId: 3, txt: '全部关闭', affix: false, icon: 'ele-FolderDelete' },
+		{ contextMenuClickId: 0, txt: 'Refresh', affix: false, icon: 'ele-RefreshRight' },
+		{ contextMenuClickId: 1, txt: 'Close', affix: false, icon: 'ele-Close' },
+		{ contextMenuClickId: 2, txt: 'Close others', affix: false, icon: 'ele-CircleClose' },
+		{ contextMenuClickId: 3, txt: 'Turn off all', affix: false, icon: 'ele-FolderDelete' },
 		{
 			contextMenuClickId: 4,
-			txt: '当前页全屏',
+			txt: 'Current page full screen',
 			affix: false,
 			icon: 'iconfont icon-fullscreen',
 		},
@@ -60,9 +60,9 @@ const state = reactive({
 	arrowLeft: 10,
 });
 
-// 父级传过来的坐标 x,y 值
+// Coordinates x,y values ​​passed from parent
 const dropdowns = computed(() => {
-	// 117 为 `Dropdown 下拉菜单` 的宽度
+	// 117 is the width of `Dropdown drop-down menu`
 	if (props.dropdown.x + 117 > document.documentElement.clientWidth) {
 		return {
 			x: document.documentElement.clientWidth - 117 - 5,
@@ -72,11 +72,11 @@ const dropdowns = computed(() => {
 		return props.dropdown;
 	}
 });
-// 当前项菜单点击
+// Current item menu click
 const onCurrentContextmenuClick = (contextMenuClickId: number) => {
 	emit('currentContextmenuClick', Object.assign({}, { contextMenuClickId }, state.item));
 };
-// 打开右键菜单：判断是否固定，固定则不显示关闭按钮
+// Open the right-click menu: determine whether it is fixed. If it is fixed, the close button will not be displayed.
 const openContextmenu = (item: RouteItem) => {
 	state.item = item;
 	item.meta?.isAffix ? (state.dropdownList[1].affix = true) : (state.dropdownList[1].affix = false);
@@ -85,19 +85,19 @@ const openContextmenu = (item: RouteItem) => {
 		state.isShow = true;
 	}, 10);
 };
-// 关闭右键菜单
+// Close right-click menu
 const closeContextmenu = () => {
 	state.isShow = false;
 };
-// 监听页面监听进行右键菜单的关闭
+// Monitor page monitoring to close the right-click menu
 onMounted(() => {
 	document.body.addEventListener('click', closeContextmenu);
 });
-// 页面卸载时，移除右键菜单监听事件
+// When the page is unloaded, remove the right-click menu listening event
 onUnmounted(() => {
 	document.body.removeEventListener('click', closeContextmenu);
 });
-// 监听下拉菜单位置
+// Monitor drop-down menu position
 watch(
 	() => props.dropdown,
 	({ x }) => {
@@ -109,7 +109,7 @@ watch(
 	}
 );
 
-// 暴露变量
+// exposure variables
 defineExpose({
 	openContextmenu,
 });

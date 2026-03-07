@@ -1,4 +1,4 @@
-// 图标类名数组
+// Icon class name array
 import { iconfonntClassList } from './iconfont/font_2298093_rnp72ifj3ba';
 import { fontAwesomeClassList } from './font-awesome/font-awesome';
 

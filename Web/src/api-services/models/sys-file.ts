@@ -1,8 +1,8 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Admin.NET 通用权限开发平台
- * 让 .NET 开发更简单、更通用、更流行。整合最新技术，模块插件式开发，前后端分离，开箱即用。<br/><u><b><font color='FF0000'> 👮不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！</font></b></u>
+ * Admin.NET General Permission Development Platform
+ * let .NET Develop more simply、More general、More popular。wholeIn line with the latest technology，Modular Plugin-Based Development，Frontend and backendpointsLeave，Ready to use out of the box。<br/><u><b><font color='FF0000'> 👮This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project! </font></b></u>
  *
  * OpenAPI spec version: 1.0.0
  * 
@@ -13,7 +13,7 @@
  */
 
  /**
- * 系统文件表
+ * System file table
  *
  * @export
  * @interface SysFile
@@ -21,7 +21,7 @@
 export interface SysFile {
 
     /**
-     * 雪花Id
+     * SnowflakeId
      *
      * @type {number}
      * @memberof SysFile
@@ -29,7 +29,7 @@ export interface SysFile {
     id?: number;
 
     /**
-     * 创建时间
+     * Creation Time
      *
      * @type {Date}
      * @memberof SysFile
@@ -37,7 +37,7 @@ export interface SysFile {
     createTime?: Date;
 
     /**
-     * 更新时间
+     * Update Time
      *
      * @type {Date}
      * @memberof SysFile
@@ -45,7 +45,7 @@ export interface SysFile {
     updateTime?: Date | null;
 
     /**
-     * 创建者Id
+     * CreatorId
      *
      * @type {number}
      * @memberof SysFile
@@ -53,7 +53,7 @@ export interface SysFile {
     createUserId?: number | null;
 
     /**
-     * 创建者姓名
+     * Creator name
      *
      * @type {string}
      * @memberof SysFile
@@ -61,7 +61,7 @@ export interface SysFile {
     createUserName?: string | null;
 
     /**
-     * 修改者Id
+     * Modifier ID
      *
      * @type {number}
      * @memberof SysFile
@@ -69,7 +69,7 @@ export interface SysFile {
     updateUserId?: number | null;
 
     /**
-     * 修改者姓名
+     * Modifier name
      *
      * @type {string}
      * @memberof SysFile
@@ -77,7 +77,7 @@ export interface SysFile {
     updateUserName?: string | null;
 
     /**
-     * 机构Id
+     * Organization ID
      *
      * @type {number}
      * @memberof SysFile
@@ -85,7 +85,7 @@ export interface SysFile {
     orgId?: number;
 
     /**
-     * 租户Id
+     * Tenant ID
      *
      * @type {number}
      * @memberof SysFile
@@ -93,7 +93,7 @@ export interface SysFile {
     tenantId?: number | null;
 
     /**
-     * 提供者
+     * Provider
      *
      * @type {string}
      * @memberof SysFile
@@ -101,7 +101,7 @@ export interface SysFile {
     provider?: string | null;
 
     /**
-     * 仓储名称
+     * Warehouse Name
      *
      * @type {string}
      * @memberof SysFile
@@ -109,7 +109,7 @@ export interface SysFile {
     bucketName?: string | null;
 
     /**
-     * 文件名称（源文件名）
+     * File name（Source File Name）
      *
      * @type {string}
      * @memberof SysFile
@@ -117,7 +117,7 @@ export interface SysFile {
     fileName?: string | null;
 
     /**
-     * 文件后缀
+     * file suffix
      *
      * @type {string}
      * @memberof SysFile
@@ -125,7 +125,7 @@ export interface SysFile {
     suffix?: string | null;
 
     /**
-     * 存储路径
+     * Storage Path
      *
      * @type {string}
      * @memberof SysFile
@@ -133,7 +133,7 @@ export interface SysFile {
     filePath?: string | null;
 
     /**
-     * 文件大小KB
+     * File size KB
      *
      * @type {number}
      * @memberof SysFile
@@ -141,7 +141,7 @@ export interface SysFile {
     sizeKb?: number;
 
     /**
-     * 文件大小信息-计算后的
+     * File size information-calculated
      *
      * @type {string}
      * @memberof SysFile
@@ -149,7 +149,7 @@ export interface SysFile {
     sizeInfo?: string | null;
 
     /**
-     * 外链地址-OSS上传后生成外链地址方便前端预览
+     * External link address-OSSuploadafterGenerateExternal link addressConvenient for the front endPreview
      *
      * @type {string}
      * @memberof SysFile
@@ -157,7 +157,7 @@ export interface SysFile {
     url?: string | null;
 
     /**
-     * 文件MD5
+     * File MD5
      *
      * @type {string}
      * @memberof SysFile
@@ -165,7 +165,7 @@ export interface SysFile {
     fileMd5?: string | null;
 
     /**
-     * 文件类别
+     * File category
      *
      * @type {string}
      * @memberof SysFile
@@ -173,7 +173,7 @@ export interface SysFile {
     fileType?: string | null;
 
     /**
-     * 文件别名
+     * File alias
      *
      * @type {string}
      * @memberof SysFile
@@ -181,7 +181,7 @@ export interface SysFile {
     fileAlias?: string | null;
 
     /**
-     * 是否公开
+     * Is it public?
      *
      * @type {boolean}
      * @memberof SysFile
@@ -189,7 +189,7 @@ export interface SysFile {
     isPublic?: boolean;
 
     /**
-     * 业务数据Id
+     * BusinessDataId
      *
      * @type {number}
      * @memberof SysFile

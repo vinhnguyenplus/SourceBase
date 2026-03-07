@@ -1,8 +1,8 @@
 <template>
-	<el-card shadow="hover" header="快捷入口" body-style="padding: 0">
+	<el-card shadow="hover" header="Quick Access" body-style="padding: 0">
 		<template #header>
 			<el-icon style="display: inline; vertical-align: middle"> <ele-Guide /> </el-icon>
-			<span> 快捷入口 </span>
+			<span> Quick Access </span>
 		</template>
 		<ul class="myMods">
 			<li v-for="mod in myMods" :key="mod.path!">
@@ -18,9 +18,9 @@
 			</li>
 		</ul>
 
-		<el-drawer title="添加应用" v-model="modsDrawer" :size="520" destroy-on-close :before-close="beforeClose">
+		<el-drawer title="Add app" v-model="modsDrawer" :size="520" destroy-on-close :before-close="beforeClose">
 			<div class="setMods mt15">
-				<h4>我的常用 ( {{ myMods.length }} )</h4>
+				<h4>My favorite ( {{ myMods.length }} )</h4>
 				<VueDraggable tag="ul" v-model="myMods" :animation="200" group="app" class="draggable-box">
 					<li v-for="item in myMods" :key="item.id">
 						<SvgIcon :name="item.meta?.icon" style="font-size: 18px" />
@@ -29,7 +29,7 @@
 				</VueDraggable>
 			</div>
 			<div class="setMods">
-				<h4>全部应用 ( {{ filterMods.length }} )</h4>
+				<h4>All apps ( {{ filterMods.length }} )</h4>
 				<VueDraggable tag="ul" v-model="filterMods" :animation="200" group="app" class="draggable-box-all">
 					<li v-for="item in filterMods" :key="item.id" :style="{ background: '#909399' }">
 						<SvgIcon :name="item.meta?.icon" style="font-size: 18px" />
@@ -39,8 +39,8 @@
 			</div>
 			<template #footer>
 				<div style="margin: 0 20px 20px 0">
-					<el-button @click="beforeClose">取消</el-button>
-					<el-button type="primary" @click="saveMods">保存</el-button>
+					<el-button @click="beforeClose">Cancel</el-button>
+					<el-button type="primary" @click="saveMods">save</el-button>
 				</div>
 			</template>
 		</el-drawer>
@@ -49,9 +49,9 @@
 
 <script lang="ts">
 export default {
-	title: '快捷入口',
+	title: 'Quick Access',
 	icon: 'ele-Guide',
-	description: '可以配置的快捷入口',
+	description: 'OkayConfigurationofQuick Access',
 };
 </script>
 
@@ -64,17 +64,17 @@ import { SysUserMenuApi } from '/@/api-services/api';
 import { MenuOutput } from '/@/api-services/models';
 import { useRequestOldRoutes } from '/@/stores/requestOldRoutes';
 
-const mods = ref<MenuOutput[]>([]); // 所有应用
-const myMods = ref<MenuOutput[]>([]); // 我的常用
-const myModsName = ref<Array<string | null | undefined>>([]); // 我的常用
-const filterMods = ref<MenuOutput[]>([]); // 过滤我的常用后的应用
+const mods = ref<MenuOutput[]>([]); // All apps
+const myMods = ref<MenuOutput[]>([]); // My usual
+const myModsName = ref<Array<string | null | undefined>>([]); // My usual
+const filterMods = ref<MenuOutput[]>([]); // Filter my favorite apps
 const modsDrawer = ref<boolean>(false);
 
 onMounted(() => {
 	getMods();
 });
 
-// 请求已收藏菜单列表
+// Request a list of favorited menus
 const getFavoriteMenuList = async () => {
 	try {
 		const res = await getAPI(SysUserMenuApi).apiSysUserMenuUserMenuListGet();
@@ -100,7 +100,7 @@ const getMods = async () => {
 	});
 };
 
-// 递归拿到所有可显示非iframe的2级菜单
+// Recursively get all the second-level menus that can display non-iframes
 const filterMenu = (map: MenuOutput[]) => {
 	map.forEach((item: MenuOutput) => {
 		if (item.meta?.isHide || item.type == 3 || item.status != 1) {
@@ -117,15 +117,15 @@ const filterMenu = (map: MenuOutput[]) => {
 	});
 };
 
-// 保存我的常用
+// Save my favorites
 const saveMods = async () => {
 	const menuIds = myMods.value.map((v: MenuOutput) => v.id) as any;
 	await getAPI(SysUserMenuApi).apiSysUserMenuAddPost({ menuIdList: menuIds });
-	ElMessage.success('设置常用成功');
+	ElMessage.success('Setting up common success');
 	modsDrawer.value = false;
 };
 
-// 取消
+// Cancel
 const beforeClose = async () => {
 	myMods.value = await getFavoriteMenuList();
 	myModsName.value = myMods.value.map((v: MenuOutput) => v.name);

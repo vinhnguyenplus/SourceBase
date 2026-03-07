@@ -34,7 +34,7 @@
   position: relative;
 }
 
-/* 火狐浏览器打印 第一页过后 重叠问题 */
+/* Firefox Browser Printing After the first page Overlapping problem */
 @-moz-document url-prefix() {
   .hiprint-printPaper .hiprint-printPaper-content {
     position: relative;

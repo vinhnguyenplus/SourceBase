@@ -1,52 +1,52 @@
-﻿// Admin.NET 项目的版权、商标、专利和其他相关权利均受相应法律法规的保护。使用本项目应遵守相关法律法规和许可证的要求。
+﻿// The copyright, trademark, patent and other related rights of the Admin.NET project are protected by corresponding laws and regulations. Use of this project shall comply with relevant laws, regulations and license requirements.
 //
-// 本项目主要遵循 MIT 许可证和 Apache 许可证（版本 2.0）进行分发和使用。许可证位于源代码树根目录中的 LICENSE-MIT 和 LICENSE-APACHE 文件。
+// This project is distributed and used primarily under the MIT License and the Apache License (version 2.0). The license is located in the LICENSE-MIT and LICENSE-APACHE files in the root of the source tree.
 //
-// 不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！
+// This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project!
 
 namespace Admin.NET.Core;
 
 /// <summary>
-/// 枚举值合规性校验特性
+/// Enumeration value compliance checking feature
 /// </summary>
 [SuppressSniffer]
 [AttributeUsage(AttributeTargets.Property | AttributeTargets.Enum | AttributeTargets.Field, AllowMultiple = true)]
 public class EnumAttribute : ValidationAttribute, ITransient
 {
     /// <summary>
-    /// 枚举值合规性校验特性
+    /// Enumeration value compliance checking feature
     /// </summary>
     /// <param name="errorMessage"></param>
-    public EnumAttribute(string errorMessage = "枚举值不合法！")
+    public EnumAttribute(string errorMessage = "The enumerated value is invalid!")
     {
         ErrorMessage = errorMessage;
     }
 
     /// <summary>
-    /// 枚举值合规性校验
+    /// Enum value compliance check
     /// </summary>
     /// <param name="value"></param>
     /// <param name="validationContext"></param>
     /// <returns></returns>
     protected override ValidationResult IsValid(object value, ValidationContext validationContext)
     {
-        // 获取属性的类型
+        // Get the type of attribute
         var property = validationContext.ObjectType.GetProperty(validationContext.MemberName);
         if (property == null)
-            return new ValidationResult($"未知属性: {validationContext.MemberName}");
+            return new ValidationResult($"Unknown property: {validationContext.MemberName}");
 
         var propertyType = Nullable.GetUnderlyingType(property.PropertyType) ?? property.PropertyType;
 
-        // 检查属性类型是否为枚举或可空枚举类型
+        // Check if the property type is an enum or a nullable enum type
         if (!propertyType.IsEnum)
-            return new ValidationResult($"属性类型'{validationContext.MemberName}'不是有效的枚举类型！");
+            return new ValidationResult($"The attribute type '{validationContext.MemberName}' is not a valid enumeration type!");
 
-        // 检查枚举值是否有效
+        // Check if enumeration value is valid
         if (value == null && Nullable.GetUnderlyingType(property.PropertyType) == null)
-            return new ValidationResult($"提示：{ErrorMessage}|枚举值不能为 null！");
+            return new ValidationResult($"Tip: {ErrorMessage}|The enumeration value cannot be null!");
 
         if (value != null && !Enum.IsDefined(propertyType, value))
-            return new ValidationResult($"提示：{ErrorMessage}|枚举值【{value}】不是有效的【{propertyType.Name}】枚举类型值！");
+            return new ValidationResult($"Prompt: {ErrorMessage}|The enum value [{value}] is not a valid [{propertyType.Name}] enum type value!");
 
         return ValidationResult.Success;
     }

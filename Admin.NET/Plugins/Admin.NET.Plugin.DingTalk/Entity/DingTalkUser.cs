@@ -1,25 +1,25 @@
-﻿// Admin.NET 项目的版权、商标、专利和其他相关权利均受相应法律法规的保护。使用本项目应遵守相关法律法规和许可证的要求。
+﻿// The copyright, trademark, patent and other related rights of the Admin.NET project are protected by corresponding laws and regulations. Use of this project shall comply with relevant laws, regulations and license requirements.
 //
-// 本项目主要遵循 MIT 许可证和 Apache 许可证（版本 2.0）进行分发和使用。许可证位于源代码树根目录中的 LICENSE-MIT 和 LICENSE-APACHE 文件。
+// This project is distributed and used primarily under the MIT License and the Apache License (version 2.0). The license is located in the LICENSE-MIT and LICENSE-APACHE files in the root of the source tree.
 //
-// 不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！
+// This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project!
 
 namespace Admin.NET.Plugin.DingTalk;
 
 /// <summary>
-/// 钉钉用户表
+/// DingTalk user table
 /// </summary>
-[SugarTable(null, "钉钉用户表")]
+[SugarTable(null, "DingTalk user table")]
 public class DingTalkUser : EntityBase
 {
     /// <summary>
-    /// 系统用户Id
+    /// System user ID
     /// </summary>
-    [SugarColumn(ColumnDescription = "系统用户Id")]
+    [SugarColumn(ColumnDescription = "System User ID")]
     public long SysUserId { get; set; }
 
     /// <summary>
-    /// 系统用户
+    /// system user
     /// </summary>
     [SugarColumn(IsIgnore = true)]
     [Navigate(NavigateType.OneToOne, nameof(SysUserId))]
@@ -27,9 +27,9 @@ public class DingTalkUser : EntityBase
     public SysUser SysUser { get; set; }
 
     /// <summary>
-    /// 钉钉用户id
+    /// DingTalk user id
     /// </summary>
-    [SugarColumn(ColumnDescription = "钉钉用户id", Length = 64)]
+    [SugarColumn(ColumnDescription = "DingTalk user ID", Length = 64)]
     [Required, MaxLength(64)]
     public virtual string? DingTalkUserId { get; set; }
 
@@ -41,57 +41,57 @@ public class DingTalkUser : EntityBase
     public string? UnionId { get; set; }
 
     /// <summary>
-    /// 用户名
+    /// username
     /// </summary>
-    [SugarColumn(ColumnDescription = "用户名", Length = 64)]
+    [SugarColumn(ColumnDescription = "Username", Length = 64)]
     [MaxLength(64)]
     public string? Name { get; set; }
 
     /// <summary>
-    /// 手机号码
+    /// phone number
     /// </summary>
-    [SugarColumn(ColumnDescription = "手机号码", Length = 16)]
+    [SugarColumn(ColumnDescription = "Mobile phone number", Length = 16)]
     [MaxLength(16)]
     public string? Mobile { get; set; }
 
     /// <summary>
-    /// 性别
+    /// gender
     /// </summary>
-    [SugarColumn(ColumnDescription = "性别")]
+    [SugarColumn(ColumnDescription = "gender")]
     public int? Sex { get; set; }
 
     /// <summary>
-    /// 头像
+    /// avatar
     /// </summary>
-    [SugarColumn(ColumnDescription = "头像", Length = 256)]
+    [SugarColumn(ColumnDescription = "Avatar", Length = 256)]
     [MaxLength(256)]
     public string? Avatar { get; set; }
 
     /// <summary>
-    /// 工号
+    /// Job number
     /// </summary>
-    [SugarColumn(ColumnDescription = "工号", Length = 16)]
+    [SugarColumn(ColumnDescription = "Job number", Length = 16)]
     [MaxLength(16)]
     public string? JobNumber { get; set; }
 
     /// <summary>
-    /// 主部门Id
+    /// Main department ID
     /// </summary>
-    [SugarColumn(ColumnDescription = "主部门Id", Length = 16)]
+    [SugarColumn(ColumnDescription = "Primary Department ID", Length = 16)]
     [MaxLength(16)]
     public string? DeptId { get; set; }
 
     /// <summary>
-    /// 主部门
+    /// main department
     /// </summary>
-    [SugarColumn(ColumnDescription = "主部门", Length = 16)]
+    [SugarColumn(ColumnDescription = "Main Department", Length = 16)]
     [MaxLength(16)]
     public string? Dept { get; set; }
 
     /// <summary>
-    /// 职位
+    /// Position
     /// </summary>
-    [SugarColumn(ColumnDescription = "职位", Length = 16)]
+    [SugarColumn(ColumnDescription = "Position", Length = 16)]
     [MaxLength(16)]
     public string? Position { get; set; }
 }

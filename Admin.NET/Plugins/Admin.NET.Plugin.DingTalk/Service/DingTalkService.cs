@@ -1,13 +1,13 @@
-// Admin.NET 项目的版权、商标、专利和其他相关权利均受相应法律法规的保护。使用本项目应遵守相关法律法规和许可证的要求。
+// The copyright, trademark, patent and other related rights of the Admin.NET project are protected by corresponding laws and regulations. Use of this project shall comply with relevant laws, regulations and license requirements.
 //
-// 本项目主要遵循 MIT 许可证和 Apache 许可证（版本 2.0）进行分发和使用。许可证位于源代码树根目录中的 LICENSE-MIT 和 LICENSE-APACHE 文件。
+// This project is distributed and used primarily under the MIT License and the Apache License (version 2.0). The license is located in the LICENSE-MIT and LICENSE-APACHE files in the root of the source tree.
 //
-// 不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！
+// This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project!
 
 namespace Admin.NET.Plugin.DingTalk.Service;
 
 /// <summary>
-/// 钉钉服务 🧩
+/// DingTalk service 🧩
 /// </summary>
 [ApiDescriptionSettings(DingTalkConst.GroupName, Order = 100)]
 public class DingTalkService : IDynamicApiController, IScoped
@@ -28,10 +28,10 @@ public class DingTalkService : IDynamicApiController, IScoped
     }
 
     /// <summary>
-    /// 获取企业内部应用的access_token
+    /// Obtain the access_token of the internal application of the enterprise
     /// </summary>
     /// <returns></returns>
-    [DisplayName("获取企业内部应用的access_token")]
+    [DisplayName("Obtain the access_token of the internal application of the enterprise")]
     public async Task<GetDingTalkTokenOutput> GetDingTalkToken()
     {
         var tokenRes = await _dingTalkApi.GetDingTalkToken(
@@ -46,12 +46,12 @@ public class DingTalkService : IDynamicApiController, IScoped
     }
 
     /// <summary>
-    /// 获取在职员工列表 🔖
+    /// Get a list of current employees 🔖
     /// </summary>
     /// <param name="access_token"></param>
     /// <param name="input"></param>
     /// <returns></returns>
-    [HttpPost, DisplayName("获取在职员工列表")]
+    [HttpPost, DisplayName("Get a list of current employees")]
     public async Task<
         DingTalkBaseResponse<GetDingTalkCurrentEmployeesListOutput>
     > GetDingTalkCurrentEmployeesList(
@@ -63,12 +63,12 @@ public class DingTalkService : IDynamicApiController, IScoped
     }
 
     /// <summary>
-    /// 获取员工花名册字段信息 🔖
+    /// Get employee roster field information 🔖
     /// </summary>
     /// <param name="access_token"></param>
     /// <param name="input"></param>
     /// <returns></returns>
-    [HttpPost, DisplayName("获取员工花名册字段信息")]
+    [HttpPost, DisplayName("Obtain employee roster field information")]
     public async Task<
         DingTalkBaseResponse<List<DingTalkEmpRosterFieldVo>>
     > GetDingTalkCurrentEmployeesRosterList(
@@ -80,12 +80,12 @@ public class DingTalkService : IDynamicApiController, IScoped
     }
 
     /// <summary>
-    /// 发送钉钉互动卡片 🔖
+    /// Send DingTalk interactive card 🔖
     /// </summary>
     /// <param name="token"></param>
     /// <param name="input"></param>
     /// <returns></returns>
-    [DisplayName("给指定用户发送钉钉互动卡片")]
+    [DisplayName("Send a DingTalk interactive card to the specified user")]
     [Obsolete]
     public async Task<DingTalkSendInteractiveCardsOutput> DingTalkSendInteractiveCards(
         string token,
@@ -96,12 +96,12 @@ public class DingTalkService : IDynamicApiController, IScoped
     }
 
     /// <summary>
-    /// 创建并投放钉钉消息卡片 🔖
+    /// Create and post DingTalk message cards 🔖
     /// </summary>
     /// <param name="token"></param>
     /// <param name="input"></param>
     /// <returns></returns>
-    [DisplayName("给指定用户发送钉钉消息卡片")]
+    [DisplayName("Send DingTalk message cards to specified users")]
     public async Task<DingTalkCreateAndDeliverOutput> DingTalkCreateAndDeliver(
         string token,
         DingTalkCreateAndDeliverInput input
@@ -110,7 +110,7 @@ public class DingTalkService : IDynamicApiController, IScoped
         return await _dingTalkApi.DingTalkCreateAndDeliver(token, input);
     }
 
-    [DisplayName("用于发起OA审批实例")]
+    [DisplayName("Used to initiate OA approval instances")]
     public async Task<DingTalkWorkflowProcessInstancesOutput> DingTalkWorkflowProcessInstances(
         string token,
         DingTalkWorkflowProcessInstancesInput input
@@ -120,7 +120,7 @@ public class DingTalkService : IDynamicApiController, IScoped
         return temp;
     }
 
-    [DisplayName("查询审批实例")]
+    [DisplayName("QueryApproval instance")]
     public async Task<DingTalkGetProcessInstancesOutput> DingTalkWorkflowProcessInstances(
         string token,
         string input

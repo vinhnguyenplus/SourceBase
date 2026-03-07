@@ -1,8 +1,8 @@
-﻿// Admin.NET 项目的版权、商标、专利和其他相关权利均受相应法律法规的保护。使用本项目应遵守相关法律法规和许可证的要求。
+﻿// The copyright, trademark, patent and other related rights of the Admin.NET project are protected by corresponding laws and regulations. Use of this project shall comply with relevant laws, regulations and license requirements.
 //
-// 本项目主要遵循 MIT 许可证和 Apache 许可证（版本 2.0）进行分发和使用。许可证位于源代码树根目录中的 LICENSE-MIT 和 LICENSE-APACHE 文件。
+// This project is distributed and used primarily under the MIT License and the Apache License (version 2.0). The license is located in the LICENSE-MIT and LICENSE-APACHE files in the root of the source tree.
 //
-// 不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！
+// This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project!
 
 using OpenQA.Selenium;
 using OpenQA.Selenium.Edge;
@@ -11,7 +11,7 @@ using OpenQA.Selenium.Support.UI;
 namespace Admin.NET.Test;
 
 /// <summary>
-/// 测试基类
+/// Test base class
 /// </summary>
 public class BaseTest : IDisposable
 {
@@ -25,12 +25,12 @@ public class BaseTest : IDisposable
         Driver.Manage().Window.Maximize();
         Driver.Navigate().GoToUrl(url);
 
-        // 隐式等待3秒（隐式等待是元素未被呈现出来，才会等待）
+        // Implicit wait for 3 seconds (implicit wait is when the element is not presented)
         Driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(3);
     }
 
     /// <summary>
-    /// 等待网页加载完成
+    /// Wait for the page to load
     /// </summary>
     protected async Task WaitExecutorCompleteAsync()
     {
@@ -40,7 +40,7 @@ public class BaseTest : IDisposable
     }
 
     /// <summary>
-    /// 用户登录
+    /// User login
     /// </summary>
     /// <param name="account"></param>
     /// <param name="password"></param>
@@ -49,28 +49,28 @@ public class BaseTest : IDisposable
         await GoToUrlAsync("/#/login");
         var inputList = Driver.FindElements(By.CssSelector("#pane-account input"));
 
-        // 输入用户名
+        // Enter username
         var accountInput = inputList.First();
         accountInput.Clear();
         accountInput.SendKeys(account);
 
-        // 输入密码
+        // Enter password
         var passwordInput = inputList.Skip(1).First();
         passwordInput.Clear();
         passwordInput.SendKeys(password);
 
-        // 输入验证码
+        // enter confirmation code
         var captchaInput = inputList.Skip(2).First();
         captchaInput.Clear();
         captchaInput.SendKeys("0");
 
-        // 提交
+        // submit
         var button = Driver.FindElement(By.CssSelector("#pane-account button"));
         button.Click();
     }
 
     /// <summary>
-    /// 打开指定页面
+    /// Open the specified page
     /// </summary>
     /// <param name="url"></param>
     protected async Task GoToUrlAsync(string url)
@@ -81,10 +81,10 @@ public class BaseTest : IDisposable
     }
 
     /// <summary>
-    /// 等待用户按回车键继续
+    /// Wait for the user to press Enter to continue
     /// </summary>
-    /// <param name="text">提示词</param>
-    protected void WaitEnter(string text = "等待用户按回车键继续...")
+    /// <param name="text">prompt word</param>
+    protected void WaitEnter(string text = "Wait for the user to press Enter to continue...")
     {
         Console.WriteLine(text);
         Console.ReadLine();

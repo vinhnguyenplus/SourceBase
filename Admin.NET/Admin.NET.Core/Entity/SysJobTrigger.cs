@@ -1,147 +1,147 @@
-﻿// Admin.NET 项目的版权、商标、专利和其他相关权利均受相应法律法规的保护。使用本项目应遵守相关法律法规和许可证的要求。
+﻿// The copyright, trademark, patent and other related rights of the Admin.NET project are protected by corresponding laws and regulations. Use of this project shall comply with relevant laws, regulations and license requirements.
 //
-// 本项目主要遵循 MIT 许可证和 Apache 许可证（版本 2.0）进行分发和使用。许可证位于源代码树根目录中的 LICENSE-MIT 和 LICENSE-APACHE 文件。
+// This project is distributed and used primarily under the MIT License and the Apache License (version 2.0). The license is located in the LICENSE-MIT and LICENSE-APACHE files in the root of the source tree.
 //
-// 不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！
+// This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project!
 
 namespace Admin.NET.Core;
 
 /// <summary>
-/// 系统作业触发器表
+/// System job trigger table
 /// </summary>
-[SugarTable(null, "系统作业触发器表")]
+[SugarTable(null, "System Job Trigger Table")]
 [SysTable]
 public partial class SysJobTrigger : EntityBaseId
 {
     /// <summary>
-    /// 触发器Id
+    /// TriggerId
     /// </summary>
-    [SugarColumn(ColumnDescription = "触发器Id", Length = 64)]
+    [SugarColumn(ColumnDescription = "Trigger ID", Length = 64)]
     [Required, MaxLength(64)]
     public virtual string TriggerId { get; set; }
 
     /// <summary>
-    /// 作业Id
+    /// JobId
     /// </summary>
-    [SugarColumn(ColumnDescription = "作业Id", Length = 64)]
+    [SugarColumn(ColumnDescription = "JobId", Length = 64)]
     [Required, MaxLength(64)]
     public virtual string JobId { get; set; }
 
     /// <summary>
-    /// 触发器类型FullName
+    /// Trigger typeFullName
     /// </summary>
-    [SugarColumn(ColumnDescription = "触发器类型", Length = 128)]
+    [SugarColumn(ColumnDescription = "Trigger type", Length = 128)]
     [MaxLength(128)]
     public string? TriggerType { get; set; }
 
     /// <summary>
-    /// 程序集Name
+    /// Assembly Name
     /// </summary>
-    [SugarColumn(ColumnDescription = "程序集", Length = 128)]
+    [SugarColumn(ColumnDescription = "Assembly", Length = 128)]
     [MaxLength(128)]
     public string? AssemblyName { get; set; } = "Furion.Pure";
 
     /// <summary>
-    /// 参数
+    /// parameter
     /// </summary>
-    [SugarColumn(ColumnDescription = "参数", Length = 128)]
+    [SugarColumn(ColumnDescription = "Parameter", Length = 128)]
     [MaxLength(128)]
     public string? Args { get; set; }
 
     /// <summary>
-    /// 描述信息
+    /// Description information
     /// </summary>
-    [SugarColumn(ColumnDescription = "描述信息", Length = 128)]
+    [SugarColumn(ColumnDescription = "Description information", Length = 128)]
     [MaxLength(128)]
     public string? Description { get; set; }
 
     /// <summary>
-    /// 状态
+    /// state
     /// </summary>
-    [SugarColumn(ColumnDescription = "状态")]
+    [SugarColumn(ColumnDescription = "state")]
     public TriggerStatus Status { get; set; } = TriggerStatus.Ready;
 
     /// <summary>
-    /// 起始时间
+    /// start time
     /// </summary>
-    [SugarColumn(ColumnDescription = "起始时间")]
+    [SugarColumn(ColumnDescription = "start time")]
     public DateTime? StartTime { get; set; }
 
     /// <summary>
-    /// 结束时间
+    /// end time
     /// </summary>
-    [SugarColumn(ColumnDescription = "结束时间")]
+    [SugarColumn(ColumnDescription = "end time")]
     public DateTime? EndTime { get; set; }
 
     /// <summary>
-    /// 最近运行时间
+    /// Last running time
     /// </summary>
-    [SugarColumn(ColumnDescription = "最近运行时间")]
+    [SugarColumn(ColumnDescription = "Recent run time")]
     public DateTime? LastRunTime { get; set; }
 
     /// <summary>
-    /// 下一次运行时间
+    /// Next run time
     /// </summary>
-    [SugarColumn(ColumnDescription = "下一次运行时间")]
+    [SugarColumn(ColumnDescription = "Next Run Time")]
     public DateTime? NextRunTime { get; set; }
 
     /// <summary>
-    /// 触发次数
+    /// Number of triggers
     /// </summary>
-    [SugarColumn(ColumnDescription = "触发次数")]
+    [SugarColumn(ColumnDescription = "Number of triggers")]
     public long NumberOfRuns { get; set; }
 
     /// <summary>
-    /// 最大触发次数（0:不限制，n:N次）
+    /// Maximum number of triggers (0: no limit, n: N times)
     /// </summary>
-    [SugarColumn(ColumnDescription = "最大触发次数")]
+    [SugarColumn(ColumnDescription = "Maximum trigger count")]
     public long MaxNumberOfRuns { get; set; }
 
     /// <summary>
-    /// 出错次数
+    /// Number of errors
     /// </summary>
-    [SugarColumn(ColumnDescription = "出错次数")]
+    [SugarColumn(ColumnDescription = "Number of errors")]
     public long NumberOfErrors { get; set; }
 
     /// <summary>
-    /// 最大出错次数（0:不限制，n:N次）
+    /// Maximum number of errors (0: no limit, n: N times)
     /// </summary>
-    [SugarColumn(ColumnDescription = "最大出错次数")]
+    [SugarColumn(ColumnDescription = "Maximum number of errors")]
     public long MaxNumberOfErrors { get; set; }
 
     /// <summary>
-    /// 重试次数
+    /// Number of retries
     /// </summary>
-    [SugarColumn(ColumnDescription = "重试次数")]
+    [SugarColumn(ColumnDescription = "Number of retries")]
     public int NumRetries { get; set; }
 
     /// <summary>
-    /// 重试间隔时间（ms）
+    /// Retry interval (ms)
     /// </summary>
-    [SugarColumn(ColumnDescription = "重试间隔时间(ms)")]
+    [SugarColumn(ColumnDescription = "Retry interval (ms)")]
     public int RetryTimeout { get; set; } = 1000;
 
     /// <summary>
-    /// 是否立即启动
+    /// Whether to start immediately
     /// </summary>
-    [SugarColumn(ColumnDescription = "是否立即启动")]
+    [SugarColumn(ColumnDescription = "Whether to start immediately")]
     public bool StartNow { get; set; } = true;
 
     /// <summary>
-    /// 是否启动时执行一次
+    /// Whether to execute once at startup
     /// </summary>
-    [SugarColumn(ColumnDescription = "是否启动时执行一次")]
+    [SugarColumn(ColumnDescription = "Whether to execute once at startup")]
     public bool RunOnStart { get; set; } = false;
 
     /// <summary>
-    /// 是否在启动时重置最大触发次数等于一次的作业
+    /// Whether to reset jobs with a maximum number of triggers equal to one on startup
     /// </summary>
-    [SugarColumn(ColumnDescription = "是否重置触发次数")]
+    [SugarColumn(ColumnDescription = "Whether to reset the number of triggers")]
     public bool ResetOnlyOnce { get; set; } = true;
 
     /// <summary>
-    /// 更新时间
+    /// Update time
     /// </summary>
-    [SugarColumn(ColumnDescription = "更新时间")]
+    [SugarColumn(ColumnDescription = "Update Time")]
     public DateTime? UpdatedTime { get; set; }
 }

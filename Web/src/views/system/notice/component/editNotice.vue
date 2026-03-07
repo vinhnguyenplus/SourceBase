@@ -10,17 +10,17 @@
 			<el-form :model="state.ruleForm" ref="ruleFormRef" label-width="auto">
 				<el-row :gutter="35">
 					<el-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12" class="mb20">
-						<el-form-item label="标题" prop="title" :rules="[{ required: true, message: '标题不能为空', trigger: 'blur' }]">
-							<el-input v-model="state.ruleForm.title" placeholder="标题" clearable />
+						<el-form-item label="title" prop="title" :rules="[{ required: true, message: 'Title cannot be empty', trigger: 'blur' }]">
+							<el-input v-model="state.ruleForm.title" placeholder="title" clearable />
 						</el-form-item>
 					</el-col>
 					<el-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12" class="mb20">
-						<el-form-item label="类型" prop="type" :rules="[{ required: true, message: '类型不能为空', trigger: 'blur' }]">
+						<el-form-item label="Type" prop="type" :rules="[{ required: true, message: 'Type cannot be empty', trigger: 'blur' }]">
               <g-sys-dict v-model="state.ruleForm.type" code="NoticeTypeEnum" render-as="select" class="w100" filterable allow-create default-first-option />
 						</el-form-item>
 					</el-col>
 					<el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="mb20">
-						<el-form-item label="内容" prop="content" :rules="[{ required: true, message: '内容不能为空', trigger: 'blur' }]">
+						<el-form-item label="content" prop="content" :rules="[{ required: true, message: 'Content cannot be empty', trigger: 'blur' }]">
 							<Editor v-model:get-html="state.ruleForm.content" />
 						</el-form-item>
 					</el-col>
@@ -28,8 +28,8 @@
 			</el-form>
 			<template #footer>
 				<span class="dialog-footer">
-					<el-button @click="cancel">取 消</el-button>
-					<el-button type="primary" @click="submit">确 定</el-button>
+					<el-button @click="cancel">Cancel</el-button>
+					<el-button type="primary" @click="submit">Confirm</el-button>
 				</span>
 			</template>
 		</el-dialog>
@@ -53,25 +53,25 @@ const state = reactive({
 	ruleForm: {} as UpdateNoticeInput,
 });
 
-// 打开弹窗
+// Open pop-up window
 const openDialog = (row: any) => {
 	state.ruleForm = JSON.parse(JSON.stringify(row));
 	state.isShowDialog = true;
 	ruleFormRef.value?.resetFields();
 };
 
-// 关闭弹窗
+// Close pop-up window
 const closeDialog = () => {
 	emits('handleQuery');
 	state.isShowDialog = false;
 };
 
-// 取消
+// Cancel
 const cancel = () => {
 	state.isShowDialog = false;
 };
 
-// 提交
+// submit
 const submit = () => {
 	ruleFormRef.value.validate(async (valid: boolean) => {
 		if (!valid) return;
@@ -84,6 +84,6 @@ const submit = () => {
 	});
 };
 
-// 导出对象
+// Export object
 defineExpose({ openDialog });
 </script>

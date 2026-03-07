@@ -3,165 +3,165 @@ import { defineStore } from 'pinia';
 export const useThemeConfig = defineStore('themeConfig', {
 	state: (): ThemeConfigState => ({
 		themeConfig: {
-			// 是否开启布局配置抽屉
+			// Whether to open the layout configuration drawer
 			isDrawer: false,
 
 			/**
-			 * 全局主题
+			 * global theme
 			 */
-			// 默认 primary 主题颜色
-			primary: '#0F59A4', //胭脂红:#F03F24 //飞燕草蓝:#0F59A4 //薄荷绿:#207F4C
-			// 是否开启深色模式
+			// Default primary theme color
+			primary: '#0F59A4', // Carmine: #F03F24 // Delphinium blue: #0F59A4 // Mint green: #207F4C
+			// Whether to enable dark mode
 			isIsDark: false,
 
 			/**
-			 * 顶栏设置
+			 * Top bar settings
 			 */
-			// 默认顶栏导航背景颜色
+			// Default top bar navigation background color
 			topBar: '#FFFFFF',
-			// 默认顶栏导航字体颜色
+			// Default top bar navigation font color
 			topBarColor: '#000000',
-			// 是否开启顶栏背景颜色渐变
+			// Whether to enable the top bar background color gradient
 			isTopBarColorGradual: false,
 
 			/**
-			 * 菜单设置
+			 * Menu Settings
 			 */
-			// 默认菜单导航背景颜色
+			// Default menu navigation background color
 			menuBar: '#FFFFFF',
-			// 默认菜单导航字体颜色
+			// Default menu navigation font color
 			menuBarColor: '#000000',
-			// 默认菜单高亮背景色
+			// Default menu highlight background color
 			menuBarActiveColor: 'var(--el-color-primary-light-7)',
-			// 是否开启菜单背景颜色渐变
+			// Whether to enable menu background color gradient
 			isMenuBarColorGradual: false,
 
 			/**
-			 * 分栏设置
+			 * Column Settings
 			 */
-			// 默认分栏菜单背景颜色
+			// Default column menu background color
 			columnsMenuBar: '#2C3A49',
-			// 默认分栏菜单字体颜色
+			// Default column menu font color
 			columnsMenuBarColor: '#F0F0F0',
-			// 是否开启分栏菜单背景颜色渐变
+			// Whether to enable the background color gradient of the column menu
 			isColumnsMenuBarColorGradual: false,
-			// 是否开启分栏菜单鼠标悬停预加载(预览菜单)
+			// Whether to enable mouse-over preloading for column menus (preview menu)
 			isColumnsMenuHoverPreload: false,
-			// 分栏Logo高度(px)
+			// Column Logo height (px)
 			columnsLogoHeight: 50,
-			// 分栏菜单宽度(px)
+			// Column menu width (px)
 			columnsMenuWidth: 70,
-			// 分栏菜单高度(px)
+			// Column menu height (px)
 			columnsMenuHeight: 50,
 
 			/**
-			 * 界面设置
+			 * Interface Settings
 			 */
-			// 是否开启菜单水平折叠效果
+			// Whether to enable the menu horizontal folding effect
 			isCollapse: false,
-			// 是否开启菜单手风琴效果
+			// Whether to enable the menu accordion effect
 			isUniqueOpened: true,
-			// 是否开启固定 Header
+			// Whether to enable fixed header
 			isFixedHeader: true,
-			// 初始化变量，用于更新菜单 el-scrollbar 的高度，请勿删除
+			// Initialization variable, used to update the height of the menu el-scrollbar, please do not delete it
 			isFixedHeaderChange: false,
-			// 是否开启经典布局分割菜单（仅经典布局生效）
+			// Whether to enable the classic layout split menu (only classic layout takes effect)
 			isClassicSplitMenu: false,
-			// 是否开启自动锁屏
+			// Whether to turn on automatic screen lock
 			isLockScreen: false,
-			// 开启自动锁屏倒计时(s/秒)
+			// Turn on automatic screen lock countdown (s/second)
 			lockScreenTime: 300,
 
 			/**
-			 * 界面显示
+			 * Interface display
 			 */
-			// 是否开启侧边栏 Logo
+			// Whether to enable the sidebar logo
 			isShowLogo: true,
-			// 初始化变量，用于 el-scrollbar 的高度更新，请勿删除
+			// Initialization variable, used for height update of el-scrollbar, please do not delete it
 			isShowLogoChange: false,
-			// 是否开启 Breadcrumb，强制经典、横向布局不显示
+			// Whether to turn on Breadcrumb, forcing the classic and horizontal layout not to be displayed
 			isBreadcrumb: true,
-			// 是否开启 Tagsview
+			// Whether to enable Tagsview
 			isTagsview: true,
-			// 是否开启 Breadcrumb 图标
+			// Whether to enable the Breadcrumb icon
 			isBreadcrumbIcon: true,
-			// 是否开启 Tagsview 图标
+			// Whether to enable Tagsview icon
 			isTagsviewIcon: true,
-			// 是否开启 TagsView 缓存
+			// Whether to enable TagsView caching
 			isCacheTagsView: true,
-			// 是否开启 TagsView 拖拽
+			// Whether to enable TagsView drag and drop
 			isSortableTagsView: true,
-			// 是否开启 TagsView 共用 -- 共用详情界面：tagsView只会出现一个；非共用详情界面：tagsView会出现多个
+			// Whether to enable TagsView sharing -- shared details interface: only one tagsView will appear; non-shared details interface: multiple tagsView will appear
 			isShareTagsView: true,
-			// 是否开启 Footer 底部版权信息
+			// Whether to turn on the copyright information at the bottom of the Footer
 			isFooter: true,
-			// 是否开启灰色模式
+			// Whether to enable gray mode
 			isGrayscale: false,
-			// 是否开启色弱模式
+			// Whether to enable color weakness mode
 			isInvert: false,
-			// 是否开启水印
+			// Whether to turn on watermark
 			isWatermark: true,
-			// 水印文案
+			// watermark copy
 			watermarkText: 'Admin.NET',
 
 			/**
-			 * 其它设置
+			 * OtherSettings
 			 */
-			// Tagsview 风格：可选值"<tags-style-one|tags-style-four|tags-style-five>"，默认 tags-style-five
-			// 定义的值与 `/src/layout/navBars/tagsView/tagsView.vue` 中的 class 同名
+			// Tagsview style: optional value "<tags-style-one|tags-style-four|tags-style-five>", default tags-style-five
+			// The defined value has the same name as the class in `/src/layout/navBars/tagsView/tagsView.vue`
 			tagsStyle: 'tags-style-one',
-			// 主页面切换动画: Animate.css
+			// Main page switching animation: Animate.css
 			animation: 'fadeLeft',
-			// 分栏高亮风格：可选值"<columns-round|columns-card>"，默认 columns-round
+			// Column highlighting style: optional value "<columns-round|columns-card>", default columns-round
 			columnsAsideStyle: 'columns-round',
-			// 分栏布局风格：可选值"<columns-horizontal|columns-vertical>"，默认 columns-horizontal
+			// Column layout style: optional value "<columns-horizontal|columns-vertical>", default columns-horizontal
 			columnsAsideLayout: 'columns-vertical',
 
 			/**
-			 * 布局切换
-			 * 注意：为了演示，切换布局时，颜色会被还原成默认，代码位置：/@/layout/navBars/topBar/settings.vue
-			 * 中的 `initSetLayoutChange(设置布局切换，重置主题样式)` 方法
+			 * Layout Switch
+			 * Attention：For demonstration，Switch layouttime，The color will berestoreSucceedDefault，Code location：/@/layout/navBars/topBar/settings.vue
+			 * inof `initSetLayoutChange (Set layout switch, reset theme style)` Method
 			 */
-			// 布局切换：可选值"<defaults|classic|transverse|columns>"，默认 defaults
+			// Layout switching: optional value "<defaults|classic|transverse|columns>", default defaults
 			layout: 'defaults',
 
 			/**
-			 * 后端控制路由
+			 * Backend-controlled routing
 			 */
-			// 是否开启后端控制路由
+			// Whether to enable backend control routing
 			isRequestRoutes: true,
 
 			/**
-			 * 全局网站标题 / 副标题
+			 * Global websitetitle / Subtitle
 			 */
-			// 网站主标题（菜单导航、浏览器当前网页标题）
+			// Website main title (menu navigation, browser current web page title)
 			globalTitle: 'Admin.NET aaaaaaaaaaa',
-			// 网站副标题（登录页顶部文字）
+			// Website subtitle (text at the top of the login page)
 			globalViceTitle: 'Admin.NET',
-			// 网站副标题（登录页顶部文字）
-			globalViceTitleMsg: '站在巨人肩膀上的 .NET 通用权限开发框架',
-			// 版权和备案文字
+			// Website subtitle (text at the top of the login page)
+			globalViceTitleMsg: '.NET General Permission Development Framework Standing on the Shoulders of Giants',
+			// Copyright and filing text
 			copyright: 'Copyright © 2026. All rights reserved.',
-			// 默认初始语言，可选值"<zh-cn|en|zh-tw>"，默认 zh-cn
+			// Default initial language, optional value "<zh-cn|en|zh-tw>", default zh-cn
 			globalI18n: 'zh-cn',
-			// 默认全局组件大小，可选值"<large|'default'|small>"，默认 'large'
+			// Default global component size, optional value "<large|'default'|small>", default 'large'
 			globalComponentSize: 'small',
-			// 系统 logo 地址
+			// System logo address
 			logoUrl: '',
-			// Icp备案号
+			// ICP registration number
 			icp: '',
-			// Icp地址
+			// ICP address
 			icpUrl: '',
 
-			// 是否开启二级验证
+			// Whether to enable secondary verification
 			secondVer: false,
-			// 是否开启注册功能
+			// Whether to enable registration function
 			registration: false,
-			// 登录时隐藏租户
+			// Hide tenant on login
 			hideTenantForLogin: false,
-			// 是否开启验证码
+			// Whether to enable verification code
 			captcha: false,
-			// 是否加载完成
+			// Is loading completed?
 			isLoaded: false,
 		},
 	}),

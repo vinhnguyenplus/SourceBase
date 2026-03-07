@@ -1,5 +1,5 @@
 <template>
-	<card-pro title="关于项目" prefix-icon="ele-QuestionFilled" shadow="hover">
+	<card-pro title="About the project" prefix-icon="ele-QuestionFilled" shadow="hover">
         <p>
 			Information!
 		</p>
@@ -8,9 +8,9 @@
 
 <script lang="ts">
 export default {
-	title: '关于项目',
+	title: 'About the project',
 	icon: 'ele-QuestionFilled',
-	description: '点个星星支持一下',
+	description: 'Give a star to show support',
 };
 </script>
 <script setup lang="ts" name="about">

@@ -5,10 +5,10 @@
 				<div class="left">
 					<div class="left-item">
 						<div class="left-item-animation left-item-num">404</div>
-						<div class="left-item-animation left-item-title">地址输入错误，请重新输入地址~</div>
-						<div class="left-item-animation left-item-msg">您可以先检查网址，然后重新输入或给我们反馈问题</div>
+						<div class="left-item-animation left-item-title">The address was entered incorrectly, please re-enter the address~</div>
+						<div class="left-item-animation left-item-msg">You can first check the website, then re-enter it or give us feedback on the problem.</div>
 						<div class="left-item-animation left-item-btn">
-							<el-button type="primary" size="default" round @click="onGoHome">返回首页</el-button>
+							<el-button type="primary" size="default" round @click="onGoHome">Return to homepage</el-button>
 						</div>
 					</div>
 				</div>
@@ -24,10 +24,10 @@
 import { useRouter } from 'vue-router';
 import notFoundImage from '/@/assets/404.png';
 
-// 定义变量内容
+// Define variable content
 const router = useRouter();
 
-// 返回首页
+// Return to home page
 const onGoHome = () => {
 	router.push('/');
 };

@@ -1,8 +1,8 @@
-﻿// Admin.NET 项目的版权、商标、专利和其他相关权利均受相应法律法规的保护。使用本项目应遵守相关法律法规和许可证的要求。
+﻿// The copyright, trademark, patent and other related rights of the Admin.NET project are protected by corresponding laws and regulations. Use of this project shall comply with relevant laws, regulations and license requirements.
 //
-// 本项目主要遵循 MIT 许可证和 Apache 许可证（版本 2.0）进行分发和使用。许可证位于源代码树根目录中的 LICENSE-MIT 和 LICENSE-APACHE 文件。
+// This project is distributed and used primarily under the MIT License and the Apache License (version 2.0). The license is located in the LICENSE-MIT and LICENSE-APACHE files in the root of the source tree.
 //
-// 不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！
+// This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project!
 
 using Org.BouncyCastle.Crypto;
 using Org.BouncyCastle.Math;
@@ -11,28 +11,28 @@ using Org.BouncyCastle.Utilities.Encoders;
 namespace Admin.NET.Core;
 
 /// <summary>
-/// GM工具类
+/// GM tools
 /// </summary>
 public class GMUtil
 {
     /// <summary>
-    /// SM2加密
+    /// SM2 encryption
     /// </summary>
     /// <param name="publicKeyHex"></param>
     /// <param name="data_string"></param>
     /// <returns></returns>
     public static string SM2Encrypt(string publicKeyHex, string data_string)
     {
-        // 如果是130位公钥，.NET使用的话，把开头的04截取掉
+        // If it is a 130-bit public key, if it is used by .NET, cut off the 04 at the beginning.
         if (publicKeyHex.Length == 130)
         {
             publicKeyHex = publicKeyHex.Substring(2, 128);
         }
-        // 公钥X，前64位
+        // Public key X, first 64 bits
         string x = publicKeyHex.Substring(0, 64);
-        // 公钥Y，后64位
+        // Public key Y, last 64 bits
         string y = publicKeyHex.Substring(64);
-        // 获取公钥对象
+        // Get the public key object
         AsymmetricKeyParameter publicKey1 = GM.GetPublickeyFromXY(new BigInteger(x, 16), new BigInteger(y, 16));
         // Sm2Encrypt: C1C3C2
         // Sm2EncryptOld: C1C2C3
@@ -42,7 +42,7 @@ public class GMUtil
     }
 
     /// <summary>
-    /// SM2解密
+    /// SM2 decryption
     /// </summary>
     /// <param name="privateKey_string"></param>
     /// <param name="encryptedData_string"></param>
@@ -52,7 +52,7 @@ public class GMUtil
         if (!encryptedData_string.StartsWith("04"))
             encryptedData_string = "04" + encryptedData_string;
         BigInteger d = new(privateKey_string, 16);
-        // 先拿到私钥对象，用ECPrivateKeyParameters 或 AsymmetricKeyParameter 都可以
+        // First get the private key object, use ECPrivateKeyParameters or AsymmetricKeyParameter.
         // ECPrivateKeyParameters bcecPrivateKey = GmUtil.GetPrivatekeyFromD(d);
         AsymmetricKeyParameter bcecPrivateKey = GM.GetPrivatekeyFromD(d);
         byte[] byToDecrypt = Hex.Decode(encryptedData_string);
@@ -62,7 +62,7 @@ public class GMUtil
     }
 
     /// <summary>
-    /// SM4加密（ECB）
+    /// SM4 encryption (ECB)
     /// </summary>
     /// <param name="key_string"></param>
     /// <param name="plainText"></param>
@@ -70,12 +70,12 @@ public class GMUtil
     public static string SM4EncryptECB(string key_string, string plainText)
     {
         byte[] key = Hex.Decode(key_string);
-        byte[] bs = GM.Sm4EncryptECB(key, Encoding.UTF8.GetBytes(plainText), GM.SM4_ECB_PKCS7PADDING);//NoPadding 的情况下需要校验数据长度是16的倍数. 使用 HandleSm4Padding 处理
+        byte[] bs = GM.Sm4EncryptECB(key, Encoding.UTF8.GetBytes(plainText), GM.SM4_ECB_PKCS7PADDING);// In the case of NoPadding, the verification data length needs to be a multiple of 16. Use HandleSm4Padding to process
         return Hex.ToHexString(bs);
     }
 
     /// <summary>
-    /// SM4解密（ECB）
+    /// SM4 Decryption (ECB)
     /// </summary>
     /// <param name="key_string"></param>
     /// <param name="cipherText"></param>
@@ -88,7 +88,7 @@ public class GMUtil
     }
 
     /// <summary>
-    /// SM4加密（CBC）
+    /// SM4 encryption (CBC)
     /// </summary>
     /// <param name="key_string"></param>
     /// <param name="iv_string"></param>
@@ -103,7 +103,7 @@ public class GMUtil
     }
 
     /// <summary>
-    /// SM4解密（CBC）
+    /// SM4 Decryption (CBC)
     /// </summary>
     /// <param name="key_string"></param>
     /// <param name="iv_string"></param>
@@ -118,10 +118,10 @@ public class GMUtil
     }
 
     /// <summary>
-    /// 补足 16 进制字符串的 0 字符，返回不带 0x 的16进制字符串
+    /// Complement the 0 characters of the hexadecimal string and return the hexadecimal string without 0x
     /// </summary>
     /// <param name="input"></param>
-    /// <param name="mode">1表示加密，0表示解密</param>
+    /// <param name="mode">1 means encryption, 0 means decryption</param>
     /// <returns></returns>
     private static byte[] HandleSm4Padding(byte[] input, int mode)
     {

@@ -4,7 +4,7 @@ import path from 'path';
 
 const directoriesToDelete = ['node_modules'];
 
-// 删除文件夹
+// Delete folder
 directoriesToDelete.forEach((dir) => {
 	const dirPath = path.join(process.cwd(), dir);
 	if (fs.existsSync(dirPath)) {

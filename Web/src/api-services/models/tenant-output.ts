@@ -1,8 +1,8 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Admin.NET 通用权限开发平台
- * 让 .NET 开发更简单、更通用、更流行。整合最新技术，模块插件式开发，前后端分离，开箱即用。<br/><u><b><font color='FF0000'> 👮不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！</font></b></u>
+ * Admin.NET General Permission Development Platform
+ * let .NET Develop more simply、More general、More popular。wholeIn line with the latest technology，Modular Plugin-Based Development，Frontend and backendpointsLeave，Ready to use out of the box。<br/><u><b><font color='FF0000'> 👮This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project! </font></b></u>
  *
  * OpenAPI spec version: 1.0.0
  * 
@@ -25,7 +25,7 @@ import { YesNoEnum } from './yes-no-enum';
 export interface TenantOutput {
 
     /**
-     * 雪花Id
+     * SnowflakeId
      *
      * @type {number}
      * @memberof TenantOutput
@@ -33,7 +33,7 @@ export interface TenantOutput {
     id?: number;
 
     /**
-     * 创建时间
+     * Creation Time
      *
      * @type {Date}
      * @memberof TenantOutput
@@ -41,7 +41,7 @@ export interface TenantOutput {
     createTime?: Date;
 
     /**
-     * 更新时间
+     * Update Time
      *
      * @type {Date}
      * @memberof TenantOutput
@@ -49,7 +49,7 @@ export interface TenantOutput {
     updateTime?: Date | null;
 
     /**
-     * 创建者Id
+     * CreatorId
      *
      * @type {number}
      * @memberof TenantOutput
@@ -57,7 +57,7 @@ export interface TenantOutput {
     createUserId?: number | null;
 
     /**
-     * 创建者姓名
+     * Creator name
      *
      * @type {string}
      * @memberof TenantOutput
@@ -65,7 +65,7 @@ export interface TenantOutput {
     createUserName?: string | null;
 
     /**
-     * 修改者Id
+     * Modifier ID
      *
      * @type {number}
      * @memberof TenantOutput
@@ -73,7 +73,7 @@ export interface TenantOutput {
     updateUserId?: number | null;
 
     /**
-     * 修改者姓名
+     * Modifier name
      *
      * @type {string}
      * @memberof TenantOutput
@@ -81,7 +81,7 @@ export interface TenantOutput {
     updateUserName?: string | null;
 
     /**
-     * 租管用户Id
+     * Rent-controlled User ID
      *
      * @type {number}
      * @memberof TenantOutput
@@ -89,7 +89,7 @@ export interface TenantOutput {
     userId?: number;
 
     /**
-     * 机构Id
+     * Organization ID
      *
      * @type {number}
      * @memberof TenantOutput
@@ -97,7 +97,7 @@ export interface TenantOutput {
     orgId?: number;
 
     /**
-     * 域名
+     * domain name
      *
      * @type {string}
      * @memberof TenantOutput
@@ -117,7 +117,7 @@ export interface TenantOutput {
     dbType?: DbType;
 
     /**
-     * 数据库连接
+     * Database connection
      *
      * @type {string}
      * @memberof TenantOutput
@@ -125,7 +125,7 @@ export interface TenantOutput {
     connection?: string | null;
 
     /**
-     * 数据库标识
+     * Database ID
      *
      * @type {string}
      * @memberof TenantOutput
@@ -133,7 +133,7 @@ export interface TenantOutput {
     configId?: string | null;
 
     /**
-     * 从库连接/读写分离
+     * Slave connection / read-write separation
      *
      * @type {string}
      * @memberof TenantOutput
@@ -147,7 +147,7 @@ export interface TenantOutput {
     enableReg?: YesNoEnum;
 
     /**
-     * 默认注册方案Id
+     * Default registration schemeId
      *
      * @type {number}
      * @memberof TenantOutput
@@ -155,7 +155,7 @@ export interface TenantOutput {
     regWayId?: number | null;
 
     /**
-     * 图标
+     * icon
      *
      * @type {string}
      * @memberof TenantOutput
@@ -163,7 +163,7 @@ export interface TenantOutput {
     logo?: string | null;
 
     /**
-     * 标题
+     * title
      *
      * @type {string}
      * @memberof TenantOutput
@@ -171,7 +171,7 @@ export interface TenantOutput {
     title?: string | null;
 
     /**
-     * 副标题
+     * Subtitle
      *
      * @type {string}
      * @memberof TenantOutput
@@ -179,7 +179,7 @@ export interface TenantOutput {
     viceTitle?: string | null;
 
     /**
-     * 副描述
+     * Sub-description
      *
      * @type {string}
      * @memberof TenantOutput
@@ -187,7 +187,7 @@ export interface TenantOutput {
     viceDesc?: string | null;
 
     /**
-     * 水印
+     * Watermark
      *
      * @type {string}
      * @memberof TenantOutput
@@ -195,7 +195,7 @@ export interface TenantOutput {
     watermark?: string | null;
 
     /**
-     * 版权信息
+     * Copyright information
      *
      * @type {string}
      * @memberof TenantOutput
@@ -203,7 +203,7 @@ export interface TenantOutput {
     copyright?: string | null;
 
     /**
-     * ICP备案号
+     * ICP Filing Number
      *
      * @type {string}
      * @memberof TenantOutput
@@ -211,7 +211,7 @@ export interface TenantOutput {
     icp?: string | null;
 
     /**
-     * ICP地址
+     * ICP address
      *
      * @type {string}
      * @memberof TenantOutput
@@ -219,7 +219,7 @@ export interface TenantOutput {
     icpUrl?: string | null;
 
     /**
-     * 排序
+     * Sort
      *
      * @type {number}
      * @memberof TenantOutput
@@ -227,7 +227,7 @@ export interface TenantOutput {
     orderNo?: number;
 
     /**
-     * 备注
+     * Remarks
      *
      * @type {string}
      * @memberof TenantOutput
@@ -241,7 +241,7 @@ export interface TenantOutput {
     status?: StatusEnum;
 
     /**
-     * 租户名称
+     * Tenant name
      *
      * @type {string}
      * @memberof TenantOutput
@@ -249,7 +249,7 @@ export interface TenantOutput {
     name?: string | null;
 
     /**
-     * 管理员账号
+     * AdministratorAccount number
      *
      * @type {string}
      * @memberof TenantOutput
@@ -257,7 +257,7 @@ export interface TenantOutput {
     adminAccount?: string | null;
 
     /**
-     * 电子邮箱
+     * electricitychildEmail
      *
      * @type {string}
      * @memberof TenantOutput
@@ -265,7 +265,7 @@ export interface TenantOutput {
     email?: string | null;
 
     /**
-     * 电话
+     * Telephone
      *
      * @type {string}
      * @memberof TenantOutput

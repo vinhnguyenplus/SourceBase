@@ -10,12 +10,12 @@
 			<el-form :model="state.ruleForm" ref="ruleFormRef" label-width="auto">
 				<el-row :gutter="35">
 					<el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="mb20">
-						<el-form-item label="方案名称" prop="name" :rules="[{ required: true, message: '方案名称不能为空', trigger: 'blur' }]">
-							<el-input v-model="state.ruleForm.name" placeholder="方案名称" clearable />
+						<el-form-item label="Plan Name" prop="name" :rules="[{ required: true, message: 'Scheme name cannot be empty', trigger: 'blur' }]">
+							<el-input v-model="state.ruleForm.name" placeholder="Plan Name" clearable />
 						</el-form-item>
 					</el-col>
 					<el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="mb20">
-						<el-form-item label="账户类型" prop="posId" :rules="[{ required: true, message: '账户类型不能为空', trigger: 'blur' }]">
+						<el-form-item label="Account Type" prop="posId" :rules="[{ required: true, message: 'Account type cannot be empty', trigger: 'blur' }]">
 							<g-sys-dict
 									v-model="state.ruleForm.accountType"
 									:on-item-filter="(data: any) => !['SuperAdmin','SysAdmin'].includes(data.name)"
@@ -25,15 +25,15 @@
 						</el-form-item>
 					</el-col>
 					<el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="mb20">
-						<el-form-item label="绑定角色" prop="roleId" :rules="[{ required: true, message: '角色不能为空', trigger: 'blur' }]">
-							<el-select v-model="state.ruleForm.roleId" placeholder="绑定角色" clearable class="w100">
+						<el-form-item label="Bind role" prop="roleId" :rules="[{ required: true, message: 'Role cannot be empty', trigger: 'blur' }]">
+							<el-select v-model="state.ruleForm.roleId" placeholder="Bind role" clearable class="w100">
 								<el-option :label="item.name" :value="item.id" v-for="(item, index) in state.roleData" :key="index" />
 							</el-select>
 						</el-form-item>
 					</el-col>
 					<el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="mb20">
-						<el-form-item label="绑定机构" prop="orgId" :rules="[{ required: true, message: '机构不能为空', trigger: 'blur' }]">
-							<el-cascader :options="state.orgData" :props="cascaderConfig" v-model="state.ruleForm.orgId" placeholder="绑定机构" clearable filterable class="w100" >
+						<el-form-item label="Bind Organization" prop="orgId" :rules="[{ required: true, message: 'Organization cannot be empty', trigger: 'blur' }]">
+							<el-cascader :options="state.orgData" :props="cascaderConfig" v-model="state.ruleForm.orgId" placeholder="Bind Organization" clearable filterable class="w100" >
 								<template #default="{ node, data }">
 									<span>{{ data.name }}</span>
 									<span v-if="!node.isLeaf"> ({{ data.children.length }}) </span>
@@ -42,28 +42,28 @@
 						</el-form-item>
 					</el-col>
 					<el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="mb20">
-						<el-form-item label="绑定职位" prop="posId" :rules="[{ required: true, message: '职位不能为空', trigger: 'blur' }]">
-							<el-select v-model="state.ruleForm.posId" placeholder="绑定职位" clearable class="w100">
+						<el-form-item label="Bind position" prop="posId" :rules="[{ required: true, message: 'Position cannot be empty', trigger: 'blur' }]">
+							<el-select v-model="state.ruleForm.posId" placeholder="Bind position" clearable class="w100">
 								<el-option :label="item.name" :value="item.id" v-for="(item, index) in state.posData" :key="index" />
 							</el-select>
 						</el-form-item>
 					</el-col>
 					<el-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12" class="mb20">
-						<el-form-item label="排序">
-							<el-input-number v-model="state.ruleForm.orderNo" placeholder="排序" class="w100" />
+						<el-form-item label="Sort">
+							<el-input-number v-model="state.ruleForm.orderNo" placeholder="Sort" class="w100" />
 						</el-form-item>
 					</el-col>
 					<el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="mb20">
-						<el-form-item label="备注">
-							<el-input v-model="state.ruleForm.remark" placeholder="请输入备注内容" clearable type="textarea" />
+						<el-form-item label="Remarks">
+							<el-input v-model="state.ruleForm.remark" placeholder="Please enter the remark content" clearable type="textarea" />
 						</el-form-item>
 					</el-col>
 				</el-row>
 			</el-form>
 			<template #footer>
 				<span class="dialog-footer">
-					<el-button @click="() => state.isShowDialog = false">取 消</el-button>
-					<el-button type="primary" @click="submit">确 定</el-button>
+					<el-button @click="() => state.isShowDialog = false">Cancel</el-button>
+					<el-button type="primary" @click="submit">Confirm</el-button>
 				</span>
 			</template>
 		</el-dialog>
@@ -88,8 +88,8 @@ const state = reactive({
 	file: undefined as any,
 	ruleForm: {} as UpdateUserRegWayInput,
 	orgData: [] as Array<OrgTreeOutput>,
-	posData: [] as Array<SysPos>, // 职位数据
-	roleData: [] as Array<RoleOutput>, // 角色数据
+	posData: [] as Array<SysPos>, // Job data
+	roleData: [] as Array<RoleOutput>, // character data
 });
 
 onMounted(async () => {
@@ -100,7 +100,7 @@ onMounted(async () => {
 	state.loading = false;
 });
 
-// 级联选择器配置选项
+// Cascading selector configuration options
 const cascaderConfig = {
 	checkStrictly: true,
 	emitPath: false,
@@ -109,7 +109,7 @@ const cascaderConfig = {
 	expandTrigger: 'hover'
 };
 
-// 打开弹窗
+// Open pop-up window
 const openDialog = async (row: any) => {
 	state.roleData = (row?.tenantId ? state.roleData?.filter((e) => e.tenantId === row.tenantId) : state.roleData) ?? [];
 	state.posData = (row?.tenantId ? state.posData?.filter((e) => e.tenantId === row.tenantId) : state.posData) ?? [];
@@ -119,13 +119,13 @@ const openDialog = async (row: any) => {
 	ruleFormRef.value?.resetFields();
 };
 
-// 关闭弹窗
+// Close pop-up window
 const closeDialog = () => {
 	emits('handleQuery');
 	state.isShowDialog = false;
 };
 
-// 提交
+// submit
 const submit = async () => {
 	ruleFormRef.value.validate(async (valid: boolean) => {
 		if (!valid) return;
@@ -138,6 +138,6 @@ const submit = async () => {
 	});
 };
 
-// 导出对象
+// Export object
 defineExpose({ openDialog });
 </script>

@@ -1,145 +1,145 @@
-// Admin.NET 项目的版权、商标、专利和其他相关权利均受相应法律法规的保护。使用本项目应遵守相关法律法规和许可证的要求。
+// The copyright, trademark, patent and other related rights of the Admin.NET project are protected by corresponding laws and regulations. Use of this project shall comply with relevant laws, regulations and license requirements.
 //
-// 本项目主要遵循 MIT 许可证和 Apache 许可证（版本 2.0）进行分发和使用。许可证位于源代码树根目录中的 LICENSE-MIT 和 LICENSE-APACHE 文件。
+// This project is distributed and used primarily under the MIT License and the Apache License (version 2.0). The license is located in the LICENSE-MIT and LICENSE-APACHE files in the root of the source tree.
 //
-// 不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！
+// This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project!
 
 namespace Admin.NET.Core;
 
 /// <summary>
-/// 系统租户表
+/// System tenant table
 /// </summary>
-[SugarTable(null, "系统租户表")]
+[SugarTable(null, "System tenant table")]
 [SysTable]
 public partial class SysTenant : EntityBase
 {
     /// <summary>
-    /// 租管用户Id
+    /// Tenant user ID
     /// </summary>
-    [SugarColumn(ColumnDescription = "租管用户Id")]
+    [SugarColumn(ColumnDescription = "Rent-controlled User ID")]
     public virtual long UserId { get; set; }
 
     /// <summary>
-    /// 机构Id
+    /// InstitutionId
     /// </summary>
-    [SugarColumn(ColumnDescription = "机构Id")]
+    [SugarColumn(ColumnDescription = "Organization ID")]
     public virtual long OrgId { get; set; }
 
     /// <summary>
-    /// 域名
+    /// domain name
     /// </summary>
-    [SugarColumn(ColumnDescription = "域名", Length = 128)]
+    [SugarColumn(ColumnDescription = "domain name", Length = 128)]
     [MaxLength(128)]
     public virtual string? Host { get; set; }
 
     /// <summary>
-    /// 租户类型
+    /// Tenant type
     /// </summary>
-    [SugarColumn(ColumnDescription = "租户类型")]
+    [SugarColumn(ColumnDescription = "Tenant Type")]
     public virtual TenantTypeEnum TenantType { get; set; }
 
     /// <summary>
-    /// 数据库类型
+    /// Database type
     /// </summary>
-    [SugarColumn(ColumnDescription = "数据库类型")]
+    [SugarColumn(ColumnDescription = "Database type")]
     public virtual SqlSugar.DbType DbType { get; set; }
 
     /// <summary>
-    /// 数据库连接
+    /// Database connection
     /// </summary>
-    [SugarColumn(ColumnDescription = "数据库连接", Length = 256)]
+    [SugarColumn(ColumnDescription = "Database connection", Length = 256)]
     [MaxLength(256)]
     public virtual string? Connection { get; set; }
 
     /// <summary>
-    /// 数据库标识
+    /// Database ID
     /// </summary>
-    [SugarColumn(ColumnDescription = "数据库标识", Length = 64)]
+    [SugarColumn(ColumnDescription = "Database ID", Length = 64)]
     [MaxLength(64)]
     public virtual string? ConfigId { get; set; }
 
     /// <summary>
-    /// 从库连接/读写分离
+    /// Connect/separate reading and writing from the library
     /// </summary>
-    [SugarColumn(ColumnDescription = "从库连接/读写分离", ColumnDataType = StaticConfig.CodeFirst_BigString)]
+    [SugarColumn(ColumnDescription = "Slave connection / read-write separation", ColumnDataType = StaticConfig.CodeFirst_BigString)]
     public virtual string? SlaveConnections { get; set; }
 
     /// <summary>
-    /// 启用注册功能
+    /// Enable registration
     /// </summary>
-    [SugarColumn(ColumnDescription = "启用注册功能")]
+    [SugarColumn(ColumnDescription = "Enable registration feature")]
     public virtual YesNoEnum? EnableReg { get; set; } = YesNoEnum.N;
 
     /// <summary>
-    /// 默认注册方案Id
+    /// Default registration scheme ID
     /// </summary>
-    [SugarColumn(ColumnDescription = "默认注册方案")]
+    [SugarColumn(ColumnDescription = "Default registration scheme")]
     public virtual long? RegWayId { get; set; }
 
     /// <summary>
-    /// 图标
+    /// icon
     /// </summary>
-    [SugarColumn(ColumnDescription = "图标", Length = 256), MaxLength(256)]
+    [SugarColumn(ColumnDescription = "icon", Length = 256), MaxLength(256)]
     public virtual string? Logo { get; set; }
 
     /// <summary>
-    /// 标题
+    /// title
     /// </summary>
-    [SugarColumn(ColumnDescription = "标题", Length = 32), MaxLength(32)]
+    [SugarColumn(ColumnDescription = "title", Length = 32), MaxLength(32)]
     public virtual string? Title { get; set; }
 
     /// <summary>
-    /// 副标题
+    /// subtitle
     /// </summary>
-    [SugarColumn(ColumnDescription = "副标题", Length = 32), MaxLength(32)]
+    [SugarColumn(ColumnDescription = "Subtitle", Length = 32), MaxLength(32)]
     public virtual string? ViceTitle { get; set; }
 
     /// <summary>
-    /// 副描述
+    /// Sub-description
     /// </summary>
-    [SugarColumn(ColumnDescription = "副描述", Length = 64), MaxLength(64)]
+    [SugarColumn(ColumnDescription = "Sub-description", Length = 64), MaxLength(64)]
     public virtual string? ViceDesc { get; set; }
 
     /// <summary>
-    /// 水印
+    /// watermark
     /// </summary>
-    [SugarColumn(ColumnDescription = "水印", Length = 32), MaxLength(32)]
+    [SugarColumn(ColumnDescription = "Watermark", Length = 32), MaxLength(32)]
     public virtual string? Watermark { get; set; }
 
     /// <summary>
-    /// 版权信息
+    /// Copyright information
     /// </summary>
-    [SugarColumn(ColumnDescription = "版权信息", Length = 64), MaxLength(64)]
+    [SugarColumn(ColumnDescription = "Copyright information", Length = 64), MaxLength(64)]
     public virtual string? Copyright { get; set; }
 
     /// <summary>
-    /// ICP备案号
+    /// ICP registration number
     /// </summary>
-    [SugarColumn(ColumnDescription = "ICP备案号", Length = 32), MaxLength(32)]
+    [SugarColumn(ColumnDescription = "ICP Filing Number", Length = 32), MaxLength(32)]
     public virtual string? Icp { get; set; }
 
     /// <summary>
-    /// ICP地址
+    /// ICP address
     /// </summary>
-    [SugarColumn(ColumnDescription = "ICP地址", Length = 32), MaxLength(32)]
+    [SugarColumn(ColumnDescription = "ICP address", Length = 32), MaxLength(32)]
     public virtual string? IcpUrl { get; set; }
 
     /// <summary>
-    /// 排序
+    /// sort
     /// </summary>
-    [SugarColumn(ColumnDescription = "排序")]
+    [SugarColumn(ColumnDescription = "Sort")]
     public virtual int OrderNo { get; set; } = 100;
 
     /// <summary>
-    /// 备注
+    /// Remark
     /// </summary>
-    [SugarColumn(ColumnDescription = "备注", Length = 128)]
+    [SugarColumn(ColumnDescription = "Remarks", Length = 128)]
     [MaxLength(128)]
     public virtual string? Remark { get; set; }
 
     /// <summary>
-    /// 状态
+    /// state
     /// </summary>
-    [SugarColumn(ColumnDescription = "状态")]
+    [SugarColumn(ColumnDescription = "state")]
     public virtual StatusEnum Status { get; set; } = StatusEnum.Enable;
 }

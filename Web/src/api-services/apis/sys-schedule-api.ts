@@ -1,8 +1,8 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Admin.NET 通用权限开发平台
- * 让 .NET 开发更简单、更通用、更流行。整合最新技术，模块插件式开发，前后端分离，开箱即用。<br/><u><b><font color='FF0000'> 👮不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！</font></b></u>
+ * Admin.NET General Permission Development Platform
+ * let .NET Develop more simply、More general、More popular。wholeIn line with the latest technology，Modular Plugin-Based Development，Frontend and backendpointsLeave，Ready to use out of the box。<br/><u><b><font color='FF0000'> 👮This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project! </font></b></u>
  *
  * OpenAPI spec version: 1.0.0
  * 
@@ -33,7 +33,7 @@ export const SysScheduleApiAxiosParamCreator = function (configuration?: Configu
     return {
         /**
          * 
-         * @summary 增加日程
+         * @summary Add schedule
          * @param {AddScheduleInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -81,7 +81,7 @@ export const SysScheduleApiAxiosParamCreator = function (configuration?: Configu
         },
         /**
          * 
-         * @summary 删除日程
+         * @summary Delete schedule
          * @param {DeleteScheduleInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -129,7 +129,7 @@ export const SysScheduleApiAxiosParamCreator = function (configuration?: Configu
         },
         /**
          * 
-         * @summary 获取日程详情
+         * @summary Get schedule details
          * @param {number} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -178,7 +178,7 @@ export const SysScheduleApiAxiosParamCreator = function (configuration?: Configu
         },
         /**
          * 
-         * @summary 获取日程列表
+         * @summary Get schedule list
          * @param {ListScheduleInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -226,7 +226,7 @@ export const SysScheduleApiAxiosParamCreator = function (configuration?: Configu
         },
         /**
          * 
-         * @summary 设置日程状态
+         * @summary Set schedule status
          * @param {ScheduleInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -274,7 +274,7 @@ export const SysScheduleApiAxiosParamCreator = function (configuration?: Configu
         },
         /**
          * 
-         * @summary 更新日程
+         * @summary Update schedule
          * @param {UpdateScheduleInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -331,7 +331,7 @@ export const SysScheduleApiFp = function(configuration?: Configuration) {
     return {
         /**
          * 
-         * @summary 增加日程
+         * @summary Add schedule
          * @param {AddScheduleInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -345,7 +345,7 @@ export const SysScheduleApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary 删除日程
+         * @summary Delete schedule
          * @param {DeleteScheduleInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -359,7 +359,7 @@ export const SysScheduleApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary 获取日程详情
+         * @summary Get schedule details
          * @param {number} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -373,7 +373,7 @@ export const SysScheduleApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary 获取日程列表
+         * @summary Get schedule list
          * @param {ListScheduleInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -387,7 +387,7 @@ export const SysScheduleApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary 设置日程状态
+         * @summary Set schedule status
          * @param {ScheduleInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -401,7 +401,7 @@ export const SysScheduleApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary 更新日程
+         * @summary Update schedule
          * @param {UpdateScheduleInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -424,7 +424,7 @@ export const SysScheduleApiFactory = function (configuration?: Configuration, ba
     return {
         /**
          * 
-         * @summary 增加日程
+         * @summary Add schedule
          * @param {AddScheduleInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -434,7 +434,7 @@ export const SysScheduleApiFactory = function (configuration?: Configuration, ba
         },
         /**
          * 
-         * @summary 删除日程
+         * @summary Delete schedule
          * @param {DeleteScheduleInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -444,7 +444,7 @@ export const SysScheduleApiFactory = function (configuration?: Configuration, ba
         },
         /**
          * 
-         * @summary 获取日程详情
+         * @summary Get schedule details
          * @param {number} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -454,7 +454,7 @@ export const SysScheduleApiFactory = function (configuration?: Configuration, ba
         },
         /**
          * 
-         * @summary 获取日程列表
+         * @summary Get schedule list
          * @param {ListScheduleInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -464,7 +464,7 @@ export const SysScheduleApiFactory = function (configuration?: Configuration, ba
         },
         /**
          * 
-         * @summary 设置日程状态
+         * @summary Set schedule status
          * @param {ScheduleInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -474,7 +474,7 @@ export const SysScheduleApiFactory = function (configuration?: Configuration, ba
         },
         /**
          * 
-         * @summary 更新日程
+         * @summary Update schedule
          * @param {UpdateScheduleInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -494,7 +494,7 @@ export const SysScheduleApiFactory = function (configuration?: Configuration, ba
 export class SysScheduleApi extends BaseAPI {
     /**
      * 
-     * @summary 增加日程
+     * @summary Add schedule
      * @param {AddScheduleInput} [body] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -505,7 +505,7 @@ export class SysScheduleApi extends BaseAPI {
     }
     /**
      * 
-     * @summary 删除日程
+     * @summary Delete schedule
      * @param {DeleteScheduleInput} [body] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -516,7 +516,7 @@ export class SysScheduleApi extends BaseAPI {
     }
     /**
      * 
-     * @summary 获取日程详情
+     * @summary Get schedule details
      * @param {number} id 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -527,7 +527,7 @@ export class SysScheduleApi extends BaseAPI {
     }
     /**
      * 
-     * @summary 获取日程列表
+     * @summary Get schedule list
      * @param {ListScheduleInput} [body] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -538,7 +538,7 @@ export class SysScheduleApi extends BaseAPI {
     }
     /**
      * 
-     * @summary 设置日程状态
+     * @summary Set schedule status
      * @param {ScheduleInput} [body] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -549,7 +549,7 @@ export class SysScheduleApi extends BaseAPI {
     }
     /**
      * 
-     * @summary 更新日程
+     * @summary Update schedule
      * @param {UpdateScheduleInput} [body] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}

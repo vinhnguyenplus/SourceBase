@@ -1,8 +1,8 @@
-// Admin.NET 项目的版权、商标、专利和其他相关权利均受相应法律法规的保护。使用本项目应遵守相关法律法规和许可证的要求。
+// The copyright, trademark, patent and other related rights of the Admin.NET project are protected by corresponding laws and regulations. Use of this project shall comply with relevant laws, regulations and license requirements.
 //
-// 本项目主要遵循 MIT 许可证和 Apache 许可证（版本 2.0）进行分发和使用。许可证位于源代码树根目录中的 LICENSE-MIT 和 LICENSE-APACHE 文件。
+// This project is distributed and used primarily under the MIT License and the Apache License (version 2.0). The license is located in the LICENSE-MIT and LICENSE-APACHE files in the root of the source tree.
 //
-// 不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！
+// This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project!
 
 using IPTools.Core;
 using Magicodes.ExporterAndImporter.Core.Models;
@@ -13,7 +13,7 @@ using System.Xml.Serialization;
 namespace Admin.NET.Core;
 
 /// <summary>
-/// 通用工具类
+/// General tools
 /// </summary>
 public static class CommonUtil
 {
@@ -22,7 +22,7 @@ public static class CommonUtil
     private static readonly SqlSugarRepository<SysDictData> SysDictDataRep = App.GetRequiredService<SqlSugarRepository<SysDictData>>();
 
     /// <summary>
-    /// 根据字符串获取固定整型哈希值
+    /// Get a fixed integer hash value from a string
     /// </summary>
     /// <param name="str"></param>
     /// <param name="startNumber"></param>
@@ -45,7 +45,7 @@ public static class CommonUtil
     }
 
     /// <summary>
-    /// 生成百分数
+    /// Generate percentage
     /// </summary>
     /// <param name="passCount"></param>
     /// <param name="allCount"></param>
@@ -66,19 +66,19 @@ public static class CommonUtil
     }
 
     /// <summary>
-    /// 获取服务地址
+    /// Get service address
     /// </summary>
     /// <returns></returns>
     public static string GetLocalhost()
     {
         string result = $"{App.HttpContext.Request.Scheme}://{App.HttpContext.Request.Host.Value}";
 
-        // 代理模式：获取真正的本机地址
-        // X-Original-Host=原始请求
-        // X-Forwarded-Server=从哪里转发过来
-        if (App.HttpContext.Request.Headers.ContainsKey("Origin")) // 配置成完整的路径如（结尾不要带"/"）,比如 https://www.abc.com
+        // Proxy mode: get the real local address
+        // X-Original-Host=Original request
+        // X-Forwarded-Server=Forwarded from where
+        if (App.HttpContext.Request.Headers.ContainsKey("Origin")) // Configure it as a complete path (without "/" at the end), such as https://www.abc.com
             result = $"{App.HttpContext.Request.Headers["Origin"]}";
-        else if (App.HttpContext.Request.Headers.ContainsKey("X-Original")) // 配置成完整的路径如（结尾不要带"/"）,比如 https://www.abc.com
+        else if (App.HttpContext.Request.Headers.ContainsKey("X-Original")) // Configure it as a complete path (without "/" at the end), such as https://www.abc.com
             result = $"{App.HttpContext.Request.Headers["X-Original"]}";
         else if (App.HttpContext.Request.Headers.ContainsKey("X-Original-Host"))
             result = $"{App.HttpContext.Request.Scheme}://{App.HttpContext.Request.Headers["X-Original-Host"]}";
@@ -86,7 +86,7 @@ public static class CommonUtil
     }
 
     /// <summary>
-    /// 对象序列化XML
+    /// Object serialization XML
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <param name="obj"></param>
@@ -99,20 +99,20 @@ public static class CommonUtil
         var stream = new MemoryStream();
         var setting = new XmlWriterSettings
         {
-            Encoding = new UTF8Encoding(false), // 不包含BOM
-            Indent = true // 设置格式化缩进
+            Encoding = new UTF8Encoding(false), // Does not include BOM
+            Indent = true // Set formatting indentation
         };
         using (var writer = XmlWriter.Create(stream, setting))
         {
             var ns = new XmlSerializerNamespaces();
-            ns.Add("", ""); // 去除默认命名空间
+            ns.Add("", ""); // Remove default namespace
             xs.Serialize(writer, obj, ns);
         }
         return Encoding.UTF8.GetString(stream.ToArray());
     }
 
     /// <summary>
-    /// 字符串转XML格式
+    /// String to XML format
     /// </summary>
     /// <param name="xmlStr"></param>
     /// <returns></returns>
@@ -129,7 +129,7 @@ public static class CommonUtil
     }
 
     /// <summary>
-    /// 导出模板Excel
+    /// Export template Excel
     /// </summary>
     /// <returns></returns>
     public static async Task<IActionResult> ExportExcelTemplate<T>(string fileName = null) where T : class, new()
@@ -141,7 +141,7 @@ public static class CommonUtil
     }
 
     /// <summary>
-    /// 导出数据excel
+    /// Export data to excel
     /// </summary>
     /// <returns></returns>
     public static async Task<IActionResult> ExportExcelData<T>(ICollection<T> data, string fileName = null) where T : class, new()
@@ -153,7 +153,7 @@ public static class CommonUtil
     }
 
     /// <summary>
-    /// 导出数据excel,包括字典转换
+    /// Export data to excel, including dictionary conversion
     /// </summary>
     /// <returns></returns>
     public static async Task<IActionResult> ExportExcelData<TSource, TTarget>(ISugarQueryable<TSource> query, Func<TSource, TTarget, TTarget> action = null)
@@ -161,7 +161,7 @@ public static class CommonUtil
     {
         var propMappings = GetExportPropertMap<TSource, TTarget>();
         var data = query.ToList();
-        //相同属性复制值，字典值转换
+        //Copy values ​​for the same attribute, convert dictionary values
         var result = new List<TTarget>();
         foreach (var item in data)
         {
@@ -210,7 +210,7 @@ public static class CommonUtil
     }
 
     /// <summary>
-    /// 导入数据Excel
+    /// Import dataExcel
     /// </summary>
     /// <param name="file"></param>
     /// <returns></returns>
@@ -228,14 +228,14 @@ public static class CommonUtil
         {
             int rowNum = drErrorInfo.RowIndex;
             foreach (var item in drErrorInfo.FieldErrors)
-                message += $"\r\n{item.Key}：{item.Value}（文件第{drErrorInfo.RowIndex}行）";
+                message += $"{item.Key}: {item.Value} (Row {drErrorInfo.RowIndex} of the file)";
         }
-        message += "\r\n字段缺失：" + string.Join("，", res.TemplateErrors.Select(m => m.RequireColumnName).ToList());
-        throw Oops.Oh("导入异常:" + message);
+        message += "Field missing:" + string.Join("，", res.TemplateErrors.Select(m => m.RequireColumnName).ToList());
+        throw Oops.Oh("Import Exception:" + message);
     }
 
     /// <summary>
-    /// 导入Excel数据并错误标记
+    /// Importing Excel data and labeling errors
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <param name="file"></param>
@@ -259,18 +259,19 @@ public static class CommonUtil
             message += $"\r\n{res.Exception.Message}";
         foreach (DataRowErrorInfo drErrorInfo in res.RowErrors)
         {
-            message = drErrorInfo.FieldErrors.Aggregate(message, (current, item) => current + $"\r\n{item.Key}：{item.Value}（文件第{drErrorInfo.RowIndex}行）");
+            message = drErrorInfo.FieldErrors.Aggregate(message, (current, item) => current + $"{item.Key}: {item.Value} (Row {drErrorInfo.RowIndex} of the file)");
         }
         if (res.TemplateErrors.Count > 0)
-            message += "\r\n字段缺失：" + string.Join("，", res.TemplateErrors.Select(m => m.RequireColumnName).ToList());
+            message += "Field missing:" + string.Join("，", res.TemplateErrors.Select(m => m.RequireColumnName).ToList());
 
         if (message.Length > 200)
-            message = message.Substring(0, 200) + "...\r\n异常过多，建议下载错误标记文件查看详细错误信息并重新导入。";
-        throw Oops.Oh("导入异常:" + message);
+            message = message.Substring(0, 200) + "...
+There are too many exceptions. It is recommended to download the error log file to view detailed error information and re-import.";
+        throw Oops.Oh("Import Exception:" + message);
     }
 
     /// <summary>
-    /// 导入数据Excel
+    /// Import dataExcel
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <param name="file"></param>
@@ -284,22 +285,22 @@ public static class CommonUtil
         IImporter importer = new ExcelImporter();
         var res = await importer.Import<T>(fileStream);
 
-        // 删除文件
+        // Delete files
         _ = SysFileService.DeleteFile(new BaseIdInput { Id = newFile.Id });
 
         if (res == null)
-            throw Oops.Oh("导入数据为空");
+            throw Oops.Oh("Import data is empty");
         if (res.Exception != null)
-            throw Oops.Oh("导入异常:" + res.Exception);
+            throw Oops.Oh("Import Exception:" + res.Exception);
         if (res.TemplateErrors?.Count > 0)
-            throw Oops.Oh("模板异常:" + res.TemplateErrors.Select(x => $"[{x.RequireColumnName}]{x.Message}").Join("\n"));
+            throw Oops.Oh("Template Exception:" + res.TemplateErrors.Select(x => $"[{x.RequireColumnName}]{x.Message}").Join("\n"));
 
         return res.Data.ToList();
     }
 
-    // 例：List<Dm_ApplyDemo> ls = CommonUtil.ParseList<Dm_ApplyDemoInport, Dm_ApplyDemo>(importResult.Data);
+    // Example: List<Dm_ApplyDemo> ls = CommonUtil.ParseList<Dm_ApplyDemoInport, Dm_ApplyDemo>(importResult.Data);
     /// <summary>
-    /// 对象转换 含字典转换
+    /// Object conversion including dictionary conversion
     /// </summary>
     /// <typeparam name="TSource"></typeparam>
     /// <typeparam name="TTarget"></typeparam>
@@ -309,7 +310,7 @@ public static class CommonUtil
     public static List<TTarget> ParseList<TSource, TTarget>(IEnumerable<TSource> data, Func<TSource, TTarget, TTarget> action = null) where TTarget : new()
     {
         var propMappings = GetImportPropertMap<TSource, TTarget>();
-        // 相同属性复制值，字典值转换
+        // Copy values ​​for the same attribute, convert dictionary values
         var result = new List<TTarget>();
         foreach (var item in data)
         {
@@ -354,14 +355,14 @@ public static class CommonUtil
     }
 
     /// <summary>
-    /// 获取导入属性映射
+    /// Get import attribute mapping
     /// </summary>
     /// <typeparam name="TSource"></typeparam>
     /// <typeparam name="TTarget"></typeparam>
-    /// <returns>整理导入对象的 属性名称， 字典数据，原属性信息，目标属性信息 </returns>
+    /// <returns>Organize the attribute names, dictionary data, original attribute information, and target attribute information of the imported objects </returns>
     private static Dictionary<string, Tuple<Dictionary<string, object>, PropertyInfo, PropertyInfo>> GetImportPropertMap<TSource, TTarget>() where TTarget : new()
     {
-        // 整理导入对象的属性名称，<字典数据，原属性信息，目标属性信息>
+        // Organize the attribute names of imported objects, <dictionary data, original attribute information, target attribute information>
         var propMappings = new Dictionary<string, Tuple<Dictionary<string, object>, PropertyInfo, PropertyInfo>>();
 
         var dictService = App.GetRequiredService<SqlSugarRepository<SysDictData>>();
@@ -396,14 +397,14 @@ public static class CommonUtil
     }
 
     /// <summary>
-    /// 获取导出属性映射
+    /// Get export attribute mapping
     /// </summary>
     /// <typeparam name="TSource"></typeparam>
     /// <typeparam name="TTarget"></typeparam>
-    /// <returns>整理导入对象的 属性名称， 字典数据，原属性信息，目标属性信息 </returns>
+    /// <returns>Organize the attribute names, dictionary data, original attribute information, and target attribute information of the imported objects </returns>
     private static Dictionary<string, Tuple<Dictionary<object, string>, PropertyInfo, PropertyInfo>> GetExportPropertMap<TSource, TTarget>() where TTarget : new()
     {
-        // 整理导入对象的属性名称，<字典数据，原属性信息，目标属性信息>
+        // Organize the attribute names of imported objects, <dictionary data, original attribute information, target attribute information>
         var propMappings = new Dictionary<string, Tuple<Dictionary<object, string>, PropertyInfo, PropertyInfo>>();
 
         var targetProps = typeof(TTarget).GetProperties().ToList();
@@ -437,13 +438,13 @@ public static class CommonUtil
     }
 
     /// <summary>
-    /// 获取属性映射
+    /// Get attribute mapping
     /// </summary>
     /// <typeparam name="TTarget"></typeparam>
-    /// <returns>整理导入对象的 属性名称， 字典数据，原属性信息，目标属性信息 </returns>
+    /// <returns>Organize the attribute names, dictionary data, original attribute information, and target attribute information of the imported objects </returns>
     private static Dictionary<string, Tuple<string, string>> GetExportDictMap<TTarget>() where TTarget : new()
     {
-        // 整理导入对象的属性名称，目标属性名，字典Code
+        // Organize the attribute names, target attribute names, and dictionary codes of imported objects
         var propMappings = new Dictionary<string, Tuple<string, string>>();
         var tTargetProps = typeof(TTarget).GetProperties();
         foreach (var propertyInfo in tTargetProps)
@@ -459,7 +460,7 @@ public static class CommonUtil
     }
 
     /// <summary>
-    /// 解析IP地址
+    /// Resolve IP address
     /// </summary>
     /// <param name="ip"></param>
     /// <returns></returns>
@@ -467,19 +468,19 @@ public static class CommonUtil
     {
         try
         {
-            var ipInfo = IpTool.SearchWithI18N(ip); // 国际化查询，默认中文 中文zh-CN、英文en
+            var ipInfo = IpTool.SearchWithI18N(ip); // International query, default Chinese, Chinese zh-CN, English en
             var addressList = new List<string>() { ipInfo.Country, ipInfo.Province, ipInfo.City, ipInfo.NetworkOperator };
-            return (string.Join(" ", addressList.Where(u => u != "0" && !string.IsNullOrWhiteSpace(u)).ToList()), ipInfo.Longitude, ipInfo.Latitude); // 去掉0及空并用空格连接
+            return (string.Join(" ", addressList.Where(u => u != "0" && !string.IsNullOrWhiteSpace(u)).ToList()), ipInfo.Longitude, ipInfo.Latitude); // Remove zeros and spaces and connect with spaces
         }
         catch
         {
-            // 不做处理
+            // No processing
         }
-        return ("未知", 0, 0);
+        return ("unknown", 0, 0);
     }
 
     /// <summary>
-    /// 获取客户端设备信息（操作系统+浏览器）
+    /// Get client device information (operating system + browser)
     /// </summary>
     /// <param name="userAgent"></param>
     /// <returns></returns>
@@ -491,13 +492,13 @@ public static class CommonUtil
             {
                 var client = Parser.GetDefault().Parse(userAgent);
                 if (client.Device.IsSpider)
-                    return "爬虫";
+                    return "Crawler";
                 return $"{client.OS.Family} {client.OS.Major} {client.OS.Minor}" +
                     $"|{client.UA.Family} {client.UA.Major}.{client.UA.Minor} / {client.Device.Family}";
             }
         }
         catch
         { }
-        return "未知";
+        return "unknown";
     }
 }

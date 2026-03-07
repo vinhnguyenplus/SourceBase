@@ -1,5 +1,5 @@
 <template>
-	<div class="sponsors-container" title="点击前往体验" v-show="state.sponsors.isShow" @click="onSponsorsClick">
+	<div class="sponsors-container" title="Click to experience" v-show="state.sponsors.isShow" @click="onSponsorsClick">
 		<el-carousel height="240px" indicator-position="none" :arrow="setCarouselShow" @change="onCarouselChange">
 			<el-carousel-item v-for="(v, k) in state.sponsors.list" :key="k">
 				<img :src="v.url" class="sponsors-img" />
@@ -7,7 +7,7 @@
 			</el-carousel-item>
 		</el-carousel>
 		<div class="sponsors-close">
-			<SvgIcon name="ele-Close" :size="12" title="关闭赞助商" @click.stop="onCloseSponsors" />
+			<SvgIcon name="ele-Close" :size="12" title="Close sponsor" @click.stop="onCloseSponsors" />
 		</div>
 	</div>
 </template>
@@ -16,13 +16,13 @@
 import { reactive, computed, onMounted } from 'vue';
 import sponsorsOne from '/@/assets/ccflowRightNextAdmin.png';
 
-// 定义变量内容
+// Define variable content
 const state = reactive({
 	sponsors: {
 		list: [
 			{
 				url: sponsorsOne,
-				text: `驰骋BPM系统包含表单引擎+流程引擎+权限控制,方便集成,配置灵活,功能强大,适合中国国情的工作流引擎.演示:http://demo.ccflow.org。右上角点star方可加群: 1060674395`,
+				text: `Chicheng BPM system includes form engine + process engine + permission control, which is easy to integrate, flexible in configuration, powerful and suitable for China's national conditions. Demo: http:// demo.ccflow.org. Click star in the upper right corner to join the group: 1060674395`,
 				link: 'http://www.ccflow.org/',
 			},
 		],
@@ -31,29 +31,29 @@ const state = reactive({
 	},
 });
 
-// 设置轮播图箭头显示
+// Set the carousel arrow display
 const setCarouselShow = computed(() => {
 	return state.sponsors.list.length <= 1 ? 'never' : 'hover';
 });
-// 关闭赞助商
+// Close sponsor
 const onCloseSponsors = () => {
 	state.sponsors.isShow = false;
 };
-// 轮播图改变时
+// When the carousel changes
 const onCarouselChange = (e: number) => {
 	state.sponsors.index = e;
 };
-// 当前项内容点击
+// Click on the current item content
 const onSponsorsClick = () => {
 	window.open(state.sponsors.list[state.sponsors.index].link);
 };
-// 延迟显示，防止影响其它界面加载
+// Delay display to prevent affecting the loading of other interfaces
 const delayShow = () => {
 	setTimeout(() => {
 		state.sponsors.isShow = true;
 	}, 3000);
 };
-// 页面加载时
+// When the page loads
 onMounted(() => {
 	delayShow();
 });

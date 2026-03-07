@@ -1,15 +1,15 @@
-﻿// Admin.NET 项目的版权、商标、专利和其他相关权利均受相应法律法规的保护。使用本项目应遵守相关法律法规和许可证的要求。
+﻿// The copyright, trademark, patent and other related rights of the Admin.NET project are protected by corresponding laws and regulations. Use of this project shall comply with relevant laws, regulations and license requirements.
 //
-// 本项目主要遵循 MIT 许可证和 Apache 许可证（版本 2.0）进行分发和使用。许可证位于源代码树根目录中的 LICENSE-MIT 和 LICENSE-APACHE 文件。
+// This project is distributed and used primarily under the MIT License and the Apache License (version 2.0). The license is located in the LICENSE-MIT and LICENSE-APACHE files in the root of the source tree.
 //
-// 不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！
+// This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project!
 
 using Newtonsoft.Json;
 
 namespace Admin.NET.Core.Service;
 
 /// <summary>
-/// 微信API客户端
+/// WeChat API client
 /// </summary>
 public partial class WechatApiClientFactory : ISingleton
 {
@@ -25,13 +25,13 @@ public partial class WechatApiClientFactory : ISingleton
     }
 
     /// <summary>
-    /// 微信公众号
+    /// WeChat public account
     /// </summary>
     /// <returns></returns>
     public WechatApiClient CreateWechatClient()
     {
         if (string.IsNullOrEmpty(_wechatOptions.WechatAppId) || string.IsNullOrEmpty(_wechatOptions.WechatAppSecret))
-            throw Oops.Oh("微信公众号配置错误");
+            throw Oops.Oh("WeChat Official Account configuration error");
 
         var client = WechatApiClientBuilder.Create(new WechatApiClientOptions()
         {
@@ -40,28 +40,28 @@ public partial class WechatApiClientFactory : ISingleton
             PushToken = _wechatOptions.WechatToken,
             PushEncodingAESKey = _wechatOptions.WechatEncodingAESKey,
         })
-        .UseHttpClient(_httpClientFactory.CreateClient(), disposeClient: false) // 设置 HttpClient 不随客户端一同销毁
+        .UseHttpClient(_httpClientFactory.CreateClient(), disposeClient: false) // Set HttpClient not to be destroyed with the client
         .Build();
 
         client.Configure(config =>
         {
             JsonSerializerSettings jsonSerializerSettings = NewtonsoftJsonSerializer.GetDefaultSerializerSettings();
             jsonSerializerSettings.Formatting = Formatting.Indented;
-            config.JsonSerializer = new NewtonsoftJsonSerializer(jsonSerializerSettings); // 指定 System.Text.Json JSON序列化
-                                                                                          // config.JsonSerializer = new SystemTextJsonSerializer(jsonSerializerOptions); // 指定 Newtonsoft.Json  JSON序列化
+            config.JsonSerializer = new NewtonsoftJsonSerializer(jsonSerializerSettings); // Specify System.Text.Json JSON serialization
+                                                                                          // config.JsonSerializer = new SystemTextJsonSerializer(jsonSerializerOptions); // Specify Newtonsoft.Json JSON serialization
         });
 
         return client;
     }
 
     /// <summary>
-    /// 微信小程序
+    /// WeChat applet
     /// </summary>
     /// <returns></returns>
     public WechatApiClient CreateWxOpenClient()
     {
         if (string.IsNullOrEmpty(_wechatOptions.WxOpenAppId) || string.IsNullOrEmpty(_wechatOptions.WxOpenAppSecret))
-            throw Oops.Oh("微信小程序配置错误");
+            throw Oops.Oh("WeChat applet configuration error");
 
         var client = WechatApiClientBuilder.Create(new WechatApiClientOptions()
         {
@@ -70,22 +70,22 @@ public partial class WechatApiClientFactory : ISingleton
             PushToken = _wechatOptions.WxToken,
             PushEncodingAESKey = _wechatOptions.WxEncodingAESKey,
         })
-        .UseHttpClient(_httpClientFactory.CreateClient(), disposeClient: false) // 设置 HttpClient 不随客户端一同销毁
+        .UseHttpClient(_httpClientFactory.CreateClient(), disposeClient: false) // Set HttpClient not to be destroyed with the client
         .Build();
 
         client.Configure(config =>
         {
             JsonSerializerSettings jsonSerializerSettings = NewtonsoftJsonSerializer.GetDefaultSerializerSettings();
             jsonSerializerSettings.Formatting = Formatting.Indented;
-            config.JsonSerializer = new NewtonsoftJsonSerializer(jsonSerializerSettings); // 指定 System.Text.Json JSON序列化
-                                                                                          // config.JsonSerializer = new SystemTextJsonSerializer(jsonSerializerOptions); // 指定 Newtonsoft.Json  JSON序列化
+            config.JsonSerializer = new NewtonsoftJsonSerializer(jsonSerializerSettings); // Specify System.Text.Json JSON serialization
+                                                                                          // config.JsonSerializer = new SystemTextJsonSerializer(jsonSerializerOptions); // Specify Newtonsoft.Json JSON serialization
         });
 
         return client;
     }
 
     /// <summary>
-    /// 获取微信公众号AccessToken
+    /// Obtain WeChat public account AccessToken
     /// </summary>
     /// <returns></returns>
     public async Task<string> TryGetWechatAccessTokenAsync()
@@ -95,7 +95,7 @@ public partial class WechatApiClientFactory : ISingleton
             var client = CreateWechatClient();
             var reqCgibinToken = new CgibinTokenRequest();
             var resCgibinToken = await client.ExecuteCgibinTokenAsync(reqCgibinToken);
-            if (resCgibinToken.ErrorCode != (int)WechatReturnCodeEnum.请求成功)
+            if (resCgibinToken.ErrorCode != (int)WechatReturnCodeEnum.Requestsuccess)
                 throw Oops.Oh(resCgibinToken.ErrorMessage + " " + resCgibinToken.ErrorCode);
             _sysCacheService.Set($"WxAccessToken_{_wechatOptions.WechatAppId}", resCgibinToken.AccessToken, TimeSpan.FromSeconds(resCgibinToken.ExpiresIn - 60));
         }
@@ -104,7 +104,7 @@ public partial class WechatApiClientFactory : ISingleton
     }
 
     /// <summary>
-    /// 获取微信小程序AccessToken
+    /// Obtain WeChat applet AccessToken
     /// </summary>
     /// <returns></returns>
     public async Task<string> TryGetWxOpenAccessTokenAsync()
@@ -114,7 +114,7 @@ public partial class WechatApiClientFactory : ISingleton
             var client = CreateWxOpenClient();
             var reqCgibinToken = new CgibinTokenRequest();
             var resCgibinToken = await client.ExecuteCgibinTokenAsync(reqCgibinToken);
-            if (resCgibinToken.ErrorCode != (int)WechatReturnCodeEnum.请求成功)
+            if (resCgibinToken.ErrorCode != (int)WechatReturnCodeEnum.Requestsuccess)
                 throw Oops.Oh(resCgibinToken.ErrorMessage + " " + resCgibinToken.ErrorCode);
             _sysCacheService.Set($"WxAccessToken_{_wechatOptions.WxOpenAppId}", resCgibinToken.AccessToken, TimeSpan.FromSeconds(resCgibinToken.ExpiresIn - 60));
         }
@@ -123,7 +123,7 @@ public partial class WechatApiClientFactory : ISingleton
     }
 
     /// <summary>
-    /// 检查微信公众号AccessToken
+    /// Check WeChat public account AccessToken
     /// </summary>
     /// <returns></returns>
     public async Task CheckWechatAccessTokenAsync()
@@ -139,22 +139,22 @@ public partial class WechatApiClientFactory : ISingleton
         var res = await client.ExecuteCgibinOpenApiQuotaGetAsync(req);
 
         var originColor = Console.ForegroundColor;
-        if (res.ErrorCode != (int)WechatReturnCodeEnum.请求成功)
+        if (res.ErrorCode != (int)WechatReturnCodeEnum.Requestsuccess)
         {
             _sysCacheService.Remove($"WxAccessToken_{_wechatOptions.WechatAppId}");
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("【" + DateTime.Now + "】" + _wechatOptions.WxOpenAppId + " 微信公众号令牌 无效");
+            Console.WriteLine("【" + DateTime.Now + "】" + _wechatOptions.WxOpenAppId + " WeChat Official Account token is invalid");
         }
         else
         {
             Console.ForegroundColor = ConsoleColor.Magenta;
-            Console.WriteLine("【" + DateTime.Now + "】" + _wechatOptions.WxOpenAppId + " 微信公众号令牌 有效");
+            Console.WriteLine("【" + DateTime.Now + "】" + _wechatOptions.WxOpenAppId + " WeChat Official Account token is valid");
         }
         Console.ForegroundColor = originColor;
     }
 
     /// <summary>
-    /// 检查微信小程序AccessToken
+    /// Check WeChat applet AccessToken
     /// </summary>
     /// <returns></returns>
     public async Task CheckWxOpenAccessTokenAsync()
@@ -170,22 +170,22 @@ public partial class WechatApiClientFactory : ISingleton
         var res = await client.ExecuteCgibinOpenApiQuotaGetAsync(req);
 
         var originColor = Console.ForegroundColor;
-        if (res.ErrorCode != (int)WechatReturnCodeEnum.请求成功)
+        if (res.ErrorCode != (int)WechatReturnCodeEnum.Requestsuccess)
         {
             _sysCacheService.Remove($"WxAccessToken_{_wechatOptions.WxOpenAppId}");
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("【" + DateTime.Now + "】" + _wechatOptions.WxOpenAppId + " 微信小程序令牌 无效");
+            Console.WriteLine("【" + DateTime.Now + "】" + _wechatOptions.WxOpenAppId + " WeChat Mini ProgramToken Noneeffect");
         }
         else
         {
             Console.ForegroundColor = ConsoleColor.Magenta;
-            Console.WriteLine("【" + DateTime.Now + "】" + _wechatOptions.WxOpenAppId + " 微信小程序令牌 有效");
+            Console.WriteLine("【" + DateTime.Now + "】" + _wechatOptions.WxOpenAppId + " WeChat Mini Program Token Valid");
         }
         Console.ForegroundColor = originColor;
     }
 
     /// <summary>
-    /// 获取微信JS接口临时票据jsapi_ticket
+    /// Get WeChat JS interface temporary ticket jsapi_ticket
     /// </summary>
     /// <returns></returns>
     public async Task<string> TryGetWechatJsApiTicketAsync()

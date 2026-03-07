@@ -4,7 +4,7 @@
 			<template #header>
 				<div style="color: #fff">
 					<el-icon size="16" style="margin-right: 3px; display: inline; vertical-align: middle"> <ele-Edit /> </el-icon>
-					<span> 授权租户菜单 </span>
+					<span> Authorized Tenant Menu </span>
 				</div>
 			</template>
 			<el-form :model="state.ruleForm" v-loading="state.loading">
@@ -33,8 +33,8 @@
 			</el-form>
 			<template #footer>
 				<span class="dialog-footer">
-					<el-button @click="cancel">取 消</el-button>
-					<el-button type="primary" @click="submit">确 定</el-button>
+					<el-button @click="cancel">Cancel</el-button>
+					<el-button type="primary" @click="submit">Confirm</el-button>
 				</span>
 			</template>
 		</el-dialog>
@@ -56,41 +56,41 @@ const state = reactive({
 	ruleForm: {
 		id: 0,
     appId: 0,
-		menuIdList: [] as any, // 菜单集合
+		menuIdList: [] as any, // menu collection
 	},
-	menuData: [] as any, // 菜单数据
+	menuData: [] as any, // Menu data
 });
 
-// 打开弹窗
+// Open pop-up window
 const openDialog = async (row: any) => {
-	treeRef.value?.setCheckedKeys([]); // 先清空已选择节点
+	treeRef.value?.setCheckedKeys([]); // Clear the selected nodes first
 	state.ruleForm = row;
   state.menuData = await getAPI(SysMenuApi).apiSysMenuListGet().then(res => res.data.result);
 	const menuIds = await getAPI(SysTenantApi).apiSysTenantTenantMenuListGet(row.id).then(res => res.data.result);
 	setTimeout(() => {
-		// 延迟传递数据
+		// Delayed delivery of data
 		treeRef.value?.setCheckedKeys(menuIds ?? []);
 	}, 100);
 	state.isShowDialog = true;
 };
 
-// 取消
+// Cancel
 const cancel = () => {
 	state.isShowDialog = false;
 };
 
-// 提交
+// submit
 const submit = async () => {
 	state.ruleForm.menuIdList = treeRef.value?.getCheckedKeys() as Array<number>;
 	await getAPI(SysTenantApi).apiSysTenantGrantMenuPost(state.ruleForm);
 	state.isShowDialog = false;
 };
 
-// 叶子节点同行显示样式
+// Leaf node peer display style
 const treeNodeClass = (node: SysMenu) => {
-	let addClass = true; // 添加叶子节点同行显示样式
+	let addClass = true; // Add leaf node peer display style
 	for (const key in node.children) {
-		// 如果存在子节点非叶子节点，不添加样式
+		// If there are child nodes that are not leaf nodes, no style will be added.
 		if (node.children[key].children?.length ?? 0 > 0) {
 			addClass = false;
 			break;
@@ -99,7 +99,7 @@ const treeNodeClass = (node: SysMenu) => {
 	return addClass ? 'penultimate-node' : '';
 };
 
-// 导出对象
+// Export object
 defineExpose({ openDialog });
 </script>
 

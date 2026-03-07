@@ -1,13 +1,13 @@
-// Admin.NET 项目的版权、商标、专利和其他相关权利均受相应法律法规的保护。使用本项目应遵守相关法律法规和许可证的要求。
+// The copyright, trademark, patent and other related rights of the Admin.NET project are protected by corresponding laws and regulations. Use of this project shall comply with relevant laws, regulations and license requirements.
 //
-// 本项目主要遵循 MIT 许可证和 Apache 许可证（版本 2.0）进行分发和使用。许可证位于源代码树根目录中的 LICENSE-MIT 和 LICENSE-APACHE 文件。
+// This project is distributed and used primarily under the MIT License and the Apache License (version 2.0). The license is located in the LICENSE-MIT and LICENSE-APACHE files in the root of the source tree.
 //
-// 不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！
+// This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project!
 
 namespace Admin.NET.Core.Service;
 
 /// <summary>
-/// 作业持久化（数据库）
+/// Job persistence (database)
 /// </summary>
 public class DbJobPersistence : IJobPersistence
 {
@@ -19,7 +19,7 @@ public class DbJobPersistence : IJobPersistence
     }
 
     /// <summary>
-    /// 作业调度服务启动时
+    /// When the job scheduling service starts
     /// </summary>
     /// <param name="stoppingToken"></param>
     /// <returns></returns>
@@ -30,53 +30,53 @@ public class DbJobPersistence : IJobPersistence
         var db = scope.ServiceProvider.GetRequiredService<ISqlSugarClient>().CopyNew();
         var dynamicJobCompiler = scope.ServiceProvider.GetRequiredService<DynamicJobCompiler>();
 
-        // 获取所有定义的作业
+        // Get all defined jobs
         var allJobs = App.EffectiveTypes.ScanToBuilders().ToList();
-        // 若数据库不存在任何作业，则直接返回
+        // If there is no job in the database, return directly
         if (!await db.Queryable<SysJobDetail>().AnyAsync(u => true, stoppingToken)) return allJobs;
 
-        // 遍历所有定义的作业
+        // Iterate through all defined jobs
         foreach (var schedulerBuilder in allJobs)
         {
-            // 获取作业信息构建器
+            // Get job information builder
             var jobBuilder = schedulerBuilder.GetJobBuilder();
 
-            // 加载数据库数据
+            // Load database data
             var dbDetail = await db.Queryable<SysJobDetail>().FirstAsync(u => u.JobId == jobBuilder.JobId, stoppingToken);
             if (dbDetail == null) continue;
 
-            // 同步数据库数据
+            // Synchronize database data
             jobBuilder.LoadFrom(dbDetail);
 
-            // 获取作业的所有数据库的触发器
+            // Get triggers for all databases of a job
             var dbTriggers = await db.Queryable<SysJobTrigger>().Where(u => u.JobId == jobBuilder.JobId).ToListAsync(stoppingToken);
-            // 遍历所有作业触发器
+            // Iterate through all job triggers
             foreach (var (_, triggerBuilder) in schedulerBuilder.GetEnumerable())
             {
-                // 加载数据库数据
+                // Load database data
                 var dbTrigger = dbTriggers.FirstOrDefault(u => u.JobId == jobBuilder.JobId && u.TriggerId == triggerBuilder.TriggerId);
                 if (dbTrigger == null) continue;
 
-                triggerBuilder.LoadFrom(dbTrigger).Updated(); // 标记更新
+                triggerBuilder.LoadFrom(dbTrigger).Updated(); // Mark updates
             }
-            // 遍历所有非编译时定义的触发器加入到作业中
+            // Traverse all non-compile-time defined triggers and add them to the job
             foreach (var dbTrigger in dbTriggers)
             {
                 if (schedulerBuilder.GetTriggerBuilder(dbTrigger.TriggerId)?.JobId == jobBuilder.JobId) continue;
                 var triggerBuilder = TriggerBuilder.Create(dbTrigger.TriggerId).LoadFrom(dbTrigger);
-                schedulerBuilder.AddTriggerBuilder(triggerBuilder); // 先添加
-                triggerBuilder.Updated(); // 再标记更新
+                schedulerBuilder.AddTriggerBuilder(triggerBuilder); // add first
+                triggerBuilder.Updated(); // mark update again
             }
 
-            // 标记更新
+            // Mark updates
             schedulerBuilder.Updated();
         }
 
-        // 获取数据库所有通过脚本创建的作业
+        // Get all jobs created by scripts in the database
         var allDbScriptJobs = await db.Queryable<SysJobDetail>().Where(u => u.CreateType != JobCreateTypeEnum.BuiltIn).ToListAsync(stoppingToken);
         foreach (var dbDetail in allDbScriptJobs)
         {
-            // 动态创建作业
+            // Create jobs dynamically
             Type jobType = dbDetail.CreateType switch
             {
                 JobCreateTypeEnum.Script => dynamicJobCompiler.BuildJob(dbDetail.ScriptCode),
@@ -84,19 +84,19 @@ public class DbJobPersistence : IJobPersistence
                 _ => throw new NotSupportedException(),
             };
 
-            // 动态构建的 jobType 的程序集名称为随机名称，需重新设置
+            // The assembly name of the dynamically built jobType is a random name and needs to be reset.
             dbDetail.AssemblyName = jobType.Assembly.FullName!.Split(',')[0];
             var jobBuilder = JobBuilder.Create(jobType).LoadFrom(dbDetail);
 
-            // 强行设置为不扫描 IJob 实现类 [Trigger] 特性触发器，否则 SchedulerBuilder.Create 会再次扫描，导致重复添加同名触发器
+            // Forcibly set not to scan the IJob implementation class [Trigger] feature trigger, otherwise SchedulerBuilder.Create will scan again, resulting in repeated addition of triggers with the same name.
             jobBuilder.SetIncludeAnnotations(false);
 
-            // 获取作业的所有数据库的触发器加入到作业中
+            // Get the triggers of all databases of the job and add them to the job
             var dbTriggers = await db.Queryable<SysJobTrigger>().Where(u => u.JobId == jobBuilder.JobId).ToListAsync();
             var triggerBuilders = dbTriggers.Select(u => TriggerBuilder.Create(u.TriggerId).LoadFrom(u).Updated());
             var schedulerBuilder = SchedulerBuilder.Create(jobBuilder, triggerBuilders.ToArray());
 
-            // 标记更新
+            // Mark updates
             schedulerBuilder.Updated();
 
             allJobs.Add(schedulerBuilder);
@@ -106,7 +106,7 @@ public class DbJobPersistence : IJobPersistence
     }
 
     /// <summary>
-    /// 作业计划初始化通知
+    /// Job plan initialization notification
     /// </summary>
     /// <param name="builder"></param>
     /// <param name="stoppingToken"></param>
@@ -117,7 +117,7 @@ public class DbJobPersistence : IJobPersistence
     }
 
     /// <summary>
-    /// 作业计划Scheduler的JobDetail变化时
+    /// When the JobDetail of the job plan Scheduler changes
     /// </summary>
     /// <param name="context"></param>
     /// <returns></returns>
@@ -144,7 +144,7 @@ public class DbJobPersistence : IJobPersistence
     }
 
     /// <summary>
-    /// 作业计划Scheduler的触发器Trigger变化时
+    /// When the trigger Trigger of the job plan Scheduler changes
     /// </summary>
     /// <param name="context"></param>
     /// <returns></returns>
@@ -171,7 +171,7 @@ public class DbJobPersistence : IJobPersistence
     }
 
     /// <summary>
-    /// 作业触发器运行记录
+    /// Job trigger run record
     /// </summary>
     /// <param name="context"></param>
     /// <returns></returns>

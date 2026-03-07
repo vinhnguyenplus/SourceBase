@@ -1,13 +1,13 @@
-// Admin.NET 项目的版权、商标、专利和其他相关权利均受相应法律法规的保护。使用本项目应遵守相关法律法规和许可证的要求。
+// The copyright, trademark, patent and other related rights of the Admin.NET project are protected by corresponding laws and regulations. Use of this project shall comply with relevant laws, regulations and license requirements.
 //
-// 本项目主要遵循 MIT 许可证和 Apache 许可证（版本 2.0）进行分发和使用。许可证位于源代码树根目录中的 LICENSE-MIT 和 LICENSE-APACHE 文件。
+// This project is distributed and used primarily under the MIT License and the Apache License (version 2.0). The license is located in the LICENSE-MIT and LICENSE-APACHE files in the root of the source tree.
 //
-// 不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！
+// This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project!
 
 namespace Admin.NET.Core.Service;
 
 /// <summary>
-/// 多OSS文件提供者
+/// Multiple OSS file providers
 /// </summary>
 public class MultiOSSFileProvider : ICustomFileProvider, ITransient
 {
@@ -25,45 +25,45 @@ public class MultiOSSFileProvider : ICustomFileProvider, ITransient
     }
 
     /// <summary>
-    /// 上传文件
+    /// Upload files
     /// </summary>
-    /// <param name="file">文件</param>
-    /// <param name="sysFile">系统文件信息</param>
-    /// <param name="path">文件存储位置</param>
-    /// <param name="finalName">文件最终名称</param>
+    /// <param name="file">document</param>
+    /// <param name="sysFile">System file information</param>
+    /// <param name="path">File storage location</param>
+    /// <param name="finalName">file final name</param>
     /// <returns></returns>
     public async Task<SysFile> UploadFileAsync(IFormFile file, SysFile sysFile, string path, string finalName)
     {
-        // 获取OSS配置（传入文件信息用于策略选择）
-        var provider = await GetFileProvider(sysFile, file) ?? throw Oops.Oh("未找到可用的存储提供者配置");
+        // Obtain OSS configuration (incoming file information is used for policy selection)
+        var provider = await GetFileProvider(sysFile, file) ?? throw Oops.Oh("No available storage provider configuration found");
 
-        // 获取OSS服务
+        // Obtain OSS services
         var ossService = await _ossServiceManager.GetOSSServiceAsync(provider);
 
-        // 设置文件信息
+        // Set file information
         sysFile.Provider = provider.Provider;
-        sysFile.BucketName = provider.BucketName; // 保存原始存储桶名称
+        sysFile.BucketName = provider.BucketName; // Save original bucket name
 
         var filePath = string.Concat(path, "/", finalName);
 
-        // 上传文件
+        // Upload files
         await ossService.PutObjectAsync(provider.BucketName, filePath, file.OpenReadStream());
 
-        // 生成外链地址
+        // Generate external link address
         sysFile.Url = GenerateFileUrl(provider, provider.BucketName, filePath);
 
         return sysFile;
     }
 
     /// <summary>
-    /// 删除文件
+    /// Delete files
     /// </summary>
-    /// <param name="sysFile">系统文件信息</param>
+    /// <param name="sysFile">System file information</param>
     /// <returns></returns>
     public async Task DeleteFileAsync(SysFile sysFile)
     {
-        // 获取OSS配置（统一方法）
-        var provider = await GetFileProvider(sysFile) ?? throw Oops.Oh($"未找到存储提供者配置: {sysFile.Provider}-{sysFile.BucketName}");
+        // Obtain OSS configuration (unified method)
+        var provider = await GetFileProvider(sysFile) ?? throw Oops.Oh($"Storage provider configuration not found: {sysFile.Provider}-{sysFile.BucketName}");
         var ossService = await _ossServiceManager.GetOSSServiceAsync(provider);
         var filePath = string.Concat(sysFile.FilePath, "/", $"{sysFile.Id}{sysFile.Suffix}");
 
@@ -71,15 +71,15 @@ public class MultiOSSFileProvider : ICustomFileProvider, ITransient
     }
 
     /// <summary>
-    /// 获取文件流
+    /// Get file stream
     /// </summary>
-    /// <param name="sysFile">系统文件信息</param>
-    /// <param name="fileName">文件名</param>
+    /// <param name="sysFile">System file information</param>
+    /// <param name="fileName">file name</param>
     /// <returns></returns>
     public async Task<FileStreamResult> GetFileStreamResultAsync(SysFile sysFile, string fileName)
     {
-        // 获取OSS配置（统一方法）
-        var provider = await GetFileProvider(sysFile) ?? throw Oops.Oh($"未找到存储提供者配置: {sysFile.Provider}-{sysFile.BucketName}");
+        // Obtain OSS configuration (unified method)
+        var provider = await GetFileProvider(sysFile) ?? throw Oops.Oh($"Storage provider configuration not found: {sysFile.Provider}-{sysFile.BucketName}");
         var ossService = await _ossServiceManager.GetOSSServiceAsync(provider);
         var filePath = Path.Combine(sysFile.FilePath ?? "", sysFile.Id + sysFile.Suffix);
 
@@ -90,9 +90,9 @@ public class MultiOSSFileProvider : ICustomFileProvider, ITransient
     }
 
     /// <summary>
-    /// 下载文件Base64格式
+    /// Download file in Base64 format
     /// </summary>
-    /// <param name="sysFile">系统文件信息</param>
+    /// <param name="sysFile">System file information</param>
     /// <returns></returns>
     public async Task<string> DownloadFileBase64Async(SysFile sysFile)
     {
@@ -103,31 +103,31 @@ public class MultiOSSFileProvider : ICustomFileProvider, ITransient
             byte[] fileBytes = await response.Content.ReadAsByteArrayAsync();
             return Convert.ToBase64String(fileBytes);
         }
-        throw Oops.Oh($"下载文件失败，状态码: {response.StatusCode}");
+        throw Oops.Oh($"Failed to download file, status code: {response.StatusCode}");
     }
 
     /// <summary>
-    /// 获取文件提供者配置（统一方法，支持上传、删除、下载场景）
+    /// Obtain file provider configuration (unified method, supports upload, delete, download scenarios)
     /// </summary>
-    /// <param name="sysFile">系统文件信息</param>
-    /// <param name="file">上传的文件（可选，仅上传时传入）</param>
+    /// <param name="sysFile">System file information</param>
+    /// <param name="file">Uploaded file (optional, only passed in when uploading)</param>
     /// <returns></returns>
     private async Task<SysFileProvider?> GetFileProvider(SysFile sysFile, IFormFile? file = null)
     {
-        // 1. 如果已指定存储桶，直接使用
+        // 1. If the bucket has been specified, use it directly
         if (!string.IsNullOrEmpty(sysFile.BucketName))
         {
             var provider = await _fileProviderService.GetFileProviderByBucket(sysFile.Provider, sysFile.BucketName);
             if (provider != null) return provider;
 
-            // 如果数据库中找不到，尝试配置文件兜底
+            // If it is not found in the database, try configuring the file.
             if (_ossProviderOptions.Enabled && _ossProviderOptions.Bucket == sysFile.BucketName)
             {
                 return await CreateProviderFromConfiguration();
             }
         }
 
-        // 2. 如果有上传文件信息，使用策略选择（仅上传场景）
+        // 2. If there is upload file information, use policy selection (only upload scenarios)
         if (file != null)
         {
             var uploadInput = new UploadFileInput
@@ -140,26 +140,26 @@ public class MultiOSSFileProvider : ICustomFileProvider, ITransient
             return await SelectProviderAsync(file, uploadInput);
         }
 
-        // 3. 最后兜底：使用默认存储提供者
+        // 3. The last resort: Use the default storage provider
         return await _fileProviderService.GetDefaultProvider();
     }
 
     /// <summary>
-    /// 选择合适的OSS存储提供者（内联版本）
+    /// Choosing the right OSS storage provider (inline version)
     /// </summary>
-    /// <param name="file">上传的文件</param>
-    /// <param name="input">上传输入参数</param>
+    /// <param name="file">Uploaded files</param>
+    /// <param name="input">Upload input parameters</param>
     /// <returns></returns>
     private async Task<SysFileProvider?> SelectProviderAsync(IFormFile file, UploadFileInput input)
     {
-        // 1. 优先使用指定的提供者ID
+        // 1. Prioritize the use of specified provider IDs
         if (input.ProviderId.HasValue)
         {
             var provider = await _fileProviderService.GetFileProviderById(input.ProviderId.Value);
             if (provider != null) return provider;
         }
 
-        // 2. 其次使用指定的存储桶名称
+        // 2. Secondly use the specified bucket name
         if (!string.IsNullOrEmpty(input.BucketName))
         {
             var providers = await _fileProviderService.GetCachedFileProviders();
@@ -167,20 +167,20 @@ public class MultiOSSFileProvider : ICustomFileProvider, ITransient
             if (provider != null) return provider;
         }
 
-        // 3. 使用默认提供者
+        // 3. Use the default provider
         var defaultProvider = await _fileProviderService.GetDefaultProvider();
         if (defaultProvider != null) return defaultProvider;
 
-        // 4. 兜底：如果数据库中没有配置，尝试从配置文件创建默认提供者
+        // 4. Bottom line: If there is no configuration in the database, try to create a default provider from the configuration file
         return await CreateProviderFromConfiguration();
     }
 
     /// <summary>
-    /// 生成文件URL（内联版本）
+    /// Generate file URL (inline version)
     /// </summary>
-    /// <param name="provider">存储提供者配置</param>
-    /// <param name="bucketName">存储桶名称</param>
-    /// <param name="filePath">文件路径</param>
+    /// <param name="provider">Storage provider configuration</param>
+    /// <param name="bucketName">bucket name</param>
+    /// <param name="filePath">file path</param>
     /// <returns></returns>
     private static string GenerateFileUrl(SysFileProvider provider, string bucketName, string filePath)
     {
@@ -190,35 +190,35 @@ public class MultiOSSFileProvider : ICustomFileProvider, ITransient
 
         var protocol = provider.IsEnableHttps == true ? "https" : "http";
 
-        // 如果有自定义域名，直接使用
+        // If you have a custom domain name, use it directly
         if (!string.IsNullOrWhiteSpace(provider.SinceDomain))
         {
             return $"{provider.SinceDomain.TrimEnd('/')}/{filePath.TrimStart('/')}";
         }
 
-        // 根据不同提供者生成URL
+        // Generate URLs based on different providers
         return provider.Provider.ToUpper() switch
         {
             "ALIYUN" => $"{protocol}://{bucketName}.{provider.Endpoint}/{filePath.TrimStart('/')}",
             "QCLOUD" => $"{protocol}://{bucketName}-{provider.Endpoint}.cos.{provider.Region}.myqcloud.com/{filePath.TrimStart('/')}",
             "MINIO" => $"{protocol}://{provider.Endpoint}/{bucketName}/{filePath.TrimStart('/')}",
-            _ => throw Oops.Oh($"不支持的OSS提供者: {provider.Provider}")
+            _ => throw Oops.Oh($"Unsupported OSS provider: {provider.Provider}")
         };
     }
 
     /// <summary>
-    /// 从配置文件创建默认提供者（兜底机制）
+    /// Create default provider from configuration file (cover-up mechanism)
     /// </summary>
     /// <returns></returns>
     private Task<SysFileProvider?> CreateProviderFromConfiguration()
     {
         try
         {
-            // 检查是否启用了OSS配置
+            // Check if OSS configuration is enabled
             if (!_ossProviderOptions.Enabled && !App.Configuration["MultiOSS:Enabled"].ToBoolean())
                 return Task.FromResult<SysFileProvider?>(null);
 
-            // 验证必要配置
+            // Verify necessary configuration
             if (string.IsNullOrWhiteSpace(_ossProviderOptions.AccessKey) ||
                 string.IsNullOrWhiteSpace(_ossProviderOptions.SecretKey) ||
                 string.IsNullOrWhiteSpace(_ossProviderOptions.Bucket))
@@ -226,10 +226,10 @@ public class MultiOSSFileProvider : ICustomFileProvider, ITransient
                 return Task.FromResult<SysFileProvider?>(null);
             }
 
-            // 使用现有的OSSProviderOptions创建临时提供者配置（不保存到数据库）
+            // Create temporary provider configuration using existing OSSProviderOptions (not saved to database)
             var provider = new SysFileProvider
             {
-                Id = 0, // 临时ID
+                Id = 0, // Temporary ID
                 Provider = Enum.GetName(_ossProviderOptions.Provider),
                 BucketName = _ossProviderOptions.Bucket,
                 AccessKey = _ossProviderOptions.AccessKey,
@@ -248,7 +248,7 @@ public class MultiOSSFileProvider : ICustomFileProvider, ITransient
         }
         catch (Exception)
         {
-            // 配置读取失败，返回null
+            // Configuration reading failed and null was returned.
             return Task.FromResult<SysFileProvider?>(null);
         }
     }

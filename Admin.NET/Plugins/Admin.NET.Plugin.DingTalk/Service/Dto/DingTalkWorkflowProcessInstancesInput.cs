@@ -1,98 +1,98 @@
-﻿// Admin.NET 项目的版权、商标、专利和其他相关权利均受相应法律法规的保护。使用本项目应遵守相关法律法规和许可证的要求。
+﻿// The copyright, trademark, patent and other related rights of the Admin.NET project are protected by corresponding laws and regulations. Use of this project shall comply with relevant laws, regulations and license requirements.
 //
-// 本项目主要遵循 MIT 许可证和 Apache 许可证（版本 2.0）进行分发和使用。许可证位于源代码树根目录中的 LICENSE-MIT 和 LICENSE-APACHE 文件。
+// This project is distributed and used primarily under the MIT License and the Apache License (version 2.0). The license is located in the LICENSE-MIT and LICENSE-APACHE files in the root of the source tree.
 //
-// 不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！
+// This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project!
 
 namespace Admin.NET.Plugin.DingTalk;
 
 public class DingTalkWorkflowProcessInstancesInput
 {
     /// <summary>
-    /// 发起人用户ID
+    /// Initiator user ID
     /// </summary>
     public string OriginatorUserId { get; set; }
 
     /// <summary>
-    /// 审批模板的流程编码
+    /// Process coding of approval template
     /// </summary>
     public string ProcessCode { get; set; }
 
     /// <summary>
-    /// 部门ID
+    /// Department ID
     /// </summary>
     public long DeptId { get; set; }
 
     /// <summary>
-    /// 微应用AgentId
+    /// MicroapplicationAgentId
     /// </summary>
     public long MicroappAgentId { get; set; }
 
     /// <summary>
-    /// 审批人列表（支持多节点）
+    /// Approver list (supports multiple nodes)
     /// </summary>
     public List<Approver> Approvers { get; set; }
 
     /// <summary>
-    /// 抄送人列表
+    /// CC list
     /// </summary>
     public List<string> CcList { get; set; }
 
     /// <summary>
-    /// 抄送位置：START（开始），MIDDLE（中间），END（结束）
+    /// CC position: START (beginning), MIDDLE (middle), END (end)
     /// </summary>
     public string CcPosition { get; set; }
 
     /// <summary>
-    /// 目标动态选择办理人（用于会签或或签等场景）
+    /// The target dynamically selects the handler (used in scenarios such as counter-signing or signing)
     /// </summary>
     public List<TargetSelectActioner> TargetSelectActioners { get; set; }
 
     /// <summary>
-    /// 表单组件值列表
+    /// form component value list
     /// </summary>
     public List<FormComponentValue> FormComponentValues { get; set; }
 
     /// <summary>
-    /// 请求ID，用于幂等控制
+    /// Request ID, used for idempotent control
     /// </summary>
     public string RequestId { get; set; }
 }
 
 /// <summary>
-/// 审批人信息
+/// Approver information
 /// </summary>
 public class Approver
 {
     /// <summary>
-    /// 节点类型：AGREE（同意），REFUSE（拒绝）等
+    /// Node type: AGREE (agree), REFUSE (reject), etc.
     /// </summary>
     public string ActionType { get; set; }
 
     /// <summary>
-    /// 该节点的审批人用户ID列表
+    /// List of approver user IDs for this node
     /// </summary>
     public List<string> UserIds { get; set; }
 }
 
 /// <summary>
-/// 动态选择办理人
+/// Dynamic selection of handlers
 /// </summary>
 public class TargetSelectActioner
 {
     /// <summary>
-    /// 办理人Key，对应表单中的人员选择控件的key
+    /// Key of the person in charge, corresponding to the key of the person selection control in the form
     /// </summary>
     public string ActionerKey { get; set; }
 
     /// <summary>
-    /// 该控件选中的用户ID列表
+    /// List of user IDs selected by this control
     /// </summary>
     public List<string> ActionerUserIds { get; set; }
 }
 
 /// <summary>
-/// 表单组件值
+/// form component value
 /// </summary>
 public class FormComponentValue
 {

@@ -114,11 +114,11 @@ export default {
     },
     successTip: {
       type: String,
-      default: "验证通过，超过80%用户"
+      default: "Verification passed, over 80% of users"
     },
     failTip: {
       type: String,
-      default: "验证未通过，拖动滑块将悬浮图像正确合并"
+      default: "Verification failed, drag the slider to merge the floating images correctly"
     },
     diffWidth: {
       type: Number,
@@ -210,7 +210,7 @@ export default {
       ctx.globalCompositeOperation = "destination-over";
     },
     checkimgLoaded: function () {
-      // 生成图片缺失位置
+      // Generate the missing location of the picture
       var barWidth = this.barWidth;
       var imgHeight = this.$refs.checkImg.height;
       var imgWidth = this.$refs.checkImg.width;
@@ -234,7 +234,7 @@ export default {
       moveCanvas.setAttribute("width", imgWidth);
       moveCanvas.setAttribute("height", imgHeight);
       this.$refs.movecanvas.style.display = "block";
-      const L = barWidth + this.barRadius * 2 + 3; //实际宽度
+      const L = barWidth + this.barRadius * 2 + 3; // actual width
       var moveCtx = this.$refs.movecanvas.getContext("2d");
       moveCtx.clearRect(0, 0, imgWidth, imgHeight);
       this.draw(moveCtx, x, y, "clip");

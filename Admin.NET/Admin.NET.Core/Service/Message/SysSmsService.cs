@@ -1,8 +1,8 @@
-// Admin.NET 项目的版权、商标、专利和其他相关权利均受相应法律法规的保护。使用本项目应遵守相关法律法规和许可证的要求。
+// The copyright, trademark, patent and other related rights of the Admin.NET project are protected by corresponding laws and regulations. Use of this project shall comply with relevant laws, regulations and license requirements.
 //
-// 本项目主要遵循 MIT 许可证和 Apache 许可证（版本 2.0）进行分发和使用。许可证位于源代码树根目录中的 LICENSE-MIT 和 LICENSE-APACHE 文件。
+// This project is distributed and used primarily under the MIT License and the Apache License (version 2.0). The license is located in the LICENSE-MIT and LICENSE-APACHE files in the root of the source tree.
 //
-// 不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！
+// This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project!
 
 using AlibabaCloud.SDK.Dysmsapi20170525.Models;
 using TencentCloud.Common;
@@ -12,7 +12,7 @@ using TencentCloud.Sms.V20190711;
 namespace Admin.NET.Core.Service;
 
 /// <summary>
-/// 系统短信服务 🧩
+/// System SMS service 🧩
 /// </summary>
 [AllowAnonymous]
 [ApiDescriptionSettings(Order = 150)]
@@ -29,13 +29,13 @@ public class SysSmsService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 发送短信 📨
+    /// Send SMS 📨
     /// </summary>
     /// <param name="phoneNumber"></param>
-    /// <param name="templateId">短信模板id</param>
+    /// <param name="templateId">SMS template id</param>
     /// <returns></returns>
     [AllowAnonymous]
-    [DisplayName("发送短信")]
+    [DisplayName("Send a text message")]
     public async Task SendSms([Required] string phoneNumber, string templateId = "0")
     {
         if (_smsOptions.Custom != null && _smsOptions.Custom.Enabled && !string.IsNullOrWhiteSpace(_smsOptions.Custom.ApiUrl))
@@ -53,36 +53,36 @@ public class SysSmsService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 校验短信验证码
+    /// Verify SMS verification code
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
     [AllowAnonymous]
-    [DisplayName("校验短信验证码")]
+    [DisplayName("Verify SMS verification code")]
     public bool VerifyCode(SmsVerifyCodeInput input)
     {
         var verifyCode = _sysCacheService.Get<string>($"{CacheConst.KeyPhoneVerCode}{input.Phone}");
 
-        if (string.IsNullOrWhiteSpace(verifyCode)) throw Oops.Oh("验证码不存在或已失效，请重新获取！");
+        if (string.IsNullOrWhiteSpace(verifyCode)) throw Oops.Oh("The verification code does not exist or has expired, please retrieve it again!");
 
-        if (verifyCode != input.Code) throw Oops.Oh("验证码错误！");
+        if (verifyCode != input.Code) throw Oops.Oh("Verification code error!");
 
         return true;
     }
 
     /// <summary>
-    /// 阿里云发送短信 📨
+    /// Alibaba Cloud sends SMS 📨
     /// </summary>
-    /// <param name="phoneNumber">手机号</param>
-    /// <param name="templateId">短信模板id</param>
+    /// <param name="phoneNumber">Phone number</param>
+    /// <param name="templateId">SMS template id</param>
     /// <returns></returns>
     [AllowAnonymous]
-    [DisplayName("阿里云发送短信")]
+    [DisplayName("Alibaba Cloud sends SMS")]
     public async Task AliyunSendSms([Required] string phoneNumber, string templateId = "0")
     {
-        if (!phoneNumber.TryValidate(ValidationTypes.PhoneNumber).IsValid) throw Oops.Oh("请正确填写手机号码");
+        if (!phoneNumber.TryValidate(ValidationTypes.PhoneNumber).IsValid) throw Oops.Oh("Please fill in your mobile phone number correctly");
 
-        // 生成随机验证码
+        // Generate random verification code
         var random = new Random();
         var verifyCode = random.Next(100000, 999999);
 
@@ -95,10 +95,10 @@ public class SysSmsService : IDynamicApiController, ITransient
         var template = _smsOptions.Aliyun.GetTemplate(templateId);
         var sendSmsRequest = new SendSmsRequest
         {
-            PhoneNumbers = phoneNumber, // 待发送手机号, 多个以逗号分隔
-            SignName = template.SignName, // 短信签名
-            TemplateCode = template.TemplateCode, // 短信模板
-            TemplateParam = templateParam.ToJson(), // 模板中的变量替换JSON串
+            PhoneNumbers = phoneNumber, // Mobile phone number to be sent, multiple separated by commas
+            SignName = template.SignName, // SMS signature
+            TemplateCode = template.TemplateCode, // SMS template
+            TemplateParam = templateParam.ToJson(), // Variables in templates replace JSON strings
             OutId = YitIdHelper.NextId().ToString()
         };
         var sendSmsResponse = await client.SendSmsAsync(sendSmsRequest);
@@ -109,35 +109,35 @@ public class SysSmsService : IDynamicApiController, ITransient
         }
         else
         {
-            throw Oops.Oh($"短信发送失败：{sendSmsResponse.Body.Code}-{sendSmsResponse.Body.Message}");
+            throw Oops.Oh($"Short messageSendFailure：{sendSmsResponse.Body.Code}-{sendSmsResponse.Body.Message}");
         }
 
         await Task.CompletedTask;
     }
 
     /// <summary>
-    /// 发送短信模板
+    /// Send SMS template
     /// </summary>
-    /// <param name="phoneNumber">手机号</param>
-    /// <param name="templateParam">短信内容</param>
-    /// <param name="templateId">短信模板id</param>
+    /// <param name="phoneNumber">Phone number</param>
+    /// <param name="templateParam">SMS content</param>
+    /// <param name="templateId">SMS template id</param>
     /// <returns></returns>
     [AllowAnonymous]
-    [DisplayName("发送短信模板")]
+    [DisplayName("Send SMS template")]
     public async Task AliyunSendSmsTemplate([Required] string phoneNumber, [Required] dynamic templateParam, string templateId)
     {
-        if (!phoneNumber.TryValidate(ValidationTypes.PhoneNumber).IsValid) throw Oops.Oh("请正确填写手机号码");
+        if (!phoneNumber.TryValidate(ValidationTypes.PhoneNumber).IsValid) throw Oops.Oh("Please fill in your mobile phone number correctly");
 
-        if (string.IsNullOrWhiteSpace(templateParam.ToString())) throw Oops.Oh("短信内容不能为空");
+        if (string.IsNullOrWhiteSpace(templateParam.ToString())) throw Oops.Oh("SMS content cannot be empty");
 
         var client = CreateAliyunClient();
         var template = _smsOptions.Aliyun.GetTemplate(templateId);
         var sendSmsRequest = new SendSmsRequest
         {
-            PhoneNumbers = phoneNumber, // 待发送手机号, 多个以逗号分隔
-            SignName = template.SignName, // 短信签名
-            TemplateCode = template.TemplateCode, // 短信模板
-            TemplateParam = templateParam.ToString(), // 模板中的变量替换JSON串
+            PhoneNumbers = phoneNumber, // Mobile phone number to be sent, multiple separated by commas
+            SignName = template.SignName, // SMS signature
+            TemplateCode = template.TemplateCode, // SMS template
+            TemplateParam = templateParam.ToString(), // Variables in templates replace JSON strings
             OutId = YitIdHelper.NextId().ToString()
         };
         var sendSmsResponse = await client.SendSmsAsync(sendSmsRequest);
@@ -146,32 +146,32 @@ public class SysSmsService : IDynamicApiController, ITransient
         }
         else
         {
-            throw Oops.Oh($"短信发送失败：{sendSmsResponse.Body.Code}-{sendSmsResponse.Body.Message}");
+            throw Oops.Oh($"Short messageSendFailure：{sendSmsResponse.Body.Code}-{sendSmsResponse.Body.Message}");
         }
 
         await Task.CompletedTask;
     }
 
     /// <summary>
-    /// 腾讯云发送短信 📨
+    /// Send SMS via Tencent Cloud 📨
     /// </summary>
     /// <param name="phoneNumber"></param>
-    /// <param name="templateId">短信模板id</param>
+    /// <param name="templateId">SMS template id</param>
     /// <returns></returns>
     [AllowAnonymous]
-    [DisplayName("腾讯云发送短信")]
+    [DisplayName("Tencent Cloud sends SMS")]
     public async Task TencentSendSms([Required] string phoneNumber, string templateId = "0")
     {
-        if (!phoneNumber.TryValidate(ValidationTypes.PhoneNumber).IsValid) throw Oops.Oh("请正确填写手机号码");
+        if (!phoneNumber.TryValidate(ValidationTypes.PhoneNumber).IsValid) throw Oops.Oh("Please fill in your mobile phone number correctly");
 
-        // 生成随机验证码
+        // Generate random verification code
         var random = new Random();
         var verifyCode = random.Next(100000, 999999);
 
-        // 实例化要请求产品的client对象，clientProfile是可选的
+        // Instantiate the client object to request the product, clientProfile is optional
         var client = new SmsClient(CreateTencentClient(), "ap-guangzhou", new ClientProfile() { HttpProfile = new HttpProfile() { Endpoint = ("sms.tencentcloudapi.com") } });
         var template = _smsOptions.Tencentyun.GetTemplate(templateId);
-        // 实例化一个请求对象,每个接口都会对应一个request对象
+        // Instantiate a request object. Each interface will correspond to a request object.
         var req = new TencentCloud.Sms.V20190711.Models.SendSmsRequest
         {
             PhoneNumberSet = new string[] { "+86" + phoneNumber.Trim(',') },
@@ -181,7 +181,7 @@ public class SysSmsService : IDynamicApiController, ITransient
             TemplateParamSet = new string[] { verifyCode.ToString() }
         };
 
-        // 返回的resp是一个SendSmsResponse的实例，与请求对象对应
+        // The returned resp is an instance of SendSmsResponse, corresponding to the request object
         TencentCloud.Sms.V20190711.Models.SendSmsResponse resp = client.SendSmsSync(req);
 
         if (resp.SendStatusSet[0].Code == "Ok" && resp.SendStatusSet[0].Message == "send success")
@@ -191,14 +191,14 @@ public class SysSmsService : IDynamicApiController, ITransient
         }
         else
         {
-            throw Oops.Oh($"短信发送失败：{resp.SendStatusSet[0].Code}-{resp.SendStatusSet[0].Message}");
+            throw Oops.Oh($"SMS sending failed: {resp.SendStatusSet[0].Code}-{resp.SendStatusSet[0].Message}");
         }
 
         await Task.CompletedTask;
     }
 
     /// <summary>
-    /// 阿里云短信配置
+    /// Alibaba Cloud SMS configuration
     /// </summary>
     /// <returns></returns>
     private AlibabaCloud.SDK.Dysmsapi20170525.Client CreateAliyunClient()
@@ -213,7 +213,7 @@ public class SysSmsService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 腾讯云短信配置
+    /// Tencent Cloud SMS configuration
     /// </summary>
     /// <returns></returns>
     private Credential CreateTencentClient()
@@ -227,30 +227,30 @@ public class SysSmsService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 自定义短信接口发送短信 📨
+    /// Customized SMS interface to send SMS 📨
     /// </summary>
-    /// <param name="phoneNumber">手机号</param>
-    /// <param name="templateId">短信模板id</param>
+    /// <param name="phoneNumber">Phone number</param>
+    /// <param name="templateId">SMS template id</param>
     /// <returns></returns>
     [AllowAnonymous]
-    [DisplayName("自定义短信接口发送短信")]
+    [DisplayName("Send SMS via custom SMS interface")]
     public async Task CustomSendSms([DataValidation(ValidationTypes.PhoneNumber)] string phoneNumber, string templateId = "0")
     {
         if (_smsOptions.Custom == null || !_smsOptions.Custom.Enabled)
-            throw Oops.Oh("自定义短信接口未启用");
+            throw Oops.Oh("Custom SMS interface is not enabled");
 
         if (string.IsNullOrWhiteSpace(_smsOptions.Custom.ApiUrl))
-            throw Oops.Oh("自定义短信接口地址未配置");
+            throw Oops.Oh("Custom SMS interface address is not configured");
 
-        // 生成随机验证码
+        // Generate random verification code
         var verifyCode = Random.Shared.Next(100000, 999999);
 
-        // 获取模板
+        // Get template
         var template = _smsOptions.Custom.GetTemplate(templateId);
         if (template == null)
-            throw Oops.Oh($"短信模板[{templateId}]不存在");
+            throw Oops.Oh($"SMS template [{templateId}] does not exist");
 
-        // 替换模板内容中的占位符
+        // Replace placeholders in template content
         var content = template.Content.Replace("{code}", verifyCode.ToString());
 
         try
@@ -260,7 +260,7 @@ public class SysSmsService : IDynamicApiController, ITransient
 
             HttpResponseMessage response;
 
-            //替换URL占位符
+            //Replace URL placeholder
             var url = _smsOptions.Custom.ApiUrl
                 .Replace("{templateId}", templateId)
                 .Replace("{mobile}", phoneNumber)
@@ -269,7 +269,7 @@ public class SysSmsService : IDynamicApiController, ITransient
 
             if (_smsOptions.Custom.Method.ToUpper() == "POST")
             {
-                // 替换占位符
+                // replace placeholder
                 var postData = _smsOptions.Custom.PostData?
                     .Replace("{templateId}", templateId)
                     .Replace("{mobile}", phoneNumber)
@@ -280,29 +280,29 @@ public class SysSmsService : IDynamicApiController, ITransient
             }
             else
             {
-                // GET 请求
+                // GET request
                 response = await httpClient.GetAsync(url);
             }
 
             var responseContent = await response.Content.ReadAsStringAsync();
 
-            // 判断是否发送成功
+            // Determine whether sending is successful
             if (response.IsSuccessStatusCode && responseContent.Contains(_smsOptions.Custom.SuccessFlag))
             {
                 if (_smsOptions.Custom.ApiUrl.Contains("{code}") || template.Content.Contains("{code}") || (_smsOptions.Custom.PostData?.Contains("{code}") == true))
                 {
-                    // 如果模板含有验证码，则添加到缓存
+                    // If the template contains a verification code, add it to the cache
                     _sysCacheService.Set($"{CacheConst.KeyPhoneVerCode}{phoneNumber}", verifyCode, TimeSpan.FromSeconds(_smsOptions.VerifyCodeExpireSeconds));
                 }
             }
             else
             {
-                throw Oops.Oh($"短信发送失败：{responseContent}");
+                throw Oops.Oh($"SMS sending failed: {responseContent}");
             }
         }
         catch (Exception ex)
         {
-            throw Oops.Oh($"短信发送异常：{ex.Message}");
+            throw Oops.Oh($"SMS sending exception: {ex.Message}");
         }
     }
 }

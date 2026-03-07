@@ -10,35 +10,35 @@
 			<el-form :model="state.ruleForm" ref="ruleFormRef" label-width="auto">
 				<el-row :gutter="35">
 					<el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="mb20">
-						<el-form-item label="角色名称" prop="name" :rules="[{ required: true, message: '角色名称不能为空', trigger: 'blur' }]">
-							<el-input v-model="state.ruleForm.name" placeholder="角色名称" clearable />
+						<el-form-item label="Character namecall" prop="name" :rules="[{ required: true, message: 'The role name cannot be empty', trigger: 'blur' }]">
+							<el-input v-model="state.ruleForm.name" placeholder="Character namecall" clearable />
 						</el-form-item>
 					</el-col>
 					<el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="mb20">
-						<el-form-item label="角色编码" prop="code" :rules="[{ required: true, message: '角色编码不能为空', trigger: 'blur' }]">
-							<el-input v-model="state.ruleForm.code" placeholder="角色编码" clearable :disabled="state.ruleForm.code == 'sys_admin' && state.ruleForm.id != undefined" />
+						<el-form-item label="Character Encoding" prop="code" :rules="[{ required: true, message: 'Role code cannot be empty', trigger: 'blur' }]">
+							<el-input v-model="state.ruleForm.code" placeholder="Character Encoding" clearable :disabled="state.ruleForm.code == 'sys_admin' && state.ruleForm.id != undefined" />
 						</el-form-item>
 					</el-col>
 					<el-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12" class="mb20">
-						<el-form-item label="排序">
-							<el-input-number v-model="state.ruleForm.orderNo" placeholder="排序" class="w100" />
+						<el-form-item label="Sort">
+							<el-input-number v-model="state.ruleForm.orderNo" placeholder="Sort" class="w100" />
 						</el-form-item>
 					</el-col>
 					<el-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12" class="mb20">
-						<el-form-item label="状态">
+						<el-form-item label="state">
 							<el-radio-group v-model="state.ruleForm.status">
-								<el-radio :value="1">启用</el-radio>
-								<el-radio :value="2">禁用</el-radio>
+								<el-radio :value="1">enable</el-radio>
+								<el-radio :value="2">Disable</el-radio>
 							</el-radio-group>
 						</el-form-item>
 					</el-col>
 					<el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="mb20">
-						<el-form-item label="备注">
-							<el-input v-model="state.ruleForm.remark" placeholder="请输入备注内容" clearable type="textarea" />
+						<el-form-item label="Remarks">
+							<el-input v-model="state.ruleForm.remark" placeholder="Please enter the remark content" clearable type="textarea" />
 						</el-form-item>
 					</el-col>
 					<el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="mb20">
-						<el-form-item label="菜单权限" v-loading="state.loading" class="tree-container">
+						<el-form-item label="Menu permissions" v-loading="state.loading" class="tree-container">
 							<el-tree
 								ref="treeRef"
 								:data="state.menuData"
@@ -56,8 +56,8 @@
 			</el-form>
 			<template #footer>
 				<span class="dialog-footer">
-					<el-button @click="cancel">取 消</el-button>
-					<el-button type="primary" @click="submit">确 定</el-button>
+					<el-button @click="cancel">Cancel</el-button>
+					<el-button type="primary" @click="submit">Confirm</el-button>
 				</span>
 			</template>
 		</el-dialog>
@@ -82,14 +82,14 @@ const state = reactive({
 	loading: false,
 	isShowDialog: false,
 	ruleForm: {} as UpdateRoleInput,
-	menuData: [] as Array<SysMenu>, // 菜单数据
+	menuData: [] as Array<SysMenu>, // Menu data
 });
 
-// 打开弹窗
+// Open pop-up window
 const openDialog = async (row: any) => {
 	state.menuData = await getAPI(SysMenuApi).apiSysMenuListGet(undefined, undefined, row?.tenantId).then((res) => res.data.result ?? []);
 	ruleFormRef.value?.resetFields();
-	treeRef.value?.setCheckedKeys([]); // 清空选中值
+	treeRef.value?.setCheckedKeys([]); // Clear selected value
 	state.ruleForm = JSON.parse(JSON.stringify(row));
 	if (row.id != undefined) {
 		var res = await getAPI(SysRoleApi).apiSysRoleOwnMenuListGet(row.id);
@@ -100,18 +100,18 @@ const openDialog = async (row: any) => {
 	state.isShowDialog = true;
 };
 
-// 关闭弹窗
+// Close pop-up window
 const closeDialog = () => {
 	emits('handleQuery');
 	state.isShowDialog = false;
 };
 
-// 取消
+// Cancel
 const cancel = () => {
 	state.isShowDialog = false;
 };
 
-// 提交
+// submit
 const submit = () => {
 	ruleFormRef.value.validate(async (valid: boolean) => {
 		if (!valid) return;
@@ -125,11 +125,11 @@ const submit = () => {
 	});
 };
 
-// 叶子节点同行显示样式
+// Leaf node peer display style
 const treeNodeClass = (node: SysMenu) => {
-	let addClass = true; // 添加叶子节点同行显示样式
+	let addClass = true; // Add leaf node peer display style
 	for (var key in node.children) {
-		// 如果存在子节点非叶子节点，不添加样式
+		// If there are child nodes that are not leaf nodes, no style will be added.
 		if (node.children[key].children?.length ?? 0 > 0) {
 			addClass = false;
 			break;
@@ -138,7 +138,7 @@ const treeNodeClass = (node: SysMenu) => {
 	return addClass ? 'penultimate-node' : '';
 };
 
-// 导出对象
+// Export object
 defineExpose({ openDialog });
 </script>
 

@@ -1,23 +1,23 @@
-// Admin.NET 项目的版权、商标、专利和其他相关权利均受相应法律法规的保护。使用本项目应遵守相关法律法规和许可证的要求。
+// The copyright, trademark, patent and other related rights of the Admin.NET project are protected by corresponding laws and regulations. Use of this project shall comply with relevant laws, regulations and license requirements.
 //
-// 本项目主要遵循 MIT 许可证和 Apache 许可证（版本 2.0）进行分发和使用。许可证位于源代码树根目录中的 LICENSE-MIT 和 LICENSE-APACHE 文件。
+// This project is distributed and used primarily under the MIT License and the Apache License (version 2.0). The license is located in the LICENSE-MIT and LICENSE-APACHE files in the root of the source tree.
 //
-// 不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！
+// This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project!
 
 using DbType = SqlSugar.DbType;
 
 namespace Admin.NET.Core;
 
 /// <summary>
-/// 代码生成帮助类
+/// Code generation helper class
 /// </summary>
 public static class CodeGenUtil
 {
     /// <summary>
-    /// 转换大驼峰法命名
+    /// Convert CamelCase naming
     /// </summary>
-    /// <param name="columnName">字段名</param>
-    /// <param name="dbColumnNames">EntityBase 实体属性名称</param>
+    /// <param name="columnName">Field name</param>
+    /// <param name="dbColumnNames">EntityBase entity attribute name</param>
     /// <returns></returns>
     public static string CamelColumnName(string columnName, string[] dbColumnNames)
     {
@@ -47,7 +47,7 @@ public static class CodeGenUtil
         return columnName;
     }
 
-    // 根据数据库类型来处理对应的数据字段类型
+    // Process the corresponding data field type according to the database type
     public static string ConvertDataType(DbColumnInfo dbColumnInfo, DbType dbType = DbType.Custom)
     {
         if (dbType == DbType.Custom)
@@ -123,7 +123,7 @@ public static class CodeGenUtil
         }
     }
 
-    //PostgresSQL数据类型对应的字段类型
+    //Field types corresponding to PostgresSQL data types
     public static string ConvertDataTypePostgresSql(string dataType)
     {
         switch (dataType)
@@ -231,7 +231,7 @@ public static class CodeGenUtil
     }
 
     /// <summary>
-    /// 数据类型转显示类型
+    /// Data type to display type
     /// </summary>
     /// <param name="dataType"></param>
     /// <returns></returns>
@@ -253,7 +253,7 @@ public static class CodeGenUtil
         };
     }
 
-    // 是否通用字段
+    // Is it a common field?
     public static bool IsCommonColumn(string columnName)
     {
         var columnList = new List<string>()
@@ -272,7 +272,7 @@ public static class CodeGenUtil
     }
 
     /// <summary>
-    /// 获取类型的PropertyInfo列表
+    /// Get the PropertyInfo list of the type
     /// </summary>
     /// <param name="type"></param>
     /// <returns></returns>

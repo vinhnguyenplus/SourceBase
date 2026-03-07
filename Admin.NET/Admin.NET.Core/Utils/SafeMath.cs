@@ -1,8 +1,8 @@
-﻿// Admin.NET 项目的版权、商标、专利和其他相关权利均受相应法律法规的保护。使用本项目应遵守相关法律法规和许可证的要求。
+﻿// The copyright, trademark, patent and other related rights of the Admin.NET project are protected by corresponding laws and regulations. Use of this project shall comply with relevant laws, regulations and license requirements.
 //
-// 本项目主要遵循 MIT 许可证和 Apache 许可证（版本 2.0）进行分发和使用。许可证位于源代码树根目录中的 LICENSE-MIT 和 LICENSE-APACHE 文件。
+// This project is distributed and used primarily under the MIT License and the Apache License (version 2.0). The license is located in the LICENSE-MIT and LICENSE-APACHE files in the root of the source tree.
 //
-// 不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！
+// This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project!
 
 using System.Globalization;
 
@@ -11,18 +11,18 @@ namespace Admin.NET.Core;
 using System;
 
 /// <summary>
-/// 安全的基本数学运算方法类
+/// Safe basic mathematical operation method class
 /// </summary>
 public static class SafeMath
 {
     /// <summary>
-    /// 安全加法
+    /// safe addition
     /// </summary>
-    /// <param name="left">左操作数</param>
-    /// <param name="right">右操作数</param>
-    /// <param name="precision">保留小数位数</param>
-    /// <param name="defaultValue">默认值</param>
-    /// <param name="throwOnError">是否抛出异常</param>
+    /// <param name="left">left operand</param>
+    /// <param name="right">right operand</param>
+    /// <param name="precision">Keep decimal places</param>
+    /// <param name="defaultValue">default value</param>
+    /// <param name="throwOnError">Whether to throw an exception</param>
     /// <returns></returns>
     public static T Add<T>(object left, object right, int precision = 2, T defaultValue = default, bool throwOnError = true) where T : struct, IComparable, IConvertible, IFormattable
     {
@@ -30,54 +30,54 @@ public static class SafeMath
     }
 
     /// <summary>
-    /// 安全减法
+    /// safe subtraction
     /// </summary>
-    /// <param name="left">左操作数</param>
-    /// <param name="right">右操作数</param>
-    /// <param name="precision">保留小数位数</param>
-    /// <param name="defaultValue">默认值</param>
-    /// <param name="throwOnError">是否抛出异常</param>
+    /// <param name="left">left operand</param>
+    /// <param name="right">right operand</param>
+    /// <param name="precision">Keep decimal places</param>
+    /// <param name="defaultValue">default value</param>
+    /// <param name="throwOnError">Whether to throw an exception</param>
     public static T Sub<T>(object left, object right, int precision = 2, T defaultValue = default, bool throwOnError = true) where T : struct, IComparable, IConvertible, IFormattable
     {
         return PerformOperation(left, right, (a, b) => a - b, precision, defaultValue, throwOnError);
     }
 
     /// <summary>
-    /// 安全乘法
+    /// safe multiplication
     /// </summary>
-    /// <param name="left">左操作数</param>
-    /// <param name="right">右操作数</param>
-    /// <param name="precision">保留小数位数</param>
-    /// <param name="defaultValue">默认值</param>
-    /// <param name="throwOnError">是否抛出异常</param>
+    /// <param name="left">left operand</param>
+    /// <param name="right">right operand</param>
+    /// <param name="precision">Keep decimal places</param>
+    /// <param name="defaultValue">default value</param>
+    /// <param name="throwOnError">Whether to throw an exception</param>
     public static T Mult<T>(object left, object right, int precision = 2, T defaultValue = default, bool throwOnError = true) where T : struct, IComparable, IConvertible, IFormattable
     {
         return PerformOperation(left, right, (a, b) => a * b, precision, defaultValue, throwOnError);
     }
 
     /// <summary>
-    /// 安全除法
+    /// safe division
     /// </summary>
-    /// <param name="left">左操作数</param>
-    /// <param name="right">右操作数</param>
-    /// <param name="precision">保留小数位数</param>
-    /// <param name="defaultValue">默认值</param>
-    /// <param name="throwOnDivideByZero">是否抛出除以零异常</param>
+    /// <param name="left">left operand</param>
+    /// <param name="right">right operand</param>
+    /// <param name="precision">Keep decimal places</param>
+    /// <param name="defaultValue">default value</param>
+    /// <param name="throwOnDivideByZero">Whether to throw divide by zero exception</param>
     public static T Div<T>(object left, object right, int precision = 2, T defaultValue = default, bool throwOnDivideByZero = true) where T : struct, IComparable, IConvertible, IFormattable
     {
         return PerformOperation(left, right, (a, b) =>
         {
             if (b != 0) return a / b;
-            if (throwOnDivideByZero) throw new DivideByZeroException("除数不能为0");
+            if (throwOnDivideByZero) throw new DivideByZeroException("The divisor cannot be 0");
             return SafeConvert<decimal>(defaultValue);
         }, precision, defaultValue, throwOnDivideByZero);
     }
 
     /// <summary>
-    /// 安全类型转换
+    /// safe type conversion
     /// </summary>
-    /// <param name="value">数据源</param>
-    /// <param name="defaultValue">默认值</param>
+    /// <param name="value">data source</param>
+    /// <param name="defaultValue">default value</param>
     public static T SafeConvert<T>(object value, T defaultValue = default) where T : struct, IComparable, IConvertible, IFormattable
     {
         if (value == null) return defaultValue;
@@ -92,7 +92,7 @@ public static class SafeMath
     }
 
     /// <summary>
-    /// 执行数学运算
+    /// perform mathematical operations
     /// </summary>
     private static T PerformOperation<T>(object left, object right, Func<decimal, decimal, decimal> operation, int precision, T defaultValue, bool throwOnError) where T : struct, IComparable, IConvertible, IFormattable
     {
@@ -112,7 +112,7 @@ public static class SafeMath
     }
 
     /// <summary>
-    /// 将输入值转换为 decimal
+    /// Convert input value to decimal
     /// </summary>
     public static decimal ConvertToDecimal(object value)
     {
@@ -126,8 +126,8 @@ public static class SafeMath
             long longValue => longValue,
             short shortValue => shortValue,
             byte byteValue => byteValue,
-            string stringValue when decimal.TryParse(stringValue, NumberStyles.Any, CultureInfo.InvariantCulture, out decimal parsedValue) => parsedValue, // 尝试解析字符串
-            _ => throw new InvalidCastException($"不支持的类型: {value.GetType().Name}")
+            string stringValue when decimal.TryParse(stringValue, NumberStyles.Any, CultureInfo.InvariantCulture, out decimal parsedValue) => parsedValue, // Try to parse the string
+            _ => throw new InvalidCastException($"Unsupported type: {value.GetType().Name}")
         };
     }
 }

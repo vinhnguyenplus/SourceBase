@@ -1,15 +1,15 @@
-// Admin.NET 项目的版权、商标、专利和其他相关权利均受相应法律法规的保护。使用本项目应遵守相关法律法规和许可证的要求。
+// The copyright, trademark, patent and other related rights of the Admin.NET project are protected by corresponding laws and regulations. Use of this project shall comply with relevant laws, regulations and license requirements.
 //
-// 本项目主要遵循 MIT 许可证和 Apache 许可证（版本 2.0）进行分发和使用。许可证位于源代码树根目录中的 LICENSE-MIT 和 LICENSE-APACHE 文件。
+// This project is distributed and used primarily under the MIT License and the Apache License (version 2.0). The license is located in the LICENSE-MIT and LICENSE-APACHE files in the root of the source tree.
 //
-// 不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！
+// This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project!
 
 namespace Admin.NET.Core.Service;
 
 /// <summary>
-/// 系统通知公告服务 🧩
+/// System notification and announcement service 🧩
 /// </summary>
-[ApiDescriptionSettings(Order = 380, Description = "通知公告")]
+[ApiDescriptionSettings(Order = 380, Description = "Notices and Announcements")]
 public class SysNoticeService : IDynamicApiController, ITransient
 {
     private readonly UserManager _userManager;
@@ -33,11 +33,11 @@ public class SysNoticeService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 获取通知公告分页列表 📢
+    /// Get the notification and announcement paginated list 📢
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
-    [DisplayName("获取通知公告分页列表")]
+    [DisplayName("Get paginated list of notifications and announcements")]
     public async Task<SqlSugarPagedList<SysNotice>> Page(PageNoticeInput input)
     {
         return await _sysNoticeRep.AsQueryable()
@@ -49,12 +49,12 @@ public class SysNoticeService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 增加通知公告 📢
+    /// Add notification announcement 📢
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
     [ApiDescriptionSettings(Name = "Add"), HttpPost]
-    [DisplayName("增加通知公告")]
+    [DisplayName("Add Notice")]
     public async Task AddNotice(AddNoticeInput input)
     {
         var notice = input.Adapt<SysNotice>();
@@ -63,13 +63,13 @@ public class SysNoticeService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 更新通知公告 📢
+    /// Update notification announcement 📢
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
     [UnitOfWork]
     [ApiDescriptionSettings(Name = "Update"), HttpPost]
-    [DisplayName("更新通知公告")]
+    [DisplayName("Update Notice")]
     public async Task UpdateNotice(UpdateNoticeInput input)
     {
         if (input.CreateUserId != _userManager.UserId)
@@ -81,13 +81,13 @@ public class SysNoticeService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 删除通知公告 📢
+    /// Deletion notification announcement 📢
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
     [UnitOfWork]
     [ApiDescriptionSettings(Name = "Delete"), HttpPost]
-    [DisplayName("删除通知公告")]
+    [DisplayName("Delete notification announcement")]
     public async Task DeleteNotice(DeleteNoticeInput input)
     {
         var sysNotice = await _sysNoticeRep.GetByIdAsync(input.Id);
@@ -102,22 +102,22 @@ public class SysNoticeService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 发布通知公告 📢
+    /// Release notification announcement 📢
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
-    [DisplayName("发布通知公告")]
+    [DisplayName("Issue Notice and Announcement")]
     public async Task Public(NoticeInput input)
     {
         if (!(await _sysNoticeRep.IsAnyAsync(u => u.Id == input.Id && u.CreateUserId == _userManager.UserId)))
             throw Oops.Oh(ErrorCodeEnum.D7003);
 
-        // 更新发布状态和时间
+        // Update release status and time
         await _sysNoticeRep.UpdateAsync(u => new SysNotice() { Status = NoticeStatusEnum.PUBLIC, PublicTime = DateTime.Now }, u => u.Id == input.Id);
 
         var notice = await _sysNoticeRep.GetByIdAsync(input.Id);
 
-        // 通知到的人(所有账号)
+        // People notified (all accounts)
         var userIdList = await _sysUserRep.AsQueryable().Select(u => u.Id).ToListAsync();
 
         await _sysNoticeUserRep.DeleteAsync(u => u.NoticeId == notice.Id);
@@ -128,16 +128,16 @@ public class SysNoticeService : IDynamicApiController, ITransient
         }).ToList();
         await _sysNoticeUserRep.InsertRangeAsync(noticeUserList);
 
-        // 广播所有在线账号
+        // Broadcast to all online accounts
         await _sysOnlineUserService.PublicNotice(notice, userIdList);
     }
 
     /// <summary>
-    /// 设置通知公告已读状态 📢
+    /// Set notification announcement read status 📢
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
-    [DisplayName("设置通知公告已读状态")]
+    [DisplayName("Set notification announcement as read")]
     public async Task SetRead(NoticeInput input)
     {
         await _sysNoticeUserRep.UpdateAsync(u => new SysNoticeUser
@@ -148,11 +148,11 @@ public class SysNoticeService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 获取接收的通知公告
+    /// Get received notification announcements
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
-    [DisplayName("获取接收的通知公告")]
+    [DisplayName("Get received notification announcements")]
     public async Task<SqlSugarPagedList<SysNoticeUser>> PageReceived(PageNoticeInput input)
     {
         return await _sysNoticeUserRep.AsQueryable().Includes(u => u.SysNotice)
@@ -164,10 +164,10 @@ public class SysNoticeService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 获取未读的通知公告 📢
+    /// Get unread notification announcements 📢
     /// </summary>
     /// <returns></returns>
-    [DisplayName("获取未读的通知公告")]
+    [DisplayName("Get unread notifications and announcements")]
     public async Task<List<SysNotice>> GetUnReadList()
     {
         var noticeUserList = await _sysNoticeUserRep.AsQueryable().Includes(u => u.SysNotice)
@@ -177,7 +177,7 @@ public class SysNoticeService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 初始化通知公告信息
+    /// Initialization notification announcement information
     /// </summary>
     /// <param name="notice"></param>
     [NonAction]

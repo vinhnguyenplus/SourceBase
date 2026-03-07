@@ -1,8 +1,8 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * 钉钉开放平台
- * 集成钉钉开放平台<br/><u><b><font color='FF0000'> 👮不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！</font></b></u>
+ * DingTalkOpen Platform
+ * IntegrationDingTalkOpen Platform<br/><u><b><font color='FF0000'> 👮This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project! </font></b></u>
  *
  * OpenAPI spec version: 1.0.0
  * 
@@ -21,7 +21,7 @@
 export interface GetDingTalkCurrentEmployeesRosterListInput {
 
     /**
-     * 员工的userId列表，多个userid之间使用逗号分隔，一次最多支持传100个值。
+     * Employee'suserIdList，multipleuseridUse a comma betweenpointsto separate，oneSupports transmitting the second most100piecevalue。
      *
      * @type {string}
      * @memberof GetDingTalkCurrentEmployeesRosterListInput
@@ -29,7 +29,7 @@ export interface GetDingTalkCurrentEmployeesRosterListInput {
     useridList?: string | null;
 
     /**
-     * 需要获取的花名册字段field_code值列表，多个字段之间使用逗号分隔，一次最多支持传100个值。
+     * NeedObtainrosterFieldfield_codevalueList，multipleFieldUse a comma betweenpointsto separate，oneSupports transmitting the second most100piecevalue。
      *
      * @type {string}
      * @memberof GetDingTalkCurrentEmployeesRosterListInput
@@ -37,7 +37,7 @@ export interface GetDingTalkCurrentEmployeesRosterListInput {
     fieldFilterList?: string | null;
 
     /**
-     * 应用的AgentId
+     * AppliedAgentId
      *
      * @type {string}
      * @memberof GetDingTalkCurrentEmployeesRosterListInput

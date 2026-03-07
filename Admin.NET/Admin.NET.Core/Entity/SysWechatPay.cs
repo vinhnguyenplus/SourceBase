@@ -1,15 +1,15 @@
-﻿// Admin.NET 项目的版权、商标、专利和其他相关权利均受相应法律法规的保护。使用本项目应遵守相关法律法规和许可证的要求。
+﻿// The copyright, trademark, patent and other related rights of the Admin.NET project are protected by corresponding laws and regulations. Use of this project shall comply with relevant laws, regulations and license requirements.
 //
-// 本项目主要遵循 MIT 许可证和 Apache 许可证（版本 2.0）进行分发和使用。许可证位于源代码树根目录中的 LICENSE-MIT 和 LICENSE-APACHE 文件。
+// This project is distributed and used primarily under the MIT License and the Apache License (version 2.0). The license is located in the LICENSE-MIT and LICENSE-APACHE files in the root of the source tree.
 //
-// 不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！
+// This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project!
 
 namespace Admin.NET.Core;
 
 /// <summary>
-/// 系统微信支付表
+/// System WeChat payment form
 /// </summary>
-[SugarTable(null, "系统微信支付表")]
+[SugarTable(null, "System WeChat Pay Table")]
 [SysTable]
 [SugarIndex("index_{table}_BU", nameof(BusinessId), OrderByType.Asc)]
 [SugarIndex("index_{table}_TR", nameof(TradeState), OrderByType.Asc)]
@@ -17,154 +17,154 @@ namespace Admin.NET.Core;
 public partial class SysWechatPay : EntityBase
 {
     /// <summary>
-    /// 微信商户号
+    /// WeChat merchant account
     /// </summary>
-    [SugarColumn(ColumnDescription = "微信商户号")]
+    [SugarColumn(ColumnDescription = "WeChat merchant account")]
     [Required]
     public virtual string MerchantId { get; set; }
 
     /// <summary>
-    /// 服务商AppId
+    /// Service provider AppId
     /// </summary>
-    [SugarColumn(ColumnDescription = "服务商AppId")]
+    [SugarColumn(ColumnDescription = "Service provider AppId")]
     [Required]
     public virtual string AppId { get; set; }
 
     /// <summary>
-    /// 商户订单号
+    /// Merchant order number
     /// </summary>
-    [SugarColumn(ColumnDescription = "商户订单号")]
+    [SugarColumn(ColumnDescription = "Merchant Order Number")]
     [Required]
     public virtual string OutTradeNumber { get; set; }
 
     /// <summary>
-    /// 支付订单号
+    /// Payment order number
     /// </summary>
-    [SugarColumn(ColumnDescription = "支付订单号")]
+    [SugarColumn(ColumnDescription = "Payment Order Number")]
     [Required]
     public virtual string TransactionId { get; set; }
 
     /// <summary>
-    /// 交易类型
+    /// transaction type
     /// </summary>
-    [SugarColumn(ColumnDescription = "交易类型")]
+    [SugarColumn(ColumnDescription = "transaction type")]
     public string? TradeType { get; set; }
 
     /// <summary>
-    /// 交易状态
+    /// transaction status
     /// </summary>
-    [SugarColumn(ColumnDescription = "交易状态")]
+    [SugarColumn(ColumnDescription = "Transaction Status")]
     public string? TradeState { get; set; }
 
     /// <summary>
-    /// 交易状态描述
+    /// Transaction status description
     /// </summary>
-    [SugarColumn(ColumnDescription = "交易状态描述")]
+    [SugarColumn(ColumnDescription = "Transaction status description")]
     public string? TradeStateDescription { get; set; }
 
     /// <summary>
-    /// 付款银行类型
+    /// Payment bank type
     /// </summary>
-    [SugarColumn(ColumnDescription = "付款银行类型")]
+    [SugarColumn(ColumnDescription = "Payment bank type")]
     public string? BankType { get; set; }
 
     /// <summary>
-    /// 订单总金额
+    /// Total order amount
     /// </summary>
-    [SugarColumn(ColumnDescription = "订单总金额")]
+    [SugarColumn(ColumnDescription = "Total Order Amount")]
     public int Total { get; set; }
 
     /// <summary>
-    /// 用户支付金额
+    /// User payment amount
     /// </summary>
-    [SugarColumn(ColumnDescription = "用户支付金额")]
+    [SugarColumn(ColumnDescription = "User Payment Amount")]
     public int? PayerTotal { get; set; }
 
     /// <summary>
-    /// 支付完成时间
+    /// Payment completion time
     /// </summary>
-    [SugarColumn(ColumnDescription = "支付完成时间")]
+    [SugarColumn(ColumnDescription = "Payment Completion Time")]
     public DateTime? SuccessTime { get; set; }
 
     /// <summary>
-    /// 交易结束时间
+    /// transaction end time
     /// </summary>
-    [SugarColumn(ColumnDescription = "交易结束时间")]
+    [SugarColumn(ColumnDescription = "Transaction End Time")]
     public DateTime? ExpireTime { get; set; }
 
     /// <summary>
-    /// 商品描述
+    /// Product description
     /// </summary>
-    [SugarColumn(ColumnDescription = "商品描述")]
+    [SugarColumn(ColumnDescription = "Product description")]
     public string? Description { get; set; }
 
     /// <summary>
-    /// 场景信息
+    /// scene information
     /// </summary>
-    [SugarColumn(ColumnDescription = "场景信息")]
+    [SugarColumn(ColumnDescription = "scene information")]
     public string? Scene { get; set; }
 
     /// <summary>
-    /// 附加数据
+    /// Additional data
     /// </summary>
-    [SugarColumn(ColumnDescription = "附加数据")]
+    [SugarColumn(ColumnDescription = "AdditionalData")]
     public string? Attachment { get; set; }
 
     /// <summary>
-    /// 优惠标记
+    /// Offer mark
     /// </summary>
-    [SugarColumn(ColumnDescription = "优惠标记")]
+    [SugarColumn(ColumnDescription = "Discount Tag")]
     public string? GoodsTag { get; set; }
 
     /// <summary>
-    /// 结算信息
+    /// Billing information
     /// </summary>
-    [SugarColumn(ColumnDescription = "结算信息")]
+    [SugarColumn(ColumnDescription = "Billing information")]
     public string? Settlement { get; set; }
 
     /// <summary>
-    /// 回调通知地址
+    /// Callback notification address
     /// </summary>
-    [SugarColumn(ColumnDescription = "回调通知地址")]
+    [SugarColumn(ColumnDescription = "Callback notification address")]
     public string? NotifyUrl { get; set; }
 
     /// <summary>
-    /// 备注
+    /// Remark
     /// </summary>
-    [SugarColumn(ColumnDescription = "备注")]
+    [SugarColumn(ColumnDescription = "Remarks")]
     public string? Remark { get; set; }
 
     /// <summary>
-    /// 微信OpenId标识
+    /// WeChat OpenId logo
     /// </summary>
-    [SugarColumn(ColumnDescription = "微信OpenId标识")]
+    [SugarColumn(ColumnDescription = "WeChat OpenId Identifier")]
     public string? OpenId { get; set; }
 
     /// <summary>
-    /// 业务标签，用来区分做什么业务
+    /// Business tags, used to distinguish what business is being done
     /// </summary>
     /// <remarks>
-    /// Tags标识用来区分这个支付记录对应什么业务从而确定相关联的表名，
-    /// 再结合BusinessId保存了对应的业务数据的ID，就可以确定这个支付
-    /// 记录与哪一条业务数据相关联
+    /// Tags are used to distinguish what business this payment record corresponds to determine the associated table name.
+    /// Combined with the BusinessId to save the ID of the corresponding business data, the payment can be determined.
+    /// Which piece of business data is the record associated with?
     /// </remarks>
-    [SugarColumn(ColumnDescription = "业务标签，用来区分做什么业务", Length = 64)]
+    [SugarColumn(ColumnDescription = "Business Tag，used to dividepointsWhat business do you do?", Length = 64)]
     public string? Tags { get; set; }
 
     /// <summary>
-    /// 对应业务的主键
+    /// The primary key corresponding to the business
     /// </summary>
-    [SugarColumn(ColumnDescription = "对应业务的主键")]
+    [SugarColumn(ColumnDescription = "The primary key corresponding to the business")]
     public long BusinessId { get; set; }
 
     /// <summary>
-    /// 付款二维码内容
+    /// Payment QR code content
     /// </summary>
-    [SugarColumn(ColumnDescription = "付款二维码内容")]
+    [SugarColumn(ColumnDescription = "Payment QR code content")]
     public string? QrcodeContent { get; set; }
 
     /// <summary>
-    /// 关联微信用户
+    /// Associated WeChat users
     /// </summary>
     [Newtonsoft.Json.JsonIgnore]
     [System.Text.Json.Serialization.JsonIgnore]
@@ -172,20 +172,20 @@ public partial class SysWechatPay : EntityBase
     public SysWechatUser SysWechatUser { get; set; }
 
     /// <summary>
-    /// 子商户号
+    /// Sub-merchant number
     /// </summary>
-    [SugarColumn(ColumnDescription = "子商户号")]
+    [SugarColumn(ColumnDescription = "Sub-merchant number")]
     public string? SubMerchantId { get; set; }
 
     /// <summary>
-    /// 子商户AppId
+    /// Sub-merchant AppId
     /// </summary>
-    [SugarColumn(ColumnDescription = "回调通知地址")]
+    [SugarColumn(ColumnDescription = "Callback notification address")]
     public string? SubAppId { get; set; }
 
     /// <summary>
-    /// 子商户唯一标识
+    /// Sub-merchant unique identifier
     /// </summary>
-    [SugarColumn(ColumnDescription = "子商户唯一标识")]
+    [SugarColumn(ColumnDescription = "childMerchant OnlyoneLogo")]
     public string? SubOpenId { get; set; }
 }

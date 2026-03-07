@@ -1,15 +1,15 @@
-// Admin.NET 项目的版权、商标、专利和其他相关权利均受相应法律法规的保护。使用本项目应遵守相关法律法规和许可证的要求。
+// The copyright, trademark, patent and other related rights of the Admin.NET project are protected by corresponding laws and regulations. Use of this project shall comply with relevant laws, regulations and license requirements.
 //
-// 本项目主要遵循 MIT 许可证和 Apache 许可证（版本 2.0）进行分发和使用。许可证位于源代码树根目录中的 LICENSE-MIT 和 LICENSE-APACHE 文件。
+// This project is distributed and used primarily under the MIT License and the Apache License (version 2.0). The license is located in the LICENSE-MIT and LICENSE-APACHE files in the root of the source tree.
 //
-// 不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！
+// This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project!
 
 using NewLife.Reflection;
 
 namespace Admin.NET.Core.Service;
 
 /// <summary>
-/// 平台参数配置服务 🧩
+/// Platform parameter configuration service 🧩
 /// </summary>
 [ApiDescriptionSettings(Order = 440)]
 public class SysConfigService : IDynamicApiController, ITransient
@@ -33,11 +33,11 @@ public class SysConfigService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 获取参数配置分页列表 🔖
+    /// Get parameter configuration paginated list 🔖
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
-    [DisplayName("获取参数配置分页列表")]
+    [DisplayName("Get parameter configuration paging list")]
     public async Task<SqlSugarPagedList<SysConfig>> Page(PageConfigInput input)
     {
         return await _sysConfigRep.AsQueryable()
@@ -49,10 +49,10 @@ public class SysConfigService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 获取参数配置列表 🔖
+    /// Get parameter configuration list 🔖
     /// </summary>
     /// <returns></returns>
-    [DisplayName("获取参数配置列表")]
+    [DisplayName("Get parameter configuration list")]
     public async Task<List<SysConfig>> List(PageConfigInput input)
     {
         return await _sysConfigRep.AsQueryable()
@@ -61,12 +61,12 @@ public class SysConfigService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 增加参数配置 🔖
+    /// Add parameter configuration 🔖
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
     [ApiDescriptionSettings(Name = "Add"), HttpPost]
-    [DisplayName("增加参数配置")]
+    [DisplayName("Increase parameter configuration")]
     public async Task AddConfig(AddConfigInput input)
     {
         if (input.SysFlag == YesNoEnum.Y && !_userManager.SuperAdmin) throw Oops.Oh(ErrorCodeEnum.D3010);
@@ -78,12 +78,12 @@ public class SysConfigService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 更新参数配置 🔖
+    /// Update parameter configuration 🔖
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
     [ApiDescriptionSettings(Name = "Update"), HttpPost]
-    [DisplayName("更新参数配置")]
+    [DisplayName("Update parameter configuration")]
     public async Task UpdateConfig(UpdateConfigInput input)
     {
         if (input.SysFlag == YesNoEnum.Y && !_userManager.SuperAdmin) throw Oops.Oh(ErrorCodeEnum.D3010);
@@ -98,17 +98,17 @@ public class SysConfigService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 删除参数配置 🔖
+    /// Delete parameter configuration 🔖
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
     [ApiDescriptionSettings(Name = "Delete"), HttpPost]
-    [DisplayName("删除参数配置")]
+    [DisplayName("Delete parameter configuration")]
     public async Task DeleteConfig(DeleteConfigInput input)
     {
         var config = await _sysConfigRep.GetFirstAsync(u => u.Id == input.Id);
 
-        // 禁止删除系统参数
+        // Disable deletion of system parameters
         if (config.SysFlag == YesNoEnum.Y)
         { throw Oops.Oh(ErrorCodeEnum.D9001); }
         else
@@ -118,19 +118,19 @@ public class SysConfigService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 批量删除参数配置 🔖
+    /// Delete parameter configurations in batches 🔖
     /// </summary>
     /// <param name="ids"></param>
     /// <returns></returns>
     [ApiDescriptionSettings(Name = "BatchDelete"), HttpPost]
-    [DisplayName("批量删除参数配置")]
+    [DisplayName("BatchDelete parameter configuration")]
     public async Task BatchDeleteConfig(List<long> ids)
     {
         foreach (var id in ids)
         {
             var config = await _sysConfigRep.GetFirstAsync(u => u.Id == id);
 
-            // 禁止删除系统参数
+            // Disable deletion of system parameters
             if (config.SysFlag == YesNoEnum.Y) continue;
 
             await _sysConfigRep.DeleteAsync(config);
@@ -140,18 +140,18 @@ public class SysConfigService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 获取参数配置详情 🔖
+    /// Get parameter configuration details 🔖
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
-    [DisplayName("获取参数配置详情")]
+    [DisplayName("Get parameter configuration details")]
     public async Task<SysConfig> GetDetail([FromQuery] ConfigInput input)
     {
         return await _sysConfigRep.GetFirstAsync(u => u.Id == input.Id);
     }
 
     /// <summary>
-    /// 获取参数配置值
+    /// Get parameter configuration value
     /// </summary>
     /// <param name="code"></param>
     /// <returns></returns>
@@ -171,7 +171,7 @@ public class SysConfigService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 更新参数配置值
+    /// Update parameter configuration values
     /// </summary>
     /// <param name="code"></param>
     /// <param name="value"></param>
@@ -189,10 +189,10 @@ public class SysConfigService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 获取分组列表 🔖
+    /// Get group list 🔖
     /// </summary>
     /// <returns></returns>
-    [DisplayName("获取分组列表")]
+    [DisplayName("Get group list")]
     public async Task<List<string>> GetGroupList()
     {
         return await _sysConfigRep.AsQueryable()
@@ -201,7 +201,7 @@ public class SysConfigService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 获取 Token 过期时间
+    /// Get Token expiration time
     /// </summary>
     /// <returns></returns>
     [NonAction]
@@ -213,7 +213,7 @@ public class SysConfigService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 获取 RefreshToken 过期时间
+    /// Get RefreshToken expiration time
     /// </summary>
     /// <returns></returns>
     [NonAction]
@@ -225,12 +225,12 @@ public class SysConfigService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 批量更新参数配置值
+    /// Batch update parameter configuration values
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
     [ApiDescriptionSettings(Name = "BatchUpdate"), HttpPost]
-    [DisplayName("批量更新参数配置值")]
+    [DisplayName("Batch update parameter configuration values")]
     public async Task BatchUpdateConfig(List<BatchConfigInput> input)
     {
         foreach (var config in input)
@@ -244,12 +244,12 @@ public class SysConfigService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 获取系统信息 🔖
+    /// Get system information 🔖
     /// </summary>
     /// <returns></returns>
     [SuppressMonitor]
     [AllowAnonymous]
-    [DisplayName("获取系统信息")]
+    [DisplayName("Get system information")]
     public async Task<dynamic> GetSysInfo()
     {
         var tenant = await SysTenantService.GetCurrentTenantSysInfo();
@@ -281,11 +281,11 @@ public class SysConfigService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 保存系统信息 🔖
+    /// Save system information 🔖
     /// </summary>
     /// <returns></returns>
     [UnitOfWork]
-    [DisplayName("保存系统信息")]
+    [DisplayName("saveSystem information")]
     public async Task SaveSysInfo(InfoSaveInput input)
     {
         var tenant = await _sysTenantRep.GetFirstAsync(u => u.Id == _userManager.TenantId) ?? throw Oops.Oh(ErrorCodeEnum.D1002);

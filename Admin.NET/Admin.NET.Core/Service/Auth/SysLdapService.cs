@@ -1,17 +1,17 @@
-// Admin.NET 项目的版权、商标、专利和其他相关权利均受相应法律法规的保护。使用本项目应遵守相关法律法规和许可证的要求。
+// The copyright, trademark, patent and other related rights of the Admin.NET project are protected by corresponding laws and regulations. Use of this project shall comply with relevant laws, regulations and license requirements.
 //
-// 本项目主要遵循 MIT 许可证和 Apache 许可证（版本 2.0）进行分发和使用。许可证位于源代码树根目录中的 LICENSE-MIT 和 LICENSE-APACHE 文件。
+// This project is distributed and used primarily under the MIT License and the Apache License (version 2.0). The license is located in the LICENSE-MIT and LICENSE-APACHE files in the root of the source tree.
 //
-// 不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！
+// This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project!
 
 using Novell.Directory.Ldap;
 
 namespace Admin.NET.Core;
 
 /// <summary>
-/// 系统域登录配置服务 🧩
+/// System domain login configuration service 🧩
 /// </summary>
-[ApiDescriptionSettings(Order = 496, Description = "域登录配置")]
+[ApiDescriptionSettings(Order = 496, Description = "Domain login configuration")]
 public class SysLdapService : IDynamicApiController, ITransient
 {
     private readonly SqlSugarRepository<SysLdap> _sysLdapRep;
@@ -22,11 +22,11 @@ public class SysLdapService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 获取系统域登录配置分页列表 🔖
+    /// Get the system domain login configuration paging list 🔖
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
-    [DisplayName("获取系统域登录配置分页列表")]
+    [DisplayName("Get the system domain login configuration paging list")]
     public async Task<SqlSugarPagedList<SysLdap>> Page(SysLdapInput input)
     {
         return await _sysLdapRep.AsQueryable()
@@ -37,12 +37,12 @@ public class SysLdapService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 增加系统域登录配置 🔖
+    /// Add system domain login configuration 🔖
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
     [ApiDescriptionSettings(Name = "Add"), HttpPost]
-    [DisplayName("增加系统域登录配置")]
+    [DisplayName("Add system domain login configuration")]
     public async Task<long> Add(AddSysLdapInput input)
     {
         var entity = input.Adapt<SysLdap>();
@@ -52,64 +52,64 @@ public class SysLdapService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 更新系统域登录配置 🔖
+    /// Update system domain login configuration 🔖
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
     [ApiDescriptionSettings(Name = "Update"), HttpPost]
-    [DisplayName("更新系统域登录配置")]
+    [DisplayName("Update system domain login configuration")]
     public async Task Update(UpdateSysLdapInput input)
     {
         var entity = input.Adapt<SysLdap>();
         if (!string.IsNullOrEmpty(input.BindPass) && input.BindPass.Length < 32)
         {
-            entity.BindPass = CryptogramUtil.Encrypt(input.BindPass); // 加密
+            entity.BindPass = CryptogramUtil.Encrypt(input.BindPass); // encryption
         }
 
         await _sysLdapRep.AsUpdateable(entity).IgnoreColumns(ignoreAllNullColumns: true).ExecuteCommandAsync();
     }
 
     /// <summary>
-    /// 删除系统域登录配置 🔖
+    /// Delete system domain login configuration 🔖
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
     [ApiDescriptionSettings(Name = "Delete"), HttpPost]
-    [DisplayName("删除系统域登录配置")]
+    [DisplayName("Delete system domain login configuration")]
     public async Task Delete(DeleteSysLdapInput input)
     {
         var entity = await _sysLdapRep.GetFirstAsync(u => u.Id == input.Id) ?? throw Oops.Oh(ErrorCodeEnum.D1002);
-        await _sysLdapRep.FakeDeleteAsync(entity); // 假删除
-        //await _rep.DeleteAsync(entity); // 真删除
+        await _sysLdapRep.FakeDeleteAsync(entity); // fake delete
+        //await _rep.DeleteAsync(entity); // true delete
     }
 
     /// <summary>
-    /// 获取系统域登录配置详情 🔖
+    /// Get system domain login configuration details 🔖
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
-    [DisplayName("获取系统域登录配置详情")]
+    [DisplayName("Get system domain login configuration details")]
     public async Task<SysLdap> GetDetail([FromQuery] DetailSysLdapInput input)
     {
         return await _sysLdapRep.GetFirstAsync(u => u.Id == input.Id);
     }
 
     /// <summary>
-    /// 获取系统域登录配置列表 🔖
+    /// Get the system domain login configuration list 🔖
     /// </summary>
     /// <returns></returns>
-    [DisplayName("获取系统域登录配置列表")]
+    [DisplayName("Get system domain login configuration list")]
     public async Task<List<SysLdap>> GetList()
     {
         return await _sysLdapRep.AsQueryable().Select<SysLdap>().ToListAsync();
     }
 
     /// <summary>
-    /// 验证账号
+    /// Verify account
     /// </summary>
-    /// <param name="account">域用户</param>
-    /// <param name="password">密码</param>
-    /// <param name="tenantId">租户</param>
+    /// <param name="account">domain user</param>
+    /// <param name="password">password</param>
+    /// <param name="tenantId">tenant</param>
     /// <returns></returns>
     [NonAction]
     public async Task<bool> AuthAccount(long? tenantId, string account, string password)
@@ -154,11 +154,11 @@ public class SysLdapService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 同步域用户 🔖
+    /// Sync domain users 🔖
     /// </summary>
     /// <param name="tenantId"></param>
     /// <returns></returns>
-    [DisplayName("同步域用户")]
+    [DisplayName("Synchronized Domain User")]
     [NonAction]
     public async Task<List<SysUserLdap>> SyncUserTenant(long tenantId)
     {
@@ -167,11 +167,11 @@ public class SysLdapService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 同步域用户 🔖
+    /// Sync domain users 🔖
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
-    [DisplayName("同步域用户")]
+    [DisplayName("Synchronized Domain User")]
     public async Task<List<SysUserLdap>> SyncUser(SyncSysLdapInput input)
     {
         var sysLdap = await _sysLdapRep.GetByIdAsync(input.Id) ?? throw Oops.Oh(ErrorCodeEnum.D1002);
@@ -179,7 +179,7 @@ public class SysLdapService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 同步域用户 🔖
+    /// Sync domain users 🔖
     /// </summary>
     /// <param name="sysLdap"></param>
     /// <returns></returns>
@@ -242,7 +242,7 @@ public class SysLdapService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 获取部门代码
+    /// Get department code
     /// </summary>
     /// <param name="attrs"></param>
     /// <param name="bindAttrCode"></param>
@@ -255,7 +255,7 @@ public class SysLdapService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 创建同步对象
+    /// Create synchronization object
     /// </summary>
     /// <param name="attrs"></param>
     /// <param name="bindAttrAccount"></param>
@@ -275,15 +275,15 @@ public class SysLdapService : IDynamicApiController, ITransient
         var pwdLastSet = attrs.ContainsKey("pwdLastSet") ? attrs.GetAttribute("pwdLastSet")?.StringValue : null;
         if (pwdLastSet != null && !pwdLastSet.Equals("0")) userLdap.PwdLastSetTime = DateTime.FromFileTime(Convert.ToInt64(pwdLastSet));
         var userAccountControl = attrs.ContainsKey("userAccountControl") ? attrs.GetAttribute("userAccountControl")?.StringValue : null;
-        if ((Convert.ToInt32(userAccountControl) & 0x2) == 0x2) // 检查账户是否已过期（通过检查userAccountControl属性的特定位）
+        if ((Convert.ToInt32(userAccountControl) & 0x2) == 0x2) // Check if the account has expired (by checking specific bits of the userAccountControl attribute)
             userLdap.AccountExpiresFlag = true;
-        if ((Convert.ToInt32(userAccountControl) & 0x10000) == 0x10000) // 检查账户密码设置是否永不过期
+        if ((Convert.ToInt32(userAccountControl) & 0x10000) == 0x10000) // Check whether the account password setting never expires
             userLdap.DontExpiresFlag = true;
         return userLdap;
     }
 
     /// <summary>
-    /// 遍历查询域用户
+    /// Traverse query domain users
     /// </summary>
     /// <param name="ldapConn"></param>
     /// <param name="sysLdap"></param>
@@ -323,11 +323,11 @@ public class SysLdapService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 同步域组织 🔖
+    /// Sync Domain Organization 🔖
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
-    [DisplayName("同步域组织")]
+    [DisplayName("Synchronize domain organization")]
     public async Task SyncDept(SyncSysLdapInput input)
     {
         var sysLdap = await _sysLdapRep.GetFirstAsync(u => u.Id == input.Id) ?? throw Oops.Oh(ErrorCodeEnum.D1002);
@@ -381,7 +381,7 @@ public class SysLdapService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 遍历查询域用户
+    /// Traverse query domain users
     /// </summary>
     /// <param name="ldapConn"></param>
     /// <param name="sysLdap"></param>
@@ -415,7 +415,7 @@ public class SysLdapService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 创建架构对象
+    /// Create schema objects
     /// </summary>
     /// <param name="attrs"></param>
     /// <param name="sysLdap"></param>

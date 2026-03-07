@@ -1,53 +1,53 @@
 <template>
 	<div class="h100">
 		<CardPro shadow="hover" v-loading="state.isLoading" style="height: 100%;">
-			<el-descriptions title="系统信息配置" :column="2" :border="true">
+			<el-descriptions title="System information configuration" :column="2" :border="true">
 				<template #title>
-					<el-icon size="16" style="margin-right: 3px; display: inline; vertical-align: middle"> <ele-Setting /> </el-icon> 系统信息配置
+					<el-icon size="16" style="margin-right: 3px; display: inline; vertical-align: middle"> <ele-Setting /> </el-icon> System information configuration
 				</template>
-				<el-descriptions-item label="系统图标" :span="2">
+				<el-descriptions-item label="System icon" :span="2">
 					<el-upload ref="uploadRef" class="avatar-uploader" :showFileList="false" :autoUpload="false" accept=".jpg,.png,.svg" action :limit="1" :onChange="handleUploadChange">
 						<img v-if="state.formData.logo" :src="state.formData.logo" class="avatar" />
 						<SvgIcon v-else class="avatar-uploader-icon" name="ele-Plus" :size="28" />
 					</el-upload>
 				</el-descriptions-item>
-				<el-descriptions-item label="系统主标题">
+				<el-descriptions-item label="System Main Title">
 					<el-input v-model="state.formData.title" />
 				</el-descriptions-item>
-				<el-descriptions-item label="系统副标题">
+				<el-descriptions-item label="System Subtitle">
 					<el-input v-model="state.formData.viceTitle" />
 				</el-descriptions-item>
-				<el-descriptions-item label="系统描述" :span="2">
+				<el-descriptions-item label="System description" :span="2">
 					<el-input v-model="state.formData.viceDesc" />
 				</el-descriptions-item>
-				<el-descriptions-item label="水印内容" :span="2">
-					<el-input v-model="state.formData.watermark" placeholder="如果此处留空，则水印功能将被禁用"/>
+				<el-descriptions-item label="Watermarkcontent" :span="2">
+					<el-input v-model="state.formData.watermark" placeholder="If left blank here, the watermark feature will be disabled"/>
 				</el-descriptions-item>
-				<el-descriptions-item label="版权说明" :span="2">
+				<el-descriptions-item label="Copyright statement" :span="2">
 					<el-input v-model="state.formData.copyright" />
 				</el-descriptions-item>
-				<el-descriptions-item label="ICP备案号">
+				<el-descriptions-item label="ICP Filing Number">
 					<el-input v-model="state.formData.icp" />
 				</el-descriptions-item>
-				<el-descriptions-item label="ICP地址">
+				<el-descriptions-item label="ICP address">
 					<el-input v-model="state.formData.icpUrl" />
 				</el-descriptions-item>
-				<!-- <el-descriptions-item label="图形验证码">
+				<!-- <el-descriptions-item label="Graphic verification code">
 					<g-sys-dict v-model="state.formData.captcha" code="YesNoEnum" render-as="radio" />
 				</el-descriptions-item>
-				<el-descriptions-item label="登录二次验证">
+				<el-descriptions-item label="Login Two-Factor Authentication">
 					<g-sys-dict v-model="state.formData.secondVer" code="YesNoEnum" render-as="radio" />
 				</el-descriptions-item> -->
-				<el-descriptions-item label="用户注册">
+				<el-descriptions-item label="User Registration">
 					<g-sys-dict v-model="state.formData.enableReg" code="YesNoEnum" render-as="radio" />
 				</el-descriptions-item>
-				<el-descriptions-item label="注册方案" v-if="state.formData.enableReg == 1">
-					<el-select v-model="state.formData.regWayId" placeholder="注册方案" clearable class="w100">
+				<el-descriptions-item label="Registration plan" v-if="state.formData.enableReg == 1">
+					<el-select v-model="state.formData.regWayId" placeholder="Registration plan" clearable class="w100">
 						<el-option :label="item.label" :value="item.value" v-for="(item, index) in state.wayList" :key="index" />
 					</el-select>
 				</el-descriptions-item>
 				<template #extra>
-					<el-button type="primary" icon="ele-SuccessFilled" @click="onSave">保存</el-button>
+					<el-button type="primary" icon="ele-SuccessFilled" @click="onSave">save</el-button>
 				</template>
 			</el-descriptions>
 		</CardPro>
@@ -87,16 +87,16 @@ const state = reactive({
 	},
 });
 
-// 通过onChange方法获得文件列表
+// Get the file list through onChange method
 const handleUploadChange = (file: any) => {
 	uploadRef.value!.clearFiles();
 	state.file = file;
-	state.formData.logo = URL.createObjectURL(state.file.raw); // 显示预览logo
+	state.formData.logo = URL.createObjectURL(state.file.raw); // Show preview logo
 };
 
-// 保存
+// save
 const onSave = async () => {
-	// 如果有选择图标，则转换为 base64
+	// If icon is selected, convert to base64
 	if (state.file) {
 		state.formData.logoBase64 = (await fileToBase64(state.file.raw)) as string;
 		state.formData.logoFileName = state.file.raw.name;
@@ -107,15 +107,15 @@ const onSave = async () => {
 		if (state.formData.enableReg == 2) {
 			state.formData.regWayId = undefined;
 		} else if (!state.formData.regWayId) {
-			ElMessage.error('注册方案不能为空');
+			ElMessage.error('Registration scheme cannot be empty');
 			return;
 		}
 		await getAPI(SysConfigApi).apiSysConfigSaveSysInfoPost(state.formData);
 
-		// 清空 file 变量
+		// Clear the file variable
 		state.file = undefined;
 		await loadData();
-		ElMessage.success('保存成功');
+		ElMessage.success('Saved successfully');
 	} finally {
 		nextTick(() => {
 			state.isLoading = false;
@@ -123,7 +123,7 @@ const onSave = async () => {
 	}
 };
 
-// 加载数据
+// Load data
 const loadData = async () => {
 	try {
 		state.isLoading = true;

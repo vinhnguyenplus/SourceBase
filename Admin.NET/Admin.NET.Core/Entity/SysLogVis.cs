@@ -1,116 +1,116 @@
-// Admin.NET 项目的版权、商标、专利和其他相关权利均受相应法律法规的保护。使用本项目应遵守相关法律法规和许可证的要求。
+// The copyright, trademark, patent and other related rights of the Admin.NET project are protected by corresponding laws and regulations. Use of this project shall comply with relevant laws, regulations and license requirements.
 //
-// 本项目主要遵循 MIT 许可证和 Apache 许可证（版本 2.0）进行分发和使用。许可证位于源代码树根目录中的 LICENSE-MIT 和 LICENSE-APACHE 文件。
+// This project is distributed and used primarily under the MIT License and the Apache License (version 2.0). The license is located in the LICENSE-MIT and LICENSE-APACHE files in the root of the source tree.
 //
-// 不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！
+// This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project!
 
 namespace Admin.NET.Core;
 
 /// <summary>
-/// 系统访问日志表
+/// System access log table
 /// </summary>
-[SugarTable(null, "系统访问日志表")]
+[SugarTable(null, "System Access Log Table")]
 [SysTable]
 [LogTable]
 public partial class SysLogVis : EntityBaseTenant
 {
     /// <summary>
-    /// 模块名称
+    /// module name
     /// </summary>
-    [SugarColumn(ColumnDescription = "模块名称", Length = 256)]
+    [SugarColumn(ColumnDescription = "Module Name", Length = 256)]
     [MaxLength(256)]
     public string? ControllerName { get; set; }
 
     /// <summary>
-    /// 方法名称
+    /// method name
     ///</summary>
-    [SugarColumn(ColumnDescription = "方法名称", Length = 256)]
+    [SugarColumn(ColumnDescription = "Method Name", Length = 256)]
     [MaxLength(256)]
     public string? ActionName { get; set; }
 
     /// <summary>
-    /// 显示名称
+    /// display name
     ///</summary>
-    [SugarColumn(ColumnDescription = "显示名称", Length = 256)]
+    [SugarColumn(ColumnDescription = "Display Name", Length = 256)]
     [MaxLength(256)]
     public string? DisplayTitle { get; set; }
 
     /// <summary>
-    /// 执行状态
+    /// Execution status
     /// </summary>
-    [SugarColumn(ColumnDescription = "执行状态", Length = 32)]
+    [SugarColumn(ColumnDescription = "Execution Status", Length = 32)]
     [MaxLength(32)]
     public string? Status { get; set; }
 
     /// <summary>
-    /// IP地址
+    /// IP address
     /// </summary>
-    [SugarColumn(ColumnDescription = "IP地址", Length = 256)]
+    [SugarColumn(ColumnDescription = "IP address", Length = 256)]
     [MaxLength(256)]
     public string? RemoteIp { get; set; }
 
     /// <summary>
-    /// 登录地点
+    /// Login location
     /// </summary>
-    [SugarColumn(ColumnDescription = "登录地点", Length = 128)]
+    [SugarColumn(ColumnDescription = "Login location", Length = 128)]
     [MaxLength(128)]
     public string? Location { get; set; }
 
     /// <summary>
-    /// 经度
+    /// longitude
     /// </summary>
-    [SugarColumn(ColumnDescription = "经度")]
+    [SugarColumn(ColumnDescription = "longitude")]
     public decimal? Longitude { get; set; }
 
     /// <summary>
-    /// 维度
+    /// Dimensions
     /// </summary>
-    [SugarColumn(ColumnDescription = "维度")]
+    [SugarColumn(ColumnDescription = "Dimension")]
     public decimal? Latitude { get; set; }
 
     /// <summary>
-    /// 浏览器
+    /// Browser
     /// </summary>
-    [SugarColumn(ColumnDescription = "浏览器", Length = 1024)]
+    [SugarColumn(ColumnDescription = "Browser", Length = 1024)]
     [MaxLength(1024)]
     public string? Browser { get; set; }
 
     /// <summary>
-    /// 操作系统
+    /// operating system
     /// </summary>
-    [SugarColumn(ColumnDescription = "操作系统", Length = 256)]
+    [SugarColumn(ColumnDescription = "operating system", Length = 256)]
     [MaxLength(256)]
     public string? Os { get; set; }
 
     /// <summary>
-    /// 操作用时
+    /// Operation time
     /// </summary>
-    [SugarColumn(ColumnDescription = "操作用时")]
+    [SugarColumn(ColumnDescription = "Operation time")]
     public long? Elapsed { get; set; }
 
     /// <summary>
-    /// 日志时间
+    /// Log time
     /// </summary>
-    [SugarColumn(ColumnDescription = "日志时间")]
+    [SugarColumn(ColumnDescription = "Log Time")]
     public DateTime? LogDateTime { get; set; }
 
     /// <summary>
-    /// 日志级别
+    /// Log level
     /// </summary>
-    [SugarColumn(ColumnDescription = "日志级别")]
+    [SugarColumn(ColumnDescription = "Log level")]
     public LogLevel? LogLevel { get; set; }
 
     /// <summary>
-    /// 账号
+    /// account
     /// </summary>
-    [SugarColumn(ColumnDescription = "账号", Length = 32)]
+    [SugarColumn(ColumnDescription = "Account number", Length = 32)]
     [MaxLength(32)]
     public string? Account { get; set; }
 
     /// <summary>
-    /// 真实姓名
+    /// real name
     /// </summary>
-    [SugarColumn(ColumnDescription = "真实姓名", Length = 32)]
+    [SugarColumn(ColumnDescription = "Real Name", Length = 32)]
     [MaxLength(32)]
     public string? RealName { get; set; }
 }

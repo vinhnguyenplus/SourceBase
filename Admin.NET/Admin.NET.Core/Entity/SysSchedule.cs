@@ -1,52 +1,52 @@
-// Admin.NET 项目的版权、商标、专利和其他相关权利均受相应法律法规的保护。使用本项目应遵守相关法律法规和许可证的要求。
+// The copyright, trademark, patent and other related rights of the Admin.NET project are protected by corresponding laws and regulations. Use of this project shall comply with relevant laws, regulations and license requirements.
 //
-// 本项目主要遵循 MIT 许可证和 Apache 许可证（版本 2.0）进行分发和使用。许可证位于源代码树根目录中的 LICENSE-MIT 和 LICENSE-APACHE 文件。
+// This project is distributed and used primarily under the MIT License and the Apache License (version 2.0). The license is located in the LICENSE-MIT and LICENSE-APACHE files in the root of the source tree.
 //
-// 不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！
+// This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project!
 
 namespace Admin.NET.Core;
 
 /// <summary>
-/// 系统日程表
+/// System schedule
 /// </summary>
-[SugarTable(null, "系统日程表")]
+[SugarTable(null, "System schedule")]
 [SysTable]
 public class SysSchedule : EntityBaseTenant
 {
     /// <summary>
-    /// 用户Id
+    /// UserId
     /// </summary>
-    [SugarColumn(ColumnDescription = "用户Id")]
+    [SugarColumn(ColumnDescription = "UserId")]
     public long UserId { get; set; }
 
     /// <summary>
-    /// 日程日期
+    /// Schedule date
     /// </summary>
-    [SugarColumn(ColumnDescription = "日程日期")]
+    [SugarColumn(ColumnDescription = "Schedule Date")]
     public DateTime? ScheduleTime { get; set; }
 
     /// <summary>
-    /// 开始时间
+    /// start time
     /// </summary>
-    [SugarColumn(ColumnDescription = "开始时间", Length = 10)]
+    [SugarColumn(ColumnDescription = "start time", Length = 10)]
     public string? StartTime { get; set; }
 
     /// <summary>
-    /// 结束时间
+    /// end time
     /// </summary>
-    [SugarColumn(ColumnDescription = "结束时间", Length = 10)]
+    [SugarColumn(ColumnDescription = "end time", Length = 10)]
     public string? EndTime { get; set; }
 
     /// <summary>
-    /// 日程内容
+    /// Schedule content
     /// </summary>
-    [SugarColumn(ColumnDescription = "日程内容", Length = 256)]
+    [SugarColumn(ColumnDescription = "Schedule content", Length = 256)]
     [Required, MaxLength(256)]
     public virtual string Content { get; set; }
 
     /// <summary>
-    /// 完成状态
+    /// completion status
     /// </summary>
-    [SugarColumn(ColumnDescription = "完成状态")]
+    [SugarColumn(ColumnDescription = "Completion Status")]
     public FinishStatusEnum Status { get; set; } = FinishStatusEnum.UnFinish;
 }

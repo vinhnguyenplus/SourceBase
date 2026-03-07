@@ -1,104 +1,104 @@
-// Admin.NET 项目的版权、商标、专利和其他相关权利均受相应法律法规的保护。使用本项目应遵守相关法律法规和许可证的要求。
+// The copyright, trademark, patent and other related rights of the Admin.NET project are protected by corresponding laws and regulations. Use of this project shall comply with relevant laws, regulations and license requirements.
 //
-// 本项目主要遵循 MIT 许可证和 Apache 许可证（版本 2.0）进行分发和使用。许可证位于源代码树根目录中的 LICENSE-MIT 和 LICENSE-APACHE 文件。
+// This project is distributed and used primarily under the MIT License and the Apache License (version 2.0). The license is located in the LICENSE-MIT and LICENSE-APACHE files in the root of the source tree.
 //
-// 不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！
+// This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project!
 
 namespace Admin.NET.Core;
 
 /// <summary>
-/// 系统文件表
+/// System file table
 /// </summary>
-[SugarTable(null, "系统文件表")]
+[SugarTable(null, "System file table")]
 [SysTable]
 [SugarIndex("index_{table}_F", nameof(FileName), OrderByType.Asc)]
 public partial class SysFile : EntityBaseTenantOrg
 {
     /// <summary>
-    /// 提供者
+    /// provider
     /// </summary>
-    [SugarColumn(ColumnDescription = "提供者", Length = 128)]
+    [SugarColumn(ColumnDescription = "Provider", Length = 128)]
     [MaxLength(128)]
     public string? Provider { get; set; }
 
     /// <summary>
-    /// 仓储名称
+    /// Warehouse name
     /// </summary>
-    [SugarColumn(ColumnDescription = "仓储名称", Length = 128)]
+    [SugarColumn(ColumnDescription = "Warehouse Name", Length = 128)]
     [MaxLength(128)]
     public string? BucketName { get; set; }
 
     /// <summary>
-    /// 文件名称（源文件名）
+    /// File name (source file name)
     /// </summary>
-    [SugarColumn(ColumnDescription = "文件名称", Length = 128)]
+    [SugarColumn(ColumnDescription = "File name", Length = 128)]
     [MaxLength(128)]
     public string? FileName { get; set; }
 
     /// <summary>
-    /// 文件后缀
+    /// file suffix
     /// </summary>
-    [SugarColumn(ColumnDescription = "文件后缀", Length = 16)]
+    [SugarColumn(ColumnDescription = "file suffix", Length = 16)]
     [MaxLength(16)]
     public string? Suffix { get; set; }
 
     /// <summary>
-    /// 存储路径
+    /// storage path
     /// </summary>
-    [SugarColumn(ColumnDescription = "存储路径", Length = 512)]
+    [SugarColumn(ColumnDescription = "Storage Path", Length = 512)]
     [MaxLength(512)]
     public string? FilePath { get; set; }
 
     /// <summary>
-    /// 文件大小KB
+    /// File size KB
     /// </summary>
-    [SugarColumn(ColumnDescription = "文件大小KB")]
+    [SugarColumn(ColumnDescription = "File size KB")]
     public long SizeKb { get; set; }
 
     /// <summary>
-    /// 文件大小信息-计算后的
+    /// File size information - calculated
     /// </summary>
-    [SugarColumn(ColumnDescription = "文件大小信息", Length = 64)]
+    [SugarColumn(ColumnDescription = "File size information", Length = 64)]
     [MaxLength(64)]
     public string? SizeInfo { get; set; }
 
     /// <summary>
-    /// 外链地址-OSS上传后生成外链地址方便前端预览
+    /// External link address - After uploading to OSS, the external link address is generated to facilitate front-end preview.
     /// </summary>
-    [SugarColumn(ColumnDescription = "外链地址", Length = 512)]
+    [SugarColumn(ColumnDescription = "External link address", Length = 512)]
     [MaxLength(512)]
     public string? Url { get; set; }
 
     /// <summary>
-    /// 文件MD5
+    /// File MD5
     /// </summary>
-    [SugarColumn(ColumnDescription = "文件MD5", Length = 128)]
+    [SugarColumn(ColumnDescription = "File MD5", Length = 128)]
     [MaxLength(128)]
     public string? FileMd5 { get; set; }
 
     /// <summary>
-    /// 文件类别
+    /// File category
     /// </summary>
-    [SugarColumn(ColumnDescription = "文件类别", Length = 128)]
+    [SugarColumn(ColumnDescription = "File category", Length = 128)]
     [MaxLength(128)]
     public virtual string? FileType { get; set; }
 
     /// <summary>
-    /// 文件别名
+    /// file alias
     /// </summary>
-    [SugarColumn(ColumnDescription = "文件别名", Length = 128)]
+    [SugarColumn(ColumnDescription = "File alias", Length = 128)]
     [MaxLength(128)]
     public string? FileAlias { get; set; }
 
     /// <summary>
-    /// 是否公开
+    /// Is it public?
     /// </summary>
-    [SugarColumn(ColumnDescription = "是否公开")]
+    [SugarColumn(ColumnDescription = "Is it public?")]
     public virtual bool IsPublic { get; set; } = false;
 
     /// <summary>
-    /// 业务数据Id
+    /// Business data ID
     /// </summary>
-    [SugarColumn(ColumnDescription = "业务数据Id")]
+    [SugarColumn(ColumnDescription = "BusinessDataId")]
     public long? DataId { get; set; }
 }

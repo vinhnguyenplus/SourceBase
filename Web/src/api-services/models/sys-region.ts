@@ -1,8 +1,8 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Admin.NET 通用权限开发平台
- * 让 .NET 开发更简单、更通用、更流行。整合最新技术，模块插件式开发，前后端分离，开箱即用。<br/><u><b><font color='FF0000'> 👮不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！</font></b></u>
+ * Admin.NET General Permission Development Platform
+ * let .NET Develop more simply、More general、More popular。wholeIn line with the latest technology，Modular Plugin-Based Development，Frontend and backendpointsLeave，Ready to use out of the box。<br/><u><b><font color='FF0000'> 👮This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project! </font></b></u>
  *
  * OpenAPI spec version: 1.0.0
  * 
@@ -14,7 +14,7 @@
 
 import { SysRegion } from './sys-region';
  /**
- * 系统行政地区表
+ * System administrative area table
  *
  * @export
  * @interface SysRegion
@@ -22,7 +22,7 @@ import { SysRegion } from './sys-region';
 export interface SysRegion {
 
     /**
-     * 雪花Id
+     * SnowflakeId
      *
      * @type {number}
      * @memberof SysRegion
@@ -30,7 +30,7 @@ export interface SysRegion {
     id?: number;
 
     /**
-     * 父Id
+     * Parent ID
      *
      * @type {number}
      * @memberof SysRegion
@@ -38,7 +38,7 @@ export interface SysRegion {
     pid?: number;
 
     /**
-     * 名称
+     * name
      *
      * @type {string}
      * @memberof SysRegion
@@ -46,7 +46,7 @@ export interface SysRegion {
     name: string;
 
     /**
-     * 简称
+     * abbreviation
      *
      * @type {string}
      * @memberof SysRegion
@@ -54,7 +54,7 @@ export interface SysRegion {
     shortName?: string | null;
 
     /**
-     * 组合名
+     * Group name
      *
      * @type {string}
      * @memberof SysRegion
@@ -62,7 +62,7 @@ export interface SysRegion {
     mergerName?: string | null;
 
     /**
-     * 行政代码
+     * Administrative code
      *
      * @type {string}
      * @memberof SysRegion
@@ -70,7 +70,7 @@ export interface SysRegion {
     code?: string | null;
 
     /**
-     * 邮政编码
+     * Postal code
      *
      * @type {string}
      * @memberof SysRegion
@@ -78,7 +78,7 @@ export interface SysRegion {
     zipCode?: string | null;
 
     /**
-     * 区号
+     * Area code
      *
      * @type {string}
      * @memberof SysRegion
@@ -86,7 +86,7 @@ export interface SysRegion {
     cityCode?: string | null;
 
     /**
-     * 层级
+     * Hierarchy
      *
      * @type {number}
      * @memberof SysRegion
@@ -94,7 +94,7 @@ export interface SysRegion {
     level?: number;
 
     /**
-     * 拼音
+     * Pinyin
      *
      * @type {string}
      * @memberof SysRegion
@@ -102,7 +102,7 @@ export interface SysRegion {
     pinYin?: string | null;
 
     /**
-     * 经度
+     * longitude
      *
      * @type {number}
      * @memberof SysRegion
@@ -110,7 +110,7 @@ export interface SysRegion {
     lng?: number;
 
     /**
-     * 维度
+     * Dimension
      *
      * @type {number}
      * @memberof SysRegion
@@ -118,7 +118,7 @@ export interface SysRegion {
     lat?: number;
 
     /**
-     * 排序
+     * Sort
      *
      * @type {number}
      * @memberof SysRegion
@@ -126,7 +126,7 @@ export interface SysRegion {
     orderNo?: number;
 
     /**
-     * 备注
+     * Remarks
      *
      * @type {string}
      * @memberof SysRegion
@@ -134,7 +134,7 @@ export interface SysRegion {
     remark?: string | null;
 
     /**
-     * 机构子项
+     * mechanismchilditem
      *
      * @type {Array<SysRegion>}
      * @memberof SysRegion

@@ -34,7 +34,7 @@ import { storeToRefs } from 'pinia';
 import { useThemeConfig } from '/@/stores/themeConfig';
 import { useRoutesList } from '/@/stores/routesList';
 
-// 定义变量内容
+// Define variable content
 const stores = useRoutesList();
 const storesThemeConfig = useThemeConfig();
 const { themeConfig } = storeToRefs(storesThemeConfig);
@@ -48,32 +48,32 @@ const state = reactive<BreadcrumbState>({
 	routeSplitIndex: 1,
 });
 
-// 动态设置经典、横向布局不显示
+// Dynamically set classic and horizontal layouts not displayed
 const isShowBreadcrumb = computed(() => {
 	initRouteSplit(route);
 	const { layout, isBreadcrumb } = themeConfig.value;
 	if (layout === 'classic' || layout === 'transverse') return false;
 	else return isBreadcrumb ? true : false;
 });
-// 面包屑点击时
+// Breadcrumbs on click
 const onBreadcrumbClick = (v: RouteItem) => {
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars, no-unused-vars
 	const { redirect, path } = v;
 	if (redirect) router.push(redirect);
-	// 如果没有指定重定向，则不跳转
+	// If no redirection is specified, no redirect will occur.
 	// else if (path) router.push(path);
 };
-// 展开/收起左侧菜单点击
+// Click to expand/collapse the left menu
 const onThemeConfigChange = () => {
 	themeConfig.value.isCollapse = !themeConfig.value.isCollapse;
 	setLocalThemeConfig();
 };
-// 存储布局配置
+// Store layout configuration
 const setLocalThemeConfig = () => {
 	Local.remove('themeConfig');
 	Local.set('themeConfig', themeConfig.value);
 };
-// 处理面包屑数据
+// Processing breadcrumb data
 const getBreadcrumbList = (arr: RouteItems) => {
 	arr.forEach((item: RouteItem) => {
 		state.routeSplit.forEach((v: string, k: number, arrs: string[]) => {
@@ -86,7 +86,7 @@ const getBreadcrumbList = (arr: RouteItems) => {
 		});
 	});
 };
-// 当前路由字符串切割成数组，并删除第一项空内容
+// Cut the current routing string into an array and delete the first empty content
 const initRouteSplit = (toRoute: RouteLocationNormalized) => {
 	if (!themeConfig.value.isBreadcrumb) return false;
 	state.breadcrumbList = [];
@@ -98,11 +98,11 @@ const initRouteSplit = (toRoute: RouteLocationNormalized) => {
 	if (toRoute.name === 'home' || (toRoute.name === 'notFound' && state.breadcrumbList.length > 1)) state.breadcrumbList.shift();
 	if (state.breadcrumbList.length > 0) state.breadcrumbList[state.breadcrumbList.length - 1].meta.tagsViewName = other.setTagsViewNameI18n(<RouteToFrom>route);
 };
-// 页面加载时
+// When the page loads
 onMounted(() => {
 	initRouteSplit(route);
 });
-// 路由更新时
+// When routing is updated
 onBeforeRouteUpdate((to) => {
 	initRouteSplit(to);
 });

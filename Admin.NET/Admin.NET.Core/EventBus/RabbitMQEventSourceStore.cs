@@ -1,8 +1,8 @@
-﻿// Admin.NET 项目的版权、商标、专利和其他相关权利均受相应法律法规的保护。使用本项目应遵守相关法律法规和许可证的要求。
+﻿// The copyright, trademark, patent and other related rights of the Admin.NET project are protected by corresponding laws and regulations. Use of this project shall comply with relevant laws, regulations and license requirements.
 //
-// 本项目主要遵循 MIT 许可证和 Apache 许可证（版本 2.0）进行分发和使用。许可证位于源代码树根目录中的 LICENSE-MIT 和 LICENSE-APACHE 文件。
+// This project is distributed and used primarily under the MIT License and the Apache License (version 2.0). The license is located in the LICENSE-MIT and LICENSE-APACHE files in the root of the source tree.
 //
-// 不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！
+// This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project!
 
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
@@ -11,106 +11,106 @@ using System.Threading.Channels;
 namespace Admin.NET.Core;
 
 /// <summary>
-/// RabbitMQ自定义事件源存储器
+/// RabbitMQ custom event source storage
 /// </summary>
 public class RabbitMQEventSourceStore : IEventSourceStorer, IDisposable
 {
     /// <summary>
-    /// 内存通道事件源存储器
+    /// Memory channel event source memory
     /// </summary>
     private Channel<IEventSource> _channelEventSource;
 
     /// <summary>
-    /// 路由键
+    /// routing key
     /// </summary>
     private string _routeKey;
 
     /// <summary>
-    /// 连接对象
+    /// connection object
     /// </summary>
     private IConnection _connection;
 
     /// <summary>
-    /// 通道对象
+    /// channel object
     /// </summary>
     private IChannel _channel;
 
     /// <summary>
-    /// 构造函数
+    /// Constructor
     /// </summary>
-    /// <param name="factory">连接工厂</param>
-    /// <param name="routeKey">路由键</param>
-    /// <param name="capacity">存储器最多能够处理多少消息，超过该容量进入等待写入</param>
+    /// <param name="factory">connection factory</param>
+    /// <param name="routeKey">routing key</param>
+    /// <param name="capacity">The maximum number of messages that the memory can process. If it exceeds this capacity, it will wait for writing.</param>
     public RabbitMQEventSourceStore(ConnectionFactory factory, string routeKey, int capacity)
     {
         InitEventSourceStore(factory, routeKey, capacity).GetAwaiter().GetResult();
     }
 
     /// <summary>
-    /// 初始化事件源存储器
+    /// Initialize event source memory
     /// </summary>
-    /// <param name="factory">连接工厂</param>
-    /// <param name="routeKey">路由键</param>
-    /// <param name="capacity">存储器最多能够处理多少消息，超过该容量进入等待写入</param>
+    /// <param name="factory">connection factory</param>
+    /// <param name="routeKey">routing key</param>
+    /// <param name="capacity">The maximum number of messages that the memory can process. If it exceeds this capacity, it will wait for writing.</param>
     private async Task InitEventSourceStore(ConnectionFactory factory, string routeKey, int capacity)
     {
-        // 配置通道（超出默认容量后进入等待）
+        // Configure the channel (wait after exceeding the default capacity)
         var boundedChannelOptions = new BoundedChannelOptions(capacity)
         {
             FullMode = BoundedChannelFullMode.Wait
         };
-        // 创建有限容量通道
+        // Create a limited capacity channel
         _channelEventSource = Channel.CreateBounded<IEventSource>(boundedChannelOptions);
 
-        // 创建连接
+        // Create connection
         _connection = await factory.CreateConnectionAsync();
-        // 路由键名
+        // Routing key name
         _routeKey = routeKey;
 
-        // 创建通道
+        // Create channel
         _channel = await _connection.CreateChannelAsync();
 
-        // 声明路由队列
+        // Declare routing queue
         await _channel.QueueDeclareAsync(routeKey, false, false, false, null);
 
-        // 创建消息订阅者
+        // Create message subscriber
         var consumer = new AsyncEventingBasicConsumer(_channel);
 
-        // 订阅消息并写入内存 Channel
+        // Subscribe to messages and write to memory Channel
         consumer.ReceivedAsync += async (ch, ea) =>
         {
-            // 读取原始消息
+            // Read the original message
             var stringEventSource = Encoding.UTF8.GetString(ea.Body.ToArray());
 
-            // 转换为 IEventSource，如果自定义了 EventSource，注意属性是可读可写
+            // Convert to IEventSource. If EventSource is customized, note that the properties are readable and writable.
             var eventSource = JSON.Deserialize<ChannelEventSource>(stringEventSource);
 
-            // 写入内存管道存储器
+            // Write to memory pipeline storage
             await _channelEventSource.Writer.WriteAsync(eventSource);
 
-            // 确认该消息已被消费
+            // Confirm that the message has been consumed
             await _channel.BasicAckAsync(ea.DeliveryTag, false);
         };
 
-        // 启动消费者且设置为手动应答消息
+        // Start the consumer and set it to answer messages manually
         await _channel.BasicConsumeAsync(routeKey, false, consumer);
     }
 
     /// <summary>
-    /// 将事件源写入存储器
+    /// Write event source to memory
     /// </summary>
-    /// <param name="eventSource">事件源对象</param>
-    /// <param name="cancellationToken">取消任务 Token</param>
+    /// <param name="eventSource">event source object</param>
+    /// <param name="cancellationToken">Cancel task token</param>
     /// <returns><see cref="ValueTask"/></returns>
     public async ValueTask WriteAsync(IEventSource eventSource, CancellationToken cancellationToken)
     {
         if (eventSource == default)
             throw new ArgumentNullException(nameof(eventSource));
 
-        // 判断是否是 ChannelEventSource 或自定义的 EventSource
+        // Determine whether it is a ChannelEventSource or a custom EventSource
         if (eventSource is ChannelEventSource source)
         {
-            // 序列化及发布
+            // Serialization and publishing
             var data = Encoding.UTF8.GetBytes(JSON.Serialize(source));
             var props = new BasicProperties();
             props.ContentType = "text/plain";
@@ -119,16 +119,16 @@ public class RabbitMQEventSourceStore : IEventSourceStorer, IDisposable
         }
         else
         {
-            // 处理动态订阅
+            // Handling dynamic subscriptions
             await _channelEventSource.Writer.WriteAsync(eventSource, cancellationToken);
         }
     }
 
     /// <summary>
-    /// 从存储器中读取一条事件源
+    /// Read an event source from memory
     /// </summary>
-    /// <param name="cancellationToken">取消任务 Token</param>
-    /// <returns>事件源对象</returns>
+    /// <param name="cancellationToken">Cancel task token</param>
+    /// <returns>event source object</returns>
     public async ValueTask<IEventSource> ReadAsync(CancellationToken cancellationToken)
     {
         var eventSource = await _channelEventSource.Reader.ReadAsync(cancellationToken);
@@ -136,7 +136,7 @@ public class RabbitMQEventSourceStore : IEventSourceStorer, IDisposable
     }
 
     /// <summary>
-    /// 释放非托管资源
+    /// Release unmanaged resources
     /// </summary>
     public void Dispose()
     {

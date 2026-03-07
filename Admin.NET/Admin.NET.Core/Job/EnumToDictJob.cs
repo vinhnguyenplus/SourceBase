@@ -1,16 +1,16 @@
-// Admin.NET 项目的版权、商标、专利和其他相关权利均受相应法律法规的保护。使用本项目应遵守相关法律法规和许可证的要求。
+// The copyright, trademark, patent and other related rights of the Admin.NET project are protected by corresponding laws and regulations. Use of this project shall comply with relevant laws, regulations and license requirements.
 //
-// 本项目主要遵循 MIT 许可证和 Apache 许可证（版本 2.0）进行分发和使用。许可证位于源代码树根目录中的 LICENSE-MIT 和 LICENSE-APACHE 文件。
+// This project is distributed and used primarily under the MIT License and the Apache License (version 2.0). The license is located in the LICENSE-MIT and LICENSE-APACHE files in the root of the source tree.
 //
-// 不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！
+// This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project!
 
 namespace Admin.NET.Core;
 
 /// <summary>
-/// 枚举转字典
+/// Convert enumeration to dictionary
 /// </summary>
-[JobDetail("job_EnumToDictJob", Description = "枚举转字典", GroupName = "default", Concurrent = false)]
-[PeriodSeconds(1, TriggerId = "trigger_EnumToDictJob", Description = "枚举转字典", MaxNumberOfRuns = 1, RunOnStart = true)]
+[JobDetail("job_EnumToDictJob", Description = "Convert enumeration to dictionary", GroupName = "default", Concurrent = false)]
+[PeriodSeconds(1, TriggerId = "trigger_EnumToDictJob", Description = "Convert enumeration to dictionary", MaxNumberOfRuns = 1, RunOnStart = true)]
 public class EnumToDictJob : IJob
 {
     private readonly IServiceScopeFactory _scopeFactory;
@@ -26,7 +26,7 @@ public class EnumToDictJob : IJob
     {
         var originColor = Console.ForegroundColor;
         Console.ForegroundColor = ConsoleColor.Yellow;
-        Console.WriteLine($"【{DateTime.Now}】系统枚举转换字典");
+        Console.WriteLine($"[{DateTime.Now}] System Enum Conversion Dictionary");
 
         using var serviceScope = _scopeFactory.CreateScope();
         var db = serviceScope.ServiceProvider.GetRequiredService<ISqlSugarClient>().CopyNew();
@@ -34,10 +34,10 @@ public class EnumToDictJob : IJob
         var sysEnumService = serviceScope.ServiceProvider.GetRequiredService<SysEnumService>();
         var sysDictTypeList = GetDictByEnumType(sysEnumService.GetEnumTypeList());
 
-        // 校验枚举类命名规范，字典相关功能中需要通过后缀判断是否为枚举类型
+        // Verify the enumeration class naming convention. In dictionary-related functions, you need to use the suffix to determine whether it is an enumeration type.
         Console.ForegroundColor = ConsoleColor.Red;
         foreach (var dictType in sysDictTypeList.Where(x => !x.Code.EndsWith("Enum")))
-            Console.WriteLine($"【{DateTime.Now}】系统枚举转换字典的枚举类名称必须以Enum结尾: {dictType.Code} ({dictType.Name})");
+            Console.WriteLine($"[{DateTime.Now}] The enumeration class name of the system enumeration conversion dictionary must end with Enum: {dictType.Code} ({dictType.Name})");
         sysDictTypeList = sysDictTypeList.Where(x => x.Code.EndsWith("Enum")).ToList();
 
         await SyncEnumToDictInfoAsync(db, sysDictTypeList);
@@ -53,7 +53,7 @@ public class EnumToDictJob : IJob
             await storageable1.AsInsertable.ExecuteCommandAsync(stoppingToken);
             await storageable1.AsUpdateable.ExecuteCommandAsync(stoppingToken);
 
-            Console.WriteLine($"【{DateTime.Now}】系统枚举类转字典类型数据: 插入{storageable1.InsertList.Count}条, 更新{storageable1.UpdateList.Count}条, 共{storageable1.TotalList.Count}条。");
+            Console.WriteLine($"[{DateTime.Now}] System enumeration class to dictionary type data: insert {storageable1.InsertList.Count} items, update {storageable1.UpdateList.Count} items, totaling {storageable1.TotalList.Count} items.");
 
             var storageable2 = await db.Storageable(sysDictTypeList.SelectMany(x => x.Children).ToList())
                 .WhereColumns(it => new { it.DictTypeId, it.Value })
@@ -68,14 +68,15 @@ public class EnumToDictJob : IJob
                 u.Value
             }).ExecuteCommandAsync(stoppingToken);
 
-            Console.WriteLine($"【{DateTime.Now}】系统枚举项转字典值数据: 插入{storageable2.InsertList.Count}条, 更新{storageable2.UpdateList.Count}条, 共{storageable2.TotalList.Count}条。");
+            Console.WriteLine($"[{DateTime.Now}] Convert system enumeration items to dictionary value data: insert {storageable2.InsertList.Count} items, update {storageable2.UpdateList.Count} items, totaling {storageable2.TotalList.Count} items.");
 
             await db.CommitTranAsync();
         }
         catch (Exception error)
         {
             await db.RollbackTranAsync();
-            Log.Error($"系统枚举转换字典操作错误：{error.Message}\n堆栈跟踪：{error.StackTrace}", error);
+            Log.Error($"System enum conversion dictionary operation error: {error.Message}
+Stack trace: {error.StackTrace}", error);
             throw;
         }
         finally
@@ -85,7 +86,7 @@ public class EnumToDictJob : IJob
     }
 
     /// <summary>
-    /// 用于同步枚举转字典数据
+    /// Used to synchronize enumeration to dictionary data
     /// </summary>
     /// <param name="db"></param>
     /// <param name="list"></param>
@@ -97,21 +98,21 @@ public class EnumToDictJob : IJob
             var enumDictType = list.First(x => x.Code == dbDictType.Code);
             if (enumDictType.Id == dbDictType.Id)
             {
-                // 字典值表字段改变后每条字典值记录会多出一条，此处用于删除多余的字典值数据
+                // After the dictionary value table field is changed, there will be one more dictionary value record for each dictionary value record. This is used to delete redundant dictionary value data.
                 var dataValueList = enumDictType.Children.Select(e => e.Value).ToList();
                 await db.Deleteable<SysDictData>().Where(x => x.DictTypeId == dbDictType.Id && !dataValueList.Contains(x.Value)).ExecuteCommandAsync();
                 continue;
             }
 
-            // 数据不一致则删除
+            // If the data is inconsistent, delete it
             await db.Deleteable<SysDictData>().Where(x => x.DictTypeId == dbDictType.Id).ExecuteCommandAsync();
             await db.Deleteable<SysDictType>().Where(x => x.Id == dbDictType.Id).ExecuteCommandAsync();
-            Console.WriteLine($"【{DateTime.Now}】删除字典数据: {dbDictType.Name}-{dbDictType.Code}");
+            Console.WriteLine($"[{DateTime.Now}] Delete dictionary data: {dbDictType.Name}-{dbDictType.Code}");
         }
     }
 
     /// <summary>
-    /// 枚举信息转字典
+    /// Convert enumeration information to dictionary
     /// </summary>
     /// <param name="enumTypeList"></param>
     /// <returns></returns>

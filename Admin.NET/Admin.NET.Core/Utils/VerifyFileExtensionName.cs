@@ -1,13 +1,13 @@
-// Admin.NET 项目的版权、商标、专利和其他相关权利均受相应法律法规的保护。使用本项目应遵守相关法律法规和许可证的要求。
+// The copyright, trademark, patent and other related rights of the Admin.NET project are protected by corresponding laws and regulations. Use of this project shall comply with relevant laws, regulations and license requirements.
 //
-// 本项目主要遵循 MIT 许可证和 Apache 许可证（版本 2.0）进行分发和使用。许可证位于源代码树根目录中的 LICENSE-MIT 和 LICENSE-APACHE 文件。
+// This project is distributed and used primarily under the MIT License and the Apache License (version 2.0). The license is located in the LICENSE-MIT and LICENSE-APACHE files in the root of the source tree.
 //
-// 不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！
+// This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project!
 
 namespace Admin.NET.Core;
 
 /// <summary>
-/// 验证文件类型
+/// Verify file type
 /// </summary>
 public static class VerifyFileExtensionName
 {
@@ -23,31 +23,31 @@ public static class VerifyFileExtensionName
         DicsExt.Add("49492A00", ".tif");
         DicsExt.Add("424D", ".bmp");
 
-        // PS和CAD
+        // PS and CAD
         DicsExt.Add("38425053", ".psd");
         DicsExt.Add("41433130", ".dwg"); // CAD
         DicsExt.Add("252150532D41646F6265", ".ps");
 
-        // 办公文档类
+        // Office documents
         DicsExt.Add("D0CF11E0", ".ppt,.doc,.xls"); // ppt、doc、xls
         DicsExt.Add("504B0304", ".pptx,.docx,.xlsx"); // pptx、docx、xlsx
 
-        /* 注意由于文本文档录入内容过多，则读取文件头时较为多变-START */
+        /* Note that because there is too much input content in the text document, the file header will be more variable when reading - START */
         DicsExt.Add("0D0A0D0A", ".txt"); // txt
         DicsExt.Add("0D0A2D2D", ".txt"); // txt
         DicsExt.Add("0D0AB4B4", ".txt"); // txt
-        DicsExt.Add("B4B4BDA8", ".txt"); // 文件头部为汉字
-        DicsExt.Add("73646673", ".txt"); // txt,文件头部为英文字母
-        DicsExt.Add("32323232", ".txt"); // txt,文件头部内容为数字
-        DicsExt.Add("0D0A09B4", ".txt"); // txt,文件头部内容为数字
-        DicsExt.Add("3132330D", ".txt"); // txt,文件头部内容为数字
-        /* 注意由于文本文档录入内容过多，则读取文件头时较为多变-END */
+        DicsExt.Add("B4B4BDA8", ".txt"); // The file header is Chinese characters
+        DicsExt.Add("73646673", ".txt"); // txt, the file header is English letters
+        DicsExt.Add("32323232", ".txt"); // txt, the file header content is a number
+        DicsExt.Add("0D0A09B4", ".txt"); // txt, the file header content is a number
+        DicsExt.Add("3132330D", ".txt"); // txt, the file header content is a number
+        /* Note that because there is too much input content in the text document, the file header will be more variable when reading - END */
 
-        DicsExt.Add("7B5C727466", ".rtf"); // 日记本
+        DicsExt.Add("7B5C727466", ".rtf"); // diary
 
         DicsExt.Add("255044462D312E", ".pdf");
 
-        // 视频或音频类
+        // Video or audio class
         DicsExt.Add("3026B275", ".wma");
         DicsExt.Add("57415645", ".wav");
         DicsExt.Add("41564920", ".avi");
@@ -58,13 +58,13 @@ public static class VerifyFileExtensionName
         DicsExt.Add("6D6F6F76", ".mov");
         DicsExt.Add("3026B2758E66CF11", ".asf");
 
-        // 压缩包
+        // Compressed package
         DicsExt.Add("52617221", ".rar");
         DicsExt.Add("504B03040A000000", ".zip");
         DicsExt.Add("504B030414000000", ".zip");
         DicsExt.Add("1F8B08", ".gz");
 
-        // 程序文件
+        // program files
         DicsExt.Add("3C3F786D6C", ".xml");
         DicsExt.Add("68746D6C3E", ".html");
         DicsExt.Add("04034b50", ".apk");
@@ -72,8 +72,8 @@ public static class VerifyFileExtensionName
         //dics_ext.Add("3C254020", ".jsp");
         //dics_ext.Add("4D5A9000", ".exe");
 
-        DicsExt.Add("44656C69766572792D646174653A", ".eml"); // 邮件
-        DicsExt.Add("5374616E64617264204A", ".mdb"); // Access数据库文件
+        DicsExt.Add("44656C69766572792D646174653A", ".eml"); // mail
+        DicsExt.Add("5374616E64617264204A", ".mdb"); // Access database file
 
         DicsExt.Add("46726F6D", ".mht");
         DicsExt.Add("4D494D45", ".mhtml");
@@ -91,7 +91,7 @@ public static class VerifyFileExtensionName
     }
 
     /// <summary>
-    /// 文件格式和文件内容格式是否一致
+    /// Are the file format and file content format consistent?
     /// </summary>
     /// <param name="stream"></param>
     /// <param name="suffix"></param>
@@ -123,9 +123,9 @@ public static class VerifyFileExtensionName
     }
 
     /**
-     * 根据文件转换成的字节数组获取文件头信息
-     * @param 文件路径
-     * @return 文件头信息
+     * Number of bytes converted from the filegroupGet fileHeader information
+     * @param File path
+     * @return File header information
      */
 
     private static string GetFileHeader(byte[] b)
@@ -135,14 +135,14 @@ public static class VerifyFileExtensionName
     }
 
     /**
-     * 将要读取文件头信息的文件的byte数组转换成string类型表示
-     * 下面这段代码就是用来对文件类型作验证的方法，
-     * 将字节数组的前四位转换成16进制字符串，并且转换的时候，要先和0xFF做一次与运算。
-     * 这是因为，整个文件流的字节数组中，有很多是负数，进行了与运算后，可以将前面的符号位都去掉，
-     * 这样转换成的16进制字符串最多保留两位，如果是正数又小于10，那么转换后只有一位，
-     * 需要在前面补0，这样做的目的是方便比较，取完前四位这个循环就可以终止了
-     * @param src要读取文件头信息的文件的byte数组
-     * @return 文件头信息
+     * of the file whose header information is about to be readbytenumbergroupconvert tostringTypeexpress; indicate; show
+     * The following piece of codeYesused to correspond toFile typeMethod of verification，
+     * Convert bytesgroupfront ofFourconvert to bits16radix string，andConvertedtimewait，Need to first and0xFFDooneBitwise AND operation。
+     * ThisYesbecause，wholeThe number of bytes in a file streamgroupin，There are manyYesNegative number，After performing the AND operation，You can remove all the preceding sign bits，
+     * Converted like this16The binary string retains up to two digits，IfYesjustnumber againless than10，Then after the conversion, onlyoneposition，
+     * Need to add in front0，The purpose of doing thisYesConvenient for comparison，Before takingFourThis loop can then be terminated
+     * @param srcThe file whose header information needs to be readbytenumbergroup
+     * @return File header information
      */
 
     private static string BytesToHexString(byte[] src)
@@ -153,7 +153,7 @@ public static class VerifyFileExtensionName
 
         for (int i = 0; i < src.Length; i++)
         {
-            // 以十六进制（基数 16）无符号整数形式返回一个整数参数的字符串表示形式，并转换为大写
+            // Returns the string representation of an integer argument as a hexadecimal (base 16) unsigned integer, converted to uppercase
             string hVal = Convert.ToString(src[i] & 0xFF, 16).ToUpper();
             if (hVal.Length < 2) builder.Append(0);
             builder.Append(hVal);

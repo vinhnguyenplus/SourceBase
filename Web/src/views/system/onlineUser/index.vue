@@ -1,23 +1,23 @@
 <template>
 	<div class="sys-onlineUser-container">
-		<el-drawer v-model="state.isVisible" title="在线用户列表" size="45%">
+		<el-drawer v-model="state.isVisible" title="Online User List" size="45%">
 			<el-card shadow="hover" :body-style="{ paddingBottom: '0' }" style="margin: 8px">
 				<el-form :model="state.queryParams" ref="queryForm" :inline="true">
-					<el-form-item label="租户" v-if="userStore.userInfos.accountType == 999">
-						<el-select v-model="state.queryParams.tenantId" placeholder="租户" style="width: 100%">
+					<el-form-item label="tenant" v-if="userStore.userInfos.accountType == 999">
+						<el-select v-model="state.queryParams.tenantId" placeholder="tenant" style="width: 100%">
 							<el-option :value="item.value" :label="`${item.label} (${item.host})`" v-for="(item, index) in state.tenantList" :key="index" />
 						</el-select>
 					</el-form-item>
-					<el-form-item label="账号" prop="userName">
-						<el-input placeholder="账号" clearable @keyup.enter="handleQuery" v-model="state.queryParams.userName" />
+					<el-form-item label="Account number" prop="userName">
+						<el-input placeholder="Account number" clearable @keyup.enter="handleQuery" v-model="state.queryParams.userName" />
 					</el-form-item>
-					<el-form-item label="姓名" prop="realName">
-						<el-input placeholder="姓名" clearable @keyup.enter="handleQuery" v-model="state.queryParams.realName" />
+					<el-form-item label="Name" prop="realName">
+						<el-input placeholder="Name" clearable @keyup.enter="handleQuery" v-model="state.queryParams.realName" />
 					</el-form-item>
 					<el-form-item>
 						<el-button-group>
-							<el-button type="primary" icon="ele-Search" @click="handleQuery"> 查询 </el-button>
-							<el-button icon="ele-Refresh" @click="resetQuery"> 重置 </el-button>
+							<el-button type="primary" icon="ele-Search" @click="handleQuery"> Query </el-button>
+							<el-button icon="ele-Refresh" @click="resetQuery"> reset </el-button>
 						</el-button-group>
 					</el-form-item>
 				</el-form>
@@ -25,16 +25,16 @@
 
 			<el-card shadow="hover" style="margin: 8px; padding-bottom: 15px">
 				<el-table :data="state.onlineUserList" style="width: 100%" v-loading="state.loading" border>
-					<el-table-column type="index" label="序号" width="55" align="center" />
-					<el-table-column prop="userName" label="账号" header-align="center" show-overflow-tooltip />
-					<el-table-column prop="realName" label="姓名" header-align="center" show-overflow-tooltip />
-					<el-table-column prop="ip" label="IP地址" min-width="100" header-align="center" show-overflow-tooltip />
-					<el-table-column prop="browser" label="浏览器" header-align="center" show-overflow-tooltip />
-					<!-- <el-table-column prop="connectionId" label="连接Id" show-overflow-tooltip></el-table-column> -->
-					<el-table-column prop="time" label="登录时间" min-width="120" header-align="center" show-overflow-tooltip />
-					<el-table-column label="操作" width="81" fixed="right" align="center" show-overflow-tooltip>
+					<el-table-column type="index" label="No" width="55" align="center" />
+					<el-table-column prop="userName" label="Account number" header-align="center" show-overflow-tooltip />
+					<el-table-column prop="realName" label="Name" header-align="center" show-overflow-tooltip />
+					<el-table-column prop="ip" label="IP address" min-width="100" header-align="center" show-overflow-tooltip />
+					<el-table-column prop="browser" label="Browser" header-align="center" show-overflow-tooltip />
+					<!-- <el-table-column prop="connectionId" label="ConnectionId" show-overflow-tooltip></el-table-column> -->
+					<el-table-column prop="time" label="Login Time" min-width="120" header-align="center" show-overflow-tooltip />
+					<el-table-column label="Operation" width="81" fixed="right" align="center" show-overflow-tooltip>
 						<template #default="scope">
-							<el-button icon="ele-CircleCloseFilled" size="small" text type="danger" v-auth="'sysOnlineUser:forceOffline'" @click="forceOffline(scope.row)"> 下线 </el-button>
+							<el-button icon="ele-CircleCloseFilled" size="small" text type="danger" v-auth="'sysOnlineUser:forceOffline'" @click="forceOffline(scope.row)"> offline </el-button>
 						</template>
 					</el-table-column>
 				</el-table>
@@ -80,11 +80,11 @@ const state = reactive({
 		pageSize: 50,
 		total: 1 as any,
 	},
-	onlineUserList: [] as Array<SysOnlineUser>, // 在线用户列表
+	onlineUserList: [] as Array<SysOnlineUser>, // Online user list
 	lastUserState: {
 		online: false,
 		realName: '',
-	}, // 最后接收的用户变更状态信息
+	}, // Last received user change status information
 });
 
 onMounted(async () => {
@@ -92,7 +92,7 @@ onMounted(async () => {
 		state.tenantList = await getAPI(SysTenantApi).apiSysTenantListGet().then(res => res.data.result ?? []);
 		state.queryParams.tenantId = userStore.userInfos.currentTenantId as any;
 	}
-	// 在线用户列表
+	// Online user list
 	signalR.off('OnlineUserList');
 	signalR.on('OnlineUserList', (data: any) => {
 		state.onlineUserList = data.userList;
@@ -102,10 +102,10 @@ onMounted(async () => {
 		};
 		notificationThrottle();
 	});
-	// 强制下线
+	// Forced offline
 	signalR.off('ForceOffline');
 	signalR.on('ForceOffline', async (data: any) => {
-		console.log('强制下线', data);
+		console.log('Forced offline', data);
 		await signalR.stop();
 
 		await getAPI(SysAuthApi).apiSysAuthLogoutPost();
@@ -113,12 +113,12 @@ onMounted(async () => {
 	});
 });
 
-// 通知提示节流
+// Notification prompts throttling
 const notificationThrottle = throttle(
 	function () {
 		ElNotification({
-			title: '提示',
-			message: `${state.lastUserState.online ? `【${state.lastUserState.realName}】上线了` : `【${state.lastUserState.realName}】离开了`}`,
+			title: 'Prompt',
+			message: `${state.lastUserState.online ? `【${state.lastUserState.realName}】Launched` : `【${state.lastUserState.realName}】Left`}`,
 			type: `${state.lastUserState.online ? 'info' : 'error'}`,
 			position: 'bottom-right',
 		});
@@ -130,13 +130,13 @@ const notificationThrottle = throttle(
 	}
 );
 
-// 打开页面
+// open page
 const openDrawer = () => {
 	state.isVisible = true;
 	handleQuery();
 };
 
-// 查询操作
+// Query operation
 const handleQuery = async () => {
 	state.loading = true;
 	let params = Object.assign(state.queryParams, state.tableParams);
@@ -146,18 +146,18 @@ const handleQuery = async () => {
 	state.loading = false;
 };
 
-// 重置操作
+// reset operation
 const resetQuery = () => {
 	state.queryParams.userName = undefined;
 	state.queryParams.realName = undefined;
 	handleQuery();
 };
 
-// 强制下线
+// Forced offline
 const forceOffline = async (row: any) => {
-	ElMessageBox.confirm(`确定踢掉账号：【${row.realName}】?`, '提示', {
-		confirmButtonText: '确定',
-		cancelButtonText: '取消',
+	ElMessageBox.confirm(`Are you sure you want to remove the account: 【${row.realName}】?`, 'Prompt', {
+		confirmButtonText: 'Confirm',
+		cancelButtonText: 'Cancel',
 		type: 'warning',
 	})
 		.then(async () => {
@@ -168,18 +168,18 @@ const forceOffline = async (row: any) => {
 		.catch(() => {});
 };
 
-// 改变页面容量
+// Change page capacity
 const handleSizeChange = (val: number) => {
 	state.tableParams.pageSize = val;
 	handleQuery();
 };
 
-// 改变页码序号
+// Change page number
 const handleCurrentChange = (val: number) => {
 	state.tableParams.page = val;
 	handleQuery();
 };
 
-// 导出对象
+// Export object
 defineExpose({ openDrawer });
 </script>

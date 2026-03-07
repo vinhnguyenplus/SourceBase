@@ -311,7 +311,7 @@ declare type TableSearchType = {
 	prop: string;
 	placeholder: string;
 	required: boolean;
-	type: 'input' | 'date' | 'daterange' | 'monthrange' | 'select' | 'cascader'; // vxe-next-admin 原定义是 string
+	type: 'input' | 'date' | 'daterange' | 'monthrange' | 'select' | 'cascader'; // The original definition of vxe-next-admin is string
 	options?: SelectOptionType[];
 	dictCode?: string;
 	cascaderData?: object[];
@@ -324,7 +324,7 @@ declare type TableDemoState = {
 	tableData: {
 		// data: EmptyObjectType[];
 		// header: TableHeaderType[];
-		columns: Object[]; //列设置，同ELTable-Column属性
+		columns: Object[]; // Column settings, same as ELTable-Column property
 		config: {
 			// total: number;
 			// loading: boolean;
@@ -351,14 +351,14 @@ declare type TableDemoState = {
 	};
 };
 
-// HTTP 作业消息（字段定义来源 Furion 的 HttpJobMessage）
+// HTTP job message (field definition source Furion's HttpJobMessage)
 interface HttpJobMessage {
 	requestUri?: string | null;
 	httpMethod?: string | null;
 	body?: string | null;
 }
 
-// 修改记录相关字段定义
+// Modify record-related field definitions
 declare type ModifyRecord = {
 	createUserName?: string | null;
 	createTime?: string | null;

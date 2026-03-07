@@ -1,89 +1,89 @@
-// Admin.NET 项目的版权、商标、专利和其他相关权利均受相应法律法规的保护。使用本项目应遵守相关法律法规和许可证的要求。
+// The copyright, trademark, patent and other related rights of the Admin.NET project are protected by corresponding laws and regulations. Use of this project shall comply with relevant laws, regulations and license requirements.
 //
-// 本项目主要遵循 MIT 许可证和 Apache 许可证（版本 2.0）进行分发和使用。许可证位于源代码树根目录中的 LICENSE-MIT 和 LICENSE-APACHE 文件。
+// This project is distributed and used primarily under the MIT License and the Apache License (version 2.0). The license is located in the LICENSE-MIT and LICENSE-APACHE files in the root of the source tree.
 //
-// 不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！
+// This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project!
 
 namespace Admin.NET.Core;
 
 /// <summary>
-/// 系统域登录信息配置表
+/// System domain login information configuration table
 /// </summary>
-[SugarTable(null, "系统域登录信息配置表")]
+[SugarTable(null, "System Domain Login Information Configuration Table")]
 [SysTable]
 public class SysLdap : EntityBaseTenantDel
 {
     /// <summary>
-    /// 主机
+    /// Host
     /// </summary>
-    [SugarColumn(ColumnDescription = "主机", Length = 128)]
+    [SugarColumn(ColumnDescription = "Host", Length = 128)]
     [Required]
     public virtual string Host { get; set; }
 
     /// <summary>
-    /// 端口
+    /// port
     /// </summary>
-    [SugarColumn(ColumnDescription = "端口")]
+    [SugarColumn(ColumnDescription = "port")]
     public virtual int Port { get; set; }
 
     /// <summary>
-    /// 用户搜索基准
+    /// User search benchmark
     /// </summary>
-    [SugarColumn(ColumnDescription = "用户搜索基准", Length = 128)]
+    [SugarColumn(ColumnDescription = "User search benchmark", Length = 128)]
     [Required]
     public virtual string BaseDn { get; set; }
 
     /// <summary>
-    /// 绑定DN(有管理权限制的用户)
+    /// Bind DN (user with administrative rights restrictions)
     /// </summary>
-    [SugarColumn(ColumnDescription = "绑定DN", Length = 128)]
+    [SugarColumn(ColumnDescription = "Bind DN", Length = 128)]
     [Required]
     public virtual string BindDn { get; set; }
 
     /// <summary>
-    /// 绑定密码(有管理权限制的用户密码)
+    /// Bind password (user password with administrative rights restrictions)
     /// </summary>
-    [SugarColumn(ColumnDescription = "绑定密码", Length = 512)]
+    [SugarColumn(ColumnDescription = "Bind password", Length = 512)]
     [Required]
     public virtual string BindPass { get; set; }
 
     /// <summary>
-    /// 用户过滤规则
+    /// User filter rules
     /// </summary>
-    [SugarColumn(ColumnDescription = "用户过滤规则", Length = 128)]
+    [SugarColumn(ColumnDescription = "User filtering rules", Length = 128)]
     [Required]
     public virtual string AuthFilter { get; set; } = "sAMAccountName=%s";
 
     /// <summary>
-    /// Ldap版本
+    /// Ldap version
     /// </summary>
-    [SugarColumn(ColumnDescription = "Ldap版本")]
+    [SugarColumn(ColumnDescription = "LDAP Version")]
     public int Version { get; set; }
 
     /// <summary>
-    /// 绑定域账号字段属性值
+    /// Bind domain account field attribute value
     /// </summary>
-    [SugarColumn(ColumnDescription = "绑定域账号字段属性值", Length = 32)]
+    [SugarColumn(ColumnDescription = "Bind domain account field attribute value", Length = 32)]
     [Required]
     public virtual string BindAttrAccount { get; set; } = "sAMAccountName";
 
     /// <summary>
-    /// 绑定用户EmployeeId属性值
+    /// Bind user EmployeeId attribute value
     /// </summary>
-    [SugarColumn(ColumnDescription = "绑定用户EmployeeId属性值", Length = 32)]
+    [SugarColumn(ColumnDescription = "Bind the user's EmployeeId property value", Length = 32)]
     [Required]
     public virtual string BindAttrEmployeeId { get; set; } = "EmployeeId";
 
     /// <summary>
-    /// 绑定Code属性值
+    /// Bind Code attribute value
     /// </summary>
-    [SugarColumn(ColumnDescription = "绑定对象Code属性值", Length = 64)]
+    [SugarColumn(ColumnDescription = "Bind the object's Code property value", Length = 64)]
     [Required]
     public virtual string BindAttrCode { get; set; } = "objectGUID";
 
     /// <summary>
-    /// 状态
+    /// state
     /// </summary>
-    [SugarColumn(ColumnDescription = "状态")]
+    [SugarColumn(ColumnDescription = "state")]
     public StatusEnum Status { get; set; } = StatusEnum.Enable;
 }

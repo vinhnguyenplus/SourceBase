@@ -1,15 +1,15 @@
-// Admin.NET 项目的版权、商标、专利和其他相关权利均受相应法律法规的保护。使用本项目应遵守相关法律法规和许可证的要求。
+// The copyright, trademark, patent and other related rights of the Admin.NET project are protected by corresponding laws and regulations. Use of this project shall comply with relevant laws, regulations and license requirements.
 //
-// 本项目主要遵循 MIT 许可证和 Apache 许可证（版本 2.0）进行分发和使用。许可证位于源代码树根目录中的 LICENSE-MIT 和 LICENSE-APACHE 文件。
+// This project is distributed and used primarily under the MIT License and the Apache License (version 2.0). The license is located in the LICENSE-MIT and LICENSE-APACHE files in the root of the source tree.
 //
-// 不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！
+// This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project!
 
 namespace Admin.NET.Core.Service;
 
 /// <summary>
-/// 系统字典类型服务 🧩
+/// System dictionary type service 🧩
 /// </summary>
-[ApiDescriptionSettings(Order = 430, Description = "系统字典类型")]
+[ApiDescriptionSettings(Order = 430, Description = "systemdictionaryType")]
 public class SysDictTypeService : IDynamicApiController, ITransient
 {
     private readonly SqlSugarRepository<SysDictType> _sysDictTypeRep;
@@ -32,10 +32,10 @@ public class SysDictTypeService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 获取字典类型分页列表 🔖
+    /// Get dictionary type paginated list 🔖
     /// </summary>
     /// <returns></returns>
-    [DisplayName("获取字典类型分页列表")]
+    [DisplayName("Get paginated list of dictionary types")]
     public async Task<SqlSugarPagedList<SysDictType>> Page(PageDictTypeInput input)
     {
         var langCode = _userManager.LangCode;
@@ -64,10 +64,10 @@ public class SysDictTypeService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 获取字典类型列表 🔖
+    /// Get list of dictionary types 🔖
     /// </summary>
     /// <returns></returns>
-    [DisplayName("获取字典类型列表")]
+    [DisplayName("Get the list of dictionary types")]
     public async Task<List<SysDictType>> GetList()
     {
         var langCode = _userManager.LangCode;
@@ -89,11 +89,11 @@ public class SysDictTypeService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 获取字典类型-值列表 🔖
+    /// Get dictionary type-list of values ​​🔖
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
-    [DisplayName("获取字典类型-值列表")]
+    [DisplayName("ObtaindictionaryType-valueList")]
     public async Task<List<SysDictData>> GetDataList([FromQuery] GetDataDictTypeInput input)
     {
         var dictType = await _sysDictTypeRep.GetFirstAsync(u => u.Code == input.Code) ?? throw Oops.Oh(ErrorCodeEnum.D3000);
@@ -116,12 +116,12 @@ public class SysDictTypeService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 添加字典类型 🔖
+    /// Add dictionary type 🔖
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
     [ApiDescriptionSettings(Name = "Add"), HttpPost]
-    [DisplayName("添加字典类型")]
+    [DisplayName("Add dictionary type")]
     public async Task AddDictType(AddDictTypeInput input)
     {
         if (input.Code.ToLower().EndsWith("enum")) throw Oops.Oh(ErrorCodeEnum.D3006);
@@ -130,19 +130,19 @@ public class SysDictTypeService : IDynamicApiController, ITransient
         var isExist = await _sysDictTypeRep.IsAnyAsync(u => u.Code == input.Code);
         if (isExist) throw Oops.Oh(ErrorCodeEnum.D3001);
 
-        if (_userManager.SuperAdmin) input.IsTenant = YesNoEnum.N;  // 超级管理员添加的字典类型默认非租户级
+        if (_userManager.SuperAdmin) input.IsTenant = YesNoEnum.N;  // The dictionary type added by the super administrator defaults to non-tenant level.
 
         await _sysDictTypeRep.InsertAsync(input.Adapt<SysDictType>());
     }
 
     /// <summary>
-    /// 更新字典类型 🔖
+    /// Update dictionary type 🔖
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
     [UnitOfWork]
     [ApiDescriptionSettings(Name = "Update"), HttpPost]
-    [DisplayName("更新字典类型")]
+    [DisplayName("Update dictionary type")]
     public async Task UpdateDictType(UpdateDictTypeInput input)
     {
         var dict = await _sysDictTypeRep.GetFirstAsync(x => x.Id == input.Id);
@@ -160,41 +160,41 @@ public class SysDictTypeService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 删除字典类型 🔖
+    /// Delete dictionary type 🔖
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
     [UnitOfWork]
     [ApiDescriptionSettings(Name = "Delete"), HttpPost]
-    [DisplayName("删除字典类型")]
+    [DisplayName("Delete dictionary type")]
     public async Task DeleteDictType(DeleteDictTypeInput input)
     {
         var dictType = await _sysDictTypeRep.GetByIdAsync(input.Id) ?? throw Oops.Oh(ErrorCodeEnum.D3000);
         if (dictType.SysFlag == YesNoEnum.Y && !_userManager.SuperAdmin) throw Oops.Oh(ErrorCodeEnum.D3010);
 
-        // 删除字典值
+        // Delete dictionary value
         await _sysDictTypeRep.DeleteAsync(dictType);
         await _sysDictDataService.DeleteDictData(input.Id);
     }
 
     /// <summary>
-    /// 获取字典类型详情 🔖
+    /// Get dictionary type details 🔖
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
-    [DisplayName("获取字典类型详情")]
+    [DisplayName("Get dictionary type details")]
     public async Task<SysDictType> GetDetail([FromQuery] DictTypeInput input)
     {
         return await _sysDictTypeRep.GetByIdAsync(input.Id);
     }
 
     /// <summary>
-    /// 修改字典类型状态 🔖
+    /// Modify dictionary type status 🔖
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
     [UnitOfWork]
-    [DisplayName("修改字典类型状态")]
+    [DisplayName("Modify dictionary type status")]
     public async Task SetStatus(DictTypeInput input)
     {
         var dictType = await _sysDictTypeRep.GetByIdAsync(input.Id) ?? throw Oops.Oh(ErrorCodeEnum.D3000);
@@ -207,10 +207,10 @@ public class SysDictTypeService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 获取所有字典集合 🔖
+    /// Get all dictionary collection 🔖
     /// </summary>
     /// <returns></returns>
-    [DisplayName("获取所有字典集合")]
+    [DisplayName("Get all dictionary collections")]
     public async Task<dynamic> GetAllDictList()
     {
         var langCode = _userManager.LangCode;
@@ -218,7 +218,7 @@ public class SysDictTypeService : IDynamicApiController, ITransient
             .InnerJoin(_sysDictDataService.VSysDictData, (u, w) => u.Id == w.DictTypeId)
             .Select((u, w) => new DictDataOutput
             {
-                DictDataId = w.Id, // 给翻译用
+                DictDataId = w.Id, // for translation
                 TypeCode = u.Code,
                 Label = w.Label,
                 Value = w.Value,

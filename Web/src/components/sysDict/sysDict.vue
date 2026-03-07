@@ -1,4 +1,4 @@
-<!-- 组件使用文档： https://gitee.com/zuohuaijun/Admin.NET/pulls/1559  -->
+<!-- Component usage documentation: https://gitee.com/zuohuaijun/Admin.NET/pulls/1559  -->
 <script setup lang="ts">
 import { reactive, watch, PropType } from 'vue';
 import { useUserInfo } from '/@/stores/userInfo';
@@ -14,7 +14,7 @@ const userStore = useUserInfo();
 const emit = defineEmits(['update:modelValue']);
 const props = defineProps({
   /**
-   * 绑定的值，支持多种类型
+   * Boundvalue，Supports multipleType
    * @example
    * <g-sys-dict v-model="selectedValue" code="xxxx" />
    */
@@ -24,7 +24,7 @@ const props = defineProps({
     required: true,
   },
   /**
-   * 字典编码，用于获取字典项
+   * Dictionary Encoding，used forObtaindictionaryitem
    * @example 'gender'
    */
   code: {
@@ -32,7 +32,7 @@ const props = defineProps({
     required: true,
   },
   /**
-   * 是否是常量
+   * YesnoYesConstant
    * @default false
    */
   isConst: {
@@ -40,7 +40,7 @@ const props = defineProps({
     default: false,
   },
   /**
-   * 字典项中用于显示的字段名
+   * dictionaryiteminused forDisplayofField Name
    * @default 'label'
    */
   propLabel: {
@@ -48,7 +48,7 @@ const props = defineProps({
     default: 'label',
   },
   /**
-   * 字典项中用于取值的字段名
+   * dictionaryiteminused for takingvalueofField Name
    * @default 'value'
    */
   propValue: {
@@ -56,9 +56,9 @@ const props = defineProps({
     default: 'value',
   },
   /**
-   * 字典项过滤函数
-   * @param dict - 字典项
-   * @returns 是否保留该项
+   * dictionaryItem filter function
+   * @param dict - dictionaryitem
+   * @returns YesnoKeep this item
    * @default (dict) => true
    */
   onItemFilter: {
@@ -66,9 +66,9 @@ const props = defineProps({
     default: (dict: DictItem) => true,
   },
   /**
-   * 字典项显示内容格式化函数
-   * @param dict - 字典项
-   * @returns 格式化后的显示内容
+   * dictionaryitemDisplaycontentFormatting function
+   * @param dict - dictionaryitem
+   * @returns FormattedDisplaycontent
    * @default () => undefined
    */
   onItemFormatter: {
@@ -76,7 +76,7 @@ const props = defineProps({
     default: () => undefined,
   },
   /**
-   * 组件渲染方式
+   * groupPiece rendering method
    * @values 'tag', 'select', 'radio', 'checkbox'
    * @default 'tag'
    */
@@ -88,7 +88,7 @@ const props = defineProps({
     },
   },
   /**
-   * 是否多选
+   * YesnoMultiple Choice
    * @default false
    */
   multiple: {
@@ -103,11 +103,11 @@ const state = reactive({
   value: undefined as any,
 });
 
-// 获取数据集
+// Get dataset
 const getDataList = () => {
   if (props.isConst) {
     const data = userStore.constList?.find((x: any) => x.code === props.code)?.data?.result ?? [];
-    // 与字典的显示文本、值保持一致，方便渲染
+    // Consistent with the displayed text and values ​​of the dictionary to facilitate rendering
     data?.forEach((item: any) => {
       item.label = item.name;
       item.value = item.code;
@@ -119,13 +119,13 @@ const getDataList = () => {
   }
 }
 
-// 设置字典数据
+// Set dictionary data
 const setDictData = () => {
   state.dictData = getDataList()?.filter(props.onItemFilter) ?? [];
   processNumericValues(props.modelValue);
 };
 
-// 处理数字类型的值
+// Handling numeric type values
 const processNumericValues = (value: any) => {
   if (typeof value === 'number' || (Array.isArray(value) && typeof value[0] === 'number')) {
     state.dictData.forEach((item) => {
@@ -134,7 +134,7 @@ const processNumericValues = (value: any) => {
   }
 };
 
-// 设置多选值
+// Set multiple selection values
 const trySetMultipleValue = (value: any) => {
   let newValue = value;
   if (typeof value === 'string') {
@@ -143,7 +143,7 @@ const trySetMultipleValue = (value: any) => {
       try {
         newValue = JSON.parse(trimmedValue);
       } catch (error) {
-        console.warn('[g-sys-dict]解析多选值失败, 异常信息:', error);
+        console.warn('[g-sys-dict] Failed to parse multiple selection values, exception information:', error);
       }
     }
   } else if (props.multiple && !value) {
@@ -155,7 +155,7 @@ const trySetMultipleValue = (value: any) => {
   return newValue;
 }
 
-// 设置字典值
+// Set dictionary value
 const setDictValue = (value: any) => {
   value = trySetMultipleValue(value);
   if (Array.isArray(value)) {
@@ -168,19 +168,19 @@ const setDictValue = (value: any) => {
   state.value = value;
 };
 
-// 确保标签类型存在
+// Make sure the label type exists
 const ensureTagType = (item: DictItem) => {
   if (!['success', 'warning', 'info', 'primary', 'danger'].includes(item.tagType ?? '')) {
     item.tagType = 'primary';
   }
 };
 
-// 更新绑定值
+// Update binding value
 const updateValue = (newValue: any) => {
   emit('update:modelValue', newValue);
 };
 
-// 计算显示的文本
+// Calculate displayed text
 const getDisplayText = (dict: DictItem | undefined = undefined) => {
   if (dict) return props.onItemFormatter?.(dict) ?? dict[props.propLabel];
   return state.value;
@@ -194,7 +194,7 @@ watch(
 </script>
 
 <template>
-  <!-- 渲染标签 -->
+  <!-- render tag -->
   <template v-if="props.renderAs === 'tag'">
     <template v-if="Array.isArray(state.dict)">
       <el-tag v-for="(item, index) in state.dict" :key="index" v-bind="$attrs" :type="item.tagType" :style="item.styleSetting" :class="item.classSetting" class="mr2">
@@ -209,14 +209,14 @@ watch(
     </template>
   </template>
 
-  <!-- 渲染选择器 -->
+  <!-- Render selector -->
   <template v-if="props.renderAs === 'select'">
     <el-select v-model="state.value" v-bind="$attrs" :multiple="props.multiple" @change="updateValue" clearable>
       <el-option v-for="(item, index) in state.dictData" :key="index" :label="getDisplayText(item)" :value="item[propValue]" />
     </el-select>
   </template>
 
-  <!-- 渲染复选框（多选） -->
+  <!-- Render checkbox (multiple selection) -->
   <template v-if="props.renderAs === 'checkbox'">
     <el-checkbox-group v-model="state.value" v-bind="$attrs" @change="updateValue">
       <el-checkbox-button v-for="(item, index) in state.dictData" :key="index" :value="item[propValue]">
@@ -225,7 +225,7 @@ watch(
     </el-checkbox-group>
   </template>
 
-  <!-- 渲染单选框 -->
+  <!-- Render radio button -->
   <template v-if="props.renderAs === 'radio'">
     <el-radio-group v-model="state.value" v-bind="$attrs" @change="updateValue">
       <el-radio v-for="(item, index) in state.dictData" :key="index" :value="item[propValue]">

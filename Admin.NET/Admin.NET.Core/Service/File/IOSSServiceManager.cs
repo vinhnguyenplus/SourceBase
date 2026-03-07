@@ -3,25 +3,25 @@ using OnceMi.AspNetCore.OSS;
 namespace Admin.NET.Core.Service;
 
 /// <summary>
-/// OSS服务管理器接口
+/// OSS service manager interface
 /// </summary>
 public interface IOSSServiceManager : IDisposable
 {
     /// <summary>
-    /// 获取OSS服务实例
+    /// Obtain OSS service instance
     /// </summary>
-    /// <param name="provider">存储提供者配置</param>
+    /// <param name="provider">Storage provider configuration</param>
     /// <returns></returns>
     Task<IOSSService> GetOSSServiceAsync(SysFileProvider provider);
 
     /// <summary>
-    /// 清除缓存
+    /// clear cache
     /// </summary>
     void ClearCache();
 }
 
 /// <summary>
-/// OSS服务管理器实现
+/// OSS service manager implementation
 /// </summary>
 public class OSSServiceManager : IOSSServiceManager, ITransient
 {
@@ -37,9 +37,9 @@ public class OSSServiceManager : IOSSServiceManager, ITransient
     }
 
     /// <summary>
-    /// 获取OSS服务实例（带缓存）
+    /// Obtain OSS service instance (with cache)
     /// </summary>
-    /// <param name="provider">存储提供者配置</param>
+    /// <param name="provider">Storage provider configuration</param>
     /// <returns></returns>
     public async Task<IOSSService> GetOSSServiceAsync(SysFileProvider provider)
     {
@@ -48,32 +48,32 @@ public class OSSServiceManager : IOSSServiceManager, ITransient
 
         var cacheKey = provider.ConfigKey;
 
-        // 尝试从缓存获取
+        // Try to get from cache
         if (_ossServiceCache.TryGetValue(cacheKey, out var cachedService))
         {
             return cachedService;
         }
 
-        // 验证配置
+        // Verify configuration
         if (!await ValidateConfigurationAsync(provider))
         {
-            throw new InvalidOperationException($"OSS提供者配置无效: {provider.DisplayName}");
+            throw new InvalidOperationException($"OSSProviderConfigurationNoneeffect: {provider.DisplayName}");
         }
 
-        // 线程安全地创建新服务
+        // Thread-safely create new services
         lock (_lockObject)
         {
-            // 双重检查锁定模式
+            // Double check lock mode
             if (_ossServiceCache.TryGetValue(cacheKey, out cachedService))
             {
                 return cachedService;
             }
 
-            // 转换配置并创建服务
+            // Convert configuration and create service
             var ossOptions = ConvertToOSSOptions(provider);
             var ossService = CreateOSSService(ossOptions);
 
-            // 添加到缓存
+            // add to cache
             _ossServiceCache.TryAdd(cacheKey, ossService);
 
             return ossService;
@@ -81,9 +81,9 @@ public class OSSServiceManager : IOSSServiceManager, ITransient
     }
 
     /// <summary>
-    /// 创建OSS服务实例
+    /// Create an OSS service instance
     /// </summary>
-    /// <param name="options">OSS配置选项</param>
+    /// <param name="options">OSS configuration options</param>
     /// <returns></returns>
     private IOSSService CreateOSSService(OSSOptions options)
     {
@@ -91,11 +91,11 @@ public class OSSServiceManager : IOSSServiceManager, ITransient
 
         try
         {
-            // 使用现有的IOSSServiceFactory，但需要先注册配置
+            // Use the existing IOSSServiceFactory, but need to register the configuration first
             var providerName = Enum.GetName(options.Provider);
             var configSectionName = $"TempOSS_{Guid.NewGuid():N}";
 
-            // 创建临时配置
+            // Create temporary configuration
             var configData = new Dictionary<string, string>
             {
                 [$"{configSectionName}:Provider"] = providerName,
@@ -111,44 +111,44 @@ public class OSSServiceManager : IOSSServiceManager, ITransient
                 .AddInMemoryCollection(configData)
                 .Build();
 
-            // 创建临时服务集合，但不立即释放
+            // Create a temporary service collection but do not release it immediately
             var services = new ServiceCollection();
             services.AddSingleton<IConfiguration>(tempConfig);
             services.AddLogging();
             services.AddOSSService(providerName, configSectionName);
 
-            // 构建服务提供者并创建OSS服务
+            // Build service providers and create OSS services
             var tempServiceProvider = services.BuildServiceProvider();
             var ossServiceFactory = tempServiceProvider.GetRequiredService<IOSSServiceFactory>();
             var ossService = ossServiceFactory.Create(providerName);
 
-            // 注意：不要释放tempServiceProvider，因为ossService可能依赖它
-            // 这里我们接受这个内存开销，因为缓存会减少创建频率
+            // Note: Do not release tempServiceProvider because ossService may depend on it
+            // Here we accept this memory overhead because caching will reduce the creation frequency
 
             return ossService;
         }
         catch (Exception ex)
         {
-            throw Oops.Oh($"创建OSS服务失败: {ex.Message}");
+            throw Oops.Oh($"Failed to create OSS service: {ex.Message}");
         }
     }
 
     /// <summary>
-    /// 验证配置
+    /// Verify configuration
     /// </summary>
-    /// <param name="provider">存储提供者配置</param>
+    /// <param name="provider">Storage provider configuration</param>
     /// <returns></returns>
     private Task<bool> ValidateConfigurationAsync(SysFileProvider provider)
     {
         if (provider == null) return Task.FromResult(false);
 
-        // 基本字段验证
+        // Basic field validation
         var isValid = !string.IsNullOrWhiteSpace(provider.Provider) &&
                      !string.IsNullOrWhiteSpace(provider.BucketName) &&
                      !string.IsNullOrWhiteSpace(provider.AccessKey) &&
                      !string.IsNullOrWhiteSpace(provider.SecretKey);
 
-        // Minio额外需要Endpoint
+        // Minio additionally requires Endpoint
         if (provider.Provider.ToUpper() == "MINIO")
         {
             isValid = isValid && !string.IsNullOrWhiteSpace(provider.Endpoint);
@@ -158,7 +158,7 @@ public class OSSServiceManager : IOSSServiceManager, ITransient
     }
 
     /// <summary>
-    /// 将SysFileProvider转换为OSSOptions
+    /// Convert SysFileProvider to OSSOptions
     /// </summary>
     /// <param name="provider"></param>
     /// <returns></returns>
@@ -176,7 +176,7 @@ public class OSSServiceManager : IOSSServiceManager, ITransient
             IsEnableCache = provider.IsEnableCache ?? true
         };
 
-        // 设置认证信息（所有提供者现在都使用统一的字段）
+        // Set authentication information (all providers now use unified fields)
         ossOptions.AccessKey = provider.AccessKey;
         ossOptions.SecretKey = provider.SecretKey;
 
@@ -184,7 +184,7 @@ public class OSSServiceManager : IOSSServiceManager, ITransient
     }
 
     /// <summary>
-    /// 清除缓存
+    /// clear cache
     /// </summary>
     public void ClearCache()
     {
@@ -195,7 +195,7 @@ public class OSSServiceManager : IOSSServiceManager, ITransient
     }
 
     /// <summary>
-    /// 释放资源
+    /// Release resources
     /// </summary>
     public void Dispose()
     {

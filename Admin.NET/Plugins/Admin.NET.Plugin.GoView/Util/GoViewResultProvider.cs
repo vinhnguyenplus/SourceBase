@@ -1,19 +1,19 @@
-// Admin.NET 项目的版权、商标、专利和其他相关权利均受相应法律法规的保护。使用本项目应遵守相关法律法规和许可证的要求。
+// The copyright, trademark, patent and other related rights of the Admin.NET project are protected by corresponding laws and regulations. Use of this project shall comply with relevant laws, regulations and license requirements.
 //
-// 本项目主要遵循 MIT 许可证和 Apache 许可证（版本 2.0）进行分发和使用。许可证位于源代码树根目录中的 LICENSE-MIT 和 LICENSE-APACHE 文件。
+// This project is distributed and used primarily under the MIT License and the Apache License (version 2.0). The license is located in the LICENSE-MIT and LICENSE-APACHE files in the root of the source tree.
 //
-// 不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！
+// This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project!
 
 namespace Admin.NET.Plugin.GoView;
 
 /// <summary>
-/// GoView 规范化结果
+/// GoView normalized results
 /// </summary>
 [UnifyModel(typeof(GoViewResult<>))]
 public class GoViewResultProvider : IUnifyResultProvider
 {
     /// <summary>
-    /// JWT 授权异常返回值
+    /// JWT authorization exception return value
     /// </summary>
     /// <param name="context"></param>
     /// <param name="metadata"></param>
@@ -24,7 +24,7 @@ public class GoViewResultProvider : IUnifyResultProvider
     }
 
     /// <summary>
-    /// 异常返回值
+    /// Exception return value
     /// </summary>
     /// <param name="context"></param>
     /// <param name="metadata"></param>
@@ -35,7 +35,7 @@ public class GoViewResultProvider : IUnifyResultProvider
     }
 
     /// <summary>
-    /// 成功返回值
+    /// Successful return value
     /// </summary>
     /// <param name="context"></param>
     /// <param name="data"></param>
@@ -46,7 +46,7 @@ public class GoViewResultProvider : IUnifyResultProvider
     }
 
     /// <summary>
-    /// 验证失败返回值
+    /// Verification failure return value
     /// </summary>
     /// <param name="context"></param>
     /// <param name="metadata"></param>
@@ -57,7 +57,7 @@ public class GoViewResultProvider : IUnifyResultProvider
     }
 
     /// <summary>
-    /// 特定状态码返回值
+    /// Specific status code return value
     /// </summary>
     /// <param name="context"></param>
     /// <param name="statusCode"></param>
@@ -65,19 +65,19 @@ public class GoViewResultProvider : IUnifyResultProvider
     /// <returns></returns>
     public async Task OnResponseStatusCodes(HttpContext context, int statusCode, UnifyResultSettingsOptions unifyResultSettings)
     {
-        // 设置响应状态码
+        // Set response status code
         UnifyContext.SetResponseStatusCodes(context, statusCode, unifyResultSettings);
 
         switch (statusCode)
         {
-            // 处理 401 状态码
+            // Handling 401 status code
             case StatusCodes.Status401Unauthorized:
-                await context.Response.WriteAsJsonAsync(RESTfulResult(886, errors: "401 登录已过期，请重新登录"),
+                await context.Response.WriteAsJsonAsync(RESTfulResult(886, errors: "401 Login has expired, please log in again"),
                     App.GetOptions<JsonOptions>()?.JsonSerializerOptions);
                 break;
-            // 处理 403 状态码
+            // Handling 403 status codes
             case StatusCodes.Status403Forbidden:
-                await context.Response.WriteAsJsonAsync(RESTfulResult(statusCode, errors: "403 禁止访问，没有权限"),
+                await context.Response.WriteAsJsonAsync(RESTfulResult(statusCode, errors: "403 Forbidden, no permission"),
                     App.GetOptions<JsonOptions>()?.JsonSerializerOptions);
                 break;
 
@@ -86,7 +86,7 @@ public class GoViewResultProvider : IUnifyResultProvider
     }
 
     /// <summary>
-    /// 返回 RESTful 风格结果集
+    /// Return RESTful style result set
     /// </summary>
     /// <param name="statusCode"></param>
     /// <param name="succeeded"></param>
@@ -106,28 +106,28 @@ public class GoViewResultProvider : IUnifyResultProvider
 }
 
 /// <summary>
-/// GoView 返回结果
+/// GoView returns results
 /// </summary>
 /// <typeparam name="T"></typeparam>
 public class GoViewResult<T>
 {
     /// <summary>
-    /// 状态码
+    /// status code
     /// </summary>
     public int Code { get; set; }
 
     /// <summary>
-    /// 信息
+    /// information
     /// </summary>
     public string Msg { get; set; }
 
     /// <summary>
-    /// 数据
+    /// data
     /// </summary>
     public T Data { get; set; }
 
     /// <summary>
-    /// 总数
+    /// total
     /// </summary>
     public int? Count { get; set; }
 }

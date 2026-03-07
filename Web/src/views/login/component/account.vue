@@ -1,8 +1,8 @@
 <template>
-	<el-tooltip :visible="state.capsLockVisible" effect="light" content="大写锁定已打开" placement="top">
+	<el-tooltip :visible="state.capsLockVisible" effect="light" content="Caps Lock is on" placement="top">
 		<el-form ref="ruleFormRef" :model="state.ruleForm" size="large" :rules="state.rules" class="login-content-form">
 			<el-form-item class="login-animation1" prop="account">
-				<el-input ref="accountRef" text placeholder="请输入账号" v-model="state.ruleForm.account" clearable autocomplete="off" @keyup.enter.native="handleSignIn">
+				<el-input ref="accountRef" text placeholder="Please enter account number" v-model="state.ruleForm.account" clearable autocomplete="off" @keyup.enter.native="handleSignIn">
 					<template #prefix>
 						<el-icon>
 							<ele-User />
@@ -11,7 +11,7 @@
 				</el-input>
 			</el-form-item>
 			<el-form-item class="login-animation2" prop="password">
-				<el-input ref="passwordRef" :type="state.isShowPassword ? 'text' : 'password'" placeholder="请输入密码" v-model="state.ruleForm.password" autocomplete="off" @keyup.enter.native="handleSignIn">
+				<el-input ref="passwordRef" :type="state.isShowPassword ? 'text' : 'password'" placeholder="Please enter password" v-model="state.ruleForm.password" autocomplete="off" @keyup.enter.native="handleSignIn">
 					<template #prefix>
 						<el-icon>
 							<ele-Unlock />
@@ -24,7 +24,7 @@
 				</el-input>
 			</el-form-item>
 			<el-form-item class="login-animation2" prop="tenantId" clearable v-if="!props.tenantInfo?.id && !state.hideTenantForLogin">
-				<el-select v-model="state.ruleForm.tenantId" placeholder="请选择租户" style="width: 100%" filterable>
+				<el-select v-model="state.ruleForm.tenantId" placeholder="Please select a tenant" style="width: 100%" filterable>
 					<template #prefix>
 						<i class="iconfont icon-shuxingtu el-input__icon"></i>
 					</template>
@@ -33,7 +33,7 @@
 			</el-form-item>
 			<el-form-item class="login-animation3" prop="captcha" v-if="state.captchaEnabled">
 				<el-col :span="15">
-					<el-input ref="codeRef" text maxlength="4" placeholder="请输入验证码" v-model="state.ruleForm.code" clearable autocomplete="off" @keyup.enter.native="handleSignIn">
+					<el-input ref="codeRef" text maxlength="4" placeholder="Please enter the verification code" v-model="state.ruleForm.code" clearable autocomplete="off" @keyup.enter.native="handleSignIn">
 						<template #prefix>
 							<el-icon>
 								<ele-Position />
@@ -50,10 +50,10 @@
 			</el-form-item>
 			<el-form-item class="login-animation4">
 				<el-button type="primary" class="login-content-submit" round v-waves @click="handleSignIn" :loading="state.loading.signIn">
-					<span>登 录</span>
+					<span>Log in</span>
 				</el-button>
 			</el-form-item>
-			<!-- <div class="font12 mt30 login-animation4 login-msg">* 温馨提示：建议使用谷歌、Microsoft Edge，版本 79.0.1072.62 及以上浏览器，360浏览器请使用极速模式</div> -->
+			<!-- <div class="font12 mt30 login-animation4 login-msg">* Warm reminder: It is recommended to use Google, Microsoft Edge, version 79.0.1072.62 and above browsers, please use the fast mode for 360 browsers</div> -->
 			<!-- <el-button type="primary" round v-waves @click="weixinSignIn" :loading="state.loading.signIn"></el-button> -->
 		</el-form>
 	</el-tooltip>
@@ -63,8 +63,8 @@
 				ref="dragRef"
 				:imgsrc="state.rotateVerifyImg"
 				v-model:isPassing="state.isPassRotate"
-				text="请按住滑块拖动"
-				successText="验证通过"
+				text="Please hold down the slider and drag"
+				successText="Verification passed"
 				handlerIcon="fa fa-angle-double-right"
 				successIcon="fa fa-hand-peace-o"
 				@passcallback="passRotateVerify"
@@ -95,7 +95,7 @@ const props = defineProps({
 	},
 });
 
-// 旋转图片滑块组件
+// Rotate picture slider component
 // import verifyImg from '/@/assets/logo-mini.svg';
 const DragVerifyImgRotate = defineAsyncComponent(() => import('/@/components/dragVerify/dragVerifyImgRotate.vue'));
 
@@ -121,9 +121,9 @@ const state = reactive({
 		codeId: 0,
 	},
 	rules: {
-		account: [{ required: true, message: '请输入账号', trigger: 'blur' }],
-		password: [{ required: true, message: '请输入密码', trigger: 'blur' }],
-		// code: [{ required: true, message: '请输入验证码', trigger: 'blur' }],
+		account: [{ required: true, message: 'Please enter account number', trigger: 'blur' }],
+		password: [{ required: true, message: 'Please enter password', trigger: 'blur' }],
+		// code: [{ required: true, message: 'Please enter the verification code', trigger: 'blur' }],
 	},
 	loading: {
 		signIn: false,
@@ -137,30 +137,30 @@ const state = reactive({
 	isPassRotate: false,
 	capsLockVisible: false,
 	hideTenantForLogin: false,
-	expirySeconds: 60, // 验证码过期时间
+	expirySeconds: 60, // Verification code expiration time
 });
 
-// 验证码过期计时器
+// Verification code expiration timer
 let timer: any = null;
 
-// 页面初始化
+// Page initialization
 onMounted(async () => {
-	// 若URL带有Token参数（第三方登录）
+	// If the URL contains Token parameters (third-party login)
 	const accessToken = route.query.token;
 	if (accessToken) await saveTokenAndInitRoutes(accessToken);
 	watch(
 		() => themeConfig.value.isLoaded,
 		(isLoaded) => {
 			if (isLoaded) {
-				// 获取登录配置
+				// Get login configuration
 				state.hideTenantForLogin = themeConfig.value.hideTenantForLogin ?? true;
 				state.secondVerEnabled = themeConfig.value.secondVer ?? true;
 				state.captchaEnabled = themeConfig.value.captcha ?? true;
 
-				// 获取验证码
+				// Get verification code
 				getCaptcha();
 
-				// 注册验证码过期计时器
+				// Registration verification code expiration timer
 				if (state.captchaEnabled) {
 					timer = setInterval(() => {
 						if (state.expirySeconds > 0) state.expirySeconds -= 1;
@@ -171,25 +171,25 @@ onMounted(async () => {
 		{ immediate: true }
 	);
 
-	// 检测大小写按键/CapsLK
+	// Detect uppercase and lowercase keys/CapsLK
 	document.addEventListener('keyup', handleKeyPress);
 });
 
-// 页面卸载
+// Page unloading
 onUnmounted(() => {
-	// 销毁验证码过期计时器
+	// Destroy verification code expiration timer
 	clearInterval(timer);
 	timer = null;
 
 	document.removeEventListener('keyup', handleKeyPress);
 });
 
-// 检测大小写按键
+// Detect uppercase and lowercase keys
 const handleKeyPress = (e: KeyboardEvent) => {
 	if (e.getModifierState != undefined) state.capsLockVisible = e.getModifierState('CapsLock');
 };
 
-// 获取验证码
+// Get verification code
 const getCaptcha = async () => {
 	if (!state.captchaEnabled) return;
 
@@ -202,12 +202,12 @@ const getCaptcha = async () => {
 	state.ruleForm.codeId = res?.id;
 };
 
-// 获取时间
+// Get time
 const currentTime = computed(() => {
 	return formatAxis(new Date());
 });
 
-// 登录
+// Log in
 const onSignIn = async () => {
 	ruleFormRef.value.validate(async (valid: boolean) => {
 		if (!valid) return false;
@@ -215,7 +215,7 @@ const onSignIn = async () => {
 		try {
 			state.loading.signIn = true;
 
-			// SM2加密密码
+			// SM2 encryption password
 			// const keys = SM2.generateKeyPair();
 			const publicKey = window.__env__.VITE_SM_PUBLIC_KEY;
 			const password = sm2.doEncrypt(state.ruleForm.password, publicKey, 1);
@@ -224,15 +224,15 @@ const onSignIn = async () => {
 			// console.log(state.ruleForm.tenantId);
 			const [err, res] = await feature(getAPI(SysAuthApi).apiSysAuthLoginPost({ ...state.ruleForm, password: password } as any));
 			if (err) {
-				getCaptcha(); // 重新获取验证码
+				getCaptcha(); // Get verification code again
 				return;
 			}
 			if (res.data.result?.accessToken == undefined) {
-				getCaptcha(); // 重新获取验证码
-				ElMessage.error('登录失败，请检查账号！');
+				getCaptcha(); // Get verification code again
+				ElMessage.error('LoginFailure，Please checkAccount number！');
 				return;
 			}
-			// 记录用户自定义首页设置
+			// Record user-defined homepage settings
 			Session.set('homepage', res.data.result?.homepage);
 			await saveTokenAndInitRoutes(res.data.result?.accessToken);
 		} finally {
@@ -241,27 +241,27 @@ const onSignIn = async () => {
 	});
 };
 
-// 保持Token并初始化路由
+// Keep Token and initialize routing
 const saveTokenAndInitRoutes = async (accessToken: string | any) => {
-	// 缓存token
+	// Cache token
 	Local.set(accessTokenKey, accessToken);
 	// Local.set(refreshAccessTokenKey, refreshAccessToken);
 	Session.set('token', accessToken);
 
-	// 添加完动态路由再进行router跳转，否则可能报错 No match found for location with path "/"
+	// After adding the dynamic route, perform router jump, otherwise an error may be reported No match found for location with path "/"
 	const isNoPower = await initBackEndControlRoutes();
-	signInSuccess(isNoPower); // 再执行 signInSuccess
+	signInSuccess(isNoPower); // Execute signInSuccess again
 };
 
-// 登录成功后的跳转
+// Jump after successful login
 const signInSuccess = (isNoPower: boolean | undefined) => {
 	if (isNoPower) {
-		ElMessage.warning('抱歉，您没有登录权限');
-		clearTokens(); // 清空Token缓存
+		ElMessage.warning('Sorry, you do not have login permission');
+		clearTokens(); // Clear Token Cache
 	} else {
-		// 初始化登录成功时间问候语
+		// Initialization login success time greeting
 		let currentTimeInfo = currentTime.value;
-		// 登录成功，跳到转首页 如果是复制粘贴的路径，非首页/登录页，那么登录成功后重定向到对应的路径中
+		// If the login is successful, jump to the home page. If the path is copied and pasted and is not the home page/login page, then after successful login, you will be redirected to the corresponding path.
 		if (route.query?.redirect) {
 			router.push({
 				path: <string>route.query?.redirect,
@@ -271,29 +271,29 @@ const signInSuccess = (isNoPower: boolean | undefined) => {
 			router.push('/');
 		}
 
-		// 登录成功提示
-		const signInText = '欢迎回来！';
+		// Login success prompt
+		const signInText = 'Welcome back!';
 		ElMessage.success(`${currentTimeInfo}，${signInText}`);
-		// 添加 loading，防止第一次进入界面时出现短暂空白
+		// Add loading to prevent a brief blank when entering the interface for the first time
 		NextLoading.start();
 	}
 };
 
-// 打开旋转验证
+// Turn on rotation verification
 const openRotateVerify = () => {
 	state.rotateVerifyVisible = true;
 	state.isPassRotate = false;
 	dragRef.value?.reset();
 };
 
-// 通过旋转验证
+// Verified by rotation
 const passRotateVerify = () => {
 	state.rotateVerifyVisible = false;
 	state.isPassRotate = true;
 	onSignIn();
 };
 
-// 登录处理
+// Login processing
 const handleSignIn = () => {
 	if (!state.ruleForm.account) {
 		accountRef.value?.focus();
@@ -306,7 +306,7 @@ const handleSignIn = () => {
 	}
 };
 
-// 导出对象
+// Export object
 defineExpose({ saveTokenAndInitRoutes });
 </script>
 
@@ -379,7 +379,7 @@ defineExpose({ saveTokenAndInitRoutes });
 	.login-content-code-expired {
 		@extend .login-content-code;
 		&::before {
-			content: '验证码已过期';
+			content: 'The verification code has expired';
 			position: absolute;
 			top: 0;
 			left: 0;

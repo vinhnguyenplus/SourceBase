@@ -1,13 +1,13 @@
-// Admin.NET 项目的版权、商标、专利和其他相关权利均受相应法律法规的保护。使用本项目应遵守相关法律法规和许可证的要求。
+// The copyright, trademark, patent and other related rights of the Admin.NET project are protected by corresponding laws and regulations. Use of this project shall comply with relevant laws, regulations and license requirements.
 //
-// 本项目主要遵循 MIT 许可证和 Apache 许可证（版本 2.0）进行分发和使用。许可证位于源代码树根目录中的 LICENSE-MIT 和 LICENSE-APACHE 文件。
+// This project is distributed and used primarily under the MIT License and the Apache License (version 2.0). The license is located in the LICENSE-MIT and LICENSE-APACHE files in the root of the source tree.
 //
-// 不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！
+// This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project!
 
 namespace Admin.NET.Core;
 
 /// <summary>
-/// 时间帮助类
+/// time help class
 /// </summary>
 public class DateTimeUtil
 {
@@ -24,7 +24,7 @@ public class DateTimeUtil
     }
 
     /// <summary>
-    /// 实例化类
+    /// instantiate class
     /// </summary>
     /// <param name="timeSpan"></param>
     /// <returns></returns>
@@ -34,7 +34,7 @@ public class DateTimeUtil
     }
 
     /// <summary>
-    /// 实例化类
+    /// instantiate class
     /// </summary>
     /// <param name="time"></param>
     /// <returns></returns>
@@ -44,13 +44,13 @@ public class DateTimeUtil
     }
 
     /// <summary>
-    /// 根据unix时间戳的长度自动判断是秒还是以毫秒为单位
+    /// Automatically determine whether the unix timestamp is in seconds or milliseconds based on its length.
     /// </summary>
     /// <param name="unixTime"></param>
     /// <returns></returns>
     public static DateTime ConvertUnixTime(long unixTime)
     {
-        // 判断时间戳长度
+        // Determine timestamp length
         bool isMilliseconds = unixTime > 9999999999;
 
         if (isMilliseconds)
@@ -64,7 +64,7 @@ public class DateTimeUtil
     }
 
     /// <summary>
-    /// 获取开始时间
+    /// Get start time
     /// </summary>
     /// <param name="dateTime"></param>
     /// <param name="days"></param>
@@ -75,7 +75,7 @@ public class DateTimeUtil
     }
 
     /// <summary>
-    ///  时间戳转本地时间-时间戳精确到秒
+    ///  Convert timestamp to local time - timestamp is accurate to seconds
     /// </summary>
     public static DateTime ToLocalTimeDateBySeconds(long unix)
     {
@@ -83,7 +83,7 @@ public class DateTimeUtil
     }
 
     /// <summary>
-    ///  时间转时间戳Unix-时间戳精确到秒
+    ///  Time to timestamp Unix-timestamp is accurate to seconds
     /// </summary>
     public static long ToUnixTimestampBySeconds(DateTime dt)
     {
@@ -91,7 +91,7 @@ public class DateTimeUtil
     }
 
     /// <summary>
-    ///  时间戳转本地时间-时间戳精确到毫秒
+    ///  Convert timestamp to local time - timestamp is accurate to milliseconds
     /// </summary>
     public static DateTime ToLocalTimeDateByMilliseconds(long unix)
     {
@@ -99,7 +99,7 @@ public class DateTimeUtil
     }
 
     /// <summary>
-    ///  时间转时间戳Unix-时间戳精确到毫秒
+    ///  Time to timestamp Unix - timestamp is accurate to milliseconds
     /// </summary>
     public static long ToUnixTimestampByMilliseconds(DateTime dt)
     {
@@ -107,10 +107,10 @@ public class DateTimeUtil
     }
 
     /// <summary>
-    /// 毫秒转天时分秒
+    /// milliseconds to days hours minutes seconds
     /// </summary>
     /// <param name="ms">TotalMilliseconds</param>
-    /// <param name="isSimplify">是否简化显示</param>
+    /// <param name="isSimplify">Whether to simplify the display</param>
     /// <returns></returns>
     public static string FormatTime(long ms, bool isSimplify = false)
     {
@@ -125,34 +125,34 @@ public class DateTimeUtil
         long second = (ms - day * dd - hour * hh - minute * mi) / ss;
         //long milliSecond = ms - day * dd - hour * hh - minute * mi - second * ss;
 
-        string sDay = day < 10 ? "0" + day : "" + day; //天
-        string sHour = hour < 10 ? "0" + hour : "" + hour;//小时
-        string sMinute = minute < 10 ? "0" + minute : "" + minute;//分钟
-        string sSecond = second < 10 ? "0" + second : "" + second;//秒
-        //string sMilliSecond = milliSecond < 10 ? "0" + milliSecond : "" + milliSecond;//毫秒
+        string sDay = day < 10 ? "0" + day : "" + day; // sky
+        string sHour = hour < 10 ? "0" + hour : "" + hour;// Hour
+        string sMinute = minute < 10 ? "0" + minute : "" + minute;// minute
+        string sSecond = second < 10 ? "0" + second : "" + second;// Second
+        //string sMilliSecond = milliSecond < 10 ? "0" + milliSecond : "" + milliSecond;//Milliseconds
         //sMilliSecond = milliSecond < 100 ? "0" + sMilliSecond : "" + sMilliSecond;
 
         if (!isSimplify)
-            return $"{sDay} 天 {sHour} 小时 {sMinute} 分 {sSecond} 秒";
+            return $"{sDay} days {sHour} hours {sMinute} minutes {sSecond} seconds";
         else
         {
             string result = string.Empty;
             if (day > 0)
-                result = $"{sDay}天";
+                result = $"{sDay} days";
             if (hour > 0)
-                result = $"{result}{sHour}小时";
+                result = $"{result}{sHour} hours";
             if (minute > 0)
-                result = $"{result}{sMinute}分";
+                result = $"{result}{sMinute} minutes";
             if (!result.IsNullOrEmpty())
-                result = $"{result}{sSecond}秒";
+                result = $"{result}{sSecond} seconds";
             else
-                result = $"{sSecond}秒";
+                result = $"{sSecond}second";
             return result;
         }
     }
 
     /// <summary>
-    /// 获取unix时间戳
+    /// Get unix timestamp
     /// </summary>
     /// <param name="dt"></param>
     /// <returns></returns>
@@ -162,7 +162,7 @@ public class DateTimeUtil
     }
 
     /// <summary>
-    /// 获取日期天的最小时间
+    /// Get the minimum time of the date day
     /// </summary>
     /// <param name="dt"></param>
     /// <returns></returns>
@@ -172,7 +172,7 @@ public class DateTimeUtil
     }
 
     /// <summary>
-    /// 获取日期天的最大时间
+    /// Get the maximum time in date days
     /// </summary>
     /// <param name="dt"></param>
     /// <returns></returns>
@@ -183,7 +183,7 @@ public class DateTimeUtil
     }
 
     /// <summary>
-    /// 根据日期是否在当前年份来格式化日期
+    /// Format a date based on whether it is in the current year
     /// </summary>
     /// <param name="dt"></param>
     /// <returns></returns>
@@ -193,7 +193,7 @@ public class DateTimeUtil
     }
 
     /// <summary>
-    /// 获取日期范围00:00:00 - 23:59:59
+    /// Get the date range 00:00:00 - 23:59:59
     /// </summary>
     /// <returns></returns>
     public static List<DateTime> GetTodayTimeList(DateTime time)
@@ -206,70 +206,70 @@ public class DateTimeUtil
     }
 
     /// <summary>
-    /// 获取星期几
+    /// Get day of week
     /// </summary>
     /// <param name="dt"></param>
     /// <returns></returns>
     public static string GetWeekByDate(DateTime dt)
     {
-        var day = new[] { "星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六" };
+        var day = new[] { "Sunday", "Monday", "weekTwo", "wednesday", "weekFour", "Friday", "Saturday" };
         return day[Convert.ToInt32(dt.DayOfWeek.ToString("d"))];
     }
 
     /// <summary>
-    /// 获取这个月的第几周
+    /// Get the week number of this month
     /// </summary>
     /// <param name="daytime"></param>
     /// <returns></returns>
     public static int GetWeekNumInMonth(DateTime daytime)
     {
         int dayInMonth = daytime.Day;
-        // 本月第一天
+        // first day of month
         DateTime firstDay = daytime.AddDays(1 - daytime.Day);
-        // 本月第一天是周几
+        // What day of the week is the first day of this month?
         int weekday = (int)firstDay.DayOfWeek == 0 ? 7 : (int)firstDay.DayOfWeek;
-        // 本月第一周有几天
+        // How many days are there in the first week of this month?
         int firstWeekEndDay = 7 - (weekday - 1);
-        // 当前日期和第一周之差
+        // The difference between the current date and the first week
         int diffday = dayInMonth - firstWeekEndDay;
         diffday = diffday > 0 ? diffday : 1;
-        // 当前是第几周，若整除7就减一天
+        // The current week is the current week. If it is divided by 7, then subtract one day.
         return ((diffday % 7) == 0 ? (diffday / 7 - 1) : (diffday / 7)) + 1 + (dayInMonth > firstWeekEndDay ? 1 : 0);
     }
 
     /// <summary>
-    /// 获取今天的时间范围
+    /// Get today's time range
     /// </summary>
-    /// <returns>返回包含开始时间和结束时间的元组</returns>
+    /// <returns>Returns a tuple containing the start time and end time</returns>
     public (DateTime Start, DateTime End) GetTodayRange()
     {
-        var start = Date.Date; // 当天开始时间
-        var end = start.AddDays(1).AddSeconds(-1); // 当天结束时间
+        var start = Date.Date; // Start time of the day
+        var end = start.AddDays(1).AddSeconds(-1); // end of day
         return (start, end);
     }
 
     /// <summary>
-    /// 获取本月的时间范围
+    /// Get this month's time range
     /// </summary>
-    /// <returns>返回包含开始时间和结束时间的元组</returns>
+    /// <returns>Returns a tuple containing the start time and end time</returns>
     public (DateTime Start, DateTime End) GetMonthRange()
     {
         return (GetFirstDayOfMonth(), GetLastDayOfMonth());
     }
 
     /// <summary>
-    /// 获取本月的第一天开始时间
+    /// Get the start time of the first day of this month
     /// </summary>
-    /// <returns>返回当月的第一天</returns>
+    /// <returns>Returns the first day of the month</returns>
     public DateTime GetFirstDayOfMonth()
     {
         return new DateTime(Date.Year, Date.Month, 1);
     }
 
     /// <summary>
-    /// 获取本月的最后一天截至时间
+    /// Get the end time of the last day of this month
     /// </summary>
-    /// <returns>返回当月的最后一天</returns>
+    /// <returns>Returns the last day of the month</returns>
     public DateTime GetLastDayOfMonth()
     {
         var firstDayOfNextMonth = new DateTime(Date.Year, Date.Month, 1).AddMonths(1);
@@ -277,7 +277,7 @@ public class DateTimeUtil
     }
 
     /// <summary>
-    /// 获取今年的时间范围
+    /// Get this year's time range
     /// </summary>
     public (DateTime Start, DateTime End) GetYearRange()
     {
@@ -285,7 +285,7 @@ public class DateTimeUtil
     }
 
     /// <summary>
-    /// 获取今年的第一天时间范围
+    /// Get the first day of the year time range
     /// </summary>
     public DateTime GetFirstDayOfYear()
     {
@@ -293,7 +293,7 @@ public class DateTimeUtil
     }
 
     /// <summary>
-    /// 获取今年的最后一天时间范围
+    /// Get the last day of the year time range
     /// </summary>
     public DateTime GetLastDayOfYear()
     {
@@ -301,116 +301,116 @@ public class DateTimeUtil
     }
 
     /// <summary>
-    /// 获取前天时间范围
+    /// Get the time range of the day before yesterday
     /// </summary>
     public (DateTime Start, DateTime End) GetDayBeforeYesterdayRange()
     {
-        var start = Date.Date.AddDays(-2); // 前天开始时间
-        var end = start.AddDays(1).AddSeconds(-1); // 前天结束时间
+        var start = Date.Date.AddDays(-2); // Start time the day before yesterday
+        var end = start.AddDays(1).AddSeconds(-1); // end time the day before yesterday
         return (start, end);
     }
 
     /// <summary>
-    /// 获取昨天时间范围
+    /// Get yesterday's time range
     /// </summary>
     public (DateTime Start, DateTime End) GetYesterdayRange()
     {
-        var start = Date.Date.AddDays(-1); // 昨天开始时间
-        var end = start.AddDays(1).AddSeconds(-1); // 昨天结束时间
+        var start = Date.Date.AddDays(-1); // Yesterday's start time
+        var end = start.AddDays(1).AddSeconds(-1); // Yesterday's end time
         return (start, end);
     }
 
     /// <summary>
-    /// 获取上一周时间范围
+    /// Get the time range of the previous week
     /// </summary>
     public (DateTime Start, DateTime End) GetLastWeekRange()
     {
-        // 计算上周的天数差
-        var daysToSubtract = (int)Date.DayOfWeek + 7; // 确保周日也能正确计算
-        var start = Date.Date.AddDays(-daysToSubtract); // 上周第一天
-        var end = start.AddDays(7).AddSeconds(-1); // 上周最后一天
+        // Calculate the difference in days from last week
+        var daysToSubtract = (int)Date.DayOfWeek + 7; // Make sure Sundays are also calculated correctly
+        var start = Date.Date.AddDays(-daysToSubtract); // first day of last week
+        var end = start.AddDays(7).AddSeconds(-1); // last day of last week
         return (start, end);
     }
 
     /// <summary>
-    /// 获取本周时间范围
+    /// Get this week's time range
     /// </summary>
     public (DateTime Start, DateTime End) GetThisWeekRange()
     {
-        // 计算本周的天数差
+        // Calculate the difference in days of the week
         var daysToSubtract = (int)Date.DayOfWeek;
-        var start = Date.Date.AddDays(-daysToSubtract); // 本周第一天
-        var end = start.AddDays(7).AddSeconds(-1); // 本周最后一天
+        var start = Date.Date.AddDays(-daysToSubtract); // first day of week
+        var end = start.AddDays(7).AddSeconds(-1); // last day of week
         return (start, end);
     }
 
     /// <summary>
-    /// 获取上月时间范围
+    /// Get the time range of the previous month
     /// </summary>
     public (DateTime Start, DateTime End) GetLastMonthRange()
     {
-        var firstDayOfLastMonth = new DateTime(Date.Year, Date.Month, 1).AddMonths(-1); // 上月第一天
-        var lastDayOfLastMonth = firstDayOfLastMonth.AddMonths(1).AddSeconds(-1); // 上月最后一天
+        var firstDayOfLastMonth = new DateTime(Date.Year, Date.Month, 1).AddMonths(-1); // first day of last month
+        var lastDayOfLastMonth = firstDayOfLastMonth.AddMonths(1).AddSeconds(-1); // last day of last month
         return (firstDayOfLastMonth, lastDayOfLastMonth);
     }
 
     /// <summary>
-    /// 获取近3天的时间范围
+    /// Get the time range of the last 3 days
     /// </summary>
     public (DateTime Start, DateTime End) GetLast3DaysRange()
     {
-        var start = Date.Date.AddDays(-2); // 3天前的开始时间
-        var end = Date.Date.AddDays(1).AddSeconds(-1); // 当前日期的结束时间
+        var start = Date.Date.AddDays(-2); // Start time 3 days ago
+        var end = Date.Date.AddDays(1).AddSeconds(-1); // end time of current date
         return (start, end);
     }
 
     /// <summary>
-    /// 获取近7天的时间范围
+    /// Get the time range of the last 7 days
     /// </summary>
     public (DateTime Start, DateTime End) GetLast7DaysRange()
     {
-        var start = Date.Date.AddDays(-6); // 7天前的开始时间
-        var end = Date.Date.AddDays(1).AddSeconds(-1); // 当前日期的结束时间
+        var start = Date.Date.AddDays(-6); // Start time 7 days ago
+        var end = Date.Date.AddDays(1).AddSeconds(-1); // end time of current date
         return (start, end);
     }
 
     /// <summary>
-    /// 获取近15天的时间范围
+    /// Get the time range of the last 15 days
     /// </summary>
     public (DateTime Start, DateTime End) GetLast15DaysRange()
     {
-        var start = Date.Date.AddDays(-14); // 15天前的开始时间
-        var end = Date.Date.AddDays(1).AddSeconds(-1); // 当前日期的结束时间
+        var start = Date.Date.AddDays(-14); // Start time 15 days ago
+        var end = Date.Date.AddDays(1).AddSeconds(-1); // end time of current date
         return (start, end);
     }
 
     /// <summary>
-    /// 获取近3个月的时间范围
+    /// Get the time range of the last 3 months
     /// </summary>
     public (DateTime Start, DateTime End) GetLast3MonthsRange()
     {
-        var start = Date.Date.AddMonths(-3); // 3个月前的开始时间
-        var end = Date.Date.AddDays(1).AddSeconds(-1); // 当前日期的结束时间
+        var start = Date.Date.AddMonths(-3); // Start time 3 months ago
+        var end = Date.Date.AddDays(1).AddSeconds(-1); // end time of current date
         return (start, end);
     }
 
     /// <summary>
-    /// 获取上半年的时间范围
+    /// Get the first half of the year time range
     /// </summary>
     public (DateTime Start, DateTime End) GetFirstHalfYearRange()
     {
-        var start = new DateTime(Date.Year, 1, 1); // 上半年开始时间
-        var end = new DateTime(Date.Year, 6, 30, 23, 59, 59); // 上半年结束时间
+        var start = new DateTime(Date.Year, 1, 1); // Start time of first half
+        var end = new DateTime(Date.Year, 6, 30, 23, 59, 59); // End of the first half of the year
         return (start, end);
     }
 
     /// <summary>
-    /// 获取下半年的时间范围
+    /// Get the time range for the second half of the year
     /// </summary>
     public (DateTime Start, DateTime End) GetSecondHalfYearRange()
     {
-        var start = new DateTime(Date.Year, 7, 1); // 下半年开始时间
-        var end = new DateTime(Date.Year, 12, 31, 23, 59, 59); // 下半年结束时间
+        var start = new DateTime(Date.Year, 7, 1); // Start time of the second half of the year
+        var end = new DateTime(Date.Year, 12, 31, 23, 59, 59); // The end of the second half of the year
         return (start, end);
     }
 }

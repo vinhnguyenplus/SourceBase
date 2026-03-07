@@ -4,31 +4,31 @@
 			<template #header>
 				<div style="color: #fff">
 					<el-icon size="16" style="margin-right: 3px; display: inline; vertical-align: middle"> <ele-Cpu /> </el-icon>
-					<span> 生成种子数据 </span>
+					<span> Generate seed data </span>
 				</div>
 			</template>
 			<el-form :model="state.ruleForm" ref="ruleFormRef" label-width="auto" :rules="state.rules">
 				<el-row :gutter="35">
 					<el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="mb20">
-						<el-form-item label="表名" prop="tableName" :rules="[{ required: true, message: '表名不能为空', trigger: 'blur' }]">
-							<el-input disabled v-model="state.ruleForm.tableName" placeholder="表名" clearable />
+						<el-form-item label="Table Name" prop="tableName" :rules="[{ required: true, message: 'Table name cannot be empty', trigger: 'blur' }]">
+							<el-input disabled v-model="state.ruleForm.tableName" placeholder="Table Name" clearable />
 						</el-form-item>
 					</el-col>
 					<el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="mb20">
-						<el-form-item label="后缀" prop="suffix">
-							<el-input v-model="state.ruleForm.suffix" placeholder="后缀" clearable />
+						<el-form-item label="Suffix" prop="suffix">
+							<el-input v-model="state.ruleForm.suffix" placeholder="Suffix" clearable />
 						</el-form-item>
 					</el-col>
 					<el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="mb20">
-						<el-form-item label="存放位置" prop="position">
-							<!-- <el-input v-model="state.ruleForm.position" placeholder="存放位置" clearable >Admin.NET.Core</el-input> -->
-							<el-select v-model="state.ruleForm.position" filterable clearable class="w100" placeholder="存放位置">
+						<el-form-item label="Storage location" prop="position">
+							<!-- <el-input v-model="state.ruleForm.position" placeholder="storage location" clearable >Admin.NET.Core</el-input> -->
+							<el-select v-model="state.ruleForm.position" filterable clearable class="w100" placeholder="Storage location">
 								<el-option v-for="(item, index) in props.applicationNamespaces" :key="index" :label="item" :value="item" />
 							</el-select>
 						</el-form-item>
 					</el-col>
 					<el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="mb20">
-						<el-form-item label="过滤重复数据" prop="filterExistingData">
+						<el-form-item label="Filter duplicate data" prop="filterExistingData">
 							<el-switch v-model="state.ruleForm.filterExistingData"></el-switch>
 						</el-form-item>
 					</el-col>
@@ -36,8 +36,8 @@
 			</el-form>
 			<template #footer>
 				<span class="dialog-footer">
-					<el-button @click="cancel" :disabled="state.loading">取 消</el-button>
-					<el-button type="primary" v-reclick="3000" @click="submit" :disabled="state.loading">确 定</el-button>
+					<el-button @click="cancel" :disabled="state.loading">Cancel</el-button>
+					<el-button type="primary" v-reclick="3000" @click="submit" :disabled="state.loading">Confirm</el-button>
 				</span>
 			</template>
 		</el-dialog>
@@ -61,10 +61,10 @@ const state = reactive({
   loading: false,
 	isShowDialog: false,
 	ruleForm: {} as any,
-	rules: { position: [{ required: true, message: '请选择存放位置', trigger: 'blur' }] },
+	rules: { position: [{ required: true, message: 'Please select a storage location', trigger: 'blur' }] },
 });
 
-// 打开弹窗
+// Open pop-up window
 const openDialog = (row: any) => {
 	state.ruleForm.configId = row.configId;
 	state.ruleForm.tableName = row.tableName;
@@ -73,18 +73,18 @@ const openDialog = (row: any) => {
 	state.isShowDialog = true;
 };
 
-// 关闭弹窗
+// Close pop-up window
 const closeDialog = () => {
 	emits('handleQueryColumn');
 	state.isShowDialog = false;
 };
 
-// 取消
+// Cancel
 const cancel = () => {
 	state.isShowDialog = false;
 };
 
-// 提交
+// submit
 const submit = () => {
 	ruleFormRef.value.validate(async (valid: boolean) => {
 		if (!valid) return;
@@ -92,12 +92,12 @@ const submit = () => {
 		try {
       await getAPI(SysDatabaseApi).apiSysDatabaseCreateSeedDataPost(state.ruleForm);
       closeDialog();
-      ElMessage.success('生成成功');
+      ElMessage.success('Generated successfully');
     } catch (e) { /* empty */ }
     state.loading = false;
 	});
 };
 
-// 导出对象
+// Export object
 defineExpose({ openDialog });
 </script>

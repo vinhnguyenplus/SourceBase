@@ -1,8 +1,8 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Admin.NET 通用权限开发平台
- * 让 .NET 开发更简单、更通用、更流行。整合最新技术，模块插件式开发，前后端分离，开箱即用。<br/><u><b><font color='FF0000'> 👮不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！</font></b></u>
+ * Admin.NET General Permission Development Platform
+ * let .NET Develop more simply、More general、More popular。wholeIn line with the latest technology，Modular Plugin-Based Development，Frontend and backendpointsLeave，Ready to use out of the box。<br/><u><b><font color='FF0000'> 👮This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project! </font></b></u>
  *
  * OpenAPI spec version: 1.0.0
  * 
@@ -29,7 +29,7 @@ export interface PageExLogInput {
     search?: Search;
 
     /**
-     * 模糊查询关键字
+     * BlurryQueryKeywords
      *
      * @type {string}
      * @memberof PageExLogInput
@@ -43,7 +43,7 @@ export interface PageExLogInput {
     filter?: Filter;
 
     /**
-     * 当前页码
+     * Current page number
      *
      * @type {number}
      * @memberof PageExLogInput
@@ -51,7 +51,7 @@ export interface PageExLogInput {
     page?: number;
 
     /**
-     * 页码容量
+     * Page capacity
      *
      * @type {number}
      * @memberof PageExLogInput
@@ -59,7 +59,7 @@ export interface PageExLogInput {
     pageSize?: number;
 
     /**
-     * 排序字段
+     * SortField
      *
      * @type {string}
      * @memberof PageExLogInput
@@ -67,7 +67,7 @@ export interface PageExLogInput {
     field?: string | null;
 
     /**
-     * 排序方向
+     * SortDirection
      *
      * @type {string}
      * @memberof PageExLogInput
@@ -75,7 +75,7 @@ export interface PageExLogInput {
     order?: string | null;
 
     /**
-     * 降序排序
+     * Descending orderSort
      *
      * @type {string}
      * @memberof PageExLogInput
@@ -83,7 +83,7 @@ export interface PageExLogInput {
     descStr?: string | null;
 
     /**
-     * 开始时间
+     * start time
      *
      * @type {Date}
      * @memberof PageExLogInput
@@ -91,7 +91,7 @@ export interface PageExLogInput {
     startTime?: Date | null;
 
     /**
-     * 结束时间
+     * end time
      *
      * @type {Date}
      * @memberof PageExLogInput
@@ -99,7 +99,7 @@ export interface PageExLogInput {
     endTime?: Date | null;
 
     /**
-     * 账号
+     * Account number
      *
      * @type {string}
      * @memberof PageExLogInput
@@ -107,7 +107,7 @@ export interface PageExLogInput {
     account?: string | null;
 
     /**
-     * 操作用时
+     * Operation time
      *
      * @type {number}
      * @memberof PageExLogInput
@@ -115,7 +115,7 @@ export interface PageExLogInput {
     elapsed?: number | null;
 
     /**
-     * 状态
+     * state
      *
      * @type {string}
      * @memberof PageExLogInput
@@ -123,7 +123,7 @@ export interface PageExLogInput {
     status?: string | null;
 
     /**
-     * IP地址
+     * IP address
      *
      * @type {string}
      * @memberof PageExLogInput
@@ -131,7 +131,7 @@ export interface PageExLogInput {
     remoteIp?: string | null;
 
     /**
-     * 租户Id
+     * Tenant ID
      *
      * @type {number}
      * @memberof PageExLogInput
@@ -139,7 +139,7 @@ export interface PageExLogInput {
     tenantId?: number;
 
     /**
-     * 方法名称
+     * Method Name
      *
      * @type {string}
      * @memberof PageExLogInput
@@ -147,7 +147,7 @@ export interface PageExLogInput {
     actionName?: string | null;
 
     /**
-     * 模块名称
+     * Module Name
      *
      * @type {string}
      * @memberof PageExLogInput

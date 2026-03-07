@@ -2,7 +2,7 @@
 	<div class="sys-cache-container h100">
 		<el-splitter class="smallbar-el-splitter">
 			<el-splitter-panel size="20%" :min="200">
-				<CardPro title="缓存列表" v-loading="state.loading" full-height body-style="overflow:auto">
+				<CardPro title="Cache List" v-loading="state.loading" full-height body-style="overflow:auto">
 					<template #suffix>
 						<el-button icon="ele-Refresh" type="success" circle plain @click="handleQuery" v-auth="'sysCache:keyList'" />
                         <el-button icon="ele-DeleteFilled" type="danger" circle plain @click="clearCache" v-auth="'sysCache:clear'"> </el-button>
@@ -23,9 +23,9 @@
 				</CardPro>
 			</el-splitter-panel>
 			<el-splitter-panel :min="200">
-				<CardPro :title="`缓存数据${state.cacheKey ? `【${state.cacheKey}】` : ''}`" v-loading="state.loading1" full-height body-style="overflow:auto">
+				<CardPro :title="`Cache data ${state.cacheKey ? `[${state.cacheKey}]` : ''}`" v-loading="state.loading1" full-height body-style="overflow:auto">
                     <template #suffix>
-                        <el-button icon="ele-Delete" type="danger" @click="delCache" v-auth="'sysCache:delete'"> 删除缓存 </el-button>
+                        <el-button icon="ele-Delete" type="danger" @click="delCache" v-auth="'sysCache:delete'"> Clear cache </el-button>
                     </template>
                     <vue-json-pretty :data="state.cacheValue" showLength showIcon showLineNumber showSelectController />
 				</CardPro>
@@ -59,7 +59,7 @@ onMounted(async () => {
 	await handleQuery();
 });
 
-// 查询操作
+// Query operation
 const handleQuery = async () => {
 	state.cacheData = [];
 	state.cacheValue = undefined;
@@ -69,7 +69,7 @@ const handleQuery = async () => {
 	var res = await getAPI(SysCacheApi).apiSysCacheKeyListGet();
 	let keyList: any = res.data.result;
 
-	// 构造树（以分号分割）
+	// Construction tree (separated by semicolon)
 	for (let i = 0; i < keyList.length; i++) {
 		let keyNames = keyList[i].split(':');
 		let pName = keyNames[0];
@@ -91,15 +91,15 @@ const handleQuery = async () => {
 	state.loading = false;
 };
 
-// 删除
+// delete
 const delCache = () => {
 	if (currentNode.value.id == 0) {
-		ElMessage.warning('禁止删除顶层缓存');
+		ElMessage.warning('Deleting the top-level cache is prohibited');
 		return;
 	}
-	ElMessageBox.confirm(`确定删除缓存：【${currentNode.value.id}】?`, '提示', {
-		confirmButtonText: '确定',
-		cancelButtonText: '取消',
+	ElMessageBox.confirm(`Are you sure you want to delete the cache: 【${currentNode.value.id}】?`, 'Prompt', {
+		confirmButtonText: 'Confirm',
+		cancelButtonText: 'Cancel',
 		type: 'warning',
 	})
 		.then(async () => {
@@ -107,16 +107,16 @@ const delCache = () => {
 			await handleQuery();
 			state.cacheValue = undefined;
 			state.cacheKey = undefined;
-			ElMessage.success('删除成功');
+			ElMessage.success('Deleted successfully');
 		})
 		.catch(() => {});
 };
 
-// 清空
+// Clear
 const clearCache = () => {
-	ElMessageBox.confirm(`确认清空所有缓存?`, '提示', {
-		confirmButtonText: '确定',
-		cancelButtonText: '取消',
+	ElMessageBox.confirm(`Are you sure you want to clear all caches?`, 'Prompt', {
+		confirmButtonText: 'Confirm',
+		cancelButtonText: 'Cancel',
 		type: 'warning',
 	})
 		.then(async () => {
@@ -124,12 +124,12 @@ const clearCache = () => {
 			await handleQuery();
 			state.cacheValue = undefined;
 			state.cacheKey = undefined;
-			ElMessage.success('清空成功');
+			ElMessage.success('Clearsuccess');
 		})
 		.catch(() => {});
 };
 
-// 树点击
+// tree click
 const nodeClick = async (node: any) => {
 	if (node.id == 0) return;
 

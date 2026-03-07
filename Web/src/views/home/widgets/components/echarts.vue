@@ -1,5 +1,5 @@
 <template>
-	<el-card shadow="hover" header="实时收入" v-loading="loading">
+	<el-card shadow="hover" header="Real-time revenue" v-loading="loading">
 		<scEcharts ref="c1" height="300px" :option="option"></scEcharts>
 	</el-card>
 </template>
@@ -8,9 +8,9 @@
 import scEcharts from '/@/components/scEcharts/index.vue';
 
 export default {
-	title: '实时收入',
+	title: 'Real-time revenue',
 	icon: 'ele-DataLine',
-	description: 'Echarts组件演示',
+	description: 'Echarts component demo',
 	components: {
 		scEcharts,
 	},
@@ -47,7 +47,7 @@ export default {
 			yAxis: [
 				{
 					type: 'value',
-					name: '价格',
+					name: 'Price',
 					splitLine: {
 						show: false,
 					},
@@ -55,7 +55,7 @@ export default {
 			],
 			series: [
 				{
-					name: '收入',
+					name: 'Income',
 					type: 'line',
 					symbol: 'none',
 					lineStyle: {

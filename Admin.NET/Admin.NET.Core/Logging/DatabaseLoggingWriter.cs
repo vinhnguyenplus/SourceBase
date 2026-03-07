@@ -1,20 +1,20 @@
-// Admin.NET 项目的版权、商标、专利和其他相关权利均受相应法律法规的保护。使用本项目应遵守相关法律法规和许可证的要求。
+// The copyright, trademark, patent and other related rights of the Admin.NET project are protected by corresponding laws and regulations. Use of this project shall comply with relevant laws, regulations and license requirements.
 //
-// 本项目主要遵循 MIT 许可证和 Apache 许可证（版本 2.0）进行分发和使用。许可证位于源代码树根目录中的 LICENSE-MIT 和 LICENSE-APACHE 文件。
+// This project is distributed and used primarily under the MIT License and the Apache License (version 2.0). The license is located in the LICENSE-MIT and LICENSE-APACHE files in the root of the source tree.
 //
-// 不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！
+// This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project!
 
 namespace Admin.NET.Core;
 
 /// <summary>
-/// 数据库日志写入器
+/// Database log writer
 /// </summary>
 public class DatabaseLoggingWriter : IDatabaseLoggingWriter, IDisposable
 {
     private readonly IServiceScope _serviceScope;
     private readonly ISqlSugarClient _db;
-    private readonly SysConfigService _sysConfigService; // 参数配置服务
-    private readonly ILogger<DatabaseLoggingWriter> _logger; // 日志组件
+    private readonly SysConfigService _sysConfigService; // Parameter configuration service
+    private readonly ILogger<DatabaseLoggingWriter> _logger; // Log component
 
     public DatabaseLoggingWriter(IServiceScopeFactory scopeFactory)
     {
@@ -23,7 +23,7 @@ public class DatabaseLoggingWriter : IDatabaseLoggingWriter, IDisposable
         _sysConfigService = _serviceScope.ServiceProvider.GetRequiredService<SysConfigService>();
         _logger = _serviceScope.ServiceProvider.GetRequiredService<ILogger<DatabaseLoggingWriter>>();
 
-        // 切换日志独立数据库
+        // Switch log independent database
         _db = SqlSugarSetup.ITenant.IsAnyConnection(SqlSugarConst.LogConfigId)
             ? SqlSugarSetup.ITenant.GetConnectionScope(SqlSugarConst.LogConfigId)
             : SqlSugarSetup.ITenant.GetConnectionScope(SqlSugarConst.MainConfigId);
@@ -36,7 +36,7 @@ public class DatabaseLoggingWriter : IDatabaseLoggingWriter, IDisposable
         {
             await _db.Insertable(new SysLogOp
             {
-                DisplayTitle = "自定义操作日志",
+                DisplayTitle = "Custom Operation Log",
                 LogDateTime = logMsg.LogDateTime,
                 EventId = logMsg.EventId.Id,
                 ThreadId = logMsg.ThreadId,
@@ -50,10 +50,10 @@ public class DatabaseLoggingWriter : IDatabaseLoggingWriter, IDisposable
         }
 
         var loggingMonitor = JSON.Deserialize<dynamic>(jsonStr);
-        // 记录数据校验日志
+        // Record data verification log
         if (loggingMonitor.validation != null && !await _sysConfigService.GetConfigValue<bool>(ConfigConst.SysValidationLog)) return;
 
-        // 获取当前操作者
+        // Get the current operator
         string account = "", realName = "", userId = "", tenantId = "";
         if (loggingMonitor.authorizationClaims != null)
         {
@@ -65,7 +65,7 @@ public class DatabaseLoggingWriter : IDatabaseLoggingWriter, IDisposable
             userId = map.GetValueOrDefault(ClaimConst.UserId);
         }
 
-        // 优先获取 X-Forwarded-For 头部信息携带的IP地址（如nginx代理配置转发）
+        // Prioritize obtaining the IP address carried by the X-Forwarded-For header information (such as nginx proxy configuration forwarding)
         var remoteIPv4 = ((JArray)loggingMonitor.requestHeaders).OfType<JObject>()
             .FirstOrDefault(header => (string)header["key"] == "X-Forwarded-For")?["value"]?.ToString();
 
@@ -85,10 +85,10 @@ public class DatabaseLoggingWriter : IDatabaseLoggingWriter, IDisposable
             os = $"{client.OS.Family} {client.OS.Major} {client.OS.Minor}";
         }
 
-        // 捕捉异常，否则会由于 unhandled exception 导致程序崩溃
+        // Catch exceptions, otherwise the program will crash due to unhandled exception
         try
         {
-            // 记录异常日志-发送邮件
+            // Record exception log-send email
             if (logMsg.Exception != null || loggingMonitor.exception != null)
             {
                 await _db.Insertable(new SysLogEx
@@ -121,7 +121,7 @@ public class DatabaseLoggingWriter : IDatabaseLoggingWriter, IDisposable
                     LogLevel = logMsg.LogLevel
                 }).ExecuteCommandAsync();
 
-                // 将异常日志发送到邮件
+                // Send exception log to email
                 if (await _sysConfigService.GetConfigValue<bool>(ConfigConst.SysErrorMail))
                 {
                     await App.GetRequiredService<IEventPublisher>().PublishAsync(CommonConst.SendErrorMail, logMsg.Exception ?? loggingMonitor.exception);
@@ -130,7 +130,7 @@ public class DatabaseLoggingWriter : IDatabaseLoggingWriter, IDisposable
                 return;
             }
 
-            // 记录访问日志-登录退出
+            // Record access log-login and logout
             if (loggingMonitor.actionName == "userInfo" || loggingMonitor.actionName == "logout")
             {
                 await _db.Insertable(new SysLogVis
@@ -156,7 +156,7 @@ public class DatabaseLoggingWriter : IDatabaseLoggingWriter, IDisposable
                 return;
             }
 
-            // 记录操作日志
+            // Record operation log
             if (!await _sysConfigService.GetConfigValue<bool>(ConfigConst.SysOpLog)) return;
             await _db.Insertable(new SysLogOp
             {
@@ -188,16 +188,16 @@ public class DatabaseLoggingWriter : IDatabaseLoggingWriter, IDisposable
                 LogLevel = logMsg.LogLevel
             }).ExecuteCommandAsync();
 
-            await Task.Delay(50); // 延迟 0.05 秒写入数据库，有效减少高频写入数据库导致死锁问题
+            await Task.Delay(50); // Delay writing to the database by 0.05 seconds, effectively reducing deadlock problems caused by high-frequency writing to the database
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "操作日志入库");
+            _logger.LogError(ex, "Operation log storage");
         }
     }
 
     /// <summary>
-    /// 释放服务作用域
+    /// Release service scope
     /// </summary>
     public void Dispose()
     {

@@ -1,8 +1,8 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Admin.NET 通用权限开发平台
- * 让 .NET 开发更简单、更通用、更流行。整合最新技术，模块插件式开发，前后端分离，开箱即用。<br/><u><b><font color='FF0000'> 👮不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！</font></b></u>
+ * Admin.NET General Permission Development Platform
+ * let .NET Develop more simply、More general、More popular。wholeIn line with the latest technology，Modular Plugin-Based Development，Frontend and backendpointsLeave，Ready to use out of the box。<br/><u><b><font color='FF0000'> 👮This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project! </font></b></u>
  *
  * OpenAPI spec version: 1.0.0
  * 
@@ -14,7 +14,7 @@
 
 import { LogLevel } from './log-level';
  /**
- * 系统异常日志表
+ * System Error Log Table
  *
  * @export
  * @interface SysLogEx
@@ -22,7 +22,7 @@ import { LogLevel } from './log-level';
 export interface SysLogEx {
 
     /**
-     * 雪花Id
+     * SnowflakeId
      *
      * @type {number}
      * @memberof SysLogEx
@@ -30,7 +30,7 @@ export interface SysLogEx {
     id?: number;
 
     /**
-     * 创建时间
+     * Creation Time
      *
      * @type {Date}
      * @memberof SysLogEx
@@ -38,7 +38,7 @@ export interface SysLogEx {
     createTime?: Date;
 
     /**
-     * 更新时间
+     * Update Time
      *
      * @type {Date}
      * @memberof SysLogEx
@@ -46,7 +46,7 @@ export interface SysLogEx {
     updateTime?: Date | null;
 
     /**
-     * 创建者Id
+     * CreatorId
      *
      * @type {number}
      * @memberof SysLogEx
@@ -54,7 +54,7 @@ export interface SysLogEx {
     createUserId?: number | null;
 
     /**
-     * 创建者姓名
+     * Creator name
      *
      * @type {string}
      * @memberof SysLogEx
@@ -62,7 +62,7 @@ export interface SysLogEx {
     createUserName?: string | null;
 
     /**
-     * 修改者Id
+     * Modifier ID
      *
      * @type {number}
      * @memberof SysLogEx
@@ -70,7 +70,7 @@ export interface SysLogEx {
     updateUserId?: number | null;
 
     /**
-     * 修改者姓名
+     * Modifier name
      *
      * @type {string}
      * @memberof SysLogEx
@@ -78,7 +78,7 @@ export interface SysLogEx {
     updateUserName?: string | null;
 
     /**
-     * 租户Id
+     * Tenant ID
      *
      * @type {number}
      * @memberof SysLogEx
@@ -86,7 +86,7 @@ export interface SysLogEx {
     tenantId?: number | null;
 
     /**
-     * 模块名称
+     * Module Name
      *
      * @type {string}
      * @memberof SysLogEx
@@ -94,7 +94,7 @@ export interface SysLogEx {
     controllerName?: string | null;
 
     /**
-     * 方法名称
+     * Method Name
      *
      * @type {string}
      * @memberof SysLogEx
@@ -102,7 +102,7 @@ export interface SysLogEx {
     actionName?: string | null;
 
     /**
-     * 显示名称
+     * Display Name
      *
      * @type {string}
      * @memberof SysLogEx
@@ -110,7 +110,7 @@ export interface SysLogEx {
     displayTitle?: string | null;
 
     /**
-     * 执行状态
+     * Execution Status
      *
      * @type {string}
      * @memberof SysLogEx
@@ -118,7 +118,7 @@ export interface SysLogEx {
     status?: string | null;
 
     /**
-     * IP地址
+     * IP address
      *
      * @type {string}
      * @memberof SysLogEx
@@ -126,7 +126,7 @@ export interface SysLogEx {
     remoteIp?: string | null;
 
     /**
-     * 登录地点
+     * Login location
      *
      * @type {string}
      * @memberof SysLogEx
@@ -134,7 +134,7 @@ export interface SysLogEx {
     location?: string | null;
 
     /**
-     * 经度
+     * longitude
      *
      * @type {number}
      * @memberof SysLogEx
@@ -142,7 +142,7 @@ export interface SysLogEx {
     longitude?: number | null;
 
     /**
-     * 维度
+     * Dimension
      *
      * @type {number}
      * @memberof SysLogEx
@@ -150,7 +150,7 @@ export interface SysLogEx {
     latitude?: number | null;
 
     /**
-     * 浏览器
+     * Browser
      *
      * @type {string}
      * @memberof SysLogEx
@@ -158,7 +158,7 @@ export interface SysLogEx {
     browser?: string | null;
 
     /**
-     * 操作系统
+     * operating system
      *
      * @type {string}
      * @memberof SysLogEx
@@ -166,7 +166,7 @@ export interface SysLogEx {
     os?: string | null;
 
     /**
-     * 操作用时
+     * Operation time
      *
      * @type {number}
      * @memberof SysLogEx
@@ -174,7 +174,7 @@ export interface SysLogEx {
     elapsed?: number | null;
 
     /**
-     * 日志时间
+     * Log Time
      *
      * @type {Date}
      * @memberof SysLogEx
@@ -188,7 +188,7 @@ export interface SysLogEx {
     logLevel?: LogLevel;
 
     /**
-     * 账号
+     * Account number
      *
      * @type {string}
      * @memberof SysLogEx
@@ -196,7 +196,7 @@ export interface SysLogEx {
     account?: string | null;
 
     /**
-     * 真实姓名
+     * Real Name
      *
      * @type {string}
      * @memberof SysLogEx
@@ -204,7 +204,7 @@ export interface SysLogEx {
     realName?: string | null;
 
     /**
-     * 请求方式
+     * Request Method
      *
      * @type {string}
      * @memberof SysLogEx
@@ -212,7 +212,7 @@ export interface SysLogEx {
     httpMethod?: string | null;
 
     /**
-     * 请求地址
+     * Request address
      *
      * @type {string}
      * @memberof SysLogEx
@@ -220,7 +220,7 @@ export interface SysLogEx {
     requestUrl?: string | null;
 
     /**
-     * 请求参数
+     * Request parameters
      *
      * @type {string}
      * @memberof SysLogEx
@@ -228,7 +228,7 @@ export interface SysLogEx {
     requestParam?: string | null;
 
     /**
-     * 返回结果
+     * Return result
      *
      * @type {string}
      * @memberof SysLogEx
@@ -236,7 +236,7 @@ export interface SysLogEx {
     returnResult?: string | null;
 
     /**
-     * 事件Id
+     * Event ID
      *
      * @type {number}
      * @memberof SysLogEx
@@ -244,7 +244,7 @@ export interface SysLogEx {
     eventId?: number | null;
 
     /**
-     * 线程Id
+     * ThreadId
      *
      * @type {number}
      * @memberof SysLogEx
@@ -252,7 +252,7 @@ export interface SysLogEx {
     threadId?: number | null;
 
     /**
-     * 请求跟踪Id
+     * Request Tracking ID
      *
      * @type {string}
      * @memberof SysLogEx
@@ -260,7 +260,7 @@ export interface SysLogEx {
     traceId?: string | null;
 
     /**
-     * 异常信息
+     * Exception information
      *
      * @type {string}
      * @memberof SysLogEx
@@ -268,7 +268,7 @@ export interface SysLogEx {
     exception?: string | null;
 
     /**
-     * 日志消息Json
+     * Log message Json
      *
      * @type {string}
      * @memberof SysLogEx

@@ -5,21 +5,21 @@
 				<el-input v-model="nodeData.id" />
 			</el-form-item>
 			<el-tabs>
-				<el-tab-pane label="基本信息">
+				<el-tab-pane label="Basic Information">
 					<el-row :gutter="35">
 						<el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="mb20">
-							<el-form-item label="编号" prop="id">
-								<el-input v-model="nodeData.id" placeholder="请输入编号" maxlength="32" readonly show-word-limit clearable />
+							<el-form-item label="Number" prop="id">
+								<el-input v-model="nodeData.id" placeholder="Please enter number" maxlength="32" readonly show-word-limit clearable />
 							</el-form-item>
 						</el-col>
 						<el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="mb20">
-							<el-form-item label="属性" prop="type">
-								<el-input v-model="nodeData.type" placeholder="请输入编号" maxlength="32" readonly show-word-limit clearable />
+							<el-form-item label="Attribute" prop="type">
+								<el-input v-model="nodeData.type" placeholder="Please enter number" maxlength="32" readonly show-word-limit clearable />
 							</el-form-item>
 						</el-col>
 					</el-row>
 				</el-tab-pane>
-				<el-tab-pane label="扩展信息">
+				<el-tab-pane label="Extended information">
 					<el-row :gutter="35"></el-row>
 				</el-tab-pane>
 			</el-tabs>

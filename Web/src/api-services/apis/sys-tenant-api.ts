@@ -1,8 +1,8 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Admin.NET 通用权限开发平台
- * 让 .NET 开发更简单、更通用、更流行。整合最新技术，模块插件式开发，前后端分离，开箱即用。<br/><u><b><font color='FF0000'> 👮不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！</font></b></u>
+ * Admin.NET General Permission Development Platform
+ * let .NET Develop more simply、More general、More popular。wholeIn line with the latest technology，Modular Plugin-Based Development，Frontend and backendpointsLeave，Ready to use out of the box。<br/><u><b><font color='FF0000'> 👮This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project! </font></b></u>
  *
  * OpenAPI spec version: 1.0.0
  * 
@@ -41,7 +41,7 @@ export const SysTenantApiAxiosParamCreator = function (configuration?: Configura
     return {
         /**
          * 
-         * @summary 增加租户 🔖
+         * @summary Add tenant 🔖
          * @param {AddTenantInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -89,7 +89,7 @@ export const SysTenantApiAxiosParamCreator = function (configuration?: Configura
         },
         /**
          * 
-         * @summary 切换租户 🔖
+         * @summary Switch Tenant 🔖
          * @param {BaseIdInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -137,7 +137,7 @@ export const SysTenantApiAxiosParamCreator = function (configuration?: Configura
         },
         /**
          * 
-         * @summary 创建租户数据库 🔖
+         * @summary Create tenant database 🔖
          * @param {TenantInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -185,7 +185,7 @@ export const SysTenantApiAxiosParamCreator = function (configuration?: Configura
         },
         /**
          * 
-         * @summary 删除租户 🔖
+         * @summary Delete tenant 🔖
          * @param {DeleteTenantInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -233,7 +233,7 @@ export const SysTenantApiAxiosParamCreator = function (configuration?: Configura
         },
         /**
          * 
-         * @summary 进入租管端 🔖
+         * @summary Enter the rental management terminal 🔖
          * @param {BaseIdInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -281,7 +281,7 @@ export const SysTenantApiAxiosParamCreator = function (configuration?: Configura
         },
         /**
          * 
-         * @summary 授权租户菜单 🔖
+         * @summary Authorized Tenant Menu 🔖
          * @param {TenantMenuInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -329,7 +329,7 @@ export const SysTenantApiAxiosParamCreator = function (configuration?: Configura
         },
         /**
          * 
-         * @summary 获取租户列表
+         * @summary Get tenant list
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -372,7 +372,7 @@ export const SysTenantApiAxiosParamCreator = function (configuration?: Configura
         },
         /**
          * 
-         * @summary 获取租户分页列表 🔖
+         * @summary Get a paginated list of tenants 🔖
          * @param {PageTenantInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -420,7 +420,7 @@ export const SysTenantApiAxiosParamCreator = function (configuration?: Configura
         },
         /**
          * 
-         * @summary 重置租户管理员密码 🔖
+         * @summary resetTenant managementmemberpassword 🔖
          * @param {TenantUserInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -468,7 +468,7 @@ export const SysTenantApiAxiosParamCreator = function (configuration?: Configura
         },
         /**
          * 
-         * @summary 设置租户状态 🔖
+         * @summary Set tenant status 🔖
          * @param {TenantInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -516,7 +516,7 @@ export const SysTenantApiAxiosParamCreator = function (configuration?: Configura
         },
         /**
          * 
-         * @summary 同步授权菜单(用于版本更新后，同步授权数据) 🔖
+         * @summary Synchronous Authorization Menu(Used to synchronize authorization data after a version update) 🔖
          * @param {BaseIdInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -564,8 +564,8 @@ export const SysTenantApiAxiosParamCreator = function (configuration?: Configura
         },
         /**
          * 
-         * @summary 获取租户菜单Id集合 🔖
-         * @param {number} id 主键Id
+         * @summary Get the tenant menu ID collection 🔖
+         * @param {number} id Primary keyId
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -616,7 +616,7 @@ export const SysTenantApiAxiosParamCreator = function (configuration?: Configura
         },
         /**
          * 
-         * @summary 更新租户 🔖
+         * @summary Update tenant 🔖
          * @param {UpdateTenantInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -664,7 +664,7 @@ export const SysTenantApiAxiosParamCreator = function (configuration?: Configura
         },
         /**
          * 
-         * @summary 获取租户下的用户列表 🔖
+         * @summary Get the user list under the tenant 🔖
          * @param {TenantIdInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -721,7 +721,7 @@ export const SysTenantApiFp = function(configuration?: Configuration) {
     return {
         /**
          * 
-         * @summary 增加租户 🔖
+         * @summary Add tenant 🔖
          * @param {AddTenantInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -735,7 +735,7 @@ export const SysTenantApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary 切换租户 🔖
+         * @summary Switch Tenant 🔖
          * @param {BaseIdInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -749,7 +749,7 @@ export const SysTenantApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary 创建租户数据库 🔖
+         * @summary Create tenant database 🔖
          * @param {TenantInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -763,7 +763,7 @@ export const SysTenantApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary 删除租户 🔖
+         * @summary Delete tenant 🔖
          * @param {DeleteTenantInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -777,7 +777,7 @@ export const SysTenantApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary 进入租管端 🔖
+         * @summary Enter the rental management terminal 🔖
          * @param {BaseIdInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -791,7 +791,7 @@ export const SysTenantApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary 授权租户菜单 🔖
+         * @summary Authorized Tenant Menu 🔖
          * @param {TenantMenuInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -805,7 +805,7 @@ export const SysTenantApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary 获取租户列表
+         * @summary Get tenant list
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -818,7 +818,7 @@ export const SysTenantApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary 获取租户分页列表 🔖
+         * @summary Get a paginated list of tenants 🔖
          * @param {PageTenantInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -832,7 +832,7 @@ export const SysTenantApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary 重置租户管理员密码 🔖
+         * @summary resetTenant managementmemberpassword 🔖
          * @param {TenantUserInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -846,7 +846,7 @@ export const SysTenantApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary 设置租户状态 🔖
+         * @summary Set tenant status 🔖
          * @param {TenantInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -860,7 +860,7 @@ export const SysTenantApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary 同步授权菜单(用于版本更新后，同步授权数据) 🔖
+         * @summary Synchronous Authorization Menu(Used to synchronize authorization data after a version update) 🔖
          * @param {BaseIdInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -874,8 +874,8 @@ export const SysTenantApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary 获取租户菜单Id集合 🔖
-         * @param {number} id 主键Id
+         * @summary Get the tenant menu ID collection 🔖
+         * @param {number} id Primary keyId
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -888,7 +888,7 @@ export const SysTenantApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary 更新租户 🔖
+         * @summary Update tenant 🔖
          * @param {UpdateTenantInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -902,7 +902,7 @@ export const SysTenantApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary 获取租户下的用户列表 🔖
+         * @summary Get the user list under the tenant 🔖
          * @param {TenantIdInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -925,7 +925,7 @@ export const SysTenantApiFactory = function (configuration?: Configuration, base
     return {
         /**
          * 
-         * @summary 增加租户 🔖
+         * @summary Add tenant 🔖
          * @param {AddTenantInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -935,7 +935,7 @@ export const SysTenantApiFactory = function (configuration?: Configuration, base
         },
         /**
          * 
-         * @summary 切换租户 🔖
+         * @summary Switch Tenant 🔖
          * @param {BaseIdInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -945,7 +945,7 @@ export const SysTenantApiFactory = function (configuration?: Configuration, base
         },
         /**
          * 
-         * @summary 创建租户数据库 🔖
+         * @summary Create tenant database 🔖
          * @param {TenantInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -955,7 +955,7 @@ export const SysTenantApiFactory = function (configuration?: Configuration, base
         },
         /**
          * 
-         * @summary 删除租户 🔖
+         * @summary Delete tenant 🔖
          * @param {DeleteTenantInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -965,7 +965,7 @@ export const SysTenantApiFactory = function (configuration?: Configuration, base
         },
         /**
          * 
-         * @summary 进入租管端 🔖
+         * @summary Enter the rental management terminal 🔖
          * @param {BaseIdInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -975,7 +975,7 @@ export const SysTenantApiFactory = function (configuration?: Configuration, base
         },
         /**
          * 
-         * @summary 授权租户菜单 🔖
+         * @summary Authorized Tenant Menu 🔖
          * @param {TenantMenuInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -985,7 +985,7 @@ export const SysTenantApiFactory = function (configuration?: Configuration, base
         },
         /**
          * 
-         * @summary 获取租户列表
+         * @summary Get tenant list
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -994,7 +994,7 @@ export const SysTenantApiFactory = function (configuration?: Configuration, base
         },
         /**
          * 
-         * @summary 获取租户分页列表 🔖
+         * @summary Get a paginated list of tenants 🔖
          * @param {PageTenantInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1004,7 +1004,7 @@ export const SysTenantApiFactory = function (configuration?: Configuration, base
         },
         /**
          * 
-         * @summary 重置租户管理员密码 🔖
+         * @summary resetTenant managementmemberpassword 🔖
          * @param {TenantUserInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1014,7 +1014,7 @@ export const SysTenantApiFactory = function (configuration?: Configuration, base
         },
         /**
          * 
-         * @summary 设置租户状态 🔖
+         * @summary Set tenant status 🔖
          * @param {TenantInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1024,7 +1024,7 @@ export const SysTenantApiFactory = function (configuration?: Configuration, base
         },
         /**
          * 
-         * @summary 同步授权菜单(用于版本更新后，同步授权数据) 🔖
+         * @summary Synchronous Authorization Menu(Used to synchronize authorization data after a version update) 🔖
          * @param {BaseIdInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1034,8 +1034,8 @@ export const SysTenantApiFactory = function (configuration?: Configuration, base
         },
         /**
          * 
-         * @summary 获取租户菜单Id集合 🔖
-         * @param {number} id 主键Id
+         * @summary Get the tenant menu ID collection 🔖
+         * @param {number} id Primary keyId
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -1044,7 +1044,7 @@ export const SysTenantApiFactory = function (configuration?: Configuration, base
         },
         /**
          * 
-         * @summary 更新租户 🔖
+         * @summary Update tenant 🔖
          * @param {UpdateTenantInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1054,7 +1054,7 @@ export const SysTenantApiFactory = function (configuration?: Configuration, base
         },
         /**
          * 
-         * @summary 获取租户下的用户列表 🔖
+         * @summary Get the user list under the tenant 🔖
          * @param {TenantIdInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1074,7 +1074,7 @@ export const SysTenantApiFactory = function (configuration?: Configuration, base
 export class SysTenantApi extends BaseAPI {
     /**
      * 
-     * @summary 增加租户 🔖
+     * @summary Add tenant 🔖
      * @param {AddTenantInput} [body] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -1085,7 +1085,7 @@ export class SysTenantApi extends BaseAPI {
     }
     /**
      * 
-     * @summary 切换租户 🔖
+     * @summary Switch Tenant 🔖
      * @param {BaseIdInput} [body] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -1096,7 +1096,7 @@ export class SysTenantApi extends BaseAPI {
     }
     /**
      * 
-     * @summary 创建租户数据库 🔖
+     * @summary Create tenant database 🔖
      * @param {TenantInput} [body] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -1107,7 +1107,7 @@ export class SysTenantApi extends BaseAPI {
     }
     /**
      * 
-     * @summary 删除租户 🔖
+     * @summary Delete tenant 🔖
      * @param {DeleteTenantInput} [body] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -1118,7 +1118,7 @@ export class SysTenantApi extends BaseAPI {
     }
     /**
      * 
-     * @summary 进入租管端 🔖
+     * @summary Enter the rental management terminal 🔖
      * @param {BaseIdInput} [body] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -1129,7 +1129,7 @@ export class SysTenantApi extends BaseAPI {
     }
     /**
      * 
-     * @summary 授权租户菜单 🔖
+     * @summary Authorized Tenant Menu 🔖
      * @param {TenantMenuInput} [body] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -1140,7 +1140,7 @@ export class SysTenantApi extends BaseAPI {
     }
     /**
      * 
-     * @summary 获取租户列表
+     * @summary Get tenant list
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SysTenantApi
@@ -1150,7 +1150,7 @@ export class SysTenantApi extends BaseAPI {
     }
     /**
      * 
-     * @summary 获取租户分页列表 🔖
+     * @summary Get a paginated list of tenants 🔖
      * @param {PageTenantInput} [body] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -1161,7 +1161,7 @@ export class SysTenantApi extends BaseAPI {
     }
     /**
      * 
-     * @summary 重置租户管理员密码 🔖
+     * @summary resetTenant managementmemberpassword 🔖
      * @param {TenantUserInput} [body] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -1172,7 +1172,7 @@ export class SysTenantApi extends BaseAPI {
     }
     /**
      * 
-     * @summary 设置租户状态 🔖
+     * @summary Set tenant status 🔖
      * @param {TenantInput} [body] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -1183,7 +1183,7 @@ export class SysTenantApi extends BaseAPI {
     }
     /**
      * 
-     * @summary 同步授权菜单(用于版本更新后，同步授权数据) 🔖
+     * @summary Synchronous Authorization Menu(Used to synchronize authorization data after a version update) 🔖
      * @param {BaseIdInput} [body] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -1194,8 +1194,8 @@ export class SysTenantApi extends BaseAPI {
     }
     /**
      * 
-     * @summary 获取租户菜单Id集合 🔖
-     * @param {number} id 主键Id
+     * @summary Get the tenant menu ID collection 🔖
+     * @param {number} id Primary keyId
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SysTenantApi
@@ -1205,7 +1205,7 @@ export class SysTenantApi extends BaseAPI {
     }
     /**
      * 
-     * @summary 更新租户 🔖
+     * @summary Update tenant 🔖
      * @param {UpdateTenantInput} [body] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -1216,7 +1216,7 @@ export class SysTenantApi extends BaseAPI {
     }
     /**
      * 
-     * @summary 获取租户下的用户列表 🔖
+     * @summary Get the user list under the tenant 🔖
      * @param {TenantIdInput} [body] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}

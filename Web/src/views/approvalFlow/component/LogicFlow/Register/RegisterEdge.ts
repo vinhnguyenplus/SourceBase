@@ -1,7 +1,7 @@
 import LogicFlow from "@logicflow/core";
-// 引入自定义的边
+// Introduce custom edges
 import edgeSql from './Edges/EdgeSql';
-// 注册边
+// Register side
 const Register = (lf: LogicFlow) => {
     lf.register(edgeSql);
 };

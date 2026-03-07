@@ -1,120 +1,120 @@
-// Admin.NET 项目的版权、商标、专利和其他相关权利均受相应法律法规的保护。使用本项目应遵守相关法律法规和许可证的要求。
+// The copyright, trademark, patent and other related rights of the Admin.NET project are protected by corresponding laws and regulations. Use of this project shall comply with relevant laws, regulations and license requirements.
 //
-// 本项目主要遵循 MIT 许可证和 Apache 许可证（版本 2.0）进行分发和使用。许可证位于源代码树根目录中的 LICENSE-MIT 和 LICENSE-APACHE 文件。
+// This project is distributed and used primarily under the MIT License and the Apache License (version 2.0). The license is located in the LICENSE-MIT and LICENSE-APACHE files in the root of the source tree.
 //
-// 不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！
+// This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project!
 
 namespace Admin.NET.Core.Service;
 
 /// <summary>
-/// 代码生成参数类
+/// Code generation parameter class
 /// </summary>
 public class CodeGenInput : BasePageInput
 {
     /// <summary>
-    /// 作者姓名
+    /// Author name
     /// </summary>
     public virtual string AuthorName { get; set; }
 
     /// <summary>
-    /// 类名
+    /// Class name
     /// </summary>
     public virtual string ClassName { get; set; }
 
     /// <summary>
-    /// 是否移除表前缀
+    /// Whether to remove table prefix
     /// </summary>
     public virtual string TablePrefix { get; set; }
 
     /// <summary>
-    /// 库定位器名
+    /// library locator name
     /// </summary>
     public virtual string ConfigId { get; set; }
 
     /// <summary>
-    /// 数据库名(保留字段)
+    /// Database name (reserved field)
     /// </summary>
     public virtual string DbName { get; set; }
 
     /// <summary>
-    /// 数据库类型
+    /// Database type
     /// </summary>
     public virtual string DbType { get; set; }
 
     /// <summary>
-    /// 数据库链接
+    /// Database link
     /// </summary>
     public virtual string ConnectionString { get; set; }
 
     /// <summary>
-    /// 生成方式
+    /// Generation method
     /// </summary>
     public virtual string GenerateType { get; set; }
 
     /// <summary>
-    /// 数据库表名
+    /// Database table name
     /// </summary>
     public virtual string TableName { get; set; }
 
     /// <summary>
-    /// 命名空间
+    /// namespace
     /// </summary>
     public virtual string NameSpace { get; set; }
 
     /// <summary>
-    /// 业务名（业务代码包名称）
+    /// Business name (business code package name)
     /// </summary>
     public virtual string BusName { get; set; }
 
     /// <summary>
-    /// 功能名（数据库表名称）
+    /// Function name (database table name)
     /// </summary>
     public virtual string TableComment { get; set; }
 
     /// <summary>
-    /// 表唯一字段
+    /// table unique field
     /// </summary>
     [Newtonsoft.Json.JsonIgnore]
     [System.Text.Json.Serialization.JsonIgnore]
     public virtual string TableUniqueConfig { get; set; }
 
     /// <summary>
-    /// 表唯一字段列表
+    /// table unique field list
     /// </summary>
     public virtual List<TableUniqueConfigItem> TableUniqueList { get; set; }
 
     /// <summary>
-    /// 菜单应用分类（应用编码）
+    /// Menu application classification (application coding)
     /// </summary>
     public virtual string MenuApplication { get; set; }
 
     /// <summary>
-    /// 是否生成菜单
+    /// Whether to generate a menu
     /// </summary>
     public virtual bool GenerateMenu { get; set; }
 
     /// <summary>
-    /// 菜单父级
+    /// Menu parent
     /// </summary>
     public virtual long? MenuPid { get; set; }
 
     /// <summary>
-    /// 菜单图标
+    /// menu icon
     /// </summary>
     public virtual string MenuIcon { get; set; }
 
     /// <summary>
-    /// 页面目录
+    /// Page directory
     /// </summary>
     public virtual string PagePath { get; set; }
 
     /// <summary>
-    /// 支持打印类型
+    /// Supported printing types
     /// </summary>
     public virtual string PrintType { get; set; }
 
     /// <summary>
-    /// 打印模版名称
+    /// Print template name
     /// </summary>
     public virtual string PrintName { get; set; }
 }
@@ -122,75 +122,75 @@ public class CodeGenInput : BasePageInput
 public class AddCodeGenInput : CodeGenInput
 {
     /// <summary>
-    /// 数据库表名
+    /// Database table name
     /// </summary>
-    [Required(ErrorMessage = "数据库表名不能为空")]
+    [Required(ErrorMessage = "Database table name cannot be empty")]
     public override string TableName { get; set; }
 
     /// <summary>
-    /// 业务名（业务代码包名称）
+    /// Business name (business code package name)
     /// </summary>
-    [Required(ErrorMessage = "业务名不能为空")]
+    [Required(ErrorMessage = "The business name cannot be empty")]
     public override string BusName { get; set; }
 
     /// <summary>
-    /// 命名空间
+    /// namespace
     /// </summary>
-    [Required(ErrorMessage = "命名空间不能为空")]
+    [Required(ErrorMessage = "Namespace cannot be empty")]
     public override string NameSpace { get; set; }
 
     /// <summary>
-    /// 作者姓名
+    /// Author name
     /// </summary>
-    [Required(ErrorMessage = "作者姓名不能为空")]
+    [Required(ErrorMessage = "Author's Namecannot benull")]
     public override string AuthorName { get; set; }
 
     ///// <summary>
-    ///// 类名
+    ///// class name
     ///// </summary>
-    //[Required(ErrorMessage = "类名不能为空")]
+    //[Required(ErrorMessage = "Class name cannot be empty")]
     //public override string ClassName { get; set; }
 
     ///// <summary>
-    ///// 是否移除表前缀
+    ///// Whether to remove the table prefix
     ///// </summary>
-    //[Required(ErrorMessage = "是否移除表前缀不能为空")]
+    //[Required(ErrorMessage = "Whether to remove the table prefix cannot be empty")]
     //public override string TablePrefix { get; set; }
 
     /// <summary>
-    /// 生成方式
+    /// Generation method
     /// </summary>
-    [Required(ErrorMessage = "生成方式不能为空")]
+    [Required(ErrorMessage = "Generation method cannot be empty")]
     public override string GenerateType { get; set; }
 
     ///// <summary>
-    ///// 功能名（数据库表名称）
+    ///// Function name (database table name)
     ///// </summary>
-    //[Required(ErrorMessage = "数据库表名不能为空")]
+    //[Required(ErrorMessage = "Database table name cannot be empty")]
     //public override string TableComment { get; set; }
 
     /// <summary>
-    /// 是否生成菜单
+    /// Whether to generate a menu
     /// </summary>
-    [Required(ErrorMessage = "是否生成菜单不能为空")]
+    [Required(ErrorMessage = "Whether generating the menu cannot be empty")]
     public override bool GenerateMenu { get; set; }
 }
 
 public class DeleteCodeGenInput
 {
     /// <summary>
-    /// 代码生成器Id
+    /// Code GeneratorId
     /// </summary>
-    [Required(ErrorMessage = "代码生成器Id不能为空")]
+    [Required(ErrorMessage = "Code generator ID cannot be empty")]
     public long Id { get; set; }
 }
 
 public class UpdateCodeGenInput : AddCodeGenInput
 {
     /// <summary>
-    /// 代码生成器Id
+    /// Code GeneratorId
     /// </summary>
-    [Required(ErrorMessage = "代码生成器Id不能为空")]
+    [Required(ErrorMessage = "Code generator ID cannot be empty")]
     public long Id { get; set; }
 }
 

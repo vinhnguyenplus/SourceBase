@@ -1,15 +1,15 @@
-// Admin.NET 项目的版权、商标、专利和其他相关权利均受相应法律法规的保护。使用本项目应遵守相关法律法规和许可证的要求。
+// The copyright, trademark, patent and other related rights of the Admin.NET project are protected by corresponding laws and regulations. Use of this project shall comply with relevant laws, regulations and license requirements.
 //
-// 本项目主要遵循 MIT 许可证和 Apache 许可证（版本 2.0）进行分发和使用。许可证位于源代码树根目录中的 LICENSE-MIT 和 LICENSE-APACHE 文件。
+// This project is distributed and used primarily under the MIT License and the Apache License (version 2.0). The license is located in the LICENSE-MIT and LICENSE-APACHE files in the root of the source tree.
 //
-// 不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！
+// This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project!
 
 namespace Admin.NET.Core;
 
 public static class SqlSugarFilter
 {
     /// <summary>
-    /// 缓存全局查询过滤器（内存缓存）
+    /// Caching global query filters (memory cache)
     /// </summary>
     private static readonly ICache Cache = NewLife.Caching.Cache.Default;
 
@@ -17,42 +17,42 @@ public static class SqlSugarFilter
     private static readonly SysCacheService SysCacheService = App.GetRequiredService<SysCacheService>();
 
     /// <summary>
-    /// 删除用户机构缓存
+    /// Delete user organization cache
     /// </summary>
     /// <param name="userId"></param>
     /// <param name="dbConfigId"></param>
     public static void DeleteUserOrgCache(long userId, string dbConfigId)
     {
-        // 删除用户机构集合缓存
+        // Delete user organization collection cache
         SysCacheService.Remove($"{CacheConst.KeyUserOrg}{userId}");
-        // 删除最大数据权限缓存
+        // Delete maximum data permission cache
         SysCacheService.Remove($"{CacheConst.KeyRoleMaxDataScope}{userId}");
-        // 用户权限缓存（按钮集合）
+        // User permission cache (button collection)
         SysCacheService.Remove($"{CacheConst.KeyUserButton}{userId}");
     }
 
     /// <summary>
-    /// 删除自定义过滤器缓存
+    /// Delete custom filter cache
     /// </summary>
     /// <param name="userId"></param>
     /// <param name="dbConfigId"></param>
     public static void DeleteCustomCache(long userId, string dbConfigId)
     {
-        // 删除自定义缓存——过滤器
+        // Delete custom cache - filter
         Cache.Remove($"db:{dbConfigId}:custom:{userId}");
     }
 
     /// <summary>
-    /// 配置用户机构集合过滤器
+    /// Configure user organization collection filters
     /// </summary>
     public static void SetOrgEntityFilter(SqlSugarScopeProvider db)
     {
-        // 若仅本人数据，则直接返回
+        // If there is only personal data, return directly
         var maxDataScope = SetDataScopeFilter(db);
-        // 获取用户最大数据范围，如果是全部数据、仅本人，则跳过
+        // Get the user's maximum data range. If it is all data or only the user, skip it.
         if (maxDataScope is 0 or (int)DataScopeEnum.Self or (int)DataScopeEnum.All) return;
 
-        // 获取用户所属机构，保证同一作用域
+        // Obtain the organization to which the user belongs, ensuring the same scope
         var orgIds = new List<long>();
         Scoped.Create((factory, scope) =>
         {
@@ -61,12 +61,12 @@ public static class SqlSugarFilter
         });
         if (orgIds == null || orgIds.Count == 0) return;
 
-        //配置机构Id过滤器
+        //Configure institution ID filter
         db.QueryFilter.AddTableFilter<IOrgIdFilter>(o => SqlFunc.ContainsArray(orgIds, o.OrgId));
     }
 
     /// <summary>
-    /// 配置用户仅本人数据过滤器
+    /// Configure user only data filter
     /// </summary>
     private static int SetDataScopeFilter(SqlSugarScopeProvider db)
     {
@@ -75,12 +75,12 @@ public static class SqlSugarFilter
         long.TryParse(App.HttpContext?.User.FindFirst(ClaimConst.UserId)?.Value, out var userId);
         if (userId <= 0) return maxDataScope;
 
-        // 获取用户最大数据范围---仅本人数据
+        // Obtain the maximum data range of the user---only personal data
         maxDataScope = App.GetRequiredService<SysCacheService>().Get<int>(CacheConst.KeyRoleMaxDataScope + userId);
-        // 若为0则获取用户机构组织集合建立缓存
+        // If it is 0, get the user organization collection and create a cache.
         if (maxDataScope == 0)
         {
-            // 获取用户所属机构，保证同一作用域
+            // Obtain the organization to which the user belongs, ensuring the same scope
             Scoped.Create((factory, scope) =>
             {
                 SysOrgService.GetUserOrgIdList().GetAwaiter().GetResult();
@@ -89,12 +89,12 @@ public static class SqlSugarFilter
         }
         if (maxDataScope != (int)DataScopeEnum.Self) return maxDataScope;
 
-        // 配置用户数据范围缓存
+        // Configure user data range cache
         var cacheKey = $"db:{db.CurrentConnectionConfig.ConfigId}:dataScope:{userId}";
         var dataScopeFilter = Cache.Get<ConcurrentDictionary<Type, LambdaExpression>>(cacheKey);
         if (dataScopeFilter == null)
         {
-            // 获取业务实体数据表
+            // Get business entity data table
             var entityTypes = App.EffectiveTypes.Where(u => !u.IsInterface && !u.IsAbstract && u.IsClass
                 && (u.IsSubclassOf(typeof(EntityBaseOrg)) || u.IsSubclassOf(typeof(EntityBaseOrgDel))));
             if (!entityTypes.Any()) return maxDataScope;
@@ -102,7 +102,7 @@ public static class SqlSugarFilter
             dataScopeFilter = new ConcurrentDictionary<Type, LambdaExpression>();
             foreach (var entityType in entityTypes)
             {
-                // 排除非当前数据库实体
+                // Exclude non-current database entities
                 var tAtt = entityType.GetCustomAttribute<TenantAttribute>();
                 if ((tAtt != null && db.CurrentConnectionConfig.ConfigId.ToString() != tAtt.configId.ToString()))
                     continue;
@@ -125,17 +125,17 @@ public static class SqlSugarFilter
     }
 
     /// <summary>
-    /// 配置自定义过滤器
+    /// Configure custom filters
     /// </summary>
     public static void SetCustomEntityFilter(SqlSugarScopeProvider db)
     {
-        // 配置自定义缓存
+        // Configure custom cache
         var userId = App.User?.FindFirst(ClaimConst.UserId)?.Value;
         var cacheKey = $"db:{db.CurrentConnectionConfig.ConfigId}:custom:{userId}";
         var tableFilterItemList = Cache.Get<List<TableFilterItem<object>>>(cacheKey);
         if (tableFilterItemList == null)
         {
-            // 获取自定义实体过滤器
+            // Get custom entity filter
             var entityFilterTypes = App.EffectiveTypes.Where(u => !u.IsInterface && !u.IsAbstract && u.IsClass
                 && u.GetInterfaces().Any(i => i.HasImplementedRawGeneric(typeof(IEntityFilter))));
             if (!entityFilterTypes.Any()) return;
@@ -152,7 +152,7 @@ public static class SqlSugarFilter
                 {
                     var tableFilterItem = (TableFilterItem<object>)u;
                     var entityType = tableFilterItem.GetType().GetProperty("type", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(tableFilterItem, null) as Type;
-                    // 排除非当前数据库实体
+                    // Exclude non-current database entities
                     var tAtt = entityType.GetCustomAttribute<TenantAttribute>();
                     if ((tAtt != null && db.CurrentConnectionConfig.ConfigId.ToString() != tAtt.configId.ToString()) ||
                         (tAtt == null && db.CurrentConnectionConfig.ConfigId.ToString() != SqlSugarConst.MainConfigId))
@@ -175,25 +175,25 @@ public static class SqlSugarFilter
 }
 
 /// <summary>
-/// 自定义实体过滤器接口
+/// Custom entity filter interface
 /// </summary>
 public interface IEntityFilter
 {
     /// <summary>
-    /// 实体过滤器
+    /// Entity filter
     /// </summary>
     /// <returns></returns>
     IEnumerable<TableFilterItem<object>> AddEntityFilter();
 }
 
 ///// <summary>
-///// 自定义业务实体过滤器示例
+///// Custom business entity filter example
 ///// </summary>
 //public class TestEntityFilter : IEntityFilter
 //{
 //    public IEnumerable<TableFilterItem<object>> AddEntityFilter()
 //    {
-//        // 构造自定义条件的过滤器
+//        // Construct a filter with custom conditions
 //        Expression<Func<SysUser, bool>> dynamicExpression = u => u.Remark.Contains("xxx");
 //        var tableFilterItem = new TableFilterItem<object>(typeof(SysUser), dynamicExpression);
 

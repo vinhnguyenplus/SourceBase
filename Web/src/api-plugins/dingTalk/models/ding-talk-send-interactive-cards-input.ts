@@ -1,8 +1,8 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * 钉钉开放平台
- * 集成钉钉开放平台<br/><u><b><font color='FF0000'> 👮不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！</font></b></u>
+ * DingTalkOpen Platform
+ * IntegrationDingTalkOpen Platform<br/><u><b><font color='FF0000'> 👮This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project! </font></b></u>
  *
  * OpenAPI spec version: 1.0.0
  * 
@@ -23,7 +23,7 @@ import { DingTalkConversationTypeEnum } from './ding-talk-conversation-type-enum
 export interface DingTalkSendInteractiveCardsInput {
 
     /**
-     * 互动卡片的消息模板Id
+     * InteractioncardofinformationTemplateId
      *
      * @type {string}
      * @memberof DingTalkSendInteractiveCardsInput
@@ -31,7 +31,7 @@ export interface DingTalkSendInteractiveCardsInput {
     cardTemplateId: string;
 
     /**
-     * 群Id
+     * groupId
      *
      * @type {string}
      * @memberof DingTalkSendInteractiveCardsInput
@@ -39,7 +39,7 @@ export interface DingTalkSendInteractiveCardsInput {
     openConversationId?: string | null;
 
     /**
-     * 接收人userId列表
+     * ReceiveruserIdList
      *
      * @type {Array<string>}
      * @memberof DingTalkSendInteractiveCardsInput
@@ -47,7 +47,7 @@ export interface DingTalkSendInteractiveCardsInput {
     receiverUserIdList: Array<string>;
 
     /**
-     * 唯一标示卡片的外部编码
+     * onlyoneSigncardexternalEncoding
      *
      * @type {string}
      * @memberof DingTalkSendInteractiveCardsInput
@@ -55,7 +55,7 @@ export interface DingTalkSendInteractiveCardsInput {
     outTrackId: string;
 
     /**
-     * 机器人的编码
+     * of the robotEncoding
      *
      * @type {string}
      * @memberof DingTalkSendInteractiveCardsInput
@@ -69,7 +69,7 @@ export interface DingTalkSendInteractiveCardsInput {
     conversationType: DingTalkConversationTypeEnum;
 
     /**
-     * 卡片回调时的路由Key，用于查询注册的callbackUrl
+     * cardCallbacktimethe routeKey，used forQueryRegisteredcallbackUrl
      *
      * @type {string}
      * @memberof DingTalkSendInteractiveCardsInput

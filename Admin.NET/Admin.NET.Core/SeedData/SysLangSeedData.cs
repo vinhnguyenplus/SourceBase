@@ -1,27 +1,27 @@
-﻿// Admin.NET 项目的版权、商标、专利和其他相关权利均受相应法律法规的保护。使用本项目应遵守相关法律法规和许可证的要求。
+﻿// The copyright, trademark, patent and other related rights of the Admin.NET project are protected by corresponding laws and regulations. Use of this project shall comply with relevant laws, regulations and license requirements.
 //
-// 本项目主要遵循 MIT 许可证和 Apache 许可证（版本 2.0）进行分发和使用。许可证位于源代码树根目录中的 LICENSE-MIT 和 LICENSE-APACHE 文件。
+// This project is distributed and used primarily under the MIT License and the Apache License (version 2.0). The license is located in the LICENSE-MIT and LICENSE-APACHE files in the root of the source tree.
 //
-// 不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！
+// This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project!
 
 namespace Admin.NET.Core;
 
 /// <summary>
-/// 语言表种子数据
+/// Language table seed data
 /// </summary>
 public class SysLangSeedData : ISqlSugarEntitySeedData<SysLang>
 {
     /// <summary>
-    /// 种子数据
+    /// Seed data
     /// </summary>
     /// <returns></returns>
     public IEnumerable<SysLang> HasData()
     {
         return new[]
         {
-            new SysLang{ Id=1300000000001,Name="Chinese (Simplified) / 简体中文", Code="zh-CN", IsoCode="zh_CN", UrlCode="zh-cn", Direction=DirectionEnum.Ltr, DateFormat="%Y年%m月%d日", TimeFormat="%H时%M分%S秒",WeekStart=WeekEnum.Sunday,Grouping="[3,0]",DecimalPoint=".",ThousandsSep=",",Active=true},
-            new SysLang{ Id=1300000000002,Name="Chinese (HK) / 繁體中文", Code="zh-HK", IsoCode="zh_HK", UrlCode="zh-hk", Direction=DirectionEnum.Ltr, DateFormat="%Y年%m月%d日 %A", TimeFormat="%I時%M分%S秒",WeekStart=WeekEnum.Sunday,Grouping="[3,0]",DecimalPoint=".",ThousandsSep=",",Active=true},
-            new SysLang{ Id=1300000000003,Name="Chinese (Traditional) / 繁體中文", Code="zh-TW", IsoCode="zh_TW", UrlCode="zh-tw", Direction=DirectionEnum.Ltr, DateFormat="%Y年%m月%d日", TimeFormat="%H時%M分%S秒",WeekStart=WeekEnum.Sunday,Grouping="[3,0]",DecimalPoint=".",ThousandsSep=",",Active=true},
+            new SysLang{ Id=1300000000001,Name="Chinese (Simplified) / Simplifiedintext", Code="zh-CN", IsoCode="zh_CN", UrlCode="zh-cn", Direction=DirectionEnum.Ltr, DateFormat="%Y year %m month %d day", TimeFormat="%H hour %M minutes %S seconds",WeekStart=WeekEnum.Sunday,Grouping="[3,0]",DecimalPoint=".",ThousandsSep=",",Active=true},
+            new SysLang{ Id=1300000000002,Name="Chinese (HK) / Traditional Chinese", Code="zh-HK", IsoCode="zh_HK", UrlCode="zh-hk", Direction=DirectionEnum.Ltr, DateFormat="%Y year %m month %d day %A", TimeFormat="%I hours %M minutes %S seconds",WeekStart=WeekEnum.Sunday,Grouping="[3,0]",DecimalPoint=".",ThousandsSep=",",Active=true},
+            new SysLang{ Id=1300000000003,Name="Chinese (Traditional) / Traditional (Chinese)intext", Code="zh-TW", IsoCode="zh_TW", UrlCode="zh-tw", Direction=DirectionEnum.Ltr, DateFormat="%Y year %m month %d day", TimeFormat="%H hour %M minutes %S seconds",WeekStart=WeekEnum.Sunday,Grouping="[3,0]",DecimalPoint=".",ThousandsSep=",",Active=true},
             new SysLang{ Id=1300000000004,Name="Italian / Italiano", Code="it-IT", IsoCode="it", UrlCode="it", Direction=DirectionEnum.Ltr, DateFormat="%d/%m/%Y", TimeFormat="%H:%M:%S",WeekStart=WeekEnum.Monday,Grouping="[3,0]",DecimalPoint=",",ThousandsSep=".",Active=true},
             new SysLang{ Id=1300000000005,Name="English (US)", Code="en-US", IsoCode="en", UrlCode="en", Direction=DirectionEnum.Ltr, DateFormat="%m/%d/%Y", TimeFormat="%H:%M:%S",WeekStart=WeekEnum.Sunday,Grouping="[3,0]",DecimalPoint=".",ThousandsSep=",",Active=true},
             new SysLang{ Id=1300000000006,Name="Amharic / አምሃርኛ", Code="am-ET", IsoCode="am_ET", UrlCode="am-et", Direction=DirectionEnum.Ltr, DateFormat="%d/%m/%Y", TimeFormat="%I:%M:%S",WeekStart=WeekEnum.Sunday,Grouping="[3,0]",DecimalPoint=".",ThousandsSep=",",Active=false},
@@ -58,7 +58,7 @@ public class SysLangSeedData : ISqlSugarEntitySeedData<SysLang>
             new SysLang{ Id=1300000000037,Name="Hindi / हिंदी", Code="hi-IN", IsoCode="hi", UrlCode="hi", Direction=DirectionEnum.Ltr, DateFormat="%A %d %b %Y", TimeFormat="%I:%M:%S",WeekStart=WeekEnum.Sunday,Grouping="[]",DecimalPoint=".",ThousandsSep=",",Active=false},
             new SysLang{ Id=1300000000038,Name="Hungarian / Magyar", Code="hu-HU", IsoCode="hu", UrlCode="hu", Direction=DirectionEnum.Ltr, DateFormat="%Y-%m-%d", TimeFormat="%H:%M:%S",WeekStart=WeekEnum.Monday,Grouping="[3,0]",DecimalPoint=",",ThousandsSep=".",Active=false},
             new SysLang{ Id=1300000000039,Name="Indonesian / Bahasa Indonesia", Code="id-ID", IsoCode="id", UrlCode="id", Direction=DirectionEnum.Ltr, DateFormat="%d/%m/%Y", TimeFormat="%H:%M:%S",WeekStart=WeekEnum.Sunday,Grouping="[3,0]",DecimalPoint=",",ThousandsSep=".",Active=false},
-            new SysLang{ Id=1300000000040,Name="Japanese / 日本語", Code="ja-JP", IsoCode="ja", UrlCode="ja", Direction=DirectionEnum.Ltr, DateFormat="%Y年%m月%d日", TimeFormat="%H時%M分%S秒",WeekStart=WeekEnum.Sunday,Grouping="[3,0]",DecimalPoint=".",ThousandsSep=",",Active=false},
+            new SysLang{ Id=1300000000040,Name="Japanese / Japanese", Code="ja-JP", IsoCode="ja", UrlCode="ja", Direction=DirectionEnum.Ltr, DateFormat="%Y year %m month %d day", TimeFormat="%H hour %M minutes %S seconds",WeekStart=WeekEnum.Sunday,Grouping="[3,0]",DecimalPoint=".",ThousandsSep=",",Active=false},
             new SysLang{ Id=1300000000041,Name="Kabyle / Taqbaylit", Code="kab-DZ", IsoCode="kab", UrlCode="kab", Direction=DirectionEnum.Ltr, DateFormat="%m/%d/%Y", TimeFormat="%I:%M:%S %p",WeekStart=WeekEnum.Saturday,Grouping="[]",DecimalPoint=".",ThousandsSep=",",Active=false},
             new SysLang{ Id=1300000000042,Name="Khmer / ភាសាខ្មែរ", Code="km-KH", IsoCode="km", UrlCode="km", Direction=DirectionEnum.Ltr, DateFormat="%d %B %Y", TimeFormat="%H:%M:%S",WeekStart=WeekEnum.Sunday,Grouping="[3,0]",DecimalPoint=".",ThousandsSep=",",Active=false},
             new SysLang{ Id=1300000000043,Name="Korean (KP) / 한국어 (KP)", Code="ko-KP", IsoCode="ko_KP", UrlCode="ko-kp", Direction=DirectionEnum.Ltr, DateFormat="%m/%d/%Y", TimeFormat="%I:%M:%S %p",WeekStart=WeekEnum.Monday,Grouping="[3,0]",DecimalPoint=".",ThousandsSep=",",Active=false},

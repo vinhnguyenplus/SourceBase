@@ -1,7 +1,7 @@
 import { service, cancelRequest } from '/@/utils/request';
 import {AxiosRequestConfig, AxiosResponse} from "axios";
 
-// 接口基类
+// Interface base class
 export const useBaseApi = (module: string) => {
     const baseUrl = `/api/${module}/`;
     const request = <T>(config: AxiosRequestConfig<T>, cancel: boolean = false) => {
@@ -99,7 +99,7 @@ export const useBaseApi = (module: string) => {
         uploadFile: function (params: any, action: string, cancel: boolean = false) {
             const formData = new FormData();
             formData.append('file', params.file);
-            // 自定义参数
+            // Custom parameters
             if (params.data) {
                 Object.keys(params.data).forEach((key) => {
                     const value = params.data![key];

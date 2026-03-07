@@ -4,100 +4,100 @@
 			<template #header>
 				<div style="color: #fff">
 					<el-icon size="16" style="margin-right: 3px; display: inline; vertical-align: middle"> <ele-Edit /> </el-icon>
-					<span> 增加表 </span>
+					<span> Add table </span>
 				</div>
 			</template>
-			<el-divider content-position="left">数据表信息</el-divider>
+			<el-divider content-position="left">Datasheet information</el-divider>
 			<el-form :model="state.ruleForm" ref="ruleFormRef" label-width="auto">
 				<el-row :gutter="35">
 					<el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="mb20">
-						<el-form-item label="表名称" prop="tableName" :rules="[{ required: true, message: '名称不能为空', trigger: 'blur' }]">
-							<el-input v-model="state.ruleForm.tableName" placeholder="表名称" clearable />
+						<el-form-item label="Table Name" prop="tableName" :rules="[{ required: true, message: 'Name cannot be empty', trigger: 'blur' }]">
+							<el-input v-model="state.ruleForm.tableName" placeholder="Table Name" clearable />
 						</el-form-item>
 					</el-col>
 					<el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="mb20">
-						<el-form-item label="描述" prop="description" :rules="[{ required: true, message: '描述不能为空', trigger: 'blur' }]">
-							<el-input v-model="state.ruleForm.description" placeholder="描述" clearable type="textarea" />
+						<el-form-item label="Description" prop="description" :rules="[{ required: true, message: 'Description cannot be empty', trigger: 'blur' }]">
+							<el-input v-model="state.ruleForm.description" placeholder="Description" clearable type="textarea" />
 						</el-form-item>
 					</el-col>
 				</el-row>
 			</el-form>
-			<el-divider content-position="left">数据列信息</el-divider>
+			<el-divider content-position="left">Data column information</el-divider>
 			<el-table :data="state.tableData" style="width: 100%" max-height="400">
-				<el-table-column prop="dbColumnName" label="字段名" width="200" fixed>
+				<el-table-column prop="dbColumnName" label="Field Name" width="200" fixed>
 					<template #default="scope">
 						<el-input v-model="scope.row.dbColumnName" autocomplete="off" />
 					</template>
 				</el-table-column>
-				<el-table-column prop="columnDescription" label="描述" width="220">
+				<el-table-column prop="columnDescription" label="Description" width="220">
 					<template #default="scope">
 						<el-input v-model="scope.row.columnDescription" autocomplete="off" />
 					</template>
 				</el-table-column>
-				<el-table-column prop="isPrimarykey" label="主键" width="100">
+				<el-table-column prop="isPrimarykey" label="Primary Key" width="100">
 					<template #default="scope">
 						<el-select v-model="scope.row.isPrimarykey" class="m-2" placeholder="Select">
 							<el-option v-for="item in yesNoSelect" :key="item.value" :label="item.label" :value="item.value" />
 						</el-select>
 					</template>
 				</el-table-column>
-				<el-table-column prop="isIdentity" label="自增" width="100">
+				<el-table-column prop="isIdentity" label="Auto-increment" width="100">
 					<template #default="scope">
 						<el-select v-model="scope.row.isIdentity" class="m-2" placeholder="Select">
 							<el-option v-for="item in yesNoSelect" :key="item.value" :label="item.label" :value="item.value" />
 						</el-select>
 					</template>
 				</el-table-column>
-				<el-table-column prop="dataType" label="类型" width="150">
+				<el-table-column prop="dataType" label="Type" width="150">
 					<template #default="scope">
 						<el-select v-model="scope.row.dataType" class="m-2" placeholder="Select" @change="handleColTypeChange(scope.row)">
 							<el-option v-for="item in dataTypeList" :key="item.value" :label="item.value" :value="item.value" />
 						</el-select>
 					</template>
 				</el-table-column>
-				<el-table-column prop="isNullable" label="可空" width="100">
+				<el-table-column prop="isNullable" label="Nullable" width="100">
 					<template #default="scope">
 						<el-select v-model="scope.row.isNullable" class="m-2" placeholder="Select">
 							<el-option v-for="item in yesNoSelect" :key="item.value" :label="item.label" :value="item.value" />
 						</el-select>
 					</template>
 				</el-table-column>
-				<el-table-column prop="length" label="长度" width="100">
+				<el-table-column prop="length" label="length" width="100">
 					<template #default="scope">
 						<el-input-number v-model="scope.row.length" controls-position="right" class="w100" />
 					</template>
 				</el-table-column>
-				<el-table-column prop="decimalDigits" label="小数位" width="100">
+				<el-table-column prop="decimalDigits" label="Decimal places" width="100">
 					<template #default="scope">
 						<el-input-number v-model="scope.row.decimalDigits" controls-position="right" class="w100" />
 					</template>
 				</el-table-column>				
-				<el-table-column prop="defaultValue" label="默认值" width="90">
+				<el-table-column prop="defaultValue" label="Default value" width="90">
 					<template #default="scope">
 						<el-input v-model="scope.row.defaultValue" autocomplete="off" />
 					</template>
 				</el-table-column>
-				<el-table-column label="操作" min-width="200" align="center" fixed="right">
+				<el-table-column label="Operation" min-width="200" align="center" fixed="right">
 					<template #default="scope">
-						<el-button link type="primary" icon="el-icon-delete" @click.prevent="handleColDelete(scope.$index)">删除</el-button>
-						<el-button v-if="state.tableData.length > 1" link type="primary" icon="ele-Top" @click.prevent="handleColUp(scope.row, scope.$index)">上移</el-button>
-						<el-button v-if="state.tableData.length > 1" link type="primary" icon="ele-Bottom" @click.prevent="handleColDown(scope.row, scope.$index)">下移</el-button>
+						<el-button link type="primary" icon="el-icon-delete" @click.prevent="handleColDelete(scope.$index)">Delete</el-button>
+						<el-button v-if="state.tableData.length > 1" link type="primary" icon="ele-Top" @click.prevent="handleColUp(scope.row, scope.$index)">Move up</el-button>
+						<el-button v-if="state.tableData.length > 1" link type="primary" icon="ele-Bottom" @click.prevent="handleColDown(scope.row, scope.$index)">Move down</el-button>
 					</template>
 				</el-table-column>
 			</el-table>
 			<div style="text-align: left; margin-top: 10px">
-				<el-button icon="ele-Plus" @click="addPrimaryColumn">新增主键字段</el-button>
-				<el-button icon="ele-Plus" @click="addColumn">新增普通字段</el-button>
-				<el-button icon="ele-Plus" @click="addTenantColumn">新增租户字段</el-button>
-				<el-button icon="ele-Plus" @click="addOrgColumn">新增机构字段</el-button>
-				<el-button icon="ele-Plus" @click="addBaseColumn">新增基础字段</el-button>
-				<el-button icon="ele-Plus" @click="addDeleteColumn">新增软删除字段</el-button>
+				<el-button icon="ele-Plus" @click="addPrimaryColumn">Add primary key field</el-button>
+				<el-button icon="ele-Plus" @click="addColumn">Add a regular field</el-button>
+				<el-button icon="ele-Plus" @click="addTenantColumn">Added tenant field</el-button>
+				<el-button icon="ele-Plus" @click="addOrgColumn">Add organization field</el-button>
+				<el-button icon="ele-Plus" @click="addBaseColumn">Add new basic fields</el-button>
+				<el-button icon="ele-Plus" @click="addDeleteColumn">Add a soft delete field</el-button>
 			</div>
 
 			<template #footer>
 				<span class="dialog-footer">
-					<el-button @click="cancel">取 消</el-button>
-					<el-button type="primary" @click="submit">确 定</el-button>
+					<el-button @click="cancel">Cancel</el-button>
+					<el-button type="primary" @click="submit">Confirm</el-button>
 				</span>
 			</template>
 		</el-dialog>
@@ -122,33 +122,33 @@ const state = reactive({
 	tableData: [] as any,
 });
 
-// 打开弹窗
+// Open pop-up window
 const openDialog = (row: any) => {
 	state.ruleForm = row;
 	state.isShowDialog = true;
 	ruleFormRef.value?.resetFields();
 };
 
-// 关闭弹窗
+// Close pop-up window
 const closeDialog = () => {
 	emits('addTableSubmitted', state.ruleForm.tableName ?? '');
 	state.tableData = [];
 	state.isShowDialog = false;
 };
 
-// 取消
+// Cancel
 const cancel = () => {
 	state.isShowDialog = false;
 };
 
-// 提交
+// submit
 const submit = () => {
 	ruleFormRef.value.validate(async (valid: boolean) => {
 		if (!valid) return;
 		if (state.tableData.length === 0) {
 			ElMessage({
 				type: 'error',
-				message: `请添加列!`,
+				message: `PleaseAdd tocolumn!`,
 			});
 			return;
 		}
@@ -161,10 +161,10 @@ const submit = () => {
 	});
 };
 
-// 增加主键列
+// Add primary key column
 function addPrimaryColumn() {
 	state.tableData.push({
-		columnDescription: '主键Id',
+		columnDescription: 'Primary keyId',
 		dataType: 'bigint',
 		dbColumnName: 'Id',
 		decimalDigits: 0,
@@ -179,7 +179,7 @@ function addPrimaryColumn() {
 	colIndex++;
 }
 
-// 增加普通列
+// Add normal column
 function addColumn() {
 	state.tableData.push({
 		columnDescription: '',
@@ -197,10 +197,10 @@ function addColumn() {
 	colIndex++;
 }
 
-// 增加租户列
+// Add tenant column
 function addTenantColumn() {
 	state.tableData.push({
-		columnDescription: '租户Id',
+		columnDescription: 'Tenant ID',
 		dataType: 'bigint',
 		dbColumnName: 'TenantId',
 		decimalDigits: 0,
@@ -215,10 +215,10 @@ function addTenantColumn() {
 	colIndex++;
 }
 
-// 增加机构列
+// Add organization column
 function addOrgColumn() {
 	state.tableData.push({
-		columnDescription: '机构Id',
+		columnDescription: 'Organization ID',
 		dataType: 'bigint',
 		dbColumnName: 'OrgId',
 		decimalDigits: 0,
@@ -233,39 +233,39 @@ function addOrgColumn() {
 	colIndex++;
 }
 
-// 增加通用基础列
+// Add common base columns
 function addBaseColumn() {
 	const fileds = [
 		{
 			dataType: 'datetime',
 			name: 'CreateTime',
-			desc: '创建时间',
+			desc: 'Creation Time',
 		},
 		{
 			dataType: 'datetime',
 			name: 'UpdateTime',
-			desc: '更新时间',
+			desc: 'Update Time',
 		},
 		{
 			dataType: 'bigint',
 			name: 'CreateUserId',
-			desc: '创建者Id',
+			desc: 'CreatorId',
 		},
 		{
 			dataType: 'varchar',
 			name: 'CreateUserName',
-			desc: '创建者姓名',
+			desc: 'Creator name',
 			length: 64,
 		},
 		{
 			dataType: 'bigint',
 			name: 'UpdateUserId',
-			desc: '修改者Id',
+			desc: 'Modifier ID',
 		},
 		{
 			dataType: 'varchar',
 			name: 'UpdateUserName',
-			desc: '修改者姓名',
+			desc: 'Modifier name',
 			length: 64,
 		},
 	];
@@ -288,10 +288,10 @@ function addBaseColumn() {
 	});
 }
 
-// 增加软删除列
+// Add soft delete column
 function addDeleteColumn() {
 	state.tableData.push({
-		columnDescription: '软删除',
+		columnDescription: 'soft delete',
 		dataType: 'bit',
 		dbColumnName: 'IsDelete',
 		decimalDigits: 0,
@@ -310,7 +310,7 @@ function handleColDelete(index: number) {
 	state.tableData.splice(index, 1);
 }
 
-// 列类型选择变化
+// Column type selection changes
 function handleColTypeChange(record: EditRecordRow) {
     if (['varchar', 'char', 'nvarchar', 'nchar'].includes(record.dataType as string)) {
         if ([0, undefined, null].includes(record.length)) {
@@ -321,7 +321,7 @@ function handleColTypeChange(record: EditRecordRow) {
     }
 }
 
-// 上移
+// move up
 function handleColUp(record: EditRecordRow, index: number) {
 	if (record.isNew) {
 		var data1 = ChangeExForArray(index, index - 1, state.tableData);
@@ -329,7 +329,7 @@ function handleColUp(record: EditRecordRow, index: number) {
 	}
 }
 
-// 下移
+// move down
 function handleColDown(record: EditRecordRow, index: number) {
 	if (record.isNew) {
 		return ChangeExForArray(index, index + 1, state.tableData);
@@ -337,7 +337,7 @@ function handleColDown(record: EditRecordRow, index: number) {
 }
 
 function ChangeExForArray(index1: number, index2: number, array: Array<EditRecordRow>) {
-	let maxIndex = state.tableData.length - 1; //最大索引
+	let maxIndex = state.tableData.length - 1; // maximum index
 	if (index2 > maxIndex) {
 		index2 = 0;
 	}
@@ -350,6 +350,6 @@ function ChangeExForArray(index1: number, index2: number, array: Array<EditRecor
 	return array;
 }
 
-// 导出对象
+// Export object
 defineExpose({ openDialog });
 </script>

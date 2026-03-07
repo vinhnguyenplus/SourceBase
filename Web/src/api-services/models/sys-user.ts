@@ -1,8 +1,8 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Admin.NET 通用权限开发平台
- * 让 .NET 开发更简单、更通用、更流行。整合最新技术，模块插件式开发，前后端分离，开箱即用。<br/><u><b><font color='FF0000'> 👮不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！</font></b></u>
+ * Admin.NET General Permission Development Platform
+ * let .NET Develop more simply、More general、More popular。wholeIn line with the latest technology，Modular Plugin-Based Development，Frontend and backendpointsLeave，Ready to use out of the box。<br/><u><b><font color='FF0000'> 👮This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project! </font></b></u>
  *
  * OpenAPI spec version: 1.0.0
  * 
@@ -19,7 +19,7 @@ import { GenderEnum } from './gender-enum';
 import { StatusEnum } from './status-enum';
 import { SysOrg } from './sys-org';
  /**
- * 系统用户表
+ * System User Table
  *
  * @export
  * @interface SysUser
@@ -27,7 +27,7 @@ import { SysOrg } from './sys-org';
 export interface SysUser {
 
     /**
-     * 雪花Id
+     * SnowflakeId
      *
      * @type {number}
      * @memberof SysUser
@@ -35,7 +35,7 @@ export interface SysUser {
     id?: number;
 
     /**
-     * 创建时间
+     * Creation Time
      *
      * @type {Date}
      * @memberof SysUser
@@ -43,7 +43,7 @@ export interface SysUser {
     createTime?: Date;
 
     /**
-     * 更新时间
+     * Update Time
      *
      * @type {Date}
      * @memberof SysUser
@@ -51,7 +51,7 @@ export interface SysUser {
     updateTime?: Date | null;
 
     /**
-     * 创建者Id
+     * CreatorId
      *
      * @type {number}
      * @memberof SysUser
@@ -59,7 +59,7 @@ export interface SysUser {
     createUserId?: number | null;
 
     /**
-     * 创建者姓名
+     * Creator name
      *
      * @type {string}
      * @memberof SysUser
@@ -67,7 +67,7 @@ export interface SysUser {
     createUserName?: string | null;
 
     /**
-     * 修改者Id
+     * Modifier ID
      *
      * @type {number}
      * @memberof SysUser
@@ -75,7 +75,7 @@ export interface SysUser {
     updateUserId?: number | null;
 
     /**
-     * 修改者姓名
+     * Modifier name
      *
      * @type {string}
      * @memberof SysUser
@@ -83,7 +83,7 @@ export interface SysUser {
     updateUserName?: string | null;
 
     /**
-     * 机构Id
+     * Organization ID
      *
      * @type {number}
      * @memberof SysUser
@@ -91,7 +91,7 @@ export interface SysUser {
     orgId?: number;
 
     /**
-     * 租户Id
+     * Tenant ID
      *
      * @type {number}
      * @memberof SysUser
@@ -99,7 +99,7 @@ export interface SysUser {
     tenantId?: number | null;
 
     /**
-     * 账号
+     * Account number
      *
      * @type {string}
      * @memberof SysUser
@@ -107,7 +107,7 @@ export interface SysUser {
     account: string;
 
     /**
-     * 真实姓名
+     * Real Name
      *
      * @type {string}
      * @memberof SysUser
@@ -115,7 +115,7 @@ export interface SysUser {
     realName?: string | null;
 
     /**
-     * 昵称
+     * Nickname
      *
      * @type {string}
      * @memberof SysUser
@@ -123,7 +123,7 @@ export interface SysUser {
     nickName?: string | null;
 
     /**
-     * 头像
+     * Avatar
      *
      * @type {string}
      * @memberof SysUser
@@ -137,7 +137,7 @@ export interface SysUser {
     sex?: GenderEnum;
 
     /**
-     * 年龄
+     * age
      *
      * @type {number}
      * @memberof SysUser
@@ -145,7 +145,7 @@ export interface SysUser {
     age?: number;
 
     /**
-     * 出生日期
+     * date of birth
      *
      * @type {Date}
      * @memberof SysUser
@@ -153,7 +153,7 @@ export interface SysUser {
     birthday?: Date | null;
 
     /**
-     * 民族
+     * ethnic group
      *
      * @type {string}
      * @memberof SysUser
@@ -161,7 +161,7 @@ export interface SysUser {
     nation?: string | null;
 
     /**
-     * 手机号码
+     * Mobile phone number
      *
      * @type {string}
      * @memberof SysUser
@@ -175,7 +175,7 @@ export interface SysUser {
     cardType?: CardTypeEnum;
 
     /**
-     * 身份证号
+     * ID number
      *
      * @type {string}
      * @memberof SysUser
@@ -183,7 +183,7 @@ export interface SysUser {
     idCardNum?: string | null;
 
     /**
-     * 邮箱
+     * Email
      *
      * @type {string}
      * @memberof SysUser
@@ -191,7 +191,7 @@ export interface SysUser {
     email?: string | null;
 
     /**
-     * 地址
+     * address
      *
      * @type {string}
      * @memberof SysUser
@@ -205,7 +205,7 @@ export interface SysUser {
     cultureLevel?: CultureLevelEnum;
 
     /**
-     * 政治面貌
+     * political outlook
      *
      * @type {string}
      * @memberof SysUser
@@ -213,7 +213,7 @@ export interface SysUser {
     politicalOutlook?: string | null;
 
     /**
-     * 毕业院校
+     * Graduation school
      *
      * @type {string}
      * @memberof SysUser
@@ -221,7 +221,7 @@ export interface SysUser {
     college?: string | null;
 
     /**
-     * 办公电话
+     * Office phone
      *
      * @type {string}
      * @memberof SysUser
@@ -229,7 +229,7 @@ export interface SysUser {
     officePhone?: string | null;
 
     /**
-     * 紧急联系人
+     * Emergency Contact
      *
      * @type {string}
      * @memberof SysUser
@@ -237,7 +237,7 @@ export interface SysUser {
     emergencyContact?: string | null;
 
     /**
-     * 紧急联系人电话
+     * Emergency contact number
      *
      * @type {string}
      * @memberof SysUser
@@ -245,7 +245,7 @@ export interface SysUser {
     emergencyPhone?: string | null;
 
     /**
-     * 紧急联系人地址
+     * UrgentContact address
      *
      * @type {string}
      * @memberof SysUser
@@ -253,7 +253,7 @@ export interface SysUser {
     emergencyAddress?: string | null;
 
     /**
-     * 个人简介
+     * Personal Profile
      *
      * @type {string}
      * @memberof SysUser
@@ -261,7 +261,7 @@ export interface SysUser {
     introduction?: string | null;
 
     /**
-     * 排序
+     * Sort
      *
      * @type {number}
      * @memberof SysUser
@@ -275,7 +275,7 @@ export interface SysUser {
     status?: StatusEnum;
 
     /**
-     * 备注
+     * Remarks
      *
      * @type {string}
      * @memberof SysUser
@@ -295,7 +295,7 @@ export interface SysUser {
     sysOrg?: SysOrg;
 
     /**
-     * 直属主管Id
+     * Direct Supervisor ID
      *
      * @type {number}
      * @memberof SysUser
@@ -303,7 +303,7 @@ export interface SysUser {
     managerUserId?: number | null;
 
     /**
-     * 职位Id
+     * Job ID
      *
      * @type {number}
      * @memberof SysUser
@@ -311,7 +311,7 @@ export interface SysUser {
     posId?: number;
 
     /**
-     * 工号
+     * Job number
      *
      * @type {string}
      * @memberof SysUser
@@ -319,7 +319,7 @@ export interface SysUser {
     jobNum?: string | null;
 
     /**
-     * 职级
+     * Rank
      *
      * @type {string}
      * @memberof SysUser
@@ -327,7 +327,7 @@ export interface SysUser {
     posLevel?: string | null;
 
     /**
-     * 职称
+     * Professional title
      *
      * @type {string}
      * @memberof SysUser
@@ -335,7 +335,7 @@ export interface SysUser {
     posTitle?: string | null;
 
     /**
-     * 擅长领域
+     * Areas of expertise
      *
      * @type {string}
      * @memberof SysUser
@@ -343,7 +343,7 @@ export interface SysUser {
     expertise?: string | null;
 
     /**
-     * 办公区域
+     * Office area
      *
      * @type {string}
      * @memberof SysUser
@@ -351,7 +351,7 @@ export interface SysUser {
     officeZone?: string | null;
 
     /**
-     * 办公室
+     * Office
      *
      * @type {string}
      * @memberof SysUser
@@ -359,7 +359,7 @@ export interface SysUser {
     office?: string | null;
 
     /**
-     * 入职日期
+     * Date of Joining
      *
      * @type {Date}
      * @memberof SysUser
@@ -367,7 +367,7 @@ export interface SysUser {
     joinDate?: Date | null;
 
     /**
-     * 最新登录Ip
+     * Latest login IP
      *
      * @type {string}
      * @memberof SysUser
@@ -375,7 +375,7 @@ export interface SysUser {
     lastLoginIp?: string | null;
 
     /**
-     * 最新登录地点
+     * Latest login location
      *
      * @type {string}
      * @memberof SysUser
@@ -383,7 +383,7 @@ export interface SysUser {
     lastLoginAddress?: string | null;
 
     /**
-     * 最新登录时间
+     * Latest login time
      *
      * @type {Date}
      * @memberof SysUser
@@ -391,7 +391,7 @@ export interface SysUser {
     lastLoginTime?: Date | null;
 
     /**
-     * 最新登录设备
+     * Latest login devices
      *
      * @type {string}
      * @memberof SysUser
@@ -399,7 +399,7 @@ export interface SysUser {
     lastLoginDevice?: string | null;
 
     /**
-     * 电子签名
+     * Electronic signature
      *
      * @type {string}
      * @memberof SysUser
@@ -407,7 +407,7 @@ export interface SysUser {
     signature?: string | null;
 
     /**
-     * 语言代码（如 zh-CN）
+     * Language code（such as zh-CN）
      *
      * @type {string}
      * @memberof SysUser
@@ -415,7 +415,7 @@ export interface SysUser {
     langCode?: string | null;
 
     /**
-     * 个性化首页地址
+     * Personalized homepage address
      *
      * @type {string}
      * @memberof SysUser

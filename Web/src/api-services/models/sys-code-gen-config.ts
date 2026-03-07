@@ -1,8 +1,8 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Admin.NET 通用权限开发平台
- * 让 .NET 开发更简单、更通用、更流行。整合最新技术，模块插件式开发，前后端分离，开箱即用。<br/><u><b><font color='FF0000'> 👮不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！</font></b></u>
+ * Admin.NET General Permission Development Platform
+ * let .NET Develop more simply、More general、More popular。wholeIn line with the latest technology，Modular Plugin-Based Development，Frontend and backendpointsLeave，Ready to use out of the box。<br/><u><b><font color='FF0000'> 👮This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project! </font></b></u>
  *
  * OpenAPI spec version: 1.0.0
  * 
@@ -13,7 +13,7 @@
  */
 
  /**
- * 代码生成字段配置表
+ * Code Generation Field Configuration Table
  *
  * @export
  * @interface SysCodeGenConfig
@@ -21,7 +21,7 @@
 export interface SysCodeGenConfig {
 
     /**
-     * 雪花Id
+     * SnowflakeId
      *
      * @type {number}
      * @memberof SysCodeGenConfig
@@ -29,7 +29,7 @@ export interface SysCodeGenConfig {
     id?: number;
 
     /**
-     * 创建时间
+     * Creation Time
      *
      * @type {Date}
      * @memberof SysCodeGenConfig
@@ -37,7 +37,7 @@ export interface SysCodeGenConfig {
     createTime?: Date;
 
     /**
-     * 更新时间
+     * Update Time
      *
      * @type {Date}
      * @memberof SysCodeGenConfig
@@ -45,7 +45,7 @@ export interface SysCodeGenConfig {
     updateTime?: Date | null;
 
     /**
-     * 创建者Id
+     * CreatorId
      *
      * @type {number}
      * @memberof SysCodeGenConfig
@@ -53,7 +53,7 @@ export interface SysCodeGenConfig {
     createUserId?: number | null;
 
     /**
-     * 创建者姓名
+     * Creator name
      *
      * @type {string}
      * @memberof SysCodeGenConfig
@@ -61,7 +61,7 @@ export interface SysCodeGenConfig {
     createUserName?: string | null;
 
     /**
-     * 修改者Id
+     * Modifier ID
      *
      * @type {number}
      * @memberof SysCodeGenConfig
@@ -69,7 +69,7 @@ export interface SysCodeGenConfig {
     updateUserId?: number | null;
 
     /**
-     * 修改者姓名
+     * Modifier name
      *
      * @type {string}
      * @memberof SysCodeGenConfig
@@ -77,7 +77,7 @@ export interface SysCodeGenConfig {
     updateUserName?: string | null;
 
     /**
-     * 代码生成主表Id
+     * code generationMain table ID
      *
      * @type {number}
      * @memberof SysCodeGenConfig
@@ -85,7 +85,7 @@ export interface SysCodeGenConfig {
     codeGenId?: number;
 
     /**
-     * 数据库字段名
+     * DataWarehouseField Name
      *
      * @type {string}
      * @memberof SysCodeGenConfig
@@ -93,7 +93,7 @@ export interface SysCodeGenConfig {
     columnName: string;
 
     /**
-     * 主键
+     * Primary Key
      *
      * @type {string}
      * @memberof SysCodeGenConfig
@@ -101,7 +101,7 @@ export interface SysCodeGenConfig {
     columnKey?: string | null;
 
     /**
-     * 实体属性名
+     * Entity attributeName
      *
      * @type {string}
      * @memberof SysCodeGenConfig
@@ -109,7 +109,7 @@ export interface SysCodeGenConfig {
     propertyName: string;
 
     /**
-     * 字段数据长度
+     * Field data length
      *
      * @type {number}
      * @memberof SysCodeGenConfig
@@ -117,7 +117,7 @@ export interface SysCodeGenConfig {
     columnLength?: number;
 
     /**
-     * 字段描述
+     * FieldDescription
      *
      * @type {string}
      * @memberof SysCodeGenConfig
@@ -125,7 +125,7 @@ export interface SysCodeGenConfig {
     columnComment?: string | null;
 
     /**
-     * 数据库中类型（物理类型）
+     * DataWarehouseinType（PhysicsType）
      *
      * @type {string}
      * @memberof SysCodeGenConfig
@@ -133,7 +133,7 @@ export interface SysCodeGenConfig {
     dataType?: string | null;
 
     /**
-     * .NET数据类型
+     * .NET Data Types
      *
      * @type {string}
      * @memberof SysCodeGenConfig
@@ -141,7 +141,7 @@ export interface SysCodeGenConfig {
     netType?: string | null;
 
     /**
-     * 字段数据默认值
+     * FieldDataDefault value
      *
      * @type {string}
      * @memberof SysCodeGenConfig
@@ -149,7 +149,7 @@ export interface SysCodeGenConfig {
     defaultValue?: string | null;
 
     /**
-     * 作用类型（字典）
+     * Type of effect（dictionary）
      *
      * @type {string}
      * @memberof SysCodeGenConfig
@@ -157,7 +157,7 @@ export interface SysCodeGenConfig {
     effectType?: string | null;
 
     /**
-     * 外键库标识
+     * Foreign key library identifier
      *
      * @type {string}
      * @memberof SysCodeGenConfig
@@ -165,7 +165,7 @@ export interface SysCodeGenConfig {
     fkConfigId?: string | null;
 
     /**
-     * 外键实体名称
+     * Foreign key entity name
      *
      * @type {string}
      * @memberof SysCodeGenConfig
@@ -173,7 +173,7 @@ export interface SysCodeGenConfig {
     fkEntityName?: string | null;
 
     /**
-     * 外键表名称
+     * Foreign key table name
      *
      * @type {string}
      * @memberof SysCodeGenConfig
@@ -181,7 +181,7 @@ export interface SysCodeGenConfig {
     fkTableName?: string | null;
 
     /**
-     * 外键显示字段
+     * Foreign key display field
      *
      * @type {string}
      * @memberof SysCodeGenConfig
@@ -189,7 +189,7 @@ export interface SysCodeGenConfig {
     fkDisplayColumns?: string | null;
 
     /**
-     * 外键链接字段
+     * Foreign key link field
      *
      * @type {string}
      * @memberof SysCodeGenConfig
@@ -197,7 +197,7 @@ export interface SysCodeGenConfig {
     fkLinkColumnName?: string | null;
 
     /**
-     * 外键显示字段.NET类型
+     * Foreign key display field .NET type
      *
      * @type {string}
      * @memberof SysCodeGenConfig
@@ -205,7 +205,7 @@ export interface SysCodeGenConfig {
     fkColumnNetType?: string | null;
 
     /**
-     * 父级字段
+     * Parent field
      *
      * @type {string}
      * @memberof SysCodeGenConfig
@@ -213,7 +213,7 @@ export interface SysCodeGenConfig {
     pidColumn?: string | null;
 
     /**
-     * 字典编码
+     * Dictionary Encoding
      *
      * @type {string}
      * @memberof SysCodeGenConfig
@@ -221,7 +221,7 @@ export interface SysCodeGenConfig {
     dictTypeCode?: string | null;
 
     /**
-     * 查询方式
+     * Query method
      *
      * @type {string}
      * @memberof SysCodeGenConfig
@@ -229,7 +229,7 @@ export interface SysCodeGenConfig {
     queryType?: string | null;
 
     /**
-     * 是否是查询条件
+     * Is it a query condition?
      *
      * @type {string}
      * @memberof SysCodeGenConfig
@@ -237,7 +237,7 @@ export interface SysCodeGenConfig {
     whetherQuery?: string | null;
 
     /**
-     * 列表是否缩进（字典）
+     * Whether the list is indented（dictionary）
      *
      * @type {string}
      * @memberof SysCodeGenConfig
@@ -245,7 +245,7 @@ export interface SysCodeGenConfig {
     whetherRetract?: string | null;
 
     /**
-     * 是否必填（字典）
+     * Is it required?（dictionary）
      *
      * @type {string}
      * @memberof SysCodeGenConfig
@@ -253,7 +253,7 @@ export interface SysCodeGenConfig {
     whetherRequired?: string | null;
 
     /**
-     * 是否可排序（字典）
+     * Is it sortable?（dictionary）
      *
      * @type {string}
      * @memberof SysCodeGenConfig
@@ -261,7 +261,7 @@ export interface SysCodeGenConfig {
     whetherSortable?: string | null;
 
     /**
-     * 列表显示
+     * List Display
      *
      * @type {string}
      * @memberof SysCodeGenConfig
@@ -269,7 +269,7 @@ export interface SysCodeGenConfig {
     whetherTable?: string | null;
 
     /**
-     * 增改
+     * Additions and changes
      *
      * @type {string}
      * @memberof SysCodeGenConfig
@@ -277,7 +277,7 @@ export interface SysCodeGenConfig {
     whetherAddUpdate?: string | null;
 
     /**
-     * 导入
+     * import
      *
      * @type {string}
      * @memberof SysCodeGenConfig
@@ -285,7 +285,7 @@ export interface SysCodeGenConfig {
     whetherImport?: string | null;
 
     /**
-     * 是否通用字段
+     * Is it a common field?
      *
      * @type {string}
      * @memberof SysCodeGenConfig
@@ -293,7 +293,7 @@ export interface SysCodeGenConfig {
     whetherCommon?: string | null;
 
     /**
-     * 排序
+     * Sort
      *
      * @type {number}
      * @memberof SysCodeGenConfig

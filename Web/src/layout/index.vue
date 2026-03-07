@@ -9,7 +9,7 @@ import { useThemeConfig } from '/@/stores/themeConfig';
 import { Local } from '/@/utils/storage';
 import mittBus from '/@/utils/mitt';
 
-// 引入组件
+// Introduce components
 const layouts: any = {
 	defaults: defineAsyncComponent(() => import('/@/layout/main/defaults.vue')),
 	classic: defineAsyncComponent(() => import('/@/layout/main/classic.vue')),
@@ -17,19 +17,19 @@ const layouts: any = {
 	columns: defineAsyncComponent(() => import('/@/layout/main/columns.vue')),
 };
 
-// 定义变量内容
+// Define variable content
 const storesThemeConfig = useThemeConfig();
 const { themeConfig } = storeToRefs(storesThemeConfig);
 
-// 20240117 最大窗体宽度
+// 20240117 Maximum window width
 let maxClientWidth = document.body.clientWidth;
 
-// 窗口大小改变时(适配移动端)
+// When the window size changes (adapted to mobile terminals)
 const onLayoutResize = () => {
 	if (!Local.get('oldLayout')) Local.set('oldLayout', themeConfig.value.layout);
 	const clientWidth = document.body.clientWidth;
 
-	// 20240117 最大窗体宽度 > 当前宽度，不触发 layoutMobileResize 事件
+	// 20240117 Maximum form width > current width, layoutMobileResize event is not triggered
 	if (maxClientWidth > clientWidth) return;
 	maxClientWidth = clientWidth;
 
@@ -47,13 +47,13 @@ const onLayoutResize = () => {
 	}
 };
 
-// 页面加载前
+// Before page loads
 onBeforeMount(() => {
 	onLayoutResize();
 	window.addEventListener('resize', onLayoutResize);
 });
 
-// 页面卸载时
+// When the page is unloaded
 onUnmounted(() => {
 	window.removeEventListener('resize', onLayoutResize);
 });

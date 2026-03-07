@@ -1,15 +1,15 @@
-// Admin.NET 项目的版权、商标、专利和其他相关权利均受相应法律法规的保护。使用本项目应遵守相关法律法规和许可证的要求。
+// The copyright, trademark, patent and other related rights of the Admin.NET project are protected by corresponding laws and regulations. Use of this project shall comply with relevant laws, regulations and license requirements.
 //
-// 本项目主要遵循 MIT 许可证和 Apache 许可证（版本 2.0）进行分发和使用。许可证位于源代码树根目录中的 LICENSE-MIT 和 LICENSE-APACHE 文件。
+// This project is distributed and used primarily under the MIT License and the Apache License (version 2.0). The license is located in the LICENSE-MIT and LICENSE-APACHE files in the root of the source tree.
 //
-// 不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！
+// This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project!
 
 namespace Admin.NET.Core.Service;
 
 /// <summary>
-/// 文件存储提供者管理控制器 🧩
+/// File Storage Provider Management Controller 🧩
 /// </summary>
-[ApiDescriptionSettings(Order = 412, Description = "文件存储提供者管理")]
+[ApiDescriptionSettings(Order = 412, Description = "File storage provider management")]
 public class SysFileProviderController : IDynamicApiController, ITransient
 {
     private readonly SysFileProviderService _fileProviderService;
@@ -20,101 +20,101 @@ public class SysFileProviderController : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 获取存储提供者列表 🔖
+    /// Get a list of storage providers 🔖
     /// </summary>
     /// <returns></returns>
-    [DisplayName("获取存储提供者列表")]
+    [DisplayName("Get a list of storage providers")]
     public async Task<List<SysFileProvider>> GetProviderList()
     {
         return await _fileProviderService.GetFileProviderList();
     }
 
     /// <summary>
-    /// 获取存储提供者分页列表 🔖
+    /// Get a paginated list of storage providers 🔖
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
-    [DisplayName("获取存储提供者分页列表")]
+    [DisplayName("Get paginated list of storage providers")]
     public async Task<SqlSugarPagedList<SysFileProvider>> GetProviderPage(PageFileProviderInput input)
     {
         return await _fileProviderService.GetFileProviderPage(input);
     }
 
     /// <summary>
-    /// 获取存储提供者详情 🔖
+    /// Get storage provider details 🔖
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
-    [DisplayName("获取存储提供者详情")]
+    [DisplayName("Get storage provider details")]
     public async Task<SysFileProvider> GetProvider([FromQuery] QueryFileProviderInput input)
     {
         return await _fileProviderService.GetFileProvider(input);
     }
 
     /// <summary>
-    /// 添加存储提供者 🔖
+    /// Add storage provider 🔖
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
     [ApiDescriptionSettings(Name = "Add"), HttpPost]
-    [DisplayName("添加存储提供者")]
+    [DisplayName("Add storage provider")]
     public async Task AddProvider(AddFileProviderInput input)
     {
         await _fileProviderService.AddFileProvider(input);
     }
 
     /// <summary>
-    /// 更新存储提供者 🔖
+    /// Update storage provider 🔖
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
     [ApiDescriptionSettings(Name = "Update"), HttpPost]
-    [DisplayName("更新存储提供者")]
+    [DisplayName("Update storage provider")]
     public async Task UpdateProvider(UpdateFileProviderInput input)
     {
         await _fileProviderService.UpdateFileProvider(input);
     }
 
     /// <summary>
-    /// 删除存储提供者 🔖
+    /// Remove storage provider 🔖
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
     [ApiDescriptionSettings(Name = "Delete"), HttpPost]
-    [DisplayName("删除存储提供者")]
+    [DisplayName("Remove storage provider")]
     public async Task DeleteProvider(DeleteFileProviderInput input)
     {
         await _fileProviderService.DeleteFileProvider(input);
     }
 
     /// <summary>
-    /// 根据存储桶名称获取存储提供者 🔖
+    /// Get storage provider based on bucket name 🔖
     /// </summary>
-    /// <param name="bucketName">存储桶名称</param>
+    /// <param name="bucketName">bucket name</param>
     /// <returns></returns>
-    [DisplayName("根据存储桶名称获取存储提供者")]
+    [DisplayName("Get storage provider based on bucket name")]
     public async Task<SysFileProvider?> GetProviderByBucketName(string bucketName)
     {
         return await _fileProviderService.GetProviderByBucketName(bucketName);
     }
 
     /// <summary>
-    /// 清除存储提供者缓存 🔖
+    /// Clear storage provider cache 🔖
     /// </summary>
     /// <returns></returns>
-    [DisplayName("清除存储提供者缓存")]
+    [DisplayName("Clear storage provider cache")]
     public async Task ClearCache()
     {
         await _fileProviderService.ClearCache();
     }
 
     /// <summary>
-    /// 批量启用/禁用存储提供者 🔖
+    /// Enable/disable storage providers in bulk 🔖
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
     [ApiDescriptionSettings(Name = "BatchEnable"), HttpPost]
-    [DisplayName("批量启用/禁用存储提供者")]
+    [DisplayName("Enable/disable storage providers in bulk")]
     public async Task BatchEnableProvider(BatchEnableProviderInput input)
     {
         foreach (var id in input.Ids)
@@ -135,10 +135,10 @@ public class SysFileProviderController : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 获取存储提供者统计信息 🔖
+    /// Get storage provider statistics 🔖
     /// </summary>
     /// <returns></returns>
-    [DisplayName("获取存储提供者统计信息")]
+    [DisplayName("Get storage provider statistics")]
     public async Task<object> GetProviderStatistics()
     {
         var providers = await _fileProviderService.GetCachedFileProviders();
@@ -161,20 +161,20 @@ public class SysFileProviderController : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 获取所有可用的存储桶列表 🔖
+    /// Get a list of all available buckets 🔖
     /// </summary>
     /// <returns></returns>
-    [DisplayName("获取所有可用的存储桶列表")]
+    [DisplayName("Get a list of all available buckets")]
     public async Task<List<string>> GetAvailableBuckets()
     {
         return await _fileProviderService.GetAvailableBuckets();
     }
 
     /// <summary>
-    /// 获取存储桶和提供者的映射关系 🔖
+    /// Get the mapping relationship between bucket and provider 🔖
     /// </summary>
     /// <returns></returns>
-    [DisplayName("获取存储桶和提供者的映射关系")]
+    [DisplayName("Obtain the mapping relationship between buckets and providers")]
     public async Task<Dictionary<string, List<SysFileProvider>>> GetBucketProviderMapping()
     {
         return await _fileProviderService.GetBucketProviderMapping();
@@ -182,18 +182,18 @@ public class SysFileProviderController : IDynamicApiController, ITransient
 }
 
 /// <summary>
-/// 批量启用/禁用存储提供者输入参数
+/// Bulk enable/disable storage provider input parameters
 /// </summary>
 public class BatchEnableProviderInput
 {
     /// <summary>
-    /// 存储提供者ID列表
+    /// Store list of provider IDs
     /// </summary>
     [Required]
     public List<long> Ids { get; set; }
 
     /// <summary>
-    /// 是否启用
+    /// Whether to enable
     /// </summary>
     public bool IsEnable { get; set; }
 }

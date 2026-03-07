@@ -1,12 +1,12 @@
 <!-- 
-// NumberRange组件，用于输入数字范围(支持前缀和后缀插槽，支持数字精度，支持限制取值范围)，在数值、金额等的范围输入场景中使用
-// 使用示例：
+// NumberRange component is used to input a number range (supports prefix and suffix slots, supports numerical precision, and supports limiting value ranges). It is used in range input scenarios of values, amounts, etc.
+// Usage example:
 <template>
 	<el-col :xs="24" :sm="12" :md="12" :lg="8" :xl="4" class="mb10">
-		<el-form-item label="订单金额">
+		<el-form-item label="Order amount">
 			<number-range v-model="queryParams.amountRange">
 				<template #prepend>
-					<span>范围</span>
+					<span>range</span>
 				</template>
 			</number-range>
 		</el-form-item>
@@ -21,7 +21,7 @@ import NumberRange from '/@/components/numberRange/index.vue';
 	<div class="number-range-container">
 		<div :id="usePrepend ? 'prepend' : ''" :class="{ 'slot-default': slotStyle === 'default', 'slot-pend ': usePrepend }">
 			<slot name="prepend">
-				<!-- 前缀插槽 -->
+				<!-- prefix slot -->
 			</slot>
 		</div>
 		<div
@@ -35,7 +35,7 @@ import NumberRange from '/@/components/numberRange/index.vue';
 		>
 			<el-input-number
 				:disabled="disabled"
-				placeholder="最小值"
+				placeholder="Minimum value"
 				@blur="handleBlur"
 				@focus="handleFocus"
 				@change="handleChangeMinValue"
@@ -49,7 +49,7 @@ import NumberRange from '/@/components/numberRange/index.vue';
 			</div>
 			<el-input-number
 				:disabled="disabled"
-				placeholder="最大值"
+				placeholder="maximum value"
 				@blur="handleBlur"
 				@focus="handleFocus"
 				@change="handleChangeMaxValue"
@@ -58,14 +58,14 @@ import NumberRange from '/@/components/numberRange/index.vue';
 				v-bind="$attrs"
 				:controls="false"
 			/>
-			<!-- 清除图标 -->
+			<!-- clear icon -->
 			<el-icon v-if="clearable && (minValue_ || maxValue_)" class="el-icon el-input__icon el-input__clear" @click="clearValues">
 				<CircleClose />
 			</el-icon>
 		</div>
 		<div :id="useAppend ? 'append' : ''" :class="{ 'slot-default': slotStyle === 'default', 'slot-pend ': useAppend }">
 			<slot name="append">
-				<!-- 后缀插槽 -->
+				<!-- suffix slot -->
 			</slot>
 		</div>
 	</div>
@@ -77,7 +77,7 @@ import { CircleClose } from '@element-plus/icons-vue';
 const props = defineProps({
 	modelValue: {
 		type: Array<Number>,
-		default: () => [null, null], // 调用时使用v-model="[min,max]" 绑定
+		default: () => [null, null], // Use v-model="[min,max]" binding when calling
 	},
 	clearable: {
 		type: Boolean,
@@ -85,13 +85,13 @@ const props = defineProps({
 	},
 	minValue: {
 		type: Number,
-		default: null, // 调用时使用v-model:min-value="" 绑定多个v-model
+		default: null, // Use v-model:min-value="" when calling to bind multiple v-models
 	},
 	maxValue: {
 		type: Number,
-		default: null, // 调用时使用v-model:max-value="" 绑定多个v-model
+		default: null, // Use v-model:max-value="" when calling to bind multiple v-models
 	},
-	// 是否禁用
+	// Whether to disable
 	disabled: {
 		type: Boolean,
 		default: false,
@@ -100,7 +100,7 @@ const props = defineProps({
 		type: String,
 		default: '-',
 	},
-	// 精度参数 -保留小数位数
+	// Precision parameter - number of decimal places to keep
 	precision: {
 		type: Number,
 		default: 0,
@@ -108,7 +108,7 @@ const props = defineProps({
 			return val >= 0 && val === parseInt(String(val), 10);
 		},
 	},
-	// 限制取值范围
+	// Limit the value range
 	valueRange: {
 		type: Array,
 		default: () => [],
@@ -116,23 +116,23 @@ const props = defineProps({
 			if (val && val.length > 0) {
 				// @ts-ignore
 				if (val.length !== 2) {
-					throw new Error('请传入长度为2的Number数组');
+					throw new Error('Please pass in a Number array of length 2');
 				}
 				// @ts-ignore
 				if (typeof val[0] !== 'number' || typeof val[1] !== 'number') {
-					throw new Error('取值范围只接受Number类型,请确认');
+					throw new Error('The range of values only accepts the Number type, please confirm');
 				}
 				// @ts-ignore
 				if (val[1] < val[0]) {
-					throw new Error('valueRange格式须为[最小值,最大值],请确认');
+					throw new Error('The valueRange format must be [minimum value, maximum value], please confirm');
 				}
 			}
 			return true;
 		},
 	},
-	// 插槽样式
+	// Slot style
 	slotStyle: {
-		type: String, // default --异色背景 |  plain--无背景色
+		type: String, // default --different color background | plain --no background color
 		default: 'plain',
 	},
 });
@@ -169,7 +169,7 @@ const maxValue_ = computed({
 	},
 });
 
-// 清除值的方法
+// How to clear a value
 const clearValues = () => {
 	minValue_.value = null;
 	maxValue_.value = null;
@@ -177,35 +177,35 @@ const clearValues = () => {
 };
 
 const handleChangeMinValue = (value: number | null) => {
-	// 非数字空返回null
+	// Returns null if it is not a number.
 	if (value === null || isNaN(value)) {
 		emit('update:minValue', null);
 		return;
 	}
-	// 初始化数字精度
+	// Initialize numeric precision
 	const newMinValue = parsePrecision(value, props.precision);
-	// min > max 交换min max
+	// min > max swap min max
 	if (typeof newMinValue === 'number' && parseFloat(String(newMinValue)) > parseFloat(String(maxValue_.value))) {
-		// 取值范围判定
+		// Value range determination
 		const { min, max } = decideValueRange(Number(maxValue_.value), newMinValue);
-		// 更新绑定值
+		// Update binding value
 		updateValue(min, max);
 	}
 };
 
 const handleChangeMaxValue = (value: number | null) => {
-	// 非数字空返回null
+	// Returns null if it is not a number.
 	if (value === null || isNaN(value)) {
 		emit('update:maxValue', null);
 		return;
 	}
-	// 初始化数字精度
+	// Initialize numeric precision
 	const newMaxValue = parsePrecision(value, props.precision);
-	// max < min 交换min max
+	// max < min swap min max
 	if (typeof newMaxValue === 'number' && parseFloat(String(newMaxValue)) < parseFloat(String(minValue_.value))) {
-		// 取值范围判定
+		// Value range determination
 		const { min, max } = decideValueRange(newMaxValue, Number(minValue_.value));
-		// 更新绑定值
+		// Update binding value
 		updateValue(min, max);
 	}
 };
@@ -218,7 +218,7 @@ const updateMaxValue = (value: number | null) => {
 	maxValue_.value = value;
 };
 
-// 更新数据
+// Update data
 const updateValue = (min: number | null, max: number | null) => {
 	emit('update:minValue', min);
 	emit('update:maxValue', max);
@@ -226,7 +226,7 @@ const updateValue = (min: number | null, max: number | null) => {
 	emit('change', { min, max });
 };
 
-// 取值范围判定
+// Value range determination
 const decideValueRange = (min: number | null, max: number | null) => {
 	if (min === null || max === null) {
 		return { min, max };
@@ -241,7 +241,7 @@ const decideValueRange = (min: number | null, max: number | null) => {
 	return { min, max };
 };
 
-// input焦点事件
+// input focus event
 const isFocus = ref();
 
 const handleFocus = () => {
@@ -252,7 +252,7 @@ const handleBlur = () => {
 	isFocus.value = false;
 };
 
-// 处理数字精度
+// Handling numerical precision
 const parsePrecision = (number: number | null, precision = 0) => {
 	if (number === null) {
 		return null;
@@ -260,18 +260,18 @@ const parsePrecision = (number: number | null, precision = 0) => {
 	return parseFloat(String(Math.round(number * Math.pow(10, precision)) / Math.pow(10, precision)));
 };
 
-// 判断插槽是否被使用
-// 组件外部使用时插入了
-// <template #插槽名 >
+// Determine whether the slot is in use
+// Inserted when the component is used externally
+// <template #slot name>
 // </template>
-// 无论template标签内是否插入了内容，均视为已使用该插槽
+// Regardless of whether content is inserted into the template tag, the slot is considered to have been used.
 const slots = useSlots();
 const usePrepend = computed(() => {
-	// 前缀插槽
+	// prefix slot
 	return slots && slots.prepend ? true : false;
 });
 const useAppend = computed(() => {
-	// 后缀插槽
+	// suffix slot
 	return slots && slots.append ? true : false;
 });
 </script>

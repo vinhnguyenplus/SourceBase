@@ -1,75 +1,75 @@
-// Admin.NET 项目的版权、商标、专利和其他相关权利均受相应法律法规的保护。使用本项目应遵守相关法律法规和许可证的要求。
+// The copyright, trademark, patent and other related rights of the Admin.NET project are protected by corresponding laws and regulations. Use of this project shall comply with relevant laws, regulations and license requirements.
 //
-// 本项目主要遵循 MIT 许可证和 Apache 许可证（版本 2.0）进行分发和使用。许可证位于源代码树根目录中的 LICENSE-MIT 和 LICENSE-APACHE 文件。
+// This project is distributed and used primarily under the MIT License and the Apache License (version 2.0). The license is located in the LICENSE-MIT and LICENSE-APACHE files in the root of the source tree.
 //
-// 不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！
+// This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project!
 
 namespace Admin.NET.Core;
 
 /// <summary>
-/// 系统用户域配置表
+/// System user domain configuration table
 /// </summary>
-[SugarTable(null, "系统用户域配置表")]
+[SugarTable(null, "System User Domain Configuration Table")]
 [SysTable]
 [SugarIndex("index_{table}_A", nameof(Account), OrderByType.Asc)]
 [SugarIndex("index_{table}_U", nameof(UserId), OrderByType.Asc)]
 public class SysUserLdap : EntityBaseTenantId
 {
     /// <summary>
-    /// 用户Id
+    /// UserId
     /// </summary>
-    [SugarColumn(ColumnDescription = "用户Id")]
+    [SugarColumn(ColumnDescription = "UserId")]
     public long UserId { get; set; }
 
     /// <summary>
-    /// 域账号
-    /// AD域对应sAMAccountName
-    /// Ldap对应uid
+    /// Domain account
+    /// AD domain corresponds to sAMAccountName
+    /// Ldap corresponds to uid
     /// </summary>
-    [SugarColumn(ColumnDescription = "域账号", Length = 32)]
+    [SugarColumn(ColumnDescription = "Domain account", Length = 32)]
     [Required]
     public string Account { get; set; }
 
     /// <summary>
-    /// 域用户名
+    /// domain username
     /// </summary>
-    [SugarColumn(ColumnDescription = "域用户名", Length = 32)]
+    [SugarColumn(ColumnDescription = "DomainUsername", Length = 32)]
     public string UserName { get; set; }
 
     /// <summary>
-    /// 对应EmployeeId(用于数据导入对照)
+    /// Corresponds to EmployeeId (used for data import control)
     /// </summary>
-    [SugarColumn(ColumnDescription = "对应EmployeeId", Length = 32)]
+    [SugarColumn(ColumnDescription = "Corresponds to EmployeeId", Length = 32)]
     public string? EmployeeId { get; set; }
 
     /// <summary>
-    /// 组织代码
+    /// organization code
     /// </summary>
-    [SugarColumn(ColumnDescription = "组织代码", Length = 64)]
+    [SugarColumn(ColumnDescription = "organization code", Length = 64)]
     public string? DeptCode { get; set; }
 
     /// <summary>
-    /// 最后设置密码时间
+    /// Last set password time
     /// </summary>
-    [SugarColumn(ColumnDescription = "最后设置密码时间")]
+    [SugarColumn(ColumnDescription = "Last set password time")]
     public DateTime? PwdLastSetTime { get; set; }
 
     /// <summary>
-    /// 邮箱
+    /// Mail
     /// </summary>
-    [SugarColumn(ColumnDescription = "组织代码", Length = 64)]
+    [SugarColumn(ColumnDescription = "organization code", Length = 64)]
     public string? Mail { get; set; }
 
     /// <summary>
-    /// 检查账户是否已过期
+    /// Check if the account has expired
     /// </summary>
-    [SugarColumn(ColumnDescription = "检查账户是否已过期")]
+    [SugarColumn(ColumnDescription = "Check if the account has expired")]
     public bool AccountExpiresFlag { get; set; } = false;
 
     /// <summary>
-    /// 密码设置是否永不过期
+    /// Whether the password setting never expires
     /// </summary>
-    [SugarColumn(ColumnDescription = "密码设置是否永不过期")]
+    [SugarColumn(ColumnDescription = "Whether the password is set to never expire")]
     public bool DontExpiresFlag { get; set; } = false;
 
     /// <summary>

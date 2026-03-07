@@ -1,8 +1,8 @@
 /**
- * 判断两数组字符串是否相同（用于按钮权限验证），数组字符串中存在相同时会自动去重（按钮权限标识不会重复）
- * @param news 新数据
- * @param old 源数据
- * @returns 两数组相同返回 `true`，反之则反
+ * Determine two numbersgroupStringYesnoSame（used forbuttonPermission Verification），numbergroupStringinExist the sametimeWill automatically remove duplicates（buttonPermission IdentifierWill not repeat）
+ * @param news NewData
+ * @param old SourceData
+ * @returns Two numbersgroupReturn the same `true`，The opposite applies
  */
 export function judgementSameArr(newArr: unknown[] | string[], oldArr: string[]): boolean {
 	const news = removeDuplicate(newArr);
@@ -18,10 +18,10 @@ export function judgementSameArr(newArr: unknown[] | string[], oldArr: string[])
 }
 
 /**
- * 判断两个对象是否相同
- * @param a 要比较的对象一
- * @param b 要比较的对象二
- * @returns 相同返回 true，反之则反
+ * Determine two objectsYesnoSame
+ * @param a Object to be comparedone
+ * @param b Object to be comparedTwo
+ * @returns Return the same true，The opposite applies
  */
 export function isObjectValueEqual<T extends Record<string, any>>(a: T, b: T): boolean {
 	if (!a || !b) return false;
@@ -43,9 +43,9 @@ export function isObjectValueEqual<T extends Record<string, any>>(a: T, b: T): b
 }
 
 /**
- * 原始实现：数组、数组对象去重
- * @param arr 数组内容
- * @param attr 需要去重的键值（数组对象）
+ * Original implementation：numbergroup、numbergroupDeduplicate objects
+ * @param arr numbergroupcontent
+ * @param attr Key that needs to be de-duplicatedvalue（numbergroupObject）
  * @returns
  */
 /*
@@ -66,10 +66,10 @@ export function removeDuplicate(arr: EmptyArrayType, attr?: string) {
 }
 */
 /**
- * 优化后实现：数组、数组对象去重
- * 支持普通数组和对象数组去重，类型安全，且兼容原有所有调用方式
- * @param arr 数组内容
- * @param attr 需要去重的键值（数组对象）
+ * Implemented after optimization：numbergroup、numbergroupDeduplicate objects
+ * Supports ordinary numbersgroupNumber of objectsgroupRemove duplicates，TypeSafety，And is compatible with all existing call methods
+ * @param arr numbergroupcontent
+ * @param attr Key that needs to be de-duplicatedvalue（numbergroupObject）
  * @returns
  */
 export function removeDuplicate<T>(arr: T[], attr?: string): T[] {
@@ -92,17 +92,17 @@ export function removeDuplicate<T>(arr: T[], attr?: string): T[] {
 	}
 }
 
-/* 数组、对象深拷贝
- * @param value 需要拷贝内容
+/* Array and object deep copy
+ * @param value Needs to be copiedcontent
  * @returns
  */
 export const clone = <T>(value: T): T => {
 	if (!value) return value;
 
-	// 数组
+	// array
 	if (Array.isArray(value)) return value.map((item) => clone(item)) as unknown as T;
 
-	// 普通对象
+	// Ordinary objects
 	if (typeof value === 'object') {
 		return Object.fromEntries(
 			Object.entries(value).map(([k, v]: [string, any]) => {
@@ -110,6 +110,6 @@ export const clone = <T>(value: T): T => {
 			})
 		) as unknown as T;
 	}
-	// 基本类型
+	// basic type
 	return value;
 };

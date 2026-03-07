@@ -39,7 +39,7 @@ const props = defineProps({
     fullHeight: { type: Boolean, default: false }
 });
 
-// 获取全局组件大小
+// Get global component size
 const getGlobalComponentSize = computed(() => {
 	return themeConfig.value.globalComponentSize;
 });

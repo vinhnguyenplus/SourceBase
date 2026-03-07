@@ -1,8 +1,8 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Admin.NET 通用权限开发平台
- * 让 .NET 开发更简单、更通用、更流行。整合最新技术，模块插件式开发，前后端分离，开箱即用。<br/><u><b><font color='FF0000'> 👮不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！</font></b></u>
+ * Admin.NET General Permission Development Platform
+ * let .NET Develop more simply、More general、More popular。wholeIn line with the latest technology，Modular Plugin-Based Development，Frontend and backendpointsLeave，Ready to use out of the box。<br/><u><b><font color='FF0000'> 👮This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project! </font></b></u>
  *
  * OpenAPI spec version: 1.0.0
  * 
@@ -13,7 +13,7 @@
  */
 
  /**
- * 系统文件存储提供者表
+ * System file storage provider table
  *
  * @export
  * @interface SysFileProvider
@@ -21,7 +21,7 @@
 export interface SysFileProvider {
 
     /**
-     * 雪花Id
+     * SnowflakeId
      *
      * @type {number}
      * @memberof SysFileProvider
@@ -29,7 +29,7 @@ export interface SysFileProvider {
     id?: number;
 
     /**
-     * 创建时间
+     * Creation Time
      *
      * @type {Date}
      * @memberof SysFileProvider
@@ -37,7 +37,7 @@ export interface SysFileProvider {
     createTime?: Date;
 
     /**
-     * 更新时间
+     * Update Time
      *
      * @type {Date}
      * @memberof SysFileProvider
@@ -45,7 +45,7 @@ export interface SysFileProvider {
     updateTime?: Date | null;
 
     /**
-     * 创建者Id
+     * CreatorId
      *
      * @type {number}
      * @memberof SysFileProvider
@@ -53,7 +53,7 @@ export interface SysFileProvider {
     createUserId?: number | null;
 
     /**
-     * 创建者姓名
+     * Creator name
      *
      * @type {string}
      * @memberof SysFileProvider
@@ -61,7 +61,7 @@ export interface SysFileProvider {
     createUserName?: string | null;
 
     /**
-     * 修改者Id
+     * Modifier ID
      *
      * @type {number}
      * @memberof SysFileProvider
@@ -69,7 +69,7 @@ export interface SysFileProvider {
     updateUserId?: number | null;
 
     /**
-     * 修改者姓名
+     * Modifier name
      *
      * @type {string}
      * @memberof SysFileProvider
@@ -77,7 +77,7 @@ export interface SysFileProvider {
     updateUserName?: string | null;
 
     /**
-     * 租户Id
+     * Tenant ID
      *
      * @type {number}
      * @memberof SysFileProvider
@@ -85,7 +85,7 @@ export interface SysFileProvider {
     tenantId?: number | null;
 
     /**
-     * 存储提供者（Minio， QCloud，Aliyun 等等）
+     * storage provider（Minio， QCloud，Aliyun Wait a moment）
      *
      * @type {string}
      * @memberof SysFileProvider
@@ -93,7 +93,7 @@ export interface SysFileProvider {
     provider: string;
 
     /**
-     * 存储桶名称
+     * bucket name
      *
      * @type {string}
      * @memberof SysFileProvider
@@ -101,7 +101,7 @@ export interface SysFileProvider {
     bucketName: string;
 
     /**
-     * 访问密钥 （填入 阿里云（Aliyun）/Minio：的 AccessKey，腾讯云（QCloud）: 的 SecretId）
+     * Access Key （Fill in Alibaba Cloud（Aliyun）/Minio：of AccessKey，Tencent Cloud（QCloud）: of SecretId）
      *
      * @type {string}
      * @memberof SysFileProvider
@@ -109,7 +109,7 @@ export interface SysFileProvider {
     accessKey?: string | null;
 
     /**
-     * 密钥
+     * key
      *
      * @type {string}
      * @memberof SysFileProvider
@@ -117,7 +117,7 @@ export interface SysFileProvider {
     secretKey?: string | null;
 
     /**
-     * 地域
+     * Region
      *
      * @type {string}
      * @memberof SysFileProvider
@@ -125,7 +125,7 @@ export interface SysFileProvider {
     region?: string | null;
 
     /**
-     * 端点地址（填入 阿里云（Aliyun）/Minio：的 endpoint/Api address，腾讯云（QCloud）: 的 AppId）
+     * Endpoint Address（Fill in Alibaba Cloud（Aliyun）/Minio：of endpoint/Api address，Tencent Cloud（QCloud）: of AppId）
      *
      * @type {string}
      * @memberof SysFileProvider
@@ -133,7 +133,7 @@ export interface SysFileProvider {
     endpoint?: string | null;
 
     /**
-     * 是否启用HTTPS
+     * Whether to enable HTTPS
      *
      * @type {boolean}
      * @memberof SysFileProvider
@@ -141,7 +141,7 @@ export interface SysFileProvider {
     isEnableHttps?: boolean | null;
 
     /**
-     * 是否启用缓存
+     * Enable cache?
      *
      * @type {boolean}
      * @memberof SysFileProvider
@@ -149,7 +149,7 @@ export interface SysFileProvider {
     isEnableCache?: boolean | null;
 
     /**
-     * 是否启用
+     * Enable or not
      *
      * @type {boolean}
      * @memberof SysFileProvider
@@ -157,7 +157,7 @@ export interface SysFileProvider {
     isEnable?: boolean | null;
 
     /**
-     * 是否默认提供者
+     * Is the default provider
      *
      * @type {boolean}
      * @memberof SysFileProvider
@@ -165,7 +165,7 @@ export interface SysFileProvider {
     isDefault?: boolean | null;
 
     /**
-     * 自定义域名
+     * Custom Domain
      *
      * @type {string}
      * @memberof SysFileProvider
@@ -173,7 +173,7 @@ export interface SysFileProvider {
     sinceDomain?: string | null;
 
     /**
-     * 排序号
+     * sequence number
      *
      * @type {number}
      * @memberof SysFileProvider
@@ -181,7 +181,7 @@ export interface SysFileProvider {
     orderNo?: number | null;
 
     /**
-     * 备注
+     * Remarks
      *
      * @type {string}
      * @memberof SysFileProvider
@@ -189,7 +189,7 @@ export interface SysFileProvider {
     remark?: string | null;
 
     /**
-     * 获取显示名称
+     * ObtainDisplay Name
      *
      * @type {string}
      * @memberof SysFileProvider
@@ -197,7 +197,7 @@ export interface SysFileProvider {
     displayName?: string | null;
 
     /**
-     * 获取配置键名
+     * ObtainConfigurationKey name
      *
      * @type {string}
      * @memberof SysFileProvider

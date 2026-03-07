@@ -1,8 +1,8 @@
-﻿// Admin.NET 项目的版权、商标、专利和其他相关权利均受相应法律法规的保护。使用本项目应遵守相关法律法规和许可证的要求。
+﻿// The copyright, trademark, patent and other related rights of the Admin.NET project are protected by corresponding laws and regulations. Use of this project shall comply with relevant laws, regulations and license requirements.
 //
-// 本项目主要遵循 MIT 许可证和 Apache 许可证（版本 2.0）进行分发和使用。许可证位于源代码树根目录中的 LICENSE-MIT 和 LICENSE-APACHE 文件。
+// This project is distributed and used primarily under the MIT License and the Apache License (version 2.0). The license is located in the LICENSE-MIT and LICENSE-APACHE files in the root of the source tree.
 //
-// 不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！
+// This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project!
 
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using NewLife.Caching.Services;
@@ -12,7 +12,7 @@ namespace Admin.NET.Core;
 public static class CacheSetup
 {
     /// <summary>
-    /// 缓存注册（新生命Redis组件）
+    /// Cache registration (new life Redis component)
     /// </summary>
     /// <param name="services"></param>
     public static void AddCache(this IServiceCollection services)
@@ -26,18 +26,18 @@ public static class CacheSetup
                 Prefix = cacheOptions.Redis.Prefix
             })
             {
-                // 自动检测集群节点
+                // Automatically detect cluster nodes
                 AutoDetect = App.GetConfig<bool>("Cache:Redis:AutoDetect", true)
             };
-            // 最大消息大小
+            // Maximum message size
             if (cacheOptions.Redis.MaxMessageSize > 0)
                 redis.MaxMessageSize = cacheOptions.Redis.MaxMessageSize;
 
-            // 注入 Redis 缓存提供者
+            // Inject the Redis cache provider
             services.AddSingleton<ICacheProvider>(u => new RedisCacheProvider(u) { Cache = redis });
         }
 
-        // 内存缓存兜底。在没有配置Redis时，使用内存缓存，逻辑代码无需修改
+        // Memory cache has the bottom line. When Redis is not configured, memory cache is used and the logic code does not need to be modified.
         services.TryAddSingleton<ICacheProvider, CacheProvider>();
     }
 }

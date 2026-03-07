@@ -9,34 +9,34 @@ import { useTagsViewRoutes } from '/@/stores/tagsViewRoutes';
 import { useRoutesList } from '/@/stores/routesList';
 import { NextLoading } from '/@/utils/loading';
 
-// 前端控制路由
+// Front-end control routing
 
 /**
- * 前端控制路由：初始化方法，防止刷新时路由丢失
- * @method  NextLoading 界面 loading 动画开始执行
- * @method useUserInfo(pinia).setUserInfos() 触发初始化用户信息 pinia
- * @method setAddRoute 添加动态路由
- * @method setFilterMenuAndCacheTagsViewRoutes 设置递归过滤有权限的路由到 pinia routesList 中（已处理成多级嵌套路由）及缓存多级嵌套数组处理后的一维数组
+ * Frontend routing control：BeginningInitialization method，PreventRefreshtimeRoute lost
+ * @method  NextLoading interface loading AnimationStartExecute
+ * @method useUserInfo(pinia).setUserInfos() TriggerBeginningInitializationUserInformation pinia
+ * @method setAddRoute Add toDynamic routing
+ * @method setFilterMenuAndCacheTagsViewRoutes Set recursive filtering for routes with permissions to pinia routesList in（Processed into multi-level nested routes）andcacheMulti-level nested numbersgroupprocessedoneDimensiongroup
  */
 export async function initFrontEndControlRoutes() {
-	// 界面 loading 动画开始执行
+	// Interface loading animation starts execution
 	if (window.nextLoading === undefined) NextLoading.start();
-	// 无 token 停止执行下一步
+	// No token, stop executing the next step
 	if (!Session.get('token')) return false;
-	// 触发初始化用户信息 pinia
+	// Trigger initialization of user information pinia
 	// https://gitee.com/lyt-top/vue-next-admin/issues/I5F1HP
 	await useUserInfo(pinia).setUserInfos();
-	// 添加动态路由
+	// Add dynamic routing
 	await setAddRoute();
-	// 设置递归过滤有权限的路由到 pinia routesList 中（已处理成多级嵌套路由）及缓存多级嵌套数组处理后的一维数组
+	// Set recursive filtering of authorized routes to pinia routesList (processed into multi-level nested routes) and cache the one-dimensional array processed by multi-level nested arrays
 	setFilterMenuAndCacheTagsViewRoutes();
 }
 
 /**
- * 添加动态路由
+ * Add toDynamic routing
  * @method router.addRoute
- * @description 此处循环为 dynamicRoutes（/@/router/route）第一个顶级 children 的路由一维数组，非多级嵌套
- * @link 参考：https://next.router.vuejs.org/zh/api/#addroute
+ * @description The loop here is dynamicRoutes（/@/router/route）NumberonepieceTop children the routeoneDimensiongroup，Non-multi-level nesting
+ * @link Reference：https://next.router.vuejs.org/zh/api/#addroute
  */
 export async function setAddRoute() {
 	await setFilterRouteEnd().forEach((route: RouteRecordRaw) => {
@@ -45,10 +45,10 @@ export async function setAddRoute() {
 }
 
 /**
- * 删除/重置路由
+ * Delete/resetRouter
  * @method router.removeRoute
- * @description 此处循环为 dynamicRoutes（/@/router/route）第一个顶级 children 的路由一维数组，非多级嵌套
- * @link 参考：https://next.router.vuejs.org/zh/api/#push
+ * @description The loop here is dynamicRoutes（/@/router/route）NumberonepieceTop children the routeoneDimensiongroup，Non-multi-level nesting
+ * @link Reference：https://next.router.vuejs.org/zh/api/#push
  */
 export async function frontEndsResetRoute() {
 	await setFilterRouteEnd().forEach((route: RouteRecordRaw) => {
@@ -58,24 +58,24 @@ export async function frontEndsResetRoute() {
 }
 
 /**
- * 获取有当前用户权限标识的路由数组，进行对原路由的替换
- * @description 替换 dynamicRoutes（/@/router/route）第一个顶级 children 的路由
- * @returns 返回替换后的路由数组
+ * Obtainhave currentUserPermission Identifiernumber of routesgroup，Carry out the replacement of the original route
+ * @description Replace dynamicRoutes（/@/router/route）NumberonepieceTop children the route
+ * @returns Return the number of routes replacedgroup
  */
 export function setFilterRouteEnd() {
 	let filterRouteEnd: any = formatTwoStageRoutes(formatFlatteningRoutes(dynamicRoutes));
-	// notFoundAndNoPower 防止 404、401 不在 layout 布局中，不设置的话，404、401 界面将全屏显示
-	// 关联问题 No match found for location with path 'xxx'
+	// notFoundAndNoPower prevents 404 and 401 from not being in the layout. If not set, the 404 and 401 interface will be displayed in full screen
+	// Related issues No match found for location with path 'xxx'
 	filterRouteEnd[0].children = [...setFilterRoute(filterRouteEnd[0].children), ...notFoundAndNoPower];
 	return filterRouteEnd;
 }
 
 /**
- * 获取当前用户权限标识去比对路由表（未处理成多级嵌套路由）
- * @description 这里主要用于动态路由的添加，router.addRoute
- * @link 参考：https://next.router.vuejs.org/zh/api/#addroute
- * @param chil dynamicRoutes（/@/router/route）第一个顶级 children 的下路由集合
- * @returns 返回有当前用户权限标识的路由数组
+ * ObtainCurrentUserPermission IdentifierGo compare the routing table（Not yetProcess into multi-level nested routes）
+ * @description This is mainly used for dynamic routingAdd to，router.addRoute
+ * @link Reference：https://next.router.vuejs.org/zh/api/#addroute
+ * @param chil dynamicRoutes（/@/router/route）NumberonepieceTop children the set of lower routes
+ * @returns Return has currentUserPermission Identifiernumber of routesgroup
  */
 export function setFilterRoute(chil: any) {
 	const stores = useUserInfo(pinia);
@@ -94,23 +94,23 @@ export function setFilterRoute(chil: any) {
 }
 
 /**
- * 缓存多级嵌套数组处理后的一维数组
- * @description 用于 tagsView、菜单搜索中：未过滤隐藏的(isHide)
+ * cacheMulti-level nested numbersgroupprocessedoneDimensiongroup
+ * @description used for tagsView、Menu searchin：Not yetFilterhideof(isHide)
  */
 export function setCacheTagsViewRoutes() {
-	// 获取有权限的路由，否则 tagsView、菜单搜索中无权限的路由也将显示
+	// Obtain routes with permissions, otherwise routes without permissions in tagsView and menu search will also be displayed.
 	const stores = useUserInfo(pinia);
 	const storesTagsView = useTagsViewRoutes(pinia);
 	const { userInfos } = storeToRefs(stores);
 	let rolesRoutes = setFilterHasRolesMenu(dynamicRoutes, userInfos.value.roles);
-	// 添加到 pinia setTagsViewRoutes 中
+	// Add to pinia setTagsViewRoutes
 	storesTagsView.setTagsViewRoutes(formatTwoStageRoutes(formatFlatteningRoutes(rolesRoutes))[0].children);
 }
 
 /**
- * 设置递归过滤有权限的路由到 pinia routesList 中（已处理成多级嵌套路由）及缓存多级嵌套数组处理后的一维数组
- * @description 用于左侧菜单、横向菜单的显示
- * @description 用于 tagsView、菜单搜索中：未过滤隐藏的(isHide)
+ * Set recursive filtering for routes with permissions to pinia routesList in（Processed into multi-level nested routes）andcacheMulti-level nested numbersgroupprocessedoneDimensiongroup
+ * @description For the left sidemenu、HorizontalmenuofDisplay
+ * @description used for tagsView、Menu searchin：Not yetFilterhideof(isHide)
  */
 export function setFilterMenuAndCacheTagsViewRoutes() {
 	const stores = useUserInfo(pinia);
@@ -121,10 +121,10 @@ export function setFilterMenuAndCacheTagsViewRoutes() {
 }
 
 /**
- * 判断路由 `meta.roles` 中是否包含当前登录用户权限字段
- * @param roles 用户权限标识，在 userInfos（用户信息）的 roles（登录页登录时缓存到浏览器）数组
- * @param route 当前循环时的路由项
- * @returns 返回对比后有权限的路由项
+ * Determine routing `meta.roles` inYesnoincludeCurrentLoginUserPermissionField
+ * @param roles UserPermission Identifier，at/in/on userInfos（UserInformation）of roles（LoginPageLogintimecachetoBrowser）numbergroup
+ * @param route Current looptimerouting item
+ * @returns Return the route items that have permissions after comparison
  */
 export function hasRoles(roles: any, route: any) {
 	if (route.meta && route.meta.roles) return roles.some((role: any) => route.meta.roles.includes(role));
@@ -132,10 +132,10 @@ export function hasRoles(roles: any, route: any) {
 }
 
 /**
- * 获取当前用户权限标识去比对路由表，设置递归过滤有权限的路由
- * @param routes 当前路由 children
- * @param roles 用户权限标识，在 userInfos（用户信息）的 roles（登录页登录时缓存到浏览器）数组
- * @returns 返回有权限的路由数组 `meta.roles` 中控制
+ * ObtainCurrentUserPermission IdentifierGo compare the routing table，Set recursive filtering for authorized routes
+ * @param routes Current Route children
+ * @param roles UserPermission Identifier，at/in/on userInfos（UserInformation）of roles（LoginPageLogintimecachetoBrowser）numbergroup
+ * @returns Return the number of routes with permissionsgroup `meta.roles` inControl
  */
 export function setFilterHasRolesMenu(routes: any, roles: any) {
 	const menu: any = [];

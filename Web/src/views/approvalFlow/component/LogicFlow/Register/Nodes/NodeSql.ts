@@ -2,8 +2,8 @@ import { HtmlNode, HtmlNodeModel, h } from '@logicflow/core';
 
 class SqlNode extends HtmlNode {
     /**
-     * 1.1.7版本后支持在view中重写锚点形状。
-     * 重写锚点新增
+     * 1.1.7Supported after the versionviewinRewrite anchor shape。
+     * Rewrite AnchorAdd New
      */
     getAnchorShape(anchorData) {
         const { x, y, type } = anchorData;
@@ -51,20 +51,20 @@ class SqlNode extends HtmlNode {
 
 class SqlNodeModel extends HtmlNodeModel {
     /**
-     * 给model自定义添加字段方法
+     * givemodelCustomizeAdd toFieldMethod
      */
     addField(item) {
         this.properties.fields.unshift(item);
         this.setAttributes();
-        // 为了保持节点顶部位置不变，在节点变化后，对节点进行一个位移,位移距离为添加高度的一半。
+        // In order to keep the position of the top of the node unchanged, after the node changes, the node is displaced, and the displacement distance is half of the added height.
         this.move(0, 24 / 2);
-        // 更新节点连接边的path
+        // Update the path of the node connecting the edge
         this.incoming.edges.forEach((egde) => {
-            // 调用自定义的更新方案
+            // Call a custom update plan
             egde.updatePathByAnchor();
         });
         this.outgoing.edges.forEach((edge) => {
-            // 调用自定义的更新方案
+            // Call a custom update plan
             edge.updatePathByAnchor();
         });
     }
@@ -74,7 +74,7 @@ class SqlNodeModel extends HtmlNodeModel {
         style.hover.stroke = 'none';
         return style;
     }
-    // 如果不用修改锚地形状，可以重写颜色相关样式
+    // If you do not need to modify the anchorage shape, you can override the color-related styles
     getAnchorStyle(anchorInfo) {
         const style = super.getAnchorStyle();
         if (anchorInfo.type === 'left') {
@@ -94,14 +94,14 @@ class SqlNodeModel extends HtmlNodeModel {
         } = this;
         this.height = 60 + fields.length * 24;
         const circleOnlyAsTarget = {
-            message: '只允许从右边的锚点连出',
+            message: 'Only allow connections from the right anchor point',
             validate: (sourceNode, targetNode, sourceAnchor) => {
                 return sourceAnchor.type === 'right';
             },
         };
         this.sourceRules.push(circleOnlyAsTarget);
         this.targetRules.push({
-            message: '只允许连接左边的锚点',
+            message: 'Only allow connections to the left anchor',
             validate: (sourceNode, targetNode, sourceAnchor, targetAnchor) => {
                 return targetAnchor.type === 'left';
             },
@@ -120,7 +120,7 @@ class SqlNodeModel extends HtmlNodeModel {
         } = this;
         const anchors = [];
         fields.forEach((feild, index) => {
-            // 如果是连出，就不显示左边的锚点
+            // If it is connected, the anchor point on the left will not be displayed.
             if (isConnection || !(isHovered || isSelected)) {
                 anchors.push({
                     x: x - width / 2 + 10,

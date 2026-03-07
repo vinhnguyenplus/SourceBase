@@ -10,7 +10,7 @@ import { reactive, ref, onMounted, watch } from 'vue';
 import { request2 } from '/@/utils/request';
 import { ElMessage } from 'element-plus';
 
-// 定义父组件传过来的值
+// Define the value passed by the parent component
 const props = defineProps({
 	accept: {
 		type: String,
@@ -24,7 +24,7 @@ const props = defineProps({
 	},
 });
 
-// 定义子组件向父组件传值/事件
+// Define child components to pass values/events to parent components
 const emit = defineEmits(['success', 'error']);
 const reffile = ref();
 const state = reactive({
@@ -44,7 +44,7 @@ watch(
 	}
 );
 
-// 上传文件
+// Upload files
 const onClick = () => {
 	reffile.value.click();
 };
@@ -74,7 +74,7 @@ function fileChange(event: any) {
 			emit('success', res);
 		})
 		.catch((res: any) => {
-			alert('上传错误');
+			alert('Upload error');
 		});
 }
 </script>

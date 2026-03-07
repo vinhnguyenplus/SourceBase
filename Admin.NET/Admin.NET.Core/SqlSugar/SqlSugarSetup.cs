@@ -1,8 +1,8 @@
-// Admin.NET 项目的版权、商标、专利和其他相关权利均受相应法律法规的保护。使用本项目应遵守相关法律法规和许可证的要求。
+// The copyright, trademark, patent and other related rights of the Admin.NET project are protected by corresponding laws and regulations. Use of this project shall comply with relevant laws, regulations and license requirements.
 //
-// 本项目主要遵循 MIT 许可证和 Apache 许可证（版本 2.0）进行分发和使用。许可证位于源代码树根目录中的 LICENSE-MIT 和 LICENSE-APACHE 文件。
+// This project is distributed and used primarily under the MIT License and the Apache License (version 2.0). The license is located in the LICENSE-MIT and LICENSE-APACHE files in the root of the source tree.
 //
-// 不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！
+// This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project!
 
 using Microsoft.Data.Sqlite;
 using DbType = SqlSugar.DbType;
@@ -11,28 +11,28 @@ namespace Admin.NET.Core;
 
 public static class SqlSugarSetup
 {
-    // 多租户实例
+    // Multi-tenant instance
     public static ITenant ITenant { get; set; }
 
-    // 是否正在处理种子数据
+    // Whether seed data is being processed
     private static bool _isHandlingSeedData = false;
 
     /// <summary>
-    /// SqlSugar 上下文初始化
+    /// SqlSugar context initialization
     /// </summary>
     /// <param name="services"></param>
     public static void AddSqlSugar(this IServiceCollection services)
     {
-        // 注册雪花Id
+        // Register Snowflake ID
         var snowIdOpt = App.GetConfig<SnowIdOptions>("SnowId", true);
         YitIdHelper.SetIdGenerator(snowIdOpt);
 
-        // 自定义 SqlSugar 雪花ID算法
+        // Customized SqlSugar snowflake ID algorithm
         SnowFlakeSingle.WorkId = snowIdOpt.WorkerId;
         StaticConfig.CustomSnowFlakeFunc = YitIdHelper.NextId;
-        // 注册 MongoDb
+        // Register MongoDB
         InstanceFactory.CustomAssemblies = [typeof(SqlSugar.MongoDb.MongoDbProvider).Assembly];
-        // 动态表达式 SqlFunc 支持，https://www.donet5.com/Home/Doc?typeId=2569
+        // Dynamic expression SqlFunc support, https://www.donet5.com/Home/Doc?typeId=2569
         StaticConfig.DynamicExpressionParserType = typeof(DynamicExpressionParser);
         StaticConfig.DynamicExpressionParsingConfig = new ParsingConfig
         {
@@ -53,11 +53,11 @@ public static class SqlSugarSetup
         });
         ITenant = sqlSugar;
 
-        services.AddSingleton<ISqlSugarClient>(sqlSugar); // 单例注册
-        services.AddScoped(typeof(SqlSugarRepository<>)); // 仓储注册
-        services.AddUnitOfWork<SqlSugarUnitOfWork>(); // 事务与工作单元注册
+        services.AddSingleton<ISqlSugarClient>(sqlSugar); // Singleton registration
+        services.AddScoped(typeof(SqlSugarRepository<>)); // Warehouse registration
+        services.AddUnitOfWork<SqlSugarUnitOfWork>(); // Transaction and work unit registration
 
-        // 初始化数据库表结构及种子数据
+        // Initialize database table structure and seed data
         dbOptions.ConnectionConfigs.ForEach(config =>
         {
             InitDatabase(sqlSugar, config);
@@ -65,7 +65,7 @@ public static class SqlSugarSetup
     }
 
     /// <summary>
-    /// 配置连接属性
+    /// Configure connection properties
     /// </summary>
     /// <param name="config"></param>
     public static void SetDbConfig(DbConnectionConfig config)
@@ -75,24 +75,24 @@ public static class SqlSugarSetup
 
         var configureExternalServices = new ConfigureExternalServices
         {
-            EntityNameService = (type, entity) => // 处理表
+            EntityNameService = (type, entity) => // processing table
             {
-                entity.IsDisabledDelete = true; // 禁止删除非 sqlsugar 创建的列
-                // 只处理贴了特性[SugarTable]表
+                entity.IsDisabledDelete = true; // Disable deletion of columns not created by sqlsugar
+                // Only the attribute [SugarTable] table is processed
                 if (!type.GetCustomAttributes<SugarTable>().Any())
                     return;
                 if (config.DbSettings.EnableUnderLine && !entity.DbTableName.Contains('_'))
-                    entity.DbTableName = entity.DbTableName.ToUnderLine(); // 驼峰转下划线
+                    entity.DbTableName = entity.DbTableName.ToUnderLine(); // camelback to underline
             },
-            EntityService = (type, column) => // 处理列
+            EntityService = (type, column) => // Process columns
             {
-                // 只处理贴了特性[SugarColumn]列
+                // Only processes columns with attributes [SugarColumn] posted
                 if (!type.GetCustomAttributes<SugarColumn>().Any())
                     return;
                 if (new NullabilityInfoContext().Create(type).WriteState is NullabilityState.Nullable)
                     column.IsNullable = true;
                 if (config.DbSettings.EnableUnderLine && !column.IsIgnore && !column.DbColumnName.Contains('_'))
-                    column.DbColumnName = column.DbColumnName.ToUnderLine(); // 驼峰转下划线
+                    column.DbColumnName = column.DbColumnName.ToUnderLine(); // camelback to underline
             },
             DataInfoCacheService = new SqlSugarCache(),
         };
@@ -101,38 +101,38 @@ public static class SqlSugarSetup
         config.IsAutoCloseConnection = true;
         config.MoreSettings = new ConnMoreSettings
         {
-            IsAutoRemoveDataCache = true, // 启用自动删除缓存，所有增删改会自动调用.RemoveDataCache()
-            IsAutoDeleteQueryFilter = true, // 启用删除查询过滤器
-            IsAutoUpdateQueryFilter = true, // 启用更新查询过滤器
-            SqlServerCodeFirstNvarchar = true // 采用Nvarchar
+            IsAutoRemoveDataCache = true, // Enable automatic cache deletion, all additions, deletions and changes will automatically call .RemoveDataCache()
+            IsAutoDeleteQueryFilter = true, // Enable delete query filter
+            IsAutoUpdateQueryFilter = true, // Enable update query filter
+            SqlServerCodeFirstNvarchar = true // Using Nvarchar
         };
 
-        // 若库类型是人大金仓则默认设置PG模式
+        // If the library type is Renmin University of Finance and Economics, the PG mode is set by default.
         if (config.DbType == DbType.Kdbndp)
-            config.MoreSettings.DatabaseModel = DbType.PostgreSQL; // 配置PG模式主要是兼容系统表差异
+            config.MoreSettings.DatabaseModel = DbType.PostgreSQL; // Configuring PG mode is mainly for compatibility with system table differences.
 
-        // 若库类型是Oracle则默认主键名字和参数名字最大长度
+        // If the library type is Oracle, the default primary key name and parameter name maximum length
         if (config.DbType == DbType.Oracle)
             config.MoreSettings.MaxParameterNameLength = 30;
     }
 
     /// <summary>
-    /// 配置Aop
+    /// Configure Aop
     /// </summary>
     /// <param name="db"></param>
     /// <param name="enableConsoleSql"></param>
     /// <param name="superAdminIgnoreIDeletedFilter"></param>
     public static void SetDbAop(SqlSugarScopeProvider db, bool enableConsoleSql, bool superAdminIgnoreIDeletedFilter)
     {
-        // 设置超时时间
+        // Set timeout
         db.Ado.CommandTimeOut = 30;
 
-        // 打印SQL语句
+        // Print SQL statement
         if (enableConsoleSql)
         {
             db.Aop.OnLogExecuting = (sql, pars) =>
             {
-                //// 若参数值超过100个字符则进行截取
+                //// If the parameter value exceeds 100 characters, intercept it
                 //foreach (var par in pars)
                 //{
                 //    if (par.DbType != System.Data.DbType.String || par.Value == null) continue;
@@ -140,7 +140,7 @@ public static class SqlSugarSetup
                 //        par.Value = string.Concat(par.Value.ToString()[..100], "......");
                 //}
 
-                var log = $"【{DateTime.Now}——执行SQL】\r\n{UtilMethods.GetNativeSql(sql, pars)}\r\n";
+                var log = $"[{DateTime.Now}——Execute SQL]\r\n{UtilMethods.GetNativeSql(sql, pars)}\r\n";
                 var originColor = Console.ForegroundColor;
                 if (sql.StartsWith("SELECT", StringComparison.OrdinalIgnoreCase))
                     Console.ForegroundColor = ConsoleColor.Green;
@@ -155,12 +155,12 @@ public static class SqlSugarSetup
         db.Aop.OnError = ex =>
         {
             if (ex.Parametres == null) return;
-            var log = $"【{DateTime.Now}——错误SQL】\r\n{UtilMethods.GetNativeSql(ex.Sql, (SugarParameter[])ex.Parametres)}\r\n";
+            var log = $"[{DateTime.Now}——Error SQL]\r\n{UtilMethods.GetNativeSql(ex.Sql, (SugarParameter[])ex.Parameters)}\r\n";
             Log.Error(log, ex);
         };
         db.Aop.OnLogExecuted = (sql, pars) =>
         {
-            //// 若参数值超过100个字符则进行截取
+            //// If the parameter value exceeds 100 characters, intercept it
             //foreach (var par in pars)
             //{
             //    if (par.DbType != System.Data.DbType.String || par.Value == null) continue;
@@ -168,40 +168,40 @@ public static class SqlSugarSetup
             //        par.Value = string.Concat(par.Value.ToString()[..100], "......");
             //}
 
-            // 执行时间超过5秒时
+            // When the execution time exceeds 5 seconds
             if (!(db.Ado.SqlExecutionTime.TotalSeconds > 5)) return;
 
-            var fileName = db.Ado.SqlStackTrace.FirstFileName; // 文件名
-            var fileLine = db.Ado.SqlStackTrace.FirstLine; // 行号
-            var firstMethodName = db.Ado.SqlStackTrace.FirstMethodName; // 方法名
-            var log = $"【{DateTime.Now}——超时SQL】\r\n【所在文件名】：{fileName}\r\n【代码行数】：{fileLine}\r\n【方法名】：{firstMethodName}\r\n" + $"【SQL语句】：{UtilMethods.GetNativeSql(sql, pars)}";
+            var fileName = db.Ado.SqlStackTrace.FirstFileName; // file name
+            var fileLine = db.Ado.SqlStackTrace.FirstLine; // Line number
+            var firstMethodName = db.Ado.SqlStackTrace.FirstMethodName; // method name
+            var log = $"[{DateTime.Now}——Timeout SQL]\r\n[File name]: {fileName}\r\n[Number of lines of code]: {fileLine}\r\n[Method name]: {firstMethodName}\r\n" + $"[SQL statement]: {UtilMethods.GetNativeSql(sql, pars)}";
             Log.Warning(log);
         };
 
-        // 数据审计
+        // Data audit
         db.Aop.DataExecuting = (_, entityInfo) =>
         {
-            // 若正在处理种子数据则直接返回
+            // If the seed data is being processed, return directly.
             if (_isHandlingSeedData) return;
 
-            // 新增/插入
+            // add/insert
             if (entityInfo.OperationType == DataFilterType.InsertByObject)
             {
-                // 若主键是长整型且空则赋值雪花Id
+                // If the primary key is a long integer and is empty, assign Snowflake Id.
                 if (entityInfo.EntityColumnInfo.IsPrimarykey && !entityInfo.EntityColumnInfo.IsIdentity && entityInfo.EntityColumnInfo.PropertyInfo.PropertyType == typeof(long))
                 {
                     var id = entityInfo.EntityColumnInfo.PropertyInfo.GetValue(entityInfo.EntityValue);
                     if (id == null || (long)id == 0)
                         entityInfo.SetValue(YitIdHelper.NextId());
                 }
-                // 若创建时间为空则赋值当前时间
+                // If the creation time is empty, assign the current time
                 else if (entityInfo.PropertyName == nameof(EntityBase.CreateTime))
                 {
                     var createTime = entityInfo.EntityColumnInfo.PropertyInfo.GetValue(entityInfo.EntityValue)!;
                     if (createTime == null || createTime.Equals(DateTime.MinValue))
                         entityInfo.SetValue(DateTime.Now);
                 }
-                // 若当前用户为空（非web线程时）
+                // If the current user is empty (not a web thread)
                 if (App.User == null) return;
 
                 dynamic entityValue = entityInfo.EntityValue;
@@ -236,7 +236,7 @@ public static class SqlSugarSetup
                         entityInfo.SetValue(App.User.FindFirst(ClaimConst.OrgName)?.Value);
                 }
             }
-            // 编辑/更新
+            // Edit/Update
             else if (entityInfo.OperationType == DataFilterType.UpdateByObject)
             {
                 if (entityInfo.PropertyName == nameof(EntityBase.UpdateTime))
@@ -257,30 +257,30 @@ public static class SqlSugarSetup
             }
         };
 
-        // 是否为超级管理员
+        // Is it a super administrator?
         var isSuperAdmin = App.User?.FindFirst(ClaimConst.AccountType)?.Value == ((int)AccountTypeEnum.SuperAdmin).ToString();
 
-        // 配置假删除过滤器，如果当前用户是超级管理员并且允许忽略软删除过滤器则不会应用
+        // Configure the fake delete filter, which will not be applied if the current user is a super administrator and is allowed to ignore soft delete filters
         if (!isSuperAdmin || !superAdminIgnoreIDeletedFilter)
             db.QueryFilter.AddTableFilter<IDeletedFilter>(u => u.IsDelete == false);
 
-        // 超管排除其他过滤器
+        // Supertube excludes other filters
         if (isSuperAdmin) return;
 
-        // 配置租户过滤器
+        // Configure tenant filters
         var tenantId = App.User?.FindFirst(ClaimConst.TenantId)?.Value;
         if (!string.IsNullOrWhiteSpace(tenantId))
             db.QueryFilter.AddTableFilter<ITenantIdFilter>(u => u.TenantId == long.Parse(tenantId));
 
-        // 配置用户机构（数据范围）过滤器
+        // Configure user organization (data range) filter
         SqlSugarFilter.SetOrgEntityFilter(db);
 
-        // 配置自定义过滤器
+        // Configure custom filters
         SqlSugarFilter.SetCustomEntityFilter(db);
     }
 
     /// <summary>
-    /// 开启库表差异化日志
+    /// Enable differential logs for database tables
     /// </summary>
     /// <param name="db"></param>
     /// <param name="config"></param>
@@ -290,7 +290,7 @@ public static class SqlSugarSetup
 
         async void AopOnDiffLogEvent(DiffLogModel u)
         {
-            // 记录差异数据
+            // Record differential data
             var diffData = new List<dynamic>();
             for (int i = 0; i < u.AfterData.Count; i++)
             {
@@ -315,11 +315,11 @@ public static class SqlSugarSetup
 
             var logDiff = new SysLogDiff
             {
-                // 差异数据（字段描述、列名、值、表名、表描述）
+                // Difference data (field description, column name, value, table name, table description)
                 DiffData = JSON.Serialize(diffData),
-                // 传进来的对象（如果对象为空，则使用首个数据的表名作为业务对象）
+                // The object passed in (if the object is empty, the table name of the first data is used as the business object)
                 BusinessData = u.BusinessData == null ? u.AfterData.FirstOrDefault()?.TableName : JSON.Serialize(u.BusinessData),
-                // 枚举（insert、update、delete）
+                // Enumeration (insert, update, delete)
                 DiffType = u.DiffType.ToString(),
                 Sql = u.Sql,
                 Parameters = JSON.Serialize(u.Parameters.Select(e => new { e.ParameterName, e.Value, TypeName = e.DbType.ToString() })),
@@ -328,56 +328,56 @@ public static class SqlSugarSetup
             var logDb = ITenant.IsAnyConnection(SqlSugarConst.LogConfigId) ? ITenant.GetConnectionScope(SqlSugarConst.LogConfigId) : ITenant.GetConnectionScope(SqlSugarConst.MainConfigId);
             await logDb.CopyNew().Insertable(logDiff).ExecuteCommandAsync();
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine(DateTime.Now + $"\r\n*****开始差异日志*****\r\n{Environment.NewLine}{JSON.Serialize(logDiff)}{Environment.NewLine}*****结束差异日志*****\r\n");
+            Console.WriteLine(DateTime.Now + $"\r\n****Start difference log*****\r\n{Environment.NewLine}{JSON.Serialize(logDiff)}{Environment.NewLine}*****End difference log*****\r\n");
         }
 
         db.Aop.OnDiffLogEvent = AopOnDiffLogEvent;
     }
 
     /// <summary>
-    /// 初始化视图
+    /// Initialize view
     /// </summary>
     /// <param name="dbProvider"></param>
     private static void InitView(SqlSugarScopeProvider dbProvider)
     {
-        var totalWatch = Stopwatch.StartNew(); // 开始总计时
-        Log.Information($"初始化视图 {dbProvider.CurrentConnectionConfig.DbType} - {dbProvider.CurrentConnectionConfig.ConfigId}");
+        var totalWatch = Stopwatch.StartNew(); // Start total time
+        Log.Information($"BeginningInitialize View {dbProvider.CurrentConnectionConfig.DbType} - {dbProvider.CurrentConnectionConfig.ConfigId}");
         var viewTypeList = App.EffectiveTypes.Where(u => !u.IsInterface && !u.IsAbstract && u.IsClass && u.GetInterfaces().Any(i => i.HasImplementedRawGeneric(typeof(ISqlSugarView)))).ToList();
 
         int taskIndex = 0, size = viewTypeList.Count;
         var taskList = viewTypeList.Select(viewType => Task.Run(() =>
         {
-            // 开始计时
+            // Start timing
             var stopWatch = Stopwatch.StartNew();
 
-            // 获取视图实体和配置信息
-            var entityInfo = dbProvider.EntityMaintenance.GetEntityInfo(viewType) ?? throw new Exception("获取视图实体配置有误");
+            // Get view entity and configuration information
+            var entityInfo = dbProvider.EntityMaintenance.GetEntityInfo(viewType) ?? throw new Exception("Error in obtaining view entity configuration");
 
-            // 如果视图存在，则删除视图
+            // Delete the view if it exists
             if (dbProvider.DbMaintenance.GetViewInfoList(false).Any(it => it.Name.EqualIgnoreCase(entityInfo.DbTableName)))
                 dbProvider.DbMaintenance.DropView(entityInfo.DbTableName);
 
-            // 获取初始化视图查询SQL
+            // Get initialization view query SQL
             var sql = viewType.GetMethod(nameof(ISqlSugarView.GetQueryableSqlString))?.Invoke(Activator.CreateInstance(viewType), [dbProvider]) as string;
-            if (string.IsNullOrWhiteSpace(sql)) throw new Exception("视图初始化Sql语句不能为空");
+            if (string.IsNullOrWhiteSpace(sql)) throw new Exception("The SQL statement for initializing the view cannot be empty");
 
-            // 创建视图
+            // Create view
             dbProvider.Ado.ExecuteCommand($"CREATE VIEW {entityInfo.DbTableName} AS " + Environment.NewLine + " " + sql);
 
-            // 停止计时
+            // Stop timing
             stopWatch.Stop();
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine($"初始化视图 {viewType.FullName,-58} ({dbProvider.CurrentConnectionConfig.ConfigId} - {Interlocked.Increment(ref taskIndex):D003}/{size:D003}，耗时：{stopWatch.ElapsedMilliseconds:N0} ms)");
+            Console.WriteLine($"Initialize view {viewType.FullName,-58} ({dbProvider.CurrentConnectionConfig.ConfigId} - {Interlocked.Increment(ref taskIndex):D003}/{size:D003}, time consuming: {stopWatch.ElapsedMilliseconds:N0} ms)");
         }));
         Task.WaitAll(taskList.ToArray());
 
-        totalWatch.Stop(); // 停止总计时
+        totalWatch.Stop(); // Stop total time
         Console.ForegroundColor = ConsoleColor.Green;
-        Console.WriteLine($"初始化视图 {dbProvider.CurrentConnectionConfig.DbType} - {dbProvider.CurrentConnectionConfig.ConfigId} 总耗时：{totalWatch.ElapsedMilliseconds:N0} ms");
+        Console.WriteLine($"Initialize view {dbProvider.CurrentConnectionConfig.DbType} - {dbProvider.CurrentConnectionConfig.ConfigId} Total time spent: {totalWatch.ElapsedMilliseconds:N0} ms");
     }
 
     /// <summary>
-    /// 等待数据库就绪
+    /// Wait for database to be ready
     /// </summary>
     /// <param name="dbProvider"></param>
     private static void WaitForDatabaseReady(SqlSugarScopeProvider dbProvider)
@@ -389,57 +389,57 @@ public static class SqlSugarSetup
                 if (dbProvider.Ado.Connection.State != ConnectionState.Open)
                     dbProvider.Ado.Connection.Open();
 
-                // 如果连接成功，直接返回
-                Log.Information("数据库连接成功。");
+                // If the connection is successful, return directly
+                Log.Information("Database connection successful.");
                 return;
             }
             catch (Exception ex)
             {
-                Log.Warning($"数据库尚未就绪，等待中... 错误：{ex.Message}");
+                Log.Warning($"The database is not ready yet, waiting... Error: {ex.Message}");
                 Thread.Sleep(1000);
             }
         } while (true);
     }
 
     /// <summary>
-    /// 初始化数据库
+    /// Initialize database
     /// </summary>
-    /// <param name="db">SqlSugarScope 实例</param>
-    /// <param name="config">数据库连接配置</param>
+    /// <param name="db">SqlSugarScope instance</param>
+    /// <param name="config">Database connection configuration</param>
     private static void InitDatabase(SqlSugarScope db, DbConnectionConfig config)
     {
         var dbProvider = db.GetConnectionScope(config.ConfigId);
 
-        // 初始化数据库  如果是没有数据库的话，是先初始化数据库再做连接
+        // Initialize the database. If there is no database, initialize the database first and then connect.
         if (config.DbSettings.EnableInitDb)
         {
-            Log.Information($"初始化数据库 {config.DbType} - {config.ConfigId} - {config.ConnectionString}");
+            Log.Information($"Initialize database {config.DbType} - {config.ConfigId} - {config.ConnectionString}");
             if (config.DbType != DbType.Oracle) dbProvider.DbMaintenance.CreateDatabase();
         }
 
-        // 等待数据库连接就绪
+        // Wait for database connection to be ready
         WaitForDatabaseReady(dbProvider);
 
-        // 初始化表结构
+        // Initialize table structure
         if (config.TableSettings.EnableInitTable)
         {
-            Log.Information($"初始化表结构 {config.DbType} - {config.ConfigId}");
+            Log.Information($"Initialize table structure {config.DbType} - {config.ConfigId}");
             var entityTypes = GetEntityTypesForInit(config);
             InitializeTables(dbProvider, entityTypes, config);
         }
 
-        // 初始化视图
+        // Initialize view
         if (config.DbSettings.EnableInitView) InitView(dbProvider);
 
-        // 初始化种子数据
+        // Initialize seed data
         if (config.SeedSettings.EnableInitSeed) InitSeedData(db, config);
     }
 
     /// <summary>
-    /// 获取需要初始化的实体类型
+    /// Get the entity type that needs to be initialized
     /// </summary>
-    /// <param name="config">数据库连接配置</param>
-    /// <returns>实体类型列表</returns>
+    /// <param name="config">Database connection configuration</param>
+    /// <returns>Entity type list</returns>
     private static List<Type> GetEntityTypesForInit(DbConnectionConfig config)
     {
         return App.EffectiveTypes
@@ -451,11 +451,11 @@ public static class SqlSugarSetup
     }
 
     /// <summary>
-    /// 判断实体是否属于当前配置
+    /// Determine whether the entity belongs to the current configuration
     /// </summary>
-    /// <param name="entityType">实体类型</param>
-    /// <param name="config">数据库连接配置</param>
-    /// <returns>是否属于当前配置</returns>
+    /// <param name="entityType">Entity type</param>
+    /// <param name="config">Database connection configuration</param>
+    /// <returns>Whether it belongs to the current configuration</returns>
     private static bool IsEntityForConfig(Type entityType, DbConnectionConfig config)
     {
         switch (config.ConfigId.ToString())
@@ -477,18 +477,18 @@ public static class SqlSugarSetup
     }
 
     /// <summary>
-    /// 初始化表结构
+    /// Initialize table structure
     /// </summary>
-    /// <param name="dbProvider">SqlSugarScopeProvider 实例</param>
-    /// <param name="entityTypes">实体类型列表</param>
-    /// <param name="config">数据库连接配置</param>
+    /// <param name="dbProvider">SqlSugarScopeProvider instance</param>
+    /// <param name="entityTypes">Entity type list</param>
+    /// <param name="config">Database connection configuration</param>
     private static void InitializeTables(SqlSugarScopeProvider dbProvider, List<Type> entityTypes, DbConnectionConfig config)
     {
-        // 删除视图再初始化表结构，防止因为视图导致无法同步表结构
+        // Delete the view and then initialize the table structure to prevent the table structure from being unable to be synchronized due to the view.
         var viewTypeList = App.EffectiveTypes.Where(u => !u.IsInterface && !u.IsAbstract && u.IsClass && u.GetInterfaces().Any(i => i.HasImplementedRawGeneric(typeof(ISqlSugarView)))).ToList();
         foreach (var viewType in viewTypeList)
         {
-            var entityInfo = dbProvider.EntityMaintenance.GetEntityInfo(viewType) ?? throw new Exception("获取视图实体配置有误");
+            var entityInfo = dbProvider.EntityMaintenance.GetEntityInfo(viewType) ?? throw new Exception("Error in obtaining view entity configuration");
             if (dbProvider.DbMaintenance.GetViewInfoList(false).Any(it => it.Name.EqualIgnoreCase(entityInfo.DbTableName)))
                 dbProvider.DbMaintenance.DropView(entityInfo.DbTableName);
         }
@@ -496,7 +496,7 @@ public static class SqlSugarSetup
         int count = 0, sum = entityTypes.Count;
         var tasks = entityTypes.Select(entityType => Task.Run(() =>
         {
-            Console.WriteLine($"初始化表结构 {entityType.FullName,-64} ({config.ConfigId} - {Interlocked.Increment(ref count):D003}/{sum:D003})");
+            Console.WriteLine($"Initialization table structure {entityType.FullName,-64} ({config.ConfigId} - {Interlocked.Increment(ref count):D003}/{sum:D003})");
             UpdateNullableColumns(dbProvider, entityType);
             InitializeTable(dbProvider, entityType);
         }));
@@ -505,10 +505,10 @@ public static class SqlSugarSetup
     }
 
     /// <summary>
-    /// 更新表中不存在于实体的字段为可空
+    /// Update fields in the table that do not exist in the entity to be nullable
     /// </summary>
-    /// <param name="dbProvider">SqlSugarScopeProvider 实例</param>
-    /// <param name="entityType">实体类型</param>
+    /// <param name="dbProvider">SqlSugarScopeProvider instance</param>
+    /// <param name="entityType">Entity type</param>
     private static void UpdateNullableColumns(SqlSugarScopeProvider dbProvider, Type entityType)
     {
         var entityInfo = dbProvider.EntityMaintenance.GetEntityInfo(entityType);
@@ -525,10 +525,10 @@ public static class SqlSugarSetup
     }
 
     /// <summary>
-    /// 初始化表
+    /// initialization table
     /// </summary>
-    /// <param name="dbProvider">SqlSugarScopeProvider 实例</param>
-    /// <param name="entityType">实体类型</param>
+    /// <param name="dbProvider">SqlSugarScopeProvider instance</param>
+    /// <param name="entityType">Entity type</param>
     private static void InitializeTable(SqlSugarScopeProvider dbProvider, Type entityType)
     {
         Retry(() =>
@@ -545,16 +545,16 @@ public static class SqlSugarSetup
     }
 
     /// <summary>
-    /// 初始化种子数据
+    /// Initialize seed data
     /// </summary>
-    /// <param name="db">SqlSugarScope 实例</param>
-    /// <param name="config">数据库连接配置</param>
+    /// <param name="db">SqlSugarScope instance</param>
+    /// <param name="config">Database connection configuration</param>
     private static void InitSeedData(SqlSugarScope db, DbConnectionConfig config)
     {
         var dbProvider = db.GetConnectionScope(config.ConfigId);
         _isHandlingSeedData = true;
 
-        Log.Information($"初始化种子数据 {config.DbType} - {config.ConfigId}");
+        Log.Information($"BeginningInitial seedchildData {config.DbType} - {config.ConfigId}");
         var seedDataTypes = GetSeedDataTypes(config);
 
         int count = 0, sum = seedDataTypes.Count;
@@ -575,10 +575,10 @@ public static class SqlSugarSetup
     }
 
     /// <summary>
-    /// 获取种子数据类型
+    /// Get seed data type
     /// </summary>
-    /// <param name="config">数据库连接配置</param>
-    /// <returns>种子数据类型列表</returns>
+    /// <param name="config">Database connection configuration</param>
+    /// <returns>List of seed data types</returns>
     private static List<Type> GetSeedDataTypes(DbConnectionConfig config)
     {
         return App.EffectiveTypes
@@ -589,10 +589,10 @@ public static class SqlSugarSetup
     }
 
     /// <summary>
-    /// 获取种子数据
+    /// Get seed data
     /// </summary>
-    /// <param name="seedType">种子数据类型</param>
-    /// <returns>种子数据列表</returns>
+    /// <param name="seedType">Seed data type</param>
+    /// <returns>Seed data list</returns>
     private static IEnumerable<object> GetSeedData(Type seedType)
     {
         var instance = Activator.CreateInstance(seedType);
@@ -601,10 +601,10 @@ public static class SqlSugarSetup
     }
 
     /// <summary>
-    /// 调整种子数据的 ID
+    /// Adjust the ID of the seed data
     /// </summary>
-    /// <param name="seedData">种子数据列表</param>
-    /// <param name="config">数据库连接配置</param>
+    /// <param name="seedData">Seed data list</param>
+    /// <param name="config">Database connection configuration</param>
     private static void AdjustSeedDataIds(IEnumerable<object> seedData, DbConnectionConfig config)
     {
         var seedId = config.ConfigId.ToLong();
@@ -622,15 +622,15 @@ public static class SqlSugarSetup
     }
 
     /// <summary>
-    /// 插入或更新种子数据
+    /// Insert or update seed data
     /// </summary>
-    /// <param name="dbProvider">SqlSugarScopeProvider 实例</param>
-    /// <param name="seedType">种子数据类型</param>
-    /// <param name="entityType">实体类型</param>
-    /// <param name="seedData">种子数据列表</param>
-    /// <param name="config">数据库连接配置</param>
-    /// <param name="count">当前处理的数量</param>
-    /// <param name="sum">总数量</param>
+    /// <param name="dbProvider">SqlSugarScopeProvider instance</param>
+    /// <param name="seedType">Seed data type</param>
+    /// <param name="entityType">Entity type</param>
+    /// <param name="seedData">Seed data list</param>
+    /// <param name="config">Database connection configuration</param>
+    /// <param name="count">Quantity currently processed</param>
+    /// <param name="sum">total quantity</param>
     private static void InsertOrUpdateSeedData(SqlSugarScopeProvider dbProvider, Type seedType, Type entityType, IEnumerable<object> seedData, DbConnectionConfig config, ref int count, int sum)
     {
         var entityInfo = dbProvider.EntityMaintenance.GetEntityInfo(entityType);
@@ -665,12 +665,12 @@ public static class SqlSugarSetup
                     dbProvider.InsertableByObject(dataList).ExecuteCommand();
                 }
             }
-            Console.WriteLine($"添加数据 {entityInfo.DbTableName,-32} ({config.ConfigId} - {Interlocked.Increment(ref count):D003}/{sum:D003}，数据量：{dataList.Count:D003}，插入 {insertCount:D003} 条记录，修改 {updateCount:D003} 条记录)");
+            Console.WriteLine($"Add data {entityInfo.DbTableName,-32} ({config.ConfigId} - {Interlocked.Increment(ref count):D003}/{sum:D003}, data volume: {dataList.Count:D003}, inserted {insertCount:D003} records, updated {updateCount:D003} records)");
         }
     }
 
     /// <summary>
-    /// 初始化租户业务数据库
+    /// Initialize tenant business database
     /// </summary>
     /// <param name="iTenant"></param>
     /// <param name="config"></param>
@@ -683,7 +683,7 @@ public static class SqlSugarSetup
         var db = iTenant.GetConnectionScope(config.ConfigId.ToString());
         db.DbMaintenance.CreateDatabase();
 
-        // 获取所有业务表-初始化租户库表结构（排除系统表、日志表、特定库表）
+        // Get all business tables - initialize the tenant library table structure (exclude system tables, log tables, specific library tables)
         var entityTypes = App.EffectiveTypes
             .Where(u => !u.GetCustomAttributes<IgnoreTableAttribute>().Any())
             .Where(u => !u.IsInterface && !u.IsAbstract && u.IsClass && u.IsDefined(typeof(SugarTable), false) &&
@@ -701,7 +701,7 @@ public static class SqlSugarSetup
     }
 
     /// <summary>
-    /// 简单的重试机制
+    /// Simple retry mechanism
     /// </summary>
     /// <param name="action"></param>
     /// <param name="maxRetry"></param>
@@ -720,9 +720,9 @@ public static class SqlSugarSetup
             {
                 if (++attempt >= maxRetry)
                 {
-                    Log.Error($"简单的重试机制:{ex.Message}"); throw;
+                    Log.Error($"Simple retry mechanism: {ex.Message}"); throw;
                 }
-                Log.Information($"数据库忙，正在重试... (尝试 {attempt}/{maxRetry})");
+                Log.Information($"Database is busy, retrying... (Attempt {attempt}/{maxRetry})");
                 Thread.Sleep(retryIntervalMs);
             }
         }

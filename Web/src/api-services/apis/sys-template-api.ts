@@ -1,8 +1,8 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Admin.NET 通用权限开发平台
- * 让 .NET 开发更简单、更通用、更流行。整合最新技术，模块插件式开发，前后端分离，开箱即用。<br/><u><b><font color='FF0000'> 👮不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！</font></b></u>
+ * Admin.NET General Permission Development Platform
+ * let .NET Develop more simply、More general、More popular。wholeIn line with the latest technology，Modular Plugin-Based Development，Frontend and backendpointsLeave，Ready to use out of the box。<br/><u><b><font color='FF0000'> 👮This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project! </font></b></u>
  *
  * OpenAPI spec version: 1.0.0
  * 
@@ -35,7 +35,7 @@ export const SysTemplateApiAxiosParamCreator = function (configuration?: Configu
     return {
         /**
          * 
-         * @summary 增加模板 📑
+         * @summary Add template 📑
          * @param {AddTemplateInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -83,7 +83,7 @@ export const SysTemplateApiAxiosParamCreator = function (configuration?: Configu
         },
         /**
          * 
-         * @summary 删除模板 📑
+         * @summary Delete template 📑
          * @param {BaseIdInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -131,7 +131,7 @@ export const SysTemplateApiAxiosParamCreator = function (configuration?: Configu
         },
         /**
          * 
-         * @summary 获取分组列表 🔖
+         * @summary Get group list 🔖
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -174,7 +174,7 @@ export const SysTemplateApiAxiosParamCreator = function (configuration?: Configu
         },
         /**
          * 
-         * @summary 获取模板列表 📑
+         * @summary Get template list 📑
          * @param {PageTemplateInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -222,7 +222,7 @@ export const SysTemplateApiAxiosParamCreator = function (configuration?: Configu
         },
         /**
          * 
-         * @summary 预览模板内容 📑
+         * @summary Preview template content 📑
          * @param {ProViewTemplateInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -270,7 +270,7 @@ export const SysTemplateApiAxiosParamCreator = function (configuration?: Configu
         },
         /**
          * 
-         * @summary 渲染模板内容 📑
+         * @summary Render template content 📑
          * @param {RenderTemplateInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -318,7 +318,7 @@ export const SysTemplateApiAxiosParamCreator = function (configuration?: Configu
         },
         /**
          * 
-         * @summary 获取模板 📑
+         * @summary Get template 📑
          * @param {string} code 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -367,7 +367,7 @@ export const SysTemplateApiAxiosParamCreator = function (configuration?: Configu
         },
         /**
          * 
-         * @summary 更新模板 📑
+         * @summary Update template 📑
          * @param {UpdateTemplateInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -424,7 +424,7 @@ export const SysTemplateApiFp = function(configuration?: Configuration) {
     return {
         /**
          * 
-         * @summary 增加模板 📑
+         * @summary Add template 📑
          * @param {AddTemplateInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -438,7 +438,7 @@ export const SysTemplateApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary 删除模板 📑
+         * @summary Delete template 📑
          * @param {BaseIdInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -452,7 +452,7 @@ export const SysTemplateApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary 获取分组列表 🔖
+         * @summary Get group list 🔖
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -465,7 +465,7 @@ export const SysTemplateApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary 获取模板列表 📑
+         * @summary Get template list 📑
          * @param {PageTemplateInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -479,7 +479,7 @@ export const SysTemplateApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary 预览模板内容 📑
+         * @summary Preview template content 📑
          * @param {ProViewTemplateInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -493,7 +493,7 @@ export const SysTemplateApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary 渲染模板内容 📑
+         * @summary Render template content 📑
          * @param {RenderTemplateInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -507,7 +507,7 @@ export const SysTemplateApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary 获取模板 📑
+         * @summary Get template 📑
          * @param {string} code 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -521,7 +521,7 @@ export const SysTemplateApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary 更新模板 📑
+         * @summary Update template 📑
          * @param {UpdateTemplateInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -544,7 +544,7 @@ export const SysTemplateApiFactory = function (configuration?: Configuration, ba
     return {
         /**
          * 
-         * @summary 增加模板 📑
+         * @summary Add template 📑
          * @param {AddTemplateInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -554,7 +554,7 @@ export const SysTemplateApiFactory = function (configuration?: Configuration, ba
         },
         /**
          * 
-         * @summary 删除模板 📑
+         * @summary Delete template 📑
          * @param {BaseIdInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -564,7 +564,7 @@ export const SysTemplateApiFactory = function (configuration?: Configuration, ba
         },
         /**
          * 
-         * @summary 获取分组列表 🔖
+         * @summary Get group list 🔖
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -573,7 +573,7 @@ export const SysTemplateApiFactory = function (configuration?: Configuration, ba
         },
         /**
          * 
-         * @summary 获取模板列表 📑
+         * @summary Get template list 📑
          * @param {PageTemplateInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -583,7 +583,7 @@ export const SysTemplateApiFactory = function (configuration?: Configuration, ba
         },
         /**
          * 
-         * @summary 预览模板内容 📑
+         * @summary Preview template content 📑
          * @param {ProViewTemplateInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -593,7 +593,7 @@ export const SysTemplateApiFactory = function (configuration?: Configuration, ba
         },
         /**
          * 
-         * @summary 渲染模板内容 📑
+         * @summary Render template content 📑
          * @param {RenderTemplateInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -603,7 +603,7 @@ export const SysTemplateApiFactory = function (configuration?: Configuration, ba
         },
         /**
          * 
-         * @summary 获取模板 📑
+         * @summary Get template 📑
          * @param {string} code 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -613,7 +613,7 @@ export const SysTemplateApiFactory = function (configuration?: Configuration, ba
         },
         /**
          * 
-         * @summary 更新模板 📑
+         * @summary Update template 📑
          * @param {UpdateTemplateInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -633,7 +633,7 @@ export const SysTemplateApiFactory = function (configuration?: Configuration, ba
 export class SysTemplateApi extends BaseAPI {
     /**
      * 
-     * @summary 增加模板 📑
+     * @summary Add template 📑
      * @param {AddTemplateInput} [body] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -644,7 +644,7 @@ export class SysTemplateApi extends BaseAPI {
     }
     /**
      * 
-     * @summary 删除模板 📑
+     * @summary Delete template 📑
      * @param {BaseIdInput} [body] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -655,7 +655,7 @@ export class SysTemplateApi extends BaseAPI {
     }
     /**
      * 
-     * @summary 获取分组列表 🔖
+     * @summary Get group list 🔖
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SysTemplateApi
@@ -665,7 +665,7 @@ export class SysTemplateApi extends BaseAPI {
     }
     /**
      * 
-     * @summary 获取模板列表 📑
+     * @summary Get template list 📑
      * @param {PageTemplateInput} [body] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -676,7 +676,7 @@ export class SysTemplateApi extends BaseAPI {
     }
     /**
      * 
-     * @summary 预览模板内容 📑
+     * @summary Preview template content 📑
      * @param {ProViewTemplateInput} [body] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -687,7 +687,7 @@ export class SysTemplateApi extends BaseAPI {
     }
     /**
      * 
-     * @summary 渲染模板内容 📑
+     * @summary Render template content 📑
      * @param {RenderTemplateInput} [body] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -698,7 +698,7 @@ export class SysTemplateApi extends BaseAPI {
     }
     /**
      * 
-     * @summary 获取模板 📑
+     * @summary Get template 📑
      * @param {string} code 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -709,7 +709,7 @@ export class SysTemplateApi extends BaseAPI {
     }
     /**
      * 
-     * @summary 更新模板 📑
+     * @summary Update template 📑
      * @param {UpdateTemplateInput} [body] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}

@@ -1,8 +1,8 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Admin.NET 通用权限开发平台
- * 让 .NET 开发更简单、更通用、更流行。整合最新技术，模块插件式开发，前后端分离，开箱即用。<br/><u><b><font color='FF0000'> 👮不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！</font></b></u>
+ * Admin.NET General Permission Development Platform
+ * let .NET Develop more simply、More general、More popular。wholeIn line with the latest technology，Modular Plugin-Based Development，Frontend and backendpointsLeave，Ready to use out of the box。<br/><u><b><font color='FF0000'> 👮This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project! </font></b></u>
  *
  * OpenAPI spec version: 1.0.0
  * 
@@ -27,8 +27,8 @@ export const APIJSONApiAxiosParamCreator = function (configuration?: Configurati
     return {
         /**
          * 
-         * @summary 新增 🔖
-         * @param {{ [key: string]: JToken; }} [body] 表对象或数组，若没有传Id则后端生成Id
+         * @summary Add New 🔖
+         * @param {{ [key: string]: JToken; }} [body] Table object or numbergroup，If there is no transmissionIdthen the backendGenerateId
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -75,7 +75,7 @@ export const APIJSONApiAxiosParamCreator = function (configuration?: Configurati
         },
         /**
          * 
-         * @summary 删除（支持非Id条件、支持批量） 🔖
+         * @summary Delete（Support nonIdCondition、Supports batch） 🔖
          * @param {{ [key: string]: JToken; }} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -122,8 +122,8 @@ export const APIJSONApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * 参数：{\"[]\":{\"SYSLOGOP\":{}}}
-         * @summary 统一查询入口 🔖
+         * Parameter：{\"[]\":{\"SYSLOGOP\":{}}}
+         * @summary uniteoneQueryEntrance 🔖
          * @param {{ [key: string]: JToken; }} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -171,7 +171,7 @@ export const APIJSONApiAxiosParamCreator = function (configuration?: Configurati
         },
         /**
          * 
-         * @summary 查询 🔖
+         * @summary Query 🔖
          * @param {string} table 
          * @param {{ [key: string]: JToken; }} [body] 
          * @param {*} [options] Override http request option.
@@ -225,8 +225,8 @@ export const APIJSONApiAxiosParamCreator = function (configuration?: Configurati
         },
         /**
          * 
-         * @summary 更新（只支持Id作为条件） 🔖
-         * @param {{ [key: string]: JToken; }} [body] 支持多表、多Id批量更新
+         * @summary Update（Only supportsIdAs a condition） 🔖
+         * @param {{ [key: string]: JToken; }} [body] Supports multiple tables、manyIdBatchUpdate
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -282,8 +282,8 @@ export const APIJSONApiFp = function(configuration?: Configuration) {
     return {
         /**
          * 
-         * @summary 新增 🔖
-         * @param {{ [key: string]: JToken; }} [body] 表对象或数组，若没有传Id则后端生成Id
+         * @summary Add New 🔖
+         * @param {{ [key: string]: JToken; }} [body] Table object or numbergroup，If there is no transmissionIdthen the backendGenerateId
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -296,7 +296,7 @@ export const APIJSONApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary 删除（支持非Id条件、支持批量） 🔖
+         * @summary Delete（Support nonIdCondition、Supports batch） 🔖
          * @param {{ [key: string]: JToken; }} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -309,8 +309,8 @@ export const APIJSONApiFp = function(configuration?: Configuration) {
             };
         },
         /**
-         * 参数：{\"[]\":{\"SYSLOGOP\":{}}}
-         * @summary 统一查询入口 🔖
+         * Parameter：{\"[]\":{\"SYSLOGOP\":{}}}
+         * @summary uniteoneQueryEntrance 🔖
          * @param {{ [key: string]: JToken; }} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -324,7 +324,7 @@ export const APIJSONApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary 查询 🔖
+         * @summary Query 🔖
          * @param {string} table 
          * @param {{ [key: string]: JToken; }} [body] 
          * @param {*} [options] Override http request option.
@@ -339,8 +339,8 @@ export const APIJSONApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary 更新（只支持Id作为条件） 🔖
-         * @param {{ [key: string]: JToken; }} [body] 支持多表、多Id批量更新
+         * @summary Update（Only supportsIdAs a condition） 🔖
+         * @param {{ [key: string]: JToken; }} [body] Supports multiple tables、manyIdBatchUpdate
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -362,8 +362,8 @@ export const APIJSONApiFactory = function (configuration?: Configuration, basePa
     return {
         /**
          * 
-         * @summary 新增 🔖
-         * @param {{ [key: string]: JToken; }} [body] 表对象或数组，若没有传Id则后端生成Id
+         * @summary Add New 🔖
+         * @param {{ [key: string]: JToken; }} [body] Table object or numbergroup，If there is no transmissionIdthen the backendGenerateId
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -372,7 +372,7 @@ export const APIJSONApiFactory = function (configuration?: Configuration, basePa
         },
         /**
          * 
-         * @summary 删除（支持非Id条件、支持批量） 🔖
+         * @summary Delete（Support nonIdCondition、Supports batch） 🔖
          * @param {{ [key: string]: JToken; }} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -381,8 +381,8 @@ export const APIJSONApiFactory = function (configuration?: Configuration, basePa
             return APIJSONApiFp(configuration).apiAPIJSONDeletePost(body, options).then((request) => request(axios, basePath));
         },
         /**
-         * 参数：{\"[]\":{\"SYSLOGOP\":{}}}
-         * @summary 统一查询入口 🔖
+         * Parameter：{\"[]\":{\"SYSLOGOP\":{}}}
+         * @summary uniteoneQueryEntrance 🔖
          * @param {{ [key: string]: JToken; }} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -392,7 +392,7 @@ export const APIJSONApiFactory = function (configuration?: Configuration, basePa
         },
         /**
          * 
-         * @summary 查询 🔖
+         * @summary Query 🔖
          * @param {string} table 
          * @param {{ [key: string]: JToken; }} [body] 
          * @param {*} [options] Override http request option.
@@ -403,8 +403,8 @@ export const APIJSONApiFactory = function (configuration?: Configuration, basePa
         },
         /**
          * 
-         * @summary 更新（只支持Id作为条件） 🔖
-         * @param {{ [key: string]: JToken; }} [body] 支持多表、多Id批量更新
+         * @summary Update（Only supportsIdAs a condition） 🔖
+         * @param {{ [key: string]: JToken; }} [body] Supports multiple tables、manyIdBatchUpdate
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -423,8 +423,8 @@ export const APIJSONApiFactory = function (configuration?: Configuration, basePa
 export class APIJSONApi extends BaseAPI {
     /**
      * 
-     * @summary 新增 🔖
-     * @param {{ [key: string]: JToken; }} [body] 表对象或数组，若没有传Id则后端生成Id
+     * @summary Add New 🔖
+     * @param {{ [key: string]: JToken; }} [body] Table object or numbergroup，If there is no transmissionIdthen the backendGenerateId
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof APIJSONApi
@@ -434,7 +434,7 @@ export class APIJSONApi extends BaseAPI {
     }
     /**
      * 
-     * @summary 删除（支持非Id条件、支持批量） 🔖
+     * @summary Delete（Support nonIdCondition、Supports batch） 🔖
      * @param {{ [key: string]: JToken; }} [body] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -444,8 +444,8 @@ export class APIJSONApi extends BaseAPI {
         return APIJSONApiFp(this.configuration).apiAPIJSONDeletePost(body, options).then((request) => request(this.axios, this.basePath));
     }
     /**
-     * 参数：{\"[]\":{\"SYSLOGOP\":{}}}
-     * @summary 统一查询入口 🔖
+     * Parameter：{\"[]\":{\"SYSLOGOP\":{}}}
+     * @summary uniteoneQueryEntrance 🔖
      * @param {{ [key: string]: JToken; }} [body] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -456,7 +456,7 @@ export class APIJSONApi extends BaseAPI {
     }
     /**
      * 
-     * @summary 查询 🔖
+     * @summary Query 🔖
      * @param {string} table 
      * @param {{ [key: string]: JToken; }} [body] 
      * @param {*} [options] Override http request option.
@@ -468,8 +468,8 @@ export class APIJSONApi extends BaseAPI {
     }
     /**
      * 
-     * @summary 更新（只支持Id作为条件） 🔖
-     * @param {{ [key: string]: JToken; }} [body] 支持多表、多Id批量更新
+     * @summary Update（Only supportsIdAs a condition） 🔖
+     * @param {{ [key: string]: JToken; }} [body] Supports multiple tables、manyIdBatchUpdate
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof APIJSONApi

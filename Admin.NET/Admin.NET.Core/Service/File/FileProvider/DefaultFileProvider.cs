@@ -1,15 +1,15 @@
-﻿// Admin.NET 项目的版权、商标、专利和其他相关权利均受相应法律法规的保护。使用本项目应遵守相关法律法规和许可证的要求。
+﻿// The copyright, trademark, patent and other related rights of the Admin.NET project are protected by corresponding laws and regulations. Use of this project shall comply with relevant laws, regulations and license requirements.
 //
-// 本项目主要遵循 MIT 许可证和 Apache 许可证（版本 2.0）进行分发和使用。许可证位于源代码树根目录中的 LICENSE-MIT 和 LICENSE-APACHE 文件。
+// This project is distributed and used primarily under the MIT License and the Apache License (version 2.0). The license is located in the LICENSE-MIT and LICENSE-APACHE files in the root of the source tree.
 //
-// 不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！
+// This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project!
 
 namespace Admin.NET.Core.Service;
 
 public class DefaultFileProvider : ICustomFileProvider, ITransient
 {
     /// <summary>
-    /// 构建文件的完整物理路径
+    /// Full physical path to build file
     /// </summary>
     /// <param name="sysFile"></param>
     /// <returns></returns>
@@ -19,7 +19,7 @@ public class DefaultFileProvider : ICustomFileProvider, ITransient
     }
 
     /// <summary>
-    /// 构建目录的完整物理路径
+    /// Full physical path to the build directory
     /// </summary>
     /// <param name="relativePath"></param>
     /// <returns></returns>
@@ -29,7 +29,7 @@ public class DefaultFileProvider : ICustomFileProvider, ITransient
     }
 
     /// <summary>
-    /// 确保目录存在
+    /// Make sure the directory exists
     /// </summary>
     /// <param name="directoryPath"></param>
     private void EnsureDirectoryExists(string directoryPath)
@@ -51,8 +51,8 @@ public class DefaultFileProvider : ICustomFileProvider, ITransient
         var realFile = BuildFullFilePath(sysFile);
         if (!File.Exists(realFile))
         {
-            Log.Error($"DownloadFileBase64:文件[{realFile}]不存在");
-            throw Oops.Oh($"文件[{sysFile.FilePath}]不存在");
+            Log.Error($"DownloadFileBase64: File [{realFile}] does not exist");
+            throw Oops.Oh($"File [{sysFile.FilePath}] does not exist");
         }
 
         byte[] fileBytes = await File.ReadAllBytesAsync(realFile);
@@ -70,7 +70,7 @@ public class DefaultFileProvider : ICustomFileProvider, ITransient
 
     public async Task<SysFile> UploadFileAsync(IFormFile file, SysFile newFile, string path, string finalName)
     {
-        newFile.Provider = ""; // 本地存储 Provider 显示为空
+        newFile.Provider = ""; // Local Storage Provider appears empty
 
         var directoryPath = BuildFullDirectoryPath(path);
         EnsureDirectoryExists(directoryPath);

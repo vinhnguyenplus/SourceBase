@@ -1,8 +1,8 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Admin.NET 通用权限开发平台
- * 让 .NET 开发更简单、更通用、更流行。整合最新技术，模块插件式开发，前后端分离，开箱即用。<br/><u><b><font color='FF0000'> 👮不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！</font></b></u>
+ * Admin.NET General Permission Development Platform
+ * let .NET Develop more simply、More general、More popular。wholeIn line with the latest technology，Modular Plugin-Based Development，Frontend and backendpointsLeave，Ready to use out of the box。<br/><u><b><font color='FF0000'> 👮This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project! </font></b></u>
  *
  * OpenAPI spec version: 1.0.0
  * 
@@ -37,7 +37,7 @@ export const SysWechatPayApiAxiosParamCreator = function (configuration?: Config
     return {
         /**
          * 
-         * @summary 生成JSAPI调起支付所需参数 🔖
+         * @summary Generate JSAPI parameters required to initiate payment 🔖
          * @param {WechatPayParaInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -85,7 +85,7 @@ export const SysWechatPayApiAxiosParamCreator = function (configuration?: Config
         },
         /**
          * 
-         * @summary 查询退款信息列表
+         * @summary Check refund informationList
          * @param {string} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -133,7 +133,7 @@ export const SysWechatPayApiAxiosParamCreator = function (configuration?: Config
         },
         /**
          * 
-         * @summary 分页查询支付列表 🔖
+         * @summary pointsPageQueryPayment List 🔖
          * @param {WechatPayPageInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -181,7 +181,7 @@ export const SysWechatPayApiAxiosParamCreator = function (configuration?: Config
         },
         /**
          * 
-         * @summary 微信支付成功回调(商户直连)
+         * @summary WeChat Pay Successful Callback (Merchant Direct Connection)
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -224,7 +224,7 @@ export const SysWechatPayApiAxiosParamCreator = function (configuration?: Config
         },
         /**
          * 
-         * @summary 获取支付订单详情(微信接口) 🔖
+         * @summary ObtainPay OrderDetails(WeChatInterface) 🔖
          * @param {string} tradeId 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -273,7 +273,7 @@ export const SysWechatPayApiAxiosParamCreator = function (configuration?: Config
         },
         /**
          * 
-         * @summary 获取支付订单详情(本地库) 🔖
+         * @summary Get payment order details (local database) 🔖
          * @param {string} tradeId 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -322,7 +322,7 @@ export const SysWechatPayApiAxiosParamCreator = function (configuration?: Config
         },
         /**
          * 
-         * @summary 微信支付成功回调(服务商模式) 🔖
+         * @summary WeChat Pay Successful Callback (Service Provider Mode) 🔖
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -365,7 +365,7 @@ export const SysWechatPayApiAxiosParamCreator = function (configuration?: Config
         },
         /**
          * 
-         * @summary 微信支付下单(服务商模式) 🔖
+         * @summary WeChat Pay Order (Service Provider Mode) 🔖
          * @param {WechatPayTransactionInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -413,7 +413,7 @@ export const SysWechatPayApiAxiosParamCreator = function (configuration?: Config
         },
         /**
          * 
-         * @summary 微信支付下单(商户直连)Native
+         * @summary WeChat Pay Order (Merchant Direct Connection) Native
          * @param {WechatPayTransactionInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -461,7 +461,7 @@ export const SysWechatPayApiAxiosParamCreator = function (configuration?: Config
         },
         /**
          * 
-         * @summary 微信支付下单(商户直连) 🔖
+         * @summary Order with WeChat payment (direct connection to merchant) 🔖
          * @param {WechatPayTransactionInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -509,7 +509,7 @@ export const SysWechatPayApiAxiosParamCreator = function (configuration?: Config
         },
         /**
          * 
-         * @summary 退款申请
+         * @summary Refund request
          * @param {WechatPayRefundDomesticInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -557,7 +557,7 @@ export const SysWechatPayApiAxiosParamCreator = function (configuration?: Config
         },
         /**
          * 
-         * @summary 获取退款订单详情(微信接口)
+         * @summary Get refund order details (WeChat API)
          * @param {string} refundId 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -615,7 +615,7 @@ export const SysWechatPayApiFp = function(configuration?: Configuration) {
     return {
         /**
          * 
-         * @summary 生成JSAPI调起支付所需参数 🔖
+         * @summary Generate JSAPI parameters required to initiate payment 🔖
          * @param {WechatPayParaInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -629,7 +629,7 @@ export const SysWechatPayApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary 查询退款信息列表
+         * @summary Check refund informationList
          * @param {string} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -643,7 +643,7 @@ export const SysWechatPayApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary 分页查询支付列表 🔖
+         * @summary pointsPageQueryPayment List 🔖
          * @param {WechatPayPageInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -657,7 +657,7 @@ export const SysWechatPayApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary 微信支付成功回调(商户直连)
+         * @summary WeChat Pay Successful Callback (Merchant Direct Connection)
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -670,7 +670,7 @@ export const SysWechatPayApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary 获取支付订单详情(微信接口) 🔖
+         * @summary ObtainPay OrderDetails(WeChatInterface) 🔖
          * @param {string} tradeId 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -684,7 +684,7 @@ export const SysWechatPayApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary 获取支付订单详情(本地库) 🔖
+         * @summary Get payment order details (local database) 🔖
          * @param {string} tradeId 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -698,7 +698,7 @@ export const SysWechatPayApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary 微信支付成功回调(服务商模式) 🔖
+         * @summary WeChat Pay Successful Callback (Service Provider Mode) 🔖
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -711,7 +711,7 @@ export const SysWechatPayApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary 微信支付下单(服务商模式) 🔖
+         * @summary WeChat Pay Order (Service Provider Mode) 🔖
          * @param {WechatPayTransactionInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -725,7 +725,7 @@ export const SysWechatPayApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary 微信支付下单(商户直连)Native
+         * @summary WeChat Pay Order (Merchant Direct Connection) Native
          * @param {WechatPayTransactionInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -739,7 +739,7 @@ export const SysWechatPayApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary 微信支付下单(商户直连) 🔖
+         * @summary Order with WeChat payment (direct connection to merchant) 🔖
          * @param {WechatPayTransactionInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -753,7 +753,7 @@ export const SysWechatPayApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary 退款申请
+         * @summary Refund request
          * @param {WechatPayRefundDomesticInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -767,7 +767,7 @@ export const SysWechatPayApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary 获取退款订单详情(微信接口)
+         * @summary Get refund order details (WeChat API)
          * @param {string} refundId 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -790,7 +790,7 @@ export const SysWechatPayApiFactory = function (configuration?: Configuration, b
     return {
         /**
          * 
-         * @summary 生成JSAPI调起支付所需参数 🔖
+         * @summary Generate JSAPI parameters required to initiate payment 🔖
          * @param {WechatPayParaInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -800,7 +800,7 @@ export const SysWechatPayApiFactory = function (configuration?: Configuration, b
         },
         /**
          * 
-         * @summary 查询退款信息列表
+         * @summary Check refund informationList
          * @param {string} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -810,7 +810,7 @@ export const SysWechatPayApiFactory = function (configuration?: Configuration, b
         },
         /**
          * 
-         * @summary 分页查询支付列表 🔖
+         * @summary pointsPageQueryPayment List 🔖
          * @param {WechatPayPageInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -820,7 +820,7 @@ export const SysWechatPayApiFactory = function (configuration?: Configuration, b
         },
         /**
          * 
-         * @summary 微信支付成功回调(商户直连)
+         * @summary WeChat Pay Successful Callback (Merchant Direct Connection)
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -829,7 +829,7 @@ export const SysWechatPayApiFactory = function (configuration?: Configuration, b
         },
         /**
          * 
-         * @summary 获取支付订单详情(微信接口) 🔖
+         * @summary ObtainPay OrderDetails(WeChatInterface) 🔖
          * @param {string} tradeId 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -839,7 +839,7 @@ export const SysWechatPayApiFactory = function (configuration?: Configuration, b
         },
         /**
          * 
-         * @summary 获取支付订单详情(本地库) 🔖
+         * @summary Get payment order details (local database) 🔖
          * @param {string} tradeId 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -849,7 +849,7 @@ export const SysWechatPayApiFactory = function (configuration?: Configuration, b
         },
         /**
          * 
-         * @summary 微信支付成功回调(服务商模式) 🔖
+         * @summary WeChat Pay Successful Callback (Service Provider Mode) 🔖
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -858,7 +858,7 @@ export const SysWechatPayApiFactory = function (configuration?: Configuration, b
         },
         /**
          * 
-         * @summary 微信支付下单(服务商模式) 🔖
+         * @summary WeChat Pay Order (Service Provider Mode) 🔖
          * @param {WechatPayTransactionInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -868,7 +868,7 @@ export const SysWechatPayApiFactory = function (configuration?: Configuration, b
         },
         /**
          * 
-         * @summary 微信支付下单(商户直连)Native
+         * @summary WeChat Pay Order (Merchant Direct Connection) Native
          * @param {WechatPayTransactionInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -878,7 +878,7 @@ export const SysWechatPayApiFactory = function (configuration?: Configuration, b
         },
         /**
          * 
-         * @summary 微信支付下单(商户直连) 🔖
+         * @summary Order with WeChat payment (direct connection to merchant) 🔖
          * @param {WechatPayTransactionInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -888,7 +888,7 @@ export const SysWechatPayApiFactory = function (configuration?: Configuration, b
         },
         /**
          * 
-         * @summary 退款申请
+         * @summary Refund request
          * @param {WechatPayRefundDomesticInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -898,7 +898,7 @@ export const SysWechatPayApiFactory = function (configuration?: Configuration, b
         },
         /**
          * 
-         * @summary 获取退款订单详情(微信接口)
+         * @summary Get refund order details (WeChat API)
          * @param {string} refundId 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -918,7 +918,7 @@ export const SysWechatPayApiFactory = function (configuration?: Configuration, b
 export class SysWechatPayApi extends BaseAPI {
     /**
      * 
-     * @summary 生成JSAPI调起支付所需参数 🔖
+     * @summary Generate JSAPI parameters required to initiate payment 🔖
      * @param {WechatPayParaInput} [body] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -929,7 +929,7 @@ export class SysWechatPayApi extends BaseAPI {
     }
     /**
      * 
-     * @summary 查询退款信息列表
+     * @summary Check refund informationList
      * @param {string} [body] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -940,7 +940,7 @@ export class SysWechatPayApi extends BaseAPI {
     }
     /**
      * 
-     * @summary 分页查询支付列表 🔖
+     * @summary pointsPageQueryPayment List 🔖
      * @param {WechatPayPageInput} [body] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -951,7 +951,7 @@ export class SysWechatPayApi extends BaseAPI {
     }
     /**
      * 
-     * @summary 微信支付成功回调(商户直连)
+     * @summary WeChat Pay Successful Callback (Merchant Direct Connection)
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SysWechatPayApi
@@ -961,7 +961,7 @@ export class SysWechatPayApi extends BaseAPI {
     }
     /**
      * 
-     * @summary 获取支付订单详情(微信接口) 🔖
+     * @summary ObtainPay OrderDetails(WeChatInterface) 🔖
      * @param {string} tradeId 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -972,7 +972,7 @@ export class SysWechatPayApi extends BaseAPI {
     }
     /**
      * 
-     * @summary 获取支付订单详情(本地库) 🔖
+     * @summary Get payment order details (local database) 🔖
      * @param {string} tradeId 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -983,7 +983,7 @@ export class SysWechatPayApi extends BaseAPI {
     }
     /**
      * 
-     * @summary 微信支付成功回调(服务商模式) 🔖
+     * @summary WeChat Pay Successful Callback (Service Provider Mode) 🔖
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SysWechatPayApi
@@ -993,7 +993,7 @@ export class SysWechatPayApi extends BaseAPI {
     }
     /**
      * 
-     * @summary 微信支付下单(服务商模式) 🔖
+     * @summary WeChat Pay Order (Service Provider Mode) 🔖
      * @param {WechatPayTransactionInput} [body] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -1004,7 +1004,7 @@ export class SysWechatPayApi extends BaseAPI {
     }
     /**
      * 
-     * @summary 微信支付下单(商户直连)Native
+     * @summary WeChat Pay Order (Merchant Direct Connection) Native
      * @param {WechatPayTransactionInput} [body] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -1015,7 +1015,7 @@ export class SysWechatPayApi extends BaseAPI {
     }
     /**
      * 
-     * @summary 微信支付下单(商户直连) 🔖
+     * @summary Order with WeChat payment (direct connection to merchant) 🔖
      * @param {WechatPayTransactionInput} [body] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -1026,7 +1026,7 @@ export class SysWechatPayApi extends BaseAPI {
     }
     /**
      * 
-     * @summary 退款申请
+     * @summary Refund request
      * @param {WechatPayRefundDomesticInput} [body] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -1037,7 +1037,7 @@ export class SysWechatPayApi extends BaseAPI {
     }
     /**
      * 
-     * @summary 获取退款订单详情(微信接口)
+     * @summary Get refund order details (WeChat API)
      * @param {string} refundId 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}

@@ -119,11 +119,11 @@ export default {
 		},
 		successTip: {
 			type: String,
-			default: "验证通过，超过80%用户"
+			default: "Verification passed, over 80% of users"
 		},
 		failTip: {
 			type: String,
-			default: "验证未通过，拖动滑块将悬浮图像正确合并"
+			default: "Verification failed, drag the slider to merge the floating images correctly"
 		},
 		diffWidth: {
 			type: Number,
@@ -199,7 +199,7 @@ export default {
 	},
 	methods: {
 		checkimgLoaded: function () {
-			//生成图片缺失位置
+			//Generate the missing location of the picture
 			var barWidth = this.barWidth;
 			var barHeight = this.barHeight;
 			var imgHeight = this.$refs.checkImg.height;

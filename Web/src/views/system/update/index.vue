@@ -1,11 +1,11 @@
 <template>
     <div class="sys-update-container">
         <!-- <div>
-            <NoticeBar text="系统更新管理，请慎重操作！" style="margin: 4px" />
+            <NoticeBar text="System update management, please operate with caution!" style="margin: 4px" />
         </div> -->
         <el-container>
             <el-aside v-auth="'sysUpdate:list'" width="220px" class="backup-list">
-                <p class="backup-list-description">备份列表</p>
+                <p class="backup-list-description">Backup list</p>
                 <el-scrollbar>
                     <div class="backup-items">
                         <div v-for="(backup, index) in state.backups" :key="index" class="backup-item"
@@ -20,18 +20,18 @@
                 </el-scrollbar>
             </el-aside>
             <el-main v-auth="'sysUpdate:logs'" class="log-terminal-container">
-                <el-alert title="系统更新管理，请慎重操作！" type="warning" show-icon />
+                <el-alert title="System update management, please operate with caution!" type="warning" show-icon />
                 <div class="toolbar">
                     <el-button-group>
                         <el-button v-auth="'sysUpdate:update'" v-reclick="5000" :disabled="state.isUpdating"
-                            @click="handleAction('update')">更新</el-button>
+                            @click="handleAction('update')">Update</el-button>
                         <el-button v-auth="'sysUpdate:restore'" v-reclick="5000"
                             :disabled="!canRestore || state.isUpdating || !state.selectedBackup"
-                            @click="handleAction('restore')">还原</el-button>
+                            @click="handleAction('restore')">restore</el-button>
                         <el-button v-auth="'sysUpdate:clear'" v-reclick="5000" :disabled="state.isUpdating"
-                            @click="clearLogs">清空</el-button>
+                            @click="clearLogs">Clear</el-button>
                         <el-button v-auth="'sysUpdate:webHookKey'" v-reclick="5000"
-                            @click="getWebHookKey">获取密钥</el-button>
+                            @click="getWebHookKey">Get key</el-button>
                     </el-button-group>
                 </div>
                 <div class="log-terminal">
@@ -61,39 +61,39 @@ const state = reactive({
     logOutput: '',
 });
 
-// 计算属性 canRestore
+// Computed property canRestore
 const canRestore = computed(() => !!state.selectedBackup);
 
-// 引用元素
+// reference element
 const terminalOutput = ref<HTMLElement | null>(null);
 
-// 新增的悬停索引变量
+// New hover index variable
 const hovered = ref<number | null>(null);
 
 let refreshInterval: number;
 
-// 获取初始数据
+// Get initial data
 const fetchData = async () => {
     try {
         state.backups = (await getAPI(SysUpdateApi).apiSysUpdateListPost()).data.result ?? [];
         await refreshLog();
     } catch (error) {
-        handleError('获取数据失败', error);
+        handleError('Failed to retrieve data', error);
     }
 };
 
-// 刷新日志
+// Refresh log
 const refreshLog = async () => {
     try {
         const response = await getAPI(SysUpdateApi).apiSysUpdateLogsGet();
         state.logOutput = (response.data.result ?? []).join('\n');
-        scrollToBottom(); // 更新日志后立即滚动到底部
+        scrollToBottom(); // Scroll to bottom immediately after update log
     } catch (error) {
-        handleError('获取日志失败', error);
+        handleError('Failed to get log', error);
     }
 };
 
-// 滚动到底部
+// scroll to bottom
 const scrollToBottom = () => {
     nextTick(() => {
         if (terminalOutput.value) {
@@ -102,7 +102,7 @@ const scrollToBottom = () => {
     });
 };
 
-// 启动/停止日志刷新定时器
+// Start/stop log refresh timer
 const toggleRefreshTimer = (start: boolean) => {
     if (start && !refreshInterval) {
         refreshInterval = window.setInterval(refreshLog, 300);
@@ -112,7 +112,7 @@ const toggleRefreshTimer = (start: boolean) => {
     }
 };
 
-// 处理动作
+// processing action
 const handleAction = async (action: 'update' | 'restore') => {
     if (state.isUpdating) return;
 
@@ -123,52 +123,52 @@ const handleAction = async (action: 'update' | 'restore') => {
         switch (action) {
             case 'update':
                 await getAPI(SysUpdateApi).apiSysUpdateUpdatePost({ timeout: -1 });
-                ElMessage.success('更新成功');
+                ElMessage.success('Update successful');
                 fetchData();
                 break;
             case 'restore':
-                ElMessageBox.confirm(`确定要还原到 ${state.selectedBackup?.fileName} ?`, '提示', {
-                    confirmButtonText: '确定',
-                    cancelButtonText: '取消',
+                ElMessageBox.confirm(`Are you sure you want to restore to ${state.selectedBackup?.fileName}?`, 'Prompt', {
+                    confirmButtonText: 'Confirm',
+                    cancelButtonText: 'Cancel',
                     type: 'warning',
                 }).then(async () => {
                     await getAPI(SysUpdateApi).apiSysUpdateRestorePost({ fileName: state.selectedBackup?.fileName } as any);
-                    ElMessage.success('还原成功');
+                    ElMessage.success('Restore successful');
                 });
                 break;
         }
     } catch (error) {
-        handleError(`执行${action}失败`, error);
+        handleError(`Failed to execute ${action}`, error);
     } finally {
         toggleRefreshTimer(false);
         state.isUpdating = false;
     }
 };
 
-// 清空日志
+// Clear log
 const clearLogs = async () => {
     try {
         state.logOutput = '';
         await getAPI(SysUpdateApi).apiSysUpdateClearGet();
-        ElMessage.success('日志已清空');
+        ElMessage.success('The log has been cleared');
     } catch (error) {
-        handleError('清空日志失败', error);
+        handleError('Failed to clear logs', error);
     }
 };
 
-// 获取密钥
+// Get key
 const getWebHookKey = async () => {
     try {
         const res = await getAPI(SysUpdateApi).apiSysUpdateWebHookKeyGet();
         if (res.data.result) copyText(res.data.result);
     } catch (error) {
-        handleError('获取密钥失败', error);
+        handleError('Failed to obtain key', error);
     }
 }
 
-// 错误处理
+// Error handling
 const handleError = (message: string, error: any) => {
-    ElMessage.error(`${message}，请稍后再试。`);
+    ElMessage.error(`${message}, please try again later.`);
 };
 
 onMounted(() => {

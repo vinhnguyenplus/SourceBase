@@ -1,182 +1,182 @@
-// Admin.NET 项目的版权、商标、专利和其他相关权利均受相应法律法规的保护。使用本项目应遵守相关法律法规和许可证的要求。
+// The copyright, trademark, patent and other related rights of the Admin.NET project are protected by corresponding laws and regulations. Use of this project shall comply with relevant laws, regulations and license requirements.
 //
-// 本项目主要遵循 MIT 许可证和 Apache 许可证（版本 2.0）进行分发和使用。许可证位于源代码树根目录中的 LICENSE-MIT 和 LICENSE-APACHE 文件。
+// This project is distributed and used primarily under the MIT License and the Apache License (version 2.0). The license is located in the LICENSE-MIT and LICENSE-APACHE files in the root of the source tree.
 //
-// 不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！
+// This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project!
 
 namespace Admin.NET.Core.Service;
 
 /// <summary>
-/// 文件存储提供者分页查询输入参数
+/// File storage provider paginated query input parameters
 /// </summary>
 public class PageFileProviderInput : BasePageInput
 {
     /// <summary>
-    /// 存储提供者
+    /// storage provider
     /// </summary>
     public string? Provider { get; set; }
 
     /// <summary>
-    /// 存储桶名称
+    /// bucket name
     /// </summary>
     public string? BucketName { get; set; }
 
     /// <summary>
-    /// 是否启用
+    /// Whether to enable
     /// </summary>
     public bool? IsEnable { get; set; }
 }
 
 /// <summary>
-/// 增加文件存储提供者输入参数
+/// Add file storage provider input parameters
 /// </summary>
 public class AddFileProviderInput
 {
     /// <summary>
-    /// 存储提供者
+    /// storage provider
     /// </summary>
-    [Required(ErrorMessage = "存储提供者不能为空")]
+    [Required(ErrorMessage = "Storage provider cannot be null")]
     public string Provider { get; set; }
 
     /// <summary>
-    /// 存储桶名称
+    /// bucket name
     /// </summary>
-    [Required(ErrorMessage = "存储桶名称不能为空")]
+    [Required(ErrorMessage = "Bucket name cannot be empty")]
     public string BucketName { get; set; }
 
     /// <summary>
-    /// 访问密钥ID（所有云服务商统一使用此字段）
+    /// Access key ID (all cloud service providers use this field uniformly)
     /// </summary>
     public string? AccessKey { get; set; }
 
     /// <summary>
-    /// 密钥
+    /// key
     /// </summary>
     public string? SecretKey { get; set; }
 
     /// <summary>
-    /// 地域
+    /// area
     /// </summary>
     public string? Region { get; set; }
 
     /// <summary>
-    /// 端点地址
+    /// endpoint address
     /// </summary>
     public string? Endpoint { get; set; }
 
     /// <summary>
-    /// 是否启用HTTPS
+    /// Whether to enable HTTPS
     /// </summary>
     public bool? IsEnableHttps { get; set; } = true;
 
     /// <summary>
-    /// 是否启用缓存
+    /// Whether to enable caching
     /// </summary>
     public bool? IsEnableCache { get; set; } = true;
 
     /// <summary>
-    /// 是否启用
+    /// Whether to enable
     /// </summary>
     public bool? IsEnable { get; set; } = true;
 
     /// <summary>
-    /// 是否默认提供者
+    /// Whether to use the default provider
     /// </summary>
     public bool? IsDefault { get; set; } = false;
 
     /// <summary>
-    /// 自定义域名
+    /// Custom domain name
     /// </summary>
     public string? SinceDomain { get; set; }
 
     /// <summary>
-    /// 排序号
+    /// sequence number
     /// </summary>
     public int? OrderNo { get; set; } = 100;
 
     /// <summary>
-    /// 备注
+    /// Remark
     /// </summary>
     public string? Remark { get; set; }
 
     /// <summary>
-    /// 支持的业务类型（JSON格式）
+    /// Supported business types (JSON format)
     /// </summary>
     public string? BusinessTypes { get; set; }
 
     /// <summary>
-    /// 优先级
+    /// priority
     /// </summary>
     public int Priority { get; set; } = 100;
 }
 
 /// <summary>
-/// 更新文件存储提供者输入参数
+/// Update file storage provider input parameters
 /// </summary>
 public class UpdateFileProviderInput : AddFileProviderInput
 {
     /// <summary>
-    /// 主键Id
+    /// Primary keyId
     /// </summary>
-    [Required(ErrorMessage = "主键Id不能为空")]
+    [Required(ErrorMessage = "Primary key Id cannot be empty")]
     public long Id { get; set; }
 }
 
 /// <summary>
-/// 删除文件存储提供者输入参数
+/// Remove file storage provider input parameters
 /// </summary>
 public class DeleteFileProviderInput : BaseIdInput
 {
 }
 
 /// <summary>
-/// 查询文件存储提供者输入参数
+/// Query file storage provider input parameters
 /// </summary>
 public class QueryFileProviderInput : BaseIdInput
 {
 }
 
 /// <summary>
-/// 测试连接输入参数
+/// Test connection input parameters
 /// </summary>
 public class TestConnectionInput : BaseIdInput
 {
 }
 
 /// <summary>
-/// 设置默认存储提供者输入参数
+/// Set default storage provider input parameters
 /// </summary>
 public class SetDefaultProviderInput
 {
     /// <summary>
-    /// 存储提供者ID
+    /// Store provider ID
     /// </summary>
-    [Required(ErrorMessage = "存储提供者ID不能为空")]
+    [Required(ErrorMessage = "Storage provider ID cannot be empty")]
     public long Id { get; set; }
 }
 
 /// <summary>
-/// 文件上传选择存储提供者输入参数
+/// File upload select storage provider input parameters
 /// </summary>
 public class SelectProviderInput
 {
     /// <summary>
-    /// 文件类型
+    /// File type
     /// </summary>
     public string? FileType { get; set; }
 
     /// <summary>
-    /// 业务类型
+    /// Business type
     /// </summary>
     public string? BusinessType { get; set; }
 
     /// <summary>
-    /// 指定提供者ID
+    /// Specify provider ID
     /// </summary>
     public long? ProviderId { get; set; }
 
     /// <summary>
-    /// 指定存储桶名称
+    /// Specify bucket name
     /// </summary>
     public string? BucketName { get; set; }
 }

@@ -1,8 +1,8 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Admin.NET 通用权限开发平台
- * 让 .NET 开发更简单、更通用、更流行。整合最新技术，模块插件式开发，前后端分离，开箱即用。<br/><u><b><font color='FF0000'> 👮不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！</font></b></u>
+ * Admin.NET General Permission Development Platform
+ * let .NET Develop more simply、More general、More popular。wholeIn line with the latest technology，Modular Plugin-Based Development，Frontend and backendpointsLeave，Ready to use out of the box。<br/><u><b><font color='FF0000'> 👮This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project! </font></b></u>
  *
  * OpenAPI spec version: 1.0.0
  * 
@@ -13,7 +13,7 @@
  */
 
 /**
- * 文化程度枚举<br />&nbsp;其他 Level0 = 0<br />&nbsp;文盲 Level1 = 1<br />&nbsp;小学 Level2 = 2<br />&nbsp;初中 Level3 = 3<br />&nbsp;普通高中 Level4 = 4<br />&nbsp;技工学校 Level5 = 5<br />&nbsp;职业教育 Level6 = 6<br />&nbsp;职业高中 Level7 = 7<br />&nbsp;中等专科 Level8 = 8<br />&nbsp;大学专科 Level9 = 9<br />&nbsp;大学本科 Level10 = 10<br />&nbsp;硕士研究生 Level11 = 11<br />&nbsp;博士研究生 Level12 = 12<br />
+ * Educational Level Enumeration<br />&nbsp;Other Level0 = 0<br />&nbsp;Illiteracy Level1 = 1<br /> Elementary School Level 2 = 2<br />  Junior High Level 3 = 3<br /> General High School Level 4 = 4<br />&nbsp;Technical School Level 5 = 5<br />&nbsp;Vocational Education Level6 = 6<br />&nbsp;Vocational High School Level7 = 7<br />&nbsp;Secondary College Level8 = 8<br />&nbsp;College College Level9 = 9<br />&nbsp;Undergraduate Level10 = 10<br />&nbsp;Master's Degree Graduate Level11 = 11<br /> Doctoral student Level12 = 12<br />
  * @export
  * @enum {string}
  */

@@ -1,909 +1,909 @@
-// Admin.NET 项目的版权、商标、专利和其他相关权利均受相应法律法规的保护。使用本项目应遵守相关法律法规和许可证的要求。
+// The copyright, trademark, patent and other related rights of the Admin.NET project are protected by corresponding laws and regulations. Use of this project shall comply with relevant laws, regulations and license requirements.
 //
-// 本项目主要遵循 MIT 许可证和 Apache 许可证（版本 2.0）进行分发和使用。许可证位于源代码树根目录中的 LICENSE-MIT 和 LICENSE-APACHE 文件。
+// This project is distributed and used primarily under the MIT License and the Apache License (version 2.0). The license is located in the LICENSE-MIT and LICENSE-APACHE files in the root of the source tree.
 //
-// 不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！
+// This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project!
 
 namespace Admin.NET.Core;
 
 /// <summary>
-/// 系统错误码
+/// System error code
 /// </summary>
 [ErrorCodeType]
-[Description("系统错误码")]
+[Description("System error code")]
 public enum ErrorCodeEnum
 {
     /// <summary>
-    /// 验证码错误
+    /// Verification code error
     /// </summary>
-    [ErrorCodeItemMetadata("验证码错误")]
+    [ErrorCodeItemMetadata("Verification code error")]
     D0008,
 
     /// <summary>
-    /// 账号不存在
+    /// Account does not exist
     /// </summary>
-    [ErrorCodeItemMetadata("账号不存在")]
+    [ErrorCodeItemMetadata("Account does not exist")]
     D0009,
 
     /// <summary>
-    /// 密匙不匹配
+    /// Key mismatch
     /// </summary>
-    [ErrorCodeItemMetadata("密匙不匹配")]
+    [ErrorCodeItemMetadata("Key mismatch")]
     D0010,
 
     /// <summary>
-    /// 账号或密码不正确
+    /// The account or password is incorrect
     /// </summary>
-    [ErrorCodeItemMetadata("账号或密码不正确")]
+    [ErrorCodeItemMetadata("The account or password is incorrect")]
     D1000,
 
     /// <summary>
-    /// 非法操作！禁止删除自己
+    /// Illegal operation! Forbidden to delete yourself
     /// </summary>
-    [ErrorCodeItemMetadata("非法操作，禁止删除自己")]
+    [ErrorCodeItemMetadata("Illegal operation, deleting yourself is prohibited")]
     D1001,
 
     /// <summary>
-    /// 记录不存在
+    /// Record does not exist
     /// </summary>
-    [ErrorCodeItemMetadata("记录不存在")]
+    [ErrorCodeItemMetadata("Record does not exist")]
     D1002,
 
     /// <summary>
-    /// 账号已存在
+    /// Account already exists
     /// </summary>
-    [ErrorCodeItemMetadata("账号已存在")]
+    [ErrorCodeItemMetadata("The account already exists")]
     D1003,
 
     /// <summary>
-    /// 旧密码不匹配
+    /// Old password does not match
     /// </summary>
-    [ErrorCodeItemMetadata("旧密码输入错误")]
+    [ErrorCodeItemMetadata("Old password entered incorrectly")]
     D1004,
 
     ///// <summary>
-    ///// 测试数据禁止更改admin密码
+    ///// Test data prohibits changing admin password
     ///// </summary>
-    //[ErrorCodeItemMetadata("测试数据禁止更改用户【admin】密码")]
+    //[ErrorCodeItemMetadata("Test data prohibits changing user [admin] password")]
     //D1005,
 
     /// <summary>
-    /// 数据已存在
+    /// Data already exists
     /// </summary>
-    [ErrorCodeItemMetadata("数据已存在")]
+    [ErrorCodeItemMetadata("Data already exists")]
     D1006,
 
     /// <summary>
-    /// 数据不存在或含有关联引用，禁止删除
+    /// The data does not exist or contains associated references and is prohibited from deletion.
     /// </summary>
-    [ErrorCodeItemMetadata("数据不存在或含有关联引用，禁止删除")]
+    [ErrorCodeItemMetadata("The data does not exist or contains related references, deletion is prohibited.")]
     D1007,
 
     /// <summary>
-    /// 禁止为管理员分配角色
+    /// Disable assigning roles to administrators
     /// </summary>
-    [ErrorCodeItemMetadata("禁止为管理员分配角色")]
+    [ErrorCodeItemMetadata("Prohibit assigning roles to administrators")]
     D1008,
 
     /// <summary>
-    /// 重复数据或记录含有不存在数据
+    /// Duplicate data or records containing non-existent data
     /// </summary>
-    [ErrorCodeItemMetadata("重复数据或记录含有不存在数据")]
+    [ErrorCodeItemMetadata("Duplicate data or records containing non-existent data")]
     D1009,
 
     /// <summary>
-    /// 禁止为超级管理员角色分配权限
+    /// Disable assigning permissions to super administrator role
     /// </summary>
-    [ErrorCodeItemMetadata("禁止为超级管理员角色分配权限")]
+    [ErrorCodeItemMetadata("Prohibit assigning permissions to the super administrator role")]
     D1010,
 
     /// <summary>
-    /// 非法操作，未登录
+    /// Illegal operation, not logged in
     /// </summary>
-    [ErrorCodeItemMetadata("非法操作，未登录")]
+    [ErrorCodeItemMetadata("Illegal operation, not logged in")]
     D1011,
 
     /// <summary>
-    /// Id不能为空
+    /// Id cannot be empty
     /// </summary>
-    [ErrorCodeItemMetadata("Id不能为空")]
+    [ErrorCodeItemMetadata("Id cannot be empty")]
     D1012,
 
     /// <summary>
-    /// 所属机构不在自己的数据范围内
+    /// The affiliated institution is not within the scope of your own data
     /// </summary>
-    [ErrorCodeItemMetadata("没有权限操作该数据")]
+    [ErrorCodeItemMetadata("You do not have permission to operate on this data")]
     D1013,
 
     /// <summary>
-    /// 禁止删除超级管理员
+    /// Disable deletion of super administrator
     /// </summary>
-    [ErrorCodeItemMetadata("禁止删除超级管理员")]
+    [ErrorCodeItemMetadata("Prohibit deleting the super administrator")]
     D1014,
 
     /// <summary>
-    /// 禁止修改超级管理员状态
+    /// Modification of super administrator status is prohibited
     /// </summary>
-    [ErrorCodeItemMetadata("禁止修改超级管理员状态")]
+    [ErrorCodeItemMetadata("Modification of super administrator status is prohibited")]
     D1015,
 
     /// <summary>
-    /// 没有权限
+    /// permission denied
     /// </summary>
-    [ErrorCodeItemMetadata("没有权限")]
+    [ErrorCodeItemMetadata("No permission")]
     D1016,
 
     /// <summary>
-    /// 账号已冻结
+    /// Account has been frozen
     /// </summary>
-    [ErrorCodeItemMetadata("账号已冻结")]
+    [ErrorCodeItemMetadata("Account has been frozen")]
     D1017,
 
     /// <summary>
-    /// 该租户下角色菜单权限集为空
+    /// The role menu permission set under this tenant is empty
     /// </summary>
-    [ErrorCodeItemMetadata("该租户下角色菜单权限集为空")]
+    [ErrorCodeItemMetadata("The role menu permission set under this tenant is empty")]
     D1019,
 
     /// <summary>
-    /// 禁止删除默认租户
+    /// Disable deletion of default tenant
     /// </summary>
-    [ErrorCodeItemMetadata("禁止删除默认租户")]
+    [ErrorCodeItemMetadata("Deleting the default tenant is prohibited")]
     D1023,
 
     /// <summary>
-    /// 已将其他地方登录账号下线
+    /// The account logged in from other places has been offline.
     /// </summary>
-    [ErrorCodeItemMetadata("已将其他地方登录账号下线")]
+    [ErrorCodeItemMetadata("has beenOtherPlaceLoginAccount numberoffline")]
     D1024,
 
     /// <summary>
-    /// 此角色下面存在账号禁止删除
+    /// There are accounts under this role that cannot be deleted.
     /// </summary>
-    [ErrorCodeItemMetadata("此角色下面存在账号禁止删除")]
+    [ErrorCodeItemMetadata("There are accounts under this role that cannot be deleted.")]
     D1025,
 
     /// <summary>
-    /// 禁止修改本人账号状态
+    /// It is prohibited to modify my account status
     /// </summary>
-    [ErrorCodeItemMetadata("禁止修改本人账号状态")]
+    [ErrorCodeItemMetadata("Prohibit changing my account status")]
     D1026,
 
     /// <summary>
-    /// 密码错误次数过多，账号已锁定，请半小时后重试！
+    /// The password has been entered incorrectly too many times and the account has been locked. Please try again in half an hour!
     /// </summary>
-    [ErrorCodeItemMetadata("密码错误次数过多，账号已锁定，请半小时后重试！")]
+    [ErrorCodeItemMetadata("The password has been entered incorrectly too many times and the account has been locked. Please try again in half an hour!")]
     D1027,
 
     /// <summary>
-    /// 新密码不能与旧密码相同
+    /// The new password cannot be the same as the old password
     /// </summary>
-    [ErrorCodeItemMetadata("新密码不能与旧密码相同")]
+    [ErrorCodeItemMetadata("The new password cannot be the same as the old password")]
     D1028,
 
     /// <summary>
-    /// 系统默认账号禁止删除
+    /// The system default account is prohibited from deletion
     /// </summary>
-    [ErrorCodeItemMetadata("系统默认账号禁止删除")]
+    [ErrorCodeItemMetadata("The system default account cannot be deleted")]
     D1029,
 
     /// <summary>
-    /// 开放接口绑定账号禁止删除
+    /// Deletion of accounts bound to open interfaces is prohibited
     /// </summary>
-    [ErrorCodeItemMetadata("开放接口绑定账号禁止删除")]
+    [ErrorCodeItemMetadata("Open interface bound accounts cannot be deleted")]
     D1030,
 
     /// <summary>
-    /// 开放接口绑定租户禁止删除
+    /// Deletion of the open interface bound tenant is prohibited
     /// </summary>
-    [ErrorCodeItemMetadata("开放接口绑定租户禁止删除")]
+    [ErrorCodeItemMetadata("Open interface bound tenant deletion prohibited")]
     D1031,
 
     /// <summary>
-    /// 手机号已存在
+    /// Mobile phone number already exists
     /// </summary>
-    [ErrorCodeItemMetadata("手机号已存在")]
+    [ErrorCodeItemMetadata("The phone number already exists")]
     D1032,
 
     /// <summary>
-    /// 此角色下存在注册方案禁止删除
+    /// There is a registration scheme under this role that prohibits deletion
     /// </summary>
-    [ErrorCodeItemMetadata("此角色下存在注册方案禁止删除")]
+    [ErrorCodeItemMetadata("There is a registration scheme under this role that prohibits deletion")]
     D1033,
 
     /// <summary>
-    /// 注册功能未开启禁止注册
+    /// The registration function is not enabled and registration is prohibited.
     /// </summary>
-    [ErrorCodeItemMetadata("注册功能未开启禁止注册")]
+    [ErrorCodeItemMetadata("The registration function is not enabled and registration is prohibited.")]
     D1034,
 
     /// <summary>
-    /// 注册方案不存在
+    /// Registration plan does not exist
     /// </summary>
-    [ErrorCodeItemMetadata("注册方案不存在")]
+    [ErrorCodeItemMetadata("Registration plan does not exist")]
     D1035,
 
     /// <summary>
-    /// 角色不存在
+    /// role does not exist
     /// </summary>
-    [ErrorCodeItemMetadata("角色不存在")]
+    [ErrorCodeItemMetadata("Character does not exist")]
     D1036,
 
     /// <summary>
-    /// 禁止注册超级管理员和系统管理员
+    /// Registration of super administrators and system administrators is prohibited
     /// </summary>
-    [ErrorCodeItemMetadata("禁止注册超级管理员和系统管理员")]
+    [ErrorCodeItemMetadata("Prohibit the registration of super administrators and system administrators")]
     D1037,
 
     /// <summary>
-    /// 禁止越权操作系统账户
+    /// Prohibiting unauthorized operating system accounts
     /// </summary>
-    [ErrorCodeItemMetadata("禁止越权操作系统账户")]
+    [ErrorCodeItemMetadata("Prohibit unauthorized operation of system accounts")]
     D1038,
 
     /// <summary>
-    /// 父机构不存在
+    /// Parent organization does not exist
     /// </summary>
-    [ErrorCodeItemMetadata("父机构不存在")]
+    [ErrorCodeItemMetadata("Parent organization does not exist")]
     D2000,
 
     /// <summary>
-    /// 当前机构Id不能与父机构Id相同
+    /// The current organization ID cannot be the same as the parent organization ID
     /// </summary>
-    [ErrorCodeItemMetadata("当前机构Id不能与父机构Id相同")]
+    [ErrorCodeItemMetadata("The current organization ID cannot be the same as the parent organization ID")]
     D2001,
 
     /// <summary>
-    /// 已有相同组织机构,编码或名称相同
+    /// Already have the same organizational structure, code or name
     /// </summary>
-    [ErrorCodeItemMetadata("已有相同组织机构,编码或名称相同")]
+    [ErrorCodeItemMetadata("An organization with the same structure, code, or name already exists")]
     D2002,
 
     /// <summary>
-    /// 没有权限操作机构
+    /// No authority to operate the organization
     /// </summary>
-    [ErrorCodeItemMetadata("没有权限操作机构")]
+    [ErrorCodeItemMetadata("No authority to operate the organization")]
     D2003,
 
     /// <summary>
-    /// 该机构下有用户禁止删除
+    /// There are users under this organization who are prohibited from deletion
     /// </summary>
-    [ErrorCodeItemMetadata("该机构下有用户禁止删除")]
+    [ErrorCodeItemMetadata("There are users under this organization who are prohibited from deletion")]
     D2004,
 
     /// <summary>
-    /// 附属机构下有用户禁止删除
+    /// Users under affiliated organizations are prohibited from deletion
     /// </summary>
-    [ErrorCodeItemMetadata("附属机构下有用户禁止删除")]
+    [ErrorCodeItemMetadata("Users under affiliated organizations are prohibited from deletion")]
     D2005,
 
     /// <summary>
-    /// 只能增加下级机构
+    /// Only subordinate organizations can be added
     /// </summary>
-    [ErrorCodeItemMetadata("只能增加下级机构")]
+    [ErrorCodeItemMetadata("Only subordinate organizations can be added")]
     D2006,
 
     /// <summary>
-    /// 下级机构下有用户禁止删除
+    /// Users under subordinate organizations are prohibited from deletion
     /// </summary>
-    [ErrorCodeItemMetadata("下级机构下有用户禁止删除")]
+    [ErrorCodeItemMetadata("Users under subordinate organizations are prohibited from deletion")]
     D2007,
 
     /// <summary>
-    /// 系统默认机构禁止删除
+    /// System default organization prohibits deletion
     /// </summary>
-    [ErrorCodeItemMetadata("系统默认机构禁止删除")]
+    [ErrorCodeItemMetadata("System default organization prohibits deletion")]
     D2008,
 
     /// <summary>
-    /// 禁止增加根节点机构
+    /// It is prohibited to add root node institutions
     /// </summary>
-    [ErrorCodeItemMetadata("禁止增加根节点机构")]
+    [ErrorCodeItemMetadata("Prohibitedincreaseroot nodemechanism")]
     D2009,
 
     /// <summary>
-    /// 此机构下存在注册方案禁止删除
+    /// There is a registration scheme under this organization that prohibits deletion
     /// </summary>
-    [ErrorCodeItemMetadata("此机构下存在注册方案禁止删除")]
+    [ErrorCodeItemMetadata("thismechanismExists belowRegistration planProhibitedDelete")]
     D2010,
 
     /// <summary>
-    /// 机构不存在
+    /// Organization does not exist
     /// </summary>
-    [ErrorCodeItemMetadata("机构不存在")]
+    [ErrorCodeItemMetadata("Organization does not exist")]
     D2011,
 
     /// <summary>
-    /// 系统默认机构禁止修改
+    /// System default organization prohibits modification
     /// </summary>
-    [ErrorCodeItemMetadata("系统默认机构禁止修改")]
+    [ErrorCodeItemMetadata("System default organization cannot be modified")]
     D2012,
 
     /// <summary>
-    /// 字典类型不存在
+    /// Dictionary type does not exist
     /// </summary>
-    [ErrorCodeItemMetadata("字典类型不存在")]
+    [ErrorCodeItemMetadata("Dictionary type does not exist")]
     D3000,
 
     /// <summary>
-    /// 字典类型已存在
+    /// Dictionary type already exists
     /// </summary>
-    [ErrorCodeItemMetadata("字典类型已存在,名称或编码重复")]
+    [ErrorCodeItemMetadata("Dictionary type already exists, name or encoding is duplicated")]
     D3001,
 
     /// <summary>
-    /// 字典类型下面有字典值禁止删除
+    /// There are dictionary values ​​under the dictionary type that are prohibited from deletion.
     /// </summary>
-    [ErrorCodeItemMetadata("字典类型下面有字典值禁止删除")]
+    [ErrorCodeItemMetadata("There are dictionary values under the dictionary type that are prohibited from deletion.")]
     D3002,
 
     /// <summary>
-    /// 字典值已存在
+    /// Dictionary value already exists
     /// </summary>
-    [ErrorCodeItemMetadata("字典值已存在")]
+    [ErrorCodeItemMetadata("Dictionary value already exists")]
     D3003,
 
     /// <summary>
-    /// 字典值不存在
+    /// Dictionary value does not exist
     /// </summary>
-    [ErrorCodeItemMetadata("字典值不存在")]
+    [ErrorCodeItemMetadata("Dictionary value does not exist")]
     D3004,
 
     /// <summary>
-    /// 字典状态错误
+    /// Dictionary status error
     /// </summary>
-    [ErrorCodeItemMetadata("字典状态错误")]
+    [ErrorCodeItemMetadata("dictionarystatemistake")]
     D3005,
 
     /// <summary>
-    /// 字典编码不能以Enum结尾
+    /// Dictionary encoding cannot end with Enum
     /// </summary>
-    [ErrorCodeItemMetadata("字典编码不能以Enum结尾")]
+    [ErrorCodeItemMetadata("Dictionary encoding cannot end with Enum")]
     D3006,
 
     /// <summary>
-    /// 禁止修改枚举类型的字典编码
+    /// It is forbidden to modify the dictionary encoding of enumeration types
     /// </summary>
-    [ErrorCodeItemMetadata("禁止修改枚举类型的字典编码")]
+    [ErrorCodeItemMetadata("Modifying the dictionary codes of enumerated types is prohibited")]
     D3007,
 
     /// <summary>
-    /// 禁止迁移枚举字典
+    /// Disable migration of enum dictionaries
     /// </summary>
-    [ErrorCodeItemMetadata("禁止迁移枚举字典")]
+    [ErrorCodeItemMetadata("Prohibit migrating enum dictionary")]
     D3008,
 
     /// <summary>
-    /// 字典已在该租户禁止迁移
+    /// Dictionary migration is prohibited in this tenant
     /// </summary>
-    [ErrorCodeItemMetadata("字典已在该租户禁止迁移")]
+    [ErrorCodeItemMetadata("The dictionary migration has been disabled for this tenant")]
     D3009,
 
     /// <summary>
-    /// 非超管用户禁止操作系统字典
+    /// Disabling operating system dictionaries for non-supervisory users
     /// </summary>
-    [ErrorCodeItemMetadata("非超管用户禁止操作系统字典")]
+    [ErrorCodeItemMetadata("Disabling operating system dictionaries for non-supervisory users")]
     D3010,
 
     /// <summary>
-    /// 获取字典值集合入参有误
+    /// Incorrect input parameters for obtaining dictionary value set
     /// </summary>
-    [ErrorCodeItemMetadata("获取字典值集合入参有误")]
+    [ErrorCodeItemMetadata("Incorrect input parameters for obtaining dictionary value set")]
     D3011,
 
     /// <summary>
-    /// 禁止修改租户字典状态
+    /// Modification of tenant dictionary status is prohibited
     /// </summary>
-    [ErrorCodeItemMetadata("禁止修改租户字典状态")]
+    [ErrorCodeItemMetadata("Modification of tenant dictionary status is prohibited")]
     D3012,
 
     /// <summary>
-    /// 菜单已存在
+    /// Menu already exists
     /// </summary>
-    [ErrorCodeItemMetadata("菜单已存在")]
+    [ErrorCodeItemMetadata("The menu already exists")]
     D4000,
 
     /// <summary>
-    /// 路由地址为空
+    /// Routing address is empty
     /// </summary>
-    [ErrorCodeItemMetadata("路由地址为空")]
+    [ErrorCodeItemMetadata("The routing address is empty")]
     D4001,
 
     /// <summary>
-    /// 打开方式为空
+    /// Open with empty
     /// </summary>
-    [ErrorCodeItemMetadata("打开方式为空")]
+    [ErrorCodeItemMetadata("Open with empty")]
     D4002,
 
     /// <summary>
-    /// 权限标识格式为空
+    /// Permission ID format is empty
     /// </summary>
-    [ErrorCodeItemMetadata("权限标识格式为空")]
+    [ErrorCodeItemMetadata("Permission ID format is empty")]
     D4003,
 
     /// <summary>
-    /// 权限标识格式错误
+    /// Permission ID format error
     /// </summary>
-    [ErrorCodeItemMetadata("权限标识格式错误 如xxx:xxx")]
+    [ErrorCodeItemMetadata("The format of the permission identifier is incorrect, such as xxx:xxx")]
     D4004,
 
     /// <summary>
-    /// 权限不存在
+    /// Permission does not exist
     /// </summary>
-    [ErrorCodeItemMetadata("权限不存在")]
+    [ErrorCodeItemMetadata("Permission does not exist")]
     D4005,
 
     /// <summary>
-    /// 父级菜单不能为当前节点，请重新选择父级菜单
+    /// The parent menu cannot be the current node, please reselect the parent menu.
     /// </summary>
-    [ErrorCodeItemMetadata("父级菜单不能为当前节点，请重新选择父级菜单")]
+    [ErrorCodeItemMetadata("The parent menu cannot be the current node, please reselect the parent menu.")]
     D4006,
 
     /// <summary>
-    /// 不能移动根节点
+    /// Cannot move root node
     /// </summary>
-    [ErrorCodeItemMetadata("不能移动根节点")]
+    [ErrorCodeItemMetadata("Cannot move root node")]
     D4007,
 
     /// <summary>
-    /// 禁止本节点与父节点相同
+    /// Prevent this node from being the same as its parent node
     /// </summary>
-    [ErrorCodeItemMetadata("禁止本节点与父节点相同")]
+    [ErrorCodeItemMetadata("This node must not be the same as the parent node")]
     D4008,
 
     /// <summary>
-    /// 路由名称重复
+    /// Duplicate route name
     /// </summary>
-    [ErrorCodeItemMetadata("路由名称重复")]
+    [ErrorCodeItemMetadata("Duplicate route name")]
     D4009,
 
     /// <summary>
-    /// 父节点不能为按钮类型
+    /// The parent node cannot be of button type
     /// </summary>
-    [ErrorCodeItemMetadata("父节点不能为按钮类型")]
+    [ErrorCodeItemMetadata("The parent node cannot be of button type")]
     D4010,
 
     /// <summary>
-    /// 租户不能为空
+    /// Tenant cannot be empty
     /// </summary>
-    [ErrorCodeItemMetadata("租户不能为空")]
+    [ErrorCodeItemMetadata("Tenant cannot be empty")]
     D4011,
 
     /// <summary>
-    /// 系统菜单禁止修改
+    /// Modification of system menu is prohibited
     /// </summary>
-    [ErrorCodeItemMetadata("系统菜单禁止修改")]
+    [ErrorCodeItemMetadata("Modification of system menu is prohibited")]
     D4012,
 
     /// <summary>
-    /// 系统菜单禁止删除
+    /// System menu is prohibited from deletion
     /// </summary>
-    [ErrorCodeItemMetadata("系统菜单禁止删除")]
+    [ErrorCodeItemMetadata("System menu deletion is prohibited")]
     D4013,
 
     /// <summary>
-    /// 已存在同名或同编码应用
+    /// An application with the same name or encoding already exists
     /// </summary>
-    [ErrorCodeItemMetadata("已存在同名或同编码应用")]
+    [ErrorCodeItemMetadata("An application with the same name or code already exists")]
     D5000,
 
     /// <summary>
-    /// 默认激活系统只能有一个
+    /// The default activation system can only have one
     /// </summary>
-    [ErrorCodeItemMetadata("默认激活系统只能有一个")]
+    [ErrorCodeItemMetadata("There can only be one default active system")]
     D5001,
 
     /// <summary>
-    /// 该应用下有菜单禁止删除
+    /// There is a menu under this application that prohibits deletion
     /// </summary>
-    [ErrorCodeItemMetadata("该应用下有菜单禁止删除")]
+    [ErrorCodeItemMetadata("This application has menus that cannot be deleted")]
     D5002,
 
     /// <summary>
-    /// 已存在同名或同编码应用
+    /// An application with the same name or encoding already exists
     /// </summary>
-    [ErrorCodeItemMetadata("已存在同名或同编码应用")]
+    [ErrorCodeItemMetadata("An application with the same name or code already exists")]
     D5003,
 
     /// <summary>
-    /// 已存在同名或同编码职位
+    /// A position with the same name or code already exists
     /// </summary>
-    [ErrorCodeItemMetadata("已存在同名或同编码职位")]
+    [ErrorCodeItemMetadata("A position with the same name or code already exists")]
     D6000,
 
     /// <summary>
-    /// 该职位下有用户禁止删除
+    /// There are users under this position who are prohibited from deletion
     /// </summary>
-    [ErrorCodeItemMetadata("该职位下有用户禁止删除")]
+    [ErrorCodeItemMetadata("Users under this position are prohibited from being deleted")]
     D6001,
 
     /// <summary>
-    /// 无权修改本职位
+    /// No authority to modify this position
     /// </summary>
-    [ErrorCodeItemMetadata("无权修改本职位")]
+    [ErrorCodeItemMetadata("No authority to modify this position")]
     D6002,
 
     /// <summary>
-    /// 职位不存在
+    /// Position does not exist
     /// </summary>
-    [ErrorCodeItemMetadata("职位不存在")]
+    [ErrorCodeItemMetadata("Position does not exist")]
     D6003,
 
     /// <summary>
-    /// 此职位下存在注册方案禁止删除
+    /// There is a registration plan under this position that prohibits deletion
     /// </summary>
-    [ErrorCodeItemMetadata("此职位下存在注册方案禁止删除")]
+    [ErrorCodeItemMetadata("There is a registration scheme under this position that cannot be deleted.")]
     D6004,
 
     /// <summary>
-    /// 通知公告状态错误
+    /// Notification announcement status error
     /// </summary>
-    [ErrorCodeItemMetadata("通知公告状态错误")]
+    [ErrorCodeItemMetadata("Notification announcement status error")]
     D7000,
 
     /// <summary>
-    /// 通知公告删除失败
+    /// Notification announcement deletion failed
     /// </summary>
-    [ErrorCodeItemMetadata("通知公告删除失败")]
+    [ErrorCodeItemMetadata("Failed to delete notification")]
     D7001,
 
     /// <summary>
-    /// 通知公告编辑失败
+    /// Notification announcement editing failed
     /// </summary>
-    [ErrorCodeItemMetadata("通知公告编辑失败，类型必须为草稿")]
+    [ErrorCodeItemMetadata("Failed to edit the notification announcement; the type must be draft")]
     D7002,
 
     /// <summary>
-    /// 通知公告操作失败，非发布者不能进行操作
+    /// The notification operation failed and non-publishers cannot perform the operation.
     /// </summary>
-    [ErrorCodeItemMetadata("通知公告操作失败，非发布者不能进行操作")]
+    [ErrorCodeItemMetadata("Notification operation failed; non-publishers cannot perform this operation.")]
     D7003,
 
     /// <summary>
-    /// 文件不存在
+    /// File does not exist
     /// </summary>
-    [ErrorCodeItemMetadata("文件不存在")]
+    [ErrorCodeItemMetadata("File does not exist")]
     D8000,
 
     /// <summary>
-    /// 不允许的文件类型
+    /// Not allowed file types
     /// </summary>
-    [ErrorCodeItemMetadata("不允许的文件类型")]
+    [ErrorCodeItemMetadata("File type not allowed")]
     D8001,
 
     /// <summary>
-    /// 文件超过允许大小
+    /// File exceeds allowed size
     /// </summary>
-    [ErrorCodeItemMetadata("文件超过允许大小")]
+    [ErrorCodeItemMetadata("The file exceeds the allowed size")]
     D8002,
 
     /// <summary>
-    /// 文件后缀错误
+    /// File suffix error
     /// </summary>
-    [ErrorCodeItemMetadata("文件后缀错误")]
+    [ErrorCodeItemMetadata("File suffix error")]
     D8003,
 
     /// <summary>
-    /// 文件已存在
+    /// File already exists
     /// </summary>
-    [ErrorCodeItemMetadata("文件已存在")]
+    [ErrorCodeItemMetadata("The file already exists")]
     D8004,
 
     /// <summary>
-    /// 无效的文件名
+    /// Invalid file name
     /// </summary>
-    [ErrorCodeItemMetadata("无效的文件名")]
+    [ErrorCodeItemMetadata("NoneEffective file name")]
     D8005,
 
     /// <summary>
-    /// 已存在同名或同编码参数配置
+    /// Parameter configuration with the same name or encoding already exists
     /// </summary>
-    [ErrorCodeItemMetadata("已存在同名或同编码参数配置")]
+    [ErrorCodeItemMetadata("A parameter configuration with the same name or code already exists")]
     D9000,
 
     /// <summary>
-    /// 禁止删除系统参数
+    /// Disable deletion of system parameters
     /// </summary>
-    [ErrorCodeItemMetadata("禁止删除系统参数")]
+    [ErrorCodeItemMetadata("Deleting system parameters is prohibited")]
     D9001,
 
     /// <summary>
-    /// 已存在同名任务调度
+    /// A task schedule with the same name already exists
     /// </summary>
-    [ErrorCodeItemMetadata("已存在同名任务调度")]
+    [ErrorCodeItemMetadata("A file with the same name already existsTask Scheduling")]
     D1100,
 
     /// <summary>
-    /// 任务调度不存在
+    /// Task scheduling does not exist
     /// </summary>
-    [ErrorCodeItemMetadata("任务调度不存在")]
+    [ErrorCodeItemMetadata("Task scheduling does not exist")]
     D1101,
 
     /// <summary>
-    /// 演示环境禁止修改数据
+    /// Modification of data is prohibited in the demo environment
     /// </summary>
-    [ErrorCodeItemMetadata("演示环境禁止修改数据")]
+    [ErrorCodeItemMetadata("Modification of data is prohibited in the demo environment")]
     D1200,
 
     /// <summary>
-    /// 已存在同名的租户
+    /// A tenant with the same name already exists
     /// </summary>
-    [ErrorCodeItemMetadata("已存在同名的租户")]
+    [ErrorCodeItemMetadata("A tenant with the same name already exists")]
     D1300,
 
     /// <summary>
-    /// 已存在同名的租户管理员
+    /// A tenant administrator with the same name already exists
     /// </summary>
-    [ErrorCodeItemMetadata("已存在同名的租户管理员")]
+    [ErrorCodeItemMetadata("A tenant administrator with the same name already exists")]
     D1301,
 
     /// <summary>
-    /// 租户从库配置错误
+    /// Tenant slave database configuration error
     /// </summary>
-    [ErrorCodeItemMetadata("租户从库配置错误")]
+    [ErrorCodeItemMetadata("Tenant slave database configuration error")]
     D1302,
 
     /// <summary>
-    /// 已存在同名的租户域名
+    /// A tenant domain name with the same name already exists
     /// </summary>
-    [ErrorCodeItemMetadata("已存在同名的租户域名")]
+    [ErrorCodeItemMetadata("A tenant domain name with the same name already exists")]
     D1303,
 
     /// <summary>
-    /// 授权菜单存在重复项
+    /// There are duplicate items in the authorization menu
     /// </summary>
-    [ErrorCodeItemMetadata("授权菜单存在重复项")]
+    [ErrorCodeItemMetadata("There are duplicate items in the authorization menu")]
     D1304,
 
     /// <summary>
-    /// 该表代码模板已经生成过
+    /// The table code template has been generated
     /// </summary>
-    [ErrorCodeItemMetadata("该表代码模板已经生成过")]
+    [ErrorCodeItemMetadata("The table codeTemplatealreadyGeneratepass")]
     D1400,
 
     /// <summary>
-    /// 数据库配置不存在
+    /// Database configuration does not exist
     /// </summary>
-    [ErrorCodeItemMetadata("数据库配置不存在")]
+    [ErrorCodeItemMetadata("Database configuration does not exist")]
     D1401,
 
     /// <summary>
-    /// 该类型不存在
+    /// The type does not exist
     /// </summary>
-    [ErrorCodeItemMetadata("该类型不存在")]
+    [ErrorCodeItemMetadata("The type does not exist")]
     D1501,
 
     /// <summary>
-    /// 该字段不存在
+    /// This field does not exist
     /// </summary>
-    [ErrorCodeItemMetadata("该字段不存在")]
+    [ErrorCodeItemMetadata("This field does not exist")]
     D1502,
 
     /// <summary>
-    /// 该类型不是枚举类型
+    /// The type is not an enumeration type
     /// </summary>
-    [ErrorCodeItemMetadata("该类型不是枚举类型")]
+    [ErrorCodeItemMetadata("The type is not an enumeration type")]
     D1503,
 
     /// <summary>
-    /// 该实体不存在
+    /// The entity does not exist
     /// </summary>
-    [ErrorCodeItemMetadata("该实体不存在")]
+    [ErrorCodeItemMetadata("The entity does not exist")]
     D1504,
 
     /// <summary>
-    /// 父菜单不存在
+    /// Parent menu does not exist
     /// </summary>
-    [ErrorCodeItemMetadata("父菜单不存在")]
+    [ErrorCodeItemMetadata("FathermenuDoes not exist")]
     D1505,
 
     /// <summary>
-    /// 父资源不存在
+    /// Parent resource does not exist
     /// </summary>
-    [ErrorCodeItemMetadata("父资源不存在")]
+    [ErrorCodeItemMetadata("Parent resource does not exist")]
     D1600,
 
     /// <summary>
-    /// 当前资源Id不能与父资源Id相同
+    /// The current resource ID cannot be the same as the parent resource ID
     /// </summary>
-    [ErrorCodeItemMetadata("当前资源Id不能与父资源Id相同")]
+    [ErrorCodeItemMetadata("The current resource ID cannot be the same as the parent resource ID")]
     D1601,
 
     /// <summary>
-    /// 已有相同编码或名称
+    /// The same code or name already exists
     /// </summary>
-    [ErrorCodeItemMetadata("已有相同编码或名称")]
+    [ErrorCodeItemMetadata("The same code or name already exists")]
     D1602,
 
     /// <summary>
-    /// 脚本代码不能为空
+    /// Script code cannot be empty
     /// </summary>
-    [ErrorCodeItemMetadata("脚本代码不能为空")]
+    [ErrorCodeItemMetadata("Script code cannot be empty")]
     D1701,
 
     /// <summary>
-    /// 脚本代码中的作业类，需要定义 [JobDetail] 特性
+    /// The job class in the script code needs to define the [JobDetail] attribute
     /// </summary>
-    [ErrorCodeItemMetadata("脚本代码中的作业类，需要定义 [JobDetail] 特性")]
+    [ErrorCodeItemMetadata("script codeinHomework type，Needs to be defined [JobDetail] Feature")]
     D1702,
 
     /// <summary>
-    /// 作业编号需要与脚本代码中的作业类 [JobDetail('jobId')] 一致
+    /// The job number needs to be consistent with the job class [JobDetail('jobId')] in the script code
     /// </summary>
-    [ErrorCodeItemMetadata("作业编号需要与脚本代码中的作业类 [JobDetail('jobId')] 一致")]
+    [ErrorCodeItemMetadata("The job number needs to match the job class in the script code [JobDetail('jobId')]")]
     D1703,
 
     /// <summary>
-    /// 禁止修改作业编号
+    /// Modification of job number is prohibited
     /// </summary>
-    [ErrorCodeItemMetadata("禁止修改作业编号")]
+    [ErrorCodeItemMetadata("Modification of job number is prohibited")]
     D1704,
 
     /// <summary>
-    /// 执行作业失败
+    /// Job execution failed
     /// </summary>
-    [ErrorCodeItemMetadata("执行作业失败")]
+    [ErrorCodeItemMetadata("Job execution failed")]
     D1705,
 
     /// <summary>
-    /// 已存在同名打印模板
+    /// A print template with the same name already exists
     /// </summary>
-    [ErrorCodeItemMetadata("已存在同名打印模板")]
+    [ErrorCodeItemMetadata("A print template with the same name already exists")]
     D1800,
 
     /// <summary>
-    /// 已存在同名功能或同名程序及插件
+    /// The same function or program and plug-in with the same name already exists
     /// </summary>
-    [ErrorCodeItemMetadata("已存在同名功能或同名程序及插件")]
+    [ErrorCodeItemMetadata("The same function or program and plug-in with the same name already exists")]
     D1900,
 
     /// <summary>
-    /// 注册方案名称已存在
+    /// Registration scheme name already exists
     /// </summary>
-    [ErrorCodeItemMetadata("注册方案名称已存在")]
+    [ErrorCodeItemMetadata("The registration plan name already exists")]
     D2101,
 
     /// <summary>
-    /// 已存在同名模板
+    /// A template with the same name already exists
     /// </summary>
-    [ErrorCodeItemMetadata("已存在同名模板")]
+    [ErrorCodeItemMetadata("A template with the same name already exists")]
     T1000,
 
     /// <summary>
-    /// 已存在相同编码模板
+    /// The same encoding template already exists
     /// </summary>
-    [ErrorCodeItemMetadata("已存在相同编码模板")]
+    [ErrorCodeItemMetadata("Already exists the sameEncodingTemplate")]
     T1001,
 
     /// <summary>
-    /// 禁止删除存在关联租户的应用
+    /// Prohibit deletion of applications with associated tenants
     /// </summary>
-    [ErrorCodeItemMetadata("禁止删除存在关联租户的应用")]
+    [ErrorCodeItemMetadata("Deleting applications with associated tenants is prohibited")]
     A1001,
 
     /// <summary>
-    /// 禁止删除存在关联菜单的应用
+    /// Prohibit deletion of apps with contextual menus
     /// </summary>
-    [ErrorCodeItemMetadata("禁止删除存在关联菜单的应用")]
+    [ErrorCodeItemMetadata("Deleting applications with associated menus is prohibited")]
     A1002,
 
     /// <summary>
-    /// 找不到系统应用
+    /// System app not found
     /// </summary>
-    [ErrorCodeItemMetadata("找不到系统应用")]
+    [ErrorCodeItemMetadata("System application not found")]
     A1000,
 
     /// <summary>
-    /// 已存在同名或同编码项目
+    /// A project with the same name or encoding already exists
     /// </summary>
-    [ErrorCodeItemMetadata("已存在同名或同编码项目")]
+    [ErrorCodeItemMetadata("A project with the same name or code already exists")]
     xg1000,
 
     /// <summary>
-    /// 已存在相同证件号码人员
+    /// A person with the same ID number already exists
     /// </summary>
-    [ErrorCodeItemMetadata("已存在相同证件号码人员")]
+    [ErrorCodeItemMetadata("A person with the same ID number already exists")]
     xg1001,
 
     /// <summary>
-    /// 检测数据不存在
+    /// Detection data does not exist
     /// </summary>
-    [ErrorCodeItemMetadata("检测数据不存在")]
+    [ErrorCodeItemMetadata("Test data does not exist")]
     xg1002,
 
     /// <summary>
-    /// 请添加数据列
+    /// Please add data columns
     /// </summary>
-    [ErrorCodeItemMetadata("请添加数据列")]
+    [ErrorCodeItemMetadata("Please add a data column")]
     db1000,
 
     /// <summary>
-    /// 数据表不存在
+    /// Data table does not exist
     /// </summary>
-    [ErrorCodeItemMetadata("数据表不存在")]
+    [ErrorCodeItemMetadata("Data table does not exist")]
     db1001,
 
     /// <summary>
-    /// 数据表不存在
+    /// Data table does not exist
     /// </summary>
-    [ErrorCodeItemMetadata("不允许添加相同字段名")]
+    [ErrorCodeItemMetadata("Adding the same field name is not allowed")]
     db1002,
 
     /// <summary>
-    /// 实体文件不存在或匹配不到。如果是刚刚生成的实体，请重启服务后再试
+    /// The entity file does not exist or cannot be matched. If it is a newly generated entity, please restart the service and try again.
     /// </summary>
-    [ErrorCodeItemMetadata("实体文件不存在或匹配不到。如果是刚刚生成的实体，请重启服务后再试")]
+    [ErrorCodeItemMetadata("The entity file does not exist or cannot be matched. If it is a newly generated entity, please try again after restarting the service.")]
     db1003,
 
     /// <summary>
-    /// 父节点不存在
+    /// Parent node does not exist
     /// </summary>
-    [ErrorCodeItemMetadata("父节点不存在")]
+    [ErrorCodeItemMetadata("Parent node does not exist")]
     R2000,
 
     /// <summary>
-    /// 当前节点Id不能与父节点Id相同
+    /// The current node ID cannot be the same as the parent node ID
     /// </summary>
-    [ErrorCodeItemMetadata("当前节点Id不能与父节点Id相同")]
+    [ErrorCodeItemMetadata("The current node ID cannot be the same as the parent node ID")]
     R2001,
 
     /// <summary>
-    /// 已有相同编码或名称
+    /// The same code or name already exists
     /// </summary>
-    [ErrorCodeItemMetadata("已有相同编码或名称")]
+    [ErrorCodeItemMetadata("The same code or name already exists")]
     R2002,
 
     /// <summary>
-    /// 行政区代码只能为6、9或12位
+    /// Administrative district codes can only be 6, 9 or 12 digits
     /// </summary>
-    [ErrorCodeItemMetadata("行政区代码只能为6、9或12位")]
+    [ErrorCodeItemMetadata("The administrative division code can only be 6, 9, or 12 digits long")]
     R2003,
 
     /// <summary>
-    /// 父节点不能为自己的子节点
+    /// The parent node cannot be its own child node
     /// </summary>
-    [ErrorCodeItemMetadata("父节点不能为自己的子节点")]
+    [ErrorCodeItemMetadata("A parent node cannot be its own child node")]
     R2004,
 
     /// <summary>
-    /// 同步国家统计局数据异常,请稍后重试
+    /// Abnormal synchronization of National Bureau of Statistics data, please try again later.
     /// </summary>
-    [ErrorCodeItemMetadata("同步国家统计局数据异常,请稍后重试")]
+    [ErrorCodeItemMetadata("syncCountryBureau of StatisticsDataAbnormal,Please try again later")]
     R2005,
 
     /// <summary>
-    /// 默认租户状态禁止修改
+    /// The default tenant status prohibits modification
     /// </summary>
-    [ErrorCodeItemMetadata("默认租户状态禁止修改")]
+    [ErrorCodeItemMetadata("The default tenant status cannot be modified")]
     Z1001,
 
     /// <summary>
-    /// 禁止创建此类型的数据库
+    /// Creation of this type of database is prohibited
     /// </summary>
-    [ErrorCodeItemMetadata("禁止创建此类型的数据库")]
+    [ErrorCodeItemMetadata("Creating this type of database is prohibited")]
     Z1002,
 
     /// <summary>
-    /// 租户不存在或已禁用
+    /// Tenant does not exist or is disabled
     /// </summary>
-    [ErrorCodeItemMetadata("租户不存在或已禁用")]
+    [ErrorCodeItemMetadata("Tenant does not exist or is disabled")]
     Z1003,
 
     /// <summary>
-    /// 租户库连接不能为空
+    /// Tenant library connection cannot be empty
     /// </summary>
-    [ErrorCodeItemMetadata("租户库连接不能为空")]
+    [ErrorCodeItemMetadata("Tenant library connection cannot be empty")]
     Z1004,
 
     /// <summary>
-    /// 身份标识已存在
+    /// Identity already exists
     /// </summary>
-    [ErrorCodeItemMetadata("身份标识已存在")]
+    [ErrorCodeItemMetadata("Identity already exists")]
     O1000,
 
     /// <summary>
-    /// 禁止非超级管理员操作
+    /// Disable operations by non-super administrators
     /// </summary>
-    [ErrorCodeItemMetadata("禁止非超级管理员操作")]
+    [ErrorCodeItemMetadata("Disable operations by non-super administrators")]
     SA001
 }

@@ -1,72 +1,72 @@
-﻿// Admin.NET 项目的版权、商标、专利和其他相关权利均受相应法律法规的保护。使用本项目应遵守相关法律法规和许可证的要求。
+﻿// The copyright, trademark, patent and other related rights of the Admin.NET project are protected by corresponding laws and regulations. Use of this project shall comply with relevant laws, regulations and license requirements.
 //
-// 本项目主要遵循 MIT 许可证和 Apache 许可证（版本 2.0）进行分发和使用。许可证位于源代码树根目录中的 LICENSE-MIT 和 LICENSE-APACHE 文件。
+// This project is distributed and used primarily under the MIT License and the Apache License (version 2.0). The license is located in the LICENSE-MIT and LICENSE-APACHE files in the root of the source tree.
 //
-// 不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！
+// This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project!
 
 namespace Admin.NET.Core.Service;
 
 /// <summary>
-/// 注册方案分页查询输入参数
+/// Registration plan paging query input parameters
 /// </summary>
 public class PageUserRegWayInput : BasePageInput
 {
     /// <summary>
-    /// 方案名称
+    /// Scheme name
     /// </summary>
     public string? Name { get; set; }
 
     /// <summary>
-    /// 租户Id
+    /// TenantId
     /// </summary>
     public long TenantId { get; set; }
 }
 
 /// <summary>
-/// 注册方案增加输入参数
+/// Add input parameters to the registration plan
 /// </summary>
 public class AddUserRegWayInput : SysUserRegWay
 {
     /// <summary>
-    /// 方案名称
+    /// Scheme name
     /// </summary>
-    [Required(ErrorMessage = "方案名称不能为空")]
-    [MaxLength(32, ErrorMessage = "方案名称字符长度不能超过32")]
+    [Required(ErrorMessage = "Scheme name cannot be empty")]
+    [MaxLength(32, ErrorMessage = "Plan NameCharacterlengthcannot exceed32")]
     public override string Name { get; set; }
 
     /// <summary>
-    /// 账号类型
+    /// Account type
     /// </summary>
-    [Enum(ErrorMessage = "账号类型不正确")]
+    [Enum(ErrorMessage = "The account type is incorrect")]
     public override AccountTypeEnum AccountType { get; set; }
 
     /// <summary>
-    /// 角色
+    /// Role
     /// </summary>
-    [Required(ErrorMessage = "角色不能为空")]
+    [Required(ErrorMessage = "Role cannot be empty")]
     public override long RoleId { get; set; }
 
     /// <summary>
-    /// 机构
+    /// mechanism
     /// </summary>
-    [Required(ErrorMessage = "机构不能为空")]
+    [Required(ErrorMessage = "Organization cannot be empty")]
     public override long OrgId { get; set; }
 
     /// <summary>
-    /// 职位
+    /// Position
     /// </summary>
-    [Required(ErrorMessage = "职位不能为空")]
+    [Required(ErrorMessage = "Position cannot be empty")]
     public override long PosId { get; set; }
 }
 
 /// <summary>
-/// 注册方案更新输入参数
+/// Registration scheme update input parameters
 /// </summary>
 public class UpdateUserRegWayInput : AddUserRegWayInput
 {
     /// <summary>
-    /// 主键Id
+    /// Primary keyId
     /// </summary>
-    [Required(ErrorMessage = "主键Id不能为空")]
+    [Required(ErrorMessage = "Primary key Id cannot be empty")]
     public override long Id { get; set; }
 }

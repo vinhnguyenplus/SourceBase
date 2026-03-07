@@ -1,350 +1,350 @@
-// Admin.NET 项目的版权、商标、专利和其他相关权利均受相应法律法规的保护。使用本项目应遵守相关法律法规和许可证的要求。
+// The copyright, trademark, patent and other related rights of the Admin.NET project are protected by corresponding laws and regulations. Use of this project shall comply with relevant laws, regulations and license requirements.
 //
-// 本项目主要遵循 MIT 许可证和 Apache 许可证（版本 2.0）进行分发和使用。许可证位于源代码树根目录中的 LICENSE-MIT 和 LICENSE-APACHE 文件。
+// This project is distributed and used primarily under the MIT License and the Apache License (version 2.0). The license is located in the LICENSE-MIT and LICENSE-APACHE files in the root of the source tree.
 //
-// 不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！
+// This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project!
 
 namespace Admin.NET.Core;
 
 /// <summary>
-/// 民族枚举
+/// Ethnic enumeration
 /// </summary>
-[Description("民族枚举")]
+[Description("Ethnic Enumeration")]
 public enum NationEnum
 {
     /// <summary>
-    /// 汉族
+    /// Han nationality
     /// </summary>
-    [Description("汉族")]
+    [Description("Han ethnicity")]
     HanZu = 1,
 
     /// <summary>
-    /// 壮族
+    /// Zhuang
     /// </summary>
-    [Description("壮族")]
+    [Description("Zhuang")]
     ZhuangZu = 2,
 
     /// <summary>
-    /// 满族
+    /// Manchu
     /// </summary>
-    [Description("满族")]
+    [Description("Manchu")]
     ManZu = 3,
 
     /// <summary>
-    /// 回族
+    /// Hui
     /// </summary>
-    [Description("回族")]
+    [Description("Hui people")]
     HuiZu = 4,
 
     /// <summary>
-    /// 苗族
+    /// Miao
     /// </summary>
-    [Description("苗族")]
+    [Description("Miao ethnic group")]
     MiaoZu = 5,
 
     /// <summary>
-    /// 维吾尔族
+    /// Uighur
     /// </summary>
-    [Description("维吾尔族")]
+    [Description("Uighur")]
     WeiWuErZu = 6,
 
     /// <summary>
-    /// 土家族
+    /// Tujia
     /// </summary>
-    [Description("土家族")]
+    [Description("Tujia ethnic group")]
     TuJiaZu = 7,
 
     /// <summary>
-    /// 彝族
+    /// Yi nationality
     /// </summary>
-    [Description("彝族")]
+    [Description("Yi nationality")]
     YiZu = 8,
 
     /// <summary>
-    /// 蒙古族
+    /// Mongolian
     /// </summary>
-    [Description("蒙古族")]
+    [Description("Mongol ethnic group")]
     MengGuZu = 9,
 
     /// <summary>
-    /// 藏族
+    /// Tibetan
     /// </summary>
-    [Description("藏族")]
+    [Description("Tibetan")]
     ZangZu = 10,
 
     /// <summary>
-    /// 布依族
+    /// Buyi ethnic group
     /// </summary>
-    [Description("布依族")]
+    [Description("Bouyei ethnic group")]
     BuYiZu = 11,
 
     /// <summary>
-    /// 侗族
+    /// Dong people
     /// </summary>
-    [Description("侗族")]
+    [Description("Dong people")]
     DongZu = 12,
 
     /// <summary>
-    /// 瑶族
+    /// Yao people
     /// </summary>
-    [Description("瑶族")]
+    [Description("Yao ethnic group")]
     YaoZu = 13,
 
     /// <summary>
-    /// 朝鲜族
+    /// Korean
     /// </summary>
-    [Description("朝鲜族")]
+    [Description("Korean ethnic group")]
     ChaoXianZu = 14,
 
     /// <summary>
-    /// 白族
+    /// Bai nationality
     /// </summary>
-    [Description("白族")]
+    [Description("Bai nationality")]
     BaiZu = 15,
 
     /// <summary>
-    /// 哈尼族
+    /// Hani people
     /// </summary>
-    [Description("哈尼族")]
+    [Description("Hani ethnic group")]
     HaNiZu = 16,
 
     /// <summary>
-    /// 哈萨克族
+    /// Kazakh
     /// </summary>
-    [Description("哈萨克族")]
+    [Description("Kazakh")]
     HaSaKeZu = 17,
 
     /// <summary>
-    /// 黎族
+    /// Li nationality
     /// </summary>
-    [Description("黎族")]
+    [Description("Li ethnic group")]
     LiZu = 18,
 
     /// <summary>
-    /// 傣族
+    /// Dai nationality
     /// </summary>
-    [Description("傣族")]
+    [Description("Dai nationality")]
     DaiZu = 19,
 
     /// <summary>
-    /// 畲族
+    /// She nationality
     /// </summary>
-    [Description("畲族")]
+    [Description("She ethnic group")]
     SheZu = 20,
 
     /// <summary>
-    /// 傈僳族
+    /// Lisu
     /// </summary>
-    [Description("傈僳族")]
+    [Description("Lisu")]
     LiSuZu = 21,
 
     /// <summary>
-    /// 仡佬族
+    /// Gelao
     /// </summary>
-    [Description("仡佬族")]
+    [Description("Gelao")]
     GeLaoZu = 22,
 
     /// <summary>
-    /// 拉祜族
+    /// Lahu people
     /// </summary>
-    [Description("拉祜族")]
+    [Description("Lahu ethnic group")]
     LaHuZu = 23,
 
     /// <summary>
-    /// 东乡族
+    /// Dongxiang nationality
     /// </summary>
-    [Description("东乡族")]
+    [Description("Dongxiang ethnic group")]
     DongXiangZu = 24,
 
     /// <summary>
-    /// 纳西族
+    /// Naxi
     /// </summary>
-    [Description("纳西族")]
+    [Description("Naxi")]
     NaXiZu = 25,
 
     /// <summary>
-    /// 景颇族
+    /// Jingpo people
     /// </summary>
-    [Description("景颇族")]
+    [Description("Jingpo ethnic group")]
     JingPoZu = 26,
 
     /// <summary>
-    /// 柯尔克孜族
+    /// Kirgiz
     /// </summary>
-    [Description("柯尔克孜族")]
+    [Description("Kirgiz")]
     KeErKeZiZu = 27,
 
     /// <summary>
-    /// 土族
+    /// Tu nationality
     /// </summary>
-    [Description("土族")]
+    [Description("Tu nationality")]
     TuZu = 28,
 
     /// <summary>
-    /// 达斡尔族
+    /// Daur
     /// </summary>
-    [Description("达斡尔族")]
+    [Description("Daur")]
     DaWoErZu = 29,
 
     /// <summary>
-    /// 仫佬族
+    /// Mulao
     /// </summary>
-    [Description("仫佬族")]
+    [Description("Mulao ethnic group")]
     MuLaoZu = 30,
 
     /// <summary>
-    /// 羌族
+    /// Qiang
     /// </summary>
-    [Description("羌族")]
+    [Description("Qiang ethnic group")]
     QiangZu = 31,
 
     /// <summary>
-    /// 布朗族
+    /// Blang
     /// </summary>
-    [Description("布朗族")]
+    [Description("Blang")]
     BuLangZu = 32,
 
     /// <summary>
-    /// 撒拉族
+    /// Salar
     /// </summary>
-    [Description("撒拉族")]
+    [Description("Salar people")]
     SaLaZu = 33,
 
     /// <summary>
-    /// 毛南族
+    /// Maonan
     /// </summary>
-    [Description("毛南族")]
+    [Description("Maonan")]
     MaoNanZu = 34,
 
     /// <summary>
-    /// 仡族
+    /// Ge nationality
     /// </summary>
-    [Description("仡族")]
+    [Description("Ge nationality")]
     GeZu = 35,
 
     /// <summary>
-    /// 锡伯族
+    /// Xibe people
     /// </summary>
-    [Description("锡伯族")]
+    [Description("Xibe ethnic group")]
     XiBoZu = 36,
 
     /// <summary>
-    /// 阿昌族
+    /// Achang people
     /// </summary>
-    [Description("阿昌族")]
+    [Description("Achang people")]
     AChangZu = 37,
 
     /// <summary>
-    /// 普米族
+    /// Pumi
     /// </summary>
-    [Description("普米族")]
+    [Description("Pumi")]
     PuMiZu = 38,
 
     /// <summary>
-    /// 塔吉克族
+    /// Tajik
     /// </summary>
-    [Description("塔吉克族")]
+    [Description("Tajik")]
     TaJiKeZu = 39,
 
     /// <summary>
-    /// 怒族
+    /// Nu tribe
     /// </summary>
-    [Description("怒族")]
+    [Description("Nu ethnic group")]
     NuZu = 40,
 
     /// <summary>
-    /// 乌孜别克族
+    /// Uzbek
     /// </summary>
-    [Description("乌孜别克族")]
+    [Description("Uzbek ethnic group")]
     WuZiBieKeZu = 41,
 
     /// <summary>
-    /// 俄罗斯族
+    /// Russian
     /// </summary>
-    [Description("俄罗斯族")]
+    [Description("Russian")]
     ELuoSiZu = 42,
 
     /// <summary>
-    /// 鄂温克族
+    /// Evenki
     /// </summary>
-    [Description("鄂温克族")]
+    [Description("Evenki")]
     EwenKeZu = 43,
 
     /// <summary>
-    /// 德昂族
+    /// De'ang
     /// </summary>
-    [Description("德昂族")]
+    [Description("De'ang")]
     DeAngZu = 44,
 
     /// <summary>
-    /// 保安族
+    /// Baoan people
     /// </summary>
-    [Description("保安族")]
+    [Description("Bao'an ethnic group")]
     BaoAnZu = 45,
 
     /// <summary>
-    /// 裕固族
+    /// Yugu people
     /// </summary>
-    [Description("裕固族")]
+    [Description("Yugur people")]
     YuGuZu = 46,
 
     /// <summary>
-    /// 京族
+    /// Kinh
     /// </summary>
-    [Description("京族")]
+    [Description("Kinh ethnicity")]
     JingZu = 47,
 
     /// <summary>
-    /// 塔塔尔族
+    /// Tatar
     /// </summary>
-    [Description("塔塔尔族")]
+    [Description("Tatar")]
     TaTaErZu = 48,
 
     /// <summary>
-    /// 独龙族
+    /// Dulong tribe
     /// </summary>
-    [Description("独龙族")]
+    [Description("Dulong tribe")]
     DuLongZu = 49,
 
     /// <summary>
-    /// 鄂伦春族
+    /// Oroqen
     /// </summary>
-    [Description("鄂伦春族")]
+    [Description("Oroqen")]
     ELunChunZu = 50,
 
     /// <summary>
-    /// 赫哲族
+    /// Hezhen
     /// </summary>
-    [Description("赫哲族")]
+    [Description("Hezhen")]
     HeZheZu = 51,
 
     /// <summary>
-    /// 门巴族
+    /// Monba
     /// </summary>
-    [Description("门巴族")]
+    [Description("Monba")]
     MenBaZu = 52,
 
     /// <summary>
-    /// 珞巴族
+    /// Lhoba people
     /// </summary>
-    [Description("珞巴族")]
+    [Description("Lhoba people")]
     LuoBaZu = 53,
 
     /// <summary>
-    /// 高山族
+    /// Gaoshan tribe
     /// </summary>
-    [Description("高山族")]
+    [Description("Tibeto-Burman ethnic group")]
     GaoShanZu = 54,
 
     /// <summary>
-    /// 佤族
+    /// Wa
     /// </summary>
-    [Description("佤族")]
+    [Description("Wa")]
     WaZu = 55,
 
     /// <summary>
-    /// 基诺族
+    /// Jinuo people
     /// </summary>
-    [Description("基诺族")]
+    [Description("Jino people")]
     JiNuoZu = 56
 }

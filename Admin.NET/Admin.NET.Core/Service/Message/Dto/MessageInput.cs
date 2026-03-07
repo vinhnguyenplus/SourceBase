@@ -1,55 +1,55 @@
-﻿// Admin.NET 项目的版权、商标、专利和其他相关权利均受相应法律法规的保护。使用本项目应遵守相关法律法规和许可证的要求。
+﻿// The copyright, trademark, patent and other related rights of the Admin.NET project are protected by corresponding laws and regulations. Use of this project shall comply with relevant laws, regulations and license requirements.
 //
-// 本项目主要遵循 MIT 许可证和 Apache 许可证（版本 2.0）进行分发和使用。许可证位于源代码树根目录中的 LICENSE-MIT 和 LICENSE-APACHE 文件。
+// This project is distributed and used primarily under the MIT License and the Apache License (version 2.0). The license is located in the LICENSE-MIT and LICENSE-APACHE files in the root of the source tree.
 //
-// 不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！
+// This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project!
 
 namespace Admin.NET.Core;
 
 public class MessageInput
 {
     /// <summary>
-    /// 接收者用户Id
+    /// Receiver UserId
     /// </summary>
     public long ReceiveUserId { get; set; }
 
     /// <summary>
-    /// 接收者名称
+    /// Receiver name
     /// </summary>
     public string ReceiveUserName { get; set; }
 
     /// <summary>
-    /// 用户ID列表
+    /// User ID list
     /// </summary>
     public List<long> UserIds { get; set; }
 
     /// <summary>
-    /// 消息标题
+    /// Message title
     /// </summary>
     public string Title { get; set; }
 
     /// <summary>
-    /// 消息类型
+    /// Message type
     /// </summary>
     public MessageTypeEnum MessageType { get; set; }
 
     /// <summary>
-    /// 消息内容
+    /// Message content
     /// </summary>
     public string Message { get; set; }
 
     /// <summary>
-    /// 发送者Id
+    /// SenderId
     /// </summary>
     public string SendUserId { get; set; }
 
     /// <summary>
-    /// 发送者名称
+    /// Sender name
     /// </summary>
     public string SendUserName { get; set; }
 
     /// <summary>
-    /// 发送时间
+    /// Send time
     /// </summary>
     public DateTime SendTime { get; set; }
 }

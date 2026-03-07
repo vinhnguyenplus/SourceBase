@@ -2,12 +2,12 @@
 	<div class="sys-stress-test h100 overlay-none">
 		<el-splitter class="smallbar-el-splitter overlay-hidden">
 			<el-splitter-panel size="25%" :min="300">
-				<CardPro title="接口列表" full-height shadow="hover" v-loading="state.loading" body-style="display: flex; flex-direction: column;">
-					<el-select v-model="state.swaggerUrl" @change="queryTreeNode" placeholder="接口分组" class="mb10">
+				<CardPro title="interface list" full-height shadow="hover" v-loading="state.loading" body-style="display: flex; flex-direction: column;">
+					<el-select v-model="state.swaggerUrl" @change="queryTreeNode" placeholder="InterfaceGroup" class="mb10">
 						<el-option :label="item.name" :value="item.url" v-for="(item, index) in state.groupList" :key="index" />
 					</el-select>
                     <div class="mb10" style="display: flex;">
-                        <el-input v-model="state.keywords" placeholder="关键字" clearable style="flex: 1; margin-right: 10px;" />
+                        <el-input v-model="state.keywords" placeholder="Keywords" clearable style="flex: 1; margin-right: 10px;" />
                         <el-button icon="ele-Search" v-reclick="1000" @click="queryTreeNode()" />
                     </div>
                     <el-tree ref="treeRef" class="filter-tree overlay-y"
@@ -30,70 +30,70 @@
 				</CardPro>
 			</el-splitter-panel>
 			<el-splitter-panel :min="200">
-				<CardPro title="缓存数据" full-height shadow="hover"v-loading="state.loading">
+				<CardPro title="Cached data" full-height shadow="hover"v-loading="state.loading">
 					<template #suffix>
                         <div style="display: flex; width: 100%;">
-                            <el-button type="primary" @click="showDialog(undefined)">开始测试</el-button>
+                            <el-button type="primary" @click="showDialog(undefined)">Start testing</el-button>
                         </div>
 					</template>
-					<el-descriptions title="压测参数" label-width="180px" :column="2" class="mb20" border>
-						<el-descriptions-item label="请求方式" label-align="left" align="left">
+					<el-descriptions title="Pressure measurement parameters" label-width="180px" :column="2" class="mb20" border>
+						<el-descriptions-item label="Request Method" label-align="left" align="left">
 							{{ state.ruleForm.requestMethod?.toUpperCase() }}
 						</el-descriptions-item>
-						<el-descriptions-item label="请求地址" label-align="left" align="left">
+						<el-descriptions-item label="Request address" label-align="left" align="left">
 							{{ state.ruleForm.requestUri }}
 						</el-descriptions-item>
-						<el-descriptions-item label="轮数" label-align="left" align="left">
+						<el-descriptions-item label="Number of rounds" label-align="left" align="left">
 							{{ state.ruleForm.numberOfRounds ?? 0 }}
 						</el-descriptions-item>
-						<el-descriptions-item label="每轮请求数" label-align="left" align="left">
+						<el-descriptions-item label="Number of requests per round" label-align="left" align="left">
 							{{ state.ruleForm.numberOfRequests ?? 0 }}
 						</el-descriptions-item>
-						<el-descriptions-item label="最大并发量" label-align="left" align="left">
+						<el-descriptions-item label="Maximum concurrency" label-align="left" align="left">
 							{{ state.ruleForm.maxDegreeOfParallelism ?? 0 }}
 						</el-descriptions-item>
 					</el-descriptions>
-					<el-descriptions title="压测结果" label-width="180px" :column="3" border>
-						<el-descriptions-item label="总用时（秒）" label-align="left" align="left">
+					<el-descriptions title="Pressure test results" label-width="180px" :column="3" border>
+						<el-descriptions-item label="Total Time (seconds)" label-align="left" align="left">
 							{{ (state.result.totalTimeInSeconds ?? 0).toFixed(2) }}
 						</el-descriptions-item>
-						<el-descriptions-item label="成功请求次数" label-align="left" align="left">
+						<el-descriptions-item label="Number of successful requests" label-align="left" align="left">
 							{{ state.result.successfulRequests ?? 0 }}
 						</el-descriptions-item>
-						<el-descriptions-item label="失败请求次数" label-align="left" align="left">
+						<el-descriptions-item label="Number of failed requests" label-align="left" align="left">
 							{{ state.result.failedRequests ?? 0 }}
 						</el-descriptions-item>
-						<el-descriptions-item label="每秒查询率（QPS）" label-align="left" align="left">
+						<el-descriptions-item label="Query rate per second (QPS)" label-align="left" align="left">
 							{{ (state.result.queriesPerSecond ?? 0).toFixed(2) }}
 						</el-descriptions-item>
-						<el-descriptions-item label="最小响应时间（毫秒）" label-align="left" align="left">
+						<el-descriptions-item label="Minimum response time (milliseconds)" label-align="left" align="left">
 							{{ (state.result.minResponseTime ?? 0).toFixed(2) }}
 						</el-descriptions-item>
-						<el-descriptions-item label="最大响应时间（毫秒）" label-align="left" align="left">
+						<el-descriptions-item label="Maximum response time (milliseconds)" label-align="left" align="left">
 							{{ (state.result.maxResponseTime ?? 0).toFixed(2) }}
 						</el-descriptions-item>
-						<el-descriptions-item label="平均响应时间（毫秒）" span="3" label-align="left" align="left">
+						<el-descriptions-item label="Average response time (milliseconds)" span="3" label-align="left" align="left">
 							{{ (state.result.averageResponseTime ?? 0).toFixed(2) }}
 						</el-descriptions-item>
-						<el-descriptions-item label="P10 响应时间（毫秒）" label-align="left" align="left">
+						<el-descriptions-item label="P10 Response Time (ms)" label-align="left" align="left">
 							{{ (state.result.percentile10ResponseTime ?? 0).toFixed(2) }}
 						</el-descriptions-item>
-						<el-descriptions-item label="P25 响应时间（毫秒）" label-align="left" align="left">
+						<el-descriptions-item label="P25 Response Time (ms)" label-align="left" align="left">
 							{{ (state.result.percentile25ResponseTime ?? 0).toFixed(2) }}
 						</el-descriptions-item>
-						<el-descriptions-item label="P50 响应时间（毫秒）" label-align="left" align="left">
+						<el-descriptions-item label="P50 Response Time (ms)" label-align="left" align="left">
 							{{ (state.result.percentile50ResponseTime ?? 0).toFixed(2) }}
 						</el-descriptions-item>
-						<el-descriptions-item label="P75 响应时间（毫秒）" label-align="left" align="left">
+						<el-descriptions-item label="P75 responsetimespace（millimetersecond）" label-align="left" align="left">
 							{{ (state.result.percentile75ResponseTime ?? 0).toFixed(2) }}
 						</el-descriptions-item>
-						<el-descriptions-item label="P90 响应时间（毫秒）" label-align="left" align="left">
+						<el-descriptions-item label="P90 Response Time (ms)" label-align="left" align="left">
 							{{ (state.result.percentile90ResponseTime ?? 0).toFixed(2) }}
 						</el-descriptions-item>
-						<el-descriptions-item label="P99 响应时间（毫秒）" label-align="left" align="left">
+						<el-descriptions-item label="P99 Response Time (ms)" label-align="left" align="left">
 							{{ (state.result.percentile99ResponseTime ?? 0).toFixed(2) }}
 						</el-descriptions-item>
-						<el-descriptions-item label="P999 响应时间（毫秒）" label-align="left" align="left">
+						<el-descriptions-item label="P999 Response Time (ms)" label-align="left" align="left">
 							{{ (state.result.percentile999ResponseTime ?? 0).toFixed(2) }}
 						</el-descriptions-item>
 					</el-descriptions>
@@ -142,7 +142,7 @@ onMounted(async () => {
 	state.data = await getApiList();
 });
 
-// 获取分组列表
+// Get group list
 const getGroupList = async () => {
 	try {
 		const response = await request('/swagger-resources', { method: 'get' });
@@ -166,7 +166,7 @@ const getGroupList = async () => {
 	}
 }
 
-// 接口树节点按钮事件
+// Interface tree node button event
 const treeNodeTest = async (node: any) => {
 	if (node.id == 0) return;
 	state.ruleForm = {
@@ -206,7 +206,7 @@ const showDialog = async (row: any) => {
 	editStressTestRef.value.openDialog(state.ruleForm)
 }
 
-// 刷新数据
+// Refresh data
 const refreshData = (data: StressTestOutput) => {
 	state.result = data;
 }
@@ -235,7 +235,7 @@ const getApiList = (keywords?: string | undefined) => {
 	});
 };
 
-// 查询树节点
+// Query tree nodes
 const queryTreeNode = async () => {
 	state.data = await getApiList(state.keywords);
 }

@@ -1,42 +1,42 @@
-// Admin.NET 项目的版权、商标、专利和其他相关权利均受相应法律法规的保护。使用本项目应遵守相关法律法规和许可证的要求。
+// The copyright, trademark, patent and other related rights of the Admin.NET project are protected by corresponding laws and regulations. Use of this project shall comply with relevant laws, regulations and license requirements.
 //
-// 本项目主要遵循 MIT 许可证和 Apache 许可证（版本 2.0）进行分发和使用。许可证位于源代码树根目录中的 LICENSE-MIT 和 LICENSE-APACHE 文件。
+// This project is distributed and used primarily under the MIT License and the Apache License (version 2.0). The license is located in the LICENSE-MIT and LICENSE-APACHE files in the root of the source tree.
 //
-// 不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！
+// This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project!
 
 using Newtonsoft.Json;
 
 namespace Admin.NET.Core;
 
 /// <summary>
-/// 对象拓展
+/// Object extension
 /// </summary>
 [SuppressSniffer]
 public static partial class ObjectExtension
 {
     /// <summary>
-    /// 类型属性列表映射表
+    /// Type attribute list mapping table
     /// </summary>
     private static readonly ConcurrentDictionary<Type, PropertyInfo[]> PropertyCache = new();
 
     /// <summary>
-    /// 脱敏特性缓存映射表
+    /// Desensitization feature cache mapping table
     /// </summary>
     private static readonly ConcurrentDictionary<PropertyInfo, DataMaskAttribute> AttributeCache = new();
 
     /// <summary>
-    /// 判断类型是否实现某个泛型
+    /// Determine whether a type implements a certain generic
     /// </summary>
-    /// <param name="type">类型</param>
-    /// <param name="generic">泛型类型</param>
+    /// <param name="type">type</param>
+    /// <param name="generic">Generic type</param>
     /// <returns>bool</returns>
     public static bool HasImplementedRawGeneric(this Type type, Type generic)
     {
-        // 检查接口类型
+        // Check interface type
         var isTheRawGenericType = type.GetInterfaces().Any(IsTheRawGenericType);
         if (isTheRawGenericType) return true;
 
-        // 检查类型
+        // Check type
         while (type != null && type != typeof(object))
         {
             isTheRawGenericType = IsTheRawGenericType(type);
@@ -46,12 +46,12 @@ public static partial class ObjectExtension
 
         return false;
 
-        // 判断逻辑
+        // Judgment logic
         bool IsTheRawGenericType(Type type) => generic == (type.IsGenericType ? type.GetGenericTypeDefinition() : type);
     }
 
     /// <summary>
-    /// 将字典转化为QueryString格式
+    /// Convert dictionary to QueryString format
     /// </summary>
     /// <param name="dict"></param>
     /// <param name="urlEncode"></param>
@@ -62,7 +62,7 @@ public static partial class ObjectExtension
     }
 
     /// <summary>
-    /// 将字符串URL编码
+    /// URL encode a string
     /// </summary>
     /// <param name="str"></param>
     /// <returns></returns>
@@ -72,7 +72,7 @@ public static partial class ObjectExtension
     }
 
     /// <summary>
-    /// 对象序列化成Json字符串
+    /// Object serialized into Json string
     /// </summary>
     /// <param name="obj"></param>
     /// <returns></returns>
@@ -87,14 +87,14 @@ public static partial class ObjectExtension
         JsonSerializerSettings setting = new JsonSerializerSettings();
         setting.DateFormatHandling = DateFormatHandling.IsoDateFormat;
         setting.DateTimeZoneHandling = DateTimeZoneHandling.Local;
-        setting.DateFormatString = "yyyy-MM-dd HH:mm:ss"; // 时间格式化
-        setting.ReferenceLoopHandling = ReferenceLoopHandling.Ignore; // 忽略循环引用
+        setting.DateFormatString = "yyyy-MM-dd HH:mm:ss"; // time formatting
+        setting.ReferenceLoopHandling = ReferenceLoopHandling.Ignore; // Ignore circular references
                                                                       //setting.ContractResolver = new HelErpContractResolver("StartTime", customName);
         return setting;
     }
 
     /// <summary>
-    /// Json字符串反序列化成对象
+    /// Deserialize Json string into object
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <param name="json"></param>
@@ -105,7 +105,7 @@ public static partial class ObjectExtension
     }
 
     /// <summary>
-    /// 将object转换为long，若失败则返回0
+    /// Convert object to long, returning 0 if failed
     /// </summary>
     /// <param name="obj"></param>
     /// <returns></returns>
@@ -122,7 +122,7 @@ public static partial class ObjectExtension
     }
 
     /// <summary>
-    /// 将object转换为long，若失败则返回指定值
+    /// Convert object to long, returning the specified value if failed
     /// </summary>
     /// <param name="str"></param>
     /// <param name="defaultValue"></param>
@@ -140,7 +140,7 @@ public static partial class ObjectExtension
     }
 
     /// <summary>
-    /// 将object转换为double，若失败则返回0
+    /// Convert object to double, returning 0 if failed
     /// </summary>
     /// <param name="obj"></param>
     /// <returns></returns>
@@ -157,7 +157,7 @@ public static partial class ObjectExtension
     }
 
     /// <summary>
-    /// 将object转换为double，若失败则返回指定值
+    /// Convert object to double, returning the specified value if failed
     /// </summary>
     /// <param name="str"></param>
     /// <param name="defaultValue"></param>
@@ -175,7 +175,7 @@ public static partial class ObjectExtension
     }
 
     /// <summary>
-    /// 将string转换为DateTime，若失败则返回日期最小值
+    /// Convert string to DateTime, returning the minimum date if failed
     /// </summary>
     /// <param name="str"></param>
     /// <returns></returns>
@@ -226,7 +226,7 @@ public static partial class ObjectExtension
     }
 
     /// <summary>
-    /// 将string转换为DateTime，若失败则返回默认值
+    /// Convert string to DateTime, returning default value if failed
     /// </summary>
     /// <param name="str"></param>
     /// <param name="defaultValue"></param>
@@ -278,7 +278,7 @@ public static partial class ObjectExtension
     }
 
     /// <summary>
-    /// 将 string 时间日期格式转换成字符串 如 {yyyy} => 2024
+    /// Convert string time and date format into string such as {yyyy} => 2024
     /// </summary>
     /// <param name="str"></param>
     /// <returns></returns>
@@ -299,7 +299,7 @@ public static partial class ObjectExtension
     }
 
     /// <summary>
-    /// 是否有值
+    /// Is it valuable?
     /// </summary>
     /// <param name="obj"></param>
     /// <returns></returns>
@@ -309,10 +309,10 @@ public static partial class ObjectExtension
     }
 
     /// <summary>
-    /// 字符串掩码
+    /// String mask
     /// </summary>
-    /// <param name="str">字符串</param>
-    /// <param name="mask">掩码符</param>
+    /// <param name="str">string</param>
+    /// <param name="mask">mask character</param>
     /// <returns></returns>
     public static string Mask(this string str, char mask = '*')
     {
@@ -334,10 +334,10 @@ public static partial class ObjectExtension
     }
 
     /// <summary>
-    /// 身份证号掩码
+    /// ID number mask
     /// </summary>
-    /// <param name="idCard">身份证号</param>
-    /// <param name="mask">掩码符</param>
+    /// <param name="idCard">ID number</param>
+    /// <param name="mask">mask character</param>
     /// <returns></returns>
     public static string MaskIdCard(this string idCard, char mask = '*')
     {
@@ -348,10 +348,10 @@ public static partial class ObjectExtension
     }
 
     /// <summary>
-    /// 邮箱掩码
+    /// Email mask
     /// </summary>
-    /// <param name="email">邮箱</param>
-    /// <param name="mask">掩码符</param>
+    /// <param name="email">Mail</param>
+    /// <param name="mask">mask character</param>
     /// <returns></returns>
     public static string MaskEmail(this string email, char mask = '*')
     {
@@ -362,11 +362,11 @@ public static partial class ObjectExtension
     }
 
     /// <summary>
-    /// 将字符串转为值类型，若没有得到或者错误返回为空
+    /// Convert the string to a value type. If it is not obtained or an error occurs, it returns empty.
     /// </summary>
-    /// <typeparam name="T">指定值类型</typeparam>
-    /// <param name="str">传入字符串</param>
-    /// <returns>可空值</returns>
+    /// <typeparam name="T">Specify value type</typeparam>
+    /// <param name="str">Pass in string</param>
+    /// <returns>Nullable value</returns>
     public static T? ParseTo<T>(this string str) where T : struct
     {
         try
@@ -388,11 +388,11 @@ public static partial class ObjectExtension
     }
 
     /// <summary>
-    /// 将字符串转为值类型，若没有得到或者错误返回为空
+    /// Convert the string to a value type. If it is not obtained or an error occurs, it returns empty.
     /// </summary>
-    /// <param name="str">传入字符串</param>
-    /// <param name="type">目标类型</param>
-    /// <returns>可空值</returns>
+    /// <param name="str">Pass in string</param>
+    /// <param name="type">target type</param>
+    /// <returns>Nullable value</returns>
     public static object ParseTo(this string str, Type type)
     {
         try
@@ -418,12 +418,12 @@ public static partial class ObjectExtension
     }
 
     /// <summary>
-    /// 将一个对象属性值赋给另一个指定对象属性, 只复制相同属性的
+    /// Assign an object property value to another specified object property, copying only those with the same property
     /// </summary>
-    /// <param name="src">原数据对象</param>
-    /// <param name="target">目标数据对象</param>
-    /// <param name="changeProperties">属性集，键为原属性，值为目标属性</param>
-    /// <param name="unChangeProperties">属性集，目标不修改的属性</param>
+    /// <param name="src">original data object</param>
+    /// <param name="target">target data object</param>
+    /// <param name="changeProperties">Attribute set, the key is the original attribute and the value is the target attribute</param>
+    /// <param name="unChangeProperties">Property set, properties that the target does not modify</param>
     public static void CopyTo(object src, object target, Dictionary<string, string> changeProperties = null, string[] unChangeProperties = null)
     {
         if (src == null || target == null)
@@ -472,10 +472,10 @@ public static partial class ObjectExtension
     }
 
     /// <summary>
-    /// 深复制
+    /// deep copy
     /// </summary>
-    /// <typeparam name="T">深复制源对象</typeparam>
-    /// <param name="obj">对象</param>
+    /// <typeparam name="T">Deep copy source object</typeparam>
+    /// <param name="obj">object</param>
     /// <returns></returns>
     public static T DeepCopy<T>(this T obj)
     {
@@ -485,7 +485,7 @@ public static partial class ObjectExtension
     }
 
     /// <summary>
-    /// 对带有<see cref="DataMaskAttribute"/>特性字段进行脱敏处理
+    /// Desensitize fields with the <see cref="DataMaskAttribute"/> attribute
     /// </summary>
     public static T MaskSensitiveData<T>(this T obj) where T : class
     {
@@ -493,23 +493,23 @@ public static partial class ObjectExtension
 
         var type = typeof(T);
 
-        // 获取或缓存属性集合
+        // Get or cache a collection of properties
         var properties = PropertyCache.GetOrAdd(type, t =>
             t.GetProperties(BindingFlags.Public | BindingFlags.Instance)
                 .Where(p => p.PropertyType == typeof(string) && p.GetCustomAttribute<DataMaskAttribute>() != null)
                 .ToArray());
 
-        // 并行处理可写属性
+        // Parallel processing of writable properties
         Parallel.ForEach(properties, prop =>
         {
             if (!prop.CanWrite) return;
 
-            // 获取或缓存特性
+            // Get or cache properties
             var maskAttr = AttributeCache.GetOrAdd(prop, p => p.GetCustomAttribute<DataMaskAttribute>());
 
             if (maskAttr == null) return;
 
-            // 处理非空字符串
+            // Handling non-empty strings
             if (prop.GetValue(obj) is string { Length: > 0 } value)
             {
                 prop.SetValue(obj, maskAttr.Mask(value));

@@ -9,9 +9,9 @@
             </template>
             <div id="preview_content" ref="previewContentRef"></div>
             <template #footer>
-                <el-button :loading="state.waitShowPrinter" type="primary" icon="ele-Printer" @click.stop="print">直接打印</el-button>
-                <el-button type="primary" icon="ele-Printer" @click.stop="toPdf">导出PDF</el-button>
-                <el-button key="close" @click="hideDialog"> 关闭 </el-button>
+                <el-button :loading="state.waitShowPrinter" type="primary" icon="ele-Printer" @click.stop="print">Print directly</el-button>
+                <el-button type="primary" icon="ele-Printer" @click.stop="toPdf">ExportPDF</el-button>
+                <el-button key="close" @click="hideDialog"> Close </el-button>
             </template>
         </el-dialog>
     </div>
@@ -30,16 +30,16 @@ var props = defineProps({
 const state = reactive({
 	dialogVisible: false,
 	waitShowPrinter: false,
-	width: 0, // 纸张宽 mm
-	printData: {}, // 打印数据
-	printType: 1, // 默认浏览器打印
+	width: 0, // Paper width mm
+	printData: {}, // Print data
+	printType: 1, // Default browser printing
 	printParam: {
-		printer: '', // 打印机名称
-		title: '', // 打印任务名称
-		color: false, // 是否打印颜色 默认 true
-		copies: 1, // 打印份数 默认 1
+		printer: '', // Printer name
+		title: '', // Print task name
+		color: false, // Whether to print colors, default true
+		copies: 1, // Number of copies to print Default 1
 	},
-	// 打印参数
+	// Print parameters
 	hiprintTemplate: {} as any,
 });
 
@@ -64,30 +64,30 @@ const showDialog = (hiprintTemplate: any, printData: {}, width = 210, printType 
 const print = () => {
 	state.waitShowPrinter = true;
 	// debugger;
-	// 判断是否已成功连接
+	// Determine whether the connection is successful
 	if (state.printType == 2) {
-		// 注意：连接是异步的
-		// 已连接
-		// 获取打印机列表
+		// Note: The connection is asynchronous
+		// Connected
+		// Get printer list
 		const printerList = state.hiprintTemplate.getPrinterList();
 
 		let sfcz = printerList.some((item: any) => {
 			return item.name == state.printParam.printer;
 		});
 		if (!sfcz) {
-			alert('打印机不存在');
+			alert('Printer does not exist');
 		} else {
-			// 直接打印 将使用系统设置的 默认打印机
+			// Direct printing will use the default printer set by the system
 			state.hiprintTemplate.print2(state.printData, state.printParam);
 
-			// 发送任务到打印机成功
+			// Sending task to printer successfully
 			state.hiprintTemplate.on('printSuccess', function (e: any) {
 				state.waitShowPrinter = false;
 			});
-			// 发送任务到打印机失败
+			// Failed to send job to printer
 			state.hiprintTemplate.on('printError', function (e: any) {
 				state.waitShowPrinter = false;
-				alert('打印失败：' + e);
+				alert('Printing failed:' + e);
 			});
 		}
 	} else {
@@ -104,7 +104,7 @@ const print = () => {
 };
 
 const toPdf = () => {
-	state.hiprintTemplate.toPdf(state.printData, 'PDF文件');
+	state.hiprintTemplate.toPdf(state.printData, 'PDF file');
 };
 
 const hideDialog = () => {

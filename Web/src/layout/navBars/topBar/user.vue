@@ -2,20 +2,20 @@
 	<div class="layout-navbars-breadcrumb-user pr15" :style="{ flex: layoutUserFlexNum }">
 		<el-dropdown :show-timeout="70" :hide-timeout="50" trigger="click" @command="onComponentSizeChange">
 			<div class="layout-navbars-breadcrumb-user-icon">
-				<i class="iconfont icon-ziti" title="组件大小"></i>
+				<i class="iconfont icon-ziti" title="Component size"></i>
 			</div>
 			<template #dropdown>
 				<el-dropdown-menu>
-					<el-dropdown-item command="large" :disabled="state.disabledSize === 'large'">大型</el-dropdown-item>
-					<el-dropdown-item command="default" :disabled="state.disabledSize === 'default'">默认</el-dropdown-item>
-					<el-dropdown-item command="small" :disabled="state.disabledSize === 'small'">小型</el-dropdown-item>
+					<el-dropdown-item command="large" :disabled="state.disabledSize === 'large'">Large</el-dropdown-item>
+					<el-dropdown-item command="default" :disabled="state.disabledSize === 'default'">Default</el-dropdown-item>
+					<el-dropdown-item command="small" :disabled="state.disabledSize === 'small'">Small</el-dropdown-item>
 				</el-dropdown-menu>
 			</template>
 		</el-dropdown>
 		<el-dropdown :show-timeout="70" :hide-timeout="50" trigger="click" @command="onLanguageChange">
 			<div class="layout-navbars-breadcrumb-user-icon">
 				<i class="iconfont" :class="state.disabledI18n === 'en' ? 'icon-fuhao-yingwen' : 'icon-fuhao-zhongwen'"
-					title="语言切换"></i>
+					title="language switch"></i>
 			</div>
 			<template #dropdown>
 				<el-dropdown-menu>
@@ -27,18 +27,18 @@
 			</template>
 		</el-dropdown>
 		<div class="layout-navbars-breadcrumb-user-icon" @click="onSearchClick">
-			<el-icon title="菜单搜索">
+			<el-icon title="Menu search">
 				<ele-Search />
 			</el-icon>
 		</div>
 		<div class="layout-navbars-breadcrumb-user-icon" @click="onLayoutSetingClick">
-			<i class="icon-skin iconfont" title="布局配置"></i>
+			<i class="icon-skin iconfont" title="layout configuration"></i>
 		</div>
 		<div class="layout-navbars-breadcrumb-user-icon">
 			<el-popover placement="bottom" trigger="click" transition="el-zoom-in-top" :width="400" :persistent="false">
 				<template #reference>
 					<el-badge :is-dot="hasUnreadNotice">
-						<el-icon title="消息">
+						<el-icon title="information">
 							<ele-Bell />
 						</el-icon>
 					</el-badge>
@@ -47,11 +47,11 @@
 			</el-popover>
 		</div>
 		<div class="layout-navbars-breadcrumb-user-icon" @click="onScreenfullClick">
-			<i class="iconfont" :title="state.isScreenfull ? '关全屏' : '开全屏'"
+			<i class="iconfont" :title="state.isScreenfull ? 'Exit Fullscreen' : 'Enter Fullscreen'"
 				:class="!state.isScreenfull ? 'icon-fullscreen' : 'icon-tuichuquanping'"></i>
 		</div>
 		<div class="layout-navbars-breadcrumb-user-icon mr10" @click="onOnlineUserClick">
-			<el-icon title="在线用户">
+			<el-icon title="Online users">
 				<ele-User />
 			</el-icon>
 		</div>
@@ -59,12 +59,12 @@
 			<span class="layout-navbars-breadcrumb-user-link">
 				<el-tooltip effect="dark" placement="left">
 					<template #content>
-						账号：{{ userInfos.account }}<br />
-						姓名：{{ userInfos.realName }}<br />
-						电话：{{ userInfos.phone }}<br />
-						邮箱：{{ userInfos.email }}<br />
-						部门：{{ userInfos.orgName }}<br />
-						职位：{{ userInfos.posName }}<br />
+						Account: {{ userInfos.account }}<br />
+						Name: {{ userInfos.realName }}<br />
+						Phone: {{ userInfos.phone }}<br />
+						Email: {{ userInfos.email }}<br />
+						Department: {{ userInfos.orgName }}<br />
+						Position: {{ userInfos.posName }}<br />
 					</template>
 					<img :src="userInfos.avatar" class="layout-navbars-breadcrumb-user-link-photo mr5" />
 				</el-tooltip>
@@ -75,13 +75,13 @@
 			</span>
 			<template #dropdown>
 				<el-dropdown-menu>
-					<!-- <el-dropdown-item command="/dashboard/home">首页</el-dropdown-item> -->
-					<el-dropdown-item :icon="Avatar" command="/system/userCenter">个人中心</el-dropdown-item>
-					<el-dropdown-item :icon="Loading" command="clearCache">清理缓存</el-dropdown-item>
+					<!-- <el-dropdown-item command="/dashboard/home">Home</el-dropdown-item> -->
+					<el-dropdown-item :icon="Avatar" command="/system/userCenter">Personal Center</el-dropdown-item>
+					<el-dropdown-item :icon="Loading" command="clearCache">clear cache</el-dropdown-item>
 					<el-dropdown-item :icon="Switch" divided command="changeTenant"
-						v-if="auth('sysTenant:changeTenant')">切换租户</el-dropdown-item>
-					<el-dropdown-item :icon="Lock" divided command="lockScreen">开启锁屏</el-dropdown-item>
-					<el-dropdown-item :icon="CircleCloseFilled" divided command="logOut">退出登录</el-dropdown-item>
+						v-if="auth('sysTenant:changeTenant')">Switch Tenant</el-dropdown-item>
+					<el-dropdown-item :icon="Lock" divided command="lockScreen">Turn on lock screen</el-dropdown-item>
+					<el-dropdown-item :icon="CircleCloseFilled" divided command="logOut">Log out</el-dropdown-item>
 				</el-dropdown-menu>
 			</template>
 		</el-dropdown>
@@ -112,13 +112,13 @@ import { auth } from '/@/utils/authFunction';
 import { useLangStore } from '/@/stores/useLangStore';
 
 const langStore = useLangStore();
-// 引入组件
+// Introduce components
 const UserNews = defineAsyncComponent(() => import('/@/layout/navBars/topBar/userNews.vue'));
 const Search = defineAsyncComponent(() => import('/@/layout/navBars/topBar/search.vue'));
 const OnlineUser = defineAsyncComponent(() => import('/@/views/system/onlineUser/index.vue'));
 const ChangeTenant = defineAsyncComponent(() => import('./changeTenant.vue'));
 
-// 定义变量内容
+// Define variable content
 const router = useRouter();
 const stores = useUserInfo();
 const storesThemeConfig = useThemeConfig();
@@ -131,10 +131,10 @@ const state = reactive({
 	isScreenfull: false,
 	disabledI18n: 'zh-cn',
 	disabledSize: 'large',
-	noticeList: [] as any, // 站内信列表
-	languages: [] as any, // 语言列表
+	noticeList: [] as any, // Site message list
+	languages: [] as any, // Language list
 });
-// 设置分割样式
+// Set split style
 const layoutUserFlexNum = computed(() => {
 	let num: string | number = '';
 	const { layout, isClassicSplitMenu } = themeConfig.value;
@@ -143,14 +143,14 @@ const layoutUserFlexNum = computed(() => {
 	else num = '';
 	return num;
 });
-// 是否有未读消息
+// Are there any unread messages?
 const hasUnreadNotice = computed(() => {
 	return state.noticeList.some((r: any) => r.readStatus == undefined || r.readStatus == 0);
 });
-// 全屏点击时
+// Full screen click
 const onScreenfullClick = () => {
 	if (!screenfull.isEnabled) {
-		ElMessage.warning('暂不不支持全屏');
+		ElMessage.warning('Full screen is not supported yet');
 		return false;
 	}
 	screenfull.toggle();
@@ -159,11 +159,11 @@ const onScreenfullClick = () => {
 		else state.isScreenfull = false;
 	});
 };
-// 布局配置 icon 点击时
+// Layout configuration icon when clicked
 const onLayoutSetingClick = () => {
 	mittBus.emit('openSettingsDrawer');
 };
-// 下拉菜单点击时
+// When the drop-down menu is clicked
 const onHandleCommandClick = (path: string) => {
 	if (path === 'clearCache') {
 		Local.clear();
@@ -178,17 +178,17 @@ const onHandleCommandClick = (path: string) => {
 		ElMessageBox({
 			closeOnClickModal: false,
 			closeOnPressEscape: false,
-			title: '提示',
-			message: '此操作将退出登录, 是否继续?',
+			title: 'Prompt',
+			message: 'thisOperationwillLog out, YesnoContinue?',
 			type: 'warning',
 			showCancelButton: true,
-			confirmButtonText: '确定',
-			cancelButtonText: '取消',
+			confirmButtonText: 'Confirm',
+			cancelButtonText: 'Cancel',
 			buttonSize: 'default',
 			beforeClose: async (action, instance, done) => {
 				if (action === 'confirm') {
 					instance.confirmButtonLoading = true;
-					instance.confirmButtonText = '退出中';
+					instance.confirmButtonText = 'Exiting';
 					try {
 						await getAPI(SysAuthApi).apiSysAuthLogoutPost();
 					} catch (error) {
@@ -211,15 +211,15 @@ const onHandleCommandClick = (path: string) => {
 		router.push(path);
 	}
 };
-// 菜单搜索点击
+// Menu search click
 const onSearchClick = () => {
 	searchRef.value.openSearch();
 };
-// 在线用户列表
+// Online user list
 const onOnlineUserClick = () => {
 	onlineUserRef.value.openDrawer();
 };
-// 组件大小改变
+// Component size changes
 const onComponentSizeChange = (size: string) => {
 	Local.remove('themeConfig');
 	themeConfig.value.globalComponentSize = size;
@@ -227,7 +227,7 @@ const onComponentSizeChange = (size: string) => {
 	initI18nOrSize('globalComponentSize', 'disabledSize');
 	//window.location.reload();
 };
-// 语言切换
+// language switch
 const onLanguageChange = async (lang: string) => {
 	const langItem = state.languages.find((item: { value: string }) => item.value === lang);
 	if (langItem) {
@@ -243,18 +243,18 @@ const onLanguageChange = async (lang: string) => {
 	other.useTitle();
 	initI18nOrSize('globalI18n', 'disabledI18n');
 };
-// 初始化组件大小/i18n
+// Initialize component size/i18n
 const initI18nOrSize = (value: string, attr: string) => {
 	(<any>state)[attr] = Local.get('themeConfig')[value];
 
-    // 设置菜单高度-横向
+    // Set menu height - landscape
     useCssVar('--el-menu-horizontal-height').value = 'var(--el-menu-item-height-' + themeConfig.value.globalComponentSize + ')';
     useCssVar('--el-menu-horizontal-sub-item-height').value = 'var(--el-menu-item-height-' + themeConfig.value.globalComponentSize + ')';
-    // 设置菜单高度-纵向
+    // Set menu height - portrait
     useCssVar('--el-menu-item-height').value = 'var(--el-menu-item-height-' + themeConfig.value.globalComponentSize + ')';
     useCssVar('--el-menu-sub-item-height').value = 'var(--el-menu-item-height-' + themeConfig.value.globalComponentSize + ')';
 };
-// 页面加载时
+// When the page loads
 onMounted(async () => {
 	state.languages = langStore.languages;
 	if (Local.get('themeConfig')) {
@@ -270,35 +270,35 @@ onMounted(async () => {
 			initI18nOrSize('globalI18n', 'disabledI18n');
 		}
 	}
-	// 手动获取用户桌面通知权限
+	// Manually obtain user desktop notification permissions
 	if (Push.Permission.GRANTED) {
-		// 判断当前是否有权限，没有则手动获取
+		// Determine whether you currently have permission, if not, obtain it manually
 		Push.Permission.request(undefined, undefined);
 	}
-	// 监听浏览器 当前系统是否在当前页
+	// Monitor the browser to see if the current system is on the current page
 	document.addEventListener('visibilitychange', () => {
 		if (!document.hidden) {
-			// 清空关闭消息通知，
+			// Clear and close message notifications,
 			Push.clear();
 		}
 	});
-	// 加载未读的站内信
+	// Load unread site messages
 	var res = await getAPI(SysNoticeApi).apiSysNoticeUnReadListGet();
 	state.noticeList = res.data.result ?? [];
 
-	// 接收站内信
+	// Receive site messages
 	signalR.on('PublicNotice', receiveNotice);
 
-	// // 处理消息已读
+	// // Process message read
 	// mittBus.on('noticeRead', (id) => {
 	// 	const notice = state.noticeList.find((r: any) => r.id == id);
 	// 	if (notice == undefined) return;
 
-	// 	// 设置已读
+	// 	//Set read
 	// 	notice.readStatus = 1;
 	// });
 });
-// // 页面卸载时
+// //When the page is unloaded
 // onUnmounted(() => {
 // 	mittBus.off('noticeRead', () => {});
 // });
@@ -307,15 +307,15 @@ const receiveNotice = (msg: any) => {
 	state.noticeList.unshift(msg);
 
 	ElNotification({
-		title: '提示',
-		message: '您有一条新消息...',
+		title: 'Prompt',
+		message: 'You have a new message...',
 		type: 'info',
 		position: 'bottom-right',
 	});
-	Push.create('提示', {
-		body: '你有一条新的消息',
-		icon: 'logo.png', //public目录下的
-		timeout: 4500, // 通知显示时间，单位为毫秒
+	Push.create('Prompt', {
+		body: 'You have a new message',
+		icon: 'logo.png', // in the public directory
+		timeout: 4500, // Notification display time in milliseconds
 	});
 };
 </script>
@@ -340,7 +340,7 @@ const receiveNotice = (msg: any) => {
 		}
 
         .dropdown-icon {
-            transition: transform 0.3s; /* 添加过渡效果 */
+            transition: transform 0.3s; /* Add toTransition effect */
         }
         &:has(.dropdown-icon)[aria-expanded=true] {
             .dropdown-icon {

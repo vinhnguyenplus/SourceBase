@@ -1,8 +1,8 @@
-﻿// Admin.NET 项目的版权、商标、专利和其他相关权利均受相应法律法规的保护。使用本项目应遵守相关法律法规和许可证的要求。
+﻿// The copyright, trademark, patent and other related rights of the Admin.NET project are protected by corresponding laws and regulations. Use of this project shall comply with relevant laws, regulations and license requirements.
 //
-// 本项目主要遵循 MIT 许可证和 Apache 许可证（版本 2.0）进行分发和使用。许可证位于源代码树根目录中的 LICENSE-MIT 和 LICENSE-APACHE 文件。
+// This project is distributed and used primarily under the MIT License and the Apache License (version 2.0). The license is located in the LICENSE-MIT and LICENSE-APACHE files in the root of the source tree.
 //
-// 不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！
+// This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project!
 
 using Aop.Api.Domain;
 using Newtonsoft.Json;
@@ -13,87 +13,87 @@ namespace Admin.NET.Core.Service;
 public class AlipayFundTransUniTransferInput
 {
     /// <summary>
-    /// 用户ID
+    /// User ID
     /// </summary>
     public long UserId { get; set; }
 
     /// <summary>
-    /// 商户AppId
+    /// MerchantAppId
     /// </summary>
     public string AppId { get; set; }
 
     /// <summary>
-    /// 商家订单号
+    /// Merchant order number
     /// </summary>
     public string OutBizNo { get; set; }
 
     /// <summary>
-    /// 转账金额
+    /// Transfer amount
     /// </summary>
     public decimal TransAmount { get; set; }
 
     /// <summary>
-    /// 业务标题
+    /// business title
     /// </summary>
     public string OrderTitle { get; set; }
 
     /// <summary>
-    /// 备注
+    /// Remark
     /// </summary>
     public string Remark { get; set; }
 
     /// <summary>
-    /// 是否展示付款方别名
+    /// Whether to display the payer alias
     /// </summary>
     public bool PayerShowNameUseAlias { get; set; }
 
     /// <summary>
-    /// 收款方证件类型
+    /// Payee ID type
     /// </summary>
     public AlipayCertTypeEnum? CertType { get; set; }
 
     /// <summary>
-    /// 收款方证件号码，条件必填
+    /// Payee ID number, required
     /// </summary>
     public string CertNo { get; set; }
 
     /// <summary>
-    /// 收款方身份标识
+    /// Payee ID
     /// </summary>
     public string Identity { get; set; }
 
     /// <summary>
-    /// 收款方真实姓名
+    /// Payee’s real name
     /// </summary>
     public string Name { get; set; }
 
     /// <summary>
-    /// 收款方身份标识类型
+    /// Payee ID type
     /// </summary>
     public AlipayIdentityTypeEnum? IdentityType { get; set; }
 }
 
 /// <summary>
-///  统一收单下单并支付页面接口输入参数
+///  Unified order collection and payment page interface input parameters
 /// </summary>
 public class AlipayTradePagePayInput
 {
     /// <summary>
-    /// 商户订单号
+    /// Merchant order number
     /// </summary>
-    [Required(ErrorMessage = "商户订单号不能为空")]
+    [Required(ErrorMessage = "Merchant order number cannot be empty")]
     public string OutTradeNo { get; set; }
 
     /// <summary>
-    /// 订单总金额
+    /// Total order amount
     /// </summary>
-    [Required(ErrorMessage = "订单总金额不能为空")]
+    [Required(ErrorMessage = "The total order amount cannot be empty")]
     public string TotalAmount { get; set; }
 
     /// <summary>
-    /// 订单标题
+    /// Order title
     /// </summary>
-    [Required(ErrorMessage = "订单标题不能为空")]
+    [Required(ErrorMessage = "Order title cannot be empty")]
     public string Subject { get; set; }
 
     /// <summary>
@@ -102,33 +102,33 @@ public class AlipayTradePagePayInput
     public string Body { get; set; }
 
     /// <summary>
-    /// 超时时间
+    /// timeout
     /// </summary>
     public string TimeoutExpress { get; set; }
 
     /// <summary>
-    /// 二维码宽度
+    /// QR code width
     /// </summary>
-    [Required(ErrorMessage = "二维码宽度不能为空")]
+    [Required(ErrorMessage = "QR code width cannot be empty")]
     public int? QrcodeWidth { get; set; }
 
     /// <summary>
-    /// 业务参数
+    /// Business parameters
     /// </summary>
     public ExtendParams ExtendParams { get; set; }
 
     /// <summary>
-    /// 商户业务数据
+    /// Merchant business data
     /// </summary>
     public Dictionary<string, object> BusinessParams { get; set; }
 
     /// <summary>
-    /// 开票信息
+    /// Billing information
     /// </summary>
     public InvoiceInfo InvoiceInfo { get; set; }
 
     /// <summary>
-    /// 外部买家信息
+    /// External buyer information
     /// </summary>
     public ExtUserInfo ExtUserInfo { get; set; }
 }
@@ -136,25 +136,25 @@ public class AlipayTradePagePayInput
 public class AlipayPreCreateInput
 {
     /// <summary>
-    /// 商户订单号
+    /// Merchant order number
     /// </summary>
-    [Required(ErrorMessage = "商户订单号不能为空")]
+    [Required(ErrorMessage = "Merchant order number cannot be empty")]
     public string OutTradeNo { get; set; }
 
     /// <summary>
-    /// 订单总金额
+    /// Total order amount
     /// </summary>
-    [Required(ErrorMessage = "订单总金额不能为空")]
+    [Required(ErrorMessage = "The total order amount cannot be empty")]
     public string TotalAmount { get; set; }
 
     /// <summary>
-    /// 订单标题
+    /// Order title
     /// </summary>
-    [Required(ErrorMessage = "订单标题不能为空")]
+    [Required(ErrorMessage = "Order title cannot be empty")]
     public string Subject { get; set; }
 
     /// <summary>
-    /// 超时时间
+    /// timeout
     /// </summary>
     public string TimeoutExpress { get; set; }
 }
@@ -162,7 +162,7 @@ public class AlipayPreCreateInput
 public class AlipayAuthInfoInput
 {
     /// <summary>
-    /// 用户Id
+    /// UserId
     /// </summary>
 
     [JsonProperty("user_id")]
@@ -171,7 +171,7 @@ public class AlipayAuthInfoInput
     public string UserId { get; set; }
 
     /// <summary>
-    /// 授权码
+    /// Authorization code
     /// </summary>
     [JsonProperty("auth_code")]
     [JsonPropertyName("auth_code")]

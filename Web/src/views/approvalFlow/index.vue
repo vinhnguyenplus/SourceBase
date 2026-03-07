@@ -4,32 +4,32 @@
 			<el-form :model="state.queryParams" ref="queryForm">
 				<el-row :gutter="35">
 					<el-col :xs="24" :sm="12" :md="12" :lg="8" :xl="4" class="mb10">
-						<el-form-item label="关键字">
-							<el-input v-model="state.queryParams.keyword" placeholder="请输入模糊查询关键字" clearable />
+						<el-form-item label="Keywords">
+							<el-input v-model="state.queryParams.keyword" placeholder="Please enter fuzzy search keywords" clearable />
 						</el-form-item>
 					</el-col>
 					<el-col :xs="24" :sm="12" :md="12" :lg="8" :xl="4" class="mb10" v-if="showAdvanceQueryUI">
-						<el-form-item label="编号">
-							<el-input v-model="state.queryParams.code" placeholder="请输入编号" clearable />
+						<el-form-item label="Number">
+							<el-input v-model="state.queryParams.code" placeholder="Please enter number" clearable />
 						</el-form-item>
 					</el-col>
 					<el-col :xs="24" :sm="12" :md="12" :lg="8" :xl="4" class="mb10" v-if="showAdvanceQueryUI">
-						<el-form-item label="名称">
-							<el-input v-model="state.queryParams.name" placeholder="请输入名称" clearable />
+						<el-form-item label="name">
+							<el-input v-model="state.queryParams.name" placeholder="Please enter a name" clearable />
 						</el-form-item>
 					</el-col>
 					<el-col :xs="24" :sm="12" :md="12" :lg="8" :xl="4" class="mb10" v-if="showAdvanceQueryUI">
-						<el-form-item label="备注">
-							<el-input v-model="state.queryParams.remark" placeholder="请输入备注" clearable />
+						<el-form-item label="Remarks">
+							<el-input v-model="state.queryParams.remark" placeholder="Please enter a note" clearable />
 						</el-form-item>
 					</el-col>
 					<el-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12" class="mb10">
 						<el-form-item>
 							<el-button-group>
-								<el-button type="primary" icon="ele-Search" @click="handleQuery"> 查询 </el-button>
-								<el-button icon="ele-Refresh" @click="() => (state.queryParams = {})"> 重置 </el-button>
+								<el-button type="primary" icon="ele-Search" @click="handleQuery"> Query </el-button>
+								<el-button icon="ele-Refresh" @click="() => (state.queryParams = {})">Reset </el-button>
 							</el-button-group>
-							<el-button type="primary" icon="ele-Plus" @click="openAddApprovalFlow" style="margin-left: 30px"> 新增 </el-button>
+							<el-button type="primary" icon="ele-Plus" @click="openAddApprovalFlow" style="margin-left: 30px"> Add New </el-button>
 							<el-button icon="ele-ArrowDown" @click="changeAdvanceQueryUI" v-if="!showAdvanceQueryUI" style="margin-left: 5px" text> </el-button>
 							<el-button icon="ele-ArrowUp" @click="changeAdvanceQueryUI" v-if="showAdvanceQueryUI" style="margin-left: 5px" text> </el-button>
 						</el-form-item>
@@ -39,29 +39,29 @@
 		</el-card>
 		<el-card class="full-table" shadow="hover" style="margin-top: 5px">
 			<el-table :data="state.tableData" style="width: 100%" v-loading="state.loading" row-key="id" border>
-				<el-table-column type="index" label="序号" width="55" align="center" />
-				<el-table-column prop="code" label="编号" width="140" show-overflow-tooltip />
-				<el-table-column prop="name" label="名称" show-overflow-tooltip />
-				<el-table-column prop="formJson" label="表单" align="center" show-overflow-tooltip>
+				<el-table-column type="index" label="No" width="55" align="center" />
+				<el-table-column prop="code" label="Number" width="140" show-overflow-tooltip />
+				<el-table-column prop="name" label="name" show-overflow-tooltip />
+				<el-table-column prop="formJson" label="form" align="center" show-overflow-tooltip>
 					<template #default="scope">
-						<el-button icon="ele-Edit" size="small" text type="primary" @click="openEditFormDialog(scope.row)"> 表单 </el-button>
+						<el-button icon="ele-Edit" size="small" text type="primary" @click="openEditFormDialog(scope.row)"> form </el-button>
 					</template>
 				</el-table-column>
-				<el-table-column prop="flowJson" label="流程" align="center" show-overflow-tooltip>
+				<el-table-column prop="flowJson" label="Process" align="center" show-overflow-tooltip>
 					<template #default="scope">
-						<el-button icon="ele-Edit" size="small" text type="primary" @click="openEditFlowDialog(scope.row)"> 流程 </el-button>
+						<el-button icon="ele-Edit" size="small" text type="primary" @click="openEditFlowDialog(scope.row)"> Process </el-button>
 					</template>
 				</el-table-column>
-				<el-table-column label="修改记录" width="100" align="center" show-overflow-tooltip>
+				<el-table-column label="Modify records" width="100" align="center" show-overflow-tooltip>
 					<template #default="scope">
 						<ModifyRecord :data="scope.row" />
 					</template>
 				</el-table-column>
-				<el-table-column label="操作" width="200" align="center" fixed="right" show-overflow-tooltip>
+				<el-table-column label="Operation" width="200" align="center" fixed="right" show-overflow-tooltip>
 					<template #default="scope">
-						<el-button icon="ele-View" size="small" text type="primary" @click="openDetailDialog(scope.row)"> 查看 </el-button>
-						<el-button icon="ele-Edit" size="small" text type="primary" @click="openEditApprovalFlow(scope.row)"> 编辑 </el-button>
-						<el-button icon="ele-Delete" size="small" text type="primary" @click="delApprovalFlow(scope.row)"> 删除 </el-button>
+						<el-button icon="ele-View" size="small" text type="primary" @click="openDetailDialog(scope.row)"> View </el-button>
+						<el-button icon="ele-Edit" size="small" text type="primary" @click="openEditApprovalFlow(scope.row)"> Edit </el-button>
+						<el-button icon="ele-Delete" size="small" text type="primary" @click="delApprovalFlow(scope.row)"> Delete </el-button>
 					</template>
 				</el-table-column>
 			</el-table>
@@ -126,12 +126,12 @@ onMounted(async () => {
 	handleQuery();
 });
 
-// 改变高级查询的控件显示状态
+// Change the display state of advanced query controls
 const changeAdvanceQueryUI = () => {
 	showAdvanceQueryUI.value = !showAdvanceQueryUI.value;
 };
 
-// 查询操作
+// Query operation
 const handleQuery = async () => {
 	state.loading = true;
 	let params = Object.assign(state.queryParams, state.tableParams);
@@ -141,37 +141,37 @@ const handleQuery = async () => {
 	state.loading = false;
 };
 
-// 打开新增页面
+// Open new page
 const openAddApprovalFlow = () => {
-	state.dialogTitle = '添加审批流';
+	state.dialogTitle = 'Add approval flow';
 	editDialogRef.value.openDialog({ status: 1 });
 };
 
-// 打开编辑页面
+// Open the edit page
 const openEditApprovalFlow = (row: ApprovalFlowOutput) => {
-	state.dialogTitle = '编辑审批流';
+	state.dialogTitle = 'Edit approval flow';
 	editDialogRef.value.openDialog(row);
 };
 
-// 打开打印页面
+// Open print page
 const openEditDialog = (row: ApprovalFlowOutput) => {
-	state.dialogTitle = '编辑审批流';
+	state.dialogTitle = 'Edit approval flow';
 	editDialogRef.value.openDialog(row);
 };
 
-// 打开打印页面
+// Open print page
 const openDetailDialog = (row: ApprovalFlowOutput) => {
-	state.dialogTitle = '查看审批流';
+	state.dialogTitle = 'ViewApproval workflow';
 	detailDialogRef.value.openDialog(row);
 };
 
 const openEditFormDialog = (row: ApprovalFlowOutput) => {
-	state.dialogTitle = '编辑表单';
+	state.dialogTitle = 'edit form';
 	editFormDialogRef.value.openDialog(row);
 };
 
 const openEditFlowDialog = (row: ApprovalFlowOutput) => {
-	state.dialogTitle = '编辑流程';
+	state.dialogTitle = 'Editing process';
 	editFlowDialogRef.value.openDialog(row);
 };
 
@@ -180,30 +180,30 @@ const handleFlow = (json: string) => {
 	handleQuery();
 };
 
-// 删除
+// delete
 const delApprovalFlow = (row: ApprovalFlowOutput) => {
-	ElMessageBox.confirm(`确定要删除吗?`, '提示', {
-		confirmButtonText: '确定',
-		cancelButtonText: '取消',
+	ElMessageBox.confirm(`ConfirmwantDelete??`, 'Prompt', {
+		confirmButtonText: 'Confirm',
+		cancelButtonText: 'Cancel',
 		type: 'warning',
 	})
 		.then(async () => {
 			if (row.id) {
 				await getAPI(ApprovalFlowApi).apiApprovalFlowDeletePost({ id: row.id });
 				handleQuery();
-				ElMessage.success('删除成功');
+				ElMessage.success('Deleted successfully');
 			}
 		})
 		.catch(() => {});
 };
 
-// 改变页面容量
+// Change page capacity
 const handleSizeChange = (val: number) => {
 	state.tableParams.pageSize = val;
 	handleQuery();
 };
 
-// 改变页码序号
+// Change page number
 const handleCurrentChange = (val: number) => {
 	state.tableParams.page = val;
 	handleQuery();

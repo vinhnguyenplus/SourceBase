@@ -1,8 +1,8 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * 钉钉开放平台
- * 集成钉钉开放平台<br/><u><b><font color='FF0000'> 👮不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！</font></b></u>
+ * DingTalkOpen Platform
+ * IntegrationDingTalkOpen Platform<br/><u><b><font color='FF0000'> 👮This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project! </font></b></u>
  *
  * OpenAPI spec version: 1.0.0
  * 
@@ -21,7 +21,7 @@
 export interface DingTalkOpenDeliverModel {
 
     /**
-     * 用于发送卡片的机器人编码。
+     * Used for sendingcardrobotEncoding。
      *
      * @type {string}
      * @memberof DingTalkOpenDeliverModel
@@ -29,7 +29,7 @@ export interface DingTalkOpenDeliverModel {
     robotCode?: string | null;
 
     /**
-     * 消息@人。格式：{\"key\":\"value\"}。key：用户的userId value：用户名
+     * information@Person。Format：{\"key\":\"value\"}。key：UserofuserId value：Username
      *
      * @type {{ [key: string]: string; }}
      * @memberof DingTalkOpenDeliverModel
@@ -37,7 +37,7 @@ export interface DingTalkOpenDeliverModel {
     atUserIds?: { [key: string]: string; } | null;
 
     /**
-     * 指定接收人的userId。
+     * Designated recipient'suserId。
      *
      * @type {Array<string>}
      * @memberof DingTalkOpenDeliverModel
@@ -45,7 +45,7 @@ export interface DingTalkOpenDeliverModel {
     recipients?: Array<string> | null;
 
     /**
-     * 扩展字段，示例如下：{\"key\":\"value\"}
+     * ExpandField，An example is as follows：{\"key\":\"value\"}
      *
      * @type {{ [key: string]: string; }}
      * @memberof DingTalkOpenDeliverModel
@@ -53,7 +53,7 @@ export interface DingTalkOpenDeliverModel {
     extension?: { [key: string]: string; } | null;
 
     /**
-     * IM机器人单聊若未设置其他投放属性，需设置spaeType为IM_ROBOT。
+     * IMRobotPrivate chatifNot yetSettingsOtherLaunchAttribute，Need to setspaeTypeforIM_ROBOT。
      *
      * @type {string}
      * @memberof DingTalkOpenDeliverModel
@@ -61,7 +61,7 @@ export interface DingTalkOpenDeliverModel {
     spaceType?: string | null;
 
     /**
-     * 过期时间戳。若使用topOpenDeliverModel对象，则该字段必填。
+     * ExpiredTimestamp。If usedtopOpenDeliverModelObject，then theFieldRequired。
      *
      * @type {number}
      * @memberof DingTalkOpenDeliverModel
@@ -69,7 +69,7 @@ export interface DingTalkOpenDeliverModel {
     expiredTimeMillis?: number;
 
     /**
-     * 可以查看该吊顶卡片的userId。
+     * OkayViewThis ceilingcardofuserId。
      *
      * @type {Array<string>}
      * @memberof DingTalkOpenDeliverModel
@@ -77,7 +77,7 @@ export interface DingTalkOpenDeliverModel {
     userIds?: Array<string> | null;
 
     /**
-     * 可以查看该吊顶卡片的设备：android｜ios｜win｜mac。
+     * OkayViewThis ceilingcardequipment：android｜ios｜win｜mac。
      *
      * @type {Array<string>}
      * @memberof DingTalkOpenDeliverModel
@@ -85,7 +85,7 @@ export interface DingTalkOpenDeliverModel {
     platforms?: Array<string> | null;
 
     /**
-     * 业务标识。
+     * Business Identifier。
      *
      * @type {string}
      * @memberof DingTalkOpenDeliverModel
@@ -93,7 +93,7 @@ export interface DingTalkOpenDeliverModel {
     bizTag?: string | null;
 
     /**
-     * 协作场域下的排序时间。
+     * In the context of collaborationSorttimespace。
      *
      * @type {number}
      * @memberof DingTalkOpenDeliverModel
@@ -101,7 +101,7 @@ export interface DingTalkOpenDeliverModel {
     gmtTimeLine?: number;
 
     /**
-     * 员工userId信息
+     * EmployeeuserIdInformation
      *
      * @type {string}
      * @memberof DingTalkOpenDeliverModel

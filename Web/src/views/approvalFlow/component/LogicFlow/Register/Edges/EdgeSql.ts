@@ -5,13 +5,13 @@ class CustomEdge2 extends BezierEdge { }
 class CustomEdgeModel2 extends BezierEdgeModel {
     getEdgeStyle() {
         const style = super.getEdgeStyle();
-        // svg属性
+        // svg attribute
         style.strokeWidth = 1;
         style.stroke = '#ababac';
         return style;
     }
     /**
-     * 重写此方法，使保存数据是能带上锚点数据。
+     * Override this method，makesaveDataYesCan bring an anchor pointData。
      */
     getData() {
         const data = super.getData();
@@ -20,7 +20,7 @@ class CustomEdgeModel2 extends BezierEdgeModel {
         return data;
     }
     /**
-     * 给边自定义方案，使其支持基于锚点的位置更新边的路径
+     * Give the edgeCustomizePlan，Make it support anchor-based positioningUpdatePath of the edge
      */
     updatePathByAnchor() {
         // TODO
@@ -42,7 +42,7 @@ class CustomEdgeModel2 extends BezierEdgeModel {
             y: targetAnchor.y,
         };
         this.updateEndPoint(endPoint);
-        // 这里需要将原有的pointsList设置为空，才能触发bezier的自动计算control点。
+        // Here you need to set the original pointsList to empty to trigger bezier's automatic calculation of control points.
         this.pointsList = [];
         this.initPoints();
     }

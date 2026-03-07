@@ -55,93 +55,93 @@ var calendar = (function () {
 
   var festival = {
     '1-1': {
-      title: '元旦节'
+      title: "New Year's Day"
     },
     '2-14': {
-      title: '情人节'
+      title: 'Valentines Day'
     },
     '5-1': {
-      title: '劳动节'
+      title: 'labor day'
     },
     '5-4': {
-      title: '青年节'
+      title: 'Youth Day'
     },
     '6-1': {
-      title: '儿童节'
+      title: 'childrens day'
     },
     '9-10': {
-      title: '教师节'
+      title: 'teachers day'
     },
     '10-1': {
-      title: '国庆节'
+      title: 'National Day'
     },
     '12-25': {
-      title: '圣诞节'
+      title: 'Christmas'
     },
     '3-8': {
-      title: '妇女节'
+      title: 'womens day'
     },
     '3-12': {
-      title: '植树节'
+      title: 'Arbor Day'
     },
     '4-1': {
-      title: '愚人节'
+      title: 'April Fools Day'
     },
     '5-12': {
-      title: '护士节'
+      title: 'Nurses Day'
     },
     '7-1': {
-      title: '建党节'
+      title: 'Party Founding Day'
     },
     '8-1': {
-      title: '建军节'
+      title: 'Army Day'
     },
     '12-24': {
-      title: '平安夜'
+      title: 'Christmas Eve'
     }
   };
   var lFestival = {
     '12-30': {
-      title: '除夕'
+      title: 'New Years Eve'
     },
     '1-1': {
-      title: '春节'
+      title: 'Spring Festival'
     },
     '1-15': {
-      title: '元宵节'
+      title: 'YuanNight Festival'
     },
     '2-2': {
-      title: '龙抬头'
+      title: 'Dragon Raising Its Head'
     },
     '5-5': {
-      title: '端午节'
+      title: 'Dragon Boat Festival'
     },
     '7-7': {
-      title: '七夕节'
+      title: 'Qixi Festival'
     },
     '7-15': {
-      title: '中元节'
+      title: 'Hungry Ghost Festival'
     },
     '8-15': {
-      title: '中秋节'
+      title: 'Mid-Autumn Festival'
     },
     '9-9': {
-      title: '重阳节'
+      title: 'Double Ninth Festival'
     },
     '10-1': {
-      title: '寒衣节'
+      title: 'Winter Clothes Festival'
     },
     '10-15': {
-      title: '下元节'
+      title: 'Lower Prime Festival'
     },
     '12-8': {
-      title: '腊八节'
+      title: 'Laba Festival'
     },
     '12-23': {
-      title: '北方小年'
+      title: 'Northern Little New Year'
     },
     '12-24': {
-      title: '南方小年'
+      title: 'Southern Little New Year'
     }
   };
 
@@ -153,107 +153,107 @@ var calendar = (function () {
   var nStr3 = ["\u6B63", "\u4E8C", "\u4E09", "\u56DB", "\u4E94", "\u516D", "\u4E03", "\u516B", "\u4E5D", "\u5341", "\u51AC", "\u814A"];
 
   /**
-   * @1900-2100区间内的公历、农历互转
+   * @1900-2100Gregorian calendar within the interval、Lunar Calendar Conversion
    * @charset UTF-8
-   * @Author  Jea杨(JJonline@JJonline.Cn)
+   * @Author  JeaYang(JJonline@JJonline.Cn)
    * @Time    2014-7-21
    * @Time    2016-8-13 Fixed 2033hex、Attribution Annals
    * @Time    2016-9-25 Fixed lunar LeapMonth Param Bug
    * @Time    2017-7-24 Fixed use getTerm Func Param Error.use solar year,NOT lunar year
    * @Version 1.0.3
-   * @公历转农历：calendar.solar2lunar(1987,11,01); //[you can ignore params of prefix 0]
-   * @农历转公历：calendar.lunar2solar(1987,09,10); //[you can ignore params of prefix 0]
+   * @Convert Gregorian calendar to Lunar calendar：calendar.solar2lunar(1987,11,01); //[you can ignore params of prefix 0]
+   * @Convert lunar calendar to Gregorian calendar：calendar.lunar2solar(1987,09,10); //[you can ignore params of prefix 0]
    */
   var calendar = {
     /**
-     * 农历1900-2100的润大小信息表
+     * Lunar calendar1900-2100Moisture Size Information Table
      * @Array Of Property
      * @return Hex
      */
     lunarInfo: lunarInfo,
     /**
-     * 公历每个月份的天数普通表
+     * The months of the Gregorian calendarskyNumber ordinary table
      * @Array Of Property
      * @return Number
      */
     solarMonth: solarMonth,
     /**
-     * 天干地支之天干速查表
-     * @Array Of Property trans["甲","乙","丙","丁","戊","己","庚","辛","壬","癸"]
+     * skyHeavenly Stems and Earthly BranchesskyDry Quick Reference Table
+     * @Array Of Property trans["First","B","C","Man","Wu","self","Geng","pungent","the ninth of the ten Heavenly Stems","Gui"]
      * @return Cn string
      */
     Gan: Gan,
     /**
-     * 天干地支之地支速查表
+     * skyQuick Reference Table of Heavenly Stems and Earthly Branches
      * @Array Of Property
-     * @trans["子","丑","寅","卯","辰","巳","午","未","申","酉","戌","亥"]
+     * @trans["child","ugly","Tiger","Mao","Chen","Si (the sixth Earthly Branch in the Chinese zodiac)","noon","Not yet","Apply","You (the tenth Earthly Branch)","Xu","Hai"]
      * @return Cn string
      */
     Zhi: Zhi,
     /**
-     * 天干地支之地支速查表<=>生肖
+     * skyQuick Reference Table of Heavenly Stems and Earthly Branches<=>Chinese zodiac
      * @Array Of Property
-     * @trans["鼠","牛","虎","兔","龙","蛇","马","羊","猴","鸡","狗","猪"]
+     * @trans["rat","Ox","Tiger","Rabbit","dragon","snake","Horse","sheep","monkey","chicken","dog","pig"]
      * @return Cn string
      */
     Animals: ChineseZodiac,
     /**
-     * 阳历节日
+     * Solar Calendar Festivalday
      */
     festival: festival,
     /**
-     * 农历节日
+     * Lunar calendar festivalday
      */
     lFestival: lFestival,
     /**
-     * 24节气速查表
+     * 24Quick Reference Table of Solar Terms
      * @Array Of Property
-     * @trans["小寒","大寒","立春","雨水","惊蛰","春分","清明","谷雨","立夏","小满","芒种","夏至","小暑","大暑","立秋","处暑","白露","秋分","寒露","霜降","立冬","小雪","大雪","冬至"]
+     * @trans["Minor Cold","Great Cold","Beginning of spring","rainwater","Waking of Insects","Spring Equinox","Qingming","Grain Rain","Beginning of Summer","Grain Full","Miscanthus","summer solstice","Lesser Heat","Great Heat","beginning of autumn","End of Heat","White Dew","autumnal equinox","cold dew","frost","Beginning of Winter","Xiaoxue","heavy snow","winter solstice"]
      * @return Cn string
      */
     solarTerm: solarTerm,
     /**
-     * 1900-2100各年的24节气日期速查表
+     * 1900-2100of each year24Solar termsdayPeriod Quick Reference Table
      * @Array Of Property
      * @return 0x string For splice
      */
     sTermInfo: sTermInfo,
     /**
-     * 数字转中文速查表
+     * digital conversioninQuick Reference Table
      * @Array Of Property
-     * @trans ['日','一','二','三','四','五','六','七','八','九','十']
+     * @trans ['day','one','Two','Three','Four','five','Six','Seven','eight','Nine','ten']
      * @return Cn string
      */
     nStr1: nStr1,
     /**
-     * 日期转农历称呼速查表
+     * dayQuick Reference Table for Converting Dates to the Lunar Calendar
      * @Array Of Property
-     * @trans ['初','十','廿','卅']
+     * @trans ['Beginning','ten','Twenty','thirty']
      * @return Cn string
      */
     nStr2: nStr2,
     /**
-     * 月份转农历称呼速查表
+     * Quick Reference Table for Converting Months to Lunar Calendar Names
      * @Array Of Property
-     * @trans ['正','一','二','三','四','五','六','七','八','九','十','冬','腊']
+     * @trans ['just','one','Two','Three','Four','five','Six','Seven','eight','Nine','ten','Winter','preserved']
      * @return Cn string
      */
     nStr3: nStr3,
     /**
-     * 返回默认定义的阳历节日
+     * ReturnDefaultDefined solar calendar festivalday
      */
     getFestival: function getFestival() {
       return this.festival;
     },
     /**
-     * 返回默认定义的内容里节日
+     * ReturnDefaultdefinedcontentinternal jointday
      */
     getLunarFestival: function getLunarFestival() {
       return this.lFestival;
     },
     /**
      *
-     * @param param {Object} 按照festival的格式输入数据，设置阳历节日
+     * @param param {Object} According tofestivalinput in the formatData，Set Solar Calendar Festivalday
      */
     setFestival: function setFestival() {
       var param = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
@@ -261,14 +261,14 @@ var calendar = (function () {
     },
     /**
      *
-     * @param param {Object} 按照lFestival的格式输入数据，设置农历节日
+     * @param param {Object} According tolFestivalinput in the formatData，Set lunar calendar festivalday
      */
     setLunarFestival: function setLunarFestival() {
       var param = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
       this.lFestival = param;
     },
     /**
-     * 返回农历y年一整年的总天数
+     * Return to the lunar calendaryYearonewholetotal of the yearskynumber
      * @param y lunar Year
      * @return Number
      * @eg:var count = calendar.lYearDays(1987) ;//count=387
@@ -282,17 +282,17 @@ var calendar = (function () {
       return sum + this.leapDays(y);
     },
     /**
-     * 返回农历y年闰月是哪个月；若y年没有闰月 则返回0
+     * Return to the lunar calendaryLeap monthYesWhich month；ifyThe year has no leap month then return0
      * @param y lunar Year
      * @return Number (0-12)
      * @eg:var leapMonth = calendar.leapMonth(1987) ;//leapMonth=6
      */
     leapMonth: function leapMonth(y) {
-      //闰字编码 \u95f0
+      //Leap character encoding \u95f0
       return this.lunarInfo[y - 1900] & 0xf;
     },
     /**
-     * 返回农历y年闰月的天数 若该年没有闰月则返回0
+     * Return to the lunar calendaryof the leap monthskynumber If there is no leap month in that year, then return0
      * @param y lunar Year
      * @return Number (0、29、30)
      * @eg:var leapMonthDay = calendar.leapDays(1987) ;//leapMonthDay=29
@@ -304,7 +304,7 @@ var calendar = (function () {
       return 0;
     },
     /**
-     * 返回农历y年m月（非闰月）的总天数，计算m为闰月时的天数请使用leapDays方法
+     * Return to the lunar calendaryYearmMoon（Non-leap month）overallskynumber，Calculatemfor a leap monthtimeofskyPlease use numbersleapDaysMethod
      * @param y lunar Year
      * @param m lunar Month
      * @return Number (-1、29、30)
@@ -313,11 +313,11 @@ var calendar = (function () {
     monthDays: function monthDays(y, m) {
       if (m > 12 || m < 1) {
         return -1;
-      } //月份参数从1至12，参数错误返回-1
+      } // The month parameter ranges from 1 to 12, and -1 is returned for parameter errors.
       return this.lunarInfo[y - 1900] & 0x10000 >> m ? 30 : 29;
     },
     /**
-     * 返回公历(!)y年m月的天数
+     * Return to Gregorian calendar(!)yYearmof the moonskynumber
      * @param y solar Year
      * @param m solar Month
      * @return Number (-1、28、29、30、31)
@@ -326,29 +326,29 @@ var calendar = (function () {
     solarDays: function solarDays(y, m) {
       if (m > 12 || m < 1) {
         return -1;
-      } //若参数错误 返回-1
+      } // If the parameter is incorrect, return -1
       var ms = m - 1;
       if (ms === 1) {
-        //2月份的闰平规律测算后确认返回28或29
+        //The leap level pattern in February is calculated and confirmed to return 28 or 29.
         return y % 4 === 0 && y % 100 !== 0 || y % 400 === 0 ? 29 : 28;
       } else {
         return this.solarMonth[ms];
       }
     },
     /**
-     * 农历年份转换为干支纪年
-     * @param  lYear 农历年的年份数
+     * Convert lunar calendar year to heavenly stems and earthly branches
+     * @param  lYear The year number of the lunar calendar
      * @return Cn string
      */
     toGanZhiYear: function toGanZhiYear(lYear) {
       var ganKey = (lYear - 3) % 10;
       var zhiKey = (lYear - 3) % 12;
-      if (ganKey === 0) ganKey = 10; //如果余数为0则为最后一个天干
-      if (zhiKey === 0) zhiKey = 12; //如果余数为0则为最后一个地支
+      if (ganKey === 0) ganKey = 10; // If the remainder is 0, it is the last heavenly stem
+      if (zhiKey === 0) zhiKey = 12; // If the remainder is 0, it is the last earthly branch
       return this.Gan[ganKey - 1] + this.Zhi[zhiKey - 1];
     },
     /**
-     * 公历月、日判断所属星座
+     * Gregorian calendar month、dayDetermine the zodiac sign
      * @param  cMonth [description]
      * @param  cDay [description]
      * @return Cn string
@@ -356,23 +356,23 @@ var calendar = (function () {
     toAstro: function toAstro(cMonth, cDay) {
       var s = "\u6469\u7FAF\u6C34\u74F6\u53CC\u9C7C\u767D\u7F8A\u91D1\u725B\u53CC\u5B50\u5DE8\u87F9\u72EE\u5B50\u5904\u5973\u5929\u79E4\u5929\u874E\u5C04\u624B\u6469\u7FAF";
       var arr = [20, 19, 21, 21, 21, 22, 23, 23, 23, 23, 22, 22];
-      return s.substr(cMonth * 2 - (cDay < arr[cMonth - 1] ? 2 : 0), 2) + "\u5EA7"; //座
+      return s.substr(cMonth * 2 - (cDay < arr[cMonth - 1] ? 2 : 0), 2) + "\u5EA7"; // seat
     },
 
     /**
-     * 传入offset偏移量返回干支
-     * @param offset 相对甲子的偏移量
+     * Passed inoffsetOffset returns the Heavenly Stems and Earthly Branches
+     * @param offset RelativeFirstchildoffset
      * @return Cn string
      */
     toGanZhi: function toGanZhi(offset) {
       return this.Gan[offset % 10] + this.Zhi[offset % 12];
     },
     /**
-     * 传入公历(!)y年获得该年第n个节气的公历日期
-     * @param y y公历年(1900-2100)
-     * @param n n二十四节气中的第几个节气(1~24)；从n=1(小寒)算起
+     * Enter the Gregorian calendar(!)yYear received that yearNumbernThe solar term's Gregorian calendar datedayperiod
+     * @param y yGregorian year(1900-2100)
+     * @param n nTwotenFourSolar termsinofNumberSeveral solar terms(1~24)；fromn=1(Minor Cold)Counted from
      * @return day Number
-     * @eg:var _24 = calendar.getTerm(1987,3) ;//_24=4;意即1987年2月4日立春
+     * @eg:var _24 = calendar.getTerm(1987,3) ;// _24=4; means the beginning of spring on February 4, 1987
      */
     getTerm: function getTerm(y, n) {
       if (y < 1900 || y > 2100 || n < 1 || n > 24) {
@@ -387,28 +387,28 @@ var calendar = (function () {
       return parseInt(_calcDay[n - 1]);
     },
     /**
-     * 传入农历数字月份返回汉语通俗表示法
+     * Pass in a lunar calendar numeric month and return the common Chinese expression
      * @param m lunar month
      * @return Cn string
-     * @eg:var cnMonth = calendar.toChinaMonth(12) ;//cnMonth='腊月'
+     * @eg:var cnMonth = calendar.toChinaMonth(12) ;// cnMonth='Twelfth lunar month'
      */
     toChinaMonth: function toChinaMonth(m) {
-      // 月 => \u6708
+      // Month => \u6708
       if (m > 12 || m < 1) {
         return -1;
-      } //若参数错误 返回-1
+      } // If the parameter is incorrect, return -1
       var s = this.nStr3[m - 1];
-      s += "\u6708"; //加上月字
+      s += "\u6708"; // Add the word "month"
       return s;
     },
     /**
-     * 传入农历日期数字返回汉字表示法
+     * Enter the lunar calendardayReturn the Chinese character representation of the period number
      * @param d lunar day
      * @return Cn string
-     * @eg:var cnDay = calendar.toChinaDay(21) ;//cnMonth='廿一'
+     * @eg:var cnDay = calendar.toChinaDay(21) ;// cnMonth='Twenty-one'
      */
     toChinaDay: function toChinaDay(d) {
-      //日 => \u65e5
+      //Day => \u65e5
       var s;
       switch (d) {
         case 10:
@@ -427,17 +427,17 @@ var calendar = (function () {
       return s;
     },
     /**
-     * 年份转生肖[!仅能大致转换] => 精确划分生肖分界线是“立春”
+     * Year to Zodiac[!Can only roughly convert] => precisely cutpointsChinese zodiacpointsBoundaryYes“Beginning of spring”
      * @param y year
      * @return Cn string
-     * @eg:var animal = calendar.getAnimal(1987) ;//animal='兔'
+     * @eg:var animal = calendar.getAnimal(1987) ;// animal='rabbit'
      */
     getAnimal: function getAnimal(y) {
       return this.Animals[(y - 4) % 12];
     },
     /**
-     * 传入阳历年月日获得详细的公历、农历object信息 <=>JSON
-     * !important! 公历参数区间1900.1.31~2100.12.31
+     * Input Gregorian calendar year and monthdayObtain a detailed Gregorian calendar、Lunar calendarobjectInformation <=>JSON
+     * !important! Gregorian calendarParameterInterval1900.1.31~2100.12.31
      * @param yPara  solar year
      * @param mPara  solar month
      * @param dPara  solar day
@@ -448,16 +448,16 @@ var calendar = (function () {
       var y = parseInt(yPara);
       var m = parseInt(mPara);
       var d = parseInt(dPara);
-      //年份限定、上限
+      //Year limit, upper limit
       if (y < 1900 || y > 2100) {
-        return -1; // undefined转换为数字变为NaN
+        return -1; // undefined is converted to a number and becomes NaN
       }
-      //公历传参最下限
+      //Minimum limit for passing parameters in the Gregorian calendar
       if (y === 1900 && m === 1 && d < 31) {
         return -1;
       }
 
-      //未传参  获得当天
+      //No parameters were passed and the same day was obtained
       var objDate;
       if (!y) {
         objDate = new Date();
@@ -467,7 +467,7 @@ var calendar = (function () {
       var i,
         leap = 0,
         temp = 0;
-      //修正ymd参数
+      //Correct ymd parameters
       y = objDate.getFullYear();
       m = objDate.getMonth() + 1;
       d = objDate.getDate();
@@ -481,41 +481,41 @@ var calendar = (function () {
         i--;
       }
 
-      //是否今天
+      //whether today
       var isTodayObj = new Date(),
         isToday = false;
       if (isTodayObj.getFullYear() === y && isTodayObj.getMonth() + 1 === m && isTodayObj.getDate() === d) {
         isToday = true;
       }
-      //星期几
+      //day of week
       var nWeek = objDate.getDay(),
         cWeek = this.nStr1[nWeek];
-      //数字表示周几顺应天朝周一开始的惯例
+      //The number indicates the day of the week in accordance with the custom of starting on Monday in China
       if (nWeek === 0) {
         nWeek = 7;
       }
-      //农历年
+      //lunar year
       var year = i;
-      leap = this.leapMonth(i); //闰哪个月
+      leap = this.leapMonth(i); // Which month is leap?
       var isLeap = false;
 
-      //效验闰月
+      //Effective leap month
       for (i = 1; i < 13 && offset > 0; i++) {
-        //闰月
+        //leap month
         if (leap > 0 && i === leap + 1 && isLeap === false) {
           --i;
           isLeap = true;
-          temp = this.leapDays(year); //计算农历闰月天数
+          temp = this.leapDays(year); // Calculate the number of days in a leap month in the lunar calendar
         } else {
-          temp = this.monthDays(year, i); //计算农历普通月天数
+          temp = this.monthDays(year, i); // Calculate the number of days in ordinary months of the lunar calendar
         }
-        //解除闰月
+        //Remove leap month
         if (isLeap === true && i === leap + 1) {
           isLeap = false;
         }
         offset -= temp;
       }
-      // 闰月导致数组下标重叠取反
+      // Leap months cause array subscripts to overlap and be negated
       if (offset === 0 && leap > 0 && i === leap + 1) {
         if (isLeap) {
           isLeap = false;
@@ -528,26 +528,26 @@ var calendar = (function () {
         offset += temp;
         --i;
       }
-      //农历月
+      //lunar month
       var month = i;
-      //农历日
+      //lunar day
       var day = offset + 1;
-      //天干地支处理
+      //Processing of Heavenly Stems and Earthly Branches
       var sm = m - 1;
       var gzY = this.toGanZhiYear(year);
 
-      // 当月的两个节气
+      // The two solar terms of the month
       // bugfix-2017-7-24 11:03:38 use lunar Year Param `y` Not `year`
-      var firstNode = this.getTerm(y, m * 2 - 1); //返回当月「节」为几日开始
-      var secondNode = this.getTerm(y, m * 2); //返回当月「节」为几日开始
+      var firstNode = this.getTerm(y, m * 2 - 1); // Returns the day on which the "festival" of the current month begins.
+      var secondNode = this.getTerm(y, m * 2); // Returns the day on which the "festival" of the current month begins.
 
-      // 依据12节气修正干支月
+      // Correct the stems and branches according to the 12 solar terms
       var gzM = this.toGanZhi((y - 1900) * 12 + m + 11);
       if (d >= firstNode) {
         gzM = this.toGanZhi((y - 1900) * 12 + m + 12);
       }
 
-      //传入的日期的节气与否
+      //Whether the incoming date has a solar term or not
       var isTerm = false;
       var Term = null;
       if (firstNode === d) {
@@ -558,10 +558,10 @@ var calendar = (function () {
         isTerm = true;
         Term = this.solarTerm[m * 2 - 1];
       }
-      //日柱 当月一日与 1900/1/1 相差天数
+      //The number of days between the first day of the current month and 1900/1/1
       var dayCyclical = Date.UTC(y, sm, 1, 0, 0, 0, 0) / 86400000 + 25567 + 10;
       var gzD = this.toGanZhi(dayCyclical + d - 1);
-      //该日期所属的星座
+      //The zodiac sign this date belongs to
       var astro = this.toAstro(m, d);
       var solarDate = y + '-' + m + '-' + d;
       var lunarDate = year + '-' + month + '-' + day;
@@ -571,10 +571,10 @@ var calendar = (function () {
       var lunarFestivalDate = month + '-' + day;
 
       // bugfix https://github.com/jjonline/calendar.js/issues/29
-      // 农历节日修正：农历12月小月则29号除夕，大月则30号除夕
-      // 此处取巧修正：当前为农历12月29号时增加一次判断并且把lunarFestivalDate设置为12-30以正确取得除夕
-      // 天朝农历节日遇闰月过前不过后的原则，此处取农历12月天数不考虑闰月
-      // 农历润12月在本工具支持的200年区间内仅1574年出现
+      // Correction of Lunar Calendar Festivals: New Year's Eve falls on the 29th in the small month of December in the lunar calendar, and New Year's Eve in the big month falls on the 30th
+      // Tricky correction here: Add a judgment when the current date is December 29th of the lunar calendar and set lunarFestivalDate to 12-30 to correctly obtain New Year's Eve
+      // The principle of the Chinese lunar calendar is that the leap month will not pass before or after the festival. The number of days in December of the lunar calendar is taken here without considering the leap month.
+      // Lunar December only occurs 1574 times in the 200-year interval supported by this tool
       if (month === 12 && day === 29 && this.monthDays(year, month) === 29) {
         lunarFestivalDate = '12-30';
       }
@@ -605,12 +605,12 @@ var calendar = (function () {
       };
     },
     /**
-     * 传入农历年月日以及传入的月份是否闰月获得详细的公历、农历object信息 <=>JSON
-     * !important! 参数区间1900.1.31~2100.12.1
+     * Pass in the lunar calendar year and monthdayand the passed-in monthYesnoGet detailed Gregorian calendar for the leap month、Lunar calendarobjectInformation <=>JSON
+     * !important! ParameterInterval1900.1.31~2100.12.1
      * @param y  lunar year
      * @param m  lunar month
      * @param d  lunar day
-     * @param isLeapMonth  lunar month is leap or not.[如果是农历闰月第四个参数赋值true即可]
+     * @param isLeapMonth  lunar month is leap or not.[IfYesLeap month in the lunar calendarNumberFourpieceParameterFuvaluetrueThat's it]
      * @return JSON object
      * @eg:console.log(calendar.lunar2solar(1987,9,10));
      */
@@ -623,10 +623,10 @@ var calendar = (function () {
       this.leapDays(y);
       if (isLeapMonth && leapMonth !== m) {
         return -1;
-      } //传参要求计算该闰月公历 但该年得出的闰月与传参的月份并不同
+      } // The leap month in the Gregorian calendar is required to be calculated when the parameter is passed, but the leap month obtained in that year is different from the month of the passed parameter.
       if (y === 2100 && m === 12 && d > 1 || y === 1900 && m === 1 && d < 31) {
         return -1;
-      } //超出了最大极限值
+      } // Maximum limit exceeded
       var day = this.monthDays(y, m);
       var _day = day;
       //bugFix 2016-9-25
@@ -636,9 +636,9 @@ var calendar = (function () {
       }
       if (y < 1900 || y > 2100 || d > _day) {
         return -1;
-      } //参数合法性效验
+      } // Parameter legality verification
 
-      //计算农历的时间差
+      //Calculate the time difference of the lunar calendar
       var offset = 0;
       var i;
       for (i = 1900; i < y; i++) {
@@ -649,7 +649,7 @@ var calendar = (function () {
       for (i = 1; i < m; i++) {
         leap = this.leapMonth(y);
         if (!isAdd) {
-          //处理闰月
+          //Handling leap months
           if (leap <= i && leap > 0) {
             offset += this.leapDays(y);
             isAdd = true;
@@ -657,11 +657,11 @@ var calendar = (function () {
         }
         offset += this.monthDays(y, i);
       }
-      //转换闰月农历 需补充该年闰月的前一个月的时差
+      //To convert the leap month to the lunar calendar, the time difference of the month before the leap month of the year needs to be added.
       if (isLeapMonth) {
         offset += day;
       }
-      //1900年农历正月一日的公历时间为1900年1月30日0时0分0秒(该时间也是本农历的最开始起始点)
+      //The Gregorian calendar time on the first day of the first lunar month in 1900 was 0:00:00 on January 30, 1900 (this time is also the starting point of this lunar calendar)
       var strap = Date.UTC(1900, 1, 30, 0, 0, 0);
       var calObj = new Date((offset + d - 31) * 86400000 + strap);
       var cY = calObj.getUTCFullYear();

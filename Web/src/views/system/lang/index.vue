@@ -21,18 +21,18 @@ const state = reactive({
     page: 1,
     pageSize: 20,
     total: 0,
-    field: 'active', // 默认的排序字段
-    order: 'descending', // 排序方向
-    descStr: 'descending', // 降序排序的关键字符
+    field: 'active', // Default sort field
+    order: 'descending', // Sorting direction
+    descStr: 'descending', // Key characters for sorting in descending order
   },
   tableData: [] as SysLangOutput[],
 });
 
-// 页面加载时
+// When the page loads
 onMounted(async () => {
 });
 
-// 查询操作
+// Query operation
 const handleQuery = async (params: any = {}) => {
   state.tableLoading = true;
   state.tableParams = Object.assign(state.tableParams, params);
@@ -42,37 +42,37 @@ const handleQuery = async (params: any = {}) => {
   state.tableLoading = false;
 };
 
-// 列排序
+// Column sort
 const sortChange = async (column: any) => {
   state.tableParams.field = column.prop;
   state.tableParams.order = column.order;
   await handleQuery();
 };
 
-// 删除
+// delete
 const delSysLang = (row: any) => {
-  ElMessageBox.confirm(`确定要删除吗?`, "提示", {
-    confirmButtonText: "确定",
-    cancelButtonText: "取消",
+  ElMessageBox.confirm(`ConfirmwantDelete??`, "Prompt", {
+    confirmButtonText: "Confirm",
+    cancelButtonText: "Cancel",
     type: "warning",
   }).then(async () => {
     await getAPI(SysLangApi).apiSysLangDeletePost({ id: row.id });
     handleQuery();
-    ElMessage.success("删除成功");
+    ElMessage.success("Deleted successfully");
   }).catch(() => {});
 };
 
 const batchDelSysLang = () => {
-  ElMessageBox.confirm(`确定要删除选中的 ${state.selectData.length} 条记录吗?`, "提示", {
-    confirmButtonText: "确定",
-    cancelButtonText: "取消",
+  ElMessageBox.confirm(`ConfirmwantDeleteSelectinof ${state.selectData.length} record??`, "Prompt", {
+    confirmButtonText: "Confirm",
+    cancelButtonText: "Cancel",
     type: "warning",
   }).then(async () => {
     const ids = state.selectData.map((item) => item.id);
     //await getAPI(SysLangApi).apiSysLangBatchDeletePost({ ids });
     state.selectData = [];
     handleQuery();
-    ElMessage.success("删除成功");
+    ElMessage.success("Deleted successfully");
   }).catch(() => {});
 };
 
@@ -84,41 +84,41 @@ handleQuery();
       <el-form :model="state.tableQueryParams" ref="queryForm" labelWidth="90">
         <el-row>
           <el-col :xs="24" :sm="12" :md="12" :lg="8" :xl="4" class="mb10">
-            <el-form-item label="关键字">
-              <el-input v-model="state.tableQueryParams.keyword" clearable placeholder="请输入模糊查询关键字"/>
+            <el-form-item label="Keywords">
+              <el-input v-model="state.tableQueryParams.keyword" clearable placeholder="Please enter fuzzy search keywords"/>
             </el-form-item>
           </el-col>
           <el-col :xs="24" :sm="12" :md="12" :lg="8" :xl="4" class="mb10" v-if="state.showAdvanceQueryUI">
-            <el-form-item label="语言名称">
-              <el-input v-model="state.tableQueryParams.name" clearable placeholder="请输入语言名称"/>
+            <el-form-item label="Language name">
+              <el-input v-model="state.tableQueryParams.name" clearable placeholder="Please enter language name"/>
             </el-form-item>
           </el-col>
           <el-col :xs="24" :sm="12" :md="12" :lg="8" :xl="4" class="mb10" v-if="state.showAdvanceQueryUI">
-            <el-form-item label="语言代码">
-              <el-input v-model="state.tableQueryParams.code" clearable placeholder="请输入语言代码"/>
+            <el-form-item label="Language code">
+              <el-input v-model="state.tableQueryParams.code" clearable placeholder="Please enter language code"/>
             </el-form-item>
           </el-col>
           <el-col :xs="24" :sm="12" :md="12" :lg="8" :xl="4" class="mb10" v-if="state.showAdvanceQueryUI">
-            <el-form-item label="ISO 语言代码">
-              <el-input v-model="state.tableQueryParams.isoCode" clearable placeholder="请输入ISO 语言代码"/>
+            <el-form-item label="ISO language code">
+              <el-input v-model="state.tableQueryParams.isoCode" clearable placeholder="Please enter the ISO language code"/>
             </el-form-item>
           </el-col>
           <el-col :xs="24" :sm="12" :md="12" :lg="8" :xl="4" class="mb10" v-if="state.showAdvanceQueryUI">
-            <el-form-item label="URL 语言代码">
-              <el-input v-model="state.tableQueryParams.urlCode" clearable placeholder="请输入URL 语言代码"/>
+            <el-form-item label="URL language code">
+              <el-input v-model="state.tableQueryParams.urlCode" clearable placeholder="Please enter the URL language code"/>
             </el-form-item>
           </el-col>
           <el-col :xs="24" :sm="12" :md="12" :lg="8" :xl="4" class="mb10" v-if="state.showAdvanceQueryUI">
-            <el-form-item label="是否启用">
-              <el-input v-model="state.tableQueryParams.active" clearable placeholder="请输入是否启用"/>
+            <el-form-item label="Enable or not">
+              <el-input v-model="state.tableQueryParams.active" clearable placeholder="Please enter whether to enable"/>
             </el-form-item>
           </el-col>
           <el-col :xs="24" :sm="12" :md="12" :lg="8" :xl="4" class="mb10">
             <el-form-item >
               <el-button-group style="display: flex; align-items: center;">
-                <el-button type="primary"  icon="ele-Search" @click="handleQuery" v-auth="'sysLang:page'" v-reclick="1000"> 查询 </el-button>
-                <el-button type="danger" style="margin-left:5px;" icon="ele-Delete" @click="batchDelSysLang" :disabled="state.selectData.length == 0" v-auth="'sysLang:batchDelete'"> 删除 </el-button>
-                <el-button type="primary" style="margin-left:5px;" icon="ele-Plus" @click="editDialogRef.openDialog(null, '新增多语言')" v-auth="'sysLang:add'"> 新增 </el-button>
+                <el-button type="primary"  icon="ele-Search" @click="handleQuery" v-auth="'sysLang:page'" v-reclick="1000"> Query </el-button>
+                <el-button type="danger" style="margin-left:5px;" icon="ele-Delete" @click="batchDelSysLang" :disabled="state.selectData.length == 0" v-auth="'sysLang:batchDelete'"> Delete </el-button>
+                <el-button type="primary" style="margin-left:5px;" icon="ele-Plus" @click="editDialogRef.openDialog(null, 'Add New Multilanguage')" v-auth="'sysLang:add'"> Add New </el-button>
               </el-button-group>
             </el-form-item>
           </el-col>
@@ -127,41 +127,41 @@ handleQuery();
     </el-card>
     <el-card class="full-table" shadow="hover" style="margin-top: 5px">
       <el-table :data="state.tableData" style="width: 100%" v-loading="state.tableLoading" tooltip-effect="light" row-key="id" @sort-change="sortChange" border>
-        <el-table-column type="index" label="序号" width="55" align="center"/>
-        <el-table-column prop='name' label='语言名称' sortable='custom' show-overflow-tooltip />
-        <el-table-column prop='code' label='语言代码' sortable='custom' show-overflow-tooltip />
-        <el-table-column prop='isoCode' label='ISO 语言代码' sortable='custom' show-overflow-tooltip />
-        <el-table-column prop='urlCode' label='URL 语言代码' sortable='custom' show-overflow-tooltip />
-        <el-table-column prop='direction' label='书写方向' sortable='custom' show-overflow-tooltip  >
+        <el-table-column type="index" label="No" width="55" align="center"/>
+        <el-table-column prop='name' label='Language name' sortable='custom' show-overflow-tooltip />
+        <el-table-column prop='code' label='Language code' sortable='custom' show-overflow-tooltip />
+        <el-table-column prop='isoCode' label='ISO language code' sortable='custom' show-overflow-tooltip />
+        <el-table-column prop='urlCode' label='URL language code' sortable='custom' show-overflow-tooltip />
+        <el-table-column prop='direction' label='Writing direction' sortable='custom' show-overflow-tooltip  >
           <template #default="scope">
 						<g-sys-dict v-model="scope.row.direction" code="DirectionEnum" />
 					</template>
         </el-table-column>
-        <el-table-column prop='dateFormat' label='日期格式' sortable='custom' show-overflow-tooltip />
-        <el-table-column prop='timeFormat' label='时间格式' sortable='custom' show-overflow-tooltip />
-        <el-table-column prop='weekStart' label='每周起始日' sortable='custom' show-overflow-tooltip >
+        <el-table-column prop='dateFormat' label='date format' sortable='custom' show-overflow-tooltip />
+        <el-table-column prop='timeFormat' label='time format' sortable='custom' show-overflow-tooltip />
+        <el-table-column prop='weekStart' label='Start day of the week' sortable='custom' show-overflow-tooltip >
           <template #default="scope">
 						<g-sys-dict v-model="scope.row.weekStart" code="WeekEnum" />
 					</template>
         </el-table-column>
-        <el-table-column prop='grouping' label='分组符号' sortable='custom' show-overflow-tooltip />
-        <el-table-column prop='decimalPoint' label='小数点符号' sortable='custom' show-overflow-tooltip />
-        <el-table-column prop='thousandsSep' label='千分位分隔符' sortable='custom' show-overflow-tooltip />
-        <el-table-column prop='active' label='是否启用' sortable='custom' show-overflow-tooltip>
+        <el-table-column prop='grouping' label='Grouping symbols' sortable='custom' show-overflow-tooltip />
+        <el-table-column prop='decimalPoint' label='Decimal point symbol' sortable='custom' show-overflow-tooltip />
+        <el-table-column prop='thousandsSep' label='thousands separator' sortable='custom' show-overflow-tooltip />
+        <el-table-column prop='active' label='Enable or not' sortable='custom' show-overflow-tooltip>
           <template #default="scope">
-            <el-tag v-if="scope.row.active"> 是 </el-tag>
-            <el-tag type="danger" v-else> 否 </el-tag>
+            <el-tag v-if="scope.row.active"> Yes </el-tag>
+            <el-tag type="danger" v-else> no </el-tag>
           </template>
         </el-table-column>
-        <el-table-column label="修改记录" width="100" align="center" show-overflow-tooltip>
+        <el-table-column label="Modify records" width="100" align="center" show-overflow-tooltip>
           <template #default="scope">
             <ModifyRecord :data="scope.row" />
           </template>
         </el-table-column>
-        <el-table-column label="操作" width="140" align="center" fixed="right" show-overflow-tooltip v-if="auth('sysLang:update') || auth('sysLang:delete')">
+        <el-table-column label="Operation" width="140" align="center" fixed="right" show-overflow-tooltip v-if="auth('sysLang:update') || auth('sysLang:delete')">
           <template #default="scope">
-            <el-button icon="ele-Edit" size="small" text type="primary" @click="editDialogRef.openDialog(scope.row, '编辑多语言')" v-auth="'sysLang:update'"> 编辑 </el-button>
-            <el-button icon="ele-Delete" size="small" text type="primary" @click="delSysLang(scope.row)" v-auth="'sysLang:delete'"> 删除 </el-button>
+            <el-button icon="ele-Edit" size="small" text type="primary" @click="editDialogRef.openDialog(scope.row, 'Edit Multilingual')" v-auth="'sysLang:update'"> Edit </el-button>
+            <el-button icon="ele-Delete" size="small" text type="primary" @click="delSysLang(scope.row)" v-auth="'sysLang:delete'"> Delete </el-button>
           </template>
         </el-table-column>
       </el-table>

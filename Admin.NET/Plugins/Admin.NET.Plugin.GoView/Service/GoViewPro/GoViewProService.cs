@@ -1,16 +1,16 @@
-// Admin.NET 项目的版权、商标、专利和其他相关权利均受相应法律法规的保护。使用本项目应遵守相关法律法规和许可证的要求。
+// The copyright, trademark, patent and other related rights of the Admin.NET project are protected by corresponding laws and regulations. Use of this project shall comply with relevant laws, regulations and license requirements.
 //
-// 本项目主要遵循 MIT 许可证和 Apache 许可证（版本 2.0）进行分发和使用。许可证位于源代码树根目录中的 LICENSE-MIT 和 LICENSE-APACHE 文件。
+// This project is distributed and used primarily under the MIT License and the Apache License (version 2.0). The license is located in the LICENSE-MIT and LICENSE-APACHE files in the root of the source tree.
 //
-// 不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！
+// This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project!
 
 namespace Admin.NET.Plugin.GoView.Service;
 
 /// <summary>
-/// 项目管理服务 🧩
+/// Project Management Services 🧩
 /// </summary>
 [UnifyProvider("GoView")]
-[ApiDescriptionSettings(GoViewConst.GroupName, Module = "goview", Name = "project", Order = 100, Description = "项目管理")]
+[ApiDescriptionSettings(GoViewConst.GroupName, Module = "goview", Name = "project", Order = 100, Description = "Project Management")]
 public class GoViewProService : IDynamicApiController
 {
     private readonly SqlSugarRepository<GoViewPro> _goViewProRep;
@@ -24,12 +24,12 @@ public class GoViewProService : IDynamicApiController
     }
 
     /// <summary>
-    /// 获取项目列表 🔖
+    /// Get project list 🔖
     /// </summary>
     /// <param name="page"></param>
     /// <param name="limit"></param>
     /// <returns></returns>
-    [DisplayName("获取项目列表")]
+    [DisplayName("Get project list")]
     public async Task<List<GoViewProItemOutput>> GetList([FromQuery] int page = 1, [FromQuery] int limit = 12)
     {
         var res = await _goViewProRep.AsQueryable()
@@ -39,12 +39,12 @@ public class GoViewProService : IDynamicApiController
     }
 
     /// <summary>
-    /// 新增项目 🔖
+    /// New items 🔖
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
     [ApiDescriptionSettings(Name = "Create")]
-    [DisplayName("新增项目")]
+    [DisplayName("Add new project")]
     public async Task<GoViewProCreateOutput> Create(GoViewProCreateInput input)
     {
         var project = await _goViewProRep.AsInsertable(input.Adapt<GoViewPro>()).ExecuteReturnEntityAsync();
@@ -55,21 +55,21 @@ public class GoViewProService : IDynamicApiController
     }
 
     /// <summary>
-    /// 修改项目 🔖
+    /// Modify project 🔖
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
-    [DisplayName("修改项目")]
+    [DisplayName("Modify project")]
     public async Task Edit(GoViewProEditInput input)
     {
         await _goViewProRep.AsUpdateable(input.Adapt<GoViewPro>()).IgnoreColumns(true).ExecuteCommandAsync();
     }
 
     /// <summary>
-    /// 删除项目 🔖
+    /// Delete item 🔖
     /// </summary>
     [ApiDescriptionSettings(Name = "Delete")]
-    [DisplayName("删除项目")]
+    [DisplayName("Delete Project")]
     [UnitOfWork]
     public async Task Delete([FromQuery] string ids)
     {
@@ -79,10 +79,10 @@ public class GoViewProService : IDynamicApiController
     }
 
     /// <summary>
-    /// 修改发布状态 🔖
+    /// Modify publishing status 🔖
     /// </summary>
     [HttpPut]
-    [DisplayName("修改发布状态")]
+    [DisplayName("Modify Publish Status")]
     public async Task Publish(GoViewProPublishInput input)
     {
         await _goViewProRep.AsUpdateable()
@@ -95,13 +95,13 @@ public class GoViewProService : IDynamicApiController
     }
 
     /// <summary>
-    /// 获取项目数据 🔖
+    /// Get project data 🔖
     /// </summary>
     /// <param name="projectId"></param>
     /// <returns></returns>
     [AllowAnonymous]
     [ApiDescriptionSettings(Name = "GetData")]
-    [DisplayName("获取项目数据")]
+    [DisplayName("Obtain project data")]
     public async Task<GoViewProDetailOutput> GetData([FromQuery] long projectId)
     {
         var projectData = await _goViewProDataRep.GetByIdAsync(projectId);
@@ -115,10 +115,10 @@ public class GoViewProService : IDynamicApiController
     }
 
     /// <summary>
-    /// 保存项目数据 🔖
+    /// Save project data 🔖
     /// </summary>
     [ApiDescriptionSettings(Name = "save/data")]
-    [DisplayName("保存项目数据")]
+    [DisplayName("Save project data")]
     public async Task SaveData([FromForm] GoViewProSaveDataInput input)
     {
         if (await _goViewProDataRep.IsAnyAsync(u => u.Id == input.ProjectId))
@@ -142,28 +142,28 @@ public class GoViewProService : IDynamicApiController
     }
 
     /// <summary>
-    /// 上传预览图 🔖
+    /// Upload preview image 🔖
     /// </summary>
-    [DisplayName("上传预览图")]
+    [DisplayName("Upload preview image")]
     public async Task<GoViewProUploadOutput> Upload(IFormFile @object)
     {
         /*
-         * 前端逻辑（useSync.hook.ts 的 dataSyncUpdate 方法）：
-         * 如果 FileUrl 不为空，使用 FileUrl
-         * 否则使用 GetOssInfo 接口获取到的 BucketUrl 和 FileName 进行拼接
+         * Front-end logic（useSync.hook.ts of dataSyncUpdate Method）：
+         * If FileUrl Not empty，Use FileUrl
+         * nothen use GetOssInfo InterfaceObtainarrived BucketUrl and FileName Perform splicing
          */
 
-        // 文件名格式示例 13414795568325_index_preview.png
+        // File name format example 13414795568325_index_preview.png
         var fileNameSplit = @object.FileName.Split('_');
         var idStr = fileNameSplit[0];
         if (!long.TryParse(idStr, out var id)) return new GoViewProUploadOutput();
 
-        // 将预览图转换成 Base64
+        // Convert preview image to Base64
         var ms = new MemoryStream();
         await @object.CopyToAsync(ms);
         var base64Image = Convert.ToBase64String(ms.ToArray());
 
-        // 保存
+        // save
         if (await _goViewProDataRep.IsAnyAsync(u => u.Id == id))
         {
             await _goViewProDataRep.AsUpdateable()
@@ -197,20 +197,20 @@ public class GoViewProService : IDynamicApiController
             UpdateUserId = null
         };
 
-        #region 使用 SysFileService 方式（已注释）
+        #region Use SysFileService Method（Commented）
 
-        ////删除已存在的预览图
+        ////Delete existing preview image
         //var uploadFileName = Path.GetFileNameWithoutExtension(@object.FileName);
         //var existFiles = await _fileRep.GetListAsync(u => u.FileName == uploadFileName);
         //foreach (var f in existFiles)
         //    await _fileService.DeleteFile(new DeleteFileInput { Id = f.Id });
 
-        ////保存预览图
+        ////save preview
         //var result = await _fileService.UploadFile(@object, "");
         //var file = await _fileRep.GetByIdAsync(result.Id);
         //int.TryParse(file.SizeKb, out var size);
 
-        ////本地存储，使用拼接的地址
+        ////local storage, using spliced ​​addresses
         //var fileUrl = file.BucketName == "Local" ? $"{file.FilePath}/{file.Id}{file.Suffix}" : file.Url;
 
         //var output = new ProjectUploadOutput
@@ -227,19 +227,19 @@ public class GoViewProService : IDynamicApiController
         //    UpdateUserId = null
         //};
 
-        #endregion 使用 SysFileService 方式（已注释）
+        #endregion Use SysFileService Method（Commented）
 
         return output;
     }
 
     /// <summary>
-    /// 获取预览图 🔖
+    /// Get preview 🔖
     /// </summary>
     /// <returns></returns>
     [AllowAnonymous]
     [NonUnify]
     [ApiDescriptionSettings(Name = "GetIndexImage")]
-    [DisplayName("获取预览图")]
+    [DisplayName("Get preview")]
     public async Task<IActionResult> GetIndexImage(long id)
     {
         var projectData = await _goViewProDataRep.AsQueryable().IgnoreColumns(u => u.Content).FirstAsync(u => u.Id == id);
@@ -251,22 +251,22 @@ public class GoViewProService : IDynamicApiController
     }
 
     /// <summary>
-    /// 上传背景图
+    /// Upload background image
     /// </summary>
-    [DisplayName("上传背景图")]
+    [DisplayName("Upload background image")]
     public async Task<GoViewProUploadOutput> UploadBackGround(IFormFile @object)
     {
-        // 文件名格式示例 13414795568325_index_preview.png
+        // File name format example 13414795568325_index_preview.png
         var fileNameSplit = @object.FileName.Split('_');
         var idStr = fileNameSplit[0];
         if (!long.TryParse(idStr, out var id)) return new GoViewProUploadOutput();
 
-        // 将预览图转换成 Base64
+        // Convert preview image to Base64
         var ms = new MemoryStream();
         await @object.CopyToAsync(ms);
         var base64Image = Convert.ToBase64String(ms.ToArray());
 
-        // 保存
+        // save
         if (await _goViewProDataRep.IsAnyAsync(u => u.Id == id))
         {
             await _goViewProDataRep.AsUpdateable()
@@ -304,13 +304,13 @@ public class GoViewProService : IDynamicApiController
     }
 
     /// <summary>
-    /// 获取背景图
+    /// Get background image
     /// </summary>
     /// <returns></returns>
     [AllowAnonymous]
     [NonUnify]
     [ApiDescriptionSettings(Name = "GetBackGroundImage")]
-    [DisplayName("获取背景图")]
+    [DisplayName("Get background image")]
     public async Task<IActionResult> GetBackGroundImage(long id)
     {
         var projectData = await _goViewProDataRep.AsQueryable().IgnoreColumns(u => u.Content).FirstAsync(u => u.Id == id);

@@ -1,18 +1,18 @@
-// Admin.NET 项目的版权、商标、专利和其他相关权利均受相应法律法规的保护。使用本项目应遵守相关法律法规和许可证的要求。
+// The copyright, trademark, patent and other related rights of the Admin.NET project are protected by corresponding laws and regulations. Use of this project shall comply with relevant laws, regulations and license requirements.
 //
-// 本项目主要遵循 MIT 许可证和 Apache 许可证（版本 2.0）进行分发和使用。许可证位于源代码树根目录中的 LICENSE-MIT 和 LICENSE-APACHE 文件。
+// This project is distributed and used primarily under the MIT License and the Apache License (version 2.0). The license is located in the LICENSE-MIT and LICENSE-APACHE files in the root of the source tree.
 //
-// 不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！
+// This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project!
 
 namespace Admin.NET.Core.Service;
 
 /// <summary>
-/// 自定义模板引擎
+/// Custom template engine
 /// </summary>
 public class CustomViewEngine : ViewEngineModel
 {
     /// <summary>
-    /// 库定位器
+    /// library locator
     /// </summary>
     public string ConfigId { get; set; } = SqlSugarConst.MainConfigId;
 
@@ -67,19 +67,19 @@ public class CustomViewEngine : ViewEngineModel
     public List<CodeGenConfig> IgnoreUpdateFieldList => TableField.Where(u => u.WhetherAddUpdate == "N" && u.ColumnKey != "True" && u.WhetherCommon != "Y").ToList();
 
     /// <summary>
-    /// 格式化主键查询条件
-    /// 例： PrimaryKeysFormat(" || ", "u.{0} == input.{0}")
-    /// 单主键返回 u.Id == input.Id
-    /// 组合主键返回 u.Id == input.Id || u.FkId == input.FkId
+    /// Format primary key query conditions
+    /// Example: PrimaryKeysFormat(" || ", "u.{0} == input.{0}")
+    /// Single primary key returns u.Id == input.Id
+    /// The combined primary key returns u.Id == input.Id || u.FkId == input.FkId
     /// </summary>
-    /// <param name="separator">分隔符</param>
-    /// <param name="format">模板字符串</param>
-    /// <param name="lowerFirstLetter">字段首字母小写</param>
+    /// <param name="separator">delimiter</param>
+    /// <param name="format">template string</param>
+    /// <param name="lowerFirstLetter">Lowercase first letter of field</param>
     /// <returns></returns>
     public string PrimaryKeysFormat(string separator, string format, bool lowerFirstLetter = false) => string.Join(separator, PrimaryKeyFieldList.Select(u => string.Format(format, lowerFirstLetter ? u.LowerPropertyName : u.PropertyName)));
 
     /// <summary>
-    /// 注入的服务
+    /// Injected services
     /// </summary>
     /// <returns></returns>
     public Dictionary<string, string> InjectServiceMap
@@ -95,38 +95,38 @@ public class CustomViewEngine : ViewEngineModel
     }
 
     /// <summary>
-    /// 服务构造参数
+    /// Service construction parameters
     /// </summary>
     public string InjectServiceArgs => InjectServiceMap.Count > 0 ? ", " + string.Join(", ", InjectServiceMap.Select(kv => $"{kv.Key} {kv.Value}")) : "";
 
     /// <summary>
-    /// 默认值列表
+    /// Default value list
     /// </summary>
     public List<CodeGenConfig> DefaultValueList { get; set; }
 
     /// <summary>
-    /// 判断字段是否为状态字段
+    /// Determine whether the field is a status field
     /// </summary>
     /// <param name="column"></param>
     /// <returns></returns>
     public bool IsStatus(CodeGenConfig column) => column.NetType == nameof(StatusEnum);
 
     /// <summary>
-    /// 获取首字母小写字符串
+    /// Get the first letter of a string in lowercase
     /// </summary>
     /// <param name="text"></param>
     /// <returns></returns>
     public string ToLowerFirstLetter(string text) => string.IsNullOrWhiteSpace(text) ? text : text[..1].ToLower() + text[1..];
 
     /// <summary>
-    /// 将基本字段类型转为可空类型
+    /// Convert basic field type to nullable type
     /// </summary>
     /// <param name="netType"></param>
     /// <returns></returns>
     public string GetNullableNetType(string netType) => Regex.IsMatch(netType, "(.*?Enum|bool|char|int|long|double|float|decimal)[?]?") ? netType.TrimEnd('?') + "?" : netType;
 
     /// <summary>
-    /// 获取前端表格列定义的属性
+    /// Get the properties defined by the front-end table column
     /// </summary>
     /// <param name="column"></param>
     /// <returns></returns>
@@ -139,7 +139,7 @@ public class CustomViewEngine : ViewEngineModel
     }
 
     /// <summary>
-    /// 设置默认值
+    /// Set default value
     /// </summary>
     /// <returns></returns>
     public string GetAddDefaultValue()
@@ -161,7 +161,7 @@ public class CustomViewEngine : ViewEngineModel
                     switch (item.EffectType)
                     {
                         case "InputNumber":
-                        case "EnumSelector"://枚举和数字框，通过正则提取 数字：如 ('0')
+                        case "EnumSelector":// Enumeration and number box, extract numbers through regular expression: such as ('0')
                             content += $"{item.LowerPropertyName}: {Regex.Match(item.DefaultValue, @"\d+").Value},";
                             break;
 
@@ -169,11 +169,11 @@ public class CustomViewEngine : ViewEngineModel
                             content += $"{item.LowerPropertyName}: {(item.DefaultValue == "1" ? true.ToString().ToLower() : false.ToString().ToLower())},";
                             break;
 
-                        case "DatePicker"://忽略适配日期格式
+                        case "DatePicker":// Ignore adapting date format
                             break;
 
                         default:
-                            content += $"{item.LowerPropertyName}: \"{item.DefaultValue}\",";// 如果是字符串 DefaultValue=('男')
+                            content += $"{item.LowerPropertyName}: \"{item.DefaultValue}\",";// If it is a string DefaultValue=('male')
                             break;
                     }
                 }

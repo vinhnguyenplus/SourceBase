@@ -1,7 +1,7 @@
 <template>
 	<div class="sys-video-container">
 		<el-container>
-			<el-header>视频监控（萤石云云直播）</el-header>
+			<el-header>Video surveillance (EZVIZ Live)</el-header>
 			<el-container>
 				<el-aside width="200px">
 					<el-tree :data="data" :props="defaultProps" @node-click="handleNodeClick" />
@@ -11,26 +11,26 @@
 					<div class="updateToken" props="ezviz_video">
 						<ul>
 							<li>
-								<el-span>密匙串：</el-span>
+								<el-span>Keychain:</el-span>
 								<el-input
-									placeholder="密匙"
+									placeholder="Key"
 									show-word-limit
 									type="text"
 									id="txt_token"
-									title="每周更新（开放平台，云直播，轻应用，代码示例）"
+									title="Weekly updates (Open Platform, Cloud Live, Lightweight Applications, Code Examples)"
 									v-model="ezviz_video.ezvizToken"
 									@keyup.enter="update_Token"
 									class="token_input"
 								/>
 							</li>
 							<li>
-								<el-span>视频流：</el-span>
+								<el-span>Video stream:</el-span>
 								<el-input
-									placeholder="萤石云视频流地址"
+									placeholder="Ezviz Cloud Video Stream Address"
 									show-word-limit
 									type="text"
 									id="txt_url"
-									title="密匙对应的视频流地址(高清后缀.h.live)"
+									title="Video stream address corresponding to the key (HD suffix .h.live)"
 									v-model="ezviz_video.ezvizUrl"
 									@keyup.enter="update_Token"
 									class="token_input"
@@ -43,7 +43,7 @@
 						<div class="video-item">
 							<div class="item">
 								<div class="home" ref="viewtoolOne">
-									<div id="video-container">等待加载...</div>
+									<div id="video-container">Waiting to load...</div>
 								</div>
 							</div>
 						</div>
@@ -55,15 +55,15 @@
 </template>
 
 <!-- 
-库：https://github.com/Ezviz-OpenBiz/EZUIKit-JavaScript-npm
-安装：npm install ezuikit-js 或 pnpm add ezuikit-js
+Warehouse：https://github.com/Ezviz-OpenBiz/EZUIKit-JavaScript-npm
+Install：npm install ezuikit-js or pnpm add ezuikit-js
 -->
 <script lang="ts" setup name="video">
 import { reactive, ref, onMounted, nextTick, beforeDestroy } from 'vue';
-import EZUIKit from 'ezuikit-js'; //页面引用
+import EZUIKit from 'ezuikit-js'; // Page reference
 //import { ElNotification } from 'element-plus';
 //import { Search,ChatDotSquare,TopRight,Star,Operation,Setting,Connection,Discount,Open,Delete,Position,View,CopyDocument,DocumentChecked,VideoCamera} from '@element-plus/icons-vue';
-import mittBus from '/@/utils/mitt'; //事件总线mitt 解决打包后错误Uncaught (in promise) ReferenceError: Cannot access 'oe' before initialization
+import mittBus from '/@/utils/mitt'; // Event bus mitt solves the post-packaging error Uncaught (in promise) ReferenceError: Cannot access 'oe' before initialization
 
 let ezvizPlayOne = ref(null);
 let ezvizPlayTwo = ref(null);
@@ -88,7 +88,7 @@ const handleNodeClick = (data: Tree) => {
 	console.log(data);
 };
 
-// 更新token
+// update token
 function update_Token(e) {
 	//ezviz_video.ezvizToken=e.target.value;
 	console.log(e.target.value);
@@ -100,57 +100,57 @@ onMounted(async () => {
 	//console.log('https://open.ys7.com/console/ezuikit/template/detail.html?themeId=pcLive&editing=false');
 });
 
-// 测试 ezopen://open.ys7.com/G39444019/1.live 和 at.3bvmj4ycamlgdwgw1ig1jruma0wpohl6-48zifyb39c-13t5am6-yukyi86mz
-// 备用 ezopen://open.ys7.com/AA2615287/1.live 和 ra.5k88qgc34vgr9yva7rlub985blo9ph7k-92q0bl2r4r-0aygaog-5cofhebpm
+// Test ezopen://open.ys7.com/G39444019/1.live and at.3bvmj4ycamlgdwgw1ig1jruma0wpohl6-48zifyb39c-13t5am6-yukyi86mz
+// Alternate ezopen://open.ys7.com/AA2615287/1.live and ra.5k88qgc34vgr9yva7rlub985blo9ph7k-92q0bl2r4r-0aygaog-5cofhebpm
 const ezviz_video = reactive({
-	ezvizToken: 'ra.5k88qgc34vgr9yva7rlub985blo9ph7k-92q0bl2r4r-0aygaog-5cofhebpm', //需要修改每周（开放平台，云直播，轻应用，代码示例中找）演示设备
-	ezvizUrl: 'ezopen://open.ys7.com/AA2615287/1.live', //高清直播拼接字符串   cosnt url = `ezopen://${item.identifyingCode}@open.ys7.com/${item.imei}/${item.channelNo}.hd.live`
-	// 回放地址ezopen://open.ys7.com/AA2615287/1.rec
+	ezvizToken: 'ra.5k88qgc34vgr9yva7rlub985blo9ph7k-92q0bl2r4r-0aygaog-5cofhebpm', // Need to modify weekly (open platform, cloud live broadcast, light application, code samples can be found) demonstration equipment
+	ezvizUrl: 'ezopen:// open.ys7.com/AA2615287/1.live', //HD live broadcast splicing string cosnt url = `ezopen://${item.identifyingCode}@open.ys7.com/${item.imei}/${item.channelNo}.hd.live`
+	// Playback address ezopen://open.ys7.com/AA2615287/1.rec
 });
 
 // beforeDestroy(()=>{
-// 	ezvizPlayOne.value  && ezvizPlayOne.value.stop() //销毁并停止直播视频
+// 	ezvizPlayOne.value && ezvizPlayOne.value.stop() //Destroy and stop the live video
 // 	console.log('beforeDestroy');
 // });
 
-// 监控1，参数https://blog.csdn.net/weixin_53791978/article/details/126489296
+// Monitoring 1, parameters https://blog.csdn.net/weixin_53791978/article/details/126489296
 function autoVideoOne(params) {
-	// 获取父节点的宽高
+	// Get the width and height of the parent node
 	let divW = viewtoolOne.value.clientWidth;
 	let divH = viewtoolOne.value.clientHeight;
 	if (ezvizPlayOne.value != null) {
 		return;
 	}
 
-	// 获取萤石token
+	// Get fluorite token
 	ezvizPlayOne.value = new EZUIKit.EZUIKitPlayer({
-		autoplay: true, // 默认播放
-		// 视频播放包括元素
-		id: 'video-container', //DIV容器
-		// 萤石token，https://open.ys7.com/console/ezuikit/template/detail.html?themeId=pcLive&editing=false中查询实例代码
+		autoplay: true, // Play by default
+		// Video playback includes elements
+		id: 'video-container', // DIV container
+		// EZVIZ token, query the example code at https://open.ys7.com/console/ezuikit/template/detail.html?themeId=pcLive&editing=false
 		accessToken: ezviz_video.ezvizToken, //"ra.bl9n4hmb3c7w4fk6bbuumtmdcbbo66w0-3k7nal0q6y-0lp00m5-fi61isesz",
-		// ezopen://open.ys7.com/${设备序列号}/{通道号}.live
-		url: ezviz_video.ezvizUrl, //"ezopen://open.ys7.com/AA2615287/1.live", // 播放地址
-		template: 'standard', // pcLive，simple - 极简版;standard-标准版;security - 安防版(预览回放);voice-语音版；theme-可配置主题；
-		useHardDev: true, // 开启高性能模式 依赖需高于7.7.x 截止到2023.11.7 建议保持最新版本为7.7.6
-		// header: ['capturePicture', 'zoom'], // 如果templete参数不为simple,该字段将被覆盖
-		//plugin: ['talk'], // 加载插件，talk-对讲
-		// 视频下方底部控件
-		//footer: ["talk", "broadcast", "hd", "fullScreen"], // 如果template参数不为simple,该字段将被覆盖
-		footer: ['talk', 'hd', 'fullScreen'], // 如果template参数不为simple,该字段将被覆盖
-		//audio: 0, // 是否默认开启声音 0 - 关闭 1 - 开启
-		// openSoundCallBack: data => console.log("开启声音回调", data),
-		// closeSoundCallBack: data => console.log("关闭声音回调", data),
-		// startSaveCallBack: data => console.log("开始录像回调", data),
-		// stopSaveCallBack: data => console.log("录像回调", data),
-		// capturePictureCallBack: data => console.log("截图成功回调", data),
-		// fullScreenCallBack: data => console.log("全屏回调", data),
-		// getOSDTimeCallBack: data => console.log("获取OSDTime回调", data),
+		// ezopen://open.ys7.com/${device No}/{channel number}.live
+		url: ezviz_video.ezvizUrl, // "ezopen://open.ys7.com/AA2615287/1.live", // playback address
+		template: 'standard', // pcLive, simple - minimalist version; standard - standard version; security - security version (preview playback); voice - voice version; theme - configurable theme;
+		useHardDev: true, // Turn on high-performance mode. Dependencies need to be higher than 7.7.x. As of 2023.11.7, it is recommended to keep the latest version 7.7.6.
+		// header: ['capturePicture', 'zoom'], // If the template parameter is not simple, this field will be overwritten
+		//plugin: ['talk'], // Load plugin, talk-talk
+		// Bottom controls below the video
+		//footer: ["talk", "broadcast", "hd", "fullScreen"], // If the template parameter is not simple, this field will be overwritten
+		footer: ['talk', 'hd', 'fullScreen'], // If the template parameter is not simple, this field will be overwritten
+		//audio: 0, // Whether to turn on sound by default 0 - off 1 - on
+		// openSoundCallBack: data => console.log("Open sound callback", data),
+		// closeSoundCallBack: data => console.log("Close sound callback", data),
+		// startSaveCallBack: data => console.log("Start recording callback", data),
+		// stopSaveCallBack: data => console.log("Recording callback", data),
+		// capturePictureCallBack: data => console.log("Screenshot successful callback", data),
+		// fullScreenCallBack: data => console.log("Full screen callback", data),
+		// getOSDTimeCallBack: data => console.log("Get OSDTime callback", data),
 		width: divW,
 		height: divH,
 		handleError: (err: any) => {
 			if (err.type === 'handleRunTimeInfoError' && err.data.nErrorCode === 5) {
-				console.log('加密设备密码错误');
+				console.log('Encryption devicepasswordmistake');
 			}
 		},
 	});
@@ -158,55 +158,55 @@ function autoVideoOne(params) {
 
 const data: Tree[] = [
 	{
-		label: '节点A',
+		label: 'Node A',
 		children: [
 			{
-				label: '菜单A-1',
+				label: 'Menu A-1',
 				children: [
 					{
-						label: '菜单A-1-1',
+						label: 'Menu A-1-1',
 					},
 				],
 			},
 		],
 	},
 	{
-		label: '节点B',
+		label: 'Node B',
 		children: [
 			{
-				label: '菜单B-1',
+				label: 'Menu B-1',
 				children: [
 					{
-						label: '菜单B-1-1',
+						label: 'Menu B-1-1',
 					},
 				],
 			},
 			{
-				label: '菜单B-2',
+				label: 'Menu B-2',
 				children: [
 					{
-						label: '菜单B-2-1',
+						label: 'Menu B-2-1',
 					},
 				],
 			},
 		],
 	},
 	{
-		label: '节点C',
+		label: 'Node C',
 		children: [
 			{
-				label: '菜单C-1',
+				label: 'Menu C-1',
 				children: [
 					{
-						label: '菜单C-1-1',
+						label: 'Menu C-1-1',
 					},
 				],
 			},
 			{
-				label: '菜单C-2',
+				label: 'Menu C-2',
 				children: [
 					{
-						label: '菜单C-2-1',
+						label: 'Menu C-2-1',
 					},
 				],
 			},
@@ -289,7 +289,7 @@ const data: Tree[] = [
 	line-height: 1.5em;
 	padding: 4px;
 	line-height: 30px;
-} /*缩进text-indent:2em;*/
+} /*Indentationtext-indent:2em;*/
 .recvfontsize {
 	text-align: center;
 	display: block;
@@ -414,7 +414,7 @@ el-tree span {
 				overflow: hidden;
 				padding: 0;
 				marigin: 0;
-				aspect-ratio: 16/9; /* 设置任意宽高任意一项即可 然后使用aspect-ratio元素 动态设置比例 */
+				aspect-ratio: 16/9; /* Set any width and any heightoneitem available Then useaspect-ratioYuanplain Dynamically set scale */
 				text-align: center;
 				justify-content: center;
 			}

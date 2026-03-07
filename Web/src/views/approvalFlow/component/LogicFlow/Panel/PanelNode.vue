@@ -19,27 +19,27 @@ var props = defineProps({
 const state = reactive({
 	nodeList: [
 		{
-			text: '开始',
+			text: 'Start',
 			type: 'bpmn:startEvent',
 			class: 'bpmn-start',
 		},
 		{
-			text: '用户',
+			text: 'User',
 			type: 'bpmn:userTask',
 			class: 'bpmn-user',
 		},
 		{
 			type: 'bpmn:exclusiveGateway',
-			text: '网关',
+			text: 'Gateway',
 			class: 'bpmn-exclusiveGateway',
 		},
 		{
 			type: 'task-node',
-			text: '任务',
+			text: 'Task',
 			class: 'node-task',
 		},
 		{
-			text: '结束',
+			text: 'end',
 			type: 'bpmn:endEvent',
 			class: 'bpmn-end',
 		},

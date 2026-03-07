@@ -1,8 +1,8 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Admin.NET 通用权限开发平台
- * 让 .NET 开发更简单、更通用、更流行。整合最新技术，模块插件式开发，前后端分离，开箱即用。<br/><u><b><font color='FF0000'> 👮不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！</font></b></u>
+ * Admin.NET General Permission Development Platform
+ * let .NET Develop more simply、More general、More popular。wholeIn line with the latest technology，Modular Plugin-Based Development，Frontend and backendpointsLeave，Ready to use out of the box。<br/><u><b><font color='FF0000'> 👮This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project! </font></b></u>
  *
  * OpenAPI spec version: 1.0.0
  * 
@@ -36,7 +36,7 @@ export const SysWxOpenApiAxiosParamCreator = function (configuration?: Configura
     return {
         /**
          * 
-         * @summary 增加订阅消息模板 🔖
+         * @summary Add subscription message template 🔖
          * @param {AddSubscribeMessageTemplateInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -84,8 +84,8 @@ export const SysWxOpenApiAxiosParamCreator = function (configuration?: Configura
         },
         /**
          * 
-         * @summary 生成带参数小程序二维码(总共生成的码数量限制为 100,000)
-         * @param {GenerateQRImageInput} [body] 扫码进入的小程序页面路径，最大长度 128 个字符，不能为空； eg: pages / index ? id &#x3D; AY000001
+         * @summary GeneratebringParameterMini ProgramQR code(TotalGeneratecodequantitylimited to 100,000)
+         * @param {GenerateQRImageInput} [body] The mini program page path accessed by scanning the QR code，Maximumlength 128 character，cannot benull； eg: pages / index ? id &#x3D; AY000001
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -132,8 +132,8 @@ export const SysWxOpenApiAxiosParamCreator = function (configuration?: Configura
         },
         /**
          * 
-         * @summary 生成二维码(获取不受限制的小程序码)
-         * @param {GenerateQRImageUnLimitInput} [body] 入参
+         * @summary GenerateQR code(ObtainUnlimited mini program code)
+         * @param {GenerateQRImageUnLimitInput} [body] Input parameter
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -180,7 +180,7 @@ export const SysWxOpenApiAxiosParamCreator = function (configuration?: Configura
         },
         /**
          * 
-         * @summary 获取订阅消息模板列表 🔖
+         * @summary Get the list of subscription message templates 🔖
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -223,7 +223,7 @@ export const SysWxOpenApiAxiosParamCreator = function (configuration?: Configura
         },
         /**
          * 
-         * @summary 发送订阅消息 🔖
+         * @summary Send subscription message 🔖
          * @param {SendSubscribeMessageInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -271,7 +271,7 @@ export const SysWxOpenApiAxiosParamCreator = function (configuration?: Configura
         },
         /**
          * 
-         * @summary 设置小程序用户昵称
+         * @summary Set up the mini programUserNickname
          * @param {SetNickNameInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -319,7 +319,7 @@ export const SysWxOpenApiAxiosParamCreator = function (configuration?: Configura
         },
         /**
          * 
-         * @summary 上传小程序头像
+         * @summary Upload mini program avatar
          * @param {string} [openId] 
          * @param {Blob} [file] 
          * @param {string} [fileType] 
@@ -386,7 +386,7 @@ export const SysWxOpenApiAxiosParamCreator = function (configuration?: Configura
         },
         /**
          * 
-         * @summary 获取小程序用户信息
+         * @summary ObtainMini ProgramUserInformation
          * @param {string} openid 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -435,7 +435,7 @@ export const SysWxOpenApiAxiosParamCreator = function (configuration?: Configura
         },
         /**
          * 
-         * @summary 获取微信用户OpenId 🔖
+         * @summary Obtain WeChat user's OpenId 🔖
          * @param {string} jsCode JsCode
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -487,7 +487,7 @@ export const SysWxOpenApiAxiosParamCreator = function (configuration?: Configura
         },
         /**
          * 
-         * @summary 微信小程序登录OpenId 🔖
+         * @summary WeChat applet login OpenId 🔖
          * @param {WxOpenIdLoginInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -535,7 +535,7 @@ export const SysWxOpenApiAxiosParamCreator = function (configuration?: Configura
         },
         /**
          * 
-         * @summary 获取微信用户电话号码 🔖
+         * @summary ObtainWeChatUserTelephoneNumber 🔖
          * @param {string} code Code
          * @param {string} openId OpenId
          * @param {*} [options] Override http request option.
@@ -605,7 +605,7 @@ export const SysWxOpenApiFp = function(configuration?: Configuration) {
     return {
         /**
          * 
-         * @summary 增加订阅消息模板 🔖
+         * @summary Add subscription message template 🔖
          * @param {AddSubscribeMessageTemplateInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -619,8 +619,8 @@ export const SysWxOpenApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary 生成带参数小程序二维码(总共生成的码数量限制为 100,000)
-         * @param {GenerateQRImageInput} [body] 扫码进入的小程序页面路径，最大长度 128 个字符，不能为空； eg: pages / index ? id &#x3D; AY000001
+         * @summary GeneratebringParameterMini ProgramQR code(TotalGeneratecodequantitylimited to 100,000)
+         * @param {GenerateQRImageInput} [body] The mini program page path accessed by scanning the QR code，Maximumlength 128 character，cannot benull； eg: pages / index ? id &#x3D; AY000001
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -633,8 +633,8 @@ export const SysWxOpenApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary 生成二维码(获取不受限制的小程序码)
-         * @param {GenerateQRImageUnLimitInput} [body] 入参
+         * @summary GenerateQR code(ObtainUnlimited mini program code)
+         * @param {GenerateQRImageUnLimitInput} [body] Input parameter
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -647,7 +647,7 @@ export const SysWxOpenApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary 获取订阅消息模板列表 🔖
+         * @summary Get the list of subscription message templates 🔖
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -660,7 +660,7 @@ export const SysWxOpenApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary 发送订阅消息 🔖
+         * @summary Send subscription message 🔖
          * @param {SendSubscribeMessageInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -674,7 +674,7 @@ export const SysWxOpenApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary 设置小程序用户昵称
+         * @summary Set up the mini programUserNickname
          * @param {SetNickNameInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -688,7 +688,7 @@ export const SysWxOpenApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary 上传小程序头像
+         * @summary Upload mini program avatar
          * @param {string} [openId] 
          * @param {Blob} [file] 
          * @param {string} [fileType] 
@@ -705,7 +705,7 @@ export const SysWxOpenApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary 获取小程序用户信息
+         * @summary ObtainMini ProgramUserInformation
          * @param {string} openid 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -719,7 +719,7 @@ export const SysWxOpenApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary 获取微信用户OpenId 🔖
+         * @summary Obtain WeChat user's OpenId 🔖
          * @param {string} jsCode JsCode
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -733,7 +733,7 @@ export const SysWxOpenApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary 微信小程序登录OpenId 🔖
+         * @summary WeChat applet login OpenId 🔖
          * @param {WxOpenIdLoginInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -747,7 +747,7 @@ export const SysWxOpenApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary 获取微信用户电话号码 🔖
+         * @summary ObtainWeChatUserTelephoneNumber 🔖
          * @param {string} code Code
          * @param {string} openId OpenId
          * @param {*} [options] Override http request option.
@@ -771,7 +771,7 @@ export const SysWxOpenApiFactory = function (configuration?: Configuration, base
     return {
         /**
          * 
-         * @summary 增加订阅消息模板 🔖
+         * @summary Add subscription message template 🔖
          * @param {AddSubscribeMessageTemplateInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -781,8 +781,8 @@ export const SysWxOpenApiFactory = function (configuration?: Configuration, base
         },
         /**
          * 
-         * @summary 生成带参数小程序二维码(总共生成的码数量限制为 100,000)
-         * @param {GenerateQRImageInput} [body] 扫码进入的小程序页面路径，最大长度 128 个字符，不能为空； eg: pages / index ? id &#x3D; AY000001
+         * @summary GeneratebringParameterMini ProgramQR code(TotalGeneratecodequantitylimited to 100,000)
+         * @param {GenerateQRImageInput} [body] The mini program page path accessed by scanning the QR code，Maximumlength 128 character，cannot benull； eg: pages / index ? id &#x3D; AY000001
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -791,8 +791,8 @@ export const SysWxOpenApiFactory = function (configuration?: Configuration, base
         },
         /**
          * 
-         * @summary 生成二维码(获取不受限制的小程序码)
-         * @param {GenerateQRImageUnLimitInput} [body] 入参
+         * @summary GenerateQR code(ObtainUnlimited mini program code)
+         * @param {GenerateQRImageUnLimitInput} [body] Input parameter
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -801,7 +801,7 @@ export const SysWxOpenApiFactory = function (configuration?: Configuration, base
         },
         /**
          * 
-         * @summary 获取订阅消息模板列表 🔖
+         * @summary Get the list of subscription message templates 🔖
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -810,7 +810,7 @@ export const SysWxOpenApiFactory = function (configuration?: Configuration, base
         },
         /**
          * 
-         * @summary 发送订阅消息 🔖
+         * @summary Send subscription message 🔖
          * @param {SendSubscribeMessageInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -820,7 +820,7 @@ export const SysWxOpenApiFactory = function (configuration?: Configuration, base
         },
         /**
          * 
-         * @summary 设置小程序用户昵称
+         * @summary Set up the mini programUserNickname
          * @param {SetNickNameInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -830,7 +830,7 @@ export const SysWxOpenApiFactory = function (configuration?: Configuration, base
         },
         /**
          * 
-         * @summary 上传小程序头像
+         * @summary Upload mini program avatar
          * @param {string} [openId] 
          * @param {Blob} [file] 
          * @param {string} [fileType] 
@@ -843,7 +843,7 @@ export const SysWxOpenApiFactory = function (configuration?: Configuration, base
         },
         /**
          * 
-         * @summary 获取小程序用户信息
+         * @summary ObtainMini ProgramUserInformation
          * @param {string} openid 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -853,7 +853,7 @@ export const SysWxOpenApiFactory = function (configuration?: Configuration, base
         },
         /**
          * 
-         * @summary 获取微信用户OpenId 🔖
+         * @summary Obtain WeChat user's OpenId 🔖
          * @param {string} jsCode JsCode
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -863,7 +863,7 @@ export const SysWxOpenApiFactory = function (configuration?: Configuration, base
         },
         /**
          * 
-         * @summary 微信小程序登录OpenId 🔖
+         * @summary WeChat applet login OpenId 🔖
          * @param {WxOpenIdLoginInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -873,7 +873,7 @@ export const SysWxOpenApiFactory = function (configuration?: Configuration, base
         },
         /**
          * 
-         * @summary 获取微信用户电话号码 🔖
+         * @summary ObtainWeChatUserTelephoneNumber 🔖
          * @param {string} code Code
          * @param {string} openId OpenId
          * @param {*} [options] Override http request option.
@@ -894,7 +894,7 @@ export const SysWxOpenApiFactory = function (configuration?: Configuration, base
 export class SysWxOpenApi extends BaseAPI {
     /**
      * 
-     * @summary 增加订阅消息模板 🔖
+     * @summary Add subscription message template 🔖
      * @param {AddSubscribeMessageTemplateInput} [body] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -905,8 +905,8 @@ export class SysWxOpenApi extends BaseAPI {
     }
     /**
      * 
-     * @summary 生成带参数小程序二维码(总共生成的码数量限制为 100,000)
-     * @param {GenerateQRImageInput} [body] 扫码进入的小程序页面路径，最大长度 128 个字符，不能为空； eg: pages / index ? id &#x3D; AY000001
+     * @summary GeneratebringParameterMini ProgramQR code(TotalGeneratecodequantitylimited to 100,000)
+     * @param {GenerateQRImageInput} [body] The mini program page path accessed by scanning the QR code，Maximumlength 128 character，cannot benull； eg: pages / index ? id &#x3D; AY000001
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SysWxOpenApi
@@ -916,8 +916,8 @@ export class SysWxOpenApi extends BaseAPI {
     }
     /**
      * 
-     * @summary 生成二维码(获取不受限制的小程序码)
-     * @param {GenerateQRImageUnLimitInput} [body] 入参
+     * @summary GenerateQR code(ObtainUnlimited mini program code)
+     * @param {GenerateQRImageUnLimitInput} [body] Input parameter
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SysWxOpenApi
@@ -927,7 +927,7 @@ export class SysWxOpenApi extends BaseAPI {
     }
     /**
      * 
-     * @summary 获取订阅消息模板列表 🔖
+     * @summary Get the list of subscription message templates 🔖
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SysWxOpenApi
@@ -937,7 +937,7 @@ export class SysWxOpenApi extends BaseAPI {
     }
     /**
      * 
-     * @summary 发送订阅消息 🔖
+     * @summary Send subscription message 🔖
      * @param {SendSubscribeMessageInput} [body] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -948,7 +948,7 @@ export class SysWxOpenApi extends BaseAPI {
     }
     /**
      * 
-     * @summary 设置小程序用户昵称
+     * @summary Set up the mini programUserNickname
      * @param {SetNickNameInput} [body] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -959,7 +959,7 @@ export class SysWxOpenApi extends BaseAPI {
     }
     /**
      * 
-     * @summary 上传小程序头像
+     * @summary Upload mini program avatar
      * @param {string} [openId] 
      * @param {Blob} [file] 
      * @param {string} [fileType] 
@@ -973,7 +973,7 @@ export class SysWxOpenApi extends BaseAPI {
     }
     /**
      * 
-     * @summary 获取小程序用户信息
+     * @summary ObtainMini ProgramUserInformation
      * @param {string} openid 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -984,7 +984,7 @@ export class SysWxOpenApi extends BaseAPI {
     }
     /**
      * 
-     * @summary 获取微信用户OpenId 🔖
+     * @summary Obtain WeChat user's OpenId 🔖
      * @param {string} jsCode JsCode
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -995,7 +995,7 @@ export class SysWxOpenApi extends BaseAPI {
     }
     /**
      * 
-     * @summary 微信小程序登录OpenId 🔖
+     * @summary WeChat applet login OpenId 🔖
      * @param {WxOpenIdLoginInput} [body] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -1006,7 +1006,7 @@ export class SysWxOpenApi extends BaseAPI {
     }
     /**
      * 
-     * @summary 获取微信用户电话号码 🔖
+     * @summary ObtainWeChatUserTelephoneNumber 🔖
      * @param {string} code Code
      * @param {string} openId OpenId
      * @param {*} [options] Override http request option.

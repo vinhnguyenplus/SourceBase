@@ -1,9 +1,9 @@
 import type { App } from 'vue';
 
 /**
- * 按钮波浪指令
- * @directive 默认方式：v-waves，如 `<div v-waves></div>`
- * @directive 参数方式：v-waves=" |light|red|orange|purple|green|teal"，如 `<div v-waves="'light'"></div>`
+ * buttonWave command
+ * @directive DefaultMethod：v-waves，such as `<div v-waves></div>`
+ * @directive ParameterMethod：v-waves=" |light|red|orange|purple|green|teal"，such as `<div v-waves="'light'"></div>`
  */
 export function wavesDirective(app: App) {
 	app.directive('waves', {
@@ -54,11 +54,11 @@ export function wavesDirective(app: App) {
 }
 
 /**
- * 自定义拖动指令
- * @description  使用方式：v-drag="[dragDom,dragHeader]"，如 `<div v-drag="['.drag-container .el-dialog', '.drag-container .el-dialog__header']"></div>`
- * @description dragDom 要拖动的元素，dragHeader 要拖动的 Header 位置
- * @link 注意：https://github.com/element-plus/element-plus/issues/522
- * @lick 参考：https://blog.csdn.net/weixin_46391323/article/details/105228020?utm_medium=distribute.pc_relevant.none-task-blog-baidujs_title-10&spm=1001.2101.3001.4242
+ * CustomizeDrag command
+ * @description  Usage：v-drag="[dragDom,dragHeader]"，such as `<div v-drag="['.drag-container .el-dialog', '.drag-container .el-dialog__header']"></div>`
+ * @description dragDom To be draggedYuanplain，dragHeader To be dragged Header Position
+ * @link Attention：https://github.com/element-plus/element-plus/issues/522
+ * @lick Reference：https://blog.csdn.net/weixin_46391323/article/details/105228020?utm_medium=distribute.pc_relevant.none-task-blog-baidujs_title-10&spm=1001.2101.3001.4242
  */
 export function dragDirective(app: App) {
 	app.directive('drag', {
@@ -71,18 +71,18 @@ export function dragDirective(app: App) {
 			dragHeader.onmouseover = () => (dragHeader.style.cursor = `move`);
 
 			function down(e: any, type: string) {
-				// 鼠标按下，计算当前元素距离可视区的距离
+				// When the mouse is pressed, the distance between the current element and the visible area is calculated.
 				const disX = type === 'pc' ? e.clientX - dragHeader.offsetLeft : e.touches[0].clientX - dragHeader.offsetLeft;
 				const disY = type === 'pc' ? e.clientY - dragHeader.offsetTop : e.touches[0].clientY - dragHeader.offsetTop;
 
-				// body当前宽度
+				// body current width
 				const screenWidth = document.body.clientWidth;
-				// 可见区域高度(应为body高度，可某些环境下无法获取)
+				// Visible area height (should be the body height, but it cannot be obtained in some environments)
 				const screenHeight = document.documentElement.clientHeight;
 
-				// 对话框宽度
+				// Dialog width
 				const dragDomWidth = dragDom.offsetWidth;
-				// 对话框高度
+				// Dialog height
 				const dragDomheight = dragDom.offsetHeight;
 
 				const minDragDomLeft = dragDom.offsetLeft;
@@ -91,11 +91,11 @@ export function dragDirective(app: App) {
 				const minDragDomTop = dragDom.offsetTop;
 				const maxDragDomTop = screenHeight - dragDom.offsetTop - dragDomheight;
 
-				// 获取到的值带px 正则匹配替换
+				// The obtained value has px regular matching and replacement
 				let styL: any = getComputedStyle(dragDom).left;
 				let styT: any = getComputedStyle(dragDom).top;
 
-				// 注意在ie中 第一次获取到的值为组件自带50% 移动之后赋值为px
+				// Note that in IE, the value obtained for the first time is 50% of the component. After moving, the value is assigned to px.
 				if (styL.includes('%')) {
 					styL = +document.body.clientWidth * (+styL.replace(/\%/g, '') / 100);
 					styT = +document.body.clientHeight * (+styT.replace(/\%/g, '') / 100);
@@ -119,11 +119,11 @@ export function dragDirective(app: App) {
 			function move(e: any, type: string, obj: any) {
 				let { disX, disY, minDragDomLeft, maxDragDomLeft, minDragDomTop, maxDragDomTop, styL, styT } = obj;
 
-				// 通过事件委托，计算移动的距离
+				// Calculate the distance moved through event delegation
 				let left = type === 'pc' ? e.clientX - disX : e.touches[0].clientX - disX;
 				let top = type === 'pc' ? e.clientY - disY : e.touches[0].clientY - disY;
 
-				// 边界处理
+				// Boundary processing
 				if (-left > minDragDomLeft) {
 					left = -minDragDomLeft;
 				} else if (left > maxDragDomLeft) {
@@ -136,15 +136,15 @@ export function dragDirective(app: App) {
 					top = maxDragDomTop;
 				}
 
-				// 移动当前元素
+				// Move the current element
 				dragDom.style.cssText += `;left:${left + styL}px;top:${top + styT}px;`;
 			}
 
 			/**
-			 * pc端
-			 * onmousedown 鼠标按下触发事件
-			 * onmousemove 鼠标按下时持续触发事件
-			 * onmouseup 鼠标抬起触发事件
+			 * pcend
+			 * onmousedown ratThe button press triggers an event
+			 * onmousemove ratLabel pressedtimeContinuously trigger events
+			 * onmouseup ratTrigger event when the marker is lifted
 			 */
 			dragHeader.onmousedown = (e) => {
 				const obj = down(e, 'pc');
@@ -158,10 +158,10 @@ export function dragDirective(app: App) {
 			};
 
 			/**
-			 * 移动端
-			 * ontouchstart 当按下手指时，触发ontouchstart
-			 * ontouchmove 当移动手指时，触发ontouchmove
-			 * ontouchend 当移走手指时，触发ontouchend
+			 * Mobile
+			 * ontouchstart When the finger is pressedtime，Triggerontouchstart
+			 * ontouchmove When moving the fingertime，Triggerontouchmove
+			 * ontouchend When the finger is removedtime，Triggerontouchend
 			 */
 			dragHeader.ontouchstart = (e) => {
 				const obj = down(e, 'app');
@@ -178,9 +178,9 @@ export function dragDirective(app: App) {
 }
 
 /**
- * 防止重复点击提交按钮
- * @directive 默认方式：v-reclick，如 `<el-button v-reclick></el-button>`
- * @directive 参数方式：v-reclick="number"，如 `<el-button v-reclick="500"></el-button>`
+ * Prevent duplicate submissionsbutton
+ * @directive DefaultMethod：v-reclick，such as `<el-button v-reclick></el-button>`
+ * @directive ParameterMethod：v-reclick="number"，such as `<el-button v-reclick="500"></el-button>`
  */
  export function reclickDirective(app: App) {
 	app.directive('reclick', {

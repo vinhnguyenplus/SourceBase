@@ -1,13 +1,13 @@
-﻿// Admin.NET 项目的版权、商标、专利和其他相关权利均受相应法律法规的保护。使用本项目应遵守相关法律法规和许可证的要求。
+﻿// The copyright, trademark, patent and other related rights of the Admin.NET project are protected by corresponding laws and regulations. Use of this project shall comply with relevant laws, regulations and license requirements.
 //
-// 本项目主要遵循 MIT 许可证和 Apache 许可证（版本 2.0）进行分发和使用。许可证位于源代码树根目录中的 LICENSE-MIT 和 LICENSE-APACHE 文件。
+// This project is distributed and used primarily under the MIT License and the Apache License (version 2.0). The license is located in the LICENSE-MIT and LICENSE-APACHE files in the root of the source tree.
 //
-// 不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！
+// This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project!
 
 namespace Admin.NET.Core.Service;
 
 /// <summary>
-/// 系统用户注册方案服务 🧩
+/// System user registration solution service 🧩
 /// </summary>
 [ApiDescriptionSettings(Order = 490)]
 public class SysUserRegWayService : IDynamicApiController, ITransient
@@ -22,11 +22,11 @@ public class SysUserRegWayService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 查询注册方案列表 🔖
+    /// Check the registration plan list 🔖
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
-    [DisplayName("查询注册方案列表")]
+    [DisplayName("Query the list of registration plans")]
     [ApiDescriptionSettings(Name = "List"), HttpPost]
     public async Task<List<UserRegWayOutput>> List(PageUserRegWayInput input)
     {
@@ -48,11 +48,11 @@ public class SysUserRegWayService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 增加注册方案 ➕
+    /// Add registration plan ➕
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
-    [DisplayName("增加注册方案")]
+    [DisplayName("Add registration plan")]
     [ApiDescriptionSettings(Name = "Add"), HttpPost]
     public async Task<long> Add(AddUserRegWayInput input)
     {
@@ -64,11 +64,11 @@ public class SysUserRegWayService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 更新注册方案 ✏️
+    /// Update registration plan ✏️
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
-    [DisplayName("更新注册方案")]
+    [DisplayName("Update registration plan")]
     [ApiDescriptionSettings(Name = "Update"), HttpPost]
     public async Task Update(UpdateUserRegWayInput input)
     {
@@ -79,40 +79,40 @@ public class SysUserRegWayService : IDynamicApiController, ITransient
     }
 
     /// <summary>
-    /// 检查数据
+    /// Check data
     /// </summary>
     /// <param name="input"></param>
     [NonAction]
     public async Task CheckData(AddUserRegWayInput input)
     {
-        // 检查外键数据是否存在
+        // Check if foreign key data exists
         if (!await _sysUserRegWayRep.Context.Queryable<SysRole>().AnyAsync(u => u.Id == input.RoleId)) throw Oops.Oh(ErrorCodeEnum.D1036);
         if (!await _sysUserRegWayRep.Context.Queryable<SysOrg>().AnyAsync(u => u.Id == input.OrgId)) throw Oops.Oh(ErrorCodeEnum.D2011);
         if (!await _sysUserRegWayRep.Context.Queryable<SysPos>().AnyAsync(u => u.Id == input.PosId)) throw Oops.Oh(ErrorCodeEnum.D6003);
 
-        // 禁止注册超级管理员和系统管理员
+        // Registration of super administrators and system administrators is prohibited
         if (input.AccountType is AccountTypeEnum.SysAdmin or AccountTypeEnum.SuperAdmin) throw Oops.Oh(ErrorCodeEnum.D1037);
     }
 
     /// <summary>
-    /// 删除注册方案 ❌
+    /// Delete registration plan ❌
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
     [UnitOfWork]
-    [DisplayName("删除注册方案")]
+    [DisplayName("Delete registration plan")]
     [ApiDescriptionSettings(Name = "Delete"), HttpPost]
     public async Task Delete(BaseIdInput input)
     {
         var entity = await _sysUserRegWayRep.GetFirstAsync(u => u.Id == input.Id) ?? throw Oops.Oh(ErrorCodeEnum.D1002);
 
-        // 关闭相关租户注册功能
+        // Close related tenant registration function
         await _sysUserRegWayRep.Context.Updateable(new SysTenant { EnableReg = YesNoEnum.N, RegWayId = null })
             .UpdateColumns(u => new { u.EnableReg, u.RegWayId })
             .Where(u => u.RegWayId == input.Id)
             .ExecuteCommandAsync();
 
-        // 删除方案
+        // Delete plan
         await _sysUserRegWayRep.DeleteAsync(entity);
     }
 }

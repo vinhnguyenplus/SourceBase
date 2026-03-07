@@ -1,6 +1,6 @@
 <template>
     <div class="multi-lang-input">
-        <el-input v-model="inputModelValue" :placeholder="`请输入 ${currentLangLabel}`" clearable
+        <el-input v-model="inputModelValue" :placeholder="`Please enter ${currentLangLabel}`" clearable
             @update:model-value="(val: string) => emit('update:modelValue', val)">
             <template #append>
                 <el-button @click="openDialog" circle>
@@ -11,12 +11,12 @@
             </template>
         </el-input>
 
-        <el-dialog v-model="dialogVisible" title="多语言设置" draggable :close-on-click-modal="false" width="600px">
+        <el-dialog v-model="dialogVisible" title="Multi-language settings" draggable :close-on-click-modal="false" width="600px">
             <el-form ref="ruleFormRef" label-width="auto">
                 <el-row :gutter="35">
                     <el-col v-for="lang in languages" :key="lang.code" :span="24" class="mb10">
                         <el-form-item :label="lang.label">
-                            <el-input v-model="multiLangValue[lang.code]" :placeholder="`请输入: ${lang.label}`"
+                            <el-input v-model="multiLangValue[lang.code]" :placeholder="`Please enter: ${lang.label}`"
                                 clearable />
                         </el-form-item>
                     </el-col>
@@ -24,9 +24,9 @@
             </el-form>
 
             <template #footer>
-                <el-button @click="aiTranslation">AI翻译</el-button>
-                <el-button @click="closeDialog">关闭</el-button>
-                <el-button type="primary" @click="confirmDialog">确认修改</el-button>
+                <el-button @click="aiTranslation">AI Translation</el-button>
+                <el-button @click="closeDialog">Close</el-button>
+                <el-button type="primary" @click="confirmDialog">Confirm changes</el-button>
             </template>
         </el-dialog>
     </div>
@@ -109,7 +109,7 @@ onMounted(async () => {
 const aiTranslation = async () => {
     for (const element of languages.value) {
         if (element.code === currentLang.value) continue;
-        multiLangValue.value[element.code] = "正在翻译...";
+        multiLangValue.value[element.code] = "Translating...";
         try {
             const text = await getAPI(SysLangTextApi)
                 .apiSysLangTextAiTranslateTextPost({
@@ -128,7 +128,7 @@ const aiTranslation = async () => {
 
 const openDialog = async () => {
     if (!props.entityId) {
-        ElMessage.warning("请先保存数据！");
+        ElMessage.warning("Please save the data first!");
         return;
     }
     const res = await fetchMultiLang();
@@ -165,13 +165,13 @@ const confirmDialog = async () => {
         }));
 
     if (langItems.length === 0) {
-        ElMessage.warning("请输入至少一条多语言内容！");
+        ElMessage.warning("Please enter at least one piece of multilingual content!");
         return;
     }
 
     try {
         await getAPI(SysLangTextApi).apiSysLangTextBatchSavePost(langItems);
-        ElMessage.success("保存成功！");
+        ElMessage.success("Saved successfully!");
         emit(
             "update:modelValue",
             multiLangValue.value[currentLang.value] ?? props.modelValue
@@ -179,7 +179,7 @@ const confirmDialog = async () => {
         dialogVisible.value = false;
     } catch (err) {
         console.error(err);
-        ElMessage.error("保存失败！");
+        ElMessage.error("Save failed!");
     }
     dialogVisible.value = false;
     ruleFormRef.value?.resetFields();

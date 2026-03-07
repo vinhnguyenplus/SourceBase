@@ -20,8 +20,8 @@
 			<div ref="monacoEditorRef" v-loading="state.loading" class="code-container"></div>
 			<template #footer>
 				<span class="dialog-footer">
-					<el-button icon="ele-Close" @click="cancel">关 闭</el-button>
-					<el-button icon="ele-CopyDocument" type="primary" @click="handleCopy">复 制</el-button>
+					<el-button icon="ele-Close" @click="cancel">closure</el-button>
+					<el-button icon="ele-CopyDocument" type="primary" @click="handleCopy">copy</el-button>
 				</span>
 			</template>
 		</el-dialog>
@@ -45,47 +45,47 @@ const props = defineProps({
 const monacoEditorRef = ref();
 const state = reactive({
 	isShowDialog: false,
-	options: [] as any, // 分段器的选项
-	current: '', // 选中的分段
-	codes: [] as any, // 预览的代码
+	options: [] as any, // Segmenter options
+	current: '', // selected segment
+	codes: [] as any, // Preview code
   loading: true
 });
 
-// 防止 monaco 报黄
+// Prevent monaco from reporting porn
 self.MonacoEnvironment = {
 	getWorker: (_: string, label: string) => new EditorWorker(),
 };
 
-// 初始化monacoEditor对象
+// Initialize the monacoEditor object
 var monacoEditor: any = null;
 const initMonacoEditor = () => {
 	monacoEditor = monaco.editor.create(monacoEditorRef.value, {
-		theme: 'vs-dark', // 主题 vs vs-dark hc-black
-		value: '', // 默认显示的值
+		theme: 'vs-dark', // theme vs vs-dark hc-black
+		value: '', // The value displayed by default
 		language: 'csharp',
 		formatOnPaste: true,
-		wordWrap: 'on', // 自动换行，注意大小写
+		wordWrap: 'on', // Automatically wrap lines, pay attention to capitalization
 		wrappingIndent: 'indent',
-		folding: true, // 是否折叠
-		foldingHighlight: true, // 折叠等高线
-		foldingStrategy: 'indentation', // 折叠方式  auto | indentation
-		showFoldingControls: 'always', // 是否一直显示折叠 always | mouSEOver
-		disableLayerHinting: true, // 等宽优化
-		emptySelectionClipboard: false, // 空选择剪切板
-		selectionClipboard: false, // 选择剪切板
-		automaticLayout: true, // 自动布局
-		codeLens: false, // 代码镜头
-		scrollBeyondLastLine: false, // 滚动完最后一行后再滚动一屏幕
-		colorDecorators: true, // 颜色装饰器
-		accessibilitySupport: 'auto', // 辅助功能支持  "auto" | "off" | "on"
-		lineNumbers: 'on', // 行号 取值： "on" | "off" | "relative" | "interval" | function
-		lineNumbersMinChars: 5, // 行号最小字符   number
+		folding: true, // Whether to fold
+		foldingHighlight: true, // Collapse contours
+		foldingStrategy: 'indentation', // Folding mode auto | indentation
+		showFoldingControls: 'always', // Whether to always display the fold always | mouSEOver
+		disableLayerHinting: true, // Equal width optimization
+		emptySelectionClipboard: false, // Empty selection clipboard
+		selectionClipboard: false, // Select clipboard
+		automaticLayout: true, // autolayout
+		codeLens: false, // code lens
+		scrollBeyondLastLine: false, // Scroll one more screen after scrolling the last line
+		colorDecorators: true, // color decorator
+		accessibilitySupport: 'auto', // Accessibility support "auto" | "off" | "on"
+		lineNumbers: 'on', // Line number Values: "on" | "off" | "relative" | "interval" | function
+		lineNumbersMinChars: 5, // Minimum characters for line number number
 		//enableSplitViewResizing: false,
-		readOnly: false, // 是否只读  取值 true | false
+		readOnly: false, // Whether to read only the value true | false
 	});
 };
 
-// 打开弹窗
+// Open pop-up window
 const openDialog = async (row: any) => {
   state.loading = true;
   try {
@@ -100,28 +100,28 @@ const openDialog = async (row: any) => {
   }  catch (e) { /* empty */ }
   state.loading = false;
 	if (monacoEditor == null) initMonacoEditor();
-	// 防止取不到
+	// Prevent not being able to get it
 	nextTick(() => {
 		monacoEditor.setValue(state.codes[state.current]);
 	});
 };
 
-// 分段器改变时切换代码
+// Switch code when segmenter changes
 const handleChange = (current: any) => {
 	monacoEditor.setValue(state.codes[current]);
 };
 
-// 取消
+// Cancel
 const cancel = () => {
 	state.isShowDialog = false;
 };
 
-//复制代码
+//Copy code
 const handleCopy = () => {
 	copyText(state.codes[state.current]);
 };
 
-// 导出对象
+// Export object
 defineExpose({ openDialog });
 </script>
 

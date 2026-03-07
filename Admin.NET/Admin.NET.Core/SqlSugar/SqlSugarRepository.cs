@@ -1,13 +1,13 @@
-// Admin.NET 项目的版权、商标、专利和其他相关权利均受相应法律法规的保护。使用本项目应遵守相关法律法规和许可证的要求。
+// The copyright, trademark, patent and other related rights of the Admin.NET project are protected by corresponding laws and regulations. Use of this project shall comply with relevant laws, regulations and license requirements.
 //
-// 本项目主要遵循 MIT 许可证和 Apache 许可证（版本 2.0）进行分发和使用。许可证位于源代码树根目录中的 LICENSE-MIT 和 LICENSE-APACHE 文件。
+// This project is distributed and used primarily under the MIT License and the Apache License (version 2.0). The license is located in the LICENSE-MIT and LICENSE-APACHE files in the root of the source tree.
 //
-// 不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！
+// This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project!
 
 namespace Admin.NET.Core;
 
 /// <summary>
-/// SqlSugar 实体仓储
+/// SqlSugar entity warehousing
 /// </summary>
 /// <typeparam name="T"></typeparam>
 public class SqlSugarRepository<T> : SimpleClient<T>, ISqlSugarRepository<T> where T : class, new()
@@ -17,14 +17,14 @@ public class SqlSugarRepository<T> : SimpleClient<T>, ISqlSugarRepository<T> whe
         var iTenant = SqlSugarSetup.ITenant; // App.GetRequiredService<ISqlSugarClient>().AsTenant();
         base.Context = iTenant.GetConnectionScope(SqlSugarConst.MainConfigId);
 
-        // 若实体贴有多库特性，则返回指定库连接
+        // If the entity sticker has multiple library characteristics, the specified library connection is returned.
         if (typeof(T).IsDefined(typeof(TenantAttribute), false))
         {
             base.Context = iTenant.GetConnectionScopeWithAttr<T>();
             return;
         }
 
-        // 若实体贴有日志表特性，则返回日志库连接
+        // If the entity is attached with the log table attribute, the log library connection is returned.
         if (typeof(T).IsDefined(typeof(LogTableAttribute), false))
         {
             if (iTenant.IsAnyConnection(SqlSugarConst.LogConfigId))
@@ -32,27 +32,27 @@ public class SqlSugarRepository<T> : SimpleClient<T>, ISqlSugarRepository<T> whe
             return;
         }
 
-        // 若实体贴有系统表特性，则返回默认库连接
+        // If the entity is attached with the system table attribute, the default library connection is returned.
         if (typeof(T).IsDefined(typeof(SysTableAttribute), false))
             return;
 
-        // 看请求头有没有租户id
+        // Check whether the request header has a tenant ID
         var tenantId = App.HttpContext?.Request.Headers[ClaimConst.TenantId].FirstOrDefault();
         if (tenantId == SqlSugarConst.MainConfigId) return;
         else if (string.IsNullOrWhiteSpace(tenantId))
         {
-            // 若未贴任何表特性或当前未登录或是默认租户Id，则返回默认库连接
+            // If no table properties are posted or you are not currently logged in or it is the default tenant ID, the default library connection will be returned.
             tenantId = App.User?.FindFirst(ClaimConst.TenantId)?.Value;
             if (string.IsNullOrWhiteSpace(tenantId) || tenantId == SqlSugarConst.MainConfigId) return;
         }
 
-        // 根据租户Id切换库连接 为空则返回默认库连接
+        // Switch the library connection based on the tenant ID. If it is empty, return to the default library connection.
         var sqlSugarScopeProviderTenant = App.GetRequiredService<SysTenantService>().GetTenantDbConnectionScope(long.Parse(tenantId));
         if (sqlSugarScopeProviderTenant == null) return;
         base.Context = sqlSugarScopeProviderTenant;
     }
 
-    #region 分表操作
+    #region pointsTableOperation
 
     public async Task<bool> SplitTableInsertAsync(T input)
     {
@@ -109,5 +109,5 @@ public class SqlSugarRepository<T> : SimpleClient<T>, ISqlSugarRepository<T> whe
         return Context.Queryable<T>().Where(whereExpression).SplitTable(t => t.InTableNames(tableNames)).ToListAsync();
     }
 
-    #endregion 分表操作
+    #endregion pointsTableOperation
 }

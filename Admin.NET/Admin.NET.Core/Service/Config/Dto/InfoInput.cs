@@ -1,84 +1,84 @@
-﻿// Admin.NET 项目的版权、商标、专利和其他相关权利均受相应法律法规的保护。使用本项目应遵守相关法律法规和许可证的要求。
+﻿// The copyright, trademark, patent and other related rights of the Admin.NET project are protected by corresponding laws and regulations. Use of this project shall comply with relevant laws, regulations and license requirements.
 //
-// 本项目主要遵循 MIT 许可证和 Apache 许可证（版本 2.0）进行分发和使用。许可证位于源代码树根目录中的 LICENSE-MIT 和 LICENSE-APACHE 文件。
+// This project is distributed and used primarily under the MIT License and the Apache License (version 2.0). The license is located in the LICENSE-MIT and LICENSE-APACHE files in the root of the source tree.
 //
-// 不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！
+// This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project!
 
 namespace Admin.NET.Core.Service;
 
 /// <summary>
-/// 系统信息保存输入参数
+/// System information save input parameters
 /// </summary>
 public class InfoSaveInput
 {
     /// <summary>
-    /// 系统图标（Data URI scheme base64 编码）
+    /// System icon (Data URI scheme base64 encoding)
     /// </summary>
     public string LogoBase64 { get; set; }
 
     /// <summary>
-    /// 系统图标文件名
+    /// System icon file name
     /// </summary>
     public string LogoFileName { get; set; }
 
     /// <summary>
-    /// 水印内容
+    /// Watermark content
     /// </summary>
     public string Watermark { get; set; }
 
     /// <summary>
-    /// 系统主标题
+    /// System main title
     /// </summary>
-    [Required(ErrorMessage = "系统主标题不能为空")]
+    [Required(ErrorMessage = "System main title cannot be empty")]
     public string Title { get; set; }
 
     /// <summary>
-    /// 系统副标题
+    /// System subtitle
     /// </summary>
-    [Required(ErrorMessage = "系统副标题不能为空")]
+    [Required(ErrorMessage = "systemSubtitle cannot be empty")]
     public string ViceTitle { get; set; }
 
     /// <summary>
-    /// 系统描述
+    /// System description
     /// </summary>
-    [Required(ErrorMessage = "系统描述不能为空")]
+    [Required(ErrorMessage = "System description cannot be empty")]
     public string ViceDesc { get; set; }
 
     /// <summary>
-    /// 版权说明
+    /// Copyright statement
     /// </summary>
-    [Required(ErrorMessage = "版权说明不能为空")]
+    [Required(ErrorMessage = "Copyright description cannot be empty")]
     public string Copyright { get; set; }
 
     /// <summary>
-    /// ICP备案号
+    /// ICP registration number
     /// </summary>
-    [Required(ErrorMessage = "ICP备案号不能为空")]
+    [Required(ErrorMessage = "ICP registration number cannot be empty")]
     public string Icp { get; set; }
 
     /// <summary>
-    /// ICP地址
+    /// ICP address
     /// </summary>
-    [Required(ErrorMessage = "ICP地址不能为空")]
+    [Required(ErrorMessage = "ICP address cannot be empty")]
     public string IcpUrl { get; set; }
 
     /// <summary>
-    /// 启用注册功能
+    /// Enable registration
     /// </summary>
     public YesNoEnum EnableReg { get; set; }
 
     /// <summary>
-    /// 登录二次验证
+    /// Login two-step verification
     /// </summary>
     public YesNoEnum SecondVer { get; set; }
 
     /// <summary>
-    /// 图形验证码
+    /// Graphic verification code
     /// </summary>
     public YesNoEnum Captcha { get; set; }
 
     /// <summary>
-    /// 默认注册方案Id
+    /// Default registration scheme ID
     /// </summary>
     public virtual long RegWayId { get; set; }
 }

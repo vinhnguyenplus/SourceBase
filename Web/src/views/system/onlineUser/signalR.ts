@@ -2,42 +2,42 @@ import * as SignalR from '@microsoft/signalr';
 import { ElNotification } from 'element-plus';
 import { getToken } from '/@/utils/axios-utils';
 
-// 初始化SignalR对象
+// Initialize the SignalR object
 const connection = new SignalR.HubConnectionBuilder()
 	.configureLogging(SignalR.LogLevel.Information)
 	.withUrl(`${window.__env__.VITE_API_URL}/hubs/onlineUser?token=${getToken()}`, { transport: SignalR.HttpTransportType.WebSockets, skipNegotiation: true })
 	.withAutomaticReconnect({
 		nextRetryDelayInMilliseconds: () => {
-			return 5000; // 每5秒重连一次
+			return 5000; // Reconnect every 5 seconds
 		},
 	})
 	.build();
 
-// 心跳检测：若15s内没有向服务器发送任何消息，则ping一下服务器端
+// Heartbeat detection: If no message is sent to the server within 15 seconds, ping the server
 connection.keepAliveIntervalInMilliseconds = 15 * 1000;
-// 超时时间：若30s内没有收到服务器端发过来的信息，则认为服务器端异常
+// Timeout: If no information is received from the server within 30 seconds, the server is considered abnormal.
 connection.serverTimeoutInMilliseconds = 30 * 1000;
 
-// 启动连接
+// Start connection
 connection.start().then(() => {
-	console.log('启动连接');
+	console.log('Start connection');
 });
-// 断开连接
+// Disconnect
 connection.onclose(async () => {
-	console.log('断开连接');
+	console.log('Disconnect');
 });
-// 重连中
+// Reconnecting
 connection.onreconnecting(() => {
 	ElNotification({
-		title: '提示',
-		message: '服务器已断线...',
+		title: 'Prompt',
+		message: 'The server has been disconnected...',
 		type: 'error',
 		position: 'bottom-right',
 	});
 });
-// 重连成功
+// Reconnection successful
 connection.onreconnected(() => {
-	console.log('重连成功');
+	console.log('Reconnection successful');
 });
 
 connection.on('OnlineUserList', () => {});

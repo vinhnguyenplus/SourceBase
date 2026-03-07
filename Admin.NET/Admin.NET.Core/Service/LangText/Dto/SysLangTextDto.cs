@@ -1,73 +1,73 @@
-﻿// Admin.NET 项目的版权、商标、专利和其他相关权利均受相应法律法规的保护。使用本项目应遵守相关法律法规和许可证的要求。
+﻿// The copyright, trademark, patent and other related rights of the Admin.NET project are protected by corresponding laws and regulations. Use of this project shall comply with relevant laws, regulations and license requirements.
 //
-// 本项目主要遵循 MIT 许可证和 Apache 许可证（版本 2.0）进行分发和使用。许可证位于源代码树根目录中的 LICENSE-MIT 和 LICENSE-APACHE 文件。
+// This project is distributed and used primarily under the MIT License and the Apache License (version 2.0). The license is located in the LICENSE-MIT and LICENSE-APACHE files in the root of the source tree.
 //
-// 不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！
+// This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project!
 
 namespace Admin.NET.Core;
 
 /// <summary>
-/// 翻译表输出参数
+/// Translation table output parameters
 /// </summary>
 public class SysLangTextDto
 {
     /// <summary>
-    /// 主键Id
+    /// Primary keyId
     /// </summary>
     public long Id { get; set; }
 
     /// <summary>
-    /// 所属实体名
+    /// Name of the entity to which it belongs
     /// </summary>
     public string EntityName { get; set; }
 
     /// <summary>
-    /// 所属实体ID
+    /// Owning entity ID
     /// </summary>
     public long EntityId { get; set; }
 
     /// <summary>
-    /// 字段名
+    /// Field name
     /// </summary>
     public string FieldName { get; set; }
 
     /// <summary>
-    /// 语言代码
+    /// language code
     /// </summary>
     public string LangCode { get; set; }
 
     /// <summary>
-    /// 翻译内容
+    /// Translate content
     /// </summary>
     public string Content { get; set; }
 
     /// <summary>
-    /// 创建时间
+    /// creation time
     /// </summary>
     public DateTime? CreateTime { get; set; }
 
     /// <summary>
-    /// 更新时间
+    /// Update time
     /// </summary>
     public DateTime? UpdateTime { get; set; }
 
     /// <summary>
-    /// 创建者Id
+    /// CreatorId
     /// </summary>
     public long? CreateUserId { get; set; }
 
     /// <summary>
-    /// 创建者姓名
+    /// Creator name
     /// </summary>
     public string? CreateUserName { get; set; }
 
     /// <summary>
-    /// 修改者Id
+    /// Modifier ID
     /// </summary>
     public long? UpdateUserId { get; set; }
 
     /// <summary>
-    /// 修改者姓名
+    /// Modifier name
     /// </summary>
     public string? UpdateUserName { get; set; }
 }

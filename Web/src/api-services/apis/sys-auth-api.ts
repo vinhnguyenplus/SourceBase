@@ -1,8 +1,8 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Admin.NET 通用权限开发平台
- * 让 .NET 开发更简单、更通用、更流行。整合最新技术，模块插件式开发，前后端分离，开箱即用。<br/><u><b><font color='FF0000'> 👮不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！</font></b></u>
+ * Admin.NET General Permission Development Platform
+ * let .NET Develop more simply、More general、More popular。wholeIn line with the latest technology，Modular Plugin-Based Development，Frontend and backendpointsLeave，Ready to use out of the box。<br/><u><b><font color='FF0000'> 👮This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project! </font></b></u>
  *
  * OpenAPI spec version: 1.0.0
  * 
@@ -31,8 +31,8 @@ import { UserRegistrationInput } from '../models';
 export const SysAuthApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
-         * Swagger登录检查
-         * @summary Swagger登录检查 🔖
+         * Swagger login check
+         * @summary Swagger login check 🔖
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -74,8 +74,8 @@ export const SysAuthApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Swagger登录提交
-         * @summary Swagger登录提交 🔖
+         * Swagger Login Submission
+         * @summary Swagger Login Submission 🔖
          * @param {string} [userName] 
          * @param {string} [password] 
          * @param {*} [options] Override http request option.
@@ -132,7 +132,7 @@ export const SysAuthApiAxiosParamCreator = function (configuration?: Configurati
         },
         /**
          * 
-         * @summary 获取验证码 🔖
+         * @summary ObtainVerification Code 🔖
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -175,7 +175,7 @@ export const SysAuthApiAxiosParamCreator = function (configuration?: Configurati
         },
         /**
          * 
-         * @summary 手机号登录 🔖
+         * @summary Login with phone number 🔖
          * @param {LoginPhoneInput} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -226,8 +226,8 @@ export const SysAuthApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * 用户名/密码：superadmin/123456
-         * @summary 账号密码登录 🔖
+         * Username/password：superadmin/123456
+         * @summary Account numberpasswordLogin 🔖
          * @param {LoginInput} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -279,7 +279,7 @@ export const SysAuthApiAxiosParamCreator = function (configuration?: Configurati
         },
         /**
          * 
-         * @summary 退出系统 🔖
+         * @summary Exit the system 🔖
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -322,8 +322,8 @@ export const SysAuthApiAxiosParamCreator = function (configuration?: Configurati
         },
         /**
          * 
-         * @summary 获取刷新Token 🔖
-         * @param {string} [accessToken] 旧的AccessToken
+         * @summary Get Refresh Token 🔖
+         * @param {string} [accessToken] oldAccessToken
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -370,7 +370,7 @@ export const SysAuthApiAxiosParamCreator = function (configuration?: Configurati
         },
         /**
          * 
-         * @summary 验证锁屏密码 🔖
+         * @summary Verify lock screen password 🔖
          * @param {string} password 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -422,7 +422,7 @@ export const SysAuthApiAxiosParamCreator = function (configuration?: Configurati
         },
         /**
          * 
-         * @summary 获取登录账号 🔖
+         * @summary Get login account 🔖
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -464,8 +464,8 @@ export const SysAuthApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * 用户注册
-         * @summary 用户注册 🔖
+         * User Registration
+         * @summary User Registration 🔖
          * @param {UserRegistrationInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -521,8 +521,8 @@ export const SysAuthApiAxiosParamCreator = function (configuration?: Configurati
 export const SysAuthApiFp = function(configuration?: Configuration) {
     return {
         /**
-         * Swagger登录检查
-         * @summary Swagger登录检查 🔖
+         * Swagger login check
+         * @summary Swagger login check 🔖
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -534,8 +534,8 @@ export const SysAuthApiFp = function(configuration?: Configuration) {
             };
         },
         /**
-         * Swagger登录提交
-         * @summary Swagger登录提交 🔖
+         * Swagger Login Submission
+         * @summary Swagger Login Submission 🔖
          * @param {string} [userName] 
          * @param {string} [password] 
          * @param {*} [options] Override http request option.
@@ -550,7 +550,7 @@ export const SysAuthApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary 获取验证码 🔖
+         * @summary ObtainVerification Code 🔖
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -563,7 +563,7 @@ export const SysAuthApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary 手机号登录 🔖
+         * @summary Login with phone number 🔖
          * @param {LoginPhoneInput} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -576,8 +576,8 @@ export const SysAuthApiFp = function(configuration?: Configuration) {
             };
         },
         /**
-         * 用户名/密码：superadmin/123456
-         * @summary 账号密码登录 🔖
+         * Username/password：superadmin/123456
+         * @summary Account numberpasswordLogin 🔖
          * @param {LoginInput} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -591,7 +591,7 @@ export const SysAuthApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary 退出系统 🔖
+         * @summary Exit the system 🔖
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -604,8 +604,8 @@ export const SysAuthApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary 获取刷新Token 🔖
-         * @param {string} [accessToken] 旧的AccessToken
+         * @summary Get Refresh Token 🔖
+         * @param {string} [accessToken] oldAccessToken
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -618,7 +618,7 @@ export const SysAuthApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary 验证锁屏密码 🔖
+         * @summary Verify lock screen password 🔖
          * @param {string} password 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -632,7 +632,7 @@ export const SysAuthApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary 获取登录账号 🔖
+         * @summary Get login account 🔖
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -644,8 +644,8 @@ export const SysAuthApiFp = function(configuration?: Configuration) {
             };
         },
         /**
-         * 用户注册
-         * @summary 用户注册 🔖
+         * User Registration
+         * @summary User Registration 🔖
          * @param {UserRegistrationInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -667,8 +667,8 @@ export const SysAuthApiFp = function(configuration?: Configuration) {
 export const SysAuthApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
     return {
         /**
-         * Swagger登录检查
-         * @summary Swagger登录检查 🔖
+         * Swagger login check
+         * @summary Swagger login check 🔖
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -676,8 +676,8 @@ export const SysAuthApiFactory = function (configuration?: Configuration, basePa
             return SysAuthApiFp(configuration).apiSwaggerCheckUrlPost(options).then((request) => request(axios, basePath));
         },
         /**
-         * Swagger登录提交
-         * @summary Swagger登录提交 🔖
+         * Swagger Login Submission
+         * @summary Swagger Login Submission 🔖
          * @param {string} [userName] 
          * @param {string} [password] 
          * @param {*} [options] Override http request option.
@@ -688,7 +688,7 @@ export const SysAuthApiFactory = function (configuration?: Configuration, basePa
         },
         /**
          * 
-         * @summary 获取验证码 🔖
+         * @summary ObtainVerification Code 🔖
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -697,7 +697,7 @@ export const SysAuthApiFactory = function (configuration?: Configuration, basePa
         },
         /**
          * 
-         * @summary 手机号登录 🔖
+         * @summary Login with phone number 🔖
          * @param {LoginPhoneInput} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -706,8 +706,8 @@ export const SysAuthApiFactory = function (configuration?: Configuration, basePa
             return SysAuthApiFp(configuration).apiSysAuthLoginPhonePost(body, options).then((request) => request(axios, basePath));
         },
         /**
-         * 用户名/密码：superadmin/123456
-         * @summary 账号密码登录 🔖
+         * Username/password：superadmin/123456
+         * @summary Account numberpasswordLogin 🔖
          * @param {LoginInput} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -717,7 +717,7 @@ export const SysAuthApiFactory = function (configuration?: Configuration, basePa
         },
         /**
          * 
-         * @summary 退出系统 🔖
+         * @summary Exit the system 🔖
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -726,8 +726,8 @@ export const SysAuthApiFactory = function (configuration?: Configuration, basePa
         },
         /**
          * 
-         * @summary 获取刷新Token 🔖
-         * @param {string} [accessToken] 旧的AccessToken
+         * @summary Get Refresh Token 🔖
+         * @param {string} [accessToken] oldAccessToken
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -736,7 +736,7 @@ export const SysAuthApiFactory = function (configuration?: Configuration, basePa
         },
         /**
          * 
-         * @summary 验证锁屏密码 🔖
+         * @summary Verify lock screen password 🔖
          * @param {string} password 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -746,7 +746,7 @@ export const SysAuthApiFactory = function (configuration?: Configuration, basePa
         },
         /**
          * 
-         * @summary 获取登录账号 🔖
+         * @summary Get login account 🔖
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -754,8 +754,8 @@ export const SysAuthApiFactory = function (configuration?: Configuration, basePa
             return SysAuthApiFp(configuration).apiSysAuthUserInfoGet(options).then((request) => request(axios, basePath));
         },
         /**
-         * 用户注册
-         * @summary 用户注册 🔖
+         * User Registration
+         * @summary User Registration 🔖
          * @param {UserRegistrationInput} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -774,8 +774,8 @@ export const SysAuthApiFactory = function (configuration?: Configuration, basePa
  */
 export class SysAuthApi extends BaseAPI {
     /**
-     * Swagger登录检查
-     * @summary Swagger登录检查 🔖
+     * Swagger login check
+     * @summary Swagger login check 🔖
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SysAuthApi
@@ -784,8 +784,8 @@ export class SysAuthApi extends BaseAPI {
         return SysAuthApiFp(this.configuration).apiSwaggerCheckUrlPost(options).then((request) => request(this.axios, this.basePath));
     }
     /**
-     * Swagger登录提交
-     * @summary Swagger登录提交 🔖
+     * Swagger Login Submission
+     * @summary Swagger Login Submission 🔖
      * @param {string} [userName] 
      * @param {string} [password] 
      * @param {*} [options] Override http request option.
@@ -797,7 +797,7 @@ export class SysAuthApi extends BaseAPI {
     }
     /**
      * 
-     * @summary 获取验证码 🔖
+     * @summary ObtainVerification Code 🔖
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SysAuthApi
@@ -807,7 +807,7 @@ export class SysAuthApi extends BaseAPI {
     }
     /**
      * 
-     * @summary 手机号登录 🔖
+     * @summary Login with phone number 🔖
      * @param {LoginPhoneInput} body 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -817,8 +817,8 @@ export class SysAuthApi extends BaseAPI {
         return SysAuthApiFp(this.configuration).apiSysAuthLoginPhonePost(body, options).then((request) => request(this.axios, this.basePath));
     }
     /**
-     * 用户名/密码：superadmin/123456
-     * @summary 账号密码登录 🔖
+     * Username/password：superadmin/123456
+     * @summary Account numberpasswordLogin 🔖
      * @param {LoginInput} body 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -829,7 +829,7 @@ export class SysAuthApi extends BaseAPI {
     }
     /**
      * 
-     * @summary 退出系统 🔖
+     * @summary Exit the system 🔖
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SysAuthApi
@@ -839,8 +839,8 @@ export class SysAuthApi extends BaseAPI {
     }
     /**
      * 
-     * @summary 获取刷新Token 🔖
-     * @param {string} [accessToken] 旧的AccessToken
+     * @summary Get Refresh Token 🔖
+     * @param {string} [accessToken] oldAccessToken
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SysAuthApi
@@ -850,7 +850,7 @@ export class SysAuthApi extends BaseAPI {
     }
     /**
      * 
-     * @summary 验证锁屏密码 🔖
+     * @summary Verify lock screen password 🔖
      * @param {string} password 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -861,7 +861,7 @@ export class SysAuthApi extends BaseAPI {
     }
     /**
      * 
-     * @summary 获取登录账号 🔖
+     * @summary Get login account 🔖
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SysAuthApi
@@ -870,8 +870,8 @@ export class SysAuthApi extends BaseAPI {
         return SysAuthApiFp(this.configuration).apiSysAuthUserInfoGet(options).then((request) => request(this.axios, this.basePath));
     }
     /**
-     * 用户注册
-     * @summary 用户注册 🔖
+     * User Registration
+     * @summary User Registration 🔖
      * @param {UserRegistrationInput} [body] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}

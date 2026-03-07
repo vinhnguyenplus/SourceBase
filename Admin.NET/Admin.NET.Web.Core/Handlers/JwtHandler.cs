@@ -1,8 +1,8 @@
-﻿// Admin.NET 项目的版权、商标、专利和其他相关权利均受相应法律法规的保护。使用本项目应遵守相关法律法规和许可证的要求。
+﻿// The copyright, trademark, patent and other related rights of the Admin.NET project are protected by corresponding laws and regulations. Use of this project shall comply with relevant laws, regulations and license requirements.
 //
-// 本项目主要遵循 MIT 许可证和 Apache 许可证（版本 2.0）进行分发和使用。许可证位于源代码树根目录中的 LICENSE-MIT 和 LICENSE-APACHE 文件。
+// This project is distributed and used primarily under the MIT License and the Apache License (version 2.0). The license is located in the LICENSE-MIT and LICENSE-APACHE files in the root of the source tree.
 //
-// 不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！
+// This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project!
 
 using Admin.NET.Core;
 using Admin.NET.Core.Service;
@@ -23,7 +23,7 @@ public class JwtHandler : AppAuthorizeHandler
     private static readonly SysMenuService SysMenuService = App.GetRequiredService<SysMenuService>();
 
     /// <summary>
-    /// 自动刷新Token
+    /// Automatically refresh Token
     /// </summary>
     /// <param name="context"></param>
     /// <param name="httpContext"></param>
@@ -33,7 +33,7 @@ public class JwtHandler : AppAuthorizeHandler
         var userId = context.User.FindFirst(ClaimConst.UserId)?.Value;
         var token = httpContext.Request.Headers["Authorization"].ToString().Replace("Bearer ", "");
 
-        // 🛡️ 黑名单校验（包括用户和token）
+        // 🛡️ Blacklist verification (including users and tokens)
         if (_sysCacheService.ExistKey($"{CacheConst.KeyBlacklist}{userId}") ||
             _sysCacheService.ExistKey($"blacklist:token:{token}"))
         {
@@ -50,11 +50,11 @@ public class JwtHandler : AppAuthorizeHandler
         }
         else
         {
-            context.Fail(); // 授权失败
+            context.Fail(); // Authorization failed
             var currentHttpContext = context.GetCurrentHttpContext();
             if (currentHttpContext == null) return;
 
-            // 跳过由于 SignatureAuthentication 引发的失败
+            // Skip failures due to SignatureAuthentication
             if (currentHttpContext.Items.ContainsKey(SignatureAuthenticationDefaults.AuthenticateFailMsgKey)) return;
             currentHttpContext.SignoutToSwagger();
         }
@@ -62,36 +62,36 @@ public class JwtHandler : AppAuthorizeHandler
 
     public override async Task<bool> PipelineAsync(AuthorizationHandlerContext context, DefaultHttpContext httpContext)
     {
-        // 已自动验证 Jwt Token 有效性
+        // Jwt Token validity has been automatically verified
         return await CheckAuthorizeAsync(httpContext);
     }
 
     /// <summary>
-    /// 权限校验核心逻辑
+    /// Permission verification core logic
     /// </summary>
     /// <param name="httpContext"></param>
     /// <returns></returns>
     private static async Task<bool> CheckAuthorizeAsync(DefaultHttpContext httpContext)
     {
-        // 登录模式判断PC、APP
+        // Login mode to determine PC and APP
         if (App.User.FindFirst(ClaimConst.LoginMode)?.Value == ((int)LoginModeEnum.APP).ToString())
             return true;
 
-        // 排除超管
+        // Exclude super pipe
         if (App.User.FindFirst(ClaimConst.AccountType)?.Value == ((int)AccountTypeEnum.SuperAdmin).ToString())
             return true;
 
-        // 路由名称
+        // Route name
         var routeName = httpContext.Request.Path.StartsWithSegments("/api")
             ? httpContext.Request.Path.Value![5..].Replace("/", ":")
             : httpContext.Request.Path.Value![1..].Replace("/", ":");
 
-        // 获取用户拥有按钮权限集合
+        // Get the set of button permissions that the user has
         var ownBtnPermList = await SysMenuService.GetOwnBtnPermList();
         if (ownBtnPermList.Exists(u => routeName.Equals(u, StringComparison.CurrentCultureIgnoreCase)))
             return true;
 
-        // 获取系统所有按钮权限集合
+        // Get the permission set of all buttons in the system
         var allBtnPermList = await SysMenuService.GetAllBtnPermList();
         return allBtnPermList.TrueForAll(u => !routeName.Equals(u, StringComparison.CurrentCultureIgnoreCase));
     }

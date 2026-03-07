@@ -22,10 +22,10 @@ import { useThemeConfig } from '/@/stores/themeConfig';
 import { Session } from '/@/utils/storage';
 import mittBus from '/@/utils/mitt';
 
-// 引入组件
+// Introduce components
 const Iframes = defineAsyncComponent(() => import('/@/layout/routerView/iframes.vue'));
 
-// 定义变量内容
+// Define variable content
 const route = useRoute();
 const router = useRouter();
 const storesKeepAliveNames = useKeepALiveNames();
@@ -33,25 +33,25 @@ const storesThemeConfig = useThemeConfig();
 const { keepAliveNames, cachedViews } = storeToRefs(storesKeepAliveNames);
 const { themeConfig } = storeToRefs(storesThemeConfig);
 const state = reactive<ParentViewState>({
-	refreshRouterViewKey: '', // 非 iframe tagsview 右键菜单刷新时
-	iframeRefreshKey: '', // iframe tagsview 右键菜单刷新时
+	refreshRouterViewKey: '', // When the non-iframe tagsview right-click menu is refreshed
+	iframeRefreshKey: '', // iframe tagsview when the right-click menu is refreshed
 	keepAliveNameList: [],
 	iframeList: [],
 });
 
-// 设置主界面切换动画
+// Set the main interface switching animation
 const setTransitionName = computed(() => {
 	return themeConfig.value.animation;
 });
-// 获取组件缓存列表(name值)
+// Get component cache list (name value)
 const getKeepAliveNames = computed(() => {
 	return themeConfig.value.isTagsview ? cachedViews.value : state.keepAliveNameList;
 });
-// 设置 iframe 显示/隐藏
+// Set iframe show/hide
 const isIframePage = computed(() => {
 	return route.meta.isIframe;
 });
-// 获取 iframe 组件列表(未进行渲染)
+// Get iframe component list (not rendered)
 const getIframeListRoutes = async () => {
 	router.getRoutes().forEach((v) => {
 		if (v.meta.isIframe) {
@@ -61,7 +61,7 @@ const getIframeListRoutes = async () => {
 		}
 	});
 };
-// 页面加载前，处理缓存，页面刷新时路由缓存处理
+// Before the page is loaded, the cache is processed, and the routing cache is processed when the page is refreshed.
 onBeforeMount(() => {
 	state.keepAliveNameList = keepAliveNames.value;
 	mittBus.on('onTagsViewRefreshRouterView', (fullPath: string) => {
@@ -75,7 +75,7 @@ onBeforeMount(() => {
 		});
 	});
 });
-// 页面加载时
+// When the page loads
 onMounted(() => {
 	getIframeListRoutes();
 	// https://gitee.com/lyt-top/vue-next-admin/issues/I58U75
@@ -90,11 +90,11 @@ onMounted(() => {
 		}, 0);
 	});
 });
-// 页面卸载时
+// When the page is unloaded
 onUnmounted(() => {
 	mittBus.off('onTagsViewRefreshRouterView', () => {});
 });
-// 监听路由变化，防止 tagsView 多标签时，切换动画消失
+// Monitor routing changes to prevent the switching animation from disappearing when tagsView has multiple tags.
 // https://toscode.gitee.com/lyt-top/vue-next-admin/pulls/38/files
 watch(
 	() => route.fullPath,

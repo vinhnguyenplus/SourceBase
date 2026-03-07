@@ -16,17 +16,17 @@
 import { reactive, ref, onMounted, nextTick } from 'vue';
 
 const props = defineProps({
-	mode: { type: String, default: '' }, // 通知栏模式，可选值为 closeable link
-	text: { type: String, default: '欢迎使用 Admin.NET 通用权限开发框架 <a href="https://gitee.com/zuohuaijun/Admin.NET" target="_blank">https://gitee.com/zuohuaijun/Admin.NET</a>' }, // 通知文本内容
-	color: { type: String, default: 'var(--el-color-warning)' }, // 通知文本颜色
-	background: { type: String, default: 'var(--el-color-warning-light-9)' }, // 通知背景色
-	size: { type: [Number, String], default: 14 }, // 字体大小，单位px
-	height: { type: Number, default: 40 }, // 通知栏高度，单位px
-	delay: { type: Number, default: 1 }, // 动画延迟时间 (s)
-	speed: { type: Number, default: 100 }, // 滚动速率 (px/s)
-	scrollable: { type: Boolean, default: false }, // 是否开启垂直滚动
-	leftIcon: { type: String, default: 'iconfont icon-tongzhi2' }, // 自定义左侧图标
-	rightIcon: { type: String, default: '' }, // 自定义右侧图标
+	mode: { type: String, default: '' }, // Notification bar mode, optional value is closeable link
+	text: { type: String, default: 'Welcome to the PAYMENT COIN' }, // Notification text content
+	color: { type: String, default: 'var(--el-color-warning)' }, // Notification text color
+	background: { type: String, default: 'var(--el-color-warning-light-9)' }, // Notification background color
+	size: { type: [Number, String], default: 14 }, // Font size, unit px
+	height: { type: Number, default: 40 }, // Notification bar height, unit: px
+	delay: { type: Number, default: 1 }, // Animation delay time (s)
+	speed: { type: Number, default: 100 }, // Scroll rate (px/s)
+	scrollable: { type: Boolean, default: false }, // Whether to enable vertical scrolling
+	leftIcon: { type: String, default: 'iconfont icon-tongzhi2' }, // Customize left icon
+	rightIcon: { type: String, default: '' }, // Customize the right icon
 });
 
 const emit = defineEmits(['close', 'link']);
@@ -39,14 +39,14 @@ const state = reactive({
 	animationDuration: 0,
 });
 
-// 页面初始化
+// Page initialization
 onMounted(() => {
 	if (!props.scrollable) {
 		initAnimation();
 	}
 });
 
-// 初始化动画
+// Initialize animation
 const initAnimation = () => {
 	nextTick(() => {
 		if (noticeBarWarpRef.value && noticeBarTextRef.value) {
@@ -74,7 +74,7 @@ const initAnimation = () => {
 	});
 };
 
-// 右侧 icon 图标点击
+// Click the icon on the right
 const onRightIconClick = () => {
 	if (!props.mode) return false;
 	if (props.mode === 'closeable') {

@@ -2,7 +2,7 @@
 /* eslint-disable */
 /**
  * ApprovalFlow
- * <br/><u><b><font color='FF0000'> 👮不得利用本项目从事危害国家安全、扰乱社会秩序、侵犯他人合法权益等法律法规禁止的活动！任何基于本项目二次开发而产生的一切法律纠纷和责任，我们不承担任何责任！</font></b></u>
+ * <br/><u><b><font color='FF0000'> 👮This project may not be used to engage in activities that endanger national security, disrupt social order, infringe on the legitimate rights and interests of others, and other activities prohibited by laws and regulations! We do not assume any responsibility for any legal disputes and liabilities arising from the secondary development of this project! </font></b></u>
  *
  * OpenAPI spec version: 1.0.0
  * 
@@ -12,7 +12,7 @@
  * Do not edit the class manually.
  */
 /**
- * 过滤逻辑运算符<br />&nbsp;等于 EQ = 0<br />&nbsp;不等于 NEQ = 1<br />&nbsp;小于 LT = 2<br />&nbsp;小于等于 LTE = 3<br />&nbsp;大于 GT = 4<br />&nbsp;大于等于 GTE = 5<br />&nbsp;开始包含 StartsWith = 6<br />&nbsp;末尾包含 EndsWith = 7<br />&nbsp;包含 Contains = 8<br />
+ * Filter logical operators<br /> Equals EQ = 0<br />&nbsp;Not equal to NEQ = 1<br /> <  LT = 2<br />&nbsp;Less than or equal to LTE = 3<br />&nbsp;Greater than GT = 4<br />&nbsp;Greater than or equal to GTE = 5<br /> Starts with = 6<br />&nbsp;EndsWith = 7<br />&nbsp;Contains = 8<br />
  * @export
  * @enum {string}
  */
