@@ -49,3 +49,32 @@ Admin.NET/Admin.NET.Application/Configuration/DeepSeek.json
 # sockets
 *.sock
 *.sock.*
+
+# =========================
+# Docker runtime data
+# =========================
+docker/mysql/
+docker/minio/
+docker/tdengine/
+docker/taos/
+docker/**/data/
+docker/**/log/
+docker/**/wal/
+
+# MySQL
+*.ibd
+*.ibdata*
+*.frm
+*.err
+*.pid
+
+# TDengine
+*.log
+*.idx
+
+# MinIO
+*.xl.meta
+
+# Logs
+*.log
+logs/
