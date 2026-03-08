@@ -180,7 +180,7 @@ public class APIJSONService : IDynamicApiController, ITransient
             if (role.Delete == null || role.Delete.Table == null)
                 throw Oops.Bah("delete permission is not configured");
             if (!role.Delete.Table.Contains(talbeName, StringComparer.CurrentCultureIgnoreCase))
-                throw Oops.Bah($"No permission to delete {tableName}");
+                throw Oops.Bah($"No permission to delete{talbeName}");
             //if (!value.ContainsKey("id"))
             //    throw Oops.Bah("Primary key id not passed");
 

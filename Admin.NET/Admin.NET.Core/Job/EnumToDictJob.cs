@@ -75,8 +75,7 @@ public class EnumToDictJob : IJob
         catch (Exception error)
         {
             await db.RollbackTranAsync();
-            Log.Error($"System enum conversion dictionary operation error: {error.Message}
-Stack trace: {error.StackTrace}", error);
+            Log.Error($"System enumeration to dictionary conversion error: {error.Message}\nStack trace：{error.StackTrace}", error);
             throw;
         }
         finally

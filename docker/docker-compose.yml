@@ -25,11 +25,6 @@ services:
        nofile:
          soft: 131072
          hard: 400000
-    #healthcheck:
-    #  test: "/usr/bin/mysql --user=root --password=root --execute \"SHOW DATABASES;\""
-    #  interval: 10s # 间隔时间
-    #  timeout: 3s  # 超时时间
-    #  retries: 50   # 重试次数
     environment:
       MYSQL_ROOT_HOST: "%"
       MYSQL_DATABASE: admin
@@ -39,17 +34,16 @@ services:
       - ./mysql/mysql:/var/lib/mysql
       - ./mysql/mysql.cnf:/etc/mysql/conf.d/mysql.cnf
   redis:
-    image: 'redis:latest' # 使用最新版本的 Redis 镜像，也可以指定特定版本如 'redis:6.2.7'
-    container_name: my-redis # 自定义容器名称
+    image: 'redis:latest' 
+    container_name: my-redis 
     ports:
-      - '6379:6379' # 映射宿主机的 6379 端口到容器的 6379 端口
-    volumes: # 持久化数据
+      - '6379:6379' 
+    volumes: 
       - ./redis/redis.conf:/usr/local/etc/redis/redis.conf
       - ./redis/data:/data:rw
       - ./redis/logs:/logs
-    #command: ['redis-server', '--appendonly', 'yes'] # 启用AOF持久化
     command: ['redis-server','/usr/local/etc/redis/redis.conf']
-    environment: # 设置环境变量，例如密码
+    environment: 
       - REDIS_PASSWORD=123456
   minio:
     image: minio/minio:RELEASE.2025-04-22T22-12-26Z
@@ -62,8 +56,8 @@ services:
       - ./minio/data:/data
       - ./minio/config:/root/.minio
     ports:
-      - "9104:9000"  # API端口
-      - "9105:9001"  # 控制台端口
+      - "9104:9000"  
+      - "9105:9001" 
     command: server /data --console-address ":9001"
   tdengine:
     image: tdengine/tdengine:3.3.6.13
@@ -75,8 +69,8 @@ services:
     privileged: true
     environment:
       TAOS_FQDN: "tdengine"
-      TAOS_FIRST_EP: "tdengine"  # 指向首个节点主机名
-      TAOS_SECOND_EP: "tdengine" # 可选备用节点 
+      TAOS_FIRST_EP: "tdengine"  
+      TAOS_SECOND_EP: "tdengine" 
 
 
     ports:

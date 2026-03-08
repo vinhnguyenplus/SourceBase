@@ -77,7 +77,7 @@ public class SysOAuthService : IDynamicApiController, ITransient
         var gender = authenticateResult.Principal.FindFirst(ClaimTypes.Gender)?.Value;
         var avatarUrl = "";
 
-        var platformType = PlatformTypeEnum.WeChat Official Account;
+        var platformType = PlatformTypeEnum.WeChatOfficialAccount;
         if (provider == "Gitee")
         {
             platformType = PlatformTypeEnum.Gitee;

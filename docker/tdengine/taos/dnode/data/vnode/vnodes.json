@@ -1,0 +1,8 @@
+{
+	"vnodes":	[{
+			"vgId":	2,
+			"dropped":	0,
+			"vgVersion":	1,
+			"diskPrimary":	0
+		}]
+}

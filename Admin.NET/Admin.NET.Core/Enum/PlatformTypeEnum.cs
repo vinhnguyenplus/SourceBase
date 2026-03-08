@@ -16,13 +16,13 @@ public enum PlatformTypeEnum
     /// WeChat public account
     /// </summary>
     [Description("WeChat Official Account")]
-    WeChat Official Account = 1,
+    WeChatOfficialAccount = 1,
 
     /// <summary>
     /// WeChat applet
     /// </summary>
     [Description("WeChat Mini Program")]
-    WeChat Mini Program = 2,
+    WeChatMiniProgram = 2,
 
     /// <summary>
     /// QQ

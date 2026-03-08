@@ -53,7 +53,7 @@ public class SysWechatService : IDynamicApiController, ITransient
             Code = input.Code,
         };
         var resOAuth2 = await _wechatApiClient.ExecuteSnsOAuth2AccessTokenAsync(reqOAuth2);
-        if (resOAuth2.ErrorCode != (int)WechatReturnCodeEnum.Requestsuccess)
+        if (resOAuth2.ErrorCode != (int)WechatReturnCodeEnum.请求成功)
             throw Oops.Oh(resOAuth2.ErrorMessage + " " + resOAuth2.ErrorCode);
 
         var wxUser = await _sysWechatUserRep.GetFirstAsync(p => p.OpenId == resOAuth2.OpenId);
@@ -133,7 +133,7 @@ public class SysWechatService : IDynamicApiController, ITransient
             AccessToken = accessToken
         };
         var resTemplate = await _wechatApiClient.ExecuteCgibinTemplateGetAllPrivateTemplateAsync(reqTemplate);
-        if (resTemplate.ErrorCode != (int)WechatReturnCodeEnum.Requestsuccess)
+        if (resTemplate.ErrorCode != (int)WechatReturnCodeEnum.请求成功)
             throw Oops.Oh(resTemplate.ErrorMessage + " " + resTemplate.ErrorCode);
 
         return resTemplate.TemplateList;

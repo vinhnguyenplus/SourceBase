@@ -43,7 +43,7 @@ public class SysWxOpenService : IDynamicApiController, ITransient
             JsCode = input.JsCode,
         };
         var resCode2Session = await _wechatApiClient.ExecuteSnsJsCode2SessionAsync(reqJsCode2Session);
-        if (resCode2Session.ErrorCode != (int)WechatReturnCodeEnum.Requestsuccess)
+        if (resCode2Session.ErrorCode != (int)WechatReturnCodeEnum.请求成功)
             throw Oops.Oh(resCode2Session.ErrorMessage + " " + resCode2Session.ErrorCode);
 
         var wxUser = await _sysWechatUserRep.GetFirstAsync(p => p.OpenId == resCode2Session.OpenId);
@@ -54,7 +54,7 @@ public class SysWxOpenService : IDynamicApiController, ITransient
                 OpenId = resCode2Session.OpenId,
                 UnionId = resCode2Session.UnionId,
                 SessionKey = resCode2Session.SessionKey,
-                PlatformType = PlatformTypeEnum.WeChat Mini Program
+                PlatformType = PlatformTypeEnum.WeChatMiniProgram
             };
             wxUser = await _sysWechatUserRep.AsInsertable(wxUser).ExecuteReturnEntityAsync();
         }
@@ -84,7 +84,7 @@ public class SysWxOpenService : IDynamicApiController, ITransient
             AccessToken = accessToken,
         };
         var resUserPhoneNumber = await _wechatApiClient.ExecuteWxaBusinessGetUserPhoneNumberAsync(reqUserPhoneNumber);
-        if (resUserPhoneNumber.ErrorCode != (int)WechatReturnCodeEnum.Requestsuccess)
+        if (resUserPhoneNumber.ErrorCode != (int)WechatReturnCodeEnum.请求成功)
             throw Oops.Oh(resUserPhoneNumber.ErrorMessage + " " + resUserPhoneNumber.ErrorCode);
 
         var wxUser = await _sysWechatUserRep.GetFirstAsync(p => p.OpenId == input.OpenId);
@@ -94,7 +94,7 @@ public class SysWxOpenService : IDynamicApiController, ITransient
             {
                 OpenId = input.OpenId,
                 Mobile = resUserPhoneNumber.PhoneInfo?.PhoneNumber,
-                PlatformType = PlatformTypeEnum.WeChat Mini Program
+                PlatformType = PlatformTypeEnum.WeChatMiniProgram
             };
             wxUser = await _sysWechatUserRep.AsInsertable(wxUser).ExecuteReturnEntityAsync();
         }
@@ -199,7 +199,7 @@ public class SysWxOpenService : IDynamicApiController, ITransient
             AccessToken = accessToken
         };
         var resTemplate = await _wechatApiClient.ExecuteWxaApiNewTemplateGetTemplateAsync(reqTemplate);
-        if (resTemplate.ErrorCode != (int)WechatReturnCodeEnum.Requestsuccess)
+        if (resTemplate.ErrorCode != (int)WechatReturnCodeEnum.请求成功)
             throw Oops.Oh(resTemplate.ErrorMessage + " " + resTemplate.ErrorCode);
 
         return resTemplate.TemplateList;

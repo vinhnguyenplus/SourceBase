@@ -19882,3 +19882,1718 @@
 03/07 06:01:32.743817 00000291 C QRY WARN  parser QID:0x5a510c6e30502461, table name is specified in sql, ignore the table name in bind param
 03/07 06:01:32.743923 00000291 C QRY INFO  QID:0x5a510c6e30502461 init with pTrans:0x2
 03/07 06:01:32.745602 00000291 C QRY INFO  QID:0x2000000000001cac init with pTrans:0x2
+==================================================
+                new log file
+==================================================
+03/08 11:44:33.037284 00000036 C UTL INFO  load from cfg file /etc/taos/taos.cfg success
+03/08 11:44:33.037294 00000036 C UTL INFO  env file:.env not load
+03/08 11:44:33.037299 00000036 C UTL INFO  load from env variables cfg success
+03/08 11:44:33.037345 00000036 C UTL INFO                       global config
+03/08 11:44:33.037346 00000036 C UTL INFO  =================================================================
+03/08 11:44:33.037349 00000036 C UTL INFO  default      forceReadConfig                  0
+03/08 11:44:33.037351 00000036 C UTL INFO  env_var      firstEp                          tdengine:6030
+03/08 11:44:33.037351 00000036 C UTL INFO  env_var      secondEp                         tdengine:6030
+03/08 11:44:33.037352 00000036 C UTL INFO  default      tempDir                          /tmp/
+03/08 11:44:33.037353 00000036 C UTL INFO  default      minimalTmpDirGB                  1.00
+03/08 11:44:33.037358 00000036 C UTL INFO  default      queryPolicy                      1
+03/08 11:44:33.037359 00000036 C UTL INFO  default      queryTableNotExistAsEmpty        0
+03/08 11:44:33.037360 00000036 C UTL INFO  default      enableQueryHb                    1
+03/08 11:44:33.037360 00000036 C UTL INFO  default      enableScience                    0
+03/08 11:44:33.037361 00000036 C UTL INFO  default      querySmaOptimize                 0
+03/08 11:44:33.037362 00000036 C UTL INFO  default      queryPlannerTrace                0
+03/08 11:44:33.037363 00000036 C UTL INFO  default      queryNodeChunkSize               32768
+03/08 11:44:33.037363 00000036 C UTL INFO  default      queryUseNodeAllocator            1
+03/08 11:44:33.037364 00000036 C UTL INFO  default      keepColumnName                   0
+03/08 11:44:33.037365 00000036 C UTL INFO  default      smlChildTableName                
+03/08 11:44:33.037365 00000036 C UTL INFO  default      smlAutoChildTableNameDelimiter   
+03/08 11:44:33.037366 00000036 C UTL INFO  default      smlTagName                       _tag_null
+03/08 11:44:33.037367 00000036 C UTL INFO  default      smlTsDefaultName                 _ts
+03/08 11:44:33.037368 00000036 C UTL INFO  default      smlDot2Underline                 1
+03/08 11:44:33.037368 00000036 C UTL INFO  default      minSlidingTime                   1
+03/08 11:44:33.037369 00000036 C UTL INFO  default      minIntervalTime                  1
+03/08 11:44:33.037370 00000036 C UTL INFO  default      maxInsertBatchRows               1000000
+03/08 11:44:33.037371 00000036 C UTL INFO  default      useAdapter                       0
+03/08 11:44:33.037372 00000036 C UTL INFO  default      queryMaxConcurrentTables         200
+03/08 11:44:33.037372 00000036 C UTL INFO  default      metaCacheMaxSize                 -1
+03/08 11:44:33.037373 00000036 C UTL INFO  default      bypassFlag                       0
+03/08 11:44:33.037374 00000036 C UTL INFO  default      numOfRpcThreads                  8
+03/08 11:44:33.037375 00000036 C UTL INFO  default      numOfRpcSessions                 30000
+03/08 11:44:33.037375 00000036 C UTL INFO  default      numOfTaskQueueThreads            32
+03/08 11:44:33.037376 00000036 C UTL INFO  default      multiResultFunctionStarReturnTa  0
+03/08 11:44:33.037377 00000036 C UTL INFO  default      countAlwaysReturnValue           1
+03/08 11:44:33.037377 00000036 C UTL INFO  default      maxTsmaCalcDelay                 600
+03/08 11:44:33.037378 00000036 C UTL INFO  default      tsmaDataDeleteMark               86400000
+03/08 11:44:33.037379 00000036 C UTL INFO  default      streamCoverage                   0
+03/08 11:44:33.037380 00000036 C UTL INFO  default      compareAsStrInGreatest           1
+03/08 11:44:33.037380 00000036 C UTL INFO  default      configDir                        /etc/taos/
+03/08 11:44:33.037381 00000036 C UTL INFO  default      scriptDir                        /etc/taos/
+03/08 11:44:33.037382 00000036 C UTL INFO  default      logDir                           /var/log/taos/
+03/08 11:44:33.037382 00000036 C UTL INFO  default      minimalLogDirGB                  1.00
+03/08 11:44:33.037383 00000036 C UTL INFO  default      numOfLogLines                    10000000
+03/08 11:44:33.037386 00000036 C UTL INFO  default      asyncLog                         1
+03/08 11:44:33.037387 00000036 C UTL INFO  default      logKeepDays                      0
+03/08 11:44:33.037387 00000036 C UTL INFO  default      debugFlag                        0
+03/08 11:44:33.037388 00000036 C UTL INFO  default      simDebugFlag                     131
+03/08 11:44:33.037389 00000036 C UTL INFO  default      tmrDebugFlag                     131
+03/08 11:44:33.037389 00000036 C UTL INFO  default      uDebugFlag                       131
+03/08 11:44:33.037390 00000036 C UTL INFO  default      rpcDebugFlag                     131
+03/08 11:44:33.037391 00000036 C UTL INFO  default      jniDebugFlag                     131
+03/08 11:44:33.037391 00000036 C UTL INFO  default      qDebugFlag                       131
+03/08 11:44:33.037392 00000036 C UTL INFO  default      cDebugFlag                       131
+03/08 11:44:33.037392 00000036 C UTL INFO  default      tqClientDebugFlag                131
+03/08 11:44:33.037393 00000036 C UTL INFO  default      numOfCores                       16.00
+03/08 11:44:33.037395 00000036 C UTL INFO  default      simdEnable                       1
+03/08 11:44:33.037396 00000036 C UTL INFO  default      AVX512Enable                     0
+03/08 11:44:33.037396 00000036 C UTL INFO  default      tagFilterCache                   0
+03/08 11:44:33.037397 00000036 C UTL INFO  default      openMax                          1048576
+03/08 11:44:33.037398 00000036 C UTL INFO  default      streamMax                        16
+03/08 11:44:33.037398 00000036 C UTL INFO  default      pageSizeKB                       4
+03/08 11:44:33.037399 00000036 C UTL INFO  default      totalMemoryKB                    6081396
+03/08 11:44:33.037400 00000036 C UTL INFO  default      os sysname                       Linux
+03/08 11:44:33.037400 00000036 C UTL INFO  default      os nodename                      tdengine
+03/08 11:44:33.037401 00000036 C UTL INFO  default      os release                       5.10.16.3-microsoft-standard-WSL2
+03/08 11:44:33.037402 00000036 C UTL INFO  default      os version                       #1 SMP Fri Apr 2 22:23:49 UTC 2021
+03/08 11:44:33.037402 00000036 C UTL INFO  default      os machine                       x86_64
+03/08 11:44:33.037403 00000036 C UTL INFO  default      version                          3.3.6.13
+03/08 11:44:33.037404 00000036 C UTL INFO  default      compatible_version               3.0.0.0
+03/08 11:44:33.037404 00000036 C UTL INFO  default      gitinfo                          1a3a182ba16ee188c0677fb6cd637b34c52f6bd7
+03/08 11:44:33.037405 00000036 C UTL INFO  default      buildinfo                        Linux-x64 2025-06-28 22:48:07 +0800
+03/08 11:44:33.037406 00000036 C UTL INFO  default      enableIpv6                       0
+03/08 11:44:33.037407 00000036 C UTL INFO  default      shellActivityTimer               3
+03/08 11:44:33.037407 00000036 C UTL INFO  default      compressMsgSize                  -1
+03/08 11:44:33.037408 00000036 C UTL INFO  default      crashReporting                   1
+03/08 11:44:33.037409 00000036 C UTL INFO  default      randErrorChance                  1
+03/08 11:44:33.037410 00000036 C UTL INFO  default      randErrorDivisor                 10001
+03/08 11:44:33.037410 00000036 C UTL INFO  default      randErrorScope                   7
+03/08 11:44:33.037411 00000036 C UTL INFO  default      safetyCheckLevel                 1
+03/08 11:44:33.037412 00000036 C UTL INFO  default      shareConnLimit                   10
+03/08 11:44:33.037412 00000036 C UTL INFO  default      readTimeout                      900
+03/08 11:44:33.037413 00000036 C UTL INFO  default      timeToGetAvailableConn           500000
+03/08 11:44:33.037414 00000036 C UTL INFO  default      experimental                     1
+03/08 11:44:33.037415 00000036 C UTL INFO  default      timezone                         Etc/UTC (UTC, +0000)
+03/08 11:44:33.037415 00000036 C UTL INFO  default      locale                           en_US.UTF-8
+03/08 11:44:33.037417 00000036 C UTL INFO  default      charset                          UTF-8
+03/08 11:44:33.037418 00000036 C UTL INFO  default      enableCoreFile                   1
+03/08 11:44:33.037418 00000036 C UTL INFO  =================================================================
+03/08 11:44:33.037419 00000036 C UTL INFO  check global fqdn:tdengine and port:6030
+03/08 11:44:33.038429 00000036 C TSC INFO  monitor init
+03/08 11:44:33.039092 00000092 C UTL INFO  scheduler tmr-taskQ is started, thread:92
+03/08 11:44:33.039148 00000093 C UTL INFO  scheduler high-tmr-taskQ is started, thread:93
+03/08 11:44:33.040188 00000095 C TSC INFO  monitor update thread started
+03/08 11:44:33.042099 00000036 C TSC INFO  starting to initialize TAOS driver
+03/08 11:44:33.042449 00000036 C QRY INFO  catalog init
+03/08 11:44:33.043418 00000036 C QRY INFO  catalog initialized, maxDb:100, maxTbl:100, dbRentSec:10, stbRentSec:10
+03/08 11:44:33.043432 00000113 C QRY INFO  catalog update thread started
+03/08 11:44:33.043786 00000036 C QRY INFO  scheduler init, policy: 1, maxNodeTableNum: 200, reSchedule:0
+03/08 11:44:33.043840 00000036 C QRY INFO  scheduler initialized, maxJob:1000, clientId:0x0
+03/08 11:44:33.043903 00000036 C QRY INFO  generate clientId:16043621246197598087
+03/08 11:44:33.044467 00000036 C UTL INFO  worker:taskWorkPool:0 is launched, total:1
+03/08 11:44:33.044523 00000036 C UTL INFO  worker:taskWorkPool:1 is launched, total:2
+03/08 11:44:33.044559 00000036 C UTL INFO  worker:taskWorkPool:2 is launched, total:3
+03/08 11:44:33.044601 00000036 C UTL INFO  worker:taskWorkPool:3 is launched, total:4
+03/08 11:44:33.044642 00000036 C UTL INFO  worker:taskWorkPool:4 is launched, total:5
+03/08 11:44:33.044684 00000036 C UTL INFO  worker:taskWorkPool:5 is launched, total:6
+03/08 11:44:33.044728 00000036 C UTL INFO  worker:taskWorkPool:6 is launched, total:7
+03/08 11:44:33.044776 00000036 C UTL INFO  worker:taskWorkPool:7 is launched, total:8
+03/08 11:44:33.044824 00000036 C UTL INFO  worker:taskWorkPool:8 is launched, total:9
+03/08 11:44:33.044876 00000036 C UTL INFO  worker:taskWorkPool:9 is launched, total:10
+03/08 11:44:33.044926 00000036 C UTL INFO  worker:taskWorkPool:10 is launched, total:11
+03/08 11:44:33.044974 00000036 C UTL INFO  worker:taskWorkPool:11 is launched, total:12
+03/08 11:44:33.045021 00000036 C UTL INFO  worker:taskWorkPool:12 is launched, total:13
+03/08 11:44:33.045068 00000036 C UTL INFO  worker:taskWorkPool:13 is launched, total:14
+03/08 11:44:33.045116 00000036 C UTL INFO  worker:taskWorkPool:14 is launched, total:15
+03/08 11:44:33.045193 00000036 C UTL INFO  worker:taskWorkPool:15 is launched, total:16
+03/08 11:44:33.045242 00000036 C UTL INFO  worker:taskWorkPool:16 is launched, total:17
+03/08 11:44:33.045291 00000036 C UTL INFO  worker:taskWorkPool:17 is launched, total:18
+03/08 11:44:33.045338 00000036 C UTL INFO  worker:taskWorkPool:18 is launched, total:19
+03/08 11:44:33.045389 00000036 C UTL INFO  worker:taskWorkPool:19 is launched, total:20
+03/08 11:44:33.045437 00000036 C UTL INFO  worker:taskWorkPool:20 is launched, total:21
+03/08 11:44:33.045492 00000036 C UTL INFO  worker:taskWorkPool:21 is launched, total:22
+03/08 11:44:33.045539 00000036 C UTL INFO  worker:taskWorkPool:22 is launched, total:23
+03/08 11:44:33.045589 00000036 C UTL INFO  worker:taskWorkPool:23 is launched, total:24
+03/08 11:44:33.045653 00000036 C UTL INFO  worker:taskWorkPool:24 is launched, total:25
+03/08 11:44:33.045700 00000036 C UTL INFO  worker:taskWorkPool:25 is launched, total:26
+03/08 11:44:33.045745 00000036 C UTL INFO  worker:taskWorkPool:26 is launched, total:27
+03/08 11:44:33.045800 00000036 C UTL INFO  worker:taskWorkPool:27 is launched, total:28
+03/08 11:44:33.045842 00000036 C UTL INFO  worker:taskWorkPool:28 is launched, total:29
+03/08 11:44:33.045886 00000036 C UTL INFO  worker:taskWorkPool:29 is launched, total:30
+03/08 11:44:33.046299 00000036 C UTL INFO  worker:taskWorkPool:30 is launched, total:31
+03/08 11:44:33.046345 00000036 C UTL INFO  worker:taskWorkPool:31 is launched, total:32
+03/08 11:44:33.046351 00000036 C UTL INFO  worker:taskWorkPool, queue:0x19ea740 is allocated, ahandle:(nil)
+03/08 11:44:33.046352 00000036 C QRY INFO  task queue is initialized, numOfThreads: 32
+03/08 11:44:33.048463 00000153 C TSC INFO  no crash info was found
+03/08 11:44:33.048659 00000036 C TSC INFO  TAOS driver is initialized successfully
+03/08 11:44:33.053069 00000036 C RPC INFO  start to close rpc
+03/08 11:44:33.053319 00000036 C RPC INFO  end to close rpc
+03/08 11:44:33.053365 00000036 C TSC INFO  start to cleanup client environment
+03/08 11:44:33.053371 00000036 C TSC INFO  monitor close
+03/08 11:44:33.140285 00000095 C TSC INFO  monitorThreadFunc quit since no slow log to send
+03/08 11:44:33.341029 00000036 C QRY INFO  start to destroy catalog
+03/08 11:44:33.341112 00000113 C QRY INFO  catalog update thread stopped
+03/08 11:44:33.341153 00000036 C QRY INFO  catalog destroyed
+03/08 11:44:33.341182 00000036 C QRY INFO  hbConnections cleanup
+03/08 11:44:33.341691 00000116 C UTL INFO  worker:taskWorkPool:0 qset:0x19ea620, got no message and exiting, thread:00000116
+03/08 11:44:33.341707 00000118 C UTL INFO  worker:taskWorkPool:1 qset:0x19ea620, got no message and exiting, thread:00000118
+03/08 11:44:33.341746 00000119 C UTL INFO  worker:taskWorkPool:2 qset:0x19ea620, got no message and exiting, thread:00000119
+03/08 11:44:33.341773 00000121 C UTL INFO  worker:taskWorkPool:3 qset:0x19ea620, got no message and exiting, thread:00000121
+03/08 11:44:33.341795 00000125 C UTL INFO  worker:taskWorkPool:5 qset:0x19ea620, got no message and exiting, thread:00000125
+03/08 11:44:33.341795 00000123 C UTL INFO  worker:taskWorkPool:4 qset:0x19ea620, got no message and exiting, thread:00000123
+03/08 11:44:33.341797 00000128 C UTL INFO  worker:taskWorkPool:7 qset:0x19ea620, got no message and exiting, thread:00000128
+03/08 11:44:33.341807 00000127 C UTL INFO  worker:taskWorkPool:6 qset:0x19ea620, got no message and exiting, thread:00000127
+03/08 11:44:33.341820 00000131 C UTL INFO  worker:taskWorkPool:10 qset:0x19ea620, got no message and exiting, thread:00000131
+03/08 11:44:33.341824 00000130 C UTL INFO  worker:taskWorkPool:9 qset:0x19ea620, got no message and exiting, thread:00000130
+03/08 11:44:33.341833 00000129 C UTL INFO  worker:taskWorkPool:8 qset:0x19ea620, got no message and exiting, thread:00000129
+03/08 11:44:33.341852 00000133 C UTL INFO  worker:taskWorkPool:12 qset:0x19ea620, got no message and exiting, thread:00000133
+03/08 11:44:33.341867 00000134 C UTL INFO  worker:taskWorkPool:13 qset:0x19ea620, got no message and exiting, thread:00000134
+03/08 11:44:33.341866 00000132 C UTL INFO  worker:taskWorkPool:11 qset:0x19ea620, got no message and exiting, thread:00000132
+03/08 11:44:33.341880 00000135 C UTL INFO  worker:taskWorkPool:14 qset:0x19ea620, got no message and exiting, thread:00000135
+03/08 11:44:33.341894 00000136 C UTL INFO  worker:taskWorkPool:15 qset:0x19ea620, got no message and exiting, thread:00000136
+03/08 11:44:33.341907 00000137 C UTL INFO  worker:taskWorkPool:16 qset:0x19ea620, got no message and exiting, thread:00000137
+03/08 11:44:33.341921 00000138 C UTL INFO  worker:taskWorkPool:17 qset:0x19ea620, got no message and exiting, thread:00000138
+03/08 11:44:33.341935 00000139 C UTL INFO  worker:taskWorkPool:18 qset:0x19ea620, got no message and exiting, thread:00000139
+03/08 11:44:33.341948 00000140 C UTL INFO  worker:taskWorkPool:19 qset:0x19ea620, got no message and exiting, thread:00000140
+03/08 11:44:33.341962 00000141 C UTL INFO  worker:taskWorkPool:20 qset:0x19ea620, got no message and exiting, thread:00000141
+03/08 11:44:33.341976 00000142 C UTL INFO  worker:taskWorkPool:21 qset:0x19ea620, got no message and exiting, thread:00000142
+03/08 11:44:33.342005 00000144 C UTL INFO  worker:taskWorkPool:23 qset:0x19ea620, got no message and exiting, thread:00000144
+03/08 11:44:33.342008 00000143 C UTL INFO  worker:taskWorkPool:22 qset:0x19ea620, got no message and exiting, thread:00000143
+03/08 11:44:33.342012 00000146 C UTL INFO  worker:taskWorkPool:25 qset:0x19ea620, got no message and exiting, thread:00000146
+03/08 11:44:33.342013 00000147 C UTL INFO  worker:taskWorkPool:26 qset:0x19ea620, got no message and exiting, thread:00000147
+03/08 11:44:33.342014 00000145 C UTL INFO  worker:taskWorkPool:24 qset:0x19ea620, got no message and exiting, thread:00000145
+03/08 11:44:33.342045 00000149 C UTL INFO  worker:taskWorkPool:28 qset:0x19ea620, got no message and exiting, thread:00000149
+03/08 11:44:33.342046 00000148 C UTL INFO  worker:taskWorkPool:27 qset:0x19ea620, got no message and exiting, thread:00000148
+03/08 11:44:33.342072 00000151 C UTL INFO  worker:taskWorkPool:30 qset:0x19ea620, got no message and exiting, thread:00000151
+03/08 11:44:33.342092 00000150 C UTL INFO  worker:taskWorkPool:29 qset:0x19ea620, got no message and exiting, thread:00000150
+03/08 11:44:33.342121 00000152 C UTL INFO  worker:taskWorkPool:31 qset:0x19ea620, got no message and exiting, thread:00000152
+03/08 11:44:33.342818 00000036 C TSC INFO  cluster instance map cleaned
+03/08 11:44:33.342890 00000036 C RPC ERROR http-report failed to destroy chanId:-1, reason:Ref is not there
+03/08 11:44:33.342910 00000036 C UTL INFO  [regex cache] destory regex cache
+03/08 11:44:33.342913 00000036 C TSC INFO  all local resources released
+==================================================
+                new log file
+==================================================
+03/08 11:44:33.487337 00000161 C UTL INFO  load from cfg file /etc/taos/taos.cfg success
+03/08 11:44:33.487344 00000161 C UTL INFO  env file:.env not load
+03/08 11:44:33.487348 00000161 C UTL INFO  load from env variables cfg success
+03/08 11:44:33.487412 00000161 C UTL INFO                       global config
+03/08 11:44:33.487413 00000161 C UTL INFO  =================================================================
+03/08 11:44:33.487416 00000161 C UTL INFO  default      forceReadConfig                  0
+03/08 11:44:33.487417 00000161 C UTL INFO  env_var      firstEp                          tdengine:6030
+03/08 11:44:33.487418 00000161 C UTL INFO  env_var      secondEp                         tdengine:6030
+03/08 11:44:33.487419 00000161 C UTL INFO  default      tempDir                          /tmp/
+03/08 11:44:33.487419 00000161 C UTL INFO  default      minimalTmpDirGB                  1.00
+03/08 11:44:33.487422 00000161 C UTL INFO  default      queryPolicy                      1
+03/08 11:44:33.487423 00000161 C UTL INFO  default      queryTableNotExistAsEmpty        0
+03/08 11:44:33.487423 00000161 C UTL INFO  default      enableQueryHb                    1
+03/08 11:44:33.487424 00000161 C UTL INFO  default      enableScience                    0
+03/08 11:44:33.487424 00000161 C UTL INFO  default      querySmaOptimize                 0
+03/08 11:44:33.487425 00000161 C UTL INFO  default      queryPlannerTrace                0
+03/08 11:44:33.487425 00000161 C UTL INFO  default      queryNodeChunkSize               32768
+03/08 11:44:33.487426 00000161 C UTL INFO  default      queryUseNodeAllocator            1
+03/08 11:44:33.487426 00000161 C UTL INFO  default      keepColumnName                   0
+03/08 11:44:33.487427 00000161 C UTL INFO  default      smlChildTableName                
+03/08 11:44:33.487428 00000161 C UTL INFO  default      smlAutoChildTableNameDelimiter   
+03/08 11:44:33.487428 00000161 C UTL INFO  default      smlTagName                       _tag_null
+03/08 11:44:33.487429 00000161 C UTL INFO  default      smlTsDefaultName                 _ts
+03/08 11:44:33.487429 00000161 C UTL INFO  default      smlDot2Underline                 1
+03/08 11:44:33.487430 00000161 C UTL INFO  default      minSlidingTime                   1
+03/08 11:44:33.487430 00000161 C UTL INFO  default      minIntervalTime                  1
+03/08 11:44:33.487431 00000161 C UTL INFO  default      maxInsertBatchRows               1000000
+03/08 11:44:33.487431 00000161 C UTL INFO  default      useAdapter                       0
+03/08 11:44:33.487432 00000161 C UTL INFO  default      queryMaxConcurrentTables         200
+03/08 11:44:33.487433 00000161 C UTL INFO  default      metaCacheMaxSize                 -1
+03/08 11:44:33.487433 00000161 C UTL INFO  default      bypassFlag                       0
+03/08 11:44:33.487434 00000161 C UTL INFO  default      numOfRpcThreads                  8
+03/08 11:44:33.487434 00000161 C UTL INFO  default      numOfRpcSessions                 30000
+03/08 11:44:33.487435 00000161 C UTL INFO  default      numOfTaskQueueThreads            32
+03/08 11:44:33.487435 00000161 C UTL INFO  default      multiResultFunctionStarReturnTa  0
+03/08 11:44:33.487436 00000161 C UTL INFO  default      countAlwaysReturnValue           1
+03/08 11:44:33.487436 00000161 C UTL INFO  default      maxTsmaCalcDelay                 600
+03/08 11:44:33.487437 00000161 C UTL INFO  default      tsmaDataDeleteMark               86400000
+03/08 11:44:33.487437 00000161 C UTL INFO  default      streamCoverage                   0
+03/08 11:44:33.487438 00000161 C UTL INFO  default      compareAsStrInGreatest           1
+03/08 11:44:33.487438 00000161 C UTL INFO  default      configDir                        /etc/taos/
+03/08 11:44:33.487439 00000161 C UTL INFO  default      scriptDir                        /etc/taos/
+03/08 11:44:33.487440 00000161 C UTL INFO  default      logDir                           /var/log/taos/
+03/08 11:44:33.487440 00000161 C UTL INFO  default      minimalLogDirGB                  1.00
+03/08 11:44:33.487441 00000161 C UTL INFO  default      numOfLogLines                    10000000
+03/08 11:44:33.487445 00000161 C UTL INFO  default      asyncLog                         1
+03/08 11:44:33.487446 00000161 C UTL INFO  default      logKeepDays                      0
+03/08 11:44:33.487446 00000161 C UTL INFO  default      debugFlag                        0
+03/08 11:44:33.487447 00000161 C UTL INFO  default      simDebugFlag                     131
+03/08 11:44:33.487447 00000161 C UTL INFO  default      tmrDebugFlag                     131
+03/08 11:44:33.487448 00000161 C UTL INFO  default      uDebugFlag                       131
+03/08 11:44:33.487448 00000161 C UTL INFO  default      rpcDebugFlag                     131
+03/08 11:44:33.487449 00000161 C UTL INFO  default      jniDebugFlag                     131
+03/08 11:44:33.487449 00000161 C UTL INFO  default      qDebugFlag                       131
+03/08 11:44:33.487450 00000161 C UTL INFO  default      cDebugFlag                       131
+03/08 11:44:33.487450 00000161 C UTL INFO  default      tqClientDebugFlag                131
+03/08 11:44:33.487451 00000161 C UTL INFO  default      numOfCores                       16.00
+03/08 11:44:33.487452 00000161 C UTL INFO  default      simdEnable                       1
+03/08 11:44:33.487453 00000161 C UTL INFO  default      AVX512Enable                     0
+03/08 11:44:33.487453 00000161 C UTL INFO  default      tagFilterCache                   0
+03/08 11:44:33.487454 00000161 C UTL INFO  default      openMax                          1048576
+03/08 11:44:33.487454 00000161 C UTL INFO  default      streamMax                        16
+03/08 11:44:33.487455 00000161 C UTL INFO  default      pageSizeKB                       4
+03/08 11:44:33.487455 00000161 C UTL INFO  default      totalMemoryKB                    6081396
+03/08 11:44:33.487456 00000161 C UTL INFO  default      os sysname                       Linux
+03/08 11:44:33.487457 00000161 C UTL INFO  default      os nodename                      tdengine
+03/08 11:44:33.487457 00000161 C UTL INFO  default      os release                       5.10.16.3-microsoft-standard-WSL2
+03/08 11:44:33.487458 00000161 C UTL INFO  default      os version                       #1 SMP Fri Apr 2 22:23:49 UTC 2021
+03/08 11:44:33.487458 00000161 C UTL INFO  default      os machine                       x86_64
+03/08 11:44:33.487459 00000161 C UTL INFO  default      version                          3.3.6.13
+03/08 11:44:33.487459 00000161 C UTL INFO  default      compatible_version               3.0.0.0
+03/08 11:44:33.487460 00000161 C UTL INFO  default      gitinfo                          1a3a182ba16ee188c0677fb6cd637b34c52f6bd7
+03/08 11:44:33.487460 00000161 C UTL INFO  default      buildinfo                        Linux-x64 2025-06-28 22:48:07 +0800
+03/08 11:44:33.487461 00000161 C UTL INFO  default      enableIpv6                       0
+03/08 11:44:33.487461 00000161 C UTL INFO  default      shellActivityTimer               3
+03/08 11:44:33.487462 00000161 C UTL INFO  default      compressMsgSize                  -1
+03/08 11:44:33.487462 00000161 C UTL INFO  default      crashReporting                   1
+03/08 11:44:33.487463 00000161 C UTL INFO  default      randErrorChance                  1
+03/08 11:44:33.487463 00000161 C UTL INFO  default      randErrorDivisor                 10001
+03/08 11:44:33.487464 00000161 C UTL INFO  default      randErrorScope                   7
+03/08 11:44:33.487465 00000161 C UTL INFO  default      safetyCheckLevel                 1
+03/08 11:44:33.487465 00000161 C UTL INFO  default      shareConnLimit                   10
+03/08 11:44:33.487466 00000161 C UTL INFO  default      readTimeout                      900
+03/08 11:44:33.487466 00000161 C UTL INFO  default      timeToGetAvailableConn           500000
+03/08 11:44:33.487467 00000161 C UTL INFO  default      experimental                     1
+03/08 11:44:33.487467 00000161 C UTL INFO  default      timezone                         Etc/UTC (UTC, +0000)
+03/08 11:44:33.487468 00000161 C UTL INFO  default      locale                           en_US.UTF-8
+03/08 11:44:33.488151 00000161 C UTL INFO  default      charset                          UTF-8
+03/08 11:44:33.488154 00000161 C UTL INFO  default      enableCoreFile                   1
+03/08 11:44:33.488155 00000161 C UTL INFO  =================================================================
+03/08 11:44:33.488156 00000161 C UTL INFO  check global fqdn:tdengine and port:6030
+03/08 11:44:33.488292 00000161 C TSC INFO  monitor init
+03/08 11:44:33.488413 00000184 C UTL INFO  scheduler tmr-taskQ is started, thread:184
+03/08 11:44:33.488441 00000185 C UTL INFO  scheduler high-tmr-taskQ is started, thread:185
+03/08 11:44:33.489158 00000187 C TSC INFO  monitor update thread started
+03/08 11:44:33.489177 00000161 C TSC INFO  starting to initialize TAOS driver
+03/08 11:44:33.489182 00000161 C QRY INFO  catalog init
+03/08 11:44:33.489219 00000161 C QRY INFO  catalog initialized, maxDb:100, maxTbl:100, dbRentSec:10, stbRentSec:10
+03/08 11:44:33.489225 00000161 C QRY INFO  scheduler init, policy: 1, maxNodeTableNum: 200, reSchedule:0
+03/08 11:44:33.489233 00000188 C QRY INFO  catalog update thread started
+03/08 11:44:33.489239 00000161 C QRY INFO  scheduler initialized, maxJob:1000, clientId:0x0
+03/08 11:44:33.489255 00000161 C QRY INFO  generate clientId:12240992205526675684
+03/08 11:44:33.489299 00000161 C UTL INFO  worker:taskWorkPool:0 is launched, total:1
+03/08 11:44:33.489333 00000161 C UTL INFO  worker:taskWorkPool:1 is launched, total:2
+03/08 11:44:33.489366 00000161 C UTL INFO  worker:taskWorkPool:2 is launched, total:3
+03/08 11:44:33.489398 00000161 C UTL INFO  worker:taskWorkPool:3 is launched, total:4
+03/08 11:44:33.489430 00000161 C UTL INFO  worker:taskWorkPool:4 is launched, total:5
+03/08 11:44:33.489461 00000161 C UTL INFO  worker:taskWorkPool:5 is launched, total:6
+03/08 11:44:33.489494 00000161 C UTL INFO  worker:taskWorkPool:6 is launched, total:7
+03/08 11:44:33.489526 00000161 C UTL INFO  worker:taskWorkPool:7 is launched, total:8
+03/08 11:44:33.489557 00000161 C UTL INFO  worker:taskWorkPool:8 is launched, total:9
+03/08 11:44:33.489589 00000161 C UTL INFO  worker:taskWorkPool:9 is launched, total:10
+03/08 11:44:33.489620 00000161 C UTL INFO  worker:taskWorkPool:10 is launched, total:11
+03/08 11:44:33.489650 00000161 C UTL INFO  worker:taskWorkPool:11 is launched, total:12
+03/08 11:44:33.489682 00000161 C UTL INFO  worker:taskWorkPool:12 is launched, total:13
+03/08 11:44:33.489714 00000161 C UTL INFO  worker:taskWorkPool:13 is launched, total:14
+03/08 11:44:33.489746 00000161 C UTL INFO  worker:taskWorkPool:14 is launched, total:15
+03/08 11:44:33.489778 00000161 C UTL INFO  worker:taskWorkPool:15 is launched, total:16
+03/08 11:44:33.489810 00000161 C UTL INFO  worker:taskWorkPool:16 is launched, total:17
+03/08 11:44:33.489842 00000161 C UTL INFO  worker:taskWorkPool:17 is launched, total:18
+03/08 11:44:33.489874 00000161 C UTL INFO  worker:taskWorkPool:18 is launched, total:19
+03/08 11:44:33.489905 00000161 C UTL INFO  worker:taskWorkPool:19 is launched, total:20
+03/08 11:44:33.489936 00000161 C UTL INFO  worker:taskWorkPool:20 is launched, total:21
+03/08 11:44:33.489968 00000161 C UTL INFO  worker:taskWorkPool:21 is launched, total:22
+03/08 11:44:33.490001 00000161 C UTL INFO  worker:taskWorkPool:22 is launched, total:23
+03/08 11:44:33.490033 00000161 C UTL INFO  worker:taskWorkPool:23 is launched, total:24
+03/08 11:44:33.490064 00000161 C UTL INFO  worker:taskWorkPool:24 is launched, total:25
+03/08 11:44:33.490103 00000161 C UTL INFO  worker:taskWorkPool:25 is launched, total:26
+03/08 11:44:33.490137 00000161 C UTL INFO  worker:taskWorkPool:26 is launched, total:27
+03/08 11:44:33.490170 00000161 C UTL INFO  worker:taskWorkPool:27 is launched, total:28
+03/08 11:44:33.490202 00000161 C UTL INFO  worker:taskWorkPool:28 is launched, total:29
+03/08 11:44:33.490232 00000161 C UTL INFO  worker:taskWorkPool:29 is launched, total:30
+03/08 11:44:33.490263 00000161 C UTL INFO  worker:taskWorkPool:30 is launched, total:31
+03/08 11:44:33.490295 00000161 C UTL INFO  worker:taskWorkPool:31 is launched, total:32
+03/08 11:44:33.490298 00000161 C UTL INFO  worker:taskWorkPool, queue:0x1f1d6b0 is allocated, ahandle:(nil)
+03/08 11:44:33.490299 00000161 C QRY INFO  task queue is initialized, numOfThreads: 32
+03/08 11:44:33.490441 00000161 C TSC INFO  TAOS driver is initialized successfully
+03/08 11:44:33.490450 00000161 C TSC INFO  set cfg:useAdapter to true
+03/08 11:44:33.490453 00000161 C UTL INFO  useAdapter set from 0 to 1
+03/08 11:44:33.490569 00000221 C TSC INFO  no crash info was found
+03/08 11:44:37.018426 00000181 C TSC INFO  try to connect to (null):0, user:root db:(null)
+03/08 11:44:37.018515 00000181 C TSC INFO  connecting to server, numOfEps:2 inUse:0 user:root db:(null) key:root:dcc5bed04851fec854c035b2e40263b6:(null):0
+03/08 11:44:37.018517 00000181 C TSC INFO  ep:0, tdengine:6030
+03/08 11:44:37.018519 00000181 C TSC INFO  ep:1, tdengine:6030
+03/08 11:44:37.018527 00000181 C TSC INFO  rpc max retry timeout 10000
+03/08 11:44:37.019597 00000181 C TSC INFO  app initialized, appId:0x510cd437800001
+03/08 11:44:37.019680 00000181 C TSC INFO  new app inst mgr:0x7f536c000fc0, user:root, ip:tdengine, port:6030
+03/08 11:44:37.019693 00000181 C TSC INFO  conn:0x2, created, p:0x7f536c0b59b0
+03/08 11:44:37.021707 00000189 C TSC INFO  clusterId:0x7e30ad02b2d0f024, create monitor
+03/08 11:44:37.021765 00000189 C TSC INFO  clusterId:0x7e30ad02b2d0f024, create monitor finished, monitor:0x7f5340000fa0
+03/08 11:44:37.021779 00000189 C TSC INFO  clusterId:0x7e30ad02b2d0f024, monitor:0x7f5340000fa0, create counter:taos_slow_sql:count 0x7f5340003330
+03/08 11:44:37.021788 00000189 C TSC INFO  clusterId:0x7e30ad02b2d0f024, monitor:0x7f5340000fa0, create counter:taos_sql_req:count 0x7f5340003df0
+03/08 11:44:37.021837 00000181 C TSC INFO  conn:0x2, connection is opening, connId:848781142, dnodeConn:0x2, QID:0x1660a143789b0001
+03/08 11:44:37.356276 00000201 C QRY INFO  QID:0x16340cd437900004 init with pTrans:0x2
+03/08 11:44:37.356396 00000201 C QRY INFO  pTrans 0x2 add to hbConnections for epId:2
+03/08 11:44:37.356410 00000204 C QRY INFO  pTrans 0x2 add to hbConnections for epId:1
+03/08 11:44:37.357119 00000205 C QRY INFO  hb connection updated, nodeId:2, fqdn:tdengine, port:6030, pTrans:0x2, pHandle:0x2
+03/08 11:44:37.357152 00000206 C QRY INFO  hb connection updated, nodeId:1, fqdn:tdengine, port:6030, pTrans:0x2, pHandle:0x3
+03/08 11:44:37.360629 00000171 C QRY INFO  QID:0x16340cd437900004, SID:1, CID:0xa9e0bd8e2cbe30e4, TID:0x2, EID:0, hb mark removed from hbConnections, epId:2
+03/08 11:44:37.360637 00000171 C QRY INFO  QID:0x16340cd437900004, SID:1, CID:0xa9e0bd8e2cbe30e4, TID:0x3, EID:0, hb mark removed from hbConnections, epId:1
+03/08 11:44:37.361512 00000213 C QRY INFO  QID:0x16340cd437900005 init with pTrans:0x2
+03/08 11:44:37.361588 00000214 C QRY INFO  pTrans 0x2 add to hbConnections for epId:2
+03/08 11:44:37.361595 00000213 C QRY INFO  pTrans 0x2 add to hbConnections for epId:1
+03/08 11:44:37.361887 00000216 C QRY INFO  hb connection updated, nodeId:2, fqdn:tdengine, port:6030, pTrans:0x2, pHandle:0x7
+03/08 11:44:37.361894 00000216 C QRY INFO  hb connection updated, nodeId:1, fqdn:tdengine, port:6030, pTrans:0x2, pHandle:0x8
+03/08 11:44:37.364381 00000181 C QRY INFO  QID:0x16340cd437900005, SID:1, CID:0xa9e0bd8e2cbe30e4, TID:0x5, EID:0, hb mark removed from hbConnections, epId:2
+03/08 11:44:37.364390 00000181 C QRY INFO  QID:0x16340cd437900005, SID:1, CID:0xa9e0bd8e2cbe30e4, TID:0x6, EID:0, hb mark removed from hbConnections, epId:1
+03/08 11:44:37.365258 00000192 C QRY INFO  QID:0x16340cd437900006 init with pTrans:0x2
+03/08 11:44:37.365341 00000193 C QRY INFO  pTrans 0x2 add to hbConnections for epId:2
+03/08 11:44:37.365347 00000192 C QRY INFO  pTrans 0x2 add to hbConnections for epId:1
+03/08 11:44:37.365768 00000196 C QRY INFO  hb connection updated, nodeId:2, fqdn:tdengine, port:6030, pTrans:0x2, pHandle:0xc
+03/08 11:44:37.365780 00000196 C QRY INFO  hb connection updated, nodeId:1, fqdn:tdengine, port:6030, pTrans:0x2, pHandle:0xd
+03/08 11:44:37.367411 00000182 C QRY INFO  QID:0x16340cd437900006, SID:1, CID:0xa9e0bd8e2cbe30e4, TID:0x8, EID:0, hb mark removed from hbConnections, epId:2
+03/08 11:44:37.367419 00000182 C QRY INFO  QID:0x16340cd437900006, SID:1, CID:0xa9e0bd8e2cbe30e4, TID:0x9, EID:0, hb mark removed from hbConnections, epId:1
+03/08 11:44:37.369436 00000201 C QRY INFO  QID:0x16340cd437900007 init with pTrans:0x2
+03/08 11:44:37.369464 00000201 C QRY INFO  pTrans 0x2 add to hbConnections for epId:2
+03/08 11:44:37.369789 00000205 C QRY INFO  hb connection updated, nodeId:2, fqdn:tdengine, port:6030, pTrans:0x2, pHandle:0x11
+03/08 11:44:37.370438 00000181 C QRY INFO  QID:0x16340cd437900007, SID:1, CID:0xa9e0bd8e2cbe30e4, TID:0xa, EID:0, hb mark removed from hbConnections, epId:2
+03/08 11:44:37.370976 00000208 C QRY INFO  QID:0x16340cd437900008 init with pTrans:0x2
+03/08 11:44:37.371025 00000208 C QRY INFO  pTrans 0x2 add to hbConnections for epId:2
+03/08 11:44:37.371333 00000210 C QRY INFO  hb connection updated, nodeId:2, fqdn:tdengine, port:6030, pTrans:0x2, pHandle:0x13
+03/08 11:44:37.371914 00000182 C QRY INFO  QID:0x16340cd437900008, SID:1, CID:0xa9e0bd8e2cbe30e4, TID:0xb, EID:0, hb mark removed from hbConnections, epId:2
+03/08 11:44:37.372855 00000213 C QRY INFO  QID:0x16340cd437900009 init with pTrans:0x2
+03/08 11:44:37.372914 00000214 C QRY INFO  pTrans 0x2 add to hbConnections for epId:2
+03/08 11:44:37.372934 00000213 C QRY INFO  pTrans 0x2 add to hbConnections for epId:1
+03/08 11:44:37.373222 00000217 C QRY INFO  hb connection updated, nodeId:2, fqdn:tdengine, port:6030, pTrans:0x2, pHandle:0x15
+03/08 11:44:37.373229 00000217 C QRY INFO  hb connection updated, nodeId:1, fqdn:tdengine, port:6030, pTrans:0x2, pHandle:0x16
+03/08 11:44:37.375200 00000171 C QRY INFO  QID:0x16340cd437900009, SID:1, CID:0xa9e0bd8e2cbe30e4, TID:0xd, EID:0, hb mark removed from hbConnections, epId:2
+03/08 11:44:37.375205 00000171 C QRY INFO  QID:0x16340cd437900009, SID:1, CID:0xa9e0bd8e2cbe30e4, TID:0xe, EID:0, hb mark removed from hbConnections, epId:1
+03/08 11:44:37.376121 00000193 C QRY INFO  QID:0x16340cd43790000a init with pTrans:0x2
+03/08 11:44:37.376190 00000192 C QRY INFO  pTrans 0x2 add to hbConnections for epId:2
+03/08 11:44:37.376199 00000193 C QRY INFO  pTrans 0x2 add to hbConnections for epId:1
+03/08 11:44:37.376454 00000196 C QRY INFO  hb connection updated, nodeId:2, fqdn:tdengine, port:6030, pTrans:0x2, pHandle:0x1a
+03/08 11:44:37.376508 00000197 C QRY INFO  hb connection updated, nodeId:1, fqdn:tdengine, port:6030, pTrans:0x2, pHandle:0x1b
+03/08 11:44:37.378297 00000177 C QRY INFO  QID:0x16340cd43790000a, SID:1, CID:0xa9e0bd8e2cbe30e4, TID:0x10, EID:0, hb mark removed from hbConnections, epId:2
+03/08 11:44:37.378305 00000177 C QRY INFO  QID:0x16340cd43790000a, SID:1, CID:0xa9e0bd8e2cbe30e4, TID:0x11, EID:0, hb mark removed from hbConnections, epId:1
+03/08 11:44:37.379990 00000182 C TSC INFO  try to connect to (null):0, user:root db:(null)
+03/08 11:44:37.380034 00000182 C TSC INFO  connecting to server, numOfEps:2 inUse:0 user:root db:(null) key:root:dcc5bed04851fec854c035b2e40263b6:(null):0
+03/08 11:44:37.380035 00000182 C TSC INFO  ep:0, tdengine:6030
+03/08 11:44:37.380036 00000182 C TSC INFO  ep:1, tdengine:6030
+03/08 11:44:37.380040 00000182 C TSC INFO  conn:0x3, created, p:0x7f536000c2c0
+03/08 11:44:37.380474 00000182 C TSC INFO  conn:0x3, connection is opening, connId:2803720411, dnodeConn:0x2, QID:0x1660a1437a040003
+03/08 11:44:37.381206 00000210 C QRY ERROR QID:0x16340cd437a0000b, no tbmeta got, tbName:km_tdengine_6043, ctg:0x7f536c0c0160
+03/08 11:44:37.381259 00000210 C QRY ERROR QID:0x16340cd437a0000b, Get table 1.log.km_tdengine_6043 meta failed with error Table does not exist, ctg:0x7f536c0c0160
+03/08 11:44:37.381831 00000210 C QRY INFO  QID:0x16340cd437a0000b init with pTrans:0x2
+03/08 11:44:37.391844 00000189 C QRY INFO  QID:0x16340cd437a0000e init with pTrans:0x2
+03/08 11:44:37.391873 00000189 C QRY INFO  pTrans 0x2 add to hbConnections for epId:1
+03/08 11:44:37.392208 00000190 C QRY INFO  hb connection updated, nodeId:1, fqdn:tdengine, port:6030, pTrans:0x2, pHandle:0x1f
+03/08 11:44:37.393449 00000171 C QRY INFO  QID:0x16340cd437a0000e, SID:1, CID:0xa9e0bd8e2cbe30e4, TID:0x13, EID:0, hb mark removed from hbConnections, epId:1
+03/08 11:44:37.394218 00000188 C QRY INFO  stb:taos_slow_sql_detail, stb removed from cache, db:1.log, suid:0x7e306b43ea6357b7, ctg:0x7f536c0c0160
+03/08 11:44:37.396020 00000188 C QRY INFO  stb:taosd_cluster_basic, stb removed from cache, db:1.log, suid:0x7e306b5e11591861, ctg:0x7f536c0c0160
+03/08 11:44:45.007149 00000192 C QRY ERROR QID:0x16340cd439700013, no tbmeta got, tbName:adapter_req_tdengine_6041_rest, ctg:0x7f536c0c0160
+03/08 11:44:45.007156 00000192 C QRY ERROR QID:0x16340cd439700013, Get table 1.log.adapter_req_tdengine_6041_rest meta failed with error Table does not exist, ctg:0x7f536c0c0160
+03/08 11:44:45.007607 00000196 C QRY ERROR QID:0x16340cd439700013, no tbmeta got, tbName:adapter_req_tdengine_6041_ws, ctg:0x7f536c0c0160
+03/08 11:44:45.007612 00000196 C QRY ERROR QID:0x16340cd439700013, Get table 1.log.adapter_req_tdengine_6041_ws meta failed with error Table does not exist, ctg:0x7f536c0c0160
+03/08 11:44:45.007690 00000196 C QRY INFO  QID:0x16340cd439700013 init with pTrans:0x2
+03/08 11:44:45.011019 00000245 C RPC WARN  TSC conn:0x7f5324000c30, recv unexpected packet, msgType:vnode-table-meta-rsp, seqNum:16, sid:0, the sever may sends repeated response since rpc no state
+03/08 11:44:45.011022 00000181 C QRY ERROR tb:adapter_status, no tbmeta got, ctg:0x7f536c0c0160
+03/08 11:44:45.011028 00000181 C UTL ERROR smlBuildSuperTableInfo failed code:-2147473917 line:0
+03/08 11:44:45.011713 00000247 C RPC WARN  TSC conn:0x7f5314000c30, recv unexpected packet, msgType:vnode-table-meta-rsp, seqNum:14, sid:0, the sever may sends repeated response since rpc no state
+03/08 11:44:45.011717 00000181 C QRY ERROR tb:adapter_status, no tbmeta got, ctg:0x7f536c0c0160
+03/08 11:44:45.015478 00000243 C RPC WARN  TSC conn:0x7f533c000c30, recv unexpected packet, msgType:vnode-table-meta-rsp, seqNum:13, sid:0, the sever may sends repeated response since rpc no state
+03/08 11:44:45.015484 00000181 C QRY ERROR tb:adapter_conn_pool, no tbmeta got, ctg:0x7f536c0c0160
+03/08 11:44:45.019099 00000247 C RPC WARN  TSC conn:0x7f5314000c30, recv unexpected packet, msgType:vnode-table-meta-rsp, seqNum:15, sid:0, the sever may sends repeated response since rpc no state
+03/08 11:44:45.019104 00000181 C QRY ERROR tb:adapter_c_interface, no tbmeta got, ctg:0x7f536c0c0160
+03/08 11:44:45.022796 00000181 C QRY INFO  QID:0x2000000000000001 init with pTrans:0x2
+03/08 11:44:52.381576 00000181 C QRY INFO  QID:0x16340cd43b400014 init with pTrans:0x2
+03/08 11:45:00.007334 00000182 C QRY INFO  QID:0x16340cd43d200015 init with pTrans:0x2
+03/08 11:45:00.012725 00000177 C QRY INFO  QID:0x2000000000000002 init with pTrans:0x2
+03/08 11:45:03.076377 00000171 C QRY WARN  parser QID:0x16340cd43de00016, table name is specified in sql, ignore the table name in bind param
+03/08 11:45:03.077813 00000205 C QRY ERROR QID:0x16340cd43de00016, no tbmeta got, tbName:taosd_cluster_basic_9092957874762608676, ctg:0x7f536c0c0160
+03/08 11:45:03.077841 00000205 C QRY ERROR QID:0x16340cd43de00016, Get table 1.log.taosd_cluster_basic_9092957874762608676 meta failed with error Table does not exist, ctg:0x7f536c0c0160
+03/08 11:45:03.078227 00000205 C QRY INFO  QID:0x16340cd43de00016 init with pTrans:0x2
+03/08 11:45:03.079866 00000250 C RPC WARN  TSC conn:0x7f52fc000c30, recv unexpected packet, msgType:vnode-table-meta-rsp, seqNum:17, sid:0, the sever may sends repeated response since rpc no state
+03/08 11:45:03.079942 00000171 C QRY ERROR tb:taosd_dnodes_info, no tbmeta got, ctg:0x7f536c0c0160
+03/08 11:45:03.079973 00000171 C UTL ERROR smlBuildSuperTableInfo failed code:-2147473917 line:0
+03/08 11:45:03.083177 00000244 C RPC WARN  TSC conn:0x7f5338000c30, recv unexpected packet, msgType:vnode-table-meta-rsp, seqNum:18, sid:0, the sever may sends repeated response since rpc no state
+03/08 11:45:03.083243 00000171 C QRY ERROR tb:taosd_dnodes_log_dirs, no tbmeta got, ctg:0x7f536c0c0160
+03/08 11:45:03.100087 00000248 C RPC WARN  TSC conn:0x7f530c000c30, recv unexpected packet, msgType:vnode-table-meta-rsp, seqNum:19, sid:0, the sever may sends repeated response since rpc no state
+03/08 11:45:03.100136 00000171 C QRY ERROR tb:taosd_dnodes_status, no tbmeta got, ctg:0x7f536c0c0160
+03/08 11:45:03.108357 00000244 C RPC WARN  TSC conn:0x7f5338000c30, recv unexpected packet, msgType:vnode-table-meta-rsp, seqNum:19, sid:0, the sever may sends repeated response since rpc no state
+03/08 11:45:03.108384 00000171 C QRY ERROR tb:taosd_sql_req, no tbmeta got, ctg:0x7f536c0c0160
+03/08 11:45:03.115389 00000247 C RPC WARN  TSC conn:0x7f5314000c30, recv unexpected packet, msgType:vnode-table-meta-rsp, seqNum:20, sid:0, the sever may sends repeated response since rpc no state
+03/08 11:45:03.115401 00000171 C QRY ERROR tb:taosd_dnodes_data_dirs, no tbmeta got, ctg:0x7f536c0c0160
+03/08 11:45:03.122715 00000243 C RPC WARN  TSC conn:0x7f533c000c30, recv unexpected packet, msgType:vnode-table-meta-rsp, seqNum:19, sid:0, the sever may sends repeated response since rpc no state
+03/08 11:45:03.122722 00000171 C QRY ERROR tb:taosd_dnodes_info, no tbmeta got, ctg:0x7f536c0c0160
+03/08 11:45:03.128793 00000247 C RPC WARN  TSC conn:0x7f5314000c30, recv unexpected packet, msgType:vnode-table-meta-rsp, seqNum:21, sid:0, the sever may sends repeated response since rpc no state
+03/08 11:45:03.128797 00000171 C QRY ERROR tb:taosd_vgroups_info, no tbmeta got, ctg:0x7f536c0c0160
+03/08 11:45:03.132293 00000243 C RPC WARN  TSC conn:0x7f533c000c30, recv unexpected packet, msgType:vnode-table-meta-rsp, seqNum:20, sid:0, the sever may sends repeated response since rpc no state
+03/08 11:45:03.132299 00000171 C QRY ERROR tb:taosd_cluster_info, no tbmeta got, ctg:0x7f536c0c0160
+03/08 11:45:03.135695 00000247 C RPC WARN  TSC conn:0x7f5314000c30, recv unexpected packet, msgType:vnode-table-meta-rsp, seqNum:22, sid:0, the sever may sends repeated response since rpc no state
+03/08 11:45:03.135698 00000171 C QRY ERROR tb:taosd_vnodes_info, no tbmeta got, ctg:0x7f536c0c0160
+03/08 11:45:03.138909 00000243 C RPC WARN  TSC conn:0x7f533c000c30, recv unexpected packet, msgType:vnode-table-meta-rsp, seqNum:21, sid:0, the sever may sends repeated response since rpc no state
+03/08 11:45:03.138916 00000171 C QRY ERROR tb:taosd_mnodes_info, no tbmeta got, ctg:0x7f536c0c0160
+03/08 11:45:03.141893 00000171 C QRY INFO  QID:0x2000000000000003 init with pTrans:0x2
+03/08 11:45:07.381014 00000171 C QRY INFO  QID:0x16340cd43ef00017 init with pTrans:0x2
+03/08 11:45:07.493894 00000247 C RPC WARN  TSC conn:0x7f5314000c30, recv unexpected packet, msgType:vnode-table-meta-rsp, seqNum:24, sid:0, the sever may sends repeated response since rpc no state
+03/08 11:45:07.493937 00000181 C QRY ERROR tb:taos_sql_req, no tbmeta got, ctg:0x7f536c0c0160
+03/08 11:45:07.493953 00000181 C UTL ERROR smlBuildSuperTableInfo failed code:-2147473917 line:0
+03/08 11:45:07.495195 00000249 C RPC WARN  TSC conn:0x7f5304000c30, recv unexpected packet, msgType:vnode-table-meta-rsp, seqNum:23, sid:0, the sever may sends repeated response since rpc no state
+03/08 11:45:07.495240 00000181 C QRY ERROR tb:taos_sql_req, no tbmeta got, ctg:0x7f536c0c0160
+03/08 11:45:07.503250 00000188 C QRY INFO  stb:taos_sql_req, stb removed from cache, db:1.log, suid:0x7e2e9fd90c5d029f, ctg:0x7f536c0c0160
+03/08 11:45:07.504085 00000181 C QRY INFO  QID:0x2000000000000004 init with pTrans:0x2
+03/08 11:45:12.381980 00000201 C QRY INFO  QID:0x16340cd440200018 init with pTrans:0x2
+03/08 11:45:12.382008 00000201 C QRY INFO  pTrans 0x2 add to hbConnections for epId:1
+03/08 11:45:12.382405 00000207 C QRY INFO  hb connection updated, nodeId:1, fqdn:tdengine, port:6030, pTrans:0x2, pHandle:0x21
+03/08 11:45:12.383722 00000171 C QRY INFO  QID:0x16340cd440200018, SID:1, CID:0xa9e0bd8e2cbe30e4, TID:0x1d, EID:0, hb mark removed from hbConnections, epId:1
+03/08 11:45:12.384447 00000188 C QRY INFO  stb:taosd_vgroups_info, stb removed from cache, db:1.log, suid:0x7e2ee27a8d984913, ctg:0x7f536c0c0160
+03/08 11:45:12.386157 00000181 C TSC INFO  try to connect to (null):0, user:root db:(null)
+03/08 11:45:12.386167 00000188 C QRY INFO  stb:taosd_mnodes_info, stb removed from cache, db:1.log, suid:0x7e2ee2530d6517ef, ctg:0x7f536c0c0160
+03/08 11:45:12.386204 00000188 C QRY INFO  stb:taos_sql_req, stb removed from cache, db:1.log, suid:0x7e2e9fd90c5d029f, ctg:0x7f536c0c0160
+03/08 11:45:12.386243 00000181 C TSC INFO  connecting to server, numOfEps:2 inUse:0 user:root db:(null) key:root:dcc5bed04851fec854c035b2e40263b6:(null):0
+03/08 11:45:12.386246 00000181 C TSC INFO  ep:0, tdengine:6030
+03/08 11:45:12.386248 00000181 C TSC INFO  ep:1, tdengine:6030
+03/08 11:45:12.386253 00000181 C TSC INFO  conn:0x4, created, p:0x7f536c0d0040
+03/08 11:45:12.386728 00000181 C TSC INFO  conn:0x4, connection is opening, connId:2443505628, dnodeConn:0x2, QID:0x1660a14402c20029
+03/08 11:45:12.386761 00000177 C TSC INFO  try to connect to (null):0, user:root db:(null)
+03/08 11:45:12.386807 00000188 C QRY INFO  stb:taosd_cluster_basic, stb removed from cache, db:1.log, suid:0x7e306b5e11591861, ctg:0x7f536c0c0160
+03/08 11:45:12.386828 00000177 C TSC INFO  connecting to server, numOfEps:2 inUse:0 user:root db:(null) key:root:dcc5bed04851fec854c035b2e40263b6:(null):0
+03/08 11:45:12.386830 00000177 C TSC INFO  ep:0, tdengine:6030
+03/08 11:45:12.386831 00000177 C TSC INFO  ep:1, tdengine:6030
+03/08 11:45:12.386835 00000177 C TSC INFO  conn:0x5, created, p:0x7f537c04b4c0
+03/08 11:45:12.387282 00000177 C TSC INFO  conn:0x5, connection is opening, connId:1881101610, dnodeConn:0x2, QID:0x1660a14402c2002a
+03/08 11:45:12.387364 00000173 C TSC INFO  try to connect to (null):0, user:root db:(null)
+03/08 11:45:12.387376 00000188 C QRY INFO  stb:taosd_sql_req, stb removed from cache, db:1.log, suid:0x7e2ee2c974abd103, ctg:0x7f536c0c0160
+03/08 11:45:12.387410 00000173 C TSC INFO  connecting to server, numOfEps:2 inUse:0 user:root db:(null) key:root:dcc5bed04851fec854c035b2e40263b6:(null):0
+03/08 11:45:12.387413 00000173 C TSC INFO  ep:0, tdengine:6030
+03/08 11:45:12.387415 00000173 C TSC INFO  ep:1, tdengine:6030
+03/08 11:45:12.387420 00000173 C TSC INFO  conn:0x6, created, p:0x7f5380000fc0
+03/08 11:45:12.387897 00000173 C TSC INFO  conn:0x6, connection is opening, connId:3883238007, dnodeConn:0x2, QID:0x1660a14402c3002b
+03/08 11:45:12.387959 00000177 C TSC INFO  try to connect to (null):0, user:root db:(null)
+03/08 11:45:12.388003 00000188 C QRY INFO  stb:adapter_c_interface, stb removed from cache, db:1.log, suid:0x7e2ff6cf488b24f7, ctg:0x7f536c0c0160
+03/08 11:45:12.388009 00000177 C TSC INFO  connecting to server, numOfEps:2 inUse:0 user:root db:(null) key:root:dcc5bed04851fec854c035b2e40263b6:(null):0
+03/08 11:45:12.388012 00000177 C TSC INFO  ep:0, tdengine:6030
+03/08 11:45:12.388013 00000177 C TSC INFO  ep:1, tdengine:6030
+03/08 11:45:12.388017 00000177 C TSC INFO  conn:0x7, created, p:0x7f537c02f260
+03/08 11:45:12.388431 00000177 C TSC INFO  conn:0x7, connection is opening, connId:3762922335, dnodeConn:0x2, QID:0x1660a14402c4002c
+03/08 11:45:12.388526 00000166 C TSC INFO  try to connect to (null):0, user:root db:(null)
+03/08 11:45:12.388583 00000166 C TSC INFO  connecting to server, numOfEps:2 inUse:0 user:root db:(null) key:root:dcc5bed04851fec854c035b2e40263b6:(null):0
+03/08 11:45:12.388585 00000166 C TSC INFO  ep:0, tdengine:6030
+03/08 11:45:12.388586 00000166 C TSC INFO  ep:1, tdengine:6030
+03/08 11:45:12.388590 00000166 C TSC INFO  conn:0x8, created, p:0x7f53a0000ea0
+03/08 11:45:12.388621 00000188 C QRY INFO  stb:taosd_dnodes_info, stb removed from cache, db:1.log, suid:0x7e2ee291713c6fc1, ctg:0x7f536c0c0160
+03/08 11:45:12.388650 00000188 C QRY INFO  stb:adapter_conn_pool, stb removed from cache, db:1.log, suid:0x7e2ff6dd9fc91cec, ctg:0x7f536c0c0160
+03/08 11:45:12.389083 00000166 C TSC INFO  conn:0x8, connection is opening, connId:1724044905, dnodeConn:0x2, QID:0x1660a14402c4002d
+03/08 11:45:12.389193 00000188 C QRY INFO  stb:taosd_dnodes_log_dirs, stb removed from cache, db:1.log, suid:0x7e2ee329808c2729, ctg:0x7f536c0c0160
+03/08 11:45:12.389260 00000180 C TSC INFO  try to connect to (null):0, user:root db:(null)
+03/08 11:45:12.389272 00000188 C QRY INFO  stb:adapter_requests, stb removed from cache, db:1.log, suid:0x7e306b12b8d06d64, ctg:0x7f536c0c0160
+03/08 11:45:12.389290 00000188 C QRY INFO  stb:taosd_vnodes_info, stb removed from cache, db:1.log, suid:0x7e2ee25fa1589805, ctg:0x7f536c0c0160
+03/08 11:45:12.389304 00000180 C TSC INFO  connecting to server, numOfEps:2 inUse:0 user:root db:(null) key:root:dcc5bed04851fec854c035b2e40263b6:(null):0
+03/08 11:45:12.389307 00000180 C TSC INFO  ep:0, tdengine:6030
+03/08 11:45:12.389308 00000180 C TSC INFO  ep:1, tdengine:6030
+03/08 11:45:12.389314 00000180 C TSC INFO  conn:0x9, created, p:0x7f536800a4d0
+03/08 11:45:12.389401 00000188 C QRY INFO  stb:taosd_cluster_info, stb removed from cache, db:1.log, suid:0x7e2ee26ca28b496d, ctg:0x7f536c0c0160
+03/08 11:45:12.389728 00000180 C TSC INFO  conn:0x9, connection is opening, connId:2969926917, dnodeConn:0x2, QID:0x1660a14402c5002e
+03/08 11:45:12.389835 00000180 C TSC INFO  try to connect to (null):0, user:root db:(null)
+03/08 11:45:12.389835 00000188 C QRY INFO  stb:taosd_dnodes_status, stb removed from cache, db:1.log, suid:0x7e2ee2e95a16fe45, ctg:0x7f536c0c0160
+03/08 11:45:12.389863 00000188 C QRY INFO  stb:taos_slow_sql_detail, stb removed from cache, db:1.log, suid:0x7e306b43ea6357b7, ctg:0x7f536c0c0160
+03/08 11:45:12.389871 00000180 C TSC INFO  connecting to server, numOfEps:2 inUse:0 user:root db:(null) key:root:dcc5bed04851fec854c035b2e40263b6:(null):0
+03/08 11:45:12.389873 00000180 C TSC INFO  ep:0, tdengine:6030
+03/08 11:45:12.389874 00000180 C TSC INFO  ep:1, tdengine:6030
+03/08 11:45:12.389878 00000180 C TSC INFO  conn:0xa, created, p:0x7f5368000dc0
+03/08 11:45:12.389892 00000188 C QRY INFO  stb:keeper_monitor, stb removed from cache, db:1.log, suid:0x7e306c6b9485ef3b, ctg:0x7f536c0c0160
+03/08 11:45:12.390305 00000180 C TSC INFO  conn:0xa, connection is opening, connId:2487839597, dnodeConn:0x2, QID:0x1660a14402c5002f
+03/08 11:45:12.390385 00000171 C TSC INFO  try to connect to (null):0, user:root db:(null)
+03/08 11:45:12.390402 00000188 C QRY INFO  stb:adapter_status, stb removed from cache, db:1.log, suid:0x7e2ff6eb8342487a, ctg:0x7f536c0c0160
+03/08 11:45:12.390433 00000171 C TSC INFO  connecting to server, numOfEps:2 inUse:0 user:root db:(null) key:root:dcc5bed04851fec854c035b2e40263b6:(null):0
+03/08 11:45:12.390435 00000171 C TSC INFO  ep:0, tdengine:6030
+03/08 11:45:12.390436 00000171 C TSC INFO  ep:1, tdengine:6030
+03/08 11:45:12.390441 00000171 C TSC INFO  conn:0xb, created, p:0x7f53880265b0
+03/08 11:45:12.390875 00000171 C TSC INFO  conn:0xb, connection is opening, connId:1605109220, dnodeConn:0x2, QID:0x1660a14402c60030
+03/08 11:45:12.390994 00000188 C QRY INFO  stb:taosd_dnodes_data_dirs, stb removed from cache, db:1.log, suid:0x7e2ee2ae0e8b1320, ctg:0x7f536c0c0160
+03/08 11:45:12.393860 00000207 C QRY INFO  QID:0x16340cd44020002a init with pTrans:0x2
+03/08 11:45:12.393901 00000207 C QRY INFO  pTrans 0x2 add to hbConnections for epId:2
+03/08 11:45:12.394194 00000214 C QRY INFO  hb connection updated, nodeId:2, fqdn:tdengine, port:6030, pTrans:0x2, pHandle:0x23
+03/08 11:45:12.396564 00000173 C QRY INFO  QID:0x16340cd44020002a, SID:1, CID:0xa9e0bd8e2cbe30e4, TID:0x1e, EID:0, hb mark removed from hbConnections, epId:2
+03/08 11:45:12.397257 00000217 C QRY INFO  QID:0x16340cd44020002b init with pTrans:0x2
+03/08 11:45:12.397286 00000217 C QRY INFO  pTrans 0x2 add to hbConnections for epId:2
+03/08 11:45:12.397556 00000216 C QRY INFO  hb connection updated, nodeId:2, fqdn:tdengine, port:6030, pTrans:0x2, pHandle:0x25
+03/08 11:45:12.398611 00000182 C QRY INFO  QID:0x16340cd44020002b, SID:1, CID:0xa9e0bd8e2cbe30e4, TID:0x1f, EID:0, hb mark removed from hbConnections, epId:2
+03/08 11:45:12.399148 00000219 C QRY INFO  QID:0x16340cd44020002c init with pTrans:0x2
+03/08 11:45:12.399171 00000219 C QRY INFO  pTrans 0x2 add to hbConnections for epId:2
+03/08 11:45:12.399415 00000194 C QRY INFO  hb connection updated, nodeId:2, fqdn:tdengine, port:6030, pTrans:0x2, pHandle:0x27
+03/08 11:45:12.400151 00000182 C QRY INFO  QID:0x16340cd44020002c, SID:1, CID:0xa9e0bd8e2cbe30e4, TID:0x20, EID:0, hb mark removed from hbConnections, epId:2
+03/08 11:45:12.400708 00000199 C QRY INFO  QID:0x16340cd44020002d init with pTrans:0x2
+03/08 11:45:12.400739 00000199 C QRY INFO  pTrans 0x2 add to hbConnections for epId:2
+03/08 11:45:12.400964 00000193 C QRY INFO  hb connection updated, nodeId:2, fqdn:tdengine, port:6030, pTrans:0x2, pHandle:0x29
+03/08 11:45:12.401754 00000173 C QRY INFO  QID:0x16340cd44020002d, SID:1, CID:0xa9e0bd8e2cbe30e4, TID:0x21, EID:0, hb mark removed from hbConnections, epId:2
+03/08 11:45:12.402753 00000204 C QRY INFO  QID:0x16340cd44020002e init with pTrans:0x2
+03/08 11:45:12.402797 00000204 C QRY INFO  pTrans 0x2 add to hbConnections for epId:2
+03/08 11:45:12.403053 00000203 C QRY INFO  hb connection updated, nodeId:2, fqdn:tdengine, port:6030, pTrans:0x2, pHandle:0x2b
+03/08 11:45:12.404189 00000171 C QRY INFO  QID:0x16340cd44020002e, SID:1, CID:0xa9e0bd8e2cbe30e4, TID:0x22, EID:0, hb mark removed from hbConnections, epId:2
+03/08 11:45:12.404732 00000206 C QRY INFO  QID:0x16340cd44020002f init with pTrans:0x2
+03/08 11:45:12.404754 00000206 C QRY INFO  pTrans 0x2 add to hbConnections for epId:2
+03/08 11:45:12.405011 00000198 C QRY INFO  hb connection updated, nodeId:2, fqdn:tdengine, port:6030, pTrans:0x2, pHandle:0x2d
+03/08 11:45:12.405736 00000182 C QRY INFO  QID:0x16340cd44020002f, SID:1, CID:0xa9e0bd8e2cbe30e4, TID:0x23, EID:0, hb mark removed from hbConnections, epId:2
+03/08 11:45:12.406669 00000200 C QRY INFO  QID:0x16340cd440200030 init with pTrans:0x2
+03/08 11:45:12.406695 00000200 C QRY INFO  pTrans 0x2 add to hbConnections for epId:2
+03/08 11:45:12.406956 00000209 C QRY INFO  hb connection updated, nodeId:2, fqdn:tdengine, port:6030, pTrans:0x2, pHandle:0x2f
+03/08 11:45:12.407644 00000182 C QRY INFO  QID:0x16340cd440200030, SID:1, CID:0xa9e0bd8e2cbe30e4, TID:0x24, EID:0, hb mark removed from hbConnections, epId:2
+03/08 11:45:12.408172 00000212 C QRY INFO  QID:0x16340cd440200031 init with pTrans:0x2
+03/08 11:45:12.408197 00000212 C QRY INFO  pTrans 0x2 add to hbConnections for epId:2
+03/08 11:45:12.408405 00000213 C QRY INFO  hb connection updated, nodeId:2, fqdn:tdengine, port:6030, pTrans:0x2, pHandle:0x31
+03/08 11:45:12.409149 00000173 C QRY INFO  QID:0x16340cd440200031, SID:1, CID:0xa9e0bd8e2cbe30e4, TID:0x25, EID:0, hb mark removed from hbConnections, epId:2
+03/08 11:45:12.409680 00000192 C QRY INFO  QID:0x16340cd440200032 init with pTrans:0x2
+03/08 11:45:12.409703 00000192 C QRY INFO  pTrans 0x2 add to hbConnections for epId:2
+03/08 11:45:12.409965 00000218 C QRY INFO  hb connection updated, nodeId:2, fqdn:tdengine, port:6030, pTrans:0x2, pHandle:0x33
+03/08 11:45:12.410884 00000171 C QRY INFO  QID:0x16340cd440200032, SID:1, CID:0xa9e0bd8e2cbe30e4, TID:0x26, EID:0, hb mark removed from hbConnections, epId:2
+03/08 11:45:12.421580 00000196 C QRY INFO  QID:0x16340cd440200033 init with pTrans:0x2
+03/08 11:45:12.421956 00000196 C QRY INFO  pTrans 0x2 add to hbConnections for epId:2
+03/08 11:45:12.422355 00000202 C QRY INFO  hb connection updated, nodeId:2, fqdn:tdengine, port:6030, pTrans:0x2, pHandle:0x35
+03/08 11:45:12.426700 00000171 C QRY INFO  QID:0x16340cd440200033, SID:1, CID:0xa9e0bd8e2cbe30e4, TID:0x27, EID:0, hb mark removed from hbConnections, epId:2
+03/08 11:45:12.428429 00000205 C QRY INFO  QID:0x16340cd440200034 init with pTrans:0x2
+03/08 11:45:12.428473 00000205 C QRY INFO  pTrans 0x2 add to hbConnections for epId:2
+03/08 11:45:12.428742 00000208 C QRY INFO  hb connection updated, nodeId:2, fqdn:tdengine, port:6030, pTrans:0x2, pHandle:0x37
+03/08 11:45:12.429599 00000173 C QRY INFO  QID:0x16340cd440200034, SID:1, CID:0xa9e0bd8e2cbe30e4, TID:0x28, EID:0, hb mark removed from hbConnections, epId:2
+03/08 11:45:12.430475 00000211 C QRY INFO  QID:0x16340cd440200035 init with pTrans:0x2
+03/08 11:45:12.430817 00000211 C QRY INFO  pTrans 0x2 add to hbConnections for epId:2
+03/08 11:45:12.431071 00000215 C QRY INFO  hb connection updated, nodeId:2, fqdn:tdengine, port:6030, pTrans:0x2, pHandle:0x39
+03/08 11:45:12.432030 00000182 C QRY INFO  QID:0x16340cd440200035, SID:1, CID:0xa9e0bd8e2cbe30e4, TID:0x29, EID:0, hb mark removed from hbConnections, epId:2
+03/08 11:45:12.432987 00000210 C QRY INFO  QID:0x16340cd440200036 init with pTrans:0x2
+03/08 11:45:12.433011 00000210 C QRY INFO  pTrans 0x2 add to hbConnections for epId:2
+03/08 11:45:12.433267 00000189 C QRY INFO  hb connection updated, nodeId:2, fqdn:tdengine, port:6030, pTrans:0x2, pHandle:0x3b
+03/08 11:45:12.433965 00000182 C QRY INFO  QID:0x16340cd440200036, SID:1, CID:0xa9e0bd8e2cbe30e4, TID:0x2a, EID:0, hb mark removed from hbConnections, epId:2
+03/08 11:45:12.434710 00000190 C QRY INFO  QID:0x16340cd440200037 init with pTrans:0x2
+03/08 11:45:12.434746 00000190 C QRY INFO  pTrans 0x2 add to hbConnections for epId:2
+03/08 11:45:12.435017 00000220 C QRY INFO  hb connection updated, nodeId:2, fqdn:tdengine, port:6030, pTrans:0x2, pHandle:0x3d
+03/08 11:45:12.435724 00000173 C QRY INFO  QID:0x16340cd440200037, SID:1, CID:0xa9e0bd8e2cbe30e4, TID:0x2b, EID:0, hb mark removed from hbConnections, epId:2
+03/08 11:45:12.436236 00000193 C QRY INFO  QID:0x16340cd440200038 init with pTrans:0x2
+03/08 11:45:12.436259 00000193 C QRY INFO  pTrans 0x2 add to hbConnections for epId:2
+03/08 11:45:12.437099 00000197 C QRY INFO  hb connection updated, nodeId:2, fqdn:tdengine, port:6030, pTrans:0x2, pHandle:0x3f
+03/08 11:45:12.437575 00000173 C QRY INFO  QID:0x16340cd440200038, SID:1, CID:0xa9e0bd8e2cbe30e4, TID:0x2c, EID:0, hb mark removed from hbConnections, epId:2
+03/08 11:45:12.438527 00000203 C QRY INFO  QID:0x16340cd440200039 init with pTrans:0x2
+03/08 11:45:12.438570 00000203 C QRY INFO  pTrans 0x2 add to hbConnections for epId:2
+03/08 11:45:12.438826 00000195 C QRY INFO  hb connection updated, nodeId:2, fqdn:tdengine, port:6030, pTrans:0x2, pHandle:0x41
+03/08 11:45:12.439779 00000173 C QRY INFO  QID:0x16340cd440200039, SID:1, CID:0xa9e0bd8e2cbe30e4, TID:0x2d, EID:0, hb mark removed from hbConnections, epId:2
+03/08 11:45:12.440469 00000198 C QRY INFO  QID:0x16340cd44020003a init with pTrans:0x2
+03/08 11:45:12.440496 00000198 C QRY INFO  pTrans 0x2 add to hbConnections for epId:2
+03/08 11:45:12.440767 00000207 C QRY INFO  hb connection updated, nodeId:2, fqdn:tdengine, port:6030, pTrans:0x2, pHandle:0x43
+03/08 11:45:12.441526 00000171 C QRY INFO  QID:0x16340cd44020003a, SID:1, CID:0xa9e0bd8e2cbe30e4, TID:0x2e, EID:0, hb mark removed from hbConnections, epId:2
+03/08 11:45:15.004568 00000173 C QRY INFO  QID:0x16340cd440c0003b init with pTrans:0x2
+03/08 11:45:15.007121 00000165 C QRY INFO  QID:0x2000000000000005 init with pTrans:0x2
+03/08 11:45:22.381376 00000165 C QRY INFO  QID:0x16340cd44290003c init with pTrans:0x2
+03/08 11:45:30.005111 00000165 C QRY INFO  QID:0x16340cd44470003d init with pTrans:0x2
+03/08 11:45:30.007524 00000171 C QRY INFO  QID:0x2000000000000006 init with pTrans:0x2
+03/08 11:45:33.091080 00000171 C QRY WARN  parser QID:0x16340cd44530003e, table name is specified in sql, ignore the table name in bind param
+03/08 11:45:33.091132 00000171 C QRY INFO  QID:0x16340cd44530003e init with pTrans:0x2
+03/08 11:45:33.091455 00000182 C QRY INFO  QID:0x2000000000000007 init with pTrans:0x2
+03/08 11:45:37.381816 00000173 C QRY INFO  QID:0x16340cd44640003f init with pTrans:0x2
+03/08 11:45:38.491480 00000171 C QRY INFO  QID:0x2000000000000008 init with pTrans:0x2
+03/08 11:45:45.008813 00000171 C QRY INFO  QID:0x16340cd448200040 init with pTrans:0x2
+03/08 11:45:45.017335 00000173 C QRY INFO  QID:0x2000000000000009 init with pTrans:0x2
+03/08 11:45:52.382649 00000171 C QRY INFO  QID:0x16340cd449e00041 init with pTrans:0x2
+03/08 11:46:00.007051 00000165 C QRY INFO  QID:0x16340cd44bc00042 init with pTrans:0x2
+03/08 11:46:00.010603 00000173 C QRY INFO  QID:0x200000000000000a init with pTrans:0x2
+03/08 11:46:03.110219 00000171 C QRY WARN  parser QID:0x16340cd44c800043, table name is specified in sql, ignore the table name in bind param
+03/08 11:46:03.110274 00000171 C QRY INFO  QID:0x16340cd44c800043 init with pTrans:0x2
+03/08 11:46:03.110669 00000180 C QRY INFO  QID:0x200000000000000b init with pTrans:0x2
+03/08 11:46:07.383419 00000171 C QRY INFO  QID:0x16340cd44d900044 init with pTrans:0x2
+03/08 11:46:09.491547 00000171 C QRY INFO  QID:0x200000000000000c init with pTrans:0x2
+03/08 11:46:15.005091 00000180 C QRY INFO  QID:0x16340cd44f700045 init with pTrans:0x2
+03/08 11:46:15.007540 00000171 C QRY INFO  QID:0x200000000000000d init with pTrans:0x2
+03/08 11:46:22.384416 00000171 C QRY INFO  QID:0x16340cd451400046 init with pTrans:0x2
+03/08 11:46:30.005605 00000171 C QRY INFO  QID:0x16340cd453100047 init with pTrans:0x2
+03/08 11:46:30.009037 00000171 C QRY INFO  QID:0x200000000000000e init with pTrans:0x2
+03/08 11:46:33.134992 00000171 C QRY WARN  parser QID:0x16340cd453e00048, table name is specified in sql, ignore the table name in bind param
+03/08 11:46:33.135099 00000171 C QRY INFO  QID:0x16340cd453e00048 init with pTrans:0x2
+03/08 11:46:33.135423 00000180 C QRY INFO  QID:0x200000000000000f init with pTrans:0x2
+03/08 11:46:37.382122 00000169 C QRY INFO  QID:0x16340cd454e00049 init with pTrans:0x2
+03/08 11:46:40.491680 00000171 C QRY INFO  QID:0x2000000000000010 init with pTrans:0x2
+03/08 11:46:45.006211 00000181 C QRY INFO  QID:0x16340cd456c0004a init with pTrans:0x2
+03/08 11:46:45.008637 00000173 C QRY INFO  QID:0x2000000000000011 init with pTrans:0x2
+03/08 11:46:52.382330 00000181 C QRY INFO  QID:0x16340cd45890004b init with pTrans:0x2
+03/08 11:47:00.004361 00000182 C QRY INFO  QID:0x16340cd45a70004c init with pTrans:0x2
+03/08 11:47:00.006923 00000171 C QRY INFO  QID:0x2000000000000012 init with pTrans:0x2
+03/08 11:47:03.147903 00000171 C QRY WARN  parser QID:0x16340cd45b30004d, table name is specified in sql, ignore the table name in bind param
+03/08 11:47:03.147984 00000171 C QRY INFO  QID:0x16340cd45b30004d init with pTrans:0x2
+03/08 11:47:03.148367 00000165 C QRY INFO  QID:0x2000000000000013 init with pTrans:0x2
+03/08 11:47:07.383130 00000171 C QRY INFO  QID:0x16340cd45c30004e init with pTrans:0x2
+03/08 11:47:11.497607 00000165 C QRY INFO  QID:0x2000000000000014 init with pTrans:0x2
+03/08 11:47:15.005806 00000171 C QRY INFO  QID:0x16340cd45e10004f init with pTrans:0x2
+03/08 11:47:15.010356 00000182 C QRY INFO  QID:0x2000000000000015 init with pTrans:0x2
+03/08 11:47:22.381168 00000182 C QRY INFO  QID:0x16340cd45fe00050 init with pTrans:0x2
+03/08 11:47:30.006581 00000165 C QRY INFO  QID:0x16340cd461c00051 init with pTrans:0x2
+03/08 11:47:30.011014 00000171 C QRY INFO  QID:0x2000000000000016 init with pTrans:0x2
+03/08 11:47:33.167894 00000182 C QRY WARN  parser QID:0x16340cd462800052, table name is specified in sql, ignore the table name in bind param
+03/08 11:47:33.167970 00000182 C QRY INFO  QID:0x16340cd462800052 init with pTrans:0x2
+03/08 11:47:33.168734 00000171 C QRY INFO  QID:0x2000000000000017 init with pTrans:0x2
+03/08 11:47:37.382703 00000171 C QRY INFO  QID:0x16340cd463900053 init with pTrans:0x2
+03/08 11:47:42.491963 00000182 C QRY INFO  QID:0x2000000000000018 init with pTrans:0x2
+03/08 11:47:45.004753 00000171 C QRY INFO  QID:0x16340cd465600054 init with pTrans:0x2
+03/08 11:47:45.008613 00000182 C QRY INFO  QID:0x2000000000000019 init with pTrans:0x2
+03/08 11:47:52.382021 00000182 C QRY INFO  QID:0x16340cd467300055 init with pTrans:0x2
+03/08 11:48:00.007027 00000182 C QRY INFO  QID:0x16340cd469100056 init with pTrans:0x2
+03/08 11:48:00.009786 00000171 C QRY INFO  QID:0x200000000000001a init with pTrans:0x2
+03/08 11:48:03.187879 00000165 C QRY WARN  parser QID:0x16340cd469d00057, table name is specified in sql, ignore the table name in bind param
+03/08 11:48:03.187939 00000165 C QRY INFO  QID:0x16340cd469d00057 init with pTrans:0x2
+03/08 11:48:03.188194 00000171 C QRY INFO  QID:0x200000000000001b init with pTrans:0x2
+03/08 11:48:07.382492 00000173 C QRY INFO  QID:0x16340cd46ae00058 init with pTrans:0x2
+03/08 11:48:13.492272 00000173 C QRY INFO  QID:0x200000000000001c init with pTrans:0x2
+03/08 11:48:15.005668 00000171 C QRY INFO  QID:0x16340cd46cc00059 init with pTrans:0x2
+03/08 11:48:15.008669 00000182 C QRY INFO  QID:0x200000000000001d init with pTrans:0x2
+03/08 11:48:22.383385 00000173 C QRY INFO  QID:0x16340cd46e80005a init with pTrans:0x2
+03/08 11:48:30.009422 00000173 C QRY INFO  QID:0x16340cd47060005b init with pTrans:0x2
+03/08 11:48:30.014656 00000171 C QRY INFO  QID:0x200000000000001e init with pTrans:0x2
+03/08 11:48:33.207558 00000171 C QRY WARN  parser QID:0x16340cd47130005c, table name is specified in sql, ignore the table name in bind param
+03/08 11:48:33.207610 00000171 C QRY INFO  QID:0x16340cd47130005c init with pTrans:0x2
+03/08 11:48:33.207903 00000182 C QRY INFO  QID:0x200000000000001f init with pTrans:0x2
+03/08 11:48:37.381479 00000173 C QRY INFO  QID:0x16340cd47230005d init with pTrans:0x2
+03/08 11:48:44.490493 00000165 C QRY INFO  QID:0x2000000000000020 init with pTrans:0x2
+03/08 11:48:45.003744 00000173 C QRY INFO  QID:0x16340cd47410005e init with pTrans:0x2
+03/08 11:48:45.006818 00000173 C QRY INFO  QID:0x2000000000000021 init with pTrans:0x2
+03/08 11:48:52.380813 00000173 C QRY INFO  QID:0x16340cd475e0005f init with pTrans:0x2
+03/08 11:49:00.003263 00000165 C QRY INFO  QID:0x16340cd477b00060 init with pTrans:0x2
+03/08 11:49:00.006652 00000171 C QRY INFO  QID:0x2000000000000022 init with pTrans:0x2
+03/08 11:49:03.226123 00000173 C QRY WARN  parser QID:0x16340cd478800061, table name is specified in sql, ignore the table name in bind param
+03/08 11:49:03.226170 00000173 C QRY INFO  QID:0x16340cd478800061 init with pTrans:0x2
+03/08 11:49:03.226549 00000166 C QRY INFO  QID:0x2000000000000023 init with pTrans:0x2
+03/08 11:49:07.380514 00000165 C QRY INFO  QID:0x16340cd479800062 init with pTrans:0x2
+03/08 11:49:15.003176 00000166 C QRY INFO  QID:0x16340cd47b600063 init with pTrans:0x2
+03/08 11:49:15.005754 00000171 C QRY INFO  QID:0x2000000000000024 init with pTrans:0x2
+03/08 11:49:15.491486 00000165 C QRY INFO  QID:0x2000000000000025 init with pTrans:0x2
+03/08 11:49:22.380905 00000165 C QRY INFO  QID:0x16340cd47d300064 init with pTrans:0x2
+03/08 11:49:30.004568 00000171 C QRY INFO  QID:0x16340cd47f100065 init with pTrans:0x2
+03/08 11:49:30.007282 00000166 C QRY INFO  QID:0x2000000000000026 init with pTrans:0x2
+03/08 11:49:33.248447 00000166 C QRY WARN  parser QID:0x16340cd47fd00066, table name is specified in sql, ignore the table name in bind param
+03/08 11:49:33.248510 00000166 C QRY INFO  QID:0x16340cd47fd00066 init with pTrans:0x2
+03/08 11:49:33.248905 00000173 C QRY INFO  QID:0x2000000000000027 init with pTrans:0x2
+03/08 11:49:37.381186 00000173 C QRY INFO  QID:0x16340cd480d00067 init with pTrans:0x2
+03/08 11:49:45.005814 00000173 C QRY INFO  QID:0x16340cd482b00068 init with pTrans:0x2
+03/08 11:49:45.008938 00000171 C QRY INFO  QID:0x2000000000000028 init with pTrans:0x2
+03/08 11:49:45.491200 00000173 C QRY INFO  QID:0x2000000000000029 init with pTrans:0x2
+03/08 11:49:52.381967 00000173 C QRY INFO  QID:0x16340cd484800069 init with pTrans:0x2
+03/08 11:50:00.006517 00000165 C QRY INFO  QID:0x16340cd48660006a init with pTrans:0x2
+03/08 11:50:00.020003 00000173 C QRY INFO  QID:0x200000000000002a init with pTrans:0x2
+03/08 11:50:03.274615 00000166 C QRY WARN  parser QID:0x16340cd48730006b, table name is specified in sql, ignore the table name in bind param
+03/08 11:50:03.274717 00000166 C QRY INFO  QID:0x16340cd48730006b init with pTrans:0x2
+03/08 11:50:03.275245 00000171 C QRY INFO  QID:0x200000000000002b init with pTrans:0x2
+03/08 11:50:07.382733 00000171 C QRY INFO  QID:0x16340cd48830006c init with pTrans:0x2
+03/08 11:50:15.006032 00000171 C QRY INFO  QID:0x16340cd48a00006d init with pTrans:0x2
+03/08 11:50:15.010103 00000169 C QRY INFO  QID:0x200000000000002c init with pTrans:0x2
+03/08 11:50:16.493169 00000169 C QRY INFO  QID:0x200000000000002d init with pTrans:0x2
+03/08 11:50:22.382259 00000169 C QRY INFO  QID:0x16340cd48bd0006e init with pTrans:0x2
+03/08 11:50:30.004994 00000182 C QRY INFO  QID:0x16340cd48db0006f init with pTrans:0x2
+03/08 11:50:30.007376 00000171 C QRY INFO  QID:0x200000000000002e init with pTrans:0x2
+03/08 11:50:33.306544 00000169 C QRY WARN  parser QID:0x16340cd48e800070, table name is specified in sql, ignore the table name in bind param
+03/08 11:50:33.306633 00000169 C QRY INFO  QID:0x16340cd48e800070 init with pTrans:0x2
+03/08 11:50:33.307768 00000169 C QRY INFO  QID:0x200000000000002f init with pTrans:0x2
+03/08 11:50:37.382247 00000169 C QRY INFO  QID:0x16340cd48f800071 init with pTrans:0x2
+03/08 11:50:45.015786 00000169 C QRY INFO  QID:0x16340cd491600072 init with pTrans:0x2
+03/08 11:50:45.042966 00000165 C QRY INFO  QID:0x2000000000000030 init with pTrans:0x2
+03/08 11:50:47.493001 00000169 C QRY INFO  QID:0x2000000000000031 init with pTrans:0x2
+03/08 11:50:52.382351 00000169 C QRY INFO  QID:0x16340cd493200073 init with pTrans:0x2
+03/08 11:51:00.006625 00000165 C QRY INFO  QID:0x16340cd495000074 init with pTrans:0x2
+03/08 11:51:00.012137 00000166 C QRY INFO  QID:0x2000000000000032 init with pTrans:0x2
+03/08 11:51:03.333503 00000173 C QRY WARN  parser QID:0x16340cd495d00075, table name is specified in sql, ignore the table name in bind param
+03/08 11:51:03.333585 00000173 C QRY INFO  QID:0x16340cd495d00075 init with pTrans:0x2
+03/08 11:51:03.333847 00000165 C QRY INFO  QID:0x2000000000000033 init with pTrans:0x2
+03/08 11:51:07.381649 00000165 C QRY INFO  QID:0x16340cd496d00076 init with pTrans:0x2
+03/08 11:51:15.005363 00000169 C QRY INFO  QID:0x16340cd498b00077 init with pTrans:0x2
+03/08 11:51:15.008800 00000165 C QRY INFO  QID:0x2000000000000034 init with pTrans:0x2
+03/08 11:51:18.491509 00000173 C QRY INFO  QID:0x2000000000000035 init with pTrans:0x2
+03/08 11:51:22.381626 00000165 C QRY INFO  QID:0x16340cd49a800078 init with pTrans:0x2
+03/08 11:51:30.004515 00000165 C QRY INFO  QID:0x16340cd49c500079 init with pTrans:0x2
+03/08 11:51:30.007627 00000169 C QRY INFO  QID:0x2000000000000036 init with pTrans:0x2
+03/08 11:51:33.350786 00000165 C QRY WARN  parser QID:0x16340cd49d20007a, table name is specified in sql, ignore the table name in bind param
+03/08 11:51:33.350857 00000165 C QRY INFO  QID:0x16340cd49d20007a init with pTrans:0x2
+03/08 11:51:33.351310 00000173 C QRY INFO  QID:0x2000000000000037 init with pTrans:0x2
+03/08 11:51:37.380419 00000173 C QRY INFO  QID:0x16340cd49e20007b init with pTrans:0x2
+03/08 11:51:45.004291 00000169 C QRY INFO  QID:0x16340cd4a000007c init with pTrans:0x2
+03/08 11:51:45.007133 00000165 C QRY INFO  QID:0x2000000000000038 init with pTrans:0x2
+03/08 11:51:48.490235 00000173 C QRY INFO  QID:0x2000000000000039 init with pTrans:0x2
+03/08 11:51:52.381014 00000169 C QRY INFO  QID:0x16340cd4a1d0007d init with pTrans:0x2
+03/08 11:52:00.005970 00000165 C QRY INFO  QID:0x16340cd4a3b0007e init with pTrans:0x2
+03/08 11:52:00.009342 00000169 C QRY INFO  QID:0x200000000000003a init with pTrans:0x2
+03/08 11:52:03.370690 00000169 C QRY WARN  parser QID:0x16340cd4a480007f, table name is specified in sql, ignore the table name in bind param
+03/08 11:52:03.370732 00000169 C QRY INFO  QID:0x16340cd4a480007f init with pTrans:0x2
+03/08 11:52:03.371301 00000169 C QRY INFO  QID:0x200000000000003b init with pTrans:0x2
+03/08 11:52:07.381907 00000173 C QRY INFO  QID:0x16340cd4a5700080 init with pTrans:0x2
+03/08 11:52:15.004705 00000165 C QRY INFO  QID:0x16340cd4a7500081 init with pTrans:0x2
+03/08 11:52:15.006830 00000169 C QRY INFO  QID:0x200000000000003c init with pTrans:0x2
+03/08 11:52:18.495531 00000165 C QRY INFO  QID:0x200000000000003d init with pTrans:0x2
+03/08 11:52:22.382362 00000165 C QRY INFO  QID:0x16340cd4a9200082 init with pTrans:0x2
+03/08 11:52:30.004988 00000165 C QRY INFO  QID:0x16340cd4ab000083 init with pTrans:0x2
+03/08 11:52:30.007356 00000169 C QRY INFO  QID:0x200000000000003e init with pTrans:0x2
+03/08 11:52:33.395319 00000182 C QRY WARN  parser QID:0x16340cd4abd00084, table name is specified in sql, ignore the table name in bind param
+03/08 11:52:33.395410 00000182 C QRY INFO  QID:0x16340cd4abd00084 init with pTrans:0x2
+03/08 11:52:33.395591 00000169 C QRY INFO  QID:0x200000000000003f init with pTrans:0x2
+03/08 11:52:37.383148 00000165 C QRY INFO  QID:0x16340cd4acd00085 init with pTrans:0x2
+03/08 11:52:45.012171 00000165 C QRY INFO  QID:0x16340cd4aea00086 init with pTrans:0x2
+03/08 11:52:45.025115 00000165 C QRY INFO  QID:0x2000000000000040 init with pTrans:0x2
+03/08 11:52:49.493646 00000180 C QRY INFO  QID:0x2000000000000041 init with pTrans:0x2
+03/08 11:52:52.384843 00000166 C QRY INFO  QID:0x16340cd4b0700087 init with pTrans:0x2
+03/08 11:53:00.008251 00000165 C QRY INFO  QID:0x16340cd4b2500088 init with pTrans:0x2
+03/08 11:53:00.018162 00000181 C QRY INFO  QID:0x2000000000000042 init with pTrans:0x2
+03/08 11:53:03.418838 00000165 C QRY WARN  parser QID:0x16340cd4b3200089, table name is specified in sql, ignore the table name in bind param
+03/08 11:53:03.418938 00000165 C QRY INFO  QID:0x16340cd4b3200089 init with pTrans:0x2
+03/08 11:53:03.420569 00000165 C QRY INFO  QID:0x2000000000000043 init with pTrans:0x2
+03/08 11:53:07.382084 00000165 C QRY INFO  QID:0x16340cd4b420008a init with pTrans:0x2
+03/08 11:53:15.005037 00000165 C QRY INFO  QID:0x16340cd4b5f0008b init with pTrans:0x2
+03/08 11:53:15.007337 00000166 C QRY INFO  QID:0x2000000000000044 init with pTrans:0x2
+03/08 11:53:20.490850 00000166 C QRY INFO  QID:0x2000000000000045 init with pTrans:0x2
+03/08 11:53:22.387324 00000166 C QRY INFO  QID:0x16340cd4b7c0008c init with pTrans:0x2
+03/08 11:53:30.004158 00000173 C QRY INFO  QID:0x16340cd4b9a0008d init with pTrans:0x2
+03/08 11:53:30.006522 00000166 C QRY INFO  QID:0x2000000000000046 init with pTrans:0x2
+03/08 11:53:33.438234 00000180 C QRY WARN  parser QID:0x16340cd4ba70008e, table name is specified in sql, ignore the table name in bind param
+03/08 11:53:33.438278 00000180 C QRY INFO  QID:0x16340cd4ba70008e init with pTrans:0x2
+03/08 11:53:33.438307 00000166 C QRY INFO  QID:0x2000000000000047 init with pTrans:0x2
+03/08 11:53:37.384986 00000166 C QRY INFO  QID:0x16340cd4bb70008f init with pTrans:0x2
+03/08 11:53:45.004008 00000173 C QRY INFO  QID:0x16340cd4bd500090 init with pTrans:0x2
+03/08 11:53:45.006366 00000166 C QRY INFO  QID:0x2000000000000048 init with pTrans:0x2
+03/08 11:53:50.490483 00000165 C QRY INFO  QID:0x2000000000000049 init with pTrans:0x2
+03/08 11:53:52.380349 00000173 C QRY INFO  QID:0x16340cd4bf100091 init with pTrans:0x2
+03/08 11:54:00.005832 00000166 C QRY INFO  QID:0x16340cd4c0f00092 init with pTrans:0x2
+03/08 11:54:00.011606 00000165 C QRY INFO  QID:0x200000000000004a init with pTrans:0x2
+03/08 11:54:03.458832 00000173 C QRY WARN  parser QID:0x16340cd4c1d00093, table name is specified in sql, ignore the table name in bind param
+03/08 11:54:03.458880 00000173 C QRY INFO  QID:0x16340cd4c1d00093 init with pTrans:0x2
+03/08 11:54:03.460020 00000165 C QRY INFO  QID:0x200000000000004b init with pTrans:0x2
+03/08 11:54:07.386862 00000180 C QRY INFO  QID:0x16340cd4c2c00094 init with pTrans:0x2
+03/08 11:54:15.009893 00000165 C QRY INFO  QID:0x16340cd4c4a00095 init with pTrans:0x2
+03/08 11:54:15.024853 00000166 C QRY INFO  QID:0x200000000000004c init with pTrans:0x2
+03/08 11:54:21.492612 00000180 C QRY INFO  QID:0x200000000000004d init with pTrans:0x2
+03/08 11:54:22.380932 00000166 C QRY INFO  QID:0x16340cd4c6700096 init with pTrans:0x2
+03/08 11:54:30.007631 00000173 C QRY INFO  QID:0x16340cd4c8400097 init with pTrans:0x2
+03/08 11:54:30.010977 00000166 C QRY INFO  QID:0x200000000000004e init with pTrans:0x2
+03/08 11:54:33.480474 00000181 C QRY WARN  parser QID:0x16340cd4c9200098, table name is specified in sql, ignore the table name in bind param
+03/08 11:54:33.480517 00000181 C QRY INFO  QID:0x16340cd4c9200098 init with pTrans:0x2
+03/08 11:54:33.480592 00000166 C QRY INFO  QID:0x200000000000004f init with pTrans:0x2
+03/08 11:54:37.384636 00000166 C QRY INFO  QID:0x16340cd4ca100099 init with pTrans:0x2
+03/08 11:54:45.005919 00000165 C QRY INFO  QID:0x16340cd4cbf0009a init with pTrans:0x2
+03/08 11:54:45.011725 00000180 C QRY INFO  QID:0x2000000000000050 init with pTrans:0x2
+03/08 11:54:52.382643 00000165 C QRY INFO  QID:0x16340cd4cdc0009b init with pTrans:0x2
+03/08 11:54:52.491852 00000180 C QRY INFO  QID:0x2000000000000051 init with pTrans:0x2
+03/08 11:55:00.011713 00000180 C QRY INFO  QID:0x16340cd4cfa0009c init with pTrans:0x2
+03/08 11:55:00.017720 00000173 C QRY INFO  QID:0x2000000000000052 init with pTrans:0x2
+03/08 11:55:03.535972 00000169 C QRY WARN  parser QID:0x16340cd4d070009d, table name is specified in sql, ignore the table name in bind param
+03/08 11:55:03.536047 00000169 C QRY INFO  QID:0x16340cd4d070009d init with pTrans:0x2
+03/08 11:55:03.536602 00000169 C QRY INFO  QID:0x2000000000000053 init with pTrans:0x2
+03/08 11:55:07.382691 00000180 C QRY INFO  QID:0x16340cd4d160009e init with pTrans:0x2
+03/08 11:55:15.004752 00000173 C QRY INFO  QID:0x16340cd4d340009f init with pTrans:0x2
+03/08 11:55:15.008469 00000165 C QRY INFO  QID:0x2000000000000054 init with pTrans:0x2
+03/08 11:55:22.382611 00000180 C QRY INFO  QID:0x16340cd4d51000a0 init with pTrans:0x2
+03/08 11:55:23.492352 00000173 C QRY INFO  QID:0x2000000000000055 init with pTrans:0x2
+03/08 11:55:30.005479 00000180 C QRY INFO  QID:0x16340cd4d6f000a1 init with pTrans:0x2
+03/08 11:55:30.007996 00000165 C QRY INFO  QID:0x2000000000000056 init with pTrans:0x2
+03/08 11:55:33.556144 00000180 C QRY WARN  parser QID:0x16340cd4d7d000a2, table name is specified in sql, ignore the table name in bind param
+03/08 11:55:33.556195 00000180 C QRY INFO  QID:0x16340cd4d7d000a2 init with pTrans:0x2
+03/08 11:55:33.556425 00000169 C QRY INFO  QID:0x2000000000000057 init with pTrans:0x2
+03/08 11:55:37.384928 00000169 C QRY INFO  QID:0x16340cd4d8c000a3 init with pTrans:0x2
+03/08 11:55:45.004955 00000180 C QRY INFO  QID:0x16340cd4da9000a4 init with pTrans:0x2
+03/08 11:55:45.007567 00000180 C QRY INFO  QID:0x2000000000000058 init with pTrans:0x2
+03/08 11:55:52.381857 00000173 C QRY INFO  QID:0x16340cd4dc6000a5 init with pTrans:0x2
+03/08 11:55:54.491366 00000169 C QRY INFO  QID:0x2000000000000059 init with pTrans:0x2
+03/08 11:56:00.005063 00000173 C QRY INFO  QID:0x16340cd4de4000a6 init with pTrans:0x2
+03/08 11:56:00.007299 00000173 C QRY INFO  QID:0x200000000000005a init with pTrans:0x2
+03/08 11:56:03.577956 00000180 C QRY WARN  parser QID:0x16340cd4df2000a7, table name is specified in sql, ignore the table name in bind param
+03/08 11:56:03.577999 00000180 C QRY INFO  QID:0x16340cd4df2000a7 init with pTrans:0x2
+03/08 11:56:03.578275 00000173 C QRY INFO  QID:0x200000000000005b init with pTrans:0x2
+03/08 11:56:07.381209 00000173 C QRY INFO  QID:0x16340cd4e01000a8 init with pTrans:0x2
+03/08 11:56:15.005978 00000165 C QRY INFO  QID:0x16340cd4e1f000a9 init with pTrans:0x2
+03/08 11:56:15.010304 00000169 C QRY INFO  QID:0x200000000000005c init with pTrans:0x2
+03/08 11:56:22.381262 00000169 C QRY INFO  QID:0x16340cd4e3b000aa init with pTrans:0x2
+03/08 11:56:25.495791 00000173 C QRY INFO  QID:0x200000000000005d init with pTrans:0x2
+03/08 11:56:30.004480 00000169 C QRY INFO  QID:0x16340cd4e59000ab init with pTrans:0x2
+03/08 11:56:30.007001 00000166 C QRY INFO  QID:0x200000000000005e init with pTrans:0x2
+03/08 11:56:33.599139 00000169 C QRY INFO  QID:0x200000000000005f init with pTrans:0x2
+03/08 11:56:33.600291 00000173 C QRY WARN  parser QID:0x16340cd4e67000ac, table name is specified in sql, ignore the table name in bind param
+03/08 11:56:33.600333 00000173 C QRY INFO  QID:0x16340cd4e67000ac init with pTrans:0x2
+03/08 11:56:37.381323 00000173 C QRY INFO  QID:0x16340cd4e76000ad init with pTrans:0x2
+03/08 11:56:45.005645 00000181 C QRY INFO  QID:0x16340cd4e94000ae init with pTrans:0x2
+03/08 11:56:45.008029 00000166 C QRY INFO  QID:0x2000000000000060 init with pTrans:0x2
+03/08 11:56:52.381415 00000166 C QRY INFO  QID:0x16340cd4eb1000af init with pTrans:0x2
+03/08 11:56:56.492481 00000181 C QRY INFO  QID:0x2000000000000061 init with pTrans:0x2
+03/08 11:57:00.006072 00000166 C QRY INFO  QID:0x16340cd4ece000b0 init with pTrans:0x2
+03/08 11:57:00.008051 00000180 C QRY INFO  QID:0x2000000000000062 init with pTrans:0x2
+03/08 11:57:03.617741 00000165 C QRY WARN  parser QID:0x16340cd4edd000b1, table name is specified in sql, ignore the table name in bind param
+03/08 11:57:03.617782 00000165 C QRY INFO  QID:0x16340cd4edd000b1 init with pTrans:0x2
+03/08 11:57:03.617909 00000166 C QRY INFO  QID:0x2000000000000063 init with pTrans:0x2
+03/08 11:57:07.381942 00000181 C QRY INFO  QID:0x16340cd4eeb000b2 init with pTrans:0x2
+03/08 11:57:15.006093 00000181 C QRY INFO  QID:0x16340cd4f09000b3 init with pTrans:0x2
+03/08 11:57:15.008903 00000165 C QRY INFO  QID:0x2000000000000064 init with pTrans:0x2
+03/08 11:57:22.381266 00000180 C QRY INFO  QID:0x16340cd4f26000b4 init with pTrans:0x2
+03/08 11:57:27.492880 00000165 C QRY INFO  QID:0x2000000000000065 init with pTrans:0x2
+03/08 11:57:30.006252 00000166 C QRY INFO  QID:0x16340cd4f44000b5 init with pTrans:0x2
+03/08 11:57:30.009346 00000181 C QRY INFO  QID:0x2000000000000066 init with pTrans:0x2
+03/08 11:57:33.636459 00000165 C QRY WARN  parser QID:0x16340cd4f52000b6, table name is specified in sql, ignore the table name in bind param
+03/08 11:57:33.636508 00000165 C QRY INFO  QID:0x16340cd4f52000b6 init with pTrans:0x2
+03/08 11:57:33.637017 00000165 C QRY INFO  QID:0x2000000000000067 init with pTrans:0x2
+03/08 11:57:37.382119 00000180 C QRY INFO  QID:0x16340cd4f60000b7 init with pTrans:0x2
+03/08 11:57:45.007643 00000165 C QRY INFO  QID:0x16340cd4f7e000b8 init with pTrans:0x2
+03/08 11:57:45.011456 00000180 C QRY INFO  QID:0x2000000000000068 init with pTrans:0x2
+03/08 11:57:52.384934 00000180 C QRY INFO  QID:0x16340cd4f9b000b9 init with pTrans:0x2
+03/08 11:57:58.491067 00000165 C QRY INFO  QID:0x2000000000000069 init with pTrans:0x2
+03/08 11:58:00.009018 00000181 C QRY INFO  QID:0x16340cd4fb9000ba init with pTrans:0x2
+03/08 11:58:00.018840 00000166 C QRY INFO  QID:0x200000000000006a init with pTrans:0x2
+03/08 11:58:03.657961 00000166 C QRY WARN  parser QID:0x16340cd4fc7000bb, table name is specified in sql, ignore the table name in bind param
+03/08 11:58:03.658002 00000166 C QRY INFO  QID:0x16340cd4fc7000bb init with pTrans:0x2
+03/08 11:58:03.658233 00000180 C QRY INFO  QID:0x200000000000006b init with pTrans:0x2
+03/08 11:58:07.383493 00000181 C QRY INFO  QID:0x16340cd4fd6000bc init with pTrans:0x2
+03/08 11:58:15.004267 00000169 C QRY INFO  QID:0x16340cd4ff3000bd init with pTrans:0x2
+03/08 11:58:15.006620 00000169 C QRY INFO  QID:0x200000000000006c init with pTrans:0x2
+03/08 11:58:22.381938 00000166 C QRY INFO  QID:0x16340cd5010000be init with pTrans:0x2
+03/08 11:58:29.491414 00000180 C QRY INFO  QID:0x200000000000006d init with pTrans:0x2
+03/08 11:58:30.007329 00000180 C QRY INFO  QID:0x16340cd502e000bf init with pTrans:0x2
+03/08 11:58:30.009779 00000181 C QRY INFO  QID:0x200000000000006e init with pTrans:0x2
+03/08 11:58:33.679599 00000180 C QRY WARN  parser QID:0x16340cd503c000c0, table name is specified in sql, ignore the table name in bind param
+03/08 11:58:33.679640 00000180 C QRY INFO  QID:0x16340cd503c000c0 init with pTrans:0x2
+03/08 11:58:33.679824 00000181 C QRY INFO  QID:0x200000000000006f init with pTrans:0x2
+03/08 11:58:37.381741 00000169 C QRY INFO  QID:0x16340cd504b000c1 init with pTrans:0x2
+03/08 11:58:45.009212 00000169 C QRY INFO  QID:0x16340cd5069000c2 init with pTrans:0x2
+03/08 11:58:45.021719 00000171 C QRY INFO  QID:0x2000000000000070 init with pTrans:0x2
+03/08 11:58:52.382772 00000165 C QRY INFO  QID:0x16340cd5085000c3 init with pTrans:0x2
+03/08 11:59:00.005571 00000165 C QRY INFO  QID:0x16340cd50a3000c4 init with pTrans:0x2
+03/08 11:59:00.009384 00000171 C QRY INFO  QID:0x2000000000000071 init with pTrans:0x2
+03/08 11:59:00.491023 00000165 C QRY INFO  QID:0x2000000000000072 init with pTrans:0x2
+03/08 11:59:03.700242 00000166 C QRY WARN  parser QID:0x16340cd50b2000c5, table name is specified in sql, ignore the table name in bind param
+03/08 11:59:03.700288 00000166 C QRY INFO  QID:0x16340cd50b2000c5 init with pTrans:0x2
+03/08 11:59:03.700328 00000169 C QRY INFO  QID:0x2000000000000073 init with pTrans:0x2
+03/08 11:59:07.382072 00000169 C QRY INFO  QID:0x16340cd50c0000c6 init with pTrans:0x2
+03/08 11:59:15.005592 00000166 C QRY INFO  QID:0x16340cd50de000c7 init with pTrans:0x2
+03/08 11:59:15.007796 00000171 C QRY INFO  QID:0x2000000000000074 init with pTrans:0x2
+03/08 11:59:22.381697 00000166 C QRY INFO  QID:0x16340cd50fb000c8 init with pTrans:0x2
+03/08 11:59:30.004807 00000171 C QRY INFO  QID:0x16340cd5118000c9 init with pTrans:0x2
+03/08 11:59:30.007177 00000169 C QRY INFO  QID:0x2000000000000075 init with pTrans:0x2
+03/08 11:59:31.490979 00000166 C QRY INFO  QID:0x2000000000000076 init with pTrans:0x2
+03/08 11:59:33.722666 00000165 C QRY WARN  parser QID:0x16340cd5127000ca, table name is specified in sql, ignore the table name in bind param
+03/08 11:59:33.722710 00000165 C QRY INFO  QID:0x16340cd5127000ca init with pTrans:0x2
+03/08 11:59:33.722962 00000171 C QRY INFO  QID:0x2000000000000077 init with pTrans:0x2
+03/08 11:59:37.001024 00000183 C UTL INFO  process log rotation
+03/08 11:59:37.381118 00000169 C QRY INFO  QID:0x16340cd5135000cb init with pTrans:0x2
+03/08 11:59:45.004149 00000171 C QRY INFO  QID:0x16340cd5153000cc init with pTrans:0x2
+03/08 11:59:45.006406 00000171 C QRY INFO  QID:0x2000000000000078 init with pTrans:0x2
+03/08 11:59:52.382280 00000165 C QRY INFO  QID:0x16340cd5170000cd init with pTrans:0x2
+03/08 12:00:00.004206 00000165 C QRY INFO  QID:0x16340cd518e000ce init with pTrans:0x2
+03/08 12:00:00.007232 00000165 C QRY INFO  QID:0x2000000000000079 init with pTrans:0x2
+03/08 12:00:02.490120 00000165 C QRY INFO  QID:0x200000000000007a init with pTrans:0x2
+03/08 12:00:03.738730 00000169 C QRY WARN  parser QID:0x16340cd519c000cf, table name is specified in sql, ignore the table name in bind param
+03/08 12:00:03.738776 00000169 C QRY INFO  QID:0x16340cd519c000cf init with pTrans:0x2
+03/08 12:00:03.738950 00000166 C QRY INFO  QID:0x200000000000007b init with pTrans:0x2
+03/08 12:00:07.383431 00000165 C QRY INFO  QID:0x16340cd51aa000d0 init with pTrans:0x2
+03/08 12:00:15.005152 00000169 C QRY INFO  QID:0x16340cd51c8000d1 init with pTrans:0x2
+03/08 12:00:15.007322 00000165 C QRY INFO  QID:0x200000000000007c init with pTrans:0x2
+03/08 12:00:22.380824 00000165 C QRY INFO  QID:0x16340cd51e5000d2 init with pTrans:0x2
+03/08 12:00:30.004038 00000169 C QRY INFO  QID:0x16340cd5203000d3 init with pTrans:0x2
+03/08 12:00:30.006577 00000171 C QRY INFO  QID:0x200000000000007d init with pTrans:0x2
+03/08 12:00:32.491528 00000166 C QRY INFO  QID:0x200000000000007e init with pTrans:0x2
+03/08 12:00:33.758043 00000181 C QRY INFO  QID:0x200000000000007f init with pTrans:0x2
+03/08 12:00:33.759473 00000166 C QRY WARN  parser QID:0x16340cd5211000d4, table name is specified in sql, ignore the table name in bind param
+03/08 12:00:33.759507 00000166 C QRY INFO  QID:0x16340cd5211000d4 init with pTrans:0x2
+03/08 12:00:37.380959 00000166 C QRY INFO  QID:0x16340cd5220000d5 init with pTrans:0x2
+03/08 12:00:45.003761 00000181 C QRY INFO  QID:0x16340cd523d000d6 init with pTrans:0x2
+03/08 12:00:45.006091 00000166 C QRY INFO  QID:0x2000000000000080 init with pTrans:0x2
+03/08 12:00:52.381320 00000181 C QRY INFO  QID:0x16340cd525a000d7 init with pTrans:0x2
+03/08 12:01:00.004239 00000181 C QRY INFO  QID:0x16340cd5278000d8 init with pTrans:0x2
+03/08 12:01:00.006377 00000171 C QRY INFO  QID:0x2000000000000081 init with pTrans:0x2
+03/08 12:01:03.491284 00000171 C QRY INFO  QID:0x2000000000000082 init with pTrans:0x2
+03/08 12:01:03.777853 00000181 C QRY WARN  parser QID:0x16340cd5287000d9, table name is specified in sql, ignore the table name in bind param
+03/08 12:01:03.777912 00000181 C QRY INFO  QID:0x16340cd5287000d9 init with pTrans:0x2
+03/08 12:01:03.778437 00000181 C QRY INFO  QID:0x2000000000000083 init with pTrans:0x2
+03/08 12:01:07.381712 00000181 C QRY INFO  QID:0x16340cd5295000da init with pTrans:0x2
+03/08 12:01:15.005135 00000181 C QRY INFO  QID:0x16340cd52b2000db init with pTrans:0x2
+03/08 12:01:15.007904 00000171 C QRY INFO  QID:0x2000000000000084 init with pTrans:0x2
+03/08 12:01:22.386365 00000171 C QRY INFO  QID:0x16340cd52cf000dc init with pTrans:0x2
+03/08 12:01:30.006451 00000181 C QRY INFO  QID:0x16340cd52ed000dd init with pTrans:0x2
+03/08 12:01:30.010180 00000171 C QRY INFO  QID:0x2000000000000085 init with pTrans:0x2
+03/08 12:01:33.801685 00000165 C QRY WARN  parser QID:0x16340cd52fc000de, table name is specified in sql, ignore the table name in bind param
+03/08 12:01:33.801758 00000165 C QRY INFO  QID:0x16340cd52fc000de init with pTrans:0x2
+03/08 12:01:33.802079 00000181 C QRY INFO  QID:0x2000000000000086 init with pTrans:0x2
+03/08 12:01:34.493359 00000171 C QRY INFO  QID:0x2000000000000087 init with pTrans:0x2
+03/08 12:01:37.382852 00000171 C QRY INFO  QID:0x16340cd530a000df init with pTrans:0x2
+03/08 12:01:45.004642 00000165 C QRY INFO  QID:0x16340cd5328000e0 init with pTrans:0x2
+03/08 12:01:45.007094 00000171 C QRY INFO  QID:0x2000000000000088 init with pTrans:0x2
+03/08 12:01:52.384656 00000171 C QRY INFO  QID:0x16340cd5344000e1 init with pTrans:0x2
+03/08 12:02:00.004343 00000166 C QRY INFO  QID:0x16340cd5362000e2 init with pTrans:0x2
+03/08 12:02:00.006608 00000165 C QRY INFO  QID:0x2000000000000089 init with pTrans:0x2
+03/08 12:02:03.823844 00000171 C QRY WARN  parser QID:0x16340cd5371000e3, table name is specified in sql, ignore the table name in bind param
+03/08 12:02:03.823899 00000171 C QRY INFO  QID:0x16340cd5371000e3 init with pTrans:0x2
+03/08 12:02:03.824060 00000181 C QRY INFO  QID:0x200000000000008a init with pTrans:0x2
+03/08 12:02:05.491581 00000166 C QRY INFO  QID:0x200000000000008b init with pTrans:0x2
+03/08 12:02:07.381174 00000166 C QRY INFO  QID:0x16340cd537f000e4 init with pTrans:0x2
+03/08 12:02:15.005503 00000181 C QRY INFO  QID:0x16340cd539d000e5 init with pTrans:0x2
+03/08 12:02:15.008450 00000165 C QRY INFO  QID:0x200000000000008c init with pTrans:0x2
+03/08 12:02:22.381882 00000181 C QRY INFO  QID:0x16340cd53ba000e6 init with pTrans:0x2
+03/08 12:02:30.004380 00000181 C QRY INFO  QID:0x16340cd53d7000e7 init with pTrans:0x2
+03/08 12:02:30.007375 00000181 C QRY INFO  QID:0x200000000000008d init with pTrans:0x2
+03/08 12:02:33.842102 00000166 C QRY WARN  parser QID:0x16340cd53e6000e8, table name is specified in sql, ignore the table name in bind param
+03/08 12:02:33.842159 00000166 C QRY INFO  QID:0x16340cd53e6000e8 init with pTrans:0x2
+03/08 12:02:33.842595 00000181 C QRY INFO  QID:0x200000000000008e init with pTrans:0x2
+03/08 12:02:36.493851 00000171 C QRY INFO  QID:0x200000000000008f init with pTrans:0x2
+03/08 12:02:37.381994 00000171 C QRY INFO  QID:0x16340cd53f4000e9 init with pTrans:0x2
+03/08 12:02:45.003769 00000181 C QRY INFO  QID:0x16340cd5412000ea init with pTrans:0x2
+03/08 12:02:45.006388 00000169 C QRY INFO  QID:0x2000000000000090 init with pTrans:0x2
+03/08 12:02:52.381656 00000182 C QRY INFO  QID:0x16340cd542f000eb init with pTrans:0x2
+03/08 12:03:00.004840 00000166 C QRY INFO  QID:0x16340cd544d000ec init with pTrans:0x2
+03/08 12:03:00.010239 00000182 C QRY INFO  QID:0x2000000000000091 init with pTrans:0x2
+03/08 12:03:03.859824 00000181 C QRY WARN  parser QID:0x16340cd545c000ed, table name is specified in sql, ignore the table name in bind param
+03/08 12:03:03.859882 00000181 C QRY INFO  QID:0x16340cd545c000ed init with pTrans:0x2
+03/08 12:03:03.860096 00000166 C QRY INFO  QID:0x2000000000000092 init with pTrans:0x2
+03/08 12:03:07.381357 00000181 C QRY INFO  QID:0x16340cd5469000ee init with pTrans:0x2
+03/08 12:03:07.490942 00000166 C QRY INFO  QID:0x2000000000000093 init with pTrans:0x2
+03/08 12:03:15.004287 00000181 C QRY INFO  QID:0x16340cd5487000ef init with pTrans:0x2
+03/08 12:03:15.006588 00000169 C QRY INFO  QID:0x2000000000000094 init with pTrans:0x2
+03/08 12:03:22.383342 00000182 C QRY INFO  QID:0x16340cd54a4000f0 init with pTrans:0x2
+03/08 12:03:30.008040 00000181 C QRY INFO  QID:0x16340cd54c2000f1 init with pTrans:0x2
+03/08 12:03:30.011761 00000166 C QRY INFO  QID:0x2000000000000095 init with pTrans:0x2
+03/08 12:03:33.881156 00000181 C QRY WARN  parser QID:0x16340cd54d1000f2, table name is specified in sql, ignore the table name in bind param
+03/08 12:03:33.881222 00000181 C QRY INFO  QID:0x16340cd54d1000f2 init with pTrans:0x2
+03/08 12:03:33.882265 00000166 C QRY INFO  QID:0x2000000000000096 init with pTrans:0x2
+03/08 12:03:37.384568 00000169 C QRY INFO  QID:0x16340cd54df000f3 init with pTrans:0x2
+03/08 12:03:38.493493 00000182 C QRY INFO  QID:0x2000000000000097 init with pTrans:0x2
+03/08 12:03:45.007257 00000166 C QRY INFO  QID:0x16340cd54fc000f4 init with pTrans:0x2
+03/08 12:03:45.011064 00000169 C QRY INFO  QID:0x2000000000000098 init with pTrans:0x2
+03/08 12:03:52.383824 00000169 C QRY INFO  QID:0x16340cd5519000f5 init with pTrans:0x2
+03/08 12:04:00.006363 00000182 C QRY INFO  QID:0x16340cd5537000f6 init with pTrans:0x2
+03/08 12:04:00.010388 00000181 C QRY INFO  QID:0x2000000000000099 init with pTrans:0x2
+03/08 12:04:03.898464 00000182 C QRY WARN  parser QID:0x16340cd5546000f7, table name is specified in sql, ignore the table name in bind param
+03/08 12:04:03.898509 00000182 C QRY INFO  QID:0x16340cd5546000f7 init with pTrans:0x2
+03/08 12:04:03.898726 00000169 C QRY INFO  QID:0x200000000000009a init with pTrans:0x2
+03/08 12:04:07.387549 00000181 C QRY INFO  QID:0x16340cd5554000f8 init with pTrans:0x2
+03/08 12:04:09.496874 00000169 C QRY INFO  QID:0x200000000000009b init with pTrans:0x2
+03/08 12:04:15.004774 00000166 C QRY INFO  QID:0x16340cd5572000f9 init with pTrans:0x2
+03/08 12:04:15.006609 00000169 C QRY INFO  QID:0x200000000000009c init with pTrans:0x2
+03/08 12:04:22.381294 00000169 C QRY INFO  QID:0x16340cd558e000fa init with pTrans:0x2
+03/08 12:04:30.007780 00000169 C QRY INFO  QID:0x16340cd55ac000fb init with pTrans:0x2
+03/08 12:04:30.014437 00000181 C QRY INFO  QID:0x200000000000009d init with pTrans:0x2
+03/08 12:04:33.924390 00000169 C QRY WARN  parser QID:0x16340cd55bc000fc, table name is specified in sql, ignore the table name in bind param
+03/08 12:04:33.924466 00000169 C QRY INFO  QID:0x16340cd55bc000fc init with pTrans:0x2
+03/08 12:04:33.924908 00000166 C QRY INFO  QID:0x200000000000009e init with pTrans:0x2
+03/08 12:04:37.386196 00000166 C QRY INFO  QID:0x16340cd55c9000fd init with pTrans:0x2
+03/08 12:04:40.490857 00000169 C QRY INFO  QID:0x200000000000009f init with pTrans:0x2
+03/08 12:04:45.008003 00000165 C QRY INFO  QID:0x16340cd55e7000fe init with pTrans:0x2
+03/08 12:04:45.014353 00000166 C QRY INFO  QID:0x20000000000000a0 init with pTrans:0x2
+03/08 12:04:52.382343 00000181 C QRY INFO  QID:0x16340cd5604000ff init with pTrans:0x2
+03/08 12:05:00.005107 00000180 C QRY INFO  QID:0x16340cd562100100 init with pTrans:0x2
+03/08 12:05:00.009711 00000180 C QRY INFO  QID:0x20000000000000a1 init with pTrans:0x2
+03/08 12:05:03.947875 00000169 C QRY WARN  parser QID:0x16340cd563100101, table name is specified in sql, ignore the table name in bind param
+03/08 12:05:03.947962 00000169 C QRY INFO  QID:0x16340cd563100101 init with pTrans:0x2
+03/08 12:05:03.948271 00000165 C QRY INFO  QID:0x20000000000000a2 init with pTrans:0x2
+03/08 12:05:07.382148 00000165 C QRY INFO  QID:0x16340cd563e00102 init with pTrans:0x2
+03/08 12:05:11.492217 00000180 C QRY INFO  QID:0x20000000000000a3 init with pTrans:0x2
+03/08 12:05:15.010228 00000181 C QRY INFO  QID:0x16340cd565c00103 init with pTrans:0x2
+03/08 12:05:15.017819 00000165 C QRY INFO  QID:0x20000000000000a4 init with pTrans:0x2
+03/08 12:05:22.382098 00000165 C QRY INFO  QID:0x16340cd567900104 init with pTrans:0x2
+03/08 12:05:30.004990 00000181 C QRY INFO  QID:0x16340cd569700105 init with pTrans:0x2
+03/08 12:05:30.007599 00000180 C QRY INFO  QID:0x20000000000000a5 init with pTrans:0x2
+03/08 12:05:33.968118 00000180 C QRY WARN  parser QID:0x16340cd56a600106, table name is specified in sql, ignore the table name in bind param
+03/08 12:05:33.968162 00000180 C QRY INFO  QID:0x16340cd56a600106 init with pTrans:0x2
+03/08 12:05:33.968523 00000180 C QRY INFO  QID:0x20000000000000a6 init with pTrans:0x2
+03/08 12:05:37.381571 00000165 C QRY INFO  QID:0x16340cd56b300107 init with pTrans:0x2
+03/08 12:05:42.491342 00000180 C QRY INFO  QID:0x20000000000000a7 init with pTrans:0x2
+03/08 12:05:45.004458 00000180 C QRY INFO  QID:0x16340cd56d100108 init with pTrans:0x2
+03/08 12:05:45.006565 00000181 C QRY INFO  QID:0x20000000000000a8 init with pTrans:0x2
+03/08 12:05:52.381254 00000181 C QRY INFO  QID:0x16340cd56ee00109 init with pTrans:0x2
+03/08 12:06:00.006802 00000181 C QRY INFO  QID:0x16340cd570c0010a init with pTrans:0x2
+03/08 12:06:00.009531 00000181 C QRY INFO  QID:0x20000000000000a9 init with pTrans:0x2
+03/08 12:06:03.987904 00000165 C QRY WARN  parser QID:0x16340cd571b0010b, table name is specified in sql, ignore the table name in bind param
+03/08 12:06:03.987950 00000165 C QRY INFO  QID:0x16340cd571b0010b init with pTrans:0x2
+03/08 12:06:03.988262 00000181 C QRY INFO  QID:0x20000000000000aa init with pTrans:0x2
+03/08 12:06:07.382048 00000165 C QRY INFO  QID:0x16340cd57290010c init with pTrans:0x2
+03/08 12:06:13.493874 00000169 C QRY INFO  QID:0x20000000000000ab init with pTrans:0x2
+03/08 12:06:15.003961 00000169 C QRY INFO  QID:0x16340cd57460010d init with pTrans:0x2
+03/08 12:06:15.005845 00000165 C QRY INFO  QID:0x20000000000000ac init with pTrans:0x2
+03/08 12:06:22.381391 00000180 C QRY INFO  QID:0x16340cd57630010e init with pTrans:0x2
+03/08 12:06:30.005560 00000181 C QRY INFO  QID:0x16340cd57810010f init with pTrans:0x2
+03/08 12:06:30.008311 00000180 C QRY INFO  QID:0x20000000000000ad init with pTrans:0x2
+03/08 12:06:34.007186 00000165 C QRY WARN  parser QID:0x16340cd579100110, table name is specified in sql, ignore the table name in bind param
+03/08 12:06:34.007265 00000165 C QRY INFO  QID:0x16340cd579100110 init with pTrans:0x2
+03/08 12:06:34.007628 00000181 C QRY INFO  QID:0x20000000000000ae init with pTrans:0x2
+03/08 12:06:37.383329 00000165 C QRY INFO  QID:0x16340cd579e00111 init with pTrans:0x2
+03/08 12:06:44.491260 00000165 C QRY INFO  QID:0x20000000000000af init with pTrans:0x2
+03/08 12:06:45.003978 00000181 C QRY INFO  QID:0x16340cd57bc00112 init with pTrans:0x2
+03/08 12:06:45.006103 00000180 C QRY INFO  QID:0x20000000000000b0 init with pTrans:0x2
+03/08 12:06:52.386560 00000169 C QRY INFO  QID:0x16340cd57d800113 init with pTrans:0x2
+03/08 12:07:00.010287 00000181 C QRY INFO  QID:0x16340cd57f600114 init with pTrans:0x2
+03/08 12:07:00.023267 00000166 C QRY INFO  QID:0x20000000000000b1 init with pTrans:0x2
+03/08 12:07:04.030049 00000181 C QRY WARN  parser QID:0x16340cd580600115, table name is specified in sql, ignore the table name in bind param
+03/08 12:07:04.030128 00000181 C QRY INFO  QID:0x16340cd580600115 init with pTrans:0x2
+03/08 12:07:04.030811 00000166 C QRY INFO  QID:0x20000000000000b2 init with pTrans:0x2
+03/08 12:07:07.383640 00000169 C QRY INFO  QID:0x16340cd581300116 init with pTrans:0x2
+03/08 12:07:15.006759 00000166 C QRY INFO  QID:0x16340cd583100117 init with pTrans:0x2
+03/08 12:07:15.009389 00000181 C QRY INFO  QID:0x20000000000000b3 init with pTrans:0x2
+03/08 12:07:15.490673 00000180 C QRY INFO  QID:0x20000000000000b4 init with pTrans:0x2
+03/08 12:07:22.385632 00000166 C QRY INFO  QID:0x16340cd584e00118 init with pTrans:0x2
+03/08 12:07:30.005392 00000181 C QRY INFO  QID:0x16340cd586b00119 init with pTrans:0x2
+03/08 12:07:30.010012 00000166 C QRY INFO  QID:0x20000000000000b5 init with pTrans:0x2
+03/08 12:07:34.050966 00000180 C QRY WARN  parser QID:0x16340cd587b0011a, table name is specified in sql, ignore the table name in bind param
+03/08 12:07:34.051054 00000180 C QRY INFO  QID:0x16340cd587b0011a init with pTrans:0x2
+03/08 12:07:34.051610 00000181 C QRY INFO  QID:0x20000000000000b6 init with pTrans:0x2
+03/08 12:07:37.381898 00000181 C QRY INFO  QID:0x16340cd58880011b init with pTrans:0x2
+03/08 12:07:45.005771 00000180 C QRY INFO  QID:0x16340cd58a60011c init with pTrans:0x2
+03/08 12:07:45.010118 00000169 C QRY INFO  QID:0x20000000000000b7 init with pTrans:0x2
+03/08 12:07:46.492074 00000180 C QRY INFO  QID:0x20000000000000b8 init with pTrans:0x2
+03/08 12:07:52.380835 00000180 C QRY INFO  QID:0x16340cd58c30011d init with pTrans:0x2
+03/08 12:08:00.005578 00000180 C QRY INFO  QID:0x16340cd58e10011e init with pTrans:0x2
+03/08 12:08:00.010262 00000180 C QRY INFO  QID:0x20000000000000b9 init with pTrans:0x2
+03/08 12:08:04.073313 00000169 C QRY WARN  parser QID:0x16340cd58f00011f, table name is specified in sql, ignore the table name in bind param
+03/08 12:08:04.073388 00000169 C QRY INFO  QID:0x16340cd58f00011f init with pTrans:0x2
+03/08 12:08:04.074163 00000169 C QRY INFO  QID:0x20000000000000ba init with pTrans:0x2
+03/08 12:08:07.386452 00000169 C QRY INFO  QID:0x16340cd58fd00120 init with pTrans:0x2
+03/08 12:08:15.003831 00000169 C QRY INFO  QID:0x16340cd591b00121 init with pTrans:0x2
+03/08 12:08:15.006142 00000180 C QRY INFO  QID:0x20000000000000bb init with pTrans:0x2
+03/08 12:08:17.490749 00000181 C QRY INFO  QID:0x20000000000000bc init with pTrans:0x2
+03/08 12:08:22.380701 00000166 C QRY INFO  QID:0x16340cd593800122 init with pTrans:0x2
+03/08 12:08:30.004912 00000180 C QRY INFO  QID:0x16340cd595600123 init with pTrans:0x2
+03/08 12:08:30.013141 00000169 C QRY INFO  QID:0x20000000000000bd init with pTrans:0x2
+03/08 12:08:34.092920 00000169 C QRY WARN  parser QID:0x16340cd596600124, table name is specified in sql, ignore the table name in bind param
+03/08 12:08:34.093010 00000169 C QRY INFO  QID:0x16340cd596600124 init with pTrans:0x2
+03/08 12:08:34.093589 00000181 C QRY INFO  QID:0x20000000000000be init with pTrans:0x2
+03/08 12:08:37.381617 00000181 C QRY INFO  QID:0x16340cd597300125 init with pTrans:0x2
+03/08 12:08:45.003781 00000169 C QRY INFO  QID:0x16340cd599000126 init with pTrans:0x2
+03/08 12:08:45.005641 00000181 C QRY INFO  QID:0x20000000000000bf init with pTrans:0x2
+03/08 12:08:48.492595 00000182 C QRY INFO  QID:0x20000000000000c0 init with pTrans:0x2
+03/08 12:08:52.381100 00000182 C QRY INFO  QID:0x16340cd59ad00127 init with pTrans:0x2
+03/08 12:09:00.004845 00000166 C QRY INFO  QID:0x16340cd59cb00128 init with pTrans:0x2
+03/08 12:09:00.007631 00000166 C QRY INFO  QID:0x20000000000000c1 init with pTrans:0x2
+03/08 12:09:04.116992 00000173 C QRY WARN  parser QID:0x16340cd59db00129, table name is specified in sql, ignore the table name in bind param
+03/08 12:09:04.117110 00000173 C QRY INFO  QID:0x16340cd59db00129 init with pTrans:0x2
+03/08 12:09:04.118620 00000173 C QRY INFO  QID:0x20000000000000c2 init with pTrans:0x2
+03/08 12:09:07.387436 00000166 C QRY INFO  QID:0x16340cd59e80012a init with pTrans:0x2
+03/08 12:09:15.005781 00000182 C QRY INFO  QID:0x16340cd5a050012b init with pTrans:0x2
+03/08 12:09:15.009649 00000166 C QRY INFO  QID:0x20000000000000c3 init with pTrans:0x2
+03/08 12:09:18.491030 00000182 C QRY INFO  QID:0x20000000000000c4 init with pTrans:0x2
+03/08 12:09:22.381978 00000181 C QRY INFO  QID:0x16340cd5a220012c init with pTrans:0x2
+03/08 12:09:30.004829 00000173 C QRY INFO  QID:0x16340cd5a400012d init with pTrans:0x2
+03/08 12:09:30.008600 00000173 C QRY INFO  QID:0x20000000000000c5 init with pTrans:0x2
+03/08 12:09:34.137363 00000166 C QRY WARN  parser QID:0x16340cd5a500012e, table name is specified in sql, ignore the table name in bind param
+03/08 12:09:34.137404 00000166 C QRY INFO  QID:0x16340cd5a500012e init with pTrans:0x2
+03/08 12:09:34.137739 00000182 C QRY INFO  QID:0x20000000000000c6 init with pTrans:0x2
+03/08 12:09:37.381216 00000182 C QRY INFO  QID:0x16340cd5a5d0012f init with pTrans:0x2
+03/08 12:09:45.004550 00000166 C QRY INFO  QID:0x16340cd5a7b00130 init with pTrans:0x2
+03/08 12:09:45.006725 00000166 C QRY INFO  QID:0x20000000000000c7 init with pTrans:0x2
+03/08 12:09:49.490571 00000173 C QRY INFO  QID:0x20000000000000c8 init with pTrans:0x2
+03/08 12:09:52.385467 00000182 C QRY INFO  QID:0x16340cd5a9700131 init with pTrans:0x2
+03/08 12:10:00.003069 00000181 C QRY INFO  QID:0x16340cd5ab500132 init with pTrans:0x2
+03/08 12:10:00.005054 00000173 C QRY INFO  QID:0x20000000000000c9 init with pTrans:0x2
+03/08 12:10:04.156363 00000182 C QRY WARN  parser QID:0x16340cd5ac500133, table name is specified in sql, ignore the table name in bind param
+03/08 12:10:04.156408 00000182 C QRY INFO  QID:0x16340cd5ac500133 init with pTrans:0x2
+03/08 12:10:04.156503 00000181 C QRY INFO  QID:0x20000000000000ca init with pTrans:0x2
+03/08 12:10:07.382255 00000173 C QRY INFO  QID:0x16340cd5ad200134 init with pTrans:0x2
+03/08 12:10:15.003052 00000181 C QRY INFO  QID:0x16340cd5af000135 init with pTrans:0x2
+03/08 12:10:15.005195 00000181 C QRY INFO  QID:0x20000000000000cb init with pTrans:0x2
+03/08 12:10:20.490758 00000181 C QRY INFO  QID:0x20000000000000cc init with pTrans:0x2
+03/08 12:10:22.381289 00000182 C QRY INFO  QID:0x16340cd5b0d00136 init with pTrans:0x2
+03/08 12:10:30.004649 00000181 C QRY INFO  QID:0x16340cd5b2a00137 init with pTrans:0x2
+03/08 12:10:30.008667 00000182 C QRY INFO  QID:0x20000000000000cd init with pTrans:0x2
+03/08 12:10:34.175537 00000173 C QRY WARN  parser QID:0x16340cd5b3b00138, table name is specified in sql, ignore the table name in bind param
+03/08 12:10:34.175586 00000173 C QRY INFO  QID:0x16340cd5b3b00138 init with pTrans:0x2
+03/08 12:10:34.175773 00000181 C QRY INFO  QID:0x20000000000000ce init with pTrans:0x2
+03/08 12:10:37.382340 00000182 C QRY INFO  QID:0x16340cd5b4700139 init with pTrans:0x2
+03/08 12:10:45.006777 00000182 C QRY INFO  QID:0x16340cd5b650013a init with pTrans:0x2
+03/08 12:10:45.013184 00000173 C QRY INFO  QID:0x20000000000000cf init with pTrans:0x2
+03/08 12:10:50.491800 00000173 C QRY INFO  QID:0x20000000000000d0 init with pTrans:0x2
+03/08 12:10:52.380932 00000182 C QRY INFO  QID:0x16340cd5b820013b init with pTrans:0x2
+03/08 12:11:00.007353 00000166 C QRY INFO  QID:0x16340cd5ba00013c init with pTrans:0x2
+03/08 12:11:00.010937 00000173 C QRY INFO  QID:0x20000000000000d1 init with pTrans:0x2
+03/08 12:11:04.196144 00000166 C QRY WARN  parser QID:0x16340cd5bb00013d, table name is specified in sql, ignore the table name in bind param
+03/08 12:11:04.196188 00000166 C QRY INFO  QID:0x16340cd5bb00013d init with pTrans:0x2
+03/08 12:11:04.196322 00000181 C QRY INFO  QID:0x20000000000000d2 init with pTrans:0x2
+03/08 12:11:07.381518 00000181 C QRY INFO  QID:0x16340cd5bbc0013e init with pTrans:0x2
+03/08 12:11:15.005656 00000171 C QRY INFO  QID:0x16340cd5bda0013f init with pTrans:0x2
+03/08 12:11:15.008328 00000181 C QRY INFO  QID:0x20000000000000d3 init with pTrans:0x2
+03/08 12:11:21.491085 00000166 C QRY INFO  QID:0x20000000000000d4 init with pTrans:0x2
+03/08 12:11:22.380942 00000166 C QRY INFO  QID:0x16340cd5bf700140 init with pTrans:0x2
+03/08 12:11:30.004426 00000171 C QRY INFO  QID:0x16340cd5c1500141 init with pTrans:0x2
+03/08 12:11:30.006755 00000166 C QRY INFO  QID:0x20000000000000d5 init with pTrans:0x2
+03/08 12:11:34.216487 00000171 C QRY WARN  parser QID:0x16340cd5c2500142, table name is specified in sql, ignore the table name in bind param
+03/08 12:11:34.216530 00000171 C QRY INFO  QID:0x16340cd5c2500142 init with pTrans:0x2
+03/08 12:11:34.216628 00000173 C QRY INFO  QID:0x20000000000000d6 init with pTrans:0x2
+03/08 12:11:37.382650 00000181 C QRY INFO  QID:0x16340cd5c3200143 init with pTrans:0x2
+03/08 12:11:45.004742 00000171 C QRY INFO  QID:0x16340cd5c4f00144 init with pTrans:0x2
+03/08 12:11:45.006825 00000181 C QRY INFO  QID:0x20000000000000d7 init with pTrans:0x2
+03/08 12:11:52.381017 00000166 C QRY INFO  QID:0x16340cd5c6c00145 init with pTrans:0x2
+03/08 12:11:52.495467 00000171 C QRY INFO  QID:0x20000000000000d8 init with pTrans:0x2
+03/08 12:12:00.004264 00000171 C QRY INFO  QID:0x16340cd5c8a00146 init with pTrans:0x2
+03/08 12:12:00.006951 00000173 C QRY INFO  QID:0x20000000000000d9 init with pTrans:0x2
+03/08 12:12:04.236143 00000173 C QRY WARN  parser QID:0x16340cd5c9b00147, table name is specified in sql, ignore the table name in bind param
+03/08 12:12:04.236218 00000173 C QRY INFO  QID:0x16340cd5c9b00147 init with pTrans:0x2
+03/08 12:12:04.236825 00000181 C QRY INFO  QID:0x20000000000000da init with pTrans:0x2
+03/08 12:12:07.381622 00000181 C QRY INFO  QID:0x16340cd5ca700148 init with pTrans:0x2
+03/08 12:12:15.005224 00000166 C QRY INFO  QID:0x16340cd5cc500149 init with pTrans:0x2
+03/08 12:12:15.009267 00000171 C QRY INFO  QID:0x20000000000000db init with pTrans:0x2
+03/08 12:12:22.381249 00000171 C QRY INFO  QID:0x16340cd5ce10014a init with pTrans:0x2
+03/08 12:12:23.490961 00000171 C QRY INFO  QID:0x20000000000000dc init with pTrans:0x2
+03/08 12:12:30.004500 00000166 C QRY INFO  QID:0x16340cd5cff0014b init with pTrans:0x2
+03/08 12:12:30.007121 00000166 C QRY INFO  QID:0x20000000000000dd init with pTrans:0x2
+03/08 12:12:34.258177 00000173 C QRY WARN  parser QID:0x16340cd5d100014c, table name is specified in sql, ignore the table name in bind param
+03/08 12:12:34.258221 00000173 C QRY INFO  QID:0x16340cd5d100014c init with pTrans:0x2
+03/08 12:12:34.258431 00000181 C QRY INFO  QID:0x20000000000000de init with pTrans:0x2
+03/08 12:12:37.381258 00000173 C QRY INFO  QID:0x16340cd5d1c0014d init with pTrans:0x2
+03/08 12:12:45.008045 00000173 C QRY INFO  QID:0x16340cd5d3a0014e init with pTrans:0x2
+03/08 12:12:45.015322 00000166 C QRY INFO  QID:0x20000000000000df init with pTrans:0x2
+03/08 12:12:52.382963 00000182 C QRY INFO  QID:0x16340cd5d570014f init with pTrans:0x2
+03/08 12:12:54.495739 00000173 C QRY INFO  QID:0x20000000000000e0 init with pTrans:0x2
+03/08 12:13:00.003383 00000171 C QRY INFO  QID:0x16340cd5d7400150 init with pTrans:0x2
+03/08 12:13:00.005488 00000181 C QRY INFO  QID:0x20000000000000e1 init with pTrans:0x2
+03/08 12:13:04.281260 00000171 C QRY WARN  parser QID:0x16340cd5d8500151, table name is specified in sql, ignore the table name in bind param
+03/08 12:13:04.281303 00000171 C QRY INFO  QID:0x16340cd5d8500151 init with pTrans:0x2
+03/08 12:13:04.281601 00000173 C QRY INFO  QID:0x20000000000000e2 init with pTrans:0x2
+03/08 12:13:07.380951 00000171 C QRY INFO  QID:0x16340cd5d9100152 init with pTrans:0x2
+03/08 12:13:15.005901 00000182 C QRY INFO  QID:0x16340cd5daf00153 init with pTrans:0x2
+03/08 12:13:15.008424 00000182 C QRY INFO  QID:0x20000000000000e3 init with pTrans:0x2
+03/08 12:13:22.381007 00000181 C QRY INFO  QID:0x16340cd5dcc00154 init with pTrans:0x2
+03/08 12:13:25.491948 00000173 C QRY INFO  QID:0x20000000000000e4 init with pTrans:0x2
+03/08 12:13:30.005682 00000182 C QRY INFO  QID:0x16340cd5dea00155 init with pTrans:0x2
+03/08 12:13:30.010197 00000171 C QRY INFO  QID:0x20000000000000e5 init with pTrans:0x2
+03/08 12:13:34.300067 00000182 C QRY WARN  parser QID:0x16340cd5dfa00156, table name is specified in sql, ignore the table name in bind param
+03/08 12:13:34.300109 00000182 C QRY INFO  QID:0x16340cd5dfa00156 init with pTrans:0x2
+03/08 12:13:34.300266 00000171 C QRY INFO  QID:0x20000000000000e6 init with pTrans:0x2
+03/08 12:13:37.384513 00000173 C QRY INFO  QID:0x16340cd5e0600157 init with pTrans:0x2
+03/08 12:13:45.008153 00000171 C QRY INFO  QID:0x16340cd5e2400158 init with pTrans:0x2
+03/08 12:13:45.015095 00000173 C QRY INFO  QID:0x20000000000000e7 init with pTrans:0x2
+03/08 12:13:52.381984 00000171 C QRY INFO  QID:0x16340cd5e4100159 init with pTrans:0x2
+03/08 12:13:56.491252 00000173 C QRY INFO  QID:0x20000000000000e8 init with pTrans:0x2
+03/08 12:14:00.009452 00000173 C QRY INFO  QID:0x16340cd5e5f0015a init with pTrans:0x2
+03/08 12:14:00.016496 00000181 C QRY INFO  QID:0x20000000000000e9 init with pTrans:0x2
+03/08 12:14:04.322589 00000171 C QRY WARN  parser QID:0x16340cd5e700015b, table name is specified in sql, ignore the table name in bind param
+03/08 12:14:04.322643 00000171 C QRY INFO  QID:0x16340cd5e700015b init with pTrans:0x2
+03/08 12:14:04.322873 00000182 C QRY INFO  QID:0x20000000000000ea init with pTrans:0x2
+03/08 12:14:07.381674 00000173 C QRY INFO  QID:0x16340cd5e7c0015c init with pTrans:0x2
+03/08 12:14:15.005594 00000171 C QRY INFO  QID:0x16340cd5e990015d init with pTrans:0x2
+03/08 12:14:15.010403 00000182 C QRY INFO  QID:0x20000000000000eb init with pTrans:0x2
+03/08 12:14:22.382100 00000182 C QRY INFO  QID:0x16340cd5eb60015e init with pTrans:0x2
+03/08 12:14:27.491529 00000171 C QRY INFO  QID:0x20000000000000ec init with pTrans:0x2
+03/08 12:14:30.006424 00000171 C QRY INFO  QID:0x16340cd5ed40015f init with pTrans:0x2
+03/08 12:14:30.014878 00000181 C QRY INFO  QID:0x20000000000000ed init with pTrans:0x2
+03/08 12:14:34.345476 00000182 C QRY WARN  parser QID:0x16340cd5ee500160, table name is specified in sql, ignore the table name in bind param
+03/08 12:14:34.345614 00000182 C QRY INFO  QID:0x16340cd5ee500160 init with pTrans:0x2
+03/08 12:14:34.346401 00000173 C QRY INFO  QID:0x20000000000000ee init with pTrans:0x2
+03/08 12:14:37.383860 00000173 C QRY INFO  QID:0x16340cd5ef100161 init with pTrans:0x2
+03/08 12:14:45.008645 00000171 C QRY INFO  QID:0x16340cd5f0f00162 init with pTrans:0x2
+03/08 12:14:45.018377 00000173 C QRY INFO  QID:0x20000000000000ef init with pTrans:0x2
+03/08 12:14:52.384960 00000166 C QRY INFO  QID:0x16340cd5f2b00163 init with pTrans:0x2
+03/08 12:14:58.490999 00000165 C QRY INFO  QID:0x20000000000000f0 init with pTrans:0x2
+03/08 12:15:00.007548 00000182 C QRY INFO  QID:0x16340cd5f4900164 init with pTrans:0x2
+03/08 12:15:00.011995 00000171 C QRY INFO  QID:0x20000000000000f1 init with pTrans:0x2
+03/08 12:15:04.372795 00000182 C QRY WARN  parser QID:0x16340cd5f5a00165, table name is specified in sql, ignore the table name in bind param
+03/08 12:15:04.372875 00000182 C QRY INFO  QID:0x16340cd5f5a00165 init with pTrans:0x2
+03/08 12:15:04.374138 00000165 C QRY INFO  QID:0x20000000000000f2 init with pTrans:0x2
+03/08 12:15:07.381352 00000173 C QRY INFO  QID:0x16340cd5f6600166 init with pTrans:0x2
+03/08 12:15:15.006590 00000182 C QRY INFO  QID:0x16340cd5f8400167 init with pTrans:0x2
+03/08 12:15:15.008626 00000173 C QRY INFO  QID:0x20000000000000f3 init with pTrans:0x2
+03/08 12:15:22.381666 00000182 C QRY INFO  QID:0x16340cd5fa100168 init with pTrans:0x2
+03/08 12:15:29.491157 00000182 C QRY INFO  QID:0x20000000000000f4 init with pTrans:0x2
+03/08 12:15:30.004851 00000173 C QRY INFO  QID:0x16340cd5fbe00169 init with pTrans:0x2
+03/08 12:15:30.007103 00000165 C QRY INFO  QID:0x20000000000000f5 init with pTrans:0x2
+03/08 12:15:34.389947 00000171 C QRY WARN  parser QID:0x16340cd5fcf0016a, table name is specified in sql, ignore the table name in bind param
+03/08 12:15:34.389996 00000171 C QRY INFO  QID:0x16340cd5fcf0016a init with pTrans:0x2
+03/08 12:15:34.390179 00000173 C QRY INFO  QID:0x20000000000000f6 init with pTrans:0x2
+03/08 12:15:37.385671 00000171 C QRY INFO  QID:0x16340cd5fdb0016b init with pTrans:0x2
+03/08 12:15:45.003932 00000173 C QRY INFO  QID:0x16340cd5ff90016c init with pTrans:0x2
+03/08 12:15:45.006953 00000165 C QRY INFO  QID:0x20000000000000f7 init with pTrans:0x2
+03/08 12:15:52.385502 00000173 C QRY INFO  QID:0x16340cd60160016d init with pTrans:0x2
+03/08 12:15:59.491795 00000173 C QRY INFO  QID:0x20000000000000f8 init with pTrans:0x2
+03/08 12:16:00.004733 00000173 C QRY INFO  QID:0x16340cd60340016e init with pTrans:0x2
+03/08 12:16:00.007132 00000182 C QRY INFO  QID:0x20000000000000f9 init with pTrans:0x2
+03/08 12:16:04.411854 00000165 C QRY WARN  parser QID:0x16340cd60450016f, table name is specified in sql, ignore the table name in bind param
+03/08 12:16:04.411937 00000165 C QRY INFO  QID:0x16340cd60450016f init with pTrans:0x2
+03/08 12:16:04.413670 00000173 C QRY INFO  QID:0x20000000000000fa init with pTrans:0x2
+03/08 12:16:07.381135 00000182 C QRY INFO  QID:0x16340cd605000170 init with pTrans:0x2
+03/08 12:16:15.005320 00000173 C QRY INFO  QID:0x16340cd606e00171 init with pTrans:0x2
+03/08 12:16:15.008141 00000165 C QRY INFO  QID:0x20000000000000fb init with pTrans:0x2
+03/08 12:16:22.382195 00000171 C QRY INFO  QID:0x16340cd608b00172 init with pTrans:0x2
+03/08 12:16:30.004456 00000182 C QRY INFO  QID:0x16340cd60a900173 init with pTrans:0x2
+03/08 12:16:30.007152 00000165 C QRY INFO  QID:0x20000000000000fc init with pTrans:0x2
+03/08 12:16:30.491524 00000165 C QRY INFO  QID:0x20000000000000fd init with pTrans:0x2
+03/08 12:16:34.431168 00000173 C QRY WARN  parser QID:0x16340cd60ba00174, table name is specified in sql, ignore the table name in bind param
+03/08 12:16:34.431236 00000173 C QRY INFO  QID:0x16340cd60ba00174 init with pTrans:0x2
+03/08 12:16:34.431549 00000182 C QRY INFO  QID:0x20000000000000fe init with pTrans:0x2
+03/08 12:16:37.382025 00000165 C QRY INFO  QID:0x16340cd60c600175 init with pTrans:0x2
+03/08 12:16:45.004992 00000171 C QRY INFO  QID:0x16340cd60e300176 init with pTrans:0x2
+03/08 12:16:45.008426 00000165 C QRY INFO  QID:0x20000000000000ff init with pTrans:0x2
+03/08 12:16:52.381418 00000171 C QRY INFO  QID:0x16340cd610000177 init with pTrans:0x2
+03/08 12:17:00.009144 00000165 C QRY INFO  QID:0x16340cd611e00178 init with pTrans:0x2
+03/08 12:17:00.015155 00000171 C QRY INFO  QID:0x2000000000000100 init with pTrans:0x2
+03/08 12:17:01.493507 00000165 C QRY INFO  QID:0x2000000000000101 init with pTrans:0x2
+03/08 12:17:04.447825 00000182 C QRY WARN  parser QID:0x16340cd612f00179, table name is specified in sql, ignore the table name in bind param
+03/08 12:17:04.447879 00000182 C QRY INFO  QID:0x16340cd612f00179 init with pTrans:0x2
+03/08 12:17:04.448715 00000182 C QRY INFO  QID:0x2000000000000102 init with pTrans:0x2
+03/08 12:17:07.382782 00000173 C QRY INFO  QID:0x16340cd613b0017a init with pTrans:0x2
+03/08 12:17:15.004209 00000173 C QRY INFO  QID:0x16340cd61580017b init with pTrans:0x2
+03/08 12:17:15.006627 00000182 C QRY INFO  QID:0x2000000000000103 init with pTrans:0x2
+03/08 12:17:22.385616 00000173 C QRY INFO  QID:0x16340cd61750017c init with pTrans:0x2
+03/08 12:17:30.004158 00000165 C QRY INFO  QID:0x16340cd61930017d init with pTrans:0x2
+03/08 12:17:30.006367 00000182 C QRY INFO  QID:0x2000000000000104 init with pTrans:0x2
+03/08 12:17:32.490569 00000182 C QRY INFO  QID:0x2000000000000105 init with pTrans:0x2
+03/08 12:17:34.468371 00000180 C QRY WARN  parser QID:0x16340cd61a50017e, table name is specified in sql, ignore the table name in bind param
+03/08 12:17:34.468419 00000180 C QRY INFO  QID:0x16340cd61a50017e init with pTrans:0x2
+03/08 12:17:34.468579 00000165 C QRY INFO  QID:0x2000000000000106 init with pTrans:0x2
+03/08 12:17:37.382988 00000171 C QRY INFO  QID:0x16340cd61b00017f init with pTrans:0x2
+03/08 12:17:45.004559 00000180 C QRY INFO  QID:0x16340cd61ce00180 init with pTrans:0x2
+03/08 12:17:45.006698 00000165 C QRY INFO  QID:0x2000000000000107 init with pTrans:0x2
+03/08 12:17:52.381285 00000165 C QRY INFO  QID:0x16340cd61ea00181 init with pTrans:0x2
+03/08 12:18:00.010965 00000180 C QRY INFO  QID:0x16340cd620800182 init with pTrans:0x2
+03/08 12:18:00.021510 00000165 C QRY INFO  QID:0x2000000000000108 init with pTrans:0x2
+03/08 12:18:03.491263 00000171 C QRY INFO  QID:0x2000000000000109 init with pTrans:0x2
+03/08 12:18:04.499114 00000171 C QRY WARN  parser QID:0x16340cd621a00183, table name is specified in sql, ignore the table name in bind param
+03/08 12:18:04.499288 00000171 C QRY INFO  QID:0x16340cd621a00183 init with pTrans:0x2
+03/08 12:18:04.501069 00000182 C QRY INFO  QID:0x200000000000010a init with pTrans:0x2
+03/08 12:18:07.381027 00000180 C QRY INFO  QID:0x16340cd622500184 init with pTrans:0x2
+03/08 12:18:15.008333 00000182 C QRY INFO  QID:0x16340cd624300185 init with pTrans:0x2
+03/08 12:18:15.013392 00000180 C QRY INFO  QID:0x200000000000010b init with pTrans:0x2
+03/08 12:18:22.381572 00000182 C QRY INFO  QID:0x16340cd626000186 init with pTrans:0x2
+03/08 12:18:30.005501 00000171 C QRY INFO  QID:0x16340cd627d00187 init with pTrans:0x2
+03/08 12:18:30.008225 00000171 C QRY INFO  QID:0x200000000000010c init with pTrans:0x2
+03/08 12:18:34.491438 00000171 C QRY INFO  QID:0x200000000000010d init with pTrans:0x2
+03/08 12:18:34.514058 00000182 C QRY WARN  parser QID:0x16340cd628f00188, table name is specified in sql, ignore the table name in bind param
+03/08 12:18:34.514120 00000182 C QRY INFO  QID:0x16340cd628f00188 init with pTrans:0x2
+03/08 12:18:34.514579 00000182 C QRY INFO  QID:0x200000000000010e init with pTrans:0x2
+03/08 12:18:37.380387 00000171 C QRY INFO  QID:0x16340cd629a00189 init with pTrans:0x2
+03/08 12:18:45.004096 00000180 C QRY INFO  QID:0x16340cd62b80018a init with pTrans:0x2
+03/08 12:18:45.006570 00000171 C QRY INFO  QID:0x200000000000010f init with pTrans:0x2
+03/08 12:18:52.381351 00000180 C QRY INFO  QID:0x16340cd62d50018b init with pTrans:0x2
+03/08 12:19:00.005004 00000165 C QRY INFO  QID:0x16340cd62f30018c init with pTrans:0x2
+03/08 12:19:00.007577 00000165 C QRY INFO  QID:0x2000000000000110 init with pTrans:0x2
+03/08 12:19:04.534784 00000171 C QRY WARN  parser QID:0x16340cd63040018d, table name is specified in sql, ignore the table name in bind param
+03/08 12:19:04.534865 00000171 C QRY INFO  QID:0x16340cd63040018d init with pTrans:0x2
+03/08 12:19:04.535396 00000171 C QRY INFO  QID:0x2000000000000111 init with pTrans:0x2
+03/08 12:19:05.493026 00000165 C QRY INFO  QID:0x2000000000000112 init with pTrans:0x2
+03/08 12:19:07.382691 00000171 C QRY INFO  QID:0x16340cd630f0018e init with pTrans:0x2
+03/08 12:19:15.005460 00000173 C QRY INFO  QID:0x16340cd632d0018f init with pTrans:0x2
+03/08 12:19:15.010265 00000180 C QRY INFO  QID:0x2000000000000113 init with pTrans:0x2
+03/08 12:19:22.381978 00000173 C QRY INFO  QID:0x16340cd634a00190 init with pTrans:0x2
+03/08 12:19:30.004401 00000173 C QRY INFO  QID:0x16340cd636800191 init with pTrans:0x2
+03/08 12:19:30.006724 00000180 C QRY INFO  QID:0x2000000000000114 init with pTrans:0x2
+03/08 12:19:34.552584 00000180 C QRY WARN  parser QID:0x16340cd637a00192, table name is specified in sql, ignore the table name in bind param
+03/08 12:19:34.552631 00000180 C QRY INFO  QID:0x16340cd637a00192 init with pTrans:0x2
+03/08 12:19:34.552841 00000173 C QRY INFO  QID:0x2000000000000115 init with pTrans:0x2
+03/08 12:19:36.491131 00000171 C QRY INFO  QID:0x2000000000000116 init with pTrans:0x2
+03/08 12:19:37.381978 00000173 C QRY INFO  QID:0x16340cd638500193 init with pTrans:0x2
+03/08 12:19:45.005248 00000173 C QRY INFO  QID:0x16340cd63a200194 init with pTrans:0x2
+03/08 12:19:45.007582 00000173 C QRY INFO  QID:0x2000000000000117 init with pTrans:0x2
+03/08 12:19:52.381808 00000171 C QRY INFO  QID:0x16340cd63bf00195 init with pTrans:0x2
+03/08 12:20:00.011178 00000173 C QRY INFO  QID:0x16340cd63dd00196 init with pTrans:0x2
+03/08 12:20:00.022290 00000171 C QRY INFO  QID:0x2000000000000118 init with pTrans:0x2
+03/08 12:20:04.571957 00000171 C QRY WARN  parser QID:0x16340cd63ef00197, table name is specified in sql, ignore the table name in bind param
+03/08 12:20:04.572015 00000171 C QRY INFO  QID:0x16340cd63ef00197 init with pTrans:0x2
+03/08 12:20:04.572315 00000180 C QRY INFO  QID:0x2000000000000119 init with pTrans:0x2
+03/08 12:20:07.381897 00000171 C QRY INFO  QID:0x16340cd63fa00198 init with pTrans:0x2
+03/08 12:20:07.491415 00000180 C QRY INFO  QID:0x200000000000011a init with pTrans:0x2
+03/08 12:20:15.004919 00000173 C QRY INFO  QID:0x16340cd641800199 init with pTrans:0x2
+03/08 12:20:15.007122 00000171 C QRY INFO  QID:0x200000000000011b init with pTrans:0x2
+03/08 12:20:22.381612 00000173 C QRY INFO  QID:0x16340cd64340019a init with pTrans:0x2
+03/08 12:20:30.011717 00000173 C QRY INFO  QID:0x16340cd64520019b init with pTrans:0x2
+03/08 12:20:30.021690 00000171 C QRY INFO  QID:0x200000000000011c init with pTrans:0x2
+03/08 12:20:34.594733 00000182 C QRY WARN  parser QID:0x16340cd64640019c, table name is specified in sql, ignore the table name in bind param
+03/08 12:20:34.594800 00000182 C QRY INFO  QID:0x16340cd64640019c init with pTrans:0x2
+03/08 12:20:34.594874 00000180 C QRY INFO  QID:0x200000000000011d init with pTrans:0x2
+03/08 12:20:37.381762 00000180 C QRY INFO  QID:0x16340cd646f0019d init with pTrans:0x2
+03/08 12:20:38.491550 00000180 C QRY INFO  QID:0x200000000000011e init with pTrans:0x2
+03/08 12:20:45.003988 00000173 C QRY INFO  QID:0x16340cd648d0019e init with pTrans:0x2
+03/08 12:20:45.006203 00000180 C QRY INFO  QID:0x200000000000011f init with pTrans:0x2
+03/08 12:20:52.385368 00000173 C QRY INFO  QID:0x16340cd64aa0019f init with pTrans:0x2
+03/08 12:21:00.004927 00000173 C QRY INFO  QID:0x16340cd64c7001a0 init with pTrans:0x2
+03/08 12:21:00.007836 00000173 C QRY INFO  QID:0x2000000000000120 init with pTrans:0x2
+03/08 12:21:04.614491 00000173 C QRY WARN  parser QID:0x16340cd64d9001a1, table name is specified in sql, ignore the table name in bind param
+03/08 12:21:04.614567 00000173 C QRY INFO  QID:0x16340cd64d9001a1 init with pTrans:0x2
+03/08 12:21:04.615018 00000169 C QRY INFO  QID:0x2000000000000121 init with pTrans:0x2
+03/08 12:21:07.382218 00000182 C QRY INFO  QID:0x16340cd64e4001a2 init with pTrans:0x2
+03/08 12:21:09.491393 00000169 C QRY INFO  QID:0x2000000000000122 init with pTrans:0x2
+03/08 12:21:15.004656 00000173 C QRY INFO  QID:0x16340cd6502001a3 init with pTrans:0x2
+03/08 12:21:15.007691 00000182 C QRY INFO  QID:0x2000000000000123 init with pTrans:0x2
+03/08 12:21:22.383086 00000169 C QRY INFO  QID:0x16340cd651f001a4 init with pTrans:0x2
+03/08 12:21:30.004264 00000169 C QRY INFO  QID:0x16340cd653d001a5 init with pTrans:0x2
+03/08 12:21:30.006301 00000182 C QRY INFO  QID:0x2000000000000124 init with pTrans:0x2
+03/08 12:21:34.632236 00000169 C QRY WARN  parser QID:0x16340cd654f001a6, table name is specified in sql, ignore the table name in bind param
+03/08 12:21:34.632278 00000169 C QRY INFO  QID:0x16340cd654f001a6 init with pTrans:0x2
+03/08 12:21:34.632931 00000169 C QRY INFO  QID:0x2000000000000125 init with pTrans:0x2
+03/08 12:21:37.382036 00000171 C QRY INFO  QID:0x16340cd6559001a7 init with pTrans:0x2
+03/08 12:21:40.491111 00000180 C QRY INFO  QID:0x2000000000000126 init with pTrans:0x2
+03/08 12:21:45.004797 00000180 C QRY INFO  QID:0x16340cd6577001a8 init with pTrans:0x2
+03/08 12:21:45.007944 00000171 C QRY INFO  QID:0x2000000000000127 init with pTrans:0x2
+03/08 12:21:52.382022 00000169 C QRY INFO  QID:0x16340cd6594001a9 init with pTrans:0x2
+03/08 12:22:00.004366 00000173 C QRY INFO  QID:0x16340cd65b2001aa init with pTrans:0x2
+03/08 12:22:00.006911 00000171 C QRY INFO  QID:0x2000000000000128 init with pTrans:0x2
+03/08 12:22:04.652622 00000180 C QRY WARN  parser QID:0x16340cd65c4001ab, table name is specified in sql, ignore the table name in bind param
+03/08 12:22:04.652670 00000180 C QRY INFO  QID:0x16340cd65c4001ab init with pTrans:0x2
+03/08 12:22:04.652904 00000169 C QRY INFO  QID:0x2000000000000129 init with pTrans:0x2
+03/08 12:22:07.381444 00000169 C QRY INFO  QID:0x16340cd65cf001ac init with pTrans:0x2
+03/08 12:22:11.490903 00000171 C QRY INFO  QID:0x200000000000012a init with pTrans:0x2
+03/08 12:22:15.005693 00000169 C QRY INFO  QID:0x16340cd65ec001ad init with pTrans:0x2
+03/08 12:22:15.008447 00000180 C QRY INFO  QID:0x200000000000012b init with pTrans:0x2
+03/08 12:22:22.381344 00000169 C QRY INFO  QID:0x16340cd6609001ae init with pTrans:0x2
+03/08 12:22:30.004148 00000171 C QRY INFO  QID:0x16340cd6627001af init with pTrans:0x2
+03/08 12:22:30.006428 00000169 C QRY INFO  QID:0x200000000000012c init with pTrans:0x2
+03/08 12:22:34.672091 00000169 C QRY WARN  parser QID:0x16340cd6639001b0, table name is specified in sql, ignore the table name in bind param
+03/08 12:22:34.672132 00000169 C QRY INFO  QID:0x16340cd6639001b0 init with pTrans:0x2
+03/08 12:22:34.672290 00000173 C QRY INFO  QID:0x200000000000012d init with pTrans:0x2
+03/08 12:22:37.382513 00000180 C QRY INFO  QID:0x16340cd6644001b1 init with pTrans:0x2
+03/08 12:22:42.492079 00000173 C QRY INFO  QID:0x200000000000012e init with pTrans:0x2
+03/08 12:22:45.005116 00000180 C QRY INFO  QID:0x16340cd6662001b2 init with pTrans:0x2
+03/08 12:22:45.008504 00000169 C QRY INFO  QID:0x200000000000012f init with pTrans:0x2
+03/08 12:22:52.382196 00000180 C QRY INFO  QID:0x16340cd667e001b3 init with pTrans:0x2
+03/08 12:23:00.005680 00000165 C QRY INFO  QID:0x16340cd669c001b4 init with pTrans:0x2
+03/08 12:23:00.010849 00000171 C QRY INFO  QID:0x2000000000000130 init with pTrans:0x2
+03/08 12:23:04.694784 00000165 C QRY WARN  parser QID:0x16340cd66ae001b5, table name is specified in sql, ignore the table name in bind param
+03/08 12:23:04.694849 00000165 C QRY INFO  QID:0x16340cd66ae001b5 init with pTrans:0x2
+03/08 12:23:04.695006 00000173 C QRY INFO  QID:0x2000000000000131 init with pTrans:0x2
+03/08 12:23:07.381599 00000171 C QRY INFO  QID:0x16340cd66b9001b6 init with pTrans:0x2
+03/08 12:23:13.491252 00000165 C QRY INFO  QID:0x2000000000000132 init with pTrans:0x2
+03/08 12:23:15.007344 00000173 C QRY INFO  QID:0x16340cd66d7001b7 init with pTrans:0x2
+03/08 12:23:15.010983 00000180 C QRY INFO  QID:0x2000000000000133 init with pTrans:0x2
+03/08 12:23:22.386458 00000173 C QRY INFO  QID:0x16340cd66f4001b8 init with pTrans:0x2
+03/08 12:23:30.004884 00000165 C QRY INFO  QID:0x16340cd6711001b9 init with pTrans:0x2
+03/08 12:23:30.007576 00000165 C QRY INFO  QID:0x2000000000000134 init with pTrans:0x2
+03/08 12:23:34.718653 00000180 C QRY WARN  parser QID:0x16340cd6724001ba, table name is specified in sql, ignore the table name in bind param
+03/08 12:23:34.718714 00000180 C QRY INFO  QID:0x16340cd6724001ba init with pTrans:0x2
+03/08 12:23:34.719156 00000171 C QRY INFO  QID:0x2000000000000135 init with pTrans:0x2
+03/08 12:23:37.384757 00000165 C QRY INFO  QID:0x16340cd672e001bb init with pTrans:0x2
+03/08 12:23:44.491216 00000171 C QRY INFO  QID:0x2000000000000136 init with pTrans:0x2
+03/08 12:23:45.004882 00000165 C QRY INFO  QID:0x16340cd674c001bc init with pTrans:0x2
+03/08 12:23:45.006973 00000173 C QRY INFO  QID:0x2000000000000137 init with pTrans:0x2
+03/08 12:23:52.381903 00000180 C QRY INFO  QID:0x16340cd6769001bd init with pTrans:0x2
+03/08 12:24:00.004487 00000165 C QRY INFO  QID:0x16340cd6787001be init with pTrans:0x2
+03/08 12:24:00.007564 00000180 C QRY INFO  QID:0x2000000000000138 init with pTrans:0x2
+03/08 12:24:04.740998 00000165 C QRY WARN  parser QID:0x16340cd6799001bf, table name is specified in sql, ignore the table name in bind param
+03/08 12:24:04.741074 00000165 C QRY INFO  QID:0x16340cd6799001bf init with pTrans:0x2
+03/08 12:24:04.741248 00000171 C QRY INFO  QID:0x2000000000000139 init with pTrans:0x2
+03/08 12:24:07.383952 00000171 C QRY INFO  QID:0x16340cd67a3001c0 init with pTrans:0x2
+03/08 12:24:15.004315 00000173 C QRY INFO  QID:0x16340cd67c1001c1 init with pTrans:0x2
+03/08 12:24:15.006232 00000180 C QRY INFO  QID:0x200000000000013a init with pTrans:0x2
+03/08 12:24:15.493890 00000173 C QRY INFO  QID:0x200000000000013b init with pTrans:0x2
+03/08 12:24:22.382575 00000180 C QRY INFO  QID:0x16340cd67de001c2 init with pTrans:0x2
+03/08 12:24:30.005733 00000173 C QRY INFO  QID:0x16340cd67fc001c3 init with pTrans:0x2
+03/08 12:24:30.008090 00000169 C QRY INFO  QID:0x200000000000013c init with pTrans:0x2
+03/08 12:24:34.760881 00000169 C QRY WARN  parser QID:0x16340cd680e001c4, table name is specified in sql, ignore the table name in bind param
+03/08 12:24:34.760929 00000169 C QRY INFO  QID:0x16340cd680e001c4 init with pTrans:0x2
+03/08 12:24:34.761275 00000171 C QRY INFO  QID:0x200000000000013d init with pTrans:0x2
+03/08 12:24:37.381382 00000171 C QRY INFO  QID:0x16340cd6819001c5 init with pTrans:0x2
+03/08 12:24:45.005492 00000180 C QRY INFO  QID:0x16340cd6836001c6 init with pTrans:0x2
+03/08 12:24:45.008278 00000173 C QRY INFO  QID:0x200000000000013e init with pTrans:0x2
+03/08 12:24:46.491439 00000171 C QRY INFO  QID:0x200000000000013f init with pTrans:0x2
+03/08 12:24:52.381178 00000171 C QRY INFO  QID:0x16340cd6853001c7 init with pTrans:0x2
+03/08 12:25:00.004849 00000166 C QRY INFO  QID:0x16340cd6871001c8 init with pTrans:0x2
+03/08 12:25:00.009258 00000181 C QRY INFO  QID:0x2000000000000140 init with pTrans:0x2
+03/08 12:25:04.786855 00000180 C QRY WARN  parser QID:0x16340cd6884001c9, table name is specified in sql, ignore the table name in bind param
+03/08 12:25:04.787021 00000180 C QRY INFO  QID:0x16340cd6884001c9 init with pTrans:0x2
+03/08 12:25:04.789239 00000180 C QRY INFO  QID:0x2000000000000141 init with pTrans:0x2
+03/08 12:25:07.383837 00000173 C QRY INFO  QID:0x16340cd688e001ca init with pTrans:0x2
+03/08 12:25:15.007042 00000180 C QRY INFO  QID:0x16340cd68ab001cb init with pTrans:0x2
+03/08 12:25:15.010165 00000166 C QRY INFO  QID:0x2000000000000142 init with pTrans:0x2
+03/08 12:25:17.494755 00000166 C QRY INFO  QID:0x2000000000000143 init with pTrans:0x2
+03/08 12:25:22.381600 00000180 C QRY INFO  QID:0x16340cd68c8001cc init with pTrans:0x2
+03/08 12:25:30.003994 00000169 C QRY INFO  QID:0x16340cd68e6001cd init with pTrans:0x2
+03/08 12:25:30.006446 00000166 C QRY INFO  QID:0x2000000000000144 init with pTrans:0x2
+03/08 12:25:34.805812 00000166 C QRY WARN  parser QID:0x16340cd68f9001ce, table name is specified in sql, ignore the table name in bind param
+03/08 12:25:34.805862 00000166 C QRY INFO  QID:0x16340cd68f9001ce init with pTrans:0x2
+03/08 12:25:34.806129 00000180 C QRY INFO  QID:0x2000000000000145 init with pTrans:0x2
+03/08 12:25:37.379906 00000181 C QRY INFO  QID:0x16340cd6903001cf init with pTrans:0x2
+03/08 12:25:45.003755 00000180 C QRY INFO  QID:0x16340cd6921001d0 init with pTrans:0x2
+03/08 12:25:45.005699 00000173 C QRY INFO  QID:0x2000000000000146 init with pTrans:0x2
+03/08 12:25:48.490057 00000181 C QRY INFO  QID:0x2000000000000147 init with pTrans:0x2
+03/08 12:25:52.380938 00000166 C QRY INFO  QID:0x16340cd693d001d1 init with pTrans:0x2
+03/08 12:26:00.007518 00000173 C QRY INFO  QID:0x16340cd695b001d2 init with pTrans:0x2
+03/08 12:26:00.011423 00000166 C QRY INFO  QID:0x2000000000000148 init with pTrans:0x2
+03/08 12:26:04.831378 00000180 C QRY WARN  parser QID:0x16340cd696e001d3, table name is specified in sql, ignore the table name in bind param
+03/08 12:26:04.831489 00000180 C QRY INFO  QID:0x16340cd696e001d3 init with pTrans:0x2
+03/08 12:26:04.832764 00000180 C QRY INFO  QID:0x2000000000000149 init with pTrans:0x2
+03/08 12:26:07.382727 00000181 C QRY INFO  QID:0x16340cd6978001d4 init with pTrans:0x2
+03/08 12:26:15.005156 00000180 C QRY INFO  QID:0x16340cd6996001d5 init with pTrans:0x2
+03/08 12:26:15.007437 00000180 C QRY INFO  QID:0x200000000000014a init with pTrans:0x2
+03/08 12:26:18.491212 00000180 C QRY INFO  QID:0x200000000000014b init with pTrans:0x2
+03/08 12:26:22.381602 00000181 C QRY INFO  QID:0x16340cd69b3001d6 init with pTrans:0x2
+03/08 12:26:30.008230 00000181 C QRY INFO  QID:0x16340cd69d0001d7 init with pTrans:0x2
+03/08 12:26:30.012332 00000181 C QRY INFO  QID:0x200000000000014c init with pTrans:0x2
+03/08 12:26:34.854073 00000180 C QRY WARN  parser QID:0x16340cd69e3001d8, table name is specified in sql, ignore the table name in bind param
+03/08 12:26:34.854151 00000180 C QRY INFO  QID:0x16340cd69e3001d8 init with pTrans:0x2
+03/08 12:26:34.854695 00000180 C QRY INFO  QID:0x200000000000014d init with pTrans:0x2
+03/08 12:26:37.381152 00000173 C QRY INFO  QID:0x16340cd69ed001d9 init with pTrans:0x2
+03/08 12:26:45.005805 00000180 C QRY INFO  QID:0x16340cd6a0b001da init with pTrans:0x2
+03/08 12:26:45.010194 00000173 C QRY INFO  QID:0x200000000000014e init with pTrans:0x2
+03/08 12:26:49.492106 00000173 C QRY INFO  QID:0x200000000000014f init with pTrans:0x2
+03/08 12:26:52.383331 00000180 C QRY INFO  QID:0x16340cd6a28001db init with pTrans:0x2
+03/08 12:27:00.005658 00000180 C QRY INFO  QID:0x16340cd6a46001dc init with pTrans:0x2
+03/08 12:27:00.012149 00000171 C QRY INFO  QID:0x2000000000000150 init with pTrans:0x2
+03/08 12:27:04.871937 00000166 C QRY WARN  parser QID:0x16340cd6a59001dd, table name is specified in sql, ignore the table name in bind param
+03/08 12:27:04.871988 00000166 C QRY INFO  QID:0x16340cd6a59001dd init with pTrans:0x2
+03/08 12:27:04.872169 00000180 C QRY INFO  QID:0x2000000000000151 init with pTrans:0x2
+03/08 12:27:07.381655 00000166 C QRY INFO  QID:0x16340cd6a62001de init with pTrans:0x2
+03/08 12:27:15.004505 00000169 C QRY INFO  QID:0x16340cd6a80001df init with pTrans:0x2
+03/08 12:27:15.007333 00000180 C QRY INFO  QID:0x2000000000000152 init with pTrans:0x2
+03/08 12:27:20.491120 00000166 C QRY INFO  QID:0x2000000000000153 init with pTrans:0x2
+03/08 12:27:22.384163 00000169 C QRY INFO  QID:0x16340cd6a9d001e0 init with pTrans:0x2
+03/08 12:27:30.003689 00000165 C QRY INFO  QID:0x16340cd6abb001e1 init with pTrans:0x2
+03/08 12:27:30.005842 00000166 C QRY INFO  QID:0x2000000000000154 init with pTrans:0x2
+03/08 12:27:34.895214 00000169 C QRY WARN  parser QID:0x16340cd6ace001e2, table name is specified in sql, ignore the table name in bind param
+03/08 12:27:34.895313 00000169 C QRY INFO  QID:0x16340cd6ace001e2 init with pTrans:0x2
+03/08 12:27:34.896038 00000165 C QRY INFO  QID:0x2000000000000155 init with pTrans:0x2
+03/08 12:27:37.385854 00000180 C QRY INFO  QID:0x16340cd6ad8001e3 init with pTrans:0x2
+03/08 12:27:45.005893 00000169 C QRY INFO  QID:0x16340cd6af5001e4 init with pTrans:0x2
+03/08 12:27:45.010396 00000180 C QRY INFO  QID:0x2000000000000156 init with pTrans:0x2
+03/08 12:27:51.491817 00000166 C QRY INFO  QID:0x2000000000000157 init with pTrans:0x2
+03/08 12:27:52.381182 00000180 C QRY INFO  QID:0x16340cd6b12001e5 init with pTrans:0x2
+03/08 12:28:00.012515 00000180 C QRY INFO  QID:0x16340cd6b30001e6 init with pTrans:0x2
+03/08 12:28:00.023602 00000165 C QRY INFO  QID:0x2000000000000158 init with pTrans:0x2
+03/08 12:28:04.918309 00000166 C QRY WARN  parser QID:0x16340cd6b43001e7, table name is specified in sql, ignore the table name in bind param
+03/08 12:28:04.918436 00000166 C QRY INFO  QID:0x16340cd6b43001e7 init with pTrans:0x2
+03/08 12:28:04.918853 00000169 C QRY INFO  QID:0x2000000000000159 init with pTrans:0x2
+03/08 12:28:07.381312 00000165 C QRY INFO  QID:0x16340cd6b4d001e8 init with pTrans:0x2
+03/08 12:28:15.005491 00000165 C QRY INFO  QID:0x16340cd6b6b001e9 init with pTrans:0x2
+03/08 12:28:15.007997 00000169 C QRY INFO  QID:0x200000000000015a init with pTrans:0x2
+03/08 12:28:22.383170 00000180 C QRY INFO  QID:0x16340cd6b87001ea init with pTrans:0x2
+03/08 12:28:22.491505 00000180 C QRY INFO  QID:0x200000000000015b init with pTrans:0x2
+03/08 12:28:30.006018 00000180 C QRY INFO  QID:0x16340cd6ba5001eb init with pTrans:0x2
+03/08 12:28:30.008194 00000166 C QRY INFO  QID:0x200000000000015c init with pTrans:0x2
+03/08 12:28:34.947866 00000165 C QRY WARN  parser QID:0x16340cd6bb9001ec, table name is specified in sql, ignore the table name in bind param
+03/08 12:28:34.948018 00000165 C QRY INFO  QID:0x16340cd6bb9001ec init with pTrans:0x2
+03/08 12:28:34.949476 00000180 C QRY INFO  QID:0x200000000000015d init with pTrans:0x2
+03/08 12:28:37.381533 00000169 C QRY INFO  QID:0x16340cd6bc2001ed init with pTrans:0x2
+03/08 12:28:45.004416 00000169 C QRY INFO  QID:0x16340cd6be0001ee init with pTrans:0x2
+03/08 12:28:45.006551 00000180 C QRY INFO  QID:0x200000000000015e init with pTrans:0x2
+03/08 12:28:52.386108 00000166 C QRY INFO  QID:0x16340cd6bfd001ef init with pTrans:0x2
+03/08 12:28:53.492139 00000165 C QRY INFO  QID:0x200000000000015f init with pTrans:0x2
+03/08 12:29:00.011424 00000166 C QRY INFO  QID:0x16340cd6c1a001f0 init with pTrans:0x2
+03/08 12:29:00.023897 00000182 C QRY INFO  QID:0x2000000000000160 init with pTrans:0x2
+03/08 12:29:04.967646 00000171 C QRY WARN  parser QID:0x16340cd6c2e001f1, table name is specified in sql, ignore the table name in bind param
+03/08 12:29:04.967713 00000171 C QRY INFO  QID:0x16340cd6c2e001f1 init with pTrans:0x2
+03/08 12:29:04.968139 00000171 C QRY INFO  QID:0x2000000000000161 init with pTrans:0x2
+03/08 12:29:07.381671 00000182 C QRY INFO  QID:0x16340cd6c37001f2 init with pTrans:0x2
+03/08 12:29:15.004919 00000173 C QRY INFO  QID:0x16340cd6c55001f3 init with pTrans:0x2
+03/08 12:29:15.007195 00000173 C QRY INFO  QID:0x2000000000000162 init with pTrans:0x2
+03/08 12:29:22.381406 00000171 C QRY INFO  QID:0x16340cd6c72001f4 init with pTrans:0x2
+03/08 12:29:24.496207 00000182 C QRY INFO  QID:0x2000000000000163 init with pTrans:0x2
+03/08 12:29:30.004952 00000180 C QRY INFO  QID:0x16340cd6c90001f5 init with pTrans:0x2
+03/08 12:29:30.007117 00000171 C QRY INFO  QID:0x2000000000000164 init with pTrans:0x2
+03/08 12:29:34.989662 00000171 C QRY WARN  parser QID:0x16340cd6ca3001f6, table name is specified in sql, ignore the table name in bind param
+03/08 12:29:34.989705 00000171 C QRY INFO  QID:0x16340cd6ca3001f6 init with pTrans:0x2
+03/08 12:29:34.989972 00000180 C QRY INFO  QID:0x2000000000000165 init with pTrans:0x2
+03/08 12:29:37.381815 00000171 C QRY INFO  QID:0x16340cd6cac001f7 init with pTrans:0x2
+03/08 12:29:45.005137 00000182 C QRY INFO  QID:0x16340cd6cca001f8 init with pTrans:0x2
+03/08 12:29:45.007434 00000173 C QRY INFO  QID:0x2000000000000166 init with pTrans:0x2
+03/08 12:29:52.384186 00000182 C QRY INFO  QID:0x16340cd6ce7001f9 init with pTrans:0x2
+03/08 12:29:55.490805 00000180 C QRY INFO  QID:0x2000000000000167 init with pTrans:0x2
+03/08 12:30:00.004486 00000182 C QRY INFO  QID:0x16340cd6d05001fa init with pTrans:0x2
+03/08 12:30:00.007142 00000180 C QRY INFO  QID:0x2000000000000168 init with pTrans:0x2
+03/08 12:30:05.014081 00000171 C QRY WARN  parser QID:0x16340cd6d18001fb, table name is specified in sql, ignore the table name in bind param
+03/08 12:30:05.014193 00000171 C QRY INFO  QID:0x16340cd6d18001fb init with pTrans:0x2
+03/08 12:30:05.014919 00000182 C QRY INFO  QID:0x2000000000000169 init with pTrans:0x2
+03/08 12:30:07.382298 00000171 C QRY INFO  QID:0x16340cd6d22001fc init with pTrans:0x2
+03/08 12:30:15.003987 00000171 C QRY INFO  QID:0x16340cd6d3f001fd init with pTrans:0x2
+03/08 12:30:15.006150 00000182 C QRY INFO  QID:0x200000000000016a init with pTrans:0x2
+03/08 12:30:22.383813 00000180 C QRY INFO  QID:0x16340cd6d5c001fe init with pTrans:0x2
+03/08 12:30:26.491276 00000182 C QRY INFO  QID:0x200000000000016b init with pTrans:0x2
+03/08 12:30:30.004779 00000173 C QRY INFO  QID:0x16340cd6d7a001ff init with pTrans:0x2
+03/08 12:30:30.007318 00000180 C QRY INFO  QID:0x200000000000016c init with pTrans:0x2
+03/08 12:30:35.033922 00000171 C QRY WARN  parser QID:0x16340cd6d8e00200, table name is specified in sql, ignore the table name in bind param
+03/08 12:30:35.033966 00000171 C QRY INFO  QID:0x16340cd6d8e00200 init with pTrans:0x2
+03/08 12:30:35.034052 00000180 C QRY INFO  QID:0x200000000000016d init with pTrans:0x2
+03/08 12:30:37.386751 00000182 C QRY INFO  QID:0x16340cd6d9700201 init with pTrans:0x2
+03/08 12:30:45.005604 00000173 C QRY INFO  QID:0x16340cd6db500202 init with pTrans:0x2
+03/08 12:30:45.008198 00000173 C QRY INFO  QID:0x200000000000016e init with pTrans:0x2
+03/08 12:30:52.382024 00000173 C QRY INFO  QID:0x16340cd6dd100203 init with pTrans:0x2
+03/08 12:30:57.491411 00000171 C QRY INFO  QID:0x200000000000016f init with pTrans:0x2
+03/08 12:31:00.005880 00000171 C QRY INFO  QID:0x16340cd6def00204 init with pTrans:0x2
+03/08 12:31:00.008656 00000173 C QRY INFO  QID:0x2000000000000170 init with pTrans:0x2
+03/08 12:31:05.060681 00000182 C QRY WARN  parser QID:0x16340cd6e0300205, table name is specified in sql, ignore the table name in bind param
+03/08 12:31:05.060850 00000182 C QRY INFO  QID:0x16340cd6e0300205 init with pTrans:0x2
+03/08 12:31:05.062694 00000171 C QRY INFO  QID:0x2000000000000171 init with pTrans:0x2
+03/08 12:31:07.381191 00000169 C QRY INFO  QID:0x16340cd6e0c00206 init with pTrans:0x2
+03/08 12:31:15.010250 00000182 C QRY INFO  QID:0x16340cd6e2a00207 init with pTrans:0x2
+03/08 12:31:15.019863 00000169 C QRY INFO  QID:0x2000000000000172 init with pTrans:0x2
+03/08 12:31:22.384567 00000171 C QRY INFO  QID:0x16340cd6e4700208 init with pTrans:0x2
+03/08 12:31:28.490393 00000173 C QRY INFO  QID:0x2000000000000173 init with pTrans:0x2
+03/08 12:31:30.004046 00000171 C QRY INFO  QID:0x16340cd6e6400209 init with pTrans:0x2
+03/08 12:31:30.006237 00000169 C QRY INFO  QID:0x2000000000000174 init with pTrans:0x2
+03/08 12:31:35.078701 00000173 C QRY WARN  parser QID:0x16340cd6e780020a, table name is specified in sql, ignore the table name in bind param
+03/08 12:31:35.078747 00000173 C QRY INFO  QID:0x16340cd6e780020a init with pTrans:0x2
+03/08 12:31:35.078934 00000169 C QRY INFO  QID:0x2000000000000175 init with pTrans:0x2
+03/08 12:31:37.381001 00000171 C QRY INFO  QID:0x16340cd6e810020b init with pTrans:0x2
+03/08 12:31:45.003405 00000182 C QRY INFO  QID:0x16340cd6e9f0020c init with pTrans:0x2
+03/08 12:31:45.005316 00000169 C QRY INFO  QID:0x2000000000000176 init with pTrans:0x2
+03/08 12:31:52.380756 00000171 C QRY INFO  QID:0x16340cd6ebc0020d init with pTrans:0x2
+03/08 12:31:58.491838 00000173 C QRY INFO  QID:0x2000000000000177 init with pTrans:0x2
+03/08 12:32:00.004207 00000169 C QRY INFO  QID:0x16340cd6eda0020e init with pTrans:0x2
+03/08 12:32:00.006596 00000173 C QRY INFO  QID:0x2000000000000178 init with pTrans:0x2
+03/08 12:32:05.103971 00000171 C QRY WARN  parser QID:0x16340cd6eed0020f, table name is specified in sql, ignore the table name in bind param
+03/08 12:32:05.104029 00000171 C QRY INFO  QID:0x16340cd6eed0020f init with pTrans:0x2
+03/08 12:32:05.104596 00000171 C QRY INFO  QID:0x2000000000000179 init with pTrans:0x2
+03/08 12:32:07.385972 00000171 C QRY INFO  QID:0x16340cd6ef600210 init with pTrans:0x2
+03/08 12:32:15.004127 00000182 C QRY INFO  QID:0x16340cd6f1400211 init with pTrans:0x2
+03/08 12:32:15.006122 00000171 C QRY INFO  QID:0x200000000000017a init with pTrans:0x2
+03/08 12:32:22.381108 00000171 C QRY INFO  QID:0x16340cd6f3100212 init with pTrans:0x2
+03/08 12:32:29.491551 00000182 C QRY INFO  QID:0x200000000000017b init with pTrans:0x2
+03/08 12:32:30.004294 00000171 C QRY INFO  QID:0x16340cd6f4f00213 init with pTrans:0x2
+03/08 12:32:30.006532 00000182 C QRY INFO  QID:0x200000000000017c init with pTrans:0x2
+03/08 12:32:35.127753 00000182 C QRY WARN  parser QID:0x16340cd6f6300214, table name is specified in sql, ignore the table name in bind param
+03/08 12:32:35.127796 00000182 C QRY INFO  QID:0x16340cd6f6300214 init with pTrans:0x2
+03/08 12:32:35.127984 00000173 C QRY INFO  QID:0x200000000000017d init with pTrans:0x2
+03/08 12:32:37.382997 00000171 C QRY INFO  QID:0x16340cd6f6c00215 init with pTrans:0x2
+03/08 12:32:45.004226 00000171 C QRY INFO  QID:0x16340cd6f8900216 init with pTrans:0x2
+03/08 12:32:45.006369 00000182 C QRY INFO  QID:0x200000000000017e init with pTrans:0x2
+03/08 12:32:52.382772 00000173 C QRY INFO  QID:0x16340cd6fa600217 init with pTrans:0x2
+03/08 12:33:00.008690 00000182 C QRY INFO  QID:0x16340cd6fc400218 init with pTrans:0x2
+03/08 12:33:00.019077 00000182 C QRY INFO  QID:0x200000000000017f init with pTrans:0x2
+03/08 12:33:00.491944 00000173 C QRY INFO  QID:0x2000000000000180 init with pTrans:0x2
+03/08 12:33:05.156356 00000180 C QRY WARN  parser QID:0x16340cd6fd800219, table name is specified in sql, ignore the table name in bind param
+03/08 12:33:05.156524 00000180 C QRY INFO  QID:0x16340cd6fd800219 init with pTrans:0x2
+03/08 12:33:05.158383 00000180 C QRY INFO  QID:0x2000000000000181 init with pTrans:0x2
+03/08 12:33:07.383519 00000169 C QRY INFO  QID:0x16340cd6fe10021a init with pTrans:0x2
+03/08 12:33:15.004616 00000180 C QRY INFO  QID:0x16340cd6ffe0021b init with pTrans:0x2
+03/08 12:33:15.006836 00000171 C QRY INFO  QID:0x2000000000000182 init with pTrans:0x2
+03/08 12:33:22.381739 00000180 C QRY INFO  QID:0x16340cd701b0021c init with pTrans:0x2
+03/08 12:33:30.005636 00000169 C QRY INFO  QID:0x16340cd70390021d init with pTrans:0x2
+03/08 12:33:30.008700 00000180 C QRY INFO  QID:0x2000000000000183 init with pTrans:0x2
+03/08 12:33:31.491442 00000169 C QRY INFO  QID:0x2000000000000184 init with pTrans:0x2
+03/08 12:33:35.176753 00000180 C QRY WARN  parser QID:0x16340cd704d0021e, table name is specified in sql, ignore the table name in bind param
+03/08 12:33:35.176856 00000180 C QRY INFO  QID:0x16340cd704d0021e init with pTrans:0x2
+03/08 12:33:35.177239 00000169 C QRY INFO  QID:0x2000000000000185 init with pTrans:0x2
+03/08 12:33:37.383285 00000169 C QRY INFO  QID:0x16340cd70560021f init with pTrans:0x2
+03/08 12:33:45.006773 00000182 C QRY INFO  QID:0x16340cd707400220 init with pTrans:0x2
+03/08 12:33:45.009181 00000180 C QRY INFO  QID:0x2000000000000186 init with pTrans:0x2
+03/08 12:33:52.382101 00000171 C QRY INFO  QID:0x16340cd709000221 init with pTrans:0x2
+03/08 12:34:00.005526 00000180 C QRY INFO  QID:0x16340cd70ae00222 init with pTrans:0x2
+03/08 12:34:00.008590 00000182 C QRY INFO  QID:0x2000000000000187 init with pTrans:0x2
+03/08 12:34:02.492728 00000182 C QRY INFO  QID:0x2000000000000188 init with pTrans:0x2
+03/08 12:34:05.197630 00000182 C QRY WARN  parser QID:0x16340cd70c300223, table name is specified in sql, ignore the table name in bind param
+03/08 12:34:05.197692 00000182 C QRY INFO  QID:0x16340cd70c300223 init with pTrans:0x2
+03/08 12:34:05.197967 00000180 C QRY INFO  QID:0x2000000000000189 init with pTrans:0x2
+03/08 12:34:07.381555 00000180 C QRY INFO  QID:0x16340cd70cb00224 init with pTrans:0x2
+03/08 12:34:15.009395 00000169 C QRY INFO  QID:0x16340cd70e900225 init with pTrans:0x2
+03/08 12:34:15.014241 00000182 C QRY INFO  QID:0x200000000000018a init with pTrans:0x2
+03/08 12:34:22.386436 00000171 C QRY INFO  QID:0x16340cd710600226 init with pTrans:0x2
+03/08 12:34:30.005411 00000171 C QRY INFO  QID:0x16340cd712300227 init with pTrans:0x2
+03/08 12:34:30.009789 00000182 C QRY INFO  QID:0x200000000000018b init with pTrans:0x2
+03/08 12:34:33.491185 00000182 C QRY INFO  QID:0x200000000000018c init with pTrans:0x2
+03/08 12:34:35.215806 00000182 C QRY WARN  parser QID:0x16340cd713800228, table name is specified in sql, ignore the table name in bind param
+03/08 12:34:35.215861 00000182 C QRY INFO  QID:0x16340cd713800228 init with pTrans:0x2
+03/08 12:34:35.216226 00000180 C QRY INFO  QID:0x200000000000018d init with pTrans:0x2
+03/08 12:34:37.381583 00000180 C QRY INFO  QID:0x16340cd714000229 init with pTrans:0x2
+03/08 12:34:45.004599 00000169 C QRY INFO  QID:0x16340cd715e0022a init with pTrans:0x2
+03/08 12:34:45.007033 00000182 C QRY INFO  QID:0x200000000000018e init with pTrans:0x2
+03/08 12:34:52.382214 00000180 C QRY INFO  QID:0x16340cd717b0022b init with pTrans:0x2
+03/08 12:35:00.006133 00000182 C QRY INFO  QID:0x16340cd71990022c init with pTrans:0x2
+03/08 12:35:00.009925 00000180 C QRY INFO  QID:0x200000000000018f init with pTrans:0x2
+03/08 12:35:04.491743 00000169 C QRY INFO  QID:0x2000000000000190 init with pTrans:0x2
+03/08 12:35:05.234170 00000182 C QRY WARN  parser QID:0x16340cd71ad0022d, table name is specified in sql, ignore the table name in bind param
+03/08 12:35:05.234222 00000182 C QRY INFO  QID:0x16340cd71ad0022d init with pTrans:0x2
+03/08 12:35:05.234829 00000182 C QRY INFO  QID:0x2000000000000191 init with pTrans:0x2
+03/08 12:35:07.382508 00000180 C QRY INFO  QID:0x16340cd71b50022e init with pTrans:0x2
+03/08 12:35:15.005178 00000182 C QRY INFO  QID:0x16340cd71d30022f init with pTrans:0x2
+03/08 12:35:15.013545 00000171 C QRY INFO  QID:0x2000000000000192 init with pTrans:0x2
+03/08 12:35:22.383162 00000180 C QRY INFO  QID:0x16340cd71f000230 init with pTrans:0x2
+03/08 12:35:30.003643 00000180 C QRY INFO  QID:0x16340cd720e00231 init with pTrans:0x2
+03/08 12:35:30.006482 00000182 C QRY INFO  QID:0x2000000000000193 init with pTrans:0x2
+03/08 12:35:35.253966 00000180 C QRY WARN  parser QID:0x16340cd722200232, table name is specified in sql, ignore the table name in bind param
+03/08 12:35:35.254023 00000180 C QRY INFO  QID:0x16340cd722200232 init with pTrans:0x2
+03/08 12:35:35.254189 00000169 C QRY INFO  QID:0x2000000000000194 init with pTrans:0x2
+03/08 12:35:35.490623 00000169 C QRY INFO  QID:0x2000000000000195 init with pTrans:0x2
+03/08 12:35:37.381776 00000171 C QRY INFO  QID:0x16340cd722b00233 init with pTrans:0x2
+03/08 12:35:45.004487 00000171 C QRY INFO  QID:0x16340cd724800234 init with pTrans:0x2
+03/08 12:35:45.006632 00000169 C QRY INFO  QID:0x2000000000000196 init with pTrans:0x2
+03/08 12:35:52.380102 00000169 C QRY INFO  QID:0x16340cd726500235 init with pTrans:0x2
+03/08 12:36:00.004334 00000171 C QRY INFO  QID:0x16340cd728300236 init with pTrans:0x2
+03/08 12:36:00.006229 00000182 C QRY INFO  QID:0x2000000000000197 init with pTrans:0x2
+03/08 12:36:05.285067 00000171 C QRY WARN  parser QID:0x16340cd729800237, table name is specified in sql, ignore the table name in bind param
+03/08 12:36:05.285227 00000171 C QRY INFO  QID:0x16340cd729800237 init with pTrans:0x2
+03/08 12:36:05.285894 00000169 C QRY INFO  QID:0x2000000000000198 init with pTrans:0x2
+03/08 12:36:05.495926 00000182 C QRY INFO  QID:0x2000000000000199 init with pTrans:0x2
+03/08 12:36:07.382025 00000182 C QRY INFO  QID:0x16340cd72a000238 init with pTrans:0x2
+03/08 12:36:15.006252 00000180 C QRY INFO  QID:0x16340cd72be00239 init with pTrans:0x2
+03/08 12:36:15.009539 00000182 C QRY INFO  QID:0x200000000000019a init with pTrans:0x2
+03/08 12:36:22.381250 00000171 C QRY INFO  QID:0x16340cd72da0023a init with pTrans:0x2
+03/08 12:36:30.005109 00000182 C QRY INFO  QID:0x16340cd72f80023b init with pTrans:0x2
+03/08 12:36:30.007162 00000171 C QRY INFO  QID:0x200000000000019b init with pTrans:0x2
+03/08 12:36:35.298675 00000180 C QRY WARN  parser QID:0x16340cd730d0023c, table name is specified in sql, ignore the table name in bind param
+03/08 12:36:35.298722 00000180 C QRY INFO  QID:0x16340cd730d0023c init with pTrans:0x2
+03/08 12:36:35.298938 00000182 C QRY INFO  QID:0x200000000000019c init with pTrans:0x2
+03/08 12:36:36.491294 00000171 C QRY INFO  QID:0x200000000000019d init with pTrans:0x2
+03/08 12:36:37.381500 00000171 C QRY INFO  QID:0x16340cd73150023d init with pTrans:0x2
+03/08 12:36:45.004979 00000182 C QRY INFO  QID:0x16340cd73330023e init with pTrans:0x2
+03/08 12:36:45.007191 00000171 C QRY INFO  QID:0x200000000000019e init with pTrans:0x2
+03/08 12:36:52.383548 00000169 C QRY INFO  QID:0x16340cd73500023f init with pTrans:0x2
+03/08 12:37:00.010231 00000180 C QRY INFO  QID:0x16340cd736d00240 init with pTrans:0x2
+03/08 12:37:00.020352 00000182 C QRY INFO  QID:0x200000000000019f init with pTrans:0x2
+03/08 12:37:05.319610 00000169 C QRY WARN  parser QID:0x16340cd738200241, table name is specified in sql, ignore the table name in bind param
+03/08 12:37:05.319654 00000169 C QRY INFO  QID:0x16340cd738200241 init with pTrans:0x2
+03/08 12:37:05.319884 00000166 C QRY INFO  QID:0x20000000000001a0 init with pTrans:0x2
+03/08 12:37:07.381085 00000182 C QRY INFO  QID:0x16340cd738a00242 init with pTrans:0x2
+03/08 12:37:07.491037 00000166 C QRY INFO  QID:0x20000000000001a1 init with pTrans:0x2
+03/08 12:37:15.005856 00000180 C QRY INFO  QID:0x16340cd73a800243 init with pTrans:0x2
+03/08 12:37:15.008625 00000182 C QRY INFO  QID:0x20000000000001a2 init with pTrans:0x2
+03/08 12:37:22.381176 00000180 C QRY INFO  QID:0x16340cd73c500244 init with pTrans:0x2
+03/08 12:37:30.004553 00000169 C QRY INFO  QID:0x16340cd73e300245 init with pTrans:0x2
+03/08 12:37:30.007433 00000169 C QRY INFO  QID:0x20000000000001a3 init with pTrans:0x2
+03/08 12:37:35.338056 00000166 C QRY WARN  parser QID:0x16340cd73f700246, table name is specified in sql, ignore the table name in bind param
+03/08 12:37:35.338123 00000166 C QRY INFO  QID:0x16340cd73f700246 init with pTrans:0x2
+03/08 12:37:35.338419 00000169 C QRY INFO  QID:0x20000000000001a4 init with pTrans:0x2
+03/08 12:37:37.382789 00000166 C QRY INFO  QID:0x16340cd73ff00247 init with pTrans:0x2
+03/08 12:37:38.491733 00000182 C QRY INFO  QID:0x20000000000001a5 init with pTrans:0x2
+03/08 12:37:45.005976 00000169 C QRY INFO  QID:0x16340cd741d00248 init with pTrans:0x2
+03/08 12:37:45.008547 00000166 C QRY INFO  QID:0x20000000000001a6 init with pTrans:0x2
+03/08 12:37:52.382133 00000166 C QRY INFO  QID:0x16340cd743a00249 init with pTrans:0x2
+03/08 12:38:00.004859 00000166 C QRY INFO  QID:0x16340cd74580024a init with pTrans:0x2
+03/08 12:38:00.007593 00000182 C QRY INFO  QID:0x20000000000001a7 init with pTrans:0x2
+03/08 12:38:05.356527 00000169 C QRY WARN  parser QID:0x16340cd746d0024b, table name is specified in sql, ignore the table name in bind param
+03/08 12:38:05.356578 00000169 C QRY INFO  QID:0x16340cd746d0024b init with pTrans:0x2
+03/08 12:38:05.356794 00000166 C QRY INFO  QID:0x20000000000001a8 init with pTrans:0x2
+03/08 12:38:07.379997 00000182 C QRY INFO  QID:0x16340cd74750024c init with pTrans:0x2
+03/08 12:38:09.489867 00000182 C QRY INFO  QID:0x20000000000001a9 init with pTrans:0x2
+03/08 12:38:15.003147 00000182 C QRY INFO  QID:0x16340cd74920024d init with pTrans:0x2
+03/08 12:38:15.005910 00000180 C QRY INFO  QID:0x20000000000001aa init with pTrans:0x2
+03/08 12:38:22.380786 00000166 C QRY INFO  QID:0x16340cd74af0024e init with pTrans:0x2
+03/08 12:38:30.004701 00000166 C QRY INFO  QID:0x16340cd74cd0024f init with pTrans:0x2
+03/08 12:38:30.007637 00000182 C QRY INFO  QID:0x20000000000001ab init with pTrans:0x2
+03/08 12:38:35.377788 00000180 C QRY WARN  parser QID:0x16340cd74e200250, table name is specified in sql, ignore the table name in bind param
+03/08 12:38:35.377873 00000180 C QRY INFO  QID:0x16340cd74e200250 init with pTrans:0x2
+03/08 12:38:35.378243 00000166 C QRY INFO  QID:0x20000000000001ac init with pTrans:0x2
+03/08 12:38:37.381845 00000171 C QRY INFO  QID:0x16340cd74ea00251 init with pTrans:0x2
+03/08 12:38:39.491055 00000171 C QRY INFO  QID:0x20000000000001ad init with pTrans:0x2
+03/08 12:38:45.005057 00000171 C QRY INFO  QID:0x16340cd750800252 init with pTrans:0x2
+03/08 12:38:45.007107 00000180 C QRY INFO  QID:0x20000000000001ae init with pTrans:0x2
+03/08 12:38:52.381608 00000166 C QRY INFO  QID:0x16340cd752400253 init with pTrans:0x2
+03/08 12:39:00.004337 00000182 C QRY INFO  QID:0x16340cd754200254 init with pTrans:0x2
+03/08 12:39:00.008532 00000171 C QRY INFO  QID:0x20000000000001af init with pTrans:0x2
+03/08 12:39:05.398655 00000173 C QRY WARN  parser QID:0x16340cd755700255, table name is specified in sql, ignore the table name in bind param
+03/08 12:39:05.398712 00000173 C QRY INFO  QID:0x16340cd755700255 init with pTrans:0x2
+03/08 12:39:05.399190 00000181 C QRY INFO  QID:0x20000000000001b0 init with pTrans:0x2
+03/08 12:39:07.381227 00000169 C QRY INFO  QID:0x16340cd755f00256 init with pTrans:0x2
+03/08 12:39:10.491249 00000181 C QRY INFO  QID:0x20000000000001b1 init with pTrans:0x2
+03/08 12:39:15.005138 00000169 C QRY INFO  QID:0x16340cd757d00257 init with pTrans:0x2
+03/08 12:39:15.007241 00000169 C QRY INFO  QID:0x20000000000001b2 init with pTrans:0x2
+03/08 12:39:22.382050 00000171 C QRY INFO  QID:0x16340cd759a00258 init with pTrans:0x2
+03/08 12:39:30.002991 00000181 C QRY INFO  QID:0x16340cd75b700259 init with pTrans:0x2
+03/08 12:39:30.005264 00000181 C QRY INFO  QID:0x20000000000001b3 init with pTrans:0x2
+03/08 12:39:35.416916 00000171 C QRY WARN  parser QID:0x16340cd75cc0025a, table name is specified in sql, ignore the table name in bind param
+03/08 12:39:35.416990 00000171 C QRY INFO  QID:0x16340cd75cc0025a init with pTrans:0x2
+03/08 12:39:35.417302 00000166 C QRY INFO  QID:0x20000000000001b4 init with pTrans:0x2
+03/08 12:39:37.382489 00000181 C QRY INFO  QID:0x16340cd75d40025b init with pTrans:0x2
+03/08 12:39:41.490209 00000181 C QRY INFO  QID:0x20000000000001b5 init with pTrans:0x2
+03/08 12:39:45.003582 00000171 C QRY INFO  QID:0x16340cd75f20025c init with pTrans:0x2
+03/08 12:39:45.005906 00000181 C QRY INFO  QID:0x20000000000001b6 init with pTrans:0x2
+03/08 12:39:52.380170 00000171 C QRY INFO  QID:0x16340cd760f0025d init with pTrans:0x2
+03/08 12:40:00.004673 00000166 C QRY INFO  QID:0x16340cd762d0025e init with pTrans:0x2
+03/08 12:40:00.007862 00000181 C QRY INFO  QID:0x20000000000001b7 init with pTrans:0x2
+03/08 12:40:05.443256 00000166 C QRY WARN  parser QID:0x16340cd76420025f, table name is specified in sql, ignore the table name in bind param
+03/08 12:40:05.443363 00000166 C QRY INFO  QID:0x16340cd76420025f init with pTrans:0x2
+03/08 12:40:05.444248 00000169 C QRY INFO  QID:0x20000000000001b8 init with pTrans:0x2
+03/08 12:40:07.381045 00000171 C QRY INFO  QID:0x16340cd764900260 init with pTrans:0x2
+03/08 12:40:11.490854 00000169 C QRY INFO  QID:0x20000000000001b9 init with pTrans:0x2
+03/08 12:40:15.010088 00000171 C QRY INFO  QID:0x16340cd766700261 init with pTrans:0x2
+03/08 12:40:15.020075 00000169 C QRY INFO  QID:0x20000000000001ba init with pTrans:0x2
+03/08 12:40:22.380530 00000166 C QRY INFO  QID:0x16340cd768400262 init with pTrans:0x2
+03/08 12:40:30.004374 00000181 C QRY INFO  QID:0x16340cd76a200263 init with pTrans:0x2
+03/08 12:40:30.006320 00000171 C QRY INFO  QID:0x20000000000001bb init with pTrans:0x2
+03/08 12:40:35.469361 00000171 C QRY WARN  parser QID:0x16340cd76b700264, table name is specified in sql, ignore the table name in bind param
+03/08 12:40:35.469491 00000171 C QRY INFO  QID:0x16340cd76b700264 init with pTrans:0x2
+03/08 12:40:35.470606 00000181 C QRY INFO  QID:0x20000000000001bc init with pTrans:0x2
+03/08 12:40:37.384790 00000169 C QRY INFO  QID:0x16340cd76bf00265 init with pTrans:0x2
+03/08 12:40:41.491302 00000169 C QRY INFO  QID:0x20000000000001bd init with pTrans:0x2
+03/08 12:40:45.005451 00000181 C QRY INFO  QID:0x16340cd76dc00266 init with pTrans:0x2
+03/08 12:40:45.007716 00000171 C QRY INFO  QID:0x20000000000001be init with pTrans:0x2
+03/08 12:40:52.381977 00000169 C QRY INFO  QID:0x16340cd76f900267 init with pTrans:0x2
+03/08 12:41:00.004533 00000166 C QRY INFO  QID:0x16340cd771700268 init with pTrans:0x2
+03/08 12:41:00.007509 00000166 C QRY INFO  QID:0x20000000000001bf init with pTrans:0x2
+03/08 12:41:05.489078 00000166 C QRY INFO  QID:0x20000000000001c0 init with pTrans:0x2
+03/08 12:41:05.493627 00000171 C QRY WARN  parser QID:0x16340cd772c00269, table name is specified in sql, ignore the table name in bind param
+03/08 12:41:05.493666 00000171 C QRY INFO  QID:0x16340cd772c00269 init with pTrans:0x2
+03/08 12:41:07.385357 00000180 C QRY INFO  QID:0x16340cd77340026a init with pTrans:0x2
+03/08 12:41:12.493066 00000177 C QRY INFO  QID:0x20000000000001c1 init with pTrans:0x2
+03/08 12:41:15.006013 00000169 C QRY INFO  QID:0x16340cd77510026b init with pTrans:0x2
+03/08 12:41:15.008644 00000180 C QRY INFO  QID:0x20000000000001c2 init with pTrans:0x2
+03/08 12:41:22.386809 00000177 C QRY INFO  QID:0x16340cd776e0026c init with pTrans:0x2
+03/08 12:41:30.004897 00000182 C QRY INFO  QID:0x16340cd778c0026d init with pTrans:0x2
+03/08 12:41:30.007018 00000169 C QRY INFO  QID:0x20000000000001c3 init with pTrans:0x2
+03/08 12:41:35.511812 00000169 C QRY WARN  parser QID:0x16340cd77a20026e, table name is specified in sql, ignore the table name in bind param
+03/08 12:41:35.511854 00000169 C QRY INFO  QID:0x16340cd77a20026e init with pTrans:0x2
+03/08 12:41:35.511960 00000180 C QRY INFO  QID:0x20000000000001c4 init with pTrans:0x2

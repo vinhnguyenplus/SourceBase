@@ -155,7 +155,7 @@ public static class SqlSugarSetup
         db.Aop.OnError = ex =>
         {
             if (ex.Parametres == null) return;
-            var log = $"[{DateTime.Now}——Error SQL]\r\n{UtilMethods.GetNativeSql(ex.Sql, (SugarParameter[])ex.Parameters)}\r\n";
+            var log = $"【{DateTime.Now}——ErrorSQL】\r\n{UtilMethods.GetNativeSql(ex.Sql, (SugarParameter[])ex.Parametres)}\r\n";
             Log.Error(log, ex);
         };
         db.Aop.OnLogExecuted = (sql, pars) =>

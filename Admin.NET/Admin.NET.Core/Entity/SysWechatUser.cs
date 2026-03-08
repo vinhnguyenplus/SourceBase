@@ -33,7 +33,7 @@ public partial class SysWechatUser : EntityBase
     /// platform type
     /// </summary>
     [SugarColumn(ColumnDescription = "Platform Type")]
-    public PlatformTypeEnum PlatformType { get; set; } = PlatformTypeEnum.WeChat Official Account;
+    public PlatformTypeEnum PlatformType { get; set; } = PlatformTypeEnum.WeChatOfficialAccount;
 
     /// <summary>
     /// OpenId

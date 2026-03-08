@@ -265,9 +265,8 @@ public static class CommonUtil
             message += "Field missing:" + string.Join("，", res.TemplateErrors.Select(m => m.RequireColumnName).ToList());
 
         if (message.Length > 200)
-            message = message.Substring(0, 200) + "...
-There are too many exceptions. It is recommended to download the error log file to view detailed error information and re-import.";
-        throw Oops.Oh("Import Exception:" + message);
+            message = message.Substring(0, 200) + "...\r\nIf there are too many errors, it is recommended to download the error marker file to view detailed error information and re-import it.";
+        throw Oops.Oh("Import error:" + message);
     }
 
     /// <summary>

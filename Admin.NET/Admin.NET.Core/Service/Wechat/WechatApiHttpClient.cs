@@ -95,7 +95,7 @@ public partial class WechatApiClientFactory : ISingleton
             var client = CreateWechatClient();
             var reqCgibinToken = new CgibinTokenRequest();
             var resCgibinToken = await client.ExecuteCgibinTokenAsync(reqCgibinToken);
-            if (resCgibinToken.ErrorCode != (int)WechatReturnCodeEnum.Requestsuccess)
+            if (resCgibinToken.ErrorCode != (int)WechatReturnCodeEnum.请求成功)
                 throw Oops.Oh(resCgibinToken.ErrorMessage + " " + resCgibinToken.ErrorCode);
             _sysCacheService.Set($"WxAccessToken_{_wechatOptions.WechatAppId}", resCgibinToken.AccessToken, TimeSpan.FromSeconds(resCgibinToken.ExpiresIn - 60));
         }
@@ -114,7 +114,7 @@ public partial class WechatApiClientFactory : ISingleton
             var client = CreateWxOpenClient();
             var reqCgibinToken = new CgibinTokenRequest();
             var resCgibinToken = await client.ExecuteCgibinTokenAsync(reqCgibinToken);
-            if (resCgibinToken.ErrorCode != (int)WechatReturnCodeEnum.Requestsuccess)
+            if (resCgibinToken.ErrorCode != (int)WechatReturnCodeEnum.请求成功)
                 throw Oops.Oh(resCgibinToken.ErrorMessage + " " + resCgibinToken.ErrorCode);
             _sysCacheService.Set($"WxAccessToken_{_wechatOptions.WxOpenAppId}", resCgibinToken.AccessToken, TimeSpan.FromSeconds(resCgibinToken.ExpiresIn - 60));
         }
@@ -139,7 +139,7 @@ public partial class WechatApiClientFactory : ISingleton
         var res = await client.ExecuteCgibinOpenApiQuotaGetAsync(req);
 
         var originColor = Console.ForegroundColor;
-        if (res.ErrorCode != (int)WechatReturnCodeEnum.Requestsuccess)
+        if (res.ErrorCode != (int)WechatReturnCodeEnum.请求成功)
         {
             _sysCacheService.Remove($"WxAccessToken_{_wechatOptions.WechatAppId}");
             Console.ForegroundColor = ConsoleColor.Red;
@@ -170,7 +170,7 @@ public partial class WechatApiClientFactory : ISingleton
         var res = await client.ExecuteCgibinOpenApiQuotaGetAsync(req);
 
         var originColor = Console.ForegroundColor;
-        if (res.ErrorCode != (int)WechatReturnCodeEnum.Requestsuccess)
+        if (res.ErrorCode != (int)WechatReturnCodeEnum.请求成功)
         {
             _sysCacheService.Remove($"WxAccessToken_{_wechatOptions.WxOpenAppId}");
             Console.ForegroundColor = ConsoleColor.Red;
