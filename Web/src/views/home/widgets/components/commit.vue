@@ -1,16 +1,6 @@
 <template>
 	<card-pro title="Update Log" prefix-icon="ele-DocumentCopy" shadow="hover">
-        <div class="commit" v-loading="state.loading">
-			<el-timeline style="max-width: 600px" v-if="state.list.length > 0">
-				<el-timeline-item v-for="(item, index) in state.list" :key="index" :timestamp="formatDate(new Date(item.commit.committer.date), 'YYYY-mm-dd HH:MM:SS')">
-					<el-link style="white-space: pre-line; word-break: break-all" :href="item.html_url" target="_blank"> {{ item.commit.message }}</el-link>
-				</el-timeline-item>
-			</el-timeline>
-			<el-empty v-else description="null"></el-empty>
-		</div>
-        <template #suffix>
-            <el-button type="primary" icon="ele-Refresh" round plain @click="refresh">Update Log</el-button>
-        </template>
+        
     </card-pro>
 </template>
 

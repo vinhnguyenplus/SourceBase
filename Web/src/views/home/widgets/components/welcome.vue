@@ -7,30 +7,7 @@
 		<div class="welcome">
 			<div class="logo">
 				<!-- <img src="/@/assets/logo.png" style="height: 150px;"/> -->
-				<h2>Welcome to {{ themeConfig.globalTitle }}</h2>
-			</div>
-			<div class="tips">
-				<div class="tips-item">
-					<div class="tips-item-icon">
-						<el-icon><ele-Menu /></el-icon>
-					</div>
-					<div class="tips-item-message">Here is the project console. You can click the "Customize" button in the upper right to add, remove or move components.</div>
-				</div>
-				<div class="tips-item">
-					<div class="tips-item-icon">
-						<el-icon><ele-Promotion /></el-icon>
-					</div>
-					<div class="tips-item-message">Optimizations have been made many times to improve front-end computing power, reduce bandwidth requests and code execution, and continue to do so.</div>
-				</div>
-				<div class="tips-item">
-					<div class="tips-item-icon">
-						<el-icon><ele-MilkTea /></el-icon>
-					</div>
-					<div class="tips-item-message">Make development simpler, more versatile, and more popular!</div>
-				</div>
-			</div>
-			<div class="actions">
-				<el-button type="primary" icon="ele-Guide" size="large" @click="godoc">Document Tutorial</el-button>
+				<h2>Welcome to Admin Dashboard</h2>
 			</div>
 		</div>
 	</el-card>

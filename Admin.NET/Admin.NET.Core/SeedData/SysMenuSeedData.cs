@@ -235,15 +235,6 @@ public class SysMenuSeedData : ISqlSugarEntitySeedData<SysMenu>
 
             // System configuration
             new SysMenu{ Id=1300300140101, Pid=1300300000101, Title="System Configuration", Path="/platform/infoSetting", Name="sysInfoSetting", Component="/system/infoSetting/index", Icon="ele-Setting", Type=MenuTypeEnum.Menu, CreateTime=DateTime.Parse("2022-02-10 00:00:00"), OrderNo=220 },
-
-            // WeChat Pay
-            new SysMenu{ Id=1300300150101, Pid=1300300000101, Title="WeChat Pay", Path="/platform/wechatpay", Name="sysWechatPay", Component="/system/weChatPay/index", Icon="ele-Coin", Type=MenuTypeEnum.Menu, CreateTime=DateTime.Parse("2022-02-10 00:00:00"), OrderNo=230 },
-            new SysMenu{ Id=1300300150201, Pid=1300300150101, Title="WeChat PayPlace an orderNative", Permission="sysWechatPay:payTransactionNative", Type=MenuTypeEnum.Btn, CreateTime=DateTime.Parse("2022-02-10 00:00:00"), OrderNo=100 },
-            new SysMenu{ Id=1300300150301, Pid=1300300150101, Title="Check refund information", Permission="sysWechatPay:listRefund", Type=MenuTypeEnum.Btn, CreateTime=DateTime.Parse("2022-02-10 00:00:00"), OrderNo=100 },
-            new SysMenu{ Id=1300300150401, Pid=1300300150101, Title="Get payment order details (local database)", Permission="sysWechatPay:payInfo", Type=MenuTypeEnum.Btn, CreateTime=DateTime.Parse("2022-02-10 00:00:00"), OrderNo=100 },
-            new SysMenu{ Id=1300300150501, Pid=1300300150101, Title="ObtainPay OrderDetails(WeChatInterface)", Permission="sysWechatPay:payInfoFromWechat", Type=MenuTypeEnum.Btn, CreateTime=DateTime.Parse("2022-02-10 00:00:00"), OrderNo=100 },
-            new SysMenu{ Id=1300300150601, Pid=1300300150101, Title="Refund request", Permission="sysWechatPay:refundDomestic", Type=MenuTypeEnum.Btn, CreateTime=DateTime.Parse("2022-02-10 00:00:00"), OrderNo=100 },
-
             // System update
             new SysMenu{ Id=1300300160101, Pid=1300300000101, Title="System update", Path="/platform/update", Name="sysUpdate", Component="/system/update/index", Icon="ele-Upload", Type=MenuTypeEnum.Menu, CreateTime=DateTime.Parse("2022-02-10 00:00:00"), OrderNo=240 },
             new SysMenu{ Id=1300300160201, Pid=1300300160101, Title="Update", Permission="sysUpdate:update", Type=MenuTypeEnum.Btn, CreateTime=DateTime.Parse("2022-02-10 00:00:00"), OrderNo=100 },
@@ -294,17 +285,6 @@ public class SysMenuSeedData : ISqlSugarEntitySeedData<SysMenu>
             new SysMenu{ Id=1300500050101, Pid=1300500000101, Title="System interface", Path="/develop/api", Name="sysApi", Component="layout/routerView/iframe", IsIframe=true, OutLink="http://localhost:5005", Icon="ele-Help", Type=MenuTypeEnum.Menu, CreateTime=DateTime.Parse("2022-02-10 00:00:00"), OrderNo=140 },
 
             #endregion development tools
-
-            #region Help documentation
-
-            // Help documentation
-            new SysMenu{ Id=1300600000101, Pid=0, Title="Help documentation", Path="/doc", Name="doc", Component="Layout", Icon="ele-Notebook", Type=MenuTypeEnum.Dir, CreateTime=DateTime.Parse("2022-02-10 00:00:00"), OrderNo=14000 },
-            new SysMenu{ Id=1300600010101, Pid=1300600000101, Title="Framework Tutorial", Path="/doc/admin", Name="sysAdmin", Component="layout/routerView/link", IsIframe=false, IsKeepAlive=false, OutLink="http://101.43.53.74:5050/", Icon="ele-Sunny", Type=MenuTypeEnum.Menu, CreateTime=DateTime.Parse("2022-02-10 00:00:00"), OrderNo=100 },
-            new SysMenu{ Id=1300600020101, Pid=1300600000101, Title="Backstage tutorial", Path="/doc/furion", Name="sysFurion", Component="layout/routerView/link", IsIframe=false, IsKeepAlive=false, OutLink="https://furion.baiqian.ltd/", Icon="ele-Promotion", Type=MenuTypeEnum.Menu, CreateTime=DateTime.Parse("2022-02-10 00:00:00"), OrderNo=110 },
-            new SysMenu{ Id=1300600030101, Pid=1300600000101, Title="Front-end tutorial", Path="/doc/element", Name="sysElement", Component="layout/routerView/link", IsIframe=false, IsKeepAlive=false, OutLink="https://element-plus.gitee.io/zh-CN/", Icon="ele-Position", Type=MenuTypeEnum.Menu, CreateTime=DateTime.Parse("2022-02-10 00:00:00"), OrderNo=120 },
-            new SysMenu{ Id=1300600040101, Pid=1300600000101, Title="SqlSugar", Path="/doc/SqlSugar", Name="sysSqlSugar", Component="layout/routerView/link", IsIframe=false, IsKeepAlive=false, OutLink="https://www.donet5.com/Home/Doc", Icon="ele-Coin", Type=MenuTypeEnum.Menu, CreateTime=DateTime.Parse("2022-02-10 00:00:00"), OrderNo=130 },
-
-	        #endregion Help documentation
 
             // About the project
             new SysMenu{ Id=1300700000101, Pid=0, Title="About the project", Path="/about", Name="about", Component="/about/index", Icon="ele-InfoFilled", Type=MenuTypeEnum.Menu, CreateTime=DateTime.Parse("2023-03-12 00:00:00"), OrderNo=15000 },

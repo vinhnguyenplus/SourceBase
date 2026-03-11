@@ -1,5 +1,5 @@
 <template>
-	<el-card shadow="hover" header="Currentclock" class="item-background">
+	<el-card shadow="hover" header="Current clock" class="item-background">
 		<template #header>
 			<el-icon style="display: inline; vertical-align: middle"> <ele-Clock /> </el-icon>
 			<span> Currentclock </span>
